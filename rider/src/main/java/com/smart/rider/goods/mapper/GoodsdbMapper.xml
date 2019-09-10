@@ -5,7 +5,7 @@
 <mapper namespace="com.smart.rider.goods.mapper.GoodsdbMapper">
 	<select id="getGoodsdbCodeMax" resultType="int">
  		SELECT 
- 			MAX(CAST(SUBSTRING(goods_database_code,7) AS DECIMAL)) as maxcol 
+ 			MAX(CAST(SUBSTRING(goods_database_code,20) AS DECIMAL)) as maxcol 
 		FROM goods_database
  	</select>
 
@@ -13,7 +13,7 @@
 	<insert id="goodsdbInsert" parameterType="com.smart.rider.goods.dto.GoodsdbDTO">
 		<selectKey keyProperty="goods_database_code" resultType="String" order="BEFORE">
  			SELECT 
- 				CONCAT('goods_database_code', MAX(CAST(SUBSTRING(goods_database_code,7) AS DECIMAL)+1)) AS goods_database_code 
+ 				CONCAT('goods_database_code', MAX(CAST(SUBSTRING(goods_database_code,20) AS DECIMAL)+1)) AS goods_database_code 
 			FROM goods_database
  		</selectKey>
 		INSERT INTO goods_database(
