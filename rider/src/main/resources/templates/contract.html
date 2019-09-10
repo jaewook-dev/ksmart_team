@@ -5,127 +5,238 @@
 <th:block layout:fragment="customContents">
  <body>
    
-    <div class="container tm-mt-big tm-mb-big">
-      <div class="row">
-        <div class="col-xl-9 col-lg-10 col-md-12 col-sm-12 mx-auto">
-          <div class="tm-bg-primary-dark tm-block tm-block-h-auto">
+ 
+        <div class="container">
             <div class="row">
-              <div class="col-12">
-                <h2 class="tm-block-title d-inline-block">Edit Product</h2>
-              </div>
-            </div>
-            <div class="row tm-edit-product-row">
-              <div class="col-xl-6 col-lg-6 col-md-12">
-                <form action="" method="post" class="tm-edit-product-form">
-                  <div class="form-group mb-3">
-                    <label
-                      for="name"
-                      >Product Name
-                    </label>
-                    <input
-                      id="name"
-                      name="name"
-                      type="text"
-                      value="Lorem Ipsum Product"
-                      class="form-control validate"
-                    />
-                  </div>
-                  <div class="form-group mb-3">
-                    <label
-                      for="description"
-                      >Description</label
-                    >
-                    <textarea                    
-                      class="form-control validate tm-small"
-                      rows="5"
-                      required
-                    >Lorem ipsum dolor amet gentrify glossier locavore messenger bag chillwave hashtag irony migas wolf kale chips small batch kogi direct trade shaman.</textarea>
-                  </div>
-                  <div class="form-group mb-3">
-                    <label
-                      for="category"
-                      >Category</label
-                    >
-                    <select
-                      class="custom-select tm-select-accounts"
-                      id="category"
-                    >
-                      <option>Select category</option>
-                      <option value="1" selected>New Arrival</option>
-                      <option value="2">Most Popular</option>
-                      <option value="3">Trending</option>
-                    </select>
-                  </div>
-                  <div class="row">
-                      <div class="form-group mb-3 col-xs-12 col-sm-6">
-                          <label
-                            for="expire_date"
-                            >Expire Date
-                          </label>
-                          <input
-                            id="expire_date"
-                            name="expire_date"
-                            type="text"
-                            value="22 Oct, 2020"
-                            class="form-control validate"
-                            data-large-mode="true"
-                          />
-                        </div>
-                        <div class="form-group mb-3 col-xs-12 col-sm-6">
-                          <label
-                            for="stock"
-                            >Units In Stock
-                          </label>
-                          <input
-                            id="stock"
-                            name="stock"
-                            type="text"
-                            value="19,765"
-                            class="form-control validate"
-                          />
-                        </div>
-                  </div>
-                  
-              </div>
-              <div class="col-xl-6 col-lg-6 col-md-12 mx-auto mb-4">
-                <div class="tm-product-img-edit mx-auto">
-                  <img src="img/product-image.jpg" alt="Product image" class="img-fluid d-block mx-auto">
-                  <i
-                    class="fas fa-cloud-upload-alt tm-upload-icon"
-                    onclick="document.getElementById('fileInput').click();"
-                  ></i>
+                <div class="col">
+                    <p class="text-white mt-5 mb-5"><b>계약관리 > 홈</b></p>
                 </div>
-                <div class="custom-file mt-3 mb-3">
-                  <input id="fileInput" type="file" style="display:none;" />
-                  <input
-                    type="button"
-                    class="btn btn-primary btn-block mx-auto"
-                    value="CHANGE IMAGE NOW"
-                    onclick="document.getElementById('fileInput').click();"
-                  />
-                </div>
-              </div>
-              <div class="col-12">
-                <button type="submit" class="btn btn-primary btn-block text-uppercase">Update Now</button>
-              </div>
-            </form>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
+            
+            	
+            	
+				<div class="row tm-content-row">
+					<div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
+					
+						<div class="tm-bg-primary-dark tm-block">
+						<h2 class="tm-block-title">계약단가표</h2>
+							 <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">월 계약금액</th>
+                                    <th scope="col">1년 일시불 금액</th>
+                                    <th scope="col">2년 일시불 금액</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            	<tr>
+                                    <th scope="row"><b>30000</b></th>
+                                    <td><b>330,000</b></td>
+                                    <td><b>660,000</b></td>
+                                </tr>
+                            </tbody>
+						</table>
+							<canvas id="lineChart"></canvas>
+						</div>
+					</div>
+					
+					<div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
+						<div class="tm-bg-primary-dark tm-block-con">
+							<h2 class="tm-block-title">년 계약조회</h2>
+							<canvas id="myChart" style="max-width: 500px;"></canvas>
+						</div>
+					</div>
+					
+      
+                <div class="col-12 tm-block-col">
+                	<h2 class="tm-block-title">계약된 매장</h2>
+                    <div class="tm-bg-primary-dark tm-block tm-block-taller tm-block-scroll">
+                        
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">계약자</th>
+                                    <th scope="col">서비스 시작일자</th>
+                                    <th scope="col">서비스 종료일자</th>
+                                    <th scope="col">계약상태</th>
+                                    <th scope="col">계약금액</th>
 
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row"><b>아이디(FK)</b></th>
+                                    <td><b>2018.03.15</b></td>
+                                    <td><b>2019.03.15</b></td>
+                                    <td>
+                                    	<div class="tm-status-circle moving">	
+                                    	</div><b>정상</b>
+                                    </td>
+                                    <td><b>330000</b></td>
+
+                                </tr>
+                                <tr>
+                                    <th scope="row"><b>#122348</b></th>
+                                    <td>
+                                        <div class="tm-status-circle pending">
+                                        </div>Pending
+                                    </td>
+                                    <td><b>Jacob Miller</b></td>
+                                    <td><b>London, UK</b></td>
+                                    <td><b>360 km</b></td>
+
+                                </tr>
+                                <tr>
+                                    <th scope="row"><b>#122347</b></th>
+                                    <td>
+                                        <div class="tm-status-circle cancelled">
+                                        </div>Cancelled
+                                    </td>
+                                    <td><b>George Wilson</b></td>
+                                    <td><b>London, UK</b></td>
+                                    <td><b>340 km</b></td>
+
+                                </tr>
+                                <tr>
+                                    <th scope="row"><b>#122346</b></th>
+                                    <td>
+                                        <div class="tm-status-circle moving">
+                                        </div>Moving
+                                    </td>
+                                    <td><b>William Aung</b></td>
+                                    <td><b>London, UK</b></td>
+                                    <td><b>218 km</b></td>
+
+                                </tr>
+                                <tr>
+                                    <th scope="row"><b>#122345</b></th>
+                                    <td>
+                                        <div class="tm-status-circle pending">
+                                        </div>Pending
+                                    </td>
+                                    <td><b>Harry Ryan</b></td>
+                                    <td><b>London, UK</b></td>
+                                    <td><b>280 km</b></td>
+
+                                </tr>
+                                <tr>
+                                    <th scope="row"><b>#122344</b></th>
+                                    <td>
+                                        <div class="tm-status-circle pending">
+                                        </div>Pending
+                                    </td>
+                                    <td><b>Michael Jones</b></td>
+                                    <td><b>London, UK</b></td>
+                                    <td><b>218 km</b></td>
+
+                                </tr>
+                                <tr>
+                                    <th scope="row"><b>#122343</b></th>
+                                    <td>
+                                        <div class="tm-status-circle moving">
+                                        </div>Moving
+                                    </td>
+                                    <td><b>Timmy Davis</b></td>
+                                    <td><b>London, UK</b></td>
+                                    <td><b>218 km</b></td>
+
+                                </tr>
+                                <tr>
+                                    <th scope="row"><b>#122342</b></th>
+                                    <td>
+                                        <div class="tm-status-circle moving">
+                                        </div>Moving
+                                    </td>
+                                    <td><b>Oscar Phyo</b></td>
+                                    <td><b>London, UK</b></td>
+                                    <td><b>420 km</b></td>
+ 
+                                </tr>
+                                <tr>
+                                    <th scope="row"><b>#122341</b></th>
+                                    <td>
+                                        <div class="tm-status-circle moving">
+                                        </div>Moving
+                                    </td>
+                                    <td><b>Charlie Brown</b></td>
+                                    <td><b>London, UK</b></td>
+                                    <td><b>300 km</b></td>
+
+                                </tr>
+                                <tr>
+                                    <th scope="row"><b>#122340</b></th>
+                                    <td>
+                                        <div class="tm-status-circle cancelled">
+                                        </div>Cancelled
+                                    </td>
+                                    <td><b>Wilson Cookies</b></td>
+                                    <td><b>London, UK</b></td>
+                                    <td><b>218 km</b></td>
+
+                                </tr>
+                                <tr>
+                                    <th scope="row"><b>#122339</b></th>
+                                    <td>
+                                        <div class="tm-status-circle moving">
+                                        </div>Moving
+                                    </td>
+                                    <td><b>Richard Clamon</b></td>
+                                    <td><b>London, UK</b></td>
+                                    <td><b>150 km</b></td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+ 
 
 </th:block>
 </th:block>
 <th:block layout:fragment="customScript">
 	<script>
-      $(function() {
-        $("#expire_date").datepicker({
-          defaultDate: "10/22/2020"
-        });
-      });
-    </script>
+	var ctx = document.getElementById("myChart").getContext('2d');
+	var myChart = new Chart(ctx, {
+	  type: 'bar',
+	  data: {
+	    labels: ["2013", "2014", "2015", "2016", "2017",],
+	    datasets: [{
+	      label: '계약건수',
+	      data: [12, 19, 3, 5, 2, 3],
+	      backgroundColor: [
+	        'rgba(255, 99, 132, 0.2)',
+	        'rgba(54, 162, 235, 0.2)',
+	        'rgba(255, 206, 86, 0.2)',
+	        'rgba(75, 192, 192, 0.2)',
+	        'rgba(153, 102, 255, 0.2)',
+	        'rgba(255, 159, 64, 0.2)'
+	      ],
+	      borderColor: [
+	        'rgba(255,99,132,1)',
+	        'rgba(54, 162, 235, 1)',
+	        'rgba(255, 206, 86, 1)',
+	        'rgba(75, 192, 192, 1)',
+	        'rgba(153, 102, 255, 1)',
+	        'rgba(255, 159, 64, 1)'
+	      ],
+	      borderWidth: 1
+	    }]
+	  },
+	  options: {
+	    scales: {
+	      yAxes: [{
+	        ticks: {
+	          beginAtZero: true
+	        }
+	      }]
+	    }
+	  }
+	});
+	
+	</script>
 	
 </th:block>
 </html>
