@@ -26,6 +26,7 @@ public class LoginController {
 		return "/login/login";
 	}
 	
+
 	//로그인 프로세스 
 	@PostMapping("/loginProcess")
 	public String loginProcess(@RequestParam(value = "memberId") String memberId
@@ -50,4 +51,5 @@ public class LoginController {
 		
 		
 	}
+
 }

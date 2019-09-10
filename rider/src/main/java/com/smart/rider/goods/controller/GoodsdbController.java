@@ -28,7 +28,7 @@ public class GoodsdbController {
 	}
 	
 	/*
-	 * 상품DB등록 확인메서드
+	 * 상품DB등록 확인메서드(처음단계)
 	 * 문영성
 	 * @PostMapping("/goodsdbInsert") public String goodsdbInsert(GoodsdbDTO
 	 * goodsdbdto,Model model) {
@@ -39,7 +39,9 @@ public class GoodsdbController {
 	 * }
 	 */
 	
-	//상품db메서드 goodsdbservice에 선언되어있는 메서드 지고와서 실행
+	
+	
+	//상품db 세션아이디가져와서 코드자동증가, db에값들어가는지확인.
 	//19-09-10 문영성
 	@PostMapping("/goodsdbInsert")
 		public String goodsdbInsert(GoodsdbDTO goodsdbdto, HttpSession session) {
