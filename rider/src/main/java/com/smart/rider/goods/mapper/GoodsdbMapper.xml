@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smart.rider.goods.mapper.GoodsdbMapper">
+	<select id="getGoodsdbCodeMax" resultType="int">
+ 		SELECT 
+ 			MAX(CAST(SUBSTRING(goods_database_code,7) AS DECIMAL)) as maxcol 
+		FROM goods_database
+ 	</select>
+
+
+	<insert id="goodsdbInsert" parameterType="com.smart.rider.goods.dto.GoodsdbDTO">
+		<selectKey keyProperty="goods_database_code" resultType="String" order="BEFORE">
+ 			SELECT 
+ 				CONCAT('goods_database_code', MAX(CAST(SUBSTRING(goods_database_code,7) AS DECIMAL)+1)) AS goods_database_code 
+			FROM goods_database
+ 		</selectKey>
+		INSERT INTO goods_database(
+		 goods_database_code,
+		 member_id, 
+		 goods_database_name, 
+		 goods_database_category, 
+		 goods_database_number, 
+		 goods_database_color, 
+		 goods_database_weight, 
+		 goods_database_speed, 
+		 goods_database_size, 
+		 goods_database_nation, 
+		 goods_database_load, 
+		 goods_database_distance, 
+		 goods_database_battery, 
+		 goods_database_time, 
+		 goods_database_made, 
+		 goods_database_description, 
+		 goods_database_image, 
+		 goods_database_date)
+		VALUES (
+		#{goods_database_code}, 
+		#{member_id}, 
+		#{goods_database_name}, 
+		#{goods_database_category}, 
+		#{goods_database_number}, 
+		#{goods_database_color}, 
+		#{goods_database_weight}, 
+		#{goods_database_speed}, 
+		#{goods_database_size}, 
+		#{goods_database_nation}, 
+		#{goods_database_load}, 
+		#{goods_database_distance}, 
+		#{goods_database_battery}, 
+		#{goods_database_time}, 
+		#{goods_database_made}, 
+		#{goods_database_description}, 
+		#{goods_database_image}, 
+		NOW())
+	
+	</insert>
+
+</mapper>
