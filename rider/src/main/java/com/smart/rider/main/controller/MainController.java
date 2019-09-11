@@ -19,7 +19,7 @@ public class MainController {
 	@GetMapping("/")
 	public String index(Model model) {
 		
-		// 초기 index 화면 DB 연결 확인용 추후 삭제
+		// 재욱, 초기 index 화면 DB 연결 확인용 추후 삭제
 		List<MemberDTO> memberList = mainService.memberList();
 		model.addAttribute("member", memberList);
 		return "index";
