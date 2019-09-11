@@ -2,101 +2,115 @@ package com.smart.rider.contract.dto;
 
 public class ContractDTO {
 
-	private String contract_code;
-	private String contract_start;
-	private String contract_finish;
-	private String contract_valid_date;
-	private String contract_state;
-	private int contract_pay;
-	private String contract_method;
-	private int contract_amount;
-	private int contract_unpaid;
-	private String contract_contents;
-	private String contract_information;
-	private String contract_date;
+	private String contractCode;
+	private String contractUnitCode;
+	private String memberId;
+	private String contractStart;
+	private String contractFinish;
+	private String contractValid_date;
+	private String contractState;
+	private int contractPay;
+	private String contractMethod;
+	private int contractAmount;
+	private int contractUnpaid;
+	private String contractContents;
+	private String contractInformation;
+	private String contractDate;
 	
-	
-	public String getContract_code() {
-		return contract_code;
+	public String getContractCode() {
+		return contractCode;
 	}
-	public void setContract_code(String contract_code) {
-		this.contract_code = contract_code;
+	public void setContractCode(String contractCode) {
+		this.contractCode = contractCode;
 	}
-	public String getContract_start() {
-		return contract_start;
+	public String getContractUnitCode() {
+		return contractUnitCode;
 	}
-	public void setContract_start(String contract_start) {
-		this.contract_start = contract_start;
+	public void setContractUnitCode(String contractUnitCode) {
+		this.contractUnitCode = contractUnitCode;
 	}
-	public String getContract_finish() {
-		return contract_finish;
+	public String getMemberId() {
+		return memberId;
 	}
-	public void setContract_finish(String contract_finish) {
-		this.contract_finish = contract_finish;
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
 	}
-	public String getContract_valid_date() {
-		return contract_valid_date;
+	public String getContractStart() {
+		return contractStart;
 	}
-	public void setContract_valid_date(String contract_valid_date) {
-		this.contract_valid_date = contract_valid_date;
+	public void setContractStart(String contractStart) {
+		this.contractStart = contractStart;
 	}
-	public String getContract_state() {
-		return contract_state;
+	public String getContractFinish() {
+		return contractFinish;
 	}
-	public void setContract_state(String contract_state) {
-		this.contract_state = contract_state;
+	public void setContractFinish(String contractFinish) {
+		this.contractFinish = contractFinish;
 	}
-	public int getContract_pay() {
-		return contract_pay;
+	public String getContractValid_date() {
+		return contractValid_date;
 	}
-	public void setContract_pay(int contract_pay) {
-		this.contract_pay = contract_pay;
+	public void setContractValid_date(String contractValid_date) {
+		this.contractValid_date = contractValid_date;
 	}
-	public String getContract_method() {
-		return contract_method;
+	public String getContractState() {
+		return contractState;
 	}
-	public void setContract_method(String contract_method) {
-		this.contract_method = contract_method;
+	public void setContractState(String contractState) {
+		this.contractState = contractState;
 	}
-	public int getContract_amount() {
-		return contract_amount;
+	public int getContractPay() {
+		return contractPay;
 	}
-	public void setContract_amount(int contract_amount) {
-		this.contract_amount = contract_amount;
+	public void setContractPay(int contractPay) {
+		this.contractPay = contractPay;
 	}
-	public int getContract_unpaid() {
-		return contract_unpaid;
+	public String getContractMethod() {
+		return contractMethod;
 	}
-	public void setContract_unpaid(int contract_unpaid) {
-		this.contract_unpaid = contract_unpaid;
+	public void setContractMethod(String contractMethod) {
+		this.contractMethod = contractMethod;
 	}
-	public String getContract_contents() {
-		return contract_contents;
+	public int getContractAmount() {
+		return contractAmount;
 	}
-	public void setContract_contents(String contract_contents) {
-		this.contract_contents = contract_contents;
+	public void setContractAmount(int contractAmount) {
+		this.contractAmount = contractAmount;
 	}
-	public String getContract_information() {
-		return contract_information;
+	public int getContractUnpaid() {
+		return contractUnpaid;
 	}
-	public void setContract_information(String contract_information) {
-		this.contract_information = contract_information;
+	public void setContractUnpaid(int contractUnpaid) {
+		this.contractUnpaid = contractUnpaid;
 	}
-	public String getContract_date() {
-		return contract_date;
+	public String getContractContents() {
+		return contractContents;
 	}
-	public void setContract_date(String contract_date) {
-		this.contract_date = contract_date;
+	public void setContractContents(String contractContents) {
+		this.contractContents = contractContents;
+	}
+	public String getContractInformation() {
+		return contractInformation;
+	}
+	public void setContractInformation(String contractInformation) {
+		this.contractInformation = contractInformation;
+	}
+	public String getContractDate() {
+		return contractDate;
+	}
+	public void setContractDate(String contractDate) {
+		this.contractDate = contractDate;
 	}
 	@Override
 	public String toString() {
-		return "ContractDTO [contract_code=" + contract_code + ", contract_start=" + contract_start
-				+ ", contract_finish=" + contract_finish + ", contract_valid_date=" + contract_valid_date
-				+ ", contract_state=" + contract_state + ", contract_pay=" + contract_pay + ", contract_method="
-				+ contract_method + ", contract_amount=" + contract_amount + ", contract_unpaid=" + contract_unpaid
-				+ ", contract_contents=" + contract_contents + ", contract_information=" + contract_information
-				+ ", contract_date=" + contract_date + "]";
+		return "ContractDTO [contractCode=" + contractCode + ", contractUnitCode=" + contractUnitCode + ", memberId="
+				+ memberId + ", contractStart=" + contractStart + ", contractFinish=" + contractFinish
+				+ ", contractValid_date=" + contractValid_date + ", contractState=" + contractState + ", contractPay="
+				+ contractPay + ", contractMethod=" + contractMethod + ", contractAmount=" + contractAmount
+				+ ", contractUnpaid=" + contractUnpaid + ", contractContents=" + contractContents
+				+ ", contractInformation=" + contractInformation + ", contractDate=" + contractDate + "]";
 	}
+	
 	
 	
 }

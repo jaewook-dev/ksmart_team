@@ -8,6 +8,7 @@ import com.smart.rider.contract.mapper.UnitMapper;
 @Service
 public class UnitService {
 
-	@Autowired UnitMapper unitMapper;
+	@Autowired 
+	private UnitMapper unitMapper;
 	
 }
