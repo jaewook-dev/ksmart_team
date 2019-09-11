@@ -14,6 +14,6 @@ public class ContractController {
 	@GetMapping("/contract")
 	public String contract() {
 		
-		return "/contract";
+		return "/contract/contract";
 	}
 }

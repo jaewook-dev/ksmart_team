@@ -8,5 +8,6 @@ import com.smart.rider.contract.mapper.ContractMapper;
 @Service
 public class ContractService {
 	 
-	@Autowired ContractMapper contractMapper;
+	@Autowired 
+	private ContractMapper contractMapper;
 }

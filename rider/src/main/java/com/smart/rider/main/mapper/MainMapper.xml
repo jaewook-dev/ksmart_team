@@ -12,4 +12,17 @@
 			, subject_date AS subjectDate
 		FROM subject
 	</select>
+	
+	<select id="UnitList" resultType="com.smart.rider.contract.dto.UnitDTO">
+		SELECT 
+			  contract_unit_code AS contractUnitCode
+			, member_id AS memberId
+			, contract_unit_month AS contractUnitMonth
+			, contract_unit_oneyear AS contractUnitOneyear
+			, contract_unit_twoyear AS contractUnitTwoyear
+			, contract_unit_date AS contractUnitDate
+
+		FROM contract_unit
+	</select>
 </mapper>
+
