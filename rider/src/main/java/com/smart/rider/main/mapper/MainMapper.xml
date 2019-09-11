@@ -2,11 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.smart.rider.main.mapper.MainMapper">
 	
-	<!-- 초기 index 화면 DB 연결 확인용 추후 삭제 -->
-	<select id="memberList" resultType="com.smart.rider.member.dto.MemberDTO">
+	<!-- 재욱, 초기 index 화면 계정과목 DB 연결 확인용 추후 삭제제 -->
+	<select id="subjectList" resultType="com.smart.rider.subject.dto.SubjectDTO">
 		SELECT 
-			 member_id AS memberId
-			,member_name AS memberName
-		FROM member
+			  subject_code AS subjectCode
+			, member_id AS memberId
+			, subject_number AS subjectNumber
+			, subject_name AS subjectName
+			, subject_date AS subjectDate
+		FROM subject
 	</select>
 </mapper>
