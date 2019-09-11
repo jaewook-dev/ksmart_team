@@ -33,6 +33,7 @@ public class GoodsdbService {
 		}
 
 		/*
+		 * 첫번쨰
 		 * 상품DB등록 확인메서드
 		 * public int goodsdbInsert(GoodsdbDTO goodsdbdto) {
 		 * 
