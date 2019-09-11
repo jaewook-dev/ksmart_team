@@ -14,17 +14,32 @@
               </div>
             </div>
             <div class="row tm-edit-product-row">
-              <div class="col-xl-6 col-lg-6 col-md-12">
-                <form action="" class="tm-edit-product-form">
+              <div  class="col-xl-12 col-lg-6 col-md-12" style="float:right;">
+                <form action="/unitInsert" class="tm-edit-product-form" method="post">
+                <!-- 세션 적용 될시 삭제 -->
+                <div class="form-group mb-3">
+                    <label
+                      for="name"
+                      style="float:right;"
+                      >아이디
+                    </label>
+                    <input
+                      name="memberId"
+                      type="text"
+                      class="form-control validate"
+                      required
+                    />
+                  </div>
                   <div class="form-group mb-3">
                     <label
                       for="name"
+                      style="float:right;"
                       >월 계약금액
                     </label>
                     <input
-                      id="name"
-                      name="name"
+                      name="contractUnitMonth"
                       type="text"
+                      placeholder="월 계약금액"
                       class="form-control validate"
                       required
                     />
@@ -32,12 +47,13 @@
                    <div class="form-group mb-3">
                     <label
                       for="name"
+                      style="float:right;"
                       >1년일시불 금액
                     </label>
                     <input
-                      id="name"
-                      name="name"
+                      name="contractUnitOneyear"
                       type="text"
+                      placeholder="1년 일시불 금액"
                       class="form-control validate"
                       required
                     />
@@ -45,20 +61,24 @@
                    <div class="form-group mb-3">
                     <label
                       for="name"
+                      style="float:right;"
                       >2년일시불 금액
                     </label>
+                    <!-- required : 입력란 설정  -->
                     <input
-                      id="name"
-                      name="name"
+                      name="contractUnitTwoyear"
+                      placeholder="2년 일시불 금액"
                       type="text"
                       class="form-control validate"
-                      required
+					  required
                     />
                   </div>
-                     
-         
-              <div class="col-12">
-                <button type="submit" class="btn btn-primary btn-block text-uppercase">계약단가표 등록</button>
+                  
+         		<br/>
+         		<div style="float:right;">
+              		<div class="col-12">
+               		 <button type="submit" class="btn btn-primary btn-block text-uppercase">계약단가표 등록</button>
+              		</div>
               </div>
             </form>
             </div>
@@ -66,7 +86,7 @@
         </div>
       </div>
     </div>
-	
+</div>	
 </th:block>
 <th:block layout:fragment="customScript">
 </th:block>
