@@ -11,6 +11,9 @@ public class UnitController {
 
 	@Autowired UnitService unitService;
 	
-	
-	
+	@GetMapping("/unitInsert.html")
+	public String contract() {
+		
+		return "/unit/unitInsert";
+	}
 }

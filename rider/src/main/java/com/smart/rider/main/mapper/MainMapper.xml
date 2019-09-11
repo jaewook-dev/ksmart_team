@@ -2,11 +2,43 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.smart.rider.main.mapper.MainMapper">
 	
-	<!-- 초기 index 화면 DB 연결 확인용 추후 삭제 -->
+	<!-- 재욱, 초기 index 화면 계정과목 DB 연결 확인용 추후 삭제제 -->
+	<select id="subjectList" resultType="com.smart.rider.subject.dto.SubjectDTO">
+		SELECT 
+			  subject_code AS subjectCode
+			, member_id AS memberId
+			, subject_number AS subjectNumber
+			, subject_name AS subjectName
+			, subject_date AS subjectDate
+		FROM subject
+	</select>
+	
+	<select id="UnitList" resultType="com.smart.rider.contract.dto.UnitDTO">
+		SELECT 
+			  contract_unit_code AS contractUnitCode
+			, member_id AS memberId
+			, contract_unit_month AS contractUnitMonth
+			, contract_unit_oneyear AS contractUnitOneyear
+			, contract_unit_twoyear AS contractUnitTwoyear
+			, contract_unit_date AS contractUnitDate
+
+		FROM contract_unit
+	</select>
+	
 	<select id="memberList" resultType="com.smart.rider.member.dto.MemberDTO">
 		SELECT 
-			 member_id AS memberId
-			,member_name AS memberName
+			 member_id 			AS memberId
+			,member_pw 			AS memberPw
+			,member_name		AS memberName
+			,member_level 		AS memberLevel
+			,member_birth 		AS memberBirth
+			,member_address 	AS memberAddress
+			,member_email 		AS memberEmail
+			,member_phone 		AS memberPhone
+			,shop_code 			AS shopCode
+			,member_insert_date AS memberInsertDate
+			,member_update_date AS memberUpdateDate
 		FROM member
 	</select>
 </mapper>
+
