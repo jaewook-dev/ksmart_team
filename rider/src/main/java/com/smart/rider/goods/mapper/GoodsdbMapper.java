@@ -1,5 +1,7 @@
 package com.smart.rider.goods.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import com.smart.rider.goods.dto.GoodsdbDTO;
@@ -12,4 +14,7 @@ public interface GoodsdbMapper {
 	//상품DB등록하기 
 	//날짜 19-09-10 문영성
 	public int goodsDbInsert(GoodsdbDTO goodsdbdto);
+	
+	//상품DB리스트조회 메서드
+	public List<GoodsdbDTO> goodsDbList();
 }
