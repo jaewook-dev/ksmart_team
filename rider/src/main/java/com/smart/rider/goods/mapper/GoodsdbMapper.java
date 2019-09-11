@@ -17,4 +17,7 @@ public interface GoodsdbMapper {
 	
 	//상품DB리스트조회 메서드
 	public List<GoodsdbDTO> goodsDbList();
+	
+	//상품상제조회메서드
+	
 }
