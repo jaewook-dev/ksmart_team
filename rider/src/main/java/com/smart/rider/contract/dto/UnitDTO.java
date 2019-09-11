@@ -4,7 +4,7 @@ public class UnitDTO {
 	
 	private String contractUnitCode;
 	private String memberId;
-	private String contractUnitMonth;
+	private int  contractUnitMonth;
 	private int contractUnitOneyear;
 	private int contractUnitTwoyear;
 	private String contractUnitDate;
@@ -21,10 +21,10 @@ public class UnitDTO {
 	public void setMemberId(String memberId) {
 		this.memberId = memberId;
 	}
-	public String getContractUnitMonth() {
+	public int getContractUnitMonth() {
 		return contractUnitMonth;
 	}
-	public void setContractUnitMonth(String contractUnitMonth) {
+	public void setContractUnitMonth(int contractUnitMonth) {
 		this.contractUnitMonth = contractUnitMonth;
 	}
 	public int getContractUnitOneyear() {
