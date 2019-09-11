@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/default}">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/default}">
 <th:block layout:fragment="customTitle">
 </th:block>
 <th:block layout:fragment="customContents">
@@ -31,23 +33,24 @@
 					</div>
 					<div class="col-12 tm-block-col">
 						<div class="tm-bg-primary-dark tm-block-sc tm-block-taller">
-							<h2 class="tm-block-title"> 매출 그래프 </h2>
+							<h2 class="tm-block-title">매출 그래프</h2>
 						</div>
 					</div>
 					<div class="col-12 tm-block-col">
 						<div
 							class="tm-bg-primary-dark tm-block-sc tm-block-taller tm-block-scroll">
-							<h2 class="tm-block-title">Orders List</h2>
+							<h2 class="tm-block-title">회원목록</h2>
 							<table class="table">
 								<thead>
 									<tr>
-										<th scope="col">ORDER NO.</th>
-										<th scope="col">STATUS</th>
-										<th scope="col">OPERATORS</th>
-										<th scope="col">LOCATION</th>
-										<th scope="col">DISTANCE</th>
-										<th scope="col">START DATE</th>
-										<th scope="col">EST DELIVERY DUE</th>
+										<th scope="col">ID</th>
+										<th scope="col">이름</th>
+										<th scope="col">접근권한</th>
+										<th scope="col">생년월일</th>
+										<th scope="col">주소</th>
+										<th scope="col">이메일</th>
+										<th scope="col">전화번호</th>
+										<th scope="col">회원가입일자</th>
 									</tr>
 								</thead>
 								<tbody>
