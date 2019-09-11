@@ -14,10 +14,17 @@ public class UnitController {
 	@Autowired UnitService unitService;
 	
 	@GetMapping("/unitInsert.html")
-	public String contract() {
+	public String unitInsert() {
 		
 		return "/unit/unitInsert";
 	}
+	
+	@GetMapping("/unitList.html")
+	public String unitList() {
+		
+		return "/unit/unitList";
+	}
+	
 	
 	@PostMapping("/unitInsert")
 	public String unitInsert(UnitDTO Unit) {

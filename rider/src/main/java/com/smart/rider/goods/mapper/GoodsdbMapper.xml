@@ -56,5 +56,34 @@
 		NOW())
 	
 	</insert>
+	<select id="goodsDbList" resultType="com.smart.rider.goods.dto.GoodsdbDTO">
+		SELECT
+		goods_database_code AS goodsDbCode,
+		member_id AS
+		memberId,
+		goods_database_name AS goodsDbName,
+		goods_database_category AS
+		goodsDbCategory,
+		goods_database_number AS goodsDbNumber,
+		goods_database_color AS goodsDbColor,
+		goods_database_weight AS
+		goodsDbWeight,
+		goods_database_speed AS goodsDbSpeed,
+		goods_database_size AS goodsDbSize,
+		goods_database_nation AS
+		goodsDbNation,
+		goods_database_load AS goodsDbLoad,
+		goods_database_distance AS goodsDbDistance,
+		goods_database_battery AS
+		goodsDbBattery,
+		goods_database_time AS goodsDbTime,
+		goods_database_made
+		AS goodsDbMade,
+		goods_database_description AS goodsDbDescription,
+		goods_database_image AS goodsDbImage,
+		goods_database_date AS
+		goodsDbDate
+		FROM goods_database
+	</select>
 
 </mapper>
