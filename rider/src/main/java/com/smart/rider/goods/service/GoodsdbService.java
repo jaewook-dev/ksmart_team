@@ -21,25 +21,30 @@ public class GoodsdbService {
 	//dto멤버아이디에 세션 셋팅
 	//19-19-10 문영성
 
-	public int goodsDbInsert(GoodsdbDTO goodsdbdto, HttpSession session) {
-		int max = goodsdbmapper.getGoodsDbCodeMax()+1;
+	public int goodsDbInsert(GoodsdbDTO goodsdbdto, HttpSession session) { 
+		int  max = goodsdbmapper.getGoodsDbCodeMax()+1;
 		String tempCode ="goods_database_code";
 
 		goodsdbdto.setMemberId((String) session.getAttribute("SID"));
 		goodsdbdto.setGoodsDbCode(tempCode+max);
 
 		return goodsdbmapper.goodsDbInsert(goodsdbdto);
-		
-		}
 
-		/*
-		 * 첫번쨰
-		 * 상품DB등록 확인메서드
-		 * public int goodsDbInsert(GoodsdbDTO goodsdbdto) {
-		 * 
-		 * return goodsdbmapper.goodsDbInsert(goodsdbdto);
-		 * 
-		 * }
-		 */
+	}
+
+
+
+	//01첫번쨰
+	// 상품DB등록 확인메서드
+	/*
+	 * public int goodsDbInsert(GoodsdbDTO goodsdbdto) {
+	 * 
+	 * return goodsdbmapper.goodsDbInsert(goodsdbdto);
+	 * 
+	 * }
+	 */
+
+
+
 
 }

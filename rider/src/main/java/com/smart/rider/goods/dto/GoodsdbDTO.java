@@ -21,9 +21,6 @@ public class GoodsdbDTO {
 	private String goodsDbDescription;
 	private String goodsDbImage;
 	private String goodsDbDate;
-	
-	
-	
 	public String getGoodsDbCode() {
 		return goodsDbCode;
 	}
@@ -48,10 +45,10 @@ public class GoodsdbDTO {
 	public void setGoodsDbCategory(String goodsDbCategory) {
 		this.goodsDbCategory = goodsDbCategory;
 	}
-	public String getGoodsDbumber() {
+	public String getGoodsDbNumber() {
 		return goodsDbNumber;
 	}
-	public void setGoodsDbumber(String goodsDbNumber) {
+	public void setGoodsDbNumber(String goodsDbNumber) {
 		this.goodsDbNumber = goodsDbNumber;
 	}
 	public String getGoodsDbColor() {
@@ -135,7 +132,7 @@ public class GoodsdbDTO {
 	@Override
 	public String toString() {
 		return "GoodsdbDTO [goodsDbCode=" + goodsDbCode + ", memberId=" + memberId + ", goodsDbName=" + goodsDbName
-				+ ", goodsDbCategory=" + goodsDbCategory + ", goodsDbumber=" + goodsDbNumber + ", goodsDbColor="
+				+ ", goodsDbCategory=" + goodsDbCategory + ", goodsDbNumber=" + goodsDbNumber + ", goodsDbColor="
 				+ goodsDbColor + ", goodsDbWeight=" + goodsDbWeight + ", goodsDbSpeed=" + goodsDbSpeed
 				+ ", goodsDbSize=" + goodsDbSize + ", goodsDbNation=" + goodsDbNation + ", goodsDbLoad=" + goodsDbLoad
 				+ ", goodsDbDistance=" + goodsDbDistance + ", goodsDbBattery=" + goodsDbBattery + ", goodsDbTime="
@@ -143,7 +140,7 @@ public class GoodsdbDTO {
 				+ ", goodsDbImage=" + goodsDbImage + ", goodsDbDate=" + goodsDbDate + "]";
 	}
 	
-
+	
 	
 	
 	
