@@ -13,7 +13,12 @@ public class MemberController {
 	private MemberService memberService;
 	
 	@GetMapping("/memberInsert")
-	public String memberInsert( ) {
+	public String memberInsert() {
 		return "member/memberInsert";
+	}
+	
+	@GetMapping("/memberList")
+	public String memberList() {
+		return "member/memberList";
 	}
 }

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.smart.rider.contract.dto.UnitDTO;
 import com.smart.rider.goods.dto.GoodsdbDTO;
 import com.smart.rider.main.mapper.MainMapper;
+import com.smart.rider.member.dto.MemberDTO;
 import com.smart.rider.subject.dto.SubjectDTO;
 
 @Service
@@ -26,13 +27,19 @@ public class MainService {
 		//System.out.println(list + " <-- list subjectList MainService.java");
 		List<UnitDTO> Ulist = mainMapper.UnitList();
 		//System.out.println(list + " <-- Ulist UnitList MainService.java");
+		List<MemberDTO> Mlist = mainMapper.memberList();
+		
 		map.put("subjectList", list);
 		// System.out.println(map.get("subjectList") + " <-- map.put 확인 MainService.java");
 		map.put("unitList", Ulist);
+
 		//영성 상품DB연결 삭제용
 		List<GoodsdbDTO> dbList = mainMapper.goodsDbList();
 		//System.out.println(dbList+"<--------------- goodsDbList Mainservice.java 확인");
 		map.put("goodsDbList", dbList);
+
+		map.put("memberList", Mlist);
+
 		return map;
 	}
 }
