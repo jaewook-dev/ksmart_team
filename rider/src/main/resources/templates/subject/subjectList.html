@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout/default}">
+	  
+<th:block layout:fragment="customTitle">
+</th:block>
+<th:block layout:fragment="customContents">
+	<body>
+		<div class="container main">
+			<div class="row">
+				<div class="col">
+					<p class="text-white mt-5 mb-5">
+						<b>관리자 > 계정과목관리</b>
+					</p>
+				</div>
+			</div>
+			<div class="row tm-content-row">
+				<div class="col-12 tm-block-col">
+					<h2 class="tm-block-title">계정과목 리스트</h2>
+					<div class="tm-bg-primary-dark tm-block-sub tm-block-taller-sub tm-block-scroll">
+						<table class="table">
+							<thead>
+								<tr>
+									<th scope="col" class="text-left">no</th>
+									<th scope="col">계정과목명</th>
+									<th scope="col">계정과목코드</th>
+									<th scope="col">등록자ID</th>
+									<th scope="col">등록일자</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="list : ${subjectList}">
+									<th th:text="${list.subjectCode}"></th>
+									<td th:text="${list.subjectName}"></td>
+									<td th:text="${list.subjectNumber}"></td>
+									<td th:text="${list.memberId}"></td>
+									<td th:text="${list.subjectDate}"></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+</th:block>
+</th:block>
+<th:block layout:fragment="customScript">
+</th:block>
+</html>
