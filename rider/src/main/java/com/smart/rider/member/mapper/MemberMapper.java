@@ -9,5 +9,7 @@ import com.smart.rider.member.dto.MemberDTO;
 @Mapper
 public interface MemberMapper {
 
+	public int memberInsert(MemberDTO memberdto);
+	
 	public List<MemberDTO> memberList();
 }
