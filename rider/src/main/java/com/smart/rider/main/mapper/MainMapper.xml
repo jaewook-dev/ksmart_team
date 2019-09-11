@@ -9,4 +9,12 @@
 			,member_name AS memberName
 		FROM member
 	</select>
+	
+	<!-- 초기 index 화면 DB 연결 확인용 추후 삭제 -->
+	<select id="goodsList" resultType="com.smart.rider.goods.dto.GoodsdbDTO">
+		SELECT 
+			 goods_database_name AS goods
+			,member_name AS memberName
+		FROM member
+	</select>
 </mapper>
