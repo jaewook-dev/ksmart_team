@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.smart.rider.goods.dto.GoodsdbDTO;
 import com.smart.rider.goods.service.GoodsdbService;
@@ -16,6 +17,14 @@ import com.smart.rider.goods.service.GoodsdbService;
 public class GoodsdbController {
 	@Autowired
 	public GoodsdbService goodsdbservice;
+	
+	//05회원상세조회
+	@GetMapping("/getGoodsDbList")
+	public String getGoodsDbList(@RequestParam(value="goodsDbCode")String goodsDbCode,Model model) {
+		System.out.println(goodsDbCode+"<==============넘어오는코드값 확인=GoodsdbController.java");
+		return "/goods/getGoodsDbList";
+		
+	}
 
 
 
