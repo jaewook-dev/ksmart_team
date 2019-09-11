@@ -65,37 +65,16 @@
 								</tr>
 							</tbody>
 						</table>
-						<!-- End 재욱, 초기 index 화면 계정과목 DB 연결 확인용 추후 삭제 -->
-
-						
-						<div class="tm-bg-primary-dark tm-block tm-block-scroll">
-							<h2 class="tm-block-title">계약단가표(석호)</h2>
-
-							<!-- 석호, 과제용  DB 연결 확인용 추후 삭제 -->
-							<table class="table">
-								<thead>
-									<tr>
-										<th scope="col">월 이용금액</th>
-										<th scope="col">1년일시불금액</th>
-										<th scope="col">2년일시불금액</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr th:each="unitList : ${unitList}">
-										<th th:text="${unitList.contractUnitMonth}"></th>
-										<th th:text="${unitList.contractUnitOneyear}"></th>
-										<th th:text="${unitList.contractUnitTwoyear}"></th>
-									</tr>
-								</tbody>
-							</table>
-							<!-- End 재욱, 초기 index 화면 계정과목 DB 연결 확인용 추후 삭제 -->
-
-						</div>
+						<!-- End 석호, 초기 index 화면 계정과목 DB 연결 확인용 추후 삭제 -->
 					</div>
+						
+					
+
+					<div></div>
 					<!-- 영성 index 상품DB연결 확인용 (삭제)  시작 -->
 					<div class="col-12 tm-block-col">
-						<div class="tm-bg-primary-dark tm-block-sc tm-block-scroll">
-							<h2 class="tm-block-title">상품DB리트스</h2>
+						<div class="tm-bg-primary-dark tm-block-ra tm-block-scroll">
+							<h2 class="tm-block-title">상품DB리스트</h2>
 							<table class="table">
 								<thead>
 									<tr>
