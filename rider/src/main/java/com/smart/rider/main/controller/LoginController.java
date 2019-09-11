@@ -37,6 +37,8 @@ public class LoginController {
 		
 		Map<String, Object> map = loginService.loginCheck(memberId, memberPw);
 		MemberDTO loginCheck = (MemberDTO)map.get("loginCheck");
+		
+		//로그인
 		if(loginCheck != null) {
 			//System.out.println(loginCheck + " <-- loginCheck loginProcess LoginController.java");
 			session.setAttribute("SID", loginCheck.getMemberId());
@@ -47,7 +49,5 @@ public class LoginController {
 			//System.out.println(loginCheck + " <-- loginCheck loginProcess LoginController.java");
 			return "redirect:/login";
 		}
-		
-		
 	}
 }
