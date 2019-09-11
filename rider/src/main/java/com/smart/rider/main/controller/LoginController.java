@@ -51,5 +51,12 @@ public class LoginController {
 			return "redirect:/login";
 		}
 	}
+	
+	//로그아웃 프로세스
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "redirect:/";
+	}
 
 }
