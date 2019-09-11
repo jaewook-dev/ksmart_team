@@ -14,6 +14,10 @@ public class MemberService {
 	@Autowired
 	private MemberMapper memberMapper;
 	
+	public int memberInsert(MemberDTO memberdto) {
+		
+		return memberMapper.memberInsert(memberdto);
+	}
 	public List<MemberDTO> memberList() {
 		List<MemberDTO> list = memberMapper.memberList();
 		return list;
