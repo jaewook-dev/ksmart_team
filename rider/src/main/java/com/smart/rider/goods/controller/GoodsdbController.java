@@ -16,10 +16,10 @@ public class GoodsdbController {
 	@Autowired
 	public GoodsdbService goodsdbservice;
 
-	//01상품db등록 페이지이동
-	@GetMapping("/goodsdb")
+	//01상품db관리 페이지이동
+	@GetMapping("/goodsDbList")
 	public String goods() {
-		return "/goods/goodsdb";
+		return "/goods/goodsDbList";
 	}
 
 	@GetMapping("/goodsDbInsert")
@@ -53,7 +53,7 @@ public class GoodsdbController {
 	@PostMapping("/goodsDbInsert") public String goodsDbInsert(GoodsdbDTO goodsdbdto, HttpSession session) {
 
 		goodsdbservice.goodsDbInsert(goodsdbdto, session);
-		return "redirect:/goodsdb";
+		return "redirect:/goodsDbList";
 		
 	}
 
