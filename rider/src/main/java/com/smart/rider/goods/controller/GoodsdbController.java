@@ -1,5 +1,6 @@
 package com.smart.rider.goods.controller;
 
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,17 +17,17 @@ public class GoodsdbController {
 	@Autowired
 	public GoodsdbService goodsdbservice;
 
-	//01상품db관리 페이지이동
-	@GetMapping("/goodsDbList")
-	public String goods() {
-		return "/goods/goodsDbList";
-	}
 
-	@GetMapping("/goodsDbInsert")
-	public String goodsdbInsert() {
-		return "/goods/goodsDbInsert";
-	}
 
+	//03상품db 세션아이디가져와서 코드자동증가, db에값들어가는지확인.
+	//19-09-10 문영성
+	@PostMapping("/goodsDbInsert")
+	public String goodsDbInsert(GoodsdbDTO goodsdbdto, HttpSession session) {
+
+		goodsdbservice.goodsDbInsert(goodsdbdto, session);
+		return "redirect:/goodsDbList";
+		
+	}
 	//02
 	// 상품DB등록 확인메서드(처음단계)
 	// 문영성
@@ -40,22 +41,19 @@ public class GoodsdbController {
 	 * 
 	 * }
 	 */
+	
+	//01상품db관리 페이지이동
+	//04상품DB리스트 조회
+		@GetMapping("/goodsDbList")
+		public String goodsDbList(Model model) {
+			//System.out.println(model.addAttribute("goodsDbList", goodsdbservice.goodsDbList())+"<======================");	
+			model.addAttribute("goodsDbList", goodsdbservice.goodsDbList());
+			return "goods/goodsDbList";
+		}
 
-
-
-
-
-	//
-	//03상품db 세션아이디가져와서 코드자동증가, db에값들어가는지확인.
-	//19-09-10 문영성
-
-
-	@PostMapping("/goodsDbInsert") public String goodsDbInsert(GoodsdbDTO goodsdbdto, HttpSession session) {
-
-		goodsdbservice.goodsDbInsert(goodsdbdto, session);
-		return "redirect:/goodsDbList";
-		
-	}
-
+		@GetMapping("/goodsDbInsert")
+		public String goodsdbInsert() {
+			return "/goods/goodsDbInsert";
+		}
 
 }
