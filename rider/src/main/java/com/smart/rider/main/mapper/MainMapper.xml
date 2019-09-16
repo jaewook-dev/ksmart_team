@@ -3,8 +3,7 @@
 <mapper namespace="com.smart.rider.main.mapper.MainMapper">
 
 	<!-- 재욱, 초기 index 화면 계정과목 DB 연결 확인용 추후 삭제제 -->
-	<select id="subjectList"
-		resultType="com.smart.rider.subject.dto.SubjectDTO">
+	<select id="subjectList" resultType="com.smart.rider.subject.dto.SubjectDTO">
 		SELECT
 		subject_code AS subjectCode
 		, member_id AS memberId
@@ -14,8 +13,7 @@
 		FROM subject
 	</select>
 
-	<select id="UnitList"
-		resultType="com.smart.rider.contract.dto.UnitDTO">
+	<select id="UnitList" resultType="com.smart.rider.contract.dto.UnitDTO">
 		SELECT
 		contract_unit_code AS contractUnitCode
 		, member_id AS memberId
@@ -28,8 +26,7 @@
 	</select>
 
 	<!-- 영성 INDEX 화면 상품DB 연결확인 -->
-	<select id="goodsDbList"
-		resultType="com.smart.rider.goods.dto.GoodsdbDTO">
+	<select id="goodsDbList" resultType="com.smart.rider.goods.dto.GoodsdbDTO">
 		SELECT
 		goods_database_code AS goodsDbCode,
 		member_id AS memberId,
@@ -52,8 +49,7 @@
 		FROM goods_database
 	</select>
 
-	<select id="memberList"
-		resultType="com.smart.rider.member.dto.MemberDTO">
+	<select id="memberList" resultType="com.smart.rider.member.dto.MemberDTO">
 		SELECT
 		member_id AS memberId
 		,member_pw AS memberPw
