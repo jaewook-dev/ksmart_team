@@ -3,6 +3,16 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.smart.rider.goods.mapper.GoodsdbMapper">
+	<delete id="goodsDbDelete" parameterType="String">
+		DELETE 
+ 				gdb
+ 		FROM goods_database gdb INNER JOIN member m
+ 		WHERE 
+ 				gdb.goods_database_code = #{goodsDbCode}
+ 			AND m.member_id = #{memberId} 
+			AND m.member_pw = #{memberPw}
+	</delete>
+	
 	<select id="getGoodsDbCodeMax" resultType="int">
  		SELECT 
  			MAX(CAST(SUBSTRING(goods_database_code,5) AS DECIMAL)) as maxcol 
@@ -84,7 +94,7 @@
 	<select id="getGoodsDbCode" resultType="com.smart.rider.goods.dto.GoodsdbDTO">
 		SELECT
 		goods_database_code AS goodsDbCode,
-		member_id AS memberId,
+		m.member_id AS memberId,
 		goods_database_name AS goodsDbName,
 		goods_database_category AS	goodsDbCategory,
 		goods_database_number AS goodsDbNumber,
@@ -102,7 +112,8 @@
 		goods_database_image AS goodsDbImage,
 		goods_database_date AS goodsDbDate
 		FROM
-		goods_database		
+		 goods_database gdb INNER JOIN member m 
+			ON gdb.member_id = m.member_id		
 		WHERE 
 		goods_database_code = #{goodsDbCode}
 	</select>

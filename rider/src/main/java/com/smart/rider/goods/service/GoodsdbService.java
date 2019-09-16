@@ -19,6 +19,15 @@ public class GoodsdbService {
 	@Autowired
 	private GoodsdbMapper goodsdbmapper;
 	
+	//04 상품DB삭제 메서드
+	//상품코드 상품아이디.비빌번호가져오기
+	public int goodsDbDelete(String goodsDbCode,String memberId,String memberPw) {
+		
+		return goodsdbmapper.goodsDbDelete(goodsDbCode, memberId, memberPw);
+	}
+	
+		
+	
 	//상품DB상세조회 위해 코드가져오기위한 메서드
 	public GoodsdbDTO getGoodsDbCode(String goodsDbCode) {
 		
