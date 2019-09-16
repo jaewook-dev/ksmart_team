@@ -18,6 +18,7 @@
 			<div class="row tm-content-row">
 				<div class="col-12 tm-block-col">
 					<h2 class="tm-block-title">계정과목 등록</h2>
+					<hr>
 					<form action="subjectInsert" method="post">
 					<div class="tm-bg-primary-dark tm-block-sub-in">
 							<table class="table">
@@ -37,9 +38,10 @@
 							<label th:text="${alert}" style="color:red;"></label>
 							</div>
 							<hr>
-							<div class="text-right">
-								<button type="submit" class="btn-sub btn-primary text-uppercase">확인</button>
-							</div>
+							<span>
+								<button type="button" class="btn-sub btn-primary text-uppercase" style="float:left" onclick="location.href='subjectList'">이전</button>
+								<button type="submit" class="btn-sub btn-primary text-uppercase" style="float:right">확인</button>
+							</span>
 						</form>
 					</div>
 				</div>
