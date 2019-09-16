@@ -5,7 +5,23 @@
 
 <!-- namespace가 인터페이스와 일치해야 연결된다 -->
 <mapper namespace="com.smart.rider.contract.mapper.ContractMapper">
-
+	<!--계약단가표 최신조회 -->
+		<select id="unitNew" resultType="com.smart.rider.contract.dto.UnitDTO">
+		
+			SELECT 
+				contract_unit_code AS contractUnitCode
+				, member_id AS memberId
+				, contract_unit_month AS contractUnitMonth
+				, contract_unit_oneyear AS contractUnitOneyear
+				, contract_unit_twoyear AS contractUnitTwoyear
+				, contract_unit_date AS contractUnitDate
+	
+	 		FROM contract_unit ORDER by contract_unit_date DESC LIMIT 1 
+		
+		</select>
+		
+	
 
 
 </mapper>
+

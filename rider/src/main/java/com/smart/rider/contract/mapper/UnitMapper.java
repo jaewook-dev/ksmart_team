@@ -11,7 +11,7 @@ public interface UnitMapper {
 	
 	public List<UnitDTO> unitList();
 	
-	public int unitCodeMax();
+	public String unitCodeMax();
 	
 	public int unitInsert(UnitDTO unit);
 	

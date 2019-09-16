@@ -29,10 +29,11 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            	<tr>
-                                    <th scope="row"><b>30000</b></th>
-                                    <td><b>330,000</b></td>
-                                    <td><b>660,000</b></td>
+                            	
+                             	<tr th:each="unitNew : ${unitNew}">
+									<th th:text="${unitNew.contractUnitMonth}"></th>
+									<th th:text="${unitNew.contractUnitOneyear}"></th>
+									<th th:text="${unitNew.contractUnitTwoyear}"></th>
                                 </tr>
                             </tbody>
 						</table>
