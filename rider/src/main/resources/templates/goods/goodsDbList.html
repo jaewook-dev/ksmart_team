@@ -15,6 +15,7 @@
 							<table class="table table-hover tm-table-small tm-product-table">
 								<thead>
 									<tr>
+										<th scope="col">DB상품 코드</th>
 										<th scope="col">DB상품 이름</th>										
 										<th scope="col">상품번호</th>
 										<th scope="col">색상</th>										
@@ -24,6 +25,7 @@
 								</thead>
 								<tbody>
 									<tr th:each="gDbList : ${goodsDbList}">
+										<th th:text="${gDbList.goodsDbCode}"></th>	
 										<th th:text="${gDbList.goodsDbName}"></th>										
 										<th th:text="${gDbList.goodsDbNumber}"></th>
 										<th th:text="${gDbList.goodsDbColor}"></th>										
