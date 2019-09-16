@@ -18,6 +18,12 @@ import com.smart.rider.goods.mapper.GoodsdbMapper;
 public class GoodsdbService {
 	@Autowired
 	private GoodsdbMapper goodsdbmapper;
+	
+	//상품DB상세조회 위해 코드가져오기위한 메서드
+	public GoodsdbDTO getGoodsDbCode(String goodsDbCode) {
+		
+		return goodsdbmapper.getGoodsDbCode(goodsDbCode);
+	}
 
 	//03 상품DB리스트 조회 메서드선언
 	public List<GoodsdbDTO> goodsDbList() {

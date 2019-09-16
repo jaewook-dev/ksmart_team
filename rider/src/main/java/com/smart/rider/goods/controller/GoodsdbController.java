@@ -18,13 +18,23 @@ public class GoodsdbController {
 	@Autowired
 	public GoodsdbService goodsdbservice;
 	
-	//05회원상세조회
+	//상품DB상세조회
+	//19-09-16문영성
 	@GetMapping("/getGoodsDbList")
 	public String getGoodsDbList(@RequestParam(value="goodsDbCode")String goodsDbCode,Model model) {
-		System.out.println(goodsDbCode+"<==============넘어오는코드값 확인=GoodsdbController.java");
-		return "/goods/getGoodsDbList";
+		//System.out.println(goodsDbCode+"<==============넘어오는코드값 확인=GoodsdbController.java");
+		model.addAttribute("goodsDB", goodsdbservice.getGoodsDbCode(goodsDbCode));
+		return "goods/getGoodsDbList";
 		
 	}
+	/*
+	 * @PostMapping("/getGoodsDbList") public String getGoodsDbList(GoodsdbDTO
+	 * goodsdbdto) {
+	 * 
+	 * return "redirect:/goodsDbList";
+	 * 
+	 * }
+	 */
 
 
 
@@ -32,11 +42,18 @@ public class GoodsdbController {
 	//19-09-10 문영성
 	@PostMapping("/goodsDbInsert")
 	public String goodsDbInsert(GoodsdbDTO goodsdbdto, HttpSession session) {
-
+		//System.out.println(goodsdbdto+"<<<<<<<<<<넘어오는값 확인하기");
 		goodsdbservice.goodsDbInsert(goodsdbdto, session);
 		return "redirect:/goodsDbList";
 		
 	}
+	
+	@GetMapping("/goodsDbInsert")
+	public String goodsdbInsert() {
+		return "/goods/goodsDbInsert";
+	}
+	
+
 	//02
 	// 상품DB등록 확인메서드(처음단계)
 	// 문영성
@@ -50,6 +67,7 @@ public class GoodsdbController {
 	 * 
 	 * }
 	 */
+	 
 	
 	//01상품db관리 페이지이동
 	//04상품DB리스트 조회
@@ -60,9 +78,6 @@ public class GoodsdbController {
 			return "goods/goodsDbList";
 		}
 
-		@GetMapping("/goodsDbInsert")
-		public String goodsdbInsert() {
-			return "/goods/goodsDbInsert";
-		}
+		
 
 }

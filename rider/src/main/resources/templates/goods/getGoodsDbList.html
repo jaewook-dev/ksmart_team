@@ -12,37 +12,72 @@
 				<div class="col-sm-12 col-md-12 col-lg-8 col-xl-8 tm-block-col">
 					<div class="tm-bg-primary-dark tm-block tm-block-products">
 						<div class="tm-product-table-container">
-							<table class="table table-hover tm-table-small tm-product-table">
+						
+						<input type="hidden" name="goodsCode" th:value="${goodsDB.goodsDbCode}">
+						
+							<table class="table table-hover tm-table-small tm-product-table">							
 								<thead>
 									<tr>
-										<th scope="col">DB상품 이름</th>
 										<th scope="col">판매자</th>
-										<th scope="col">상품번호</th>
-										<th scope="col">색상</th>
-										<th scope="col">중량</th>
-										<th scope="col">가격</th>
-										<th scope="col">상세설명</th>
-										<th scope="col">상세보기</th>
+										<th th:text="${goodsDB.memberId}"></th>
 									</tr>
-								</thead>
-								<tbody>
-									<tr th:each="gDbList : ${goodsDbList}">
-										<th th:text="${gDbList.goodsDbName}"></th>
-										<th th:text="${gDbList.memberId}"></th>
-										<th th:text="${gDbList.goodsDbNumber}"></th>
-										<th th:text="${gDbList.goodsDbColor}"></th>
-										<th th:text="${gDbList.goodsDbWeight}"></th>
-										<th th:text="${gDbList.goodsDbSpeed}"></th>
-										<th th:text="${gDbList.goodsDbDescription}"></th>
-										<td>
-										<a
-										 th:href="@{/goodsDbList(goodsDbCode=${gDbList.goodsDbCode})}"
-										 class="tm-product-delete-link">
-										 <i class="fas fa-check tm-product-check-icon"></i>
-										</a>
-										</td>
-									</tr>							
-								</tbody>
+									<tr>
+										<th scope="col">상품카테고리</th>
+										<th th:text="${goodsDB.goodsDbCategory}" ></th>
+									</tr>									
+									<tr>
+										<th scope="col">상품번호</th>
+										<th th:text="${goodsDB.goodsDbNumber}"></th>
+									</tr>									
+									<tr>
+										<th scope="col">색상</th>
+										<th th:text="${goodsDB.goodsDbColor}"></th>
+									</tr>
+									<tr>
+										<th scope="col">중량</th>
+										<th th:text="${goodsDB.goodsDbWeight}"></th>
+									</tr>
+									<tr>
+										<th scope="col">최대속도</th>
+										<th th:text="${goodsDB.goodsDbSpeed}"></th>
+									</tr>
+									<tr>
+										<th scope="col">박퀴사이즈</th>
+										<th th:text="${goodsDB.goodsDbSize}"></th>
+									</tr>
+									<tr>	
+										<th scope="col">제조국가</th>
+										<th th:text="${goodsDB.goodsDbNation}"></th>
+									</tr>
+									<tr>	
+										<th scope="col">최대하중</th>
+										<th th:text="${goodsDB.goodsDbLoad}"></th>
+									</tr>
+									<tr>	
+										<th scope="col">주행가능거리</th>
+										<th th:text="${goodsDB.goodsDbDistance}"></th>
+									</tr>
+									<tr>	
+										<th scope="col">베터리용량</th>
+										<th th:text="${goodsDB.goodsDbBattery}"></th>
+									</tr>
+									<tr>	
+										<th scope="col">완충시간</th>
+										<th th:text="${goodsDB.goodsDbTime}"></th>
+									</tr>
+									<tr>	
+										<th scope="col">제조일자</th>
+										<th th:text="${goodsDB.goodsDbMade}"></th>
+									</tr>
+									<tr>	
+										<th scope="col">상품이미지</th>
+										<th th:text="${goodsDB.goodsDbImage}"></th>
+									</tr>									
+									<tr>	
+										<th scope="col">DB등록일자</th>
+										<th th:text="${goodsDB.goodsDbDate}"></th>
+									</tr>
+								</thead>								
 							</table>
 						</div>
 						<!-- table container -->

@@ -18,6 +18,6 @@ public interface GoodsdbMapper {
 	//상품DB리스트조회 메서드
 	public List<GoodsdbDTO> goodsDbList();
 	
-	//상품상제조회메서드
-	
+	//상품코드로 상품DB상제조회 메서드
+	public GoodsdbDTO getGoodsDbCode(String goodsDbCode);
 }

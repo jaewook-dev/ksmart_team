@@ -9,13 +9,13 @@ public class GoodsdbDTO {
 	private String goodsDbCategory;
 	private String goodsDbNumber;
 	private String goodsDbColor;
-	private int goodsDbWeight;
-	private int goodsDbSpeed;
+	private String goodsDbWeight;
+	private String goodsDbSpeed;
 	private String goodsDbSize;
 	private String goodsDbNation;
-	private int goodsDbLoad;
-	private int goodsDbDistance;
-	private int goodsDbBattery;
+	private String goodsDbLoad;
+	private String goodsDbDistance;
+	private String goodsDbBattery;
 	private String goodsDbTime;
 	private String goodsDbMade;
 	private String goodsDbDescription;
@@ -57,16 +57,16 @@ public class GoodsdbDTO {
 	public void setGoodsDbColor(String goodsDbColor) {
 		this.goodsDbColor = goodsDbColor;
 	}
-	public int getGoodsDbWeight() {
+	public String getGoodsDbWeight() {
 		return goodsDbWeight;
 	}
-	public void setGoodsDbWeight(int goodsDbWeight) {
+	public void setGoodsDbWeight(String goodsDbWeight) {
 		this.goodsDbWeight = goodsDbWeight;
 	}
-	public int getGoodsDbSpeed() {
+	public String getGoodsDbSpeed() {
 		return goodsDbSpeed;
 	}
-	public void setGoodsDbSpeed(int goodsDbSpeed) {
+	public void setGoodsDbSpeed(String goodsDbSpeed) {
 		this.goodsDbSpeed = goodsDbSpeed;
 	}
 	public String getGoodsDbSize() {
@@ -81,22 +81,22 @@ public class GoodsdbDTO {
 	public void setGoodsDbNation(String goodsDbNation) {
 		this.goodsDbNation = goodsDbNation;
 	}
-	public int getGoodsDbLoad() {
+	public String getGoodsDbLoad() {
 		return goodsDbLoad;
 	}
-	public void setGoodsDbLoad(int goodsDbLoad) {
+	public void setGoodsDbLoad(String goodsDbLoad) {
 		this.goodsDbLoad = goodsDbLoad;
 	}
-	public int getGoodsDbDistance() {
+	public String getGoodsDbDistance() {
 		return goodsDbDistance;
 	}
-	public void setGoodsDbDistance(int goodsDbDistance) {
+	public void setGoodsDbDistance(String goodsDbDistance) {
 		this.goodsDbDistance = goodsDbDistance;
 	}
-	public int getGoodsDbBattery() {
+	public String getGoodsDbBattery() {
 		return goodsDbBattery;
 	}
-	public void setGoodsDbBattery(int goodsDbBattery) {
+	public void setGoodsDbBattery(String goodsDbBattery) {
 		this.goodsDbBattery = goodsDbBattery;
 	}
 	public String getGoodsDbTime() {
@@ -139,8 +139,7 @@ public class GoodsdbDTO {
 				+ goodsDbTime + ", goodsDbMade=" + goodsDbMade + ", goodsDbDescription=" + goodsDbDescription
 				+ ", goodsDbImage=" + goodsDbImage + ", goodsDbDate=" + goodsDbDate + "]";
 	}
-	
-	
+
 	
 	
 	
