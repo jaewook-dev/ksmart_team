@@ -10,7 +10,8 @@
 	<result column="subject_date" 	property="subjectDate"/>
 </resultMap>
 
-	<select id="subjectList" resultMap="subjectMap">
+	<!-- 계정과목 리스트 -->
+	<select id="subjectList" resultMap="subjectMap" parameterType="String">
 		SELECT 
 			 subject_code
 			,member_id
@@ -18,6 +19,10 @@
 			,subject_name
 			,subject_date
 		FROM subject
+		<if test="subjectCode neq null and subjectCode neq ''.toString()">
+            WHERE
+                subject_code = #{subjectCode}
+        </if>
 	</select>
 	
 	<!-- 계정과목코드 자동증가 -->
@@ -43,5 +48,16 @@
 		DELETE 
 		FROM subject 
 		WHERE subject_code=#{subjectCode}
-	</delete>	
+	</delete>
+	
+	<!-- 계정과목 수정 -->
+	<update id="subjectUpdate" parameterType="com.smart.rider.subject.dto.SubjectDTO">
+		UPDATE subject SET
+			member_id=#{memberId},
+			subject_number=#{subjectNumber},
+			subject_name=#{subjectName},
+			subject_date=NOW()
+		WHERE subject_code=#{subjectCode}
+	</update>
+		
 </mapper>
