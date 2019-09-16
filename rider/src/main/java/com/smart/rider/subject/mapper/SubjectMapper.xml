@@ -19,4 +19,22 @@
 			,subject_date
 		FROM subject
 	</select>
+	
+	<!-- 계정과목코드 자동증가 -->
+	<select id="subjectCodeCount" resultType="String">
+		SELECT 
+			MAX(LPAD(RIGHT(subject_code, 3)+1, '3' , '0')) 
+		FROM subject;
+	</select>
+	
+	<!-- 계정과목 등록 -->
+	<insert id="subjectInsert" parameterType="com.smart.rider.subject.dto.SubjectDTO">
+		INSERT INTO subject(
+			 subject_code
+			,member_id
+			,subject_number
+			,subject_name
+			,subject_date)
+		VALUES (#{subjectCode}, #{memberId}, #{subjectNumber}, #{subjectName}, NOW())
+	</insert>	
 </mapper>

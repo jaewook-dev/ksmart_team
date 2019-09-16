@@ -17,5 +17,11 @@ public class SubjectService {
 	public List<SubjectDTO> subjectList(){
 		return subjectMapper.subjectList();
 	}
+	
+	public int subjectInsert(SubjectDTO subjectDTO) {
+		String subjectCode = "AS" + subjectMapper.subjectCodeCount();
+		System.out.println(subjectCode + " <-- subjectCode check subjectInsert SubjectService.java");
+		return subjectMapper.subjectInsert(subjectDTO);
+	}
 
 }
