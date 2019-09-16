@@ -2,6 +2,8 @@ package com.smart.rider.subject.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,11 +36,19 @@ public class SubjectController {
 	
 	// 계정과목 등록 
 	@PostMapping("/subjectInsert")
-	public String subjectInsert(SubjectDTO subjectDTO) {
+	public String subjectInsert(SubjectDTO subjectDTO, HttpSession session) {
 		//System.out.println(subjectDTO.getSubjectNumber() + " <-- subjectNumber subjectInsert SubjectController.java");
 		//System.out.println(subjectDTO.getSubjectName() + " <-- subjectName subjectInsert SubjectController.java");
-		subjectService.subjectInsert(subjectDTO);
-		
+		String memberId = (String)session.getAttribute("SID");
+		subjectService.subjectInsert(subjectDTO, memberId);
+		return "redirect:/subjectList";
+	}
+	
+	// 계정과목 삭제
+	@GetMapping("/subjectDelete")
+	public String subjectDelete(@RequestParam(value = "subjectCode") String subjectCode) {
+		//System.out.println(subjectCode + " <-- subjectCode subjectDelete SubjectController.java");
+		subjectService.subjectDelete(subjectCode);
 		return "redirect:/subjectList";
 	}
 

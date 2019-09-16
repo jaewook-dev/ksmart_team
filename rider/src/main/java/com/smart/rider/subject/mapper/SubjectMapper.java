@@ -17,5 +17,8 @@ public interface SubjectMapper {
 	
 	//계정과목 등록
 	public int subjectInsert(SubjectDTO subjectDTO);
+	
+	//계정과목 삭제
+	public int subjectDelete(String subjectCode);
 
 }

@@ -7,7 +7,7 @@
 </th:block>
 <th:block layout:fragment="customContents">
 	<body>
-		<div class="container main">
+		<div class="container main-height">
 			<div class="row">
 				<div class="col">
 					<p class="text-white mt-5 mb-5">
@@ -15,10 +15,11 @@
 					</p>
 				</div>
 			</div>
+				<h2 class="tm-block-title">계정과목 리스트</h2>
+				<hr>
 			<div class="row tm-content-row">
 				<div class="col-12 tm-block-col">
-					<h2 class="tm-block-title">계정과목 리스트</h2>
-					<div class="tm-bg-primary-dark tm-block-sub tm-block-taller-sub tm-block-scroll">
+					<div class="tm-bg-primary-dark tm-block-sub tm-block-scroll">
 						<table class="table">
 							<thead>
 								<tr>
@@ -42,7 +43,7 @@
 										<button class="btn-sub btn-primary text-uppercase">수정</button>
 									</td>
 									<td class="text-center">
-										<button class="btn-sub btn-primary text-uppercase">삭제</button>
+										<a th:href="@{/subjectDelete(subjectCode=${list.subjectCode})}" class="btn-sub btn-primary text-uppercase">삭제</a>
 									</td>
 								</tr>
 							</tbody>
@@ -50,6 +51,7 @@
 					</div>
 				</div>
 			</div>
+			<hr>
 			<button type="button" id="insertBtn" onclick="location.href='subjectInsert'" style="float:right" class="btn btn-primary text-uppercase">계정과목등록</button>
 		</div>
 </th:block>
