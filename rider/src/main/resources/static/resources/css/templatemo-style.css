@@ -25,7 +25,7 @@ a:hover {
 button:focus {
   outline: 0;
 }
-.main{
+.main-height{
 	min-height:100vh;
 }
 .navbar-brand {
@@ -79,7 +79,7 @@ button:focus {
   -webkit-box-shadow: 1px 1px 5px 0 #455c71;
   -moz-box-shadow: 1px 1px 5px 0 #455c71;
   box-shadow: 1px 1px 5px 0 #455c71;
-  min-height: 100px;
+  min-height: 450px;
   height: 100%;
   max-height: 450px;
 }
@@ -376,10 +376,23 @@ thead {
   transition: all 0.2s ease;
   max-width: 100%;
 }
+.btn-sub {
+  border-radius: 0;
+  padding: 8px 20px;
+  transition: all 0.2s ease;
+  max-width: 100%;
+}
 .btn-small {
   padding: 10px 24px;
 }
 .btn-primary {
+  color: #fff;
+  background-color: #f5a623;
+  border: 2px solid #f5a623;
+  font-size: 90%;
+  font-weight: 600;
+}
+.btn-primary-sub {
   color: #fff;
   background-color: #f5a623;
   border: 2px solid #f5a623;
