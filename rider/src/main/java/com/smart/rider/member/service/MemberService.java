@@ -22,4 +22,12 @@ public class MemberService {
 		List<MemberDTO> list = memberMapper.memberList();
 		return list;
 	}
+	//19.09.16작성
+	public MemberDTO memberIdCheck(String memberId) {
+		return memberMapper.memberIdCheck(memberId);
+	}
+	
+	public MemberDTO getMemberList(String memberId) {
+		return memberMapper.getMemberList(memberId);
+	}
 }

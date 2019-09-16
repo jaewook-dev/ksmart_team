@@ -16,7 +16,35 @@ import com.smart.rider.goods.service.GoodsdbService;
 @Controller
 public class GoodsdbController {
 	@Autowired
-	public GoodsdbService goodsdbservice;
+	private GoodsdbService goodsdbservice;
+	
+	//상품DB삭제 메서드
+	//19-09-16 문영성
+	@GetMapping("/goodsDbDelete")
+	public String goodsDbDelete(@RequestParam(value="goodsDbCode")String goodsDbCode,Model model) {
+		//System.out.println(goodsDbCode+"<..............코드가져오기");
+		model.addAttribute("goodsDbCode",goodsDbCode);
+		return "/goods/goodsDbDelete";
+	}
+	
+	@PostMapping("/goodsDbDelete")
+	public String goodsDbDelete(@RequestParam(value="goodsDbCode")String goodsDbCode,
+								@RequestParam(value="memberId")String memberId,
+								@RequestParam(value="memberPw")String memberPw,Model model) {
+		//System.out.println(goodsDbCode+"<..............코드가져오기");
+		//System.out.println(memberId+"<..............아이디");
+		//System.out.println(memberPw+"<..............비빌번호");		
+		
+		  int result = goodsdbservice.goodsDbDelete(goodsDbCode, memberId, memberPw);
+		  if(result==0) {
+			  model.addAttribute("result", "비밀번호가 불일치합니다.");
+			  model.addAttribute("goodsDbCode", goodsDbCode); 
+			  return  "/goods/goodsDbDelete"; }
+		  
+		return "redirect:goodsDbList";	
+	}
+	
+	
 	
 	//상품DB상세조회
 	//19-09-16문영성

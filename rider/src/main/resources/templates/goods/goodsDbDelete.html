@@ -12,41 +12,31 @@
 				<div class="col-sm-12 col-md-12 col-lg-8 col-xl-8 tm-block-col">
 					<div class="tm-bg-primary-dark tm-block tm-block-products">
 						<div class="tm-product-table-container">
-							<table class="table table-hover tm-table-small tm-product-table">
-								<thead>
+							<form action="/goodsDbDelete" method="post">
+								<input type="hidden" name="memberId" th:value="${session.SID}">
+								<table border="1">
 									<tr>
-										<th scope="col">DB상품 코드</th>
-										<th scope="col">DB상품 이름</th>										
-										<th scope="col">상품번호</th>
-										<th scope="col">색상</th>										
-										<th scope="col">상세설명</th>
-										<th scope="col">상세보기</th>
+										<td>비밀번호</td>
+										<td><input type="text" name="goodsDbCode"
+											th:value="${goodsDbCode}" readonly="readonly"></td>
 									</tr>
-								</thead>
-								<tbody>
-									<tr th:each="gDbList : ${goodsDbList}">
-										<th th:text="${gDbList.goodsDbCode}"></th>	
-										<th th:text="${gDbList.goodsDbName}"></th>										
-										<th th:text="${gDbList.goodsDbNumber}"></th>
-										<th th:text="${gDbList.goodsDbColor}"></th>										
-										<th th:text="${gDbList.goodsDbDescription}"></th>
-										<td>
-										<a
-										 th:href="@{/getGoodsDbList(goodsDbCode=${gDbList.goodsDbCode})}"
-										 class="tm-product-delete-link">
-										 <i class="fas fa-check tm-product-check-icon"></i>
-										</a>
+													
+									<tr>
+										<td>비밀번호</td>
+										<td><input type="text" name="memberPw"></td>
+									</tr>
+									<tr style="text-align: center;">
+										<td colspan="2">
+											<button type="submit" class="btn btn-primary btn-block text-uppercase mb-3">
+											상품삭제</button>
 										</td>
-									</tr>							
-								</tbody>
-							</table>
+									</tr>
+								</table>
+								<label th:if="${result ne null}" th:text="${result}"></label>
+							</form>
 						</div>
 						<!-- table container -->
-						<a href="/goodsDbInsert"
-							class="btn btn-primary btn-block text-uppercase mb-3">DB상품
-							추가하기</a>
-						<!-- <button class="btn btn-primary btn-block text-uppercase">
-							선택상품 삭제하기</button> -->
+						
 					</div>
 				</div>
 				<div class="col-sm-12 col-md-12 col-lg-4 col-xl-4 tm-block-col">
