@@ -36,5 +36,15 @@ public class SubjectService {
 	public int subjectDelete(String subjectCode) {
 		return subjectMapper.subjectDelete(subjectCode);
 	}
+	
+	// 계정과목 수정화면
+	public List<SubjectDTO> getSubjectList(String subjectCode) {
+		return subjectMapper.subjectList(subjectCode);
+	}
+	
+	// 계정과목 수정
+	public int subjectUpdate(SubjectDTO subjectDTO) {
+		return subjectMapper.subjectUpdate(subjectDTO);
+	}
 
 }

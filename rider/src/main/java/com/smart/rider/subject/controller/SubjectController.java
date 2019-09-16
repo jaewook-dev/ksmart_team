@@ -61,5 +61,32 @@ public class SubjectController {
 		subjectService.subjectDelete(subjectCode);
 		return "redirect:/subjectList";
 	}
+	
+	// 계정과목 수정화면
+	@GetMapping("/subjectUpdate")
+	public String subjectUpdate(@RequestParam(value = "subjectCode") String subjectCode, Model model) {
+		List<SubjectDTO> list = subjectService.getSubjectList(subjectCode);
+		//System.out.println(list + " <-- list subjectUpdate SubjectController.java");
+		model.addAttribute("subjectList", list);
+		return "subject/subjectUpdate";
+	}
 
+	// 계정과목 수정
+	@PostMapping("/subjectUpdate")
+	public String subjectUpdate(SubjectDTO subjectDTO, Model model, HttpSession session) {
+		//System.out.println(subjectDTO.getSubjectCode() + " <-- subjectCode subjectUpdate SubjectController.java");
+		String memberId = (String)session.getAttribute("SID");
+		subjectDTO.setMemberId(memberId);
+		
+		List<SubjectDTO> list = subjectService.getSubjectList(subjectDTO.getSubjectCode());
+		
+		if(StringCheck.isNumeric(subjectDTO.getSubjectNumber()) == false) {
+			model.addAttribute("alert", "계정과목코드는 숫자만 입력하세요");
+			model.addAttribute("subjectList", list);
+			return "subject/subjectUpdate";
+		} else {
+			subjectService.subjectUpdate(subjectDTO);
+			return "redirect:/subjectList";
+		}
+	}
 }
