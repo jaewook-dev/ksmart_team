@@ -69,7 +69,8 @@
 	<select id="goodsDbList" resultType="com.smart.rider.goods.dto.GoodsdbDTO">
 		SELECT
 		goods_database_code AS goodsDbCode,
-		gdb.member_id AS member_id,
+		gdb.member_id AS memberId,
+		m.member_id AS memberId,
 		goods_database_name AS goodsDbName,
 		goods_database_category AS	goodsDbCategory,
 		goods_database_number AS goodsDbNumber,

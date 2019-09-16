@@ -16,7 +16,7 @@ import com.smart.rider.goods.service.GoodsdbService;
 @Controller
 public class GoodsdbController {
 	@Autowired
-	public GoodsdbService goodsdbservice;
+	private GoodsdbService goodsdbservice;
 	
 	//상품DB삭제 메서드
 	//19-09-16 문영성

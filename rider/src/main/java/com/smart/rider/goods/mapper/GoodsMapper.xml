@@ -1,1 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smart.rider.goods.mapper.GoodsMapper">
+	<select id="goodsList"	resultType="com.smart.rider.goods.dto.GoodsDTO">
+		SELECT
+		g.goods_code AS goodsCode,
+		g.goods_database_code AS goodsDbCode,
+		gdb.goods_database_code AS goodsDbCode,
+		g.purchase_code AS	purchaseCode,
+		p.purchase_code AS purchaseCode,
+		g.contract_shop_code AS	contractShopCode,
+		sr.contract_shop_code AS contractShopCode,
+		goods_pay AS goodsPay,
+		goods_position AS goodsPosition,
+		goods_rental AS	goodsRental,
+		goods_state AS goodsState,
+		goods_completion_state AS	goodsCompletionState,
+		goods_rental_state AS goodsRentalState,
+		goods_inventory_date AS goodsInventoryDate,
+		goods_date AS goodsDate
+		FROM goods g INNER JOIN goods_database gdb 
+		INNER JOIN	purchase p 
+		INNER JOIN shop_relation sr
+		ON g.goods_database_code = gdb.goods_database_code and
+		g.purchase_code = p.purchase_code and
+		g.contract_shop_code = sr.contract_shop_code
+	</select>
+</mapper>

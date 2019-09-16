@@ -7,14 +7,12 @@ public class GoodsDTO {
 	private String contractShopCode;
 	private int goodsPay;
 	private String goodsPosition;
-	private String goodsRental;
+	private char goodsRental;
 	private String goodsState;
-	private String goodsCompletionState;
-	private String goodsRentalState;
+	private char goodsCompletionState;
+	private char goodsRentalState;
 	private String goodsInventoryDate;
 	private String goodsDate;
-	
-	
 	public String getGoodsCode() {
 		return goodsCode;
 	}
@@ -51,10 +49,10 @@ public class GoodsDTO {
 	public void setGoodsPosition(String goodsPosition) {
 		this.goodsPosition = goodsPosition;
 	}
-	public String getGoodsRental() {
+	public char getGoodsRental() {
 		return goodsRental;
 	}
-	public void setGoodsRental(String goodsRental) {
+	public void setGoodsRental(char goodsRental) {
 		this.goodsRental = goodsRental;
 	}
 	public String getGoodsState() {
@@ -63,16 +61,16 @@ public class GoodsDTO {
 	public void setGoodsState(String goodsState) {
 		this.goodsState = goodsState;
 	}
-	public String getGoodsCompletionState() {
+	public char getGoodsCompletionState() {
 		return goodsCompletionState;
 	}
-	public void setGoodsCompletionState(String goodsCompletionState) {
+	public void setGoodsCompletionState(char goodsCompletionState) {
 		this.goodsCompletionState = goodsCompletionState;
 	}
-	public String getGoodsRentalState() {
+	public char getGoodsRentalState() {
 		return goodsRentalState;
 	}
-	public void setGoodsRentalState(String goodsRentalState) {
+	public void setGoodsRentalState(char goodsRentalState) {
 		this.goodsRentalState = goodsRentalState;
 	}
 	public String getGoodsInventoryDate() {
@@ -95,6 +93,7 @@ public class GoodsDTO {
 				+ ", goodsCompletionState=" + goodsCompletionState + ", goodsRentalState=" + goodsRentalState
 				+ ", goodsInventoryDate=" + goodsInventoryDate + ", goodsDate=" + goodsDate + "]";
 	}
+	
 	
 	
 }
