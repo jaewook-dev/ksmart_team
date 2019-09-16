@@ -25,7 +25,7 @@ a:hover {
 button:focus {
   outline: 0;
 }
-.main{
+.main-height{
 	min-height:100vh;
 }
 .navbar-brand {
