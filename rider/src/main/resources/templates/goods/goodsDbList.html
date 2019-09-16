@@ -15,24 +15,18 @@
 							<table class="table table-hover tm-table-small tm-product-table">
 								<thead>
 									<tr>
-										<th scope="col">DB상품 이름</th>
-										<th scope="col">판매자</th>
+										<th scope="col">DB상품 이름</th>										
 										<th scope="col">상품번호</th>
-										<th scope="col">색상</th>
-										<th scope="col">중량</th>
-										<th scope="col">가격</th>
+										<th scope="col">색상</th>										
 										<th scope="col">상세설명</th>
 										<th scope="col">상세보기</th>
 									</tr>
 								</thead>
 								<tbody>
 									<tr th:each="gDbList : ${goodsDbList}">
-										<th th:text="${gDbList.goodsDbName}"></th>
-										<th th:text="${gDbList.memberId}"></th>
+										<th th:text="${gDbList.goodsDbName}"></th>										
 										<th th:text="${gDbList.goodsDbNumber}"></th>
-										<th th:text="${gDbList.goodsDbColor}"></th>
-										<th th:text="${gDbList.goodsDbWeight}"></th>
-										<th th:text="${gDbList.goodsDbSpeed}"></th>
+										<th th:text="${gDbList.goodsDbColor}"></th>										
 										<th th:text="${gDbList.goodsDbDescription}"></th>
 										<td>
 										<a
