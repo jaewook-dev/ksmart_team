@@ -1,4 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.smart.rider.member.mapper.EmployeeMapper">
+	<insert id="employeeInsert" parameterType="com.smart.rider.member.dto.MemberDTO">
+		INSERT INTO member(
+			 member_id
+			,member_pw
+			,member_name
+			,member_level
+			,member_birth
+			,member_address
+			,member_email
+			,member_phone
+			,shop_code
+			,member_insert_date
+			,member_update_date
+		)VALUES (
+			 #{memberId}
+			,#{memberPw}
+			,#{memberName}
+			,#{memberLevel}
+			,#{memberBirth}
+			,#{memberAddress}
+			,#{memberEmail}
+			,#{memberPhone}
+			,#{shopCode} 
+			,NOW()
+			,NOW())
+	</insert>
+	
+	<select id="employeeList" resultType="com.smart.rider.member.dto.MemberDTO">
+		SELECT 
+			 member_id 			AS memberId
+			,member_pw 			AS memberPw
+			,member_name		AS memberName
+			,member_level 		AS memberLevel
+			,member_birth 		AS memberBirth
+			,member_address 	AS memberAddress
+			,member_email 		AS memberEmail
+			,member_phone 		AS memberPhone
+			,shop_code 			AS shopCode
+			,member_insert_date AS memberInsertDate
+			,member_update_date AS memberUpdateDate
+		FROM member
+	</select>
 </mapper>

@@ -1,7 +1,10 @@
 package com.smart.rider.contract.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -20,15 +23,21 @@ public class UnitController {
 	}
 	
 	@GetMapping("/unitList.html")
-	public String unitList() {
+	public String unitList(Model model) {
+		
+		model.addAttribute("unitList", unitService.UnitList());
 		
 		return "/unit/unitList";
 	}
 	
 	
 	@PostMapping("/unitInsert")
-	public String unitInsert(UnitDTO Unit) {
+	public String unitInsert(UnitDTO unit, HttpSession session) {
+		System.out.println(unit.toString() + "<-- Unit.toString");
+		unitService.unitInsert(unit,session);
 		
 		return "redirect:/unitList";
 	}
+	
+
 }

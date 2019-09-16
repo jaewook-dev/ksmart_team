@@ -10,5 +10,9 @@ import com.smart.rider.contract.dto.UnitDTO;
 public interface UnitMapper {
 	
 	public List<UnitDTO> UnitList();
+
+	public int UnitCodeMax();
+	
+	public int UnitInsert(UnitDTO unit);
 	
 }
