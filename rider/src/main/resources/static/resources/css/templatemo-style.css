@@ -376,10 +376,23 @@ thead {
   transition: all 0.2s ease;
   max-width: 100%;
 }
+.btn-sub {
+  border-radius: 0;
+  padding: 8px 20px;
+  transition: all 0.2s ease;
+  max-width: 100%;
+}
 .btn-small {
   padding: 10px 24px;
 }
 .btn-primary {
+  color: #fff;
+  background-color: #f5a623;
+  border: 2px solid #f5a623;
+  font-size: 90%;
+  font-weight: 600;
+}
+.btn-primary-sub {
   color: #fff;
   background-color: #f5a623;
   border: 2px solid #f5a623;
