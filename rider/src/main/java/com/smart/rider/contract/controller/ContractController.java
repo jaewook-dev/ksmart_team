@@ -21,5 +21,14 @@ public class ContractController {
 		return "/contract/contract";
 	}
 	
+	@GetMapping("/agreement")
+	public String agreement() {
+		
+		
+		
+
+		return "/contract/agreement";
+	}
+	
 	
 }
