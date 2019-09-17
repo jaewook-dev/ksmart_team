@@ -13,7 +13,7 @@ public interface MemberMapper {
 	
 	public List<MemberDTO> memberList();
 	//19.09.16작성
-	public MemberDTO memberIdCheck(String memberId);
+	public int memberIdCheck(String memberId);
 	
 	public MemberDTO getMemberList(String memberId);
 	//19.09.17작성

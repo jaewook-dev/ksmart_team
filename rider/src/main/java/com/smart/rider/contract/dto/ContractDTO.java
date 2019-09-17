@@ -7,7 +7,7 @@ public class ContractDTO {
 	private String memberId;
 	private String contractStart;
 	private String contractFinish;
-	private String contractValid_date;
+	private String contractValidDate;
 	private String contractState;
 	private int contractPay;
 	private String contractMethod;
@@ -48,10 +48,10 @@ public class ContractDTO {
 		this.contractFinish = contractFinish;
 	}
 	public String getContractValid_date() {
-		return contractValid_date;
+		return contractValidDate;
 	}
 	public void setContractValid_date(String contractValid_date) {
-		this.contractValid_date = contractValid_date;
+		this.contractValidDate = contractValid_date;
 	}
 	public String getContractState() {
 		return contractState;
@@ -105,7 +105,7 @@ public class ContractDTO {
 	public String toString() {
 		return "ContractDTO [contractCode=" + contractCode + ", contractUnitCode=" + contractUnitCode + ", memberId="
 				+ memberId + ", contractStart=" + contractStart + ", contractFinish=" + contractFinish
-				+ ", contractValid_date=" + contractValid_date + ", contractState=" + contractState + ", contractPay="
+				+ ", contractValid_date=" + contractValidDate + ", contractState=" + contractState + ", contractPay="
 				+ contractPay + ", contractMethod=" + contractMethod + ", contractAmount=" + contractAmount
 				+ ", contractUnpaid=" + contractUnpaid + ", contractContents=" + contractContents
 				+ ", contractInformation=" + contractInformation + ", contractDate=" + contractDate + "]";

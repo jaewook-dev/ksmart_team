@@ -54,7 +54,7 @@
 							<input id="memberEmail" name="memberEmail" type="text" class="form-control validate" />
 						</div>
 						<div>
-							<button type="submit" id="submit" class="btn btn-primary btn-block text-uppercase" disabled="disabled">
+							<button type="submit" id="submit" class="btn btn-primary btn-block text-uppercase">
 							회원가입
 							</button>
 						</div>
@@ -66,5 +66,48 @@
 </th:block>
 
 <th:block layout:fragment="customScript">
+<script>
+	// 아이디 유효성 검사(1 = 중복 / 0 != 중복)
+	$("#checkButton").click(function() {
+		// id = "id_reg" / name = "userId"
+		var memberId = $('#memberId').val();
+		$.ajax({
+			url : '${pageContext.request.contextPath}/memberIdCheck?memberId='+ memberId,
+			type : 'get',
+			success : function(data) {
+				console.log("1 = 중복o / 0 = 중복x : "+ data);
 
+				if (data == 1) {
+						// 1 : 아이디가 중복되는 문구
+						$("#idCheck").text("사용중인 아이디입니다 :p");
+						$("#idCheck").css("color", "red");
+						//$("#reg_submit").attr("disabled", true);
+					} else {
+						
+						if(idJ.test(user_id)){
+							// 0 : 아이디 길이 / 문자열 검사
+							$("#idCheck").text("");
+							//$("#reg_submit").attr("disabled", false);
+				
+						} else if(user_id == ""){
+							
+							$('#idCheck').text('아이디를 입력해주세요 :)');
+							$('#idCheck').css('color', 'red');
+							//$("#reg_submit").attr("disabled", true);				
+							
+						} else {
+							
+							$('#idCheck').text("아이디는 소문자와 숫자 4~12자리만 가능합니다 :) :)");
+							$('#idCheck').css('color', 'red');
+							//$("#reg_submit").attr("disabled", true);
+						}
+						
+					}
+				}, error : function() {
+						console.log("실패");
+				}
+			});
+		});
+</script>
+</th:block>
 </html>
