@@ -5,7 +5,8 @@
 
 <!-- namespace가 인터페이스와 일치해야 연결된다 -->
 <mapper namespace="com.smart.rider.contract.mapper.UnitMapper">
-	<select id="UnitList"
+	<!-- 계약단가표 조회 -->
+	<select id="unitList"
 		resultType="com.smart.rider.contract.dto.UnitDTO">
 		SELECT
 		contract_unit_code AS contractUnitCode
@@ -17,22 +18,22 @@
 
 		FROM contract_unit
 	</select>
-	<select id="contractUnitCode" resultType="int">
-			SELECT 
-			MAX(CAST(substring(contract_unit_code,19) AS DECIMAL)) 
-			AS maxcol 
-			FROM contract_unit
-	</select>	
+	
+	<!-- 계약단가표 코드 자동증가 -->
+
+	<select id="unitCodeMax" resultType="String">
+		SELECT 
+			MAX(LPAD(RIGHT(contract_unit_code, 4)+1, '4' , '0')) 
+		FROM contract_unit;
+	</select>
+	
+	<!-- 계약단가표 생성 -->
 	<insert id="unitInsert" parameterType="com.smart.rider.contract.dto.UnitDTO">
-		<selectKey keyProperty="contractUnitCode" resultType="String" order="BEFORE">
-			SELECT 
-			CONCAT('goods_', MAX(CAST(substring(contract_unit_code,19) AS DECIMAL)+1)) 
-			AS contractUnitCode 
-			FROM contract_unit
-		</selectKey>
+		
 		INSERT INTO contract_unit
 			(	contract_unit_code,
-			 	member_id, contract_unit_month,
+			 	member_id, 
+			 	contract_unit_month,
 			 	contract_unit_oneyear,
 			 	contract_unit_twoyear,
 			 	contract_unit_date)
@@ -44,6 +45,7 @@
 		 	  	#{contractUnitTwoyear},
 		 	    NOW())
 	</insert>
+	
 
 
 </mapper>

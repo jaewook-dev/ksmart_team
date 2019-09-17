@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.smart.rider.main.controller.StringCheck;
 import com.smart.rider.subject.dto.SubjectDTO;
 import com.smart.rider.subject.service.SubjectService;
 
@@ -36,12 +37,21 @@ public class SubjectController {
 	
 	// 계정과목 등록 
 	@PostMapping("/subjectInsert")
-	public String subjectInsert(SubjectDTO subjectDTO, HttpSession session) {
+	public String subjectInsert(SubjectDTO subjectDTO, HttpSession session, Model model) {
 		//System.out.println(subjectDTO.getSubjectNumber() + " <-- subjectNumber subjectInsert SubjectController.java");
 		//System.out.println(subjectDTO.getSubjectName() + " <-- subjectName subjectInsert SubjectController.java");
 		String memberId = (String)session.getAttribute("SID");
-		subjectService.subjectInsert(subjectDTO, memberId);
-		return "redirect:/subjectList";
+		
+		// 문자열, 숫자 판별
+		if(StringCheck.isNumeric(subjectDTO.getSubjectNumber()) == false) {
+			//System.out.println("미스 매칭 subjectInsert SubjectController.java");
+			model.addAttribute("alert", "계정과목코드는 숫자만 입력하세요");
+			return "subject/subjectInsert";
+		} else {
+			subjectService.subjectInsert(subjectDTO, memberId);
+			return "redirect:/subjectList";
+		}
+		
 	}
 	
 	// 계정과목 삭제
@@ -51,5 +61,32 @@ public class SubjectController {
 		subjectService.subjectDelete(subjectCode);
 		return "redirect:/subjectList";
 	}
+	
+	// 계정과목 수정화면
+	@GetMapping("/subjectUpdate")
+	public String subjectUpdate(@RequestParam(value = "subjectCode") String subjectCode, Model model) {
+		List<SubjectDTO> list = subjectService.getSubjectList(subjectCode);
+		//System.out.println(list + " <-- list subjectUpdate SubjectController.java");
+		model.addAttribute("subjectList", list);
+		return "subject/subjectUpdate";
+	}
 
+	// 계정과목 수정
+	@PostMapping("/subjectUpdate")
+	public String subjectUpdate(SubjectDTO subjectDTO, Model model, HttpSession session) {
+		//System.out.println(subjectDTO.getSubjectCode() + " <-- subjectCode subjectUpdate SubjectController.java");
+		String memberId = (String)session.getAttribute("SID");
+		subjectDTO.setMemberId(memberId);
+		
+		List<SubjectDTO> list = subjectService.getSubjectList(subjectDTO.getSubjectCode());
+		
+		if(StringCheck.isNumeric(subjectDTO.getSubjectNumber()) == false) {
+			model.addAttribute("alert", "계정과목코드는 숫자만 입력하세요");
+			model.addAttribute("subjectList", list);
+			return "subject/subjectUpdate";
+		} else {
+			subjectService.subjectUpdate(subjectDTO);
+			return "redirect:/subjectList";
+		}
+	}
 }

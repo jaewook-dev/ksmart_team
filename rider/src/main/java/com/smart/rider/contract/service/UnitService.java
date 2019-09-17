@@ -16,17 +16,25 @@ public class UnitService {
 	@Autowired 
 	private UnitMapper unitMapper;
 	
-	public List<UnitDTO> UnitList(){
+	public List<UnitDTO> unitList(){
 		
-		return unitMapper.UnitList();
+		return unitMapper.unitList();
 	}
 	
+
+	
 	public int unitInsert(UnitDTO unit,HttpSession session) {
-		int max = unitMapper.UnitCodeMax()+1;
-		String tempCode = "U_0";
-		unit.setContractUnitCode(tempCode+max);
+		//전체 삭제 후 다시 등록시 null을 받아오는 문제
+		String unitCode = "U"+ unitMapper.unitCodeMax();
+		if(unitCode.equals("Unull")) { 
+			unitCode = "U0001";
+		}
+
+		unit.setMemberId((String)session.getAttribute("SID"));
+		unit.setContractUnitCode(unitCode);
 		
-		return unitMapper.UnitInsert(unit);
+		return unitMapper.unitInsert(unit);
+	
 	}
 	
 }

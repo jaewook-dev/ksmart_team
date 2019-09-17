@@ -15,7 +15,7 @@
 					</p>
 				</div>
 			</div>
-				<h2 class="tm-block-title">계정과목 리스트</h2>
+				<h2 class="tm-block-title">계정과목관리</h2>
 				<hr>
 			<div class="row tm-content-row">
 				<div class="col-12 tm-block-col">
@@ -40,7 +40,7 @@
 									<td th:text="${list.memberId}"></td>
 									<td th:text="${list.subjectDate}"></td>
 									<td class="text-center">
-										<button class="btn-sub btn-primary text-uppercase">수정</button>
+										<a th:href="@{/subjectUpdate(subjectCode=${list.subjectCode})}" class="btn-sub btn-primary text-uppercase">수정</a>
 									</td>
 									<td class="text-center">
 										<a th:href="@{/subjectDelete(subjectCode=${list.subjectCode})}" class="btn-sub btn-primary text-uppercase">삭제</a>
