@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smart.rider.spend.mapper.UtilityMapper">
+
+	<resultMap type="com.smart.rider.spend.dto.UtilityDTO" id="utilityMap">
+		<result column="spend_utility_code"		property="spendUtilityCode"/>
+		<result column="subject_code" 			property="subjectCode"/>
+		<result column="contract_shop_code"		property="contractShopCode"/>
+		<result column="spend_utility_pay"		property="spendUtilityPay"/>
+		<result column="spend_utility_contents"	property="spendUtilityContents"/>
+		<result column="spend_utility_date"		property="spendUtilityDate"/>
+	</resultMap>
+	
+	<!-- 공과금 등록 내역 -->
+	<select id="utilityList" resultMap="utilityMap">
+		SELECT 
+			 spend_utility_code
+			,subject_code
+			,contract_shop_code
+			,spend_utility_pay
+			,spend_utility_contents
+			,spend_utility_date
+		FROM spend_utility
+	</select>
+</mapper>

@@ -1,10 +1,20 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="~{layout/default}">
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout/default}">
 <th:block layout:fragment="customTitle">
 </th:block>
 <th:block layout:fragment="customContents">
+<head>
+	<style type="text/css">
+		#box {
+		    text-align: center;
+		}
+		#white {
+			color: white;
+		}
+	</style>
+</head>
 	<!-- MAIN -->
 	<div class="main">
 		<div class="container tm-mt-big tm-mb-big">
@@ -29,10 +39,12 @@
 											type="password" class="form-control validate" id="memberPw" 
 											placeholder="Password를 입력하세요" required  value="pw001"/>
 									</div>
-									<div class="form-group mt-4">
-										<button type="button" class="btn-primary">관리자</button>
-										<button type="button" class="btn-primary">점주</button>
-										<button type="button" class="btn-primary">직원</button>
+									<h6 style="text-align: center" id="white">권한별 버튼 클릭시 아이디 및 비밀번호 자동 입력</h6>
+									<br>
+									<div id="box">
+										<button type="button" class="btn btn-primary" style="float: left" id="adminButton">관리자</button>
+										<button type="button" class="btn btn-primary" id="ownerButton">점주</button>
+										<button type="button" class="btn btn-primary" style="float: right" id="employeeButton">직원</button>
 									</div>
 									<div class="form-group mt-4">
 										<button type="submit"
@@ -53,9 +65,27 @@
 </th:block>
 </th:block>
 <th:block layout:fragment="customScript">
+	<script type="text/javascript">
+		$('#adminButton').click(function() {
+			$('#memberId').val('');
+			$('#memberPw').val('');
+			$('#memberId').val('id001');
+			$('#memberPw').val('pw001');
+		});
+		$('#ownerButton').click(function() {
+			$('#memberId').val('');
+			$('#memberPw').val('');
+			$('#memberId').val('id002');
+			$('#memberPw').val('pw002');
+		});
+		$('#employeeButton').click(function() {
+			$('#memberId').val('');
+			$('#memberPw').val('');
+			$('#memberId').val('id003');
+			$('#memberPw').val('pw003');
+		});
+		
+	</script>
 </th:block>
 </html>
-
-
-
 

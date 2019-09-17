@@ -42,12 +42,13 @@
 			,member_update_date AS memberUpdateDate
 		FROM member
 	</select>
+	<!-- 19.09.16작성 -->
 	<select id="memberIdCheck" parameterType="String" resultType="com.smart.rider.member.dto.MemberDTO">
 		SELECT 
 			member_id
 		FROM member 
 		WHERE 
-			member_id={#memberId}
+			member_id= #{memberId}
 	</select>
 	<select id="getMemberList" parameterType="String" resultType="com.smart.rider.member.dto.MemberDTO">
 		SELECT 
@@ -62,6 +63,19 @@
 			,shop_code 			AS shopCode
 		FROM member
 		WHERE
-			member_id={#memberId}
+			member_id = #{memberId}
 	</select>
+	<!-- 19.09.17작성 -->
+	<update id="memberUpdate" parameterType="com.smart.rider.member.dto.MemberDTO">
+		UPDATE member
+		SET
+			 member_name		= #{memberName}
+			,member_birth		= #{memberBirth}
+			,member_address		= #{memberAddress}
+			,member_email		= #{memberEmail}
+			,member_phone		= #{memberPhone}
+			,member_update_date	= NOW()
+		WHERE
+			member_id = #{memberId}
+	</update>
 </mapper>

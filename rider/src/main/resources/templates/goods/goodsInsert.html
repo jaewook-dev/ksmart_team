@@ -17,83 +17,39 @@
 						<div class="col-xl-6 col-lg-6 col-md-12">
 							
 								<div class="form-group mb-3">
-									<label for="name">상품코드 </label> <input id="goodsCode"
-										name="goodsCode " type="text" class="form-control validate" required />
+									<label for="name">판매가격 </label> <input id="goodsPay"
+										name="goodsPay " type="text" class="form-control validate" required />
 								</div>
 								<div class="form-group mb-3">
-									<label for="name">아이디 </label> <input id="memberId"
-										name="memberId" type="text" class="form-control validate" required />
+									<label for="name">상품위치 </label> <input id="goodsPosition"
+										name="goodsPosition" type="text" class="form-control validate" required />
 								</div>
 								<div class="form-group mb-3">
-									<label for="name">상품명 </label> <input id="goodsName"
-										name="goodsName" type="text" class="form-control validate" required />
+									<label for="name">대여가능여부 </label> <input id="goodsRental"
+										name="goodsRental" type="text" class="form-control validate" required />
+								</div>
+								
+								<div class="form-group mb-3">
+									<label for="name">상품상태 </label> <input id="goodsState"
+										name="goodsState" type="text" class="form-control validate" required />
 								</div>
 								<div class="form-group mb-3">
-									<label for="category">상품카테고리</label> <select
-										class="custom-select tm-select-accounts" id="goodsDbCategory" name="goodsDbCategory">
-										<option selected>상품카테고리</option>
-										<option value="킥보드">전동 킥보드</option>
-										<option value="전동휠">전동 휠</option>
-										<option value="전동자전거">전동 자전거</option>
-										<option value="전동바이크">전동 바이크</option>
-									</select>
-								</div>
-								<div class="form-group mb-3">
-									<label for="name">상품번호 </label> <input id="goodsDbNumber"
-										name="goodsDbNumber" type="text" class="form-control validate" required />
-								</div>
-								<div class="form-group mb-3">
-									<label for="name">색상 </label> <input id="goodsDbColor"
-										name="goodsDbColor" type="text" class="form-control validate" required />								
+									<label for="name">판매완료유무 </label> <input id="goodsCompletionState"
+										name="goodsCompletionState" type="text" class="form-control validate" required />								
 										
 								</div>
 								<div class="form-group mb-3">
-									<label for="name">중량 </label> <input id="goodsDbWeight"
-										name="goodsDbWeight" type="text" class="form-control validate" required />
+									<label for="name">대여상태 </label> <input id="goodsRentalState"
+										name="goodsRentalState" type="text" class="form-control validate" required />
 								</div>
 								<div class="form-group mb-3">
-									<label for="name">최대속도 </label> <input id="goodsDbSpeed"
-										name="goodsDbSpeed" type="text" class="form-control validate" required />
+									<label for="name">최종재고확인일자 </label> <input id="goodsInventoryDate"
+										name="goodsInventoryDate" type="text" class="form-control validate" required />
 								</div>
 								<div class="form-group mb-3">
-									<label for="name">바퀴사이즈 </label> <input id="goodsDbSize"
-										name="goodsDbSize" type="text" class="form-control validate" required />
-								</div>
-								<div class="form-group mb-3">
-									<label for="name">제조국가 </label> <input id="goodsDbNation"
-										name="goodsDbNation" type="text" class="form-control validate" required />
-								</div>
-								<div class="form-group mb-3">
-									<label for="name">최대하중 </label> <input id="goodsDbLoad"
-										name="goodsDbLoad" type="text" class="form-control validate" required />
-								</div>
-								<div class="form-group mb-3">
-									<label for="name">최대주행거리 </label> <input id="goodsDbDistance"
-										name="goodsDbDistance" type="text" class="form-control validate" required />
-								</div>
-								<div class="form-group mb-3">
-									<label for="name">베터리용량 </label> <input id="goodsDbBattery"
-										name="goodsDbBattery" type="text" class="form-control validate" required />
-								</div>
-								<div class="form-group mb-3">
-									<label for="name">베터리 완충시간 </label> <input id="goodsDbTime"
-										name="goodsDbTime" type="text" class="form-control validate" required />
-								</div>
-								<div class="form-group mb-3">
-									<label for="name">제조일자 </label> <input id="goodsDbMade"
-										name="goodsDbMade" type="text" class="form-control validate" required />
-								</div>
-								<div class="form-group mb-3">
-									<label for="description">제품상세설명</label>
-									<textarea name="goodsDbDescription" id ="goodsDbDescription"class="form-control validate" rows="3" required></textarea>
-								</div>
-								
-							
-								<div class="form-group mb-3">
-									<label for="expire_date">등록날짜. </label> <input
+									<label for="expire_date">등록일자 </label> <input
 										id="goodsDbDate" name="goodsDbDate" type="text"
-										class="form-control validate" data-large-mode="true" />
-								</div>
+										class="form-control validate" data-large-mode="true" />								</div>							
 								
 								
 							</div>
@@ -114,7 +70,7 @@
 				            	href="/goodsdbInsert"
 				              	class="btn btn-primary btn-block text-uppercase mb-3">DB상품 추가하기</a> -->
 							<button type="submit"
-								class="btn btn-primary btn-block text-uppercase">상품등록 확인</button>
+								class="btn btn-primary btn-block text-uppercase">판매상품등록완료</button>
 						</div>
 						
 					</div>
