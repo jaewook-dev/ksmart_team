@@ -28,22 +28,26 @@
 									<th scope="col">계정과목명</th>
 									<th scope="col">등록자ID</th>
 									<th scope="col">등록일자</th>
-									<th scope="col" style="width:12%" class="text-center">수정</th>
-									<th scope="col" style="width:12%" class="text-center">삭제</th>
+									<th scope="col" style="width:8%" class="text-center">수정</th>
+									<th scope="col" style="width:8%" class="text-center">삭제</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr th:each="list : ${subjectList}">
-									<th th:text="${list.subjectCode}"></th>
+									<td th:text="${list.subjectCode}"></td>
 									<td th:text="${list.subjectNumber}"></td>
 									<td th:text="${list.subjectName}"></td>
 									<td th:text="${list.memberId}"></td>
 									<td th:text="${list.subjectDate}"></td>
 									<td class="text-center">
-										<a th:href="@{/subjectUpdate(subjectCode=${list.subjectCode})}" class="btn-sub btn-primary text-uppercase">수정</a>
+										<a th:href="@{/subjectUpdate(subjectCode=${list.subjectCode})}" class="tm-product-delete-link">
+											<i class="fas fa-check tm-product-check-icon" style="color: white"></i>
+										</a>
 									</td>
 									<td class="text-center">
-										<a th:href="@{/subjectDelete(subjectCode=${list.subjectCode})}" class="btn-sub btn-primary text-uppercase">삭제</a>
+										<a th:href="@{/subjectDelete(subjectCode=${list.subjectCode})}" class="tm-product-delete-link">
+											<i class="far fa-trash-alt tm-product-delete-icon"></i>
+										</a>
 									</td>
 								</tr>
 							</tbody>
