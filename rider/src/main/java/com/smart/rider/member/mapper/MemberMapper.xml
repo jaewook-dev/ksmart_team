@@ -43,7 +43,7 @@
 		FROM member
 	</select>
 	<!-- 19.09.16작성 -->
-	<select id="memberIdCheck" parameterType="String" resultType="com.smart.rider.member.dto.MemberDTO">
+	<select id="memberIdCheck" parameterType="String" resultType="int">
 		SELECT 
 			member_id
 		FROM member 

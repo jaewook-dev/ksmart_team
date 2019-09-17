@@ -6,8 +6,9 @@
 		 <nav class="navbar navbar-expand-xl">
             <div class="container h-100">
                 <a class="navbar-brand" href="/">
-                    <h1 class="tm-site-title mb-0">SMART RIDER</h1>
+                	<h2 class="tm-site-title mb-0"> 배포 190917</h2>             
                 </a>
+
                 <button class="navbar-toggler ml-auto mr-0" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fas fa-bars tm-nav-icon"></i>
@@ -32,9 +33,10 @@
                                 </span>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="/spend">#지출</a>
                                 <a class="dropdown-item" href="/spend">지출</a>
-                                <a class="dropdown-item" href="#">Billing</a>
-                                <a class="dropdown-item" href="#">Customize</a>
+                                <a class="dropdown-item" href="#">#매출</a>
+                                <a class="dropdown-item" href="#">#재고</a>
                             </div>
                         </li>
                         <li class="nav-item dropdown">
@@ -63,14 +65,14 @@
                                 </span>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" th:if="${session.SLEVEL ne '직원'}" href="/goodsDbList">상품DB관리</a>
-                                <a class="dropdown-item" href="/goodsList">판매상품</a>
-                                <a class="dropdown-item" href="#">대여상품</a>
+                                <a class="dropdown-item" th:if="${session.SLEVEL ne '직원'}" href="/goodsDbList">!)상품DB관리</a>
+                                <a class="dropdown-item" href="/goodsList">!)판매상품</a>
+                                <a class="dropdown-item" href="#">#)대여상품</a>
                             </div>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="/accounts">
+                            <a class="nav-link" href="#">
                                 <i class="far fa-user"></i>
                                 	매장관리
                             </a>
@@ -100,9 +102,7 @@
                                 </span>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="/subjectList">계정과목관리</a>
-                                <a class="dropdown-item" href="#">Billing</a>
-                                <a class="dropdown-item" href="#">Customize</a>
+                                <a class="dropdown-item" href="/subjectList">!계정과목관리</a>
                             </div>
                         </li>
                     </ul>

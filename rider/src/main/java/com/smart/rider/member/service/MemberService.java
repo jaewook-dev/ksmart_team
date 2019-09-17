@@ -22,7 +22,7 @@ public class MemberService {
 		return list;
 	}
 	//19.09.16작성
-	public MemberDTO memberIdCheck(String memberId) {
+	public int memberIdCheck(String memberId) {
 		return memberMapper.memberIdCheck(memberId);
 	}
 	//member정보를 화면에 출력
