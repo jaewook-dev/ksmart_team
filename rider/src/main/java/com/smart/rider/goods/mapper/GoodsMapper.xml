@@ -8,8 +8,7 @@
 			MAX(LPAD(RIGHT(subject_code, 4)+1, '4' , '0')) 
 		FROM subject;
 	</select>
-	<insert id="goodsInsert" parameterType=""></insert>
-		
+			
 
 	<select id="goodsList"	resultType="com.smart.rider.goods.dto.GoodsDTO">
 			SELECT
