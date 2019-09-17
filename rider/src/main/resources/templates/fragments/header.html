@@ -33,8 +33,8 @@
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="/spend">지출</a>
-                                <a class="dropdown-item" href="#">Billing</a>
-                                <a class="dropdown-item" href="#">Customize</a>
+                                <a class="dropdown-item" href="#">#매출</a>
+                                <a class="dropdown-item" href="#">#재고</a>
                             </div>
                         </li>
                         <li class="nav-item dropdown">
@@ -63,14 +63,14 @@
                                 </span>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" th:if="${session.SLEVEL ne '직원'}" href="/goodsDbList">상품DB관리</a>
-                                <a class="dropdown-item" href="/goodsList">판매상품</a>
-                                <a class="dropdown-item" href="#">대여상품</a>
+                                <a class="dropdown-item" th:if="${session.SLEVEL ne '직원'}" href="/goodsDbList">!)상품DB관리</a>
+                                <a class="dropdown-item" href="/goodsList">!)판매상품</a>
+                                <a class="dropdown-item" href="#">#)대여상품</a>
                             </div>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="/accounts">
+                            <a class="nav-link" href="#">
                                 <i class="far fa-user"></i>
                                 	매장관리
                             </a>
