@@ -15,7 +15,6 @@ public class MemberService {
 	private MemberMapper memberMapper;
 	
 	public int memberInsert(MemberDTO memberdto) {
-		
 		return memberMapper.memberInsert(memberdto);
 	}
 	public List<MemberDTO> memberList() {
@@ -26,8 +25,12 @@ public class MemberService {
 	public MemberDTO memberIdCheck(String memberId) {
 		return memberMapper.memberIdCheck(memberId);
 	}
-	
+	//member정보를 화면에 출력
 	public MemberDTO getMemberList(String memberId) {
 		return memberMapper.getMemberList(memberId);
+	}
+	//19.09.17작성
+	public int memberUpdate(MemberDTO memberdto) {
+		return memberMapper.memberUpdate(memberdto);
 	}
 }
