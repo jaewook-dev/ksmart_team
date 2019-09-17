@@ -25,18 +25,17 @@ public class UnitController {
 	@GetMapping("/unitList.html")
 	public String unitList(Model model) {
 		
-		model.addAttribute("unitList", unitService.UnitList());
+		model.addAttribute("unitList", unitService.unitList());
 		
 		return "/unit/unitList";
 	}
-	
-	
+
 	@PostMapping("/unitInsert")
 	public String unitInsert(UnitDTO unit, HttpSession session) {
-		System.out.println(unit.toString() + "<-- Unit.toString");
+		System.out.println(unit.toString() + "<-- unit.toString");
 		unitService.unitInsert(unit,session);
 		
-		return "redirect:/unitList";
+		return "redirect:/unitList.html";
 	}
 	
 

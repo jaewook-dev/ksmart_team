@@ -3,6 +3,7 @@ package com.smart.rider.member.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -56,8 +57,15 @@ public class MemberController {
 	
 	@GetMapping("/getMemberList")
 	public String getMemberList(@RequestParam(value="memberId") String memberId, Model model) {
+		System.out.println(memberId + "<--상세보기id");
 		model.addAttribute("memberList", memberService.getMemberList(memberId));
+
 		return "member/memberUpdate";
 	}
-	
+	//19.09.17작성
+	@PostMapping("/memberUpdate")
+	public String memberUpdate(MemberDTO memberdto) {
+		memberService.memberUpdate(memberdto);
+		return "redirect:/memberList";
+	}
 }
