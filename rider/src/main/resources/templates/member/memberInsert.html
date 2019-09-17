@@ -66,53 +66,5 @@
 </th:block>
 
 <th:block layout:fragment="customScript">
-	<!--
-	<script type="text/javascript">
-		$(function(){
-		    $("#checkPw").hide();
-		    $("#checkPwFail").hide();
-		    $("#memberPw2").blur(function(){
-		        var pw1=$("#memberPw").val();
-		        var pw2=$("#memberPw2").val();
-		        if(pw1 != "" || pw2 != ""){
-		            if(pwd1 == pwd2){
-		                $("#checkPw").show();
-		                $("#checkPwFail").hide();
-		            }else{
-		                $("#checkPw").hide();
-		                $("#checkPwFail").show();
-		            }
-		       	}
-			});
-		});
-	</script>
-	-->
-<script>
-	// 아이디 유효성 검사(1 = 중복 / 0 != 중복)
-	$("#checkButton").click(function() {
-		var check = $('#memberId').val();
-		$.ajax({
-			url : '/memberIdCheck',
-			type : 'post',
-			data : check
-			dataType : "json",
-            contentType: "application/json; charset=UTF-8",
-			success : function(data) {
-				console.log("1 = 중복o / 0 = 중복x : "+ data);							
-				
-				if (data == 1) {
-						// 1 : 아이디가 중복되는 문구
-						$("#idCheck").text("사용중인 아이디입니다.");
-						$("#idCheck").css("color", "red");
-						$("#submit").attr("disabled", "disabled");
-					} else {
-						$("#idCheck").text("사용가능한 아이디입니다.");
-						$("#idCheck").css("color", "blue");
-						$("#submit").removeAttr("disabled");
-					}
-				}
-			});
-		});
-</script>
-</th:block>
+
 </html>

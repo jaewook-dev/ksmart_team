@@ -1,65 +1,74 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" 
-	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	  layout:decorate="~{layout/default}">
-	  
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/default}">
+
 <th:block layout:fragment="customTitle">
 </th:block>
 <th:block layout:fragment="customContents">
-	<body>
-		<div class="container main-height">
-			<div class="row">
-				<div class="col">
-					<p class="text-white mt-5 mb-5">
-						<b>관리자 > 계정과목관리</b>
-					</p>
-				</div>
-			</div>
-				<h2 class="tm-block-title">계정과목관리</h2>
-				<hr>
-			<div class="row tm-content-row">
-				<div class="col-12 tm-block-col">
-					<div class="tm-bg-primary-dark tm-block-sub tm-block-scroll">
-						<table class="table">
-							<thead>
-								<tr>
-									<th scope="col">no</th>
-									<th scope="col">계정과목코드</th>
-									<th scope="col">계정과목명</th>
-									<th scope="col">등록자ID</th>
-									<th scope="col">등록일자</th>
-									<th scope="col" style="width:8%" class="text-center">수정</th>
-									<th scope="col" style="width:8%" class="text-center">삭제</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr th:each="list : ${subjectList}">
-									<td th:text="${list.subjectCode}"></td>
-									<td th:text="${list.subjectNumber}"></td>
-									<td th:text="${list.subjectName}"></td>
-									<td th:text="${list.memberId}"></td>
-									<td th:text="${list.subjectDate}"></td>
-									<td class="text-center">
-										<a th:href="@{/subjectUpdate(subjectCode=${list.subjectCode})}" class="tm-product-delete-link">
-											<i class="fas fa-check tm-product-check-icon" style="color: white"></i>
-										</a>
-									</td>
-									<td class="text-center">
-										<a th:href="@{/subjectDelete(subjectCode=${list.subjectCode})}" class="tm-product-delete-link">
-											<i class="far fa-trash-alt tm-product-delete-icon"></i>
-										</a>
-									</td>
-								</tr>
-							</tbody>
-						</table>
+	<!-- MAIN -->
+	<div class="main-height">
+		<!-- MAIN CONTENT -->
+		<div class="main-content">
+			<div class="container">
+				<div class="row">
+					<div class="col">
+						<p class="text-white mt-5 mb-5">
+							<b>관리자 > 계정과목관리</b>
+						</p>
 					</div>
 				</div>
+
+				<h2 class="tm-block-title">계정과목관리</h2>
+				<hr>
+
+				<!-- row -->
+				<div class="row tm-content-row">
+					<div class="col-12 tm-block-col">
+						<div class="tm-bg-primary-dark tm-block-scroll tm-block-sc">
+							<table class="table">
+								<thead>
+									<tr>
+										<th scope="col">no</th>
+										<th scope="col">계정과목코드</th>
+										<th scope="col">계정과목명</th>
+										<th scope="col">등록자ID</th>
+										<th scope="col">등록일자</th>
+										<th scope="col" style="width: 8%" class="text-center">수정</th>
+										<th scope="col" style="width: 8%" class="text-center">삭제</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="list : ${subjectList}">
+										<td th:text="${list.subjectCode}"></td>
+										<td th:text="${list.subjectNumber}"></td>
+										<td th:text="${list.subjectName}"></td>
+										<td th:text="${list.memberId}"></td>
+										<td th:text="${list.subjectDate}"></td>
+										<td class="text-center"><a
+											th:href="@{/subjectUpdate(subjectCode=${list.subjectCode})}"
+											class="tm-product-delete-link"> <i
+												class="fas fa-check tm-product-check-icon"
+												style="color: white"></i>
+										</a></td>
+										<td class="text-center"><a
+											th:href="@{/subjectDelete(subjectCode=${list.subjectCode})}"
+											class="tm-product-delete-link"> <i
+												class="far fa-trash-alt tm-product-delete-icon"></i>
+										</a></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<hr>
+				<button type="button" id="insertBtn"
+					onclick="location.href='subjectInsert'" style="float: right"
+					class="btn btn-primary text-uppercase">계정과목등록</button>
 			</div>
-			<hr>
-			<button type="button" id="insertBtn" onclick="location.href='subjectInsert'" style="float:right" class="btn btn-primary text-uppercase">계정과목등록</button>
 		</div>
+	</div>
+</th:block>
 </th:block>
 <th:block layout:fragment="customScript">
-
 </th:block>
 </html>
