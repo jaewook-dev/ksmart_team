@@ -43,16 +43,11 @@ public class MemberController {
 	}
 	//19.09.16작성
 	@ResponseBody
-	@RequestMapping(value = "/memberIdCheck", method = RequestMethod.POST)
+	@RequestMapping(value = "/memberIdCheck", method = RequestMethod.GET)
 	public int idCheck(@RequestParam(value="memberId") String memberId) {
 		System.out.println(memberId + "아이디체크");
-		MemberDTO idCheck = memberService.memberIdCheck(memberId);
 		
-		int result = 0;
-		if(idCheck != null) {
-			result = 1;
-		}
-		return result;
+		return memberService.memberIdCheck(memberId);
 	}
 	
 	@GetMapping("/getMemberList")
