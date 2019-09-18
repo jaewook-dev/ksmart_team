@@ -9,22 +9,24 @@
         <div class="container">
             <div class="row">
                 <div class="col">
-                    <p class="text-white mt-5 mb-5"><b>계약관리 > 홈</b></p>
+                    <p class="text-white mt-5 mb-5"><b>거래관리 > 홈</b></p>
                 </div>
             </div>
             
             	
             	
 				<div class="row tm-content-row">
-					<div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
-						<div class="tm-bg-primary-dark tm-block-con">
-						<h2 class="tm-block-title">계약단가표 -최신-</h2>
+					<div class="col-12 tm-block-col">
+						<div class="tm-bg-primary-dark tm-block-scroll tm-block-sc">
+						<h2 class="tm-block-title">매입상품</h2>
 							 <table class="table">
                             <thead>
                                 <tr>
-                                    <th scope="col">월 계약금액</th>
-                                    <th scope="col">1년 일시불 금액</th>
-                                    <th scope="col">2년 일시불 금액</th>
+                                	<th scope="col">매입 거래처명</th>
+                                    <th scope="col">매입 상품명</th>
+                                    <th scope="col">상품 단가</th>
+                                    <th scope="col">매입상품상태</th>
+                                    <th scope="col">매입일자</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -37,26 +39,18 @@
                             </tbody>
 						</table>
 							<div>
-								<br/><br/><button class="btn btn-secondary btn-sm" type="button" onclick="location.href='unitList.html'">계약단가표 조회</button>
+								<br/><br/><button class="btn btn-secondary btn-sm" type="button" onclick="location.href='unitList.html'">매입상품 상세조회</button>
 								
-											<span style="float:right;"><button class="btn btn-secondary btn-sm" type="button" onclick="location.href='unitInsert.html' ">계약단가표 등록</button></span>
+											<span style="float:right;"><button class="btn btn-secondary btn-sm" type="button" onclick="location.href='unitInsert.html' ">매입상품 등록</button></span>
 							</div>
 							
 						</div>
 					</div>
-					
-					<div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
-						<div class="tm-bg-primary-dark tm-block-con">
-							<h2 class="tm-block-title">년 계약조회</h2>
-							<canvas id="myChart" style="max-width: 500px;"></canvas>
-						</div>
-					</div>
-					
-      
+				
                 <div class="col-12 tm-block-col">
-                	<h2 class="tm-block-title">계약된 매장</h2>
-                    <div class="tm-bg-primary-dark tm-block tm-block-taller tm-block-scroll">
-                        
+                	
+                    <div class="tm-bg-primary-dark tm-block-scroll tm-block-sc">
+                        <h2 class="tm-block-title">매입 반품관리</h2>
                         <table class="table">
                             <thead>
                                 <tr>
@@ -192,6 +186,11 @@
                                 </tr>
                             </tbody>
                         </table>
+                        <div>
+							<br/><br/><button class="btn btn-secondary btn-sm" type="button" onclick="location.href='unitList.html'">매입상품 상세조회</button>
+							
+								<span style="float:right;"><button class="btn btn-secondary btn-sm" type="button" onclick="location.href='unitInsert.html' ">매입상품 등록</button></span>
+						</div>
                     </div>
                 </div>
             </div>
