@@ -1,110 +1,113 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" 
-	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	  layout:decorate="~{layout/default}">
-	  
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/default}">
+
 <th:block layout:fragment="customTitle">
 </th:block>
 <th:block layout:fragment="customContents">
-	<body>
-		<div class="container main-height">
-			<div class="row">
-				<div class="col">
-					<p class="text-white mt-5">
-						<b>지출/매출 > 지출</b>
-					</p>
-				</div>
-			</div>
-			<div class="container mt-3">
-				<!-- Nav tabs -->
-				<ul class="nav nav-tabs">
-					<li class="nav-item">
-						<a class="nav-link active" data-toggle="tab" href="#home">통합</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" data-toggle="tab" href="#menu1">급여</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" data-toggle="tab" href="#menu2">공과금</a>
-					</li>
-				</ul>
 
-				<!-- Tab panes -->
-				<div class="tab-content">
-					<div id="home" class="container tab-pane active"><br>
-						<h3>통합</h3>
+	<!-- MAIN -->
+	<div class="main-height">
+		<!-- MAIN CONTENT -->
+		<div class="main-content">
+			<div class="container">
+				<div class="row">
+					<div class="col">
+						<p class="text-white mt-5 mb-5">
+							<b>지출/매출 > 지출</b>
+						</p>
 					</div>
-					<div id="menu1" class="container tab-pane fade"><br>
-						<h3>급여</h3>
-					</div>
-					<div id="menu2" class="container tab-pane fade"><br>
-						<div class="row tm-content-row">
-							<div class="col-12 tm-block-col">
-								<div class="tm-bg-primary-dark tm-block-sub">
-									<h4 class="tm-block-title">공과금 지출 현황</h4>
-									<table class="table">
-									</table>
-								</div>
-							</div>
+				</div>
+				<div class="container mt-3">
+					<!-- Nav tabs -->
+					<ul class="nav nav-tabs">
+						<li class="nav-item"><a class="nav-link active"
+							data-toggle="tab" href="#home">통합</a></li>
+						<li class="nav-item"><a class="nav-link" data-toggle="tab"
+							href="#menu1">급여</a></li>
+						<li class="nav-item"><a class="nav-link" data-toggle="tab"
+							href="#menu2">공과금</a></li>
+					</ul>
+
+					<!-- Tab panes -->
+					<div class="tab-content">
+						<div id="home" class="container tab-pane active">
+							<br>
+							<h3>통합</h3>
 						</div>
-						
-						<div class="row tm-content-row">
-							<div class="col-sm-12 col-md-12 col-lg-6 col-xl-7 tm-block-col">
-								<div class="tm-bg-primary-dark tm-block-spend ">
-									<h4 class="tm-block-title">최근 등록내역</h4>
-									<table class="table">
-										<thead>
-											<tr>
-												<th>내역</th>
-												<th>금액</th>
-												<th>등록일자</th>
-												<th>상세보기</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr>
-												<td>가짜</td>
-												<td>40,000</td>
-												<td>2019-09-17</td>
-												<td>상세</td>
-											</tr>
-											<tr>
-												<td>진짜?</td>
-												<td>30,000</td>
-												<td>2019-09-17</td>
-												<td>상세</td>
-											</tr>
-											<tr>
-												<td>가스수도료</td>
-												<td>140,000</td>
-												<td>2019-09-17</td>
-												<td>상세</td>
-											</tr>
-										</tbody>
-									</table>
+						<div id="menu1" class="container tab-pane fade">
+							<br>
+							<h3>급여</h3>
+						</div>
+						<div id="menu2" class="container tab-pane fade">
+							<br>
+							<div class="row tm-content-row">
+								<div class="col-12 tm-block-col">
+									<div class="tm-bg-primary-dark tm-block-sub">
+										<h4 class="tm-block-title">공과금 지출 현황</h4>
+										<table class="table">
+										</table>
+									</div>
 								</div>
 							</div>
-							<div class="col-sm-12 col-md-12 col-lg-6 col-xl-5 tm-block-col">
-								<div class="tm-bg-primary-dark tm-block-spend">
-									<h4 class="tm-block-title">공과금 등록</h4>
-									<form action="">
-									<div class="form-group">
-										<label>내역</label>
-										<select class="custom-select tm-select-accounts">
-											<option>A</option>
-										</select>
+
+							<div class="row tm-content-row">
+								<div class="col-sm-12 col-md-12 col-lg-6 col-xl-7 tm-block-col">
+									<div class="tm-bg-primary-dark tm-block-spend ">
+										<h4 class="tm-block-title">최근 등록내역</h4>
+										<table class="table">
+											<thead>
+												<tr>
+													<th>내역</th>
+													<th>금액</th>
+													<th>등록일자</th>
+													<th>상세보기</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td>가짜</td>
+													<td>40,000</td>
+													<td>2019-09-17</td>
+													<td>상세</td>
+												</tr>
+												<tr>
+													<td>진짜?</td>
+													<td>30,000</td>
+													<td>2019-09-17</td>
+													<td>상세</td>
+												</tr>
+												<tr>
+													<td>가스수도료</td>
+													<td>140,000</td>
+													<td>2019-09-17</td>
+													<td>상세</td>
+												</tr>
+											</tbody>
+										</table>
 									</div>
-									<div class="form-group">
-										<label>금액</label>
-										<input class="form-control validate">
+								</div>
+								<div class="col-sm-12 col-md-12 col-lg-6 col-xl-5 tm-block-col">
+									<div class="tm-bg-primary-dark tm-block-spend">
+										<h4 class="tm-block-title">공과금 등록</h4>
+										<form action="">
+											<div class="form-group">
+												<label>내역</label> <select
+													class="custom-select tm-select-accounts">
+													<option>A</option>
+												</select>
+											</div>
+											<div class="form-group">
+												<label>금액</label> <input class="form-control validate">
+											</div>
+											<div class="form-group">
+												<label>내용</label> <input class="form-control validate">
+											</div>
+										</form>
+										<hr>
+										<button type="submit" class="btn btn-primary btn-block text-uppercase">확인</button>
 									</div>
-									<div class="form-group">
-										<label>내용</label>
-										<input class="form-control validate">
-									</div>
-									</form>
-									<hr>
-									<button type="submit" class="btn btn-primary btn-block text-uppercase">확인</button>
 								</div>
 							</div>
 						</div>
@@ -112,6 +115,7 @@
 				</div>
 			</div>
 		</div>
+	</div>
 </th:block>
 <th:block layout:fragment="customScript">
 

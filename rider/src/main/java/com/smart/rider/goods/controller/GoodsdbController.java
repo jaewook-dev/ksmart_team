@@ -51,6 +51,11 @@ public class GoodsdbController {
 	@GetMapping("/getGoodsDbList")
 	public String getGoodsDbList(@RequestParam(value="goodsDbCode")String goodsDbCode,Model model) {
 		//System.out.println(goodsDbCode+"<==============넘어오는코드값 확인=GoodsdbController.java");
+		//GoodsdbDTO ggg = goodsdbservice.getGoodsDbCode(goodsDbCode);
+		
+		//입력처리 메서드 호출시에 
+		
+		
 		model.addAttribute("goodsDB", goodsdbservice.getGoodsDbCode(goodsDbCode));
 		return "goods/getGoodsDbList";
 		

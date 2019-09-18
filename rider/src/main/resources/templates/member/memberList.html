@@ -49,7 +49,8 @@
 									<th scope="col">생년월일</th>
 									<th scope="col">전화번호</th>
 									<th scope="col">회원가입일자</th>
-									<th scope="col">상세보기</th>
+									<th scope="col" class="text-center">수정</th>
+									<th scope="col" class="text-center">삭제</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -60,11 +61,18 @@
 									<td th:text="${member.memberBirth}"></td>
 									<td th:text="${member.memberPhone}"></td>
 									<td th:text="${member.memberInsertDate}"></td>
-									<td>
-										<a class="btn-sub btn-primary text-uppercase" 
-										   th:href="@{/getMemberList(memberId=${member.memberId})}">상세보기</a>
+									<td class="text-center">
+										<a th:href="@{/getMemberList(memberId=${member.memberId})}"
+										   	class="tm-product-delete-link">
+										   <i class="fas fa-check tm-product-check-icon" style="color: white"></i>
+										</a>
 									</td>
-									<!-- 관리자 권한일때 리스트에 삭제기능 추가 할 것 -->
+									<td class="text-center">
+										<a th:href="@{/getMemberList(memberId=${member.memberId})}"
+											class="tm-product-delete-link">
+											<i class="far fa-trash-alt tm-product-delete-icon"></i>
+										</a>
+									</td>
 								</tr>
 							</tbody>
 						</table>
