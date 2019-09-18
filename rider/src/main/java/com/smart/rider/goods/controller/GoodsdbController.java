@@ -68,8 +68,10 @@ public class GoodsdbController {
 		//System.out.println(goodsDbCode+"<==============넘어오는코드값 확인=GoodsdbController.java");
 		//GoodsdbDTO ggg = goodsdbservice.getGoodsDbCode(goodsDbCode);
 		
-		//입력처리 메서드 호출시에 
-		
+		 
+		//GoodsdbDTO GoodsdbDTO = goodsdbservice.getGoodsDbCode(goodsDbCode);
+		//System.out.println(GoodsdbDTO.toString() +"GoodsdbDTO.toString() <==============넘어오는코드값 확인=GoodsdbController.java");
+		//입력처리 메서드 호출시에
 		
 		model.addAttribute("goodsDB", goodsdbservice.getGoodsDbCode(goodsDbCode));
 		return "goods/getGoodsDbList";
