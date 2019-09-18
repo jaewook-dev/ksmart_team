@@ -1,10 +1,13 @@
 package com.smart.rider.subject.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.smart.rider.spend.dto.UtilityDTO;
 import com.smart.rider.subject.dto.SubjectDTO;
 import com.smart.rider.subject.mapper.SubjectMapper;
 
@@ -32,7 +35,17 @@ public class SubjectService {
 		return subjectMapper.subjectInsert(subjectDTO);
 	}
 	
-	// 계정과목 삭제
+	//삭제 가능한 계정과목 리스트
+	public List<SubjectDTO> subjectDeletePossible(){
+		return subjectMapper.subjectDeletePossible();
+	}
+	
+	//삭제 불가능한 계정과목 리스트 (외래키 참조중)
+	public List<SubjectDTO> subjectDeleteImpossible(){
+		return subjectMapper.subjectDeleteImpossible();
+	}
+	
+	//계정과목 삭제
 	public int subjectDelete(String subjectCode) {
 		return subjectMapper.subjectDelete(subjectCode);
 	}

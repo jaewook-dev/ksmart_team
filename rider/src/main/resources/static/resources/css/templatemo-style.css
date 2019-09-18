@@ -42,7 +42,7 @@ button:focus {
   outline: 0;
 }
 .main-height{
-	min-height:100vh;
+	min-height:110vh;
 }
 .footer-fix {
     position:absolute;

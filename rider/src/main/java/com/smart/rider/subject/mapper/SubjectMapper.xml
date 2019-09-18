@@ -2,13 +2,24 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper	namespace="com.smart.rider.subject.mapper.SubjectMapper">
 
-<resultMap type="com.smart.rider.subject.dto.SubjectDTO" id="subjectMap">
-	<result column="subject_code" 	property="subjectCode"/>
-	<result column="member_id" 		property="memberId"/>
-	<result column="subject_number" property="subjectNumber"/>
-	<result column="subject_name" 	property="subjectName"/>
-	<result column="subject_date" 	property="subjectDate"/>
-</resultMap>
+	<!-- 계정과목 resultMap -->
+	<resultMap type="com.smart.rider.subject.dto.SubjectDTO" id="subjectMap">
+		<result column="subject_code" 	property="subjectCode"/>
+		<result column="member_id" 		property="memberId"/>
+		<result column="subject_number" property="subjectNumber"/>
+		<result column="subject_name" 	property="subjectName"/>
+		<result column="subject_date" 	property="subjectDate"/>
+	</resultMap>
+
+	<!-- 지출_공과금 resultMap -->
+	<resultMap type="com.smart.rider.spend.dto.UtilityDTO" id="utilityMap">
+		<result column="spend_utility_code"		property="spendUtilityCode"/>
+		<result column="subject_code" 			property="subjectCode"/>
+		<result column="contract_shop_code"		property="contractShopCode"/>
+		<result column="spend_utility_pay"		property="spendUtilityPay"/>
+		<result column="spend_utility_contents"	property="spendUtilityContents"/>
+		<result column="spend_utility_date"		property="spendUtilityDate"/>
+	</resultMap>
 
 	<!-- 계정과목 리스트 -->
 	<select id="subjectList" resultMap="subjectMap" parameterType="String">
@@ -42,6 +53,31 @@
 			,subject_date)
 		VALUES (#{subjectCode}, #{memberId}, #{subjectNumber}, #{subjectName}, NOW())
 	</insert>
+	
+	<!-- 삭제 불가능한 계정과목 리스트 (외래키 적용중)-->
+	<select id="subjectDeleteImpossible" parameterType="String" resultMap="subjectMap">
+		SELECT DISTINCT 
+			 su.subject_code
+			,sub.member_id
+			,sub.subject_number
+			,sub.subject_name
+			,sub.subject_date
+		FROM spend_utility su, subject sub
+		WHERE su.subject_code = sub.subject_code
+	</select>
+	
+	<!-- 삭제 가능한 계정과목 리스트 -->
+	<select id="subjectDeletePossible" resultMap="subjectMap">
+		SELECT
+			 sub.subject_code
+			,sub.member_id
+			,sub.subject_number
+			,sub.subject_name
+			,sub.subject_date
+		FROM subject sub LEFT JOIN spend_utility su 
+		ON sub.subject_code = su.subject_code
+		WHERE su.subject_code IS NULL;
+	</select>
 	
 	<!-- 계정과목 삭제 -->
 	<delete id="subjectDelete" parameterType="String">

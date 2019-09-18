@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.smart.rider.spend.dto.UtilityDTO;
 import com.smart.rider.subject.dto.SubjectDTO;
 
 @Mapper
@@ -17,6 +18,12 @@ public interface SubjectMapper {
 	
 	//계정과목 등록
 	public int subjectInsert(SubjectDTO subjectDTO);
+	
+	//삭제 불가능한 계정과목 리스트 (외래키 참조중)
+	public List<SubjectDTO> subjectDeleteImpossible();
+	
+	//삭제 가능한 계정과목 리스트
+	public List<SubjectDTO> subjectDeletePossible();
 	
 	//계정과목 삭제
 	public int subjectDelete(String subjectCode);

@@ -1,6 +1,7 @@
 package com.smart.rider.subject.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -10,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.w3c.dom.ls.LSInput;
 
 import com.smart.rider.main.controller.StringCheck;
 import com.smart.rider.subject.dto.SubjectDTO;
@@ -24,8 +26,16 @@ public class SubjectController {
 	// 계정과목 리스트 화면
 	@GetMapping("/subjectList")
 	public String subject(Model model) {
-		List<SubjectDTO> list = subjectService.subjectList();
-		model.addAttribute("subjectList", list);
+		
+		// 삭제 가능한 계정과목 리스트
+		List<SubjectDTO> deletePossible = subjectService.subjectDeletePossible();
+		//System.out.println(deletePossible +  " <-- deletePossible subject SubjectController.java");
+		model.addAttribute("deletePossible", deletePossible);
+		
+		// 삭제 불가능한 계정과목 리스트 (외래키 참조중)
+		List<SubjectDTO> DeleteImpossible = subjectService.subjectDeleteImpossible();
+		model.addAttribute("deleteImpossible", DeleteImpossible);
+		
 		return "subject/subjectList";
 	}
 	
@@ -52,14 +62,6 @@ public class SubjectController {
 			return "redirect:/subjectList";
 		}
 		
-	}
-	
-	// 계정과목 삭제
-	@GetMapping("/subjectDelete")
-	public String subjectDelete(@RequestParam(value = "subjectCode") String subjectCode) {
-		//System.out.println(subjectCode + " <-- subjectCode subjectDelete SubjectController.java");
-		subjectService.subjectDelete(subjectCode);
-		return "redirect:/subjectList";
 	}
 	
 	// 계정과목 수정화면
