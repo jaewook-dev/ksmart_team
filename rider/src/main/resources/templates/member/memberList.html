@@ -21,7 +21,7 @@
 							<div class="form-group col-3">
 								
 								<select class="custom-select" name="select">
-									<option value="0">Select account</option>
+									<option value="0">Select</option>
 									<option value="member_name">이름</option>
 								</select>
 							</div>
@@ -71,7 +71,7 @@
 										</a>
 									</td>
 									<td class="text-center">
-										<a th:href="@{/getMemberList(memberId=${member.memberId})}"
+										<a th:href="@{/memberDelete(memberId=${member.memberId})}"
 											class="tm-product-delete-link">
 											<i class="far fa-trash-alt tm-product-delete-icon"></i>
 										</a>

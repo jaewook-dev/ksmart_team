@@ -37,4 +37,9 @@ public class MemberService {
 		List<MemberDTO> search = memberMapper.searchMember(select, searchInput);
 		return search;
 	}
+	//19.09.18작성
+	public int memberDelete(String memberId) {
+		System.out.println("삭제 서비스");
+		return memberMapper.memberDelete(memberId);
+	}
 }
