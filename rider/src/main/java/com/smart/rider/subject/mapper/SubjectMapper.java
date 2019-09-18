@@ -20,10 +20,16 @@ public interface SubjectMapper {
 	public int subjectInsert(SubjectDTO subjectDTO);
 	
 	//삭제 불가능한 계정과목 리스트 (외래키 참조중)
-	public List<SubjectDTO> subjectDeleteImpossible();
+	//public List<SubjectDTO> subjectDeleteImpossible();
+	
+	//삭제 불가능한 계정과목 검색 리스트 (외래키 참조중)
+	public List<SubjectDTO> subjectDeleteImpossible(String subjectKey, String subjectValue);
 	
 	//삭제 가능한 계정과목 리스트
-	public List<SubjectDTO> subjectDeletePossible();
+	//public List<SubjectDTO> subjectDeletePossible();
+	
+	//삭제 가능한 계정과목 검색 리스트
+	public List<SubjectDTO> subjectDeletePossible(String subjectKey, String subjectValue);
 	
 	//계정과목 삭제
 	public int subjectDelete(String subjectCode);

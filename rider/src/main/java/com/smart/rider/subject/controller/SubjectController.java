@@ -26,14 +26,16 @@ public class SubjectController {
 	// 계정과목 리스트 화면
 	@GetMapping("/subjectList")
 	public String subject(Model model) {
+		String subjectKey = null;
+		String subjectValue = "";
 		
 		// 삭제 가능한 계정과목 리스트
-		List<SubjectDTO> deletePossible = subjectService.subjectDeletePossible();
+		List<SubjectDTO> deletePossible = subjectService.subjectDeletePossible(subjectKey, subjectValue);
 		//System.out.println(deletePossible +  " <-- deletePossible subject SubjectController.java");
 		model.addAttribute("deletePossible", deletePossible);
 		
 		// 삭제 불가능한 계정과목 리스트 (외래키 참조중)
-		List<SubjectDTO> DeleteImpossible = subjectService.subjectDeleteImpossible();
+		List<SubjectDTO> DeleteImpossible = subjectService.subjectDeleteImpossible(subjectKey, subjectValue);
 		model.addAttribute("deleteImpossible", DeleteImpossible);
 		
 		return "subject/subjectList";
@@ -99,4 +101,29 @@ public class SubjectController {
 			return "redirect:/subjectList";
 		}
 	}
+	
+	// 계정과목 검색
+	@PostMapping("/subjectList")
+	public String subjectList(@RequestParam(value = "subjectKey") String subjectKey, @RequestParam(value = "subjectValue") String subjectValue, Model model) {
+		//System.out.println(subjectKey + " <-- subjectKey subjectList SubjectController.java");
+		//System.out.println(subjectValue + " <-- subjectValue subjectList SubjectController.java");
+
+		// 삭제 가능한 계정과목 검색 리스트
+		List<SubjectDTO> deletePossible = subjectService.subjectDeletePossible(subjectKey, subjectValue);
+		//System.out.println(deletePossible +  " <-- deletePossible subject SubjectController.java");
+		model.addAttribute("deletePossible", deletePossible);
+		
+		// 삭제 불가능한 계정과목 검색 리스트 (외래키 참조중)
+		List<SubjectDTO> deleteImpossible = subjectService.subjectDeleteImpossible(subjectKey, subjectValue);
+		model.addAttribute("deleteImpossible", deleteImpossible);
+		
+		if(deletePossible.size() == 0 && deleteImpossible.size() == 0) {
+			model.addAttribute("alert", "검색 결과가 없습니다");
+		}
+		
+		return "subject/subjectList";
+	}
+	
+	
+	
 }
