@@ -39,6 +39,14 @@ public class SubjectController {
 		return "subject/subjectList";
 	}
 	
+	// 계정과목 삭제
+	@GetMapping("/subjectDelete")
+	public String subjectDelete(@RequestParam(value = "subjectCode") String subjectCode) {
+		//System.out.println(subjectCode + " <-- subjectCode subjectDelete SubjectController.java");
+		subjectService.subjectDelete(subjectCode);
+		return "redirect:/subjectList";
+	}
+	
 	// 계정과목 등록 화면 이동 
 	@GetMapping("/subjectInsert")
 	public String subjectInsert() {
