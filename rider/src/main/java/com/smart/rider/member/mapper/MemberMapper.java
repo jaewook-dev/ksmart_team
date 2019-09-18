@@ -18,4 +18,6 @@ public interface MemberMapper {
 	public MemberDTO getMemberList(String memberId);
 	//19.09.17작성
 	public int memberUpdate(MemberDTO memberdto);
+	
+	public List<MemberDTO> searchMember(String select, String searchInput);
 }

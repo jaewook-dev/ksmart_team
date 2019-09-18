@@ -33,4 +33,8 @@ public class MemberService {
 	public int memberUpdate(MemberDTO memberdto) {
 		return memberMapper.memberUpdate(memberdto);
 	}
+	public List<MemberDTO> searchMember(String select, String searchInput) {
+		List<MemberDTO> search = memberMapper.searchMember(select, searchInput);
+		return search;
+	}
 }
