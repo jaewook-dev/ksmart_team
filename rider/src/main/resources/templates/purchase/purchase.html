@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/default}">
+<th:block layout:fragment="customTitle">
+</th:block>
+<th:block layout:fragment="customContents">
+ <body>
+   
+ 
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <p class="text-white mt-5 mb-5"><b>계약관리 > 홈</b></p>
+                </div>
+            </div>
+            
+            	
+            	
+				<div class="row tm-content-row">
+					<div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
+						<div class="tm-bg-primary-dark tm-block-con">
+						<h2 class="tm-block-title">계약단가표 -최신-</h2>
+							 <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">월 계약금액</th>
+                                    <th scope="col">1년 일시불 금액</th>
+                                    <th scope="col">2년 일시불 금액</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            	
+                             	<tr th:each="unitNew : ${unitNew}">
+									<th th:text="${unitNew.contractUnitMonth}"></th>
+									<th th:text="${unitNew.contractUnitOneyear}"></th>
+									<th th:text="${unitNew.contractUnitTwoyear}"></th>
+                                </tr>
+                            </tbody>
+						</table>
+							<div>
+								<br/><br/><button class="btn btn-secondary btn-sm" type="button" onclick="location.href='unitList.html'">계약단가표 조회</button>
+								
+											<span style="float:right;"><button class="btn btn-secondary btn-sm" type="button" onclick="location.href='unitInsert.html' ">계약단가표 등록</button></span>
+							</div>
+							
+						</div>
+					</div>
+					
+					<div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
+						<div class="tm-bg-primary-dark tm-block-con">
+							<h2 class="tm-block-title">년 계약조회</h2>
+							<canvas id="myChart" style="max-width: 500px;"></canvas>
+						</div>
+					</div>
+					
+      
+                <div class="col-12 tm-block-col">
+                	<h2 class="tm-block-title">계약된 매장</h2>
+                    <div class="tm-bg-primary-dark tm-block tm-block-taller tm-block-scroll">
+                        
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">계약자</th>
+                                    <th scope="col">서비스 시작일자</th>
+                                    <th scope="col">서비스 종료일자</th>
+                                    <th scope="col">계약상태</th>
+                                    <th scope="col">계약금액</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row"><b>아이디(FK)</b></th>
+                                    <td><b>2018.03.15</b></td>
+                                    <td><b>2019.03.15</b></td>
+                                    <td>
+                                    	<div class="tm-status-circle moving">	
+                                    	</div><b>정상</b>
+                                    </td>
+                                    <td><b>330000</b></td>
+
+                                </tr>
+                                <tr>
+                                    <th scope="row"><b>#122348</b></th>
+                                    <td>
+                                        <div class="tm-status-circle pending">
+                                        </div>Pending
+                                    </td>
+                                    <td><b>Jacob Miller</b></td>
+                                    <td><b>London, UK</b></td>
+                                    <td><b>360 km</b></td>
+
+                                </tr>
+                                <tr>
+                                    <th scope="row"><b>#122347</b></th>
+                                    <td>
+                                        <div class="tm-status-circle cancelled">
+                                        </div>Cancelled
+                                    </td>
+                                    <td><b>George Wilson</b></td>
+                                    <td><b>London, UK</b></td>
+                                    <td><b>340 km</b></td>
+
+                                </tr>
+                                <tr>
+                                    <th scope="row"><b>#122346</b></th>
+                                    <td>
+                                        <div class="tm-status-circle moving">
+                                        </div>Moving
+                                    </td>
+                                    <td><b>William Aung</b></td>
+                                    <td><b>London, UK</b></td>
+                                    <td><b>218 km</b></td>
+
+                                </tr>
+                                <tr>
+                                    <th scope="row"><b>#122345</b></th>
+                                    <td>
+                                        <div class="tm-status-circle pending">
+                                        </div>Pending
+                                    </td>
+                                    <td><b>Harry Ryan</b></td>
+                                    <td><b>London, UK</b></td>
+                                    <td><b>280 km</b></td>
+
+                                </tr>
+                                <tr>
+                                    <th scope="row"><b>#122344</b></th>
+                                    <td>
+                                        <div class="tm-status-circle pending">
+                                        </div>Pending
+                                    </td>
+                                    <td><b>Michael Jones</b></td>
+                                    <td><b>London, UK</b></td>
+                                    <td><b>218 km</b></td>
+
+                                </tr>
+                                <tr>
+                                    <th scope="row"><b>#122343</b></th>
+                                    <td>
+                                        <div class="tm-status-circle moving">
+                                        </div>Moving
+                                    </td>
+                                    <td><b>Timmy Davis</b></td>
+                                    <td><b>London, UK</b></td>
+                                    <td><b>218 km</b></td>
+
+                                </tr>
+                                <tr>
+                                    <th scope="row"><b>#122342</b></th>
+                                    <td>
+                                        <div class="tm-status-circle moving">
+                                        </div>Moving
+                                    </td>
+                                    <td><b>Oscar Phyo</b></td>
+                                    <td><b>London, UK</b></td>
+                                    <td><b>420 km</b></td>
+ 
+                                </tr>
+                                <tr>
+                                    <th scope="row"><b>#122341</b></th>
+                                    <td>
+                                        <div class="tm-status-circle moving">
+                                        </div>Moving
+                                    </td>
+                                    <td><b>Charlie Brown</b></td>
+                                    <td><b>London, UK</b></td>
+                                    <td><b>300 km</b></td>
+
+                                </tr>
+                                <tr>
+                                    <th scope="row"><b>#122340</b></th>
+                                    <td>
+                                        <div class="tm-status-circle cancelled">
+                                        </div>Cancelled
+                                    </td>
+                                    <td><b>Wilson Cookies</b></td>
+                                    <td><b>London, UK</b></td>
+                                    <td><b>218 km</b></td>
+
+                                </tr>
+                                <tr>
+                                    <th scope="row"><b>#122339</b></th>
+                                    <td>
+                                        <div class="tm-status-circle moving">
+                                        </div>Moving
+                                    </td>
+                                    <td><b>Richard Clamon</b></td>
+                                    <td><b>London, UK</b></td>
+                                    <td><b>150 km</b></td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+ 
+
+</th:block>
+</th:block>
+<th:block layout:fragment="customScript">
+	<script>
+	var ctx = document.getElementById("myChart").getContext('2d');
+	var myChart = new Chart(ctx, {
+	  type: 'bar',
+	  data: {
+	    labels: ["2013", "2014", "2015", "2016", "2017",],
+	    datasets: [{
+	      label: '계약건수',
+	      data: [12, 19, 3, 5, 2, 3],
+	      backgroundColor: [
+	        'rgba(255, 99, 132, 0.2)',
+	        'rgba(54, 162, 235, 0.2)',
+	        'rgba(255, 206, 86, 0.2)',
+	        'rgba(75, 192, 192, 0.2)',
+	        'rgba(153, 102, 255, 0.2)',
+	        'rgba(255, 159, 64, 0.2)'
+	      ],
+	      borderColor: [
+	        'rgba(255,99,132,1)',
+	        'rgba(54, 162, 235, 1)',
+	        'rgba(255, 206, 86, 1)',
+	        'rgba(75, 192, 192, 1)',
+	        'rgba(153, 102, 255, 1)',
+	        'rgba(255, 159, 64, 1)'
+	      ],
+	      borderWidth: 1
+	    }]
+	  },
+	  options: {
+	    scales: {
+	      yAxes: [{
+	        ticks: {
+	          beginAtZero: true
+	        }
+	      }]
+	    }
+	  }
+	});
+	
+	</script>
+	<script>
+	
+	
+	</script>
+	
+</th:block>
+</html>

@@ -13,11 +13,9 @@ public class ShopController {
 	private ShopService shopService;
 	
 	@GetMapping("/shop")
-	public String agreement() {
+	public String shop() {
 		
 		
-		
-
 		return "/shop/shop";
 	}
 }
