@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.smart.rider.goods.dto.GoodsdbDTO;
 import com.smart.rider.goods.mapper.GoodsdbMapper;
+import com.smart.rider.member.dto.MemberDTO;
 
 
 
@@ -18,6 +19,13 @@ import com.smart.rider.goods.mapper.GoodsdbMapper;
 public class GoodsdbService {
 	@Autowired
 	private GoodsdbMapper goodsdbmapper;
+	
+	//05상품 검색 메서드 
+	//19-19-18 문영성
+	public List<GoodsdbDTO> goodsDbSearchList(String select, String searchInput) {
+		List<GoodsdbDTO> search = goodsdbmapper.goodsDbSearchList(select, searchInput);
+		return search;
+	}
 	
 	//04 상품DB삭제 메서드
 	//상품코드 상품아이디.비빌번호가져오기
