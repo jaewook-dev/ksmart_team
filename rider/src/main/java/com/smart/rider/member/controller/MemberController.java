@@ -71,4 +71,15 @@ public class MemberController {
 		model.addAttribute("memberList", search);
 		return "member/memberList";
 	}
+	//19.09.18작성
+	@RequestMapping(value="/memberDelete" , method = RequestMethod.POST)
+	public String memberDelete(String memberId) {
+		System.out.println("삭제 컨트롤");
+		return "redirect:/memberList";
+	}
+	//비밀번호 수정화면 팝업으로 띄우기
+	@GetMapping("/changePassword")
+	public String memberPassword() {
+		return "member/memberPassword";
+	}
 }

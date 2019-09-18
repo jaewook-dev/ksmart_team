@@ -8,7 +8,7 @@
 	<!-- MAIN -->
 	<div class="main">
 		<div class="container mt-5">
-		<h2 class="tm-block-title">상품DB리스트</h2>
+		<h2 class="tm-block-title">대여상품</h2>
 			<div class="row tm-content-row">
 				<div class="col-sm-12 col-md-12 col-lg-8 col-xl-8 tm-block-col">
 					<div class="tm-bg-primary-dark tm-block tm-block-products">
@@ -16,24 +16,25 @@
 							<table class="table table-hover tm-table-small tm-product-table">
 								<thead>
 									<tr>
-										<th scope="col">DB상품 코드</th>
-										<th scope="col">DB상품 이름</th>										
-										<th scope="col">상품번호</th>
-										<th scope="col">색상</th>										
-										<th scope="col">상세설명</th>
-										<th scope="col">상세보기</th>
+										<th scope="col">상품 코드</th>
+										<th scope="col">상품카테고리</th>
+										<th scope="col">대여가격</th>
+										<th scope="col">상품상태</th>																	
+										<th scope="col">등록일자</th>							
+										<th scope="col">재고확인일자</th>
 									</tr>
 								</thead>
 								<tbody>
-									<tr th:each="gDbList : ${goodsDbList}">
-										<th th:text="${gDbList.goodsDbCode}"></th>	
-										<th th:text="${gDbList.goodsDbName}"></th>										
-										<th th:text="${gDbList.goodsDbNumber}"></th>
-										<th th:text="${gDbList.goodsDbColor}"></th>										
-										<th th:text="${gDbList.goodsDbDescription}"></th>
+									<tr th:each="g : ${goodsList}">
+										<th th:text="${g.goodsCode}"></th>
+										<th th:text="${g.goodsDbCode}"></th>	
+										<th th:text="${g.purchaseCode}"></th>										
+										<th th:text="${g.goodsPay}"></th>
+										<th th:text="${g.goodsState}"></th>										
+										<th th:text="${g.goodsInventoryDate}"></th>
 										<td>
 										<a
-										 th:href="@{/getGoodsDbList(goodsDbCode=${gDbList.goodsDbCode})}"
+										 th:href="@{/getGoodsList(goodsCode=${g.goodsCode})}"
 										 class="tm-product-delete-link">
 										 <i class="fas fa-check tm-product-check-icon"></i>
 										</a>
@@ -43,8 +44,8 @@
 							</table>
 						</div>
 						<!-- table container -->
-						<a href="/goodsDbInsert"
-							class="btn btn-primary btn-block text-uppercase mb-3">DB상품
+						<a href="/goodsInsert"
+							class="btn btn-primary btn-block text-uppercase mb-3">상품
 							추가하기</a>
 						<!-- <button class="btn btn-primary btn-block text-uppercase">
 							선택상품 삭제하기</button> -->

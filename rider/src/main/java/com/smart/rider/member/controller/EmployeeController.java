@@ -25,13 +25,13 @@ public class EmployeeController {
 	@PostMapping("/employeeInsert")
 	public String employeeInsert(MemberDTO memberdto) {
 		employeeService.employeeInsert(memberdto);
-		return "employee/employeeList";
+		return "redirect:/employeeList";
 	}
 	
 	@GetMapping("/employeeList")
 	public String employeeList(Model model) {
 		List<MemberDTO> list = employeeService.employeeList();
 		model.addAttribute("employeeList", list);
-		return "member/memberList";
+		return "employee/employeeList";
 	}
 }
