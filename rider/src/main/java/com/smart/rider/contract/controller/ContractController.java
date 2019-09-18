@@ -24,10 +24,12 @@ public class ContractController {
 	@GetMapping("/agreement")
 	public String agreement() {
 		
-		
-		
-
 		return "/contract/agreement";
+	}
+	@GetMapping("/contractInsert")
+	public String contractInsert() {
+		
+		return "/contract/contractInsert";
 	}
 	
 	
