@@ -81,8 +81,9 @@
 										<th th:text="${goodsDB.goodsDbDate}"></th>
 									</tr>
 								</thead>								
-							</table>
+							</table>							
 						</div>
+						
 						<!-- table container -->
 						
 						<a th:if="${session.SLEVEL eq '관리자'}" th:href="@{/goodsDbDelete(goodsDbCode=${goodsDB.goodsDbCode})}"

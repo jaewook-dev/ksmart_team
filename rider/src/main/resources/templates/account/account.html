@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/default}">
+<th:block layout:fragment="customTitle">
+</th:block>
+<th:block layout:fragment="customContents">
+ <body>
+  <div class="main-height">
+		<!-- MAIN CONTENT -->
+		<div class="main-content">
+			<div class="container">
+				<div class="row">
+					<div class="col">
+						<p class="text-white mt-5 mb-5">
+							<b>거래관리 >거래처관리 </b>
+						</p>
+					</div>
+				</div>
+
+
+				<!-- row -->
+				<div class="row tm-content-row">
+					<div class="col-12 tm-block-col">
+						<div class="tm-bg-primary-dark tm-block-scroll tm-block-sc">
+							<table class="table">
+								<thead>
+									<tr>
+										<th scope="col">거래처명</th>
+										<th scope="col">거래처 담당자</th>
+										<th scope="col">전화번호</th>
+										<th scope="col">주소</th>
+										<th scope="col">주요 품목</th>
+										<th scope="col" style="width: 8%" class="text-center">수정</th>
+										<th scope="col" style="width: 8%" class="text-center">삭제</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>전주)전동 자전거</td>
+										<td>장비</td>
+										<td>01012348151</td>
+										<td>id001</td>
+										<td>전동 자전거</td>
+										<td class="text-center"><a
+											href="/subjectUpdate?subjectCode=AS0001"
+											class="tm-product-delete-link"> <i
+												class="fas fa-check tm-product-check-icon"
+												style="color: white"></i>
+										</a></td>
+										<td class="text-center"><a
+											href="/subjectDelete?subjectCode=AS0001"
+											class="tm-product-delete-link"> <i
+												class="far fa-trash-alt tm-product-delete-icon"></i>
+										</a></td>
+									</tr>
+								
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<button type="button" id="insertBtn"
+					onclick="location.href='subjectInsert'" style="float: right"
+					class="btn btn-primary text-uppercase">거래처등록</button>
+			</div>
+		</div>
+	</div>
+</body>
+</th:block>
+</th:block>
+<th:block layout:fragment="customScript">
+
+	
+</th:block>
+</html>

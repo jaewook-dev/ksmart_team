@@ -3,6 +3,38 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.smart.rider.goods.mapper.GoodsdbMapper">
+
+	<select id="goodsDbSearchList" parameterType="String" resultType="com.smart.rider.goods.dto.GoodsdbDTO">
+		SELECT
+			goods_database_code AS goodsDbCode,
+			gdb.member_id AS memberId,
+			goods_database_name AS goodsDbName,
+			goods_database_category AS	goodsDbCategory,
+			goods_database_number AS goodsDbNumber,
+			goods_database_color AS goodsDbColor,
+			goods_database_weight AS	goodsDbWeight,
+			goods_database_speed AS goodsDbSpeed,
+			goods_database_size AS goodsDbSize,
+			goods_database_nation AS	goodsDbNation,
+			goods_database_load AS goodsDbLoad,
+			goods_database_distance AS goodsDbDistance,
+			goods_database_battery AS	goodsDbBattery,
+			goods_database_time AS goodsDbTime,
+			goods_database_made	AS goodsDbMade,
+			goods_database_description AS goodsDbDescription,
+			goods_database_image AS goodsDbImage,
+			goods_database_date AS	goodsDbDate
+			
+		FROM
+		 goods_database gdb INNER JOIN member m 
+			ON gdb.member_id = m.member_id
+		<if test="searchInput != null and searchInput neq ''.toString()">
+			WHERE 
+				${select} Like CONCAT('%',#{searchInput},'%')
+		</if>
+		
+	</select>
+
 	<delete id="goodsDbDelete" parameterType="String">
 		DELETE 
  				gdb
