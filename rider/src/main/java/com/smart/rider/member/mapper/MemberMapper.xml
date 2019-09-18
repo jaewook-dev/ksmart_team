@@ -45,7 +45,7 @@
 	<!-- 19.09.16작성 -->
 	<select id="memberIdCheck" parameterType="String" resultType="int">
 		SELECT 
-			member_id
+			count(*)
 		FROM member 
 		WHERE 
 			member_id= #{memberId}
@@ -78,4 +78,23 @@
 		WHERE
 			member_id = #{memberId}
 	</update>
+	<select id="searchMember" parameterType="String" resultType="com.smart.rider.member.dto.MemberDTO">
+		SELECT 
+			 member_id 			AS memberId
+			,member_pw 			AS memberPw
+			,member_name		AS memberName
+			,member_level 		AS memberLevel
+			,member_birth 		AS memberBirth
+			,member_address 	AS memberAddress
+			,member_email 		AS memberEmail
+			,member_phone 		AS memberPhone
+			,shop_code 			AS shopCode
+			,member_insert_date AS memberInsertDate
+			,member_update_date AS memberUpdateDate
+		FROM member
+		<if test="searchInput != null and searchInput neq ''.toString()">
+			WHERE 
+				${select} Like CONCAT('%',#{searchInput},'%')
+		</if>
+	</select>
 </mapper>

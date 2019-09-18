@@ -43,7 +43,7 @@ public class MemberController {
 	}
 	//19.09.16작성
 	@ResponseBody
-	@RequestMapping(value = "/memberIdCheck", method = RequestMethod.GET)
+	@RequestMapping(value = "/memberIdCheck", method = RequestMethod.POST)
 	public int idCheck(@RequestParam(value="memberId") String memberId) {
 		System.out.println(memberId + "아이디체크");
 		
@@ -62,5 +62,13 @@ public class MemberController {
 	public String memberUpdate(MemberDTO memberdto) {
 		memberService.memberUpdate(memberdto);
 		return "redirect:/memberList";
+	}
+	@PostMapping("/searchMember")
+	public String searchMember( @RequestParam(value="select") String select
+							   ,@RequestParam(value="searchInput") String searchInput
+							   ,Model model) {
+		List<MemberDTO> search = memberService.searchMember(select, searchInput);
+		model.addAttribute("memberList", search);
+		return "member/memberList";
 	}
 }
