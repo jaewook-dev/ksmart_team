@@ -18,7 +18,7 @@
 			 #{memberId}
 			,#{memberPw}
 			,#{memberName}
-			,#{memberLevel}
+			,'점주'
 			,#{memberBirth}
 			,#{memberAddress}
 			,#{memberEmail}
@@ -97,4 +97,11 @@
 				${select} Like CONCAT('%',#{searchInput},'%')
 		</if>
 	</select>
+	<!-- 19.09.18작성 -->
+	<delete id="memberDelete" parameterType="String">
+		DELETE 
+		FROM member
+		WHERE
+			member_id = #{memberId}
+	</delete>
 </mapper>

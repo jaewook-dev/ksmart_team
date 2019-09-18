@@ -30,8 +30,11 @@
 						<!-- 비밀번호수정버튼 클릭으로 수정 -->
 						<div class="form-group col-lg-6">
 							<label for="password">비밀번호</label>
-							<!-- 새창을 오픈하여 수정 -->
-							<button class="btn btn-outline-info form-control validate">비밀번호 수정</button>
+							<!----------------- 팝업으로 수정하기 -------------------->
+							<button class="btn btn-outline-info form-control validate" 
+									onclick="window.open('/changePassword','비밀번호변경','width=430,height=550,location=no,status=no,scrollbars=yes')">
+									!비밀번호 수정
+							</button>
 						</div>
 						<div class="form-group col-lg-6">
 							<label for="name">이름</label>
@@ -67,10 +70,9 @@
 						
 					</form>
 					<div class="col-lx">
-						<!-- 탈퇴 버튼 클릭시 새창으로 비밀번호 확인
-							  창 오픈하여 탈퇴 할 수 있다  -->
+						<!-------- 탈퇴 버튼 클릭시 팝업으로 비밀번호 확인 후 탈퇴 할 수 있다  --------->
 						<button type="submit" class="btn btn-primary btn-block text-uppercase">
-							회원 탈퇴
+							#회원 탈퇴
 						</button>
 					</div>
 				</div>
