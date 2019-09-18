@@ -15,19 +15,22 @@
 				</div>
 			</div>
 			<div class="row tm-content-row">
-				<div class="col-12 col-12 tm-block-col">
-					<div class="tm-bg-primary-dark tm-block tm-block-h-auto">
-						<form action="/searchMember" class="tm-signup-form row" method="post">
-							<div class="form-group col-5">
+				<div class="col-12 tm-block-col">
+					<div class="tm-bg-primary-dark tm-block tm-block-h-auto-copy">
+						<form action="/searchMember" class="tm-search-form row" method="post">
+							<div class="form-group col-3">
+								
 								<select class="custom-select" name="select">
 									<option value="0">Select account</option>
 									<option value="member_name">이름</option>
 								</select>
 							</div>
-							<div class="form-group col-5">
+							<div class="form-group col-7">
+								
 								<input id="searchInput" name="searchInput" type="text" class="form-control validate" />
 							</div>
 							<div class="form-group col-2">
+								
 								<button type="submit" id="searchButton" name="searchButton" class="btn btn-primary btn-block">
 									검색
 								</button>
