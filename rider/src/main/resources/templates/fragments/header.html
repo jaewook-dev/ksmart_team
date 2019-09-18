@@ -33,9 +33,10 @@
                                 </span>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
                                 <a class="dropdown-item" href="/spend">!지출</a>
-                                <a class="dropdown-item" href="#">#매출</a>
-                                <a class="dropdown-item" href="#">#재고</a>
+                                <a class="dropdown-item" href="/salesList">!)매출</a>
+                                <a class="dropdown-item" href="/inventoryList">!)재고</a>
                             </div>
                         </li>
                         <li class="nav-item dropdown">
@@ -49,15 +50,15 @@
                             </a>
 
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" th:href="@{/contract}">계약관리</a>
-                                <a class="dropdown-item" th:href="@{/agreement}">계약서관리</a>
+                                <a class="dropdown-item" th:href="@{/contract}"> #)계약관리</a>
+                                <a class="dropdown-item" th:href="@{/agreement}"> #)계약서관리</a>
                                 
                             </div>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">
-
+								
                                 <i class="fas fa-shopping-cart"></i>
                                 <span>
                                     	상품관리 <i class="fas fa-angle-down"></i>
@@ -66,29 +67,28 @@
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" th:if="${session.SLEVEL ne '직원'}" href="/goodsDbList">!)상품DB관리</a>
                                 <a class="dropdown-item" href="/goodsList">!)판매상품</a>
-                                <a class="dropdown-item" href="#">#)대여상품</a>
+                                <a class="dropdown-item" href="/rentalList">!)대여상품</a>
                             </div>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <i class="far fa-user"></i>
-                                	매장관리
+                            <a class="nav-link" th:href="@{/shop}">
+                            	<i class="fas fa-store"></i>
+                               
+                                	#)매장관리
                             </a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-cog"></i>
+                                <i class="far fa-user"></i>
                                 <span>
-                                     <i class="fas fa-angle-down"></i>
-                                     	회원관리
+                                     	거래관리 <i class="fas fa-angle-down"></i>
                                 </span>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="/memberList">회원목록</a>
-                                <a class="dropdown-item" href="#">Billing</a>
-                                <a class="dropdown-item" href="#">Customize</a>
+                                <a class="dropdown-item" href="#">#)거래처관리</a>
+                                <a class="dropdown-item" href="#">#)매입상품관리</a>
                             </div>
                         </li>
                         <li class="nav-item dropdown" th:if="${session.SLEVEL eq '관리자'}">
@@ -101,7 +101,12 @@
                                 </span>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+<<<<<<< HEAD
                                 <a class="dropdown-item" href="/subjectList">계정과목관리</a>
+=======
+                            	<a class="dropdown-item" href="/memberList">!회원목록</a>
+                                <a class="dropdown-item" href="/subjectList">!계정과목관리</a>
+>>>>>>> branch 'master' of https://github.com/guno923/smartrider.git
                             </div>
                         </li>
                     </ul>

@@ -178,6 +178,11 @@ button:focus {
   max-height: none;
   height: auto;
 }
+.tm-block-h-auto-copy {
+  min-height: 1px;
+  max-height: none;
+  height: 90%;
+}
 .tm-block-scroll {
   overflow-y: scroll;
 }
