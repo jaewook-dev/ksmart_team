@@ -3,6 +3,25 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.smart.rider.goods.mapper.GoodsMapper">
+	
+<!-- 	<insert id="goodsInsert" parameterType="com.smart.rider.goods.dto.GoodsDTO">
+		INSERT INTO goods
+			(goods_code AS goodsCode
+			, goods_database_code AS goodsCode
+			, purchase_code AS goodsCode
+			, contract_shop_code AS goodsCode
+			, goods_pay AS goodsCode
+			, goods_position AS goodsCode
+			, goods_rental AS goodsCode
+			, goods_state AS goodsCode
+			, goods_completion_state AS goodsCode
+			, goods_rental_state AS goodsCode
+			, goods_inventory_date AS goodsCode
+			, goods_date AS goodsCode
+			)
+		VALUES ('', '', '', '', 0, '', '', '', '', '', NOW(), NOW())
+	</insert> -->
+
 	<select id="goodsCodeCount" resultType="String">
 		SELECT 
 			MAX(LPAD(RIGHT(subject_code, 4)+1, '4' , '0')) 
