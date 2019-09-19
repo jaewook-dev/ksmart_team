@@ -9,6 +9,6 @@ import com.smart.rider.spend.dto.UtilityDTO;
 @Mapper
 public interface UtilityMapper {
 	
-	public List<UtilityDTO> utilityList();
+	public List<UtilityDTO> utilityList(String contractShopCode);
 
 }
