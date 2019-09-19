@@ -7,7 +7,7 @@ public class MemberDTO {
 	private String memberName;
 	private String memberLevel;
 	private String memberBirth;
-	private String shopCode;
+	private String contractShopCode;
 	private String memberAddress;
 	private String memberEmail;
 	private String memberPhone;
@@ -44,11 +44,11 @@ public class MemberDTO {
 	public void setMemberBirth(String memberBirth) {
 		this.memberBirth = memberBirth;
 	}
-	public String getShopCode() {
-		return shopCode;
+	public String getContractShopCode() {
+		return contractShopCode;
 	}
-	public void setShopCode(String shopCode) {
-		this.shopCode = shopCode;
+	public void setContractShopCode(String contractShopCode) {
+		this.contractShopCode = contractShopCode;
 	}
 	public String getMemberAddress() {
 		return memberAddress;
@@ -84,8 +84,9 @@ public class MemberDTO {
 	@Override
 	public String toString() {
 		return "MemberDTO [memberId=" + memberId + ", memberPw=" + memberPw + ", memberName=" + memberName
-				+ ", memberLevel=" + memberLevel + ", memberBirth=" + memberBirth + ", shopCode=" + shopCode
-				+ ", memberAddress=" + memberAddress + ", memberEmail=" + memberEmail + ", memberPhone=" + memberPhone
-				+ ", memberInsertDate=" + memberInsertDate + ", memberUpdateDate=" + memberUpdateDate + "]";
+				+ ", memberLevel=" + memberLevel + ", memberBirth=" + memberBirth + ", contractShopCode="
+				+ contractShopCode + ", memberAddress=" + memberAddress + ", memberEmail=" + memberEmail
+				+ ", memberPhone=" + memberPhone + ", memberInsertDate=" + memberInsertDate + ", memberUpdateDate="
+				+ memberUpdateDate + "]";
 	}
 }

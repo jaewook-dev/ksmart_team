@@ -45,6 +45,12 @@ public class LoginController {
 			session.setAttribute("SID", loginCheck.getMemberId());
 			session.setAttribute("SNAME", loginCheck.getMemberName());
 			session.setAttribute("SLEVEL", loginCheck.getMemberLevel());
+			
+			if(loginCheck.getContractShopCode() == null) {
+				session.setAttribute("SCODE", "SR0000");
+			} else {
+				session.setAttribute("SCODE", loginCheck.getContractShopCode());
+			}
 			return "redirect:/";
 		} else {
 			//System.out.println(loginCheck + " <-- loginCheck loginProcess LoginController.java");
