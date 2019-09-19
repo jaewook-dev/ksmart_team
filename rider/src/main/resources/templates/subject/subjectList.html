@@ -64,20 +64,20 @@
 								</thead>
 								<tbody>
 									<!-- 삭제 불가능한 계정과목 리스트 -->
-									<tr th:each="Impossible : ${deleteImpossible}">
-										<td th:text="${Impossible.subjectCode}"></td>
-										<td th:text="${Impossible.subjectNumber}"></td>
-										<td th:text="${Impossible.subjectName}"></td>
-										<td th:text="${Impossible.memberId}"></td>
-										<td th:text="${Impossible.subjectDate}"></td>
+									<tr th:each="impossible : ${deleteImpossible}">
+										<td th:text="${impossible.subjectCode}"></td>
+										<td th:text="${impossible.subjectNumber}"></td>
+										<td th:text="${impossible.subjectName}"></td>
+										<td th:text="${impossible.memberId}"></td>
+										<td th:text="${impossible.subjectDate}"></td>
 										<td class="text-center"><a
-											th:href="@{/subjectUpdate(subjectCode=${Impossible.subjectCode})}"
+											th:href="@{/subjectUpdate(subjectCode=${impossible.subjectCode})}"
 											class="tm-product-delete-link"> <i
 												class="fas fa-check tm-product-check-icon"
 												style="color: white"></i>
 										</a></td>
 										<td class="text-center">
-											<a class="tm-product-delete-link" id="impossibleButton">
+											<a class="tm-product-delete-link impossible" data-toggle="modal" href="#myModal">
 												<i class="far fa-trash-alt tm-product-delete-icon" style="color: black"></i>
 											</a>
 										</td>
@@ -121,11 +121,32 @@
 				<button type="button"
 					onclick="location.href='subjectInsert'" style="float: right"
 					class="btn btn-primary text-uppercase">계정과목등록</button>
+					
+				<!-- The Modal -->
+				<div class="modal fade" id="myModal">
+					<div class="modal-dialog">
+						<div class="modal-content">
+				      
+						<!-- Modal Header -->
+						<div class="modal-header">
+							<h4 class="modal-title">알림</h4>
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+						</div>
+				        
+						<!-- Modal body -->
+						<div class="modal-body">
+							현재 사용중인 계정과목은 삭제할 수 없습니다
+						</div>				        
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
 </th:block>
 </th:block>
+
 <th:block layout:fragment="customScript">
+
 </th:block>
 </html>
