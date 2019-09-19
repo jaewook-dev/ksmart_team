@@ -3,24 +3,37 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.smart.rider.goods.mapper.GoodsMapper">
-	
-<!-- 	<insert id="goodsInsert" parameterType="com.smart.rider.goods.dto.GoodsDTO">
-		INSERT INTO goods
-			(goods_code AS goodsCode
-			, goods_database_code AS goodsCode
-			, purchase_code AS goodsCode
-			, contract_shop_code AS goodsCode
-			, goods_pay AS goodsCode
-			, goods_position AS goodsCode
-			, goods_rental AS goodsCode
-			, goods_state AS goodsCode
-			, goods_completion_state AS goodsCode
-			, goods_rental_state AS goodsCode
-			, goods_inventory_date AS goodsCode
-			, goods_date AS goodsCode
+
+	<insert id="goodsInsert" parameterType="com.smart.rider.goods.dto.GoodsDTO">		
+			INSERT INTO goods
+			(
+			g.goods_code AS goodsCode
+			, gdb.goods_database_code AS goodsDbCode
+			, purchase_code AS purchaseCode
+			, contract_shop_code AS contractShopCode
+			, goods_pay AS goodsPay
+			, goods_position AS goodsPosition
+			, goods_rental AS goodsRental
+			, goods_state AS goodsState
+			, goods_completion_state AS goodsCompletionState
+			, goods_rental_state AS goodsRentalState
+			, goods_inventory_date AS goodsInventoryDate
+			, goods_date AS goodsDate
 			)
-		VALUES ('', '', '', '', 0, '', '', '', '', '', NOW(), NOW())
-	</insert> -->
+		VALUES
+		 (#{goodsCode}
+		 , #{goodsDbCode}
+		 , #{purchaseCode}
+		 , #{contractShopCode}
+		 , #{goodsPay}
+		 , #{goodsPosition}
+		 , #{goodsRental}
+		 , #{goodsState}
+		 , #{goodsCompletionState}
+		 , #{goodsRentalState}
+		 , NOW()
+		 , NOW())
+	</insert>
 
 	<select id="goodsCodeCount" resultType="String">
 		SELECT 

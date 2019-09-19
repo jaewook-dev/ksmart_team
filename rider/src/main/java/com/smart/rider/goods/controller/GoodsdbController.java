@@ -1,6 +1,8 @@
 package com.smart.rider.goods.controller;
 
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,19 @@ import com.smart.rider.goods.service.GoodsdbService;
 public class GoodsdbController {
 	@Autowired
 	private GoodsdbService goodsdbservice;
+	
+	//05상품 검색메서드
+	//19-09-18 문영성
+	@PostMapping("/goodsDbSearchList")
+	public String goodsDbSearchList(@RequestParam(value="select")String select
+									,@RequestParam(value="searchInput")String searchInput
+									,Model model) {
+		
+		List<GoodsdbDTO> search = goodsdbservice.goodsDbSearchList(select, searchInput);
+		//System.out.println(search+"<==========검색확인");
+		model.addAttribute("goodsDbList", search);
+		return "goods/goodsDbList";
+	}
 	
 	//상품DB삭제 메서드
 	//19-09-16 문영성
@@ -53,8 +68,10 @@ public class GoodsdbController {
 		//System.out.println(goodsDbCode+"<==============넘어오는코드값 확인=GoodsdbController.java");
 		//GoodsdbDTO ggg = goodsdbservice.getGoodsDbCode(goodsDbCode);
 		
-		//입력처리 메서드 호출시에 
-		
+		 
+		//GoodsdbDTO GoodsdbDTO = goodsdbservice.getGoodsDbCode(goodsDbCode);
+		//System.out.println(GoodsdbDTO.toString() +"GoodsdbDTO.toString() <==============넘어오는코드값 확인=GoodsdbController.java");
+		//입력처리 메서드 호출시에
 		
 		model.addAttribute("goodsDB", goodsdbservice.getGoodsDbCode(goodsDbCode));
 		return "goods/getGoodsDbList";
