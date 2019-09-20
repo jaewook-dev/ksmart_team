@@ -26,9 +26,8 @@
 						<table class="table">
 							<thead>
 								<tr>
-									<th scope="col">매입 거래처명</th>
-									<th scope="col">매입 상품명</th>
-									<th scope="col">상품 단가</th>
+									<th scope="col">상품명</th>
+									<th scope="col">매입 가격</th>									
 									<th scope="col">매입상품상태</th>
 									<th scope="col">매입일자</th>
 									<th scope="col">상세보기</th>
@@ -38,12 +37,13 @@
 							<tbody>
 
 								<tr th:each="pList : ${purchaseList}">
-									<th th:text="${unitNew.contractUnitMonth}"></th>
-									<th th:text="${unitNew.contractUnitOneyear}"></th>
-									<th th:text="${unitNew.contractUnitTwoyear}"></th>
+									<th th:text="${goodsDbCode.goodsDbName}"></th>
+									<th th:text="${pList.purchasePay}"></th>
+									<th th:text="${pList.purchaseState}"></th>
+									<th th:text="${pList.purchaseSDate}"></th>
 									<td>
 									<a
-										th:href="@{/getGoodsDbList(goodsDbCode=${gDbList.goodsDbCode})}"
+										th:href="@{/getpurchaseList(purchaseCode=${pList.purchaseCode})}"
 										class="tm-product-delete-link"> <i
 											class="fas fa-check tm-product-check-icon"></i>
 									</a>

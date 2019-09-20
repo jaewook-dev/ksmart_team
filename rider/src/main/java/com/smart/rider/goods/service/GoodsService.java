@@ -17,6 +17,8 @@ import com.smart.rider.goods.mapper.GoodsMapper;
 @Transactional
 public class GoodsService {
 	@Autowired
+	
+	
 	private GoodsMapper goodsMapper;
 	
 	//01판매상품 리스트조회 메서드
