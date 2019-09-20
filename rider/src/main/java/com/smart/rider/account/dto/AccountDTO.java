@@ -10,7 +10,7 @@ public class AccountDTO {
 	private String accountAddress;
 	private String accountCategory;
 	private String accountDate;
-	
+
 	public String getAccountCode() {
 		return accountCode;
 	}
