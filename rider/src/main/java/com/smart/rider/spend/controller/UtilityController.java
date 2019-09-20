@@ -27,5 +27,10 @@ public class UtilityController {
 		return "spend/spend";
 	}
 	
+	@GetMapping("spendUtility")
+	public String spendUtility() {
+		return "spend/spendUtility";
+	}
+	
 
 }

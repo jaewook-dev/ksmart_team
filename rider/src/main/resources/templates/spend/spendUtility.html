@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<!-- 지출_공과금 레이아웃 -->
+<div id="menu2" class="container tab-pane fade">
+	<br>
+
+	<!-- 공과금 지출 현황 -->
+	<div class="row tm-content-row">
+		<div class="col-12 tm-block-col">
+			<div class="tm-bg-primary-dark tm-block-sub">
+				<h4 class="tm-block-title">공과금 지출 현황</h4>
+				<table class="table">
+				</table>
+			</div>
+		</div>
+	</div>
+
+	<!-- 최근 등록된 공과금 내역 -->
+	<div class="row tm-content-row">
+		<div class="col-sm-12 col-md-12 col-lg-6 col-xl-7 tm-block-col">
+			<div class="tm-bg-primary-dark tm-block-spend ">
+				<h4 class="tm-block-title">최근 등록내역</h4>
+				<table class="table">
+					<thead>
+						<tr>
+							<th>내역</th>
+							<th>금액</th>
+							<th>등록일자</th>
+							<th style="width: 20%">상세보기</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="list : ${utilityList}">
+							<td th:text="${list.subjectName}"></td>
+							<td th:text="${list.spendUtilityPay}"></td>
+							<td th:text="${list.spendUtilityDate}"></td>
+							<td class="text-center"><a class="tm-product-delete-link">
+									<i class="fas fa-search" style="color: white"></i>
+							</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<!-- 공과금 등록 폼 -->
+		<div class="col-sm-12 col-md-12 col-lg-6 col-xl-5 tm-block-col">
+			<div class="tm-bg-primary-dark tm-block-spend">
+				<h4 class="tm-block-title">공과금 등록</h4>
+				<form action="">
+					<div class="form-group">
+						<label>내역</label> <select class="custom-select tm-select-accounts">
+							<option>A</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label>금액</label> <input class="form-control validate">
+					</div>
+					<div class="form-group">
+						<label>내용</label> <input class="form-control validate">
+					</div>
+				</form>
+				<hr>
+				<button type="submit"
+					class="btn btn-primary btn-block text-uppercase">확인</button>
+			</div>
+		</div>
+	</div>
+</div>
+</html>

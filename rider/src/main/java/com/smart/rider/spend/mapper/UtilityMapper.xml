@@ -28,6 +28,6 @@
 		FROM spend_utility su, subject sub
 		WHERE su.subject_code = sub.subject_code AND contract_shop_code = #{contractShopCode} 
 		ORDER BY su.spend_utility_date DESC
-		LIMIT 6;
+		LIMIT 4;
 	</select>
 </mapper>
