@@ -10,24 +10,49 @@
             <div class="row">
                 <div class="col">
                     <p class="text-white mt-5 mb-5"><b>계약서 관리 >홈</b></p>
-                    	<div class="tm-block-col">
-							<div class="tm-bg-primary-dark tm-block-big">
-								<img src="./resources/img/contra.jpg" width="950">
-									<br/><br/>
-									<span>
+                    	<div class="tm-block-col ">
+							<div class="tm-bg-primary-dark tm-block-big tm-block-scroll " >
+								<div>
+									<img src="./resources/img/contra.jpg" width="750" style="float: left;">
+									<input type="button" class="btn btn-primary" style="float: right; line-height: 50pt; WIDTH: 150pt; margin-top:75pt; " onclick="location.href='contractInsert' " value="등록버튼"/>
+									<input type="button" class="btn btn-primary" style="float: right; line-height: 50pt; WIDTH: 150pt; margin-top:75pt; " onclick="location.href='contractList' " value="상세조회버튼"/>
 									
-									<input type="button" class="btn btn-primary" style="float: left; WIDTH: 150pt;" onclick="location.href='joinUs.jsp' " value="조회버튼"/>
-									
-									
-									<input type="button" class="btn btn-primary" style="float: right; margin-right: 100px; WIDTH: 150pt;" onclick="location.href='contractInsert' " value="등록버튼"/>
-									</span>
+								</div>
+			
 							</div>
 						</div>
-                    
-                    
-                </div>
-            </div>
-		</div>
+					 	<div class=" tm-block-col " >
+	                		<h2 class="tm-block-title">계약자 명단</h2>
+	                    		<div class="tm-bg-primary-dark tm-block-big tm-block-scroll">
+									<table class="table">
+				                      <thead>
+				                          <tr>
+				                              <th scope="col">계약자 아이디</th>
+				                              <th scope="col">계약자 이름</th>
+				                              <th scope="col">계약자 전화번호</th>
+				                              <th scope="col">서비스 시작일자</th>
+				                              <th scope="col">서비스 종료일자</th>
+				                          </tr>
+				                      </thead>
+				                      <tbody>
+		                                <tr>
+		                                    <th scope="row"><b>#122348</b></th>
+		                                    <td>
+		                                        <div class="tm-status-circle pending">
+		                                        </div>Pending
+		                                    </td>
+		                                    <td><b>Jacob Miller</b></td>
+		                                    <td><b>London, UK</b></td>
+		                                    <td><b>360 km</b></td>
+		                                </tr>
+		                               </tbody>
+									</table>
+								</div>
+							</div>
+	              		</div>
+		          	</div>
+				</div>
+
 </body>
 </th:block>
 </th:block>

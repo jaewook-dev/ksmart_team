@@ -20,6 +20,28 @@
 		
 		</select>
 		
+		<select id="contractList" resultType="com.smart.rider.contract.dto.ContractDTO">
+		
+			SELECT 
+				 contract_code AS contractCode
+				,contract_unit_code AS contractUnitCode
+				,member_id AS memberId
+				,contract_start AS contractStart
+				,contract_finish AS contractFinish
+				,contract_valid_date AS contractValidDate
+				,contract_state AS contractState
+				,contract_pay AS contractPay
+				,contract_method AS contractMethod
+				,contract_amout AS contractAmount
+				,contract_unpaid AS contractUnpaid
+				,contract_contents AS contractContents
+				,contract_information AS contractInformation
+				,contract_date AS contractDate
+	
+	 		FROM contract
+		
+		</select>
+
 	
 
 
