@@ -48,22 +48,27 @@
 		<div class="col-sm-12 col-md-12 col-lg-6 col-xl-5 tm-block-col">
 			<div class="tm-bg-primary-dark tm-block-spend">
 				<h4 class="tm-block-title">공과금 등록</h4>
-				<form action="">
+				<form action="spendInsert" method="post">
 					<div class="form-group">
-						<label>내역</label> <select class="custom-select tm-select-accounts">
-							<option>A</option>
+						<label>내역</label> 
+						<select class="custom-select tm-select-accounts">
+							<th:block th:each="subject : ${subjectSelectBox}">
+								<option th:value="${subject.subjectCode}" th:text="${subject.subjectName}"></option>
+							</th:block>
 						</select>
 					</div>
 					<div class="form-group">
-						<label>금액</label> <input class="form-control validate">
+						<label>금액</label> 
+						<input class="form-control validate" name="spendUtilityPay">
 					</div>
 					<div class="form-group">
-						<label>내용</label> <input class="form-control validate">
+						<label>내용</label> 
+						<input class="form-control validate" name="spendUtilityContents">
 					</div>
+					<hr>
+					<button type="submit"
+							class="btn btn-primary btn-block text-uppercase">확인</button>
 				</form>
-				<hr>
-				<button type="submit"
-					class="btn btn-primary btn-block text-uppercase">확인</button>
 			</div>
 		</div>
 	</div>

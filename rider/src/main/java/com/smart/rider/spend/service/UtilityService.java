@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.smart.rider.spend.dto.UtilityDTO;
 import com.smart.rider.spend.mapper.UtilityMapper;
+import com.smart.rider.subject.dto.SubjectDTO;
 
 @Service
 public class UtilityService {
@@ -16,6 +17,10 @@ public class UtilityService {
 	
 	public List<UtilityDTO> utilityList(String contractShopCode){
 		return utilityMapper.utilityList(contractShopCode);
+	}
+	
+	public List<SubjectDTO> subjectSelectBox(){
+		return utilityMapper.subjectSelectBox();
 	}
 
 }
