@@ -27,8 +27,14 @@ public class GoodsService {
 	}
 	
 	//02판매상품 등록메서드
-	public int goodsInsert(GoodsDTO goodsDto,GoodsdbDTO goodsDbCode,Model model) {
-		System.out.println(goodsDto+"lllllllllllllllllllllllllll");
-		return goodsMapper.goodsInsert(goodsDto);
+	public int goodsInsert(GoodsDTO goodsDto,HttpSession session) {
+		String goodsCode = "G" + goodsMapper.goodsCodeCount();
+		System.out.println(goodsCode+"lllllllllllllllllllllllllll");
+		
+		if(goodsCode.equals("Gnull")) {
+			goodsCode = "G0001";
+		}
+		goodsDto.setGoodsCode(goodsCode);
+		return goodsMapper.goodsInsert(goodsDto, session);
 	}
 }

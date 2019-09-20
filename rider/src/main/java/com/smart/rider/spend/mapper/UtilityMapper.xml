@@ -2,7 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.smart.rider.spend.mapper.UtilityMapper">
 
-	<!-- 계정과목 resultMap -->
+	<!-- JoinUtilityDTO resultMap -->
+	<resultMap type="com.smart.rider.spend.dto.JoinUtilityDTO" id="joinUtilityMap">
+    	<result column="spend_utility_code"     property="spendUtilityCode"/>
+    	<result column="contract_shop_code"     property="contractShopCode"/>
+    	<result column="subject_code"     		property="subjectCode"/>
+    	<result column="spend_utility_pay"     	property="spendUtilityPay"/>
+    	<result column="spend_utility_contents" property="spendUtilityContents"/>
+    	<result column="spend_utility_date"     property="spendUtilityDate"/>
+    	<result column="subject_number"	 		property="subjectNumber"/>
+    	<result column="subject_name"     		property="subjectName"/>
+    	<result column="shop_code"     			property="shopCode"/>
+    	<result column="member_id"         		property="memberId"/>
+	</resultMap>
+	
+	<!-- SubjectDTO resultMap -->
 	<resultMap type="com.smart.rider.subject.dto.SubjectDTO" id="subjectMap">
 		<result column="subject_code" 	property="subjectCode"/>
 		<result column="member_id" 		property="memberId"/>
@@ -10,19 +24,20 @@
 		<result column="subject_name" 	property="subjectName"/>
 		<result column="subject_date" 	property="subjectDate"/>
 	</resultMap>
-
-	<!-- 공과금 resultMap -->
-	<resultMap type="com.smart.rider.spend.dto.UtilityDTO" id="utilityMap">
-		<result column="spend_utility_code"		property="spendUtilityCode"/>
-		<result column="subject_code" 			property="subjectCode"/>
-		<result column="contract_shop_code"		property="contractShopCode"/>
-		<result column="spend_utility_pay"		property="spendUtilityPay"/>
-		<result column="spend_utility_contents"	property="spendUtilityContents"/>
-		<result column="spend_utility_date"		property="spendUtilityDate"/>
-	</resultMap>
 	
-	<!-- 공과금 등록 내역 -->
-	<select id="utilityList" resultMap="utilityMap" parameterType="String">
+	<!-- 지출_공과금 등록 계정과목 selectBox -->
+	<select id="subjectSelectBox" resultMap="subjectMap">
+		SELECT 
+			 subject_code
+			,member_id
+			,subject_number
+			,subject_name
+			,subject_date
+		FROM subject
+	</select>
+	
+	<!-- 지출_공과금 최근 등록 목록 -->
+	<select id="utilityList" resultMap="joinUtilityMap" parameterType="String">
 		SELECT 
 			 su.spend_utility_code
 			,su.subject_code
@@ -33,5 +48,7 @@
 			,sub.subject_name
 		FROM spend_utility su, subject sub
 		WHERE su.subject_code = sub.subject_code AND contract_shop_code = #{contractShopCode} 
+		ORDER BY su.spend_utility_date DESC
+		LIMIT 4;
 	</select>
 </mapper>
