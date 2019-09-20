@@ -4,7 +4,20 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- namespace가 인터페이스와 일치해야 연결된다 -->
 <mapper namespace="com.smart.rider.account.mapper.AccountMapper">
-
+	<select id="accountList" resultType="com.smart.rider.account.dto.AccountDTO">
+		
+		SELECT 
+			 account_code AS accountCode
+			,contract_shop_code AS contractShopCode
+			,account_market AS accountMarket
+			,account_name AS accountName
+			,account_phone AS accountPhone
+			,account_address AS accountAddress
+			,account_category AS accountCategory
+			,account_date AS accountDate
+		FROM account
+		
+	</select>
 
 
 </mapper>
