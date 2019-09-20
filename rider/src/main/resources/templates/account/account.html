@@ -34,20 +34,20 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>전주)전동 자전거</td>
-										<td>장비</td>
-										<td>01012348151</td>
-										<td>id001</td>
-										<td>전동 자전거</td>
+									<tr th:each="accountList : ${accountList}">
+										<td th:text="${accountList.accountMarket}"></td>
+										<td th:text="${accountList.accountName}"></td>
+										<td th:text="${accountList.accountPhone}"></td>
+										<td th:text="${accountList.accountAddress}"></td>
+										<td th:text="${accountList.accountCategory}"></td>
 										<td class="text-center"><a
-											href="/subjectUpdate?subjectCode=AS0001"
+											href="#"
 											class="tm-product-delete-link"> <i
 												class="fas fa-check tm-product-check-icon"
 												style="color: white"></i>
 										</a></td>
 										<td class="text-center"><a
-											href="/subjectDelete?subjectCode=AS0001"
+											href="#"
 											class="tm-product-delete-link"> <i
 												class="far fa-trash-alt tm-product-delete-icon"></i>
 										</a></td>

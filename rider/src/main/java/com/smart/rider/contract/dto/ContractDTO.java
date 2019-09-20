@@ -47,10 +47,10 @@ public class ContractDTO {
 	public void setContractFinish(String contractFinish) {
 		this.contractFinish = contractFinish;
 	}
-	public String getContractValid_date() {
+	public String getContractValidDate() {
 		return contractValidDate;
 	}
-	public void setContractValid_date(String contractValid_date) {
+	public void setContractValidDate(String contractValid_date) {
 		this.contractValidDate = contractValid_date;
 	}
 	public String getContractState() {

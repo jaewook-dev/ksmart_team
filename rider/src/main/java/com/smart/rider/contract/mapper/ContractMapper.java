@@ -4,9 +4,12 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.smart.rider.contract.dto.ContractDTO;
 import com.smart.rider.contract.dto.UnitDTO;
 
 @Mapper
 public interface ContractMapper {
 	public List<UnitDTO> unitNew();
+	
+	public List<ContractDTO> contractList();
 }

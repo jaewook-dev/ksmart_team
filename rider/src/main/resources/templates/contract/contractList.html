@@ -1,10 +1,62 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="EUC-KR">
-<title>Insert title here</title>
-</head>
-<body>
-
-</body>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/default}">
+<th:block layout:fragment="customTitle">
+</th:block>
+<th:block layout:fragment="customContents">	
+	<div class="container tm-mt-big tm-mb-big">
+		<div class="row">
+			
+				<div class="tm-bg-primary-dark tm-block tm-block-h-auto">
+					<div class="row">
+						<div class="col-12">
+           					<h2 class="tm-block-title d-inline-block">계약서 상세조회</h2>
+						</div>
+ 					</div>
+					<table class="table">
+						<thead>
+							<tr>
+								<th scope="col">계약자 아이디</th>
+								<th scope="col">서비스 시작일자</th>
+								<th scope="col">서비스 종료일자</th>
+								<th scope="col">계약유효기간</th>
+								<th scope="col">계약금액</th>
+								<th scope="col">계약금납입방식</th>
+								<th scope="col">계약일</th>
+								<th scope="col" style="width: 8%" class="text-center">수정</th>
+								<th scope="col" style="width: 8%" class="text-center">삭제</th>
+								
+							
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="contractList : ${contractList}">
+								<th th:text="${contractList.memberId}"></th>
+								<th th:text="${contractList.contractStart}"></th>
+								<th th:text="${contractList.contractFinish}"></th>
+								<th th:text="${contractList.contractValidDate}"></th>
+								<th th:text="${contractList.contractPay}"></th>
+								<th th:text="${contractList.contractMethod}"></th>
+								<th th:text="${contractList.contractDate}"></th>
+								<td class="text-center"><a
+											href="/subjectUpdate?subjectCode=AS0001"
+											class="tm-product-delete-link"> <i
+												class="fas fa-check tm-product-check-icon"
+												style="color: white"></i>
+										</a></td>
+										<td class="text-center"><a
+											href="/subjectDelete?subjectCode=AS0001"
+											class="tm-product-delete-link"> <i
+												class="far fa-trash-alt tm-product-delete-icon"></i>
+										</a></td>
+									</tr>
+							</tr>
+						</tbody>
+					</table>
+          		</div>
+       		</div>
+   	  	</div>
+	
+</th:block>
+<th:block layout:fragment="customScript">
+</th:block>
 </html>
