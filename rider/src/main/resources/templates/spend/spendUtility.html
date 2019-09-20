@@ -10,8 +10,7 @@
 		<div class="col-12 tm-block-col">
 			<div class="tm-bg-primary-dark tm-block-sub">
 				<h4 class="tm-block-title">공과금 지출 현황</h4>
-				<table class="table">
-				</table>
+				<canvas id="myChart" style="max-width: 500px;"></canvas>
 			</div>
 		</div>
 	</div>
@@ -48,12 +47,12 @@
 		<div class="col-sm-12 col-md-12 col-lg-6 col-xl-5 tm-block-col">
 			<div class="tm-bg-primary-dark tm-block-spend">
 				<h4 class="tm-block-title">공과금 등록</h4>
-				<form action="spendInsert" method="post">
+				<form action="utilityInsert" method="post">
 					<div class="form-group">
 						<label>내역</label> 
-						<select class="custom-select tm-select-accounts">
+						<select class="custom-select tm-select-accounts" name="subjectCode">
 							<th:block th:each="subject : ${subjectSelectBox}">
-								<option th:value="${subject.subjectCode}" th:text="${subject.subjectName}"></option>
+								<option th:text="${subject.subjectName}" th:value="${subject.subjectCode}"></option>
 							</th:block>
 						</select>
 					</div>
@@ -67,10 +66,51 @@
 					</div>
 					<hr>
 					<button type="submit"
-							class="btn btn-primary btn-block text-uppercase">확인</button>
+							class="btn btn-primary btn-block text-uppercase"
+							id="insertUtility">확인</button>
 				</form>
 			</div>
 		</div>
 	</div>
 </div>
+<script type="text/javascript">
+var ctx = document.getElementById("myChart").getContext('2d');
+var myChart = new Chart(ctx, {
+  type: 'bar',
+  data: {
+    labels: ["2013", "2014", "2015", "2016", "2017",],
+    datasets: [{
+      label: '계약건수',
+      data: [12, 19, 3, 5, 2, 3],
+      backgroundColor: [
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(255, 206, 86, 0.2)',
+        'rgba(75, 192, 192, 0.2)',
+        'rgba(153, 102, 255, 0.2)',
+        'rgba(255, 159, 64, 0.2)'
+      ],
+      borderColor: [
+        'rgba(255,99,132,1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(255, 206, 86, 1)',
+        'rgba(75, 192, 192, 1)',
+        'rgba(153, 102, 255, 1)',
+        'rgba(255, 159, 64, 1)'
+      ],
+      borderWidth: 1
+    }]
+  },
+  options: {
+    scales: {
+      yAxes: [{
+        ticks: {
+          beginAtZero: true
+        }
+      }]
+    }
+  }
+});
+
+</script>
 </html>

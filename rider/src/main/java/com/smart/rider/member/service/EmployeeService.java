@@ -24,4 +24,11 @@ public class EmployeeService {
 		List<MemberDTO> list = employeeMapper.employeeList();
 		return list;
 	}
+	//19.09.20작성
+	public MemberDTO getEmployeeList(String memberId) {
+		return employeeMapper.getEmployeeList(memberId);
+	}
+	public int employeeUpdate(MemberDTO memberdto) {
+		return employeeMapper.employeeUpdate(memberdto);
+	}
 }

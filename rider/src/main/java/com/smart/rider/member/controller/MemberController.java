@@ -72,14 +72,22 @@ public class MemberController {
 		return "member/memberList";
 	}
 	//19.09.18작성
+	/*************************************
 	@RequestMapping(value="/memberDelete" , method = RequestMethod.POST)
 	public String memberDelete(String memberId) {
 		System.out.println("삭제 컨트롤");
 		return "redirect:/memberList";
 	}
+	***********************************/
 	//비밀번호 수정화면 팝업으로 띄우기
 	@GetMapping("/changePassword")
 	public String memberPassword() {
 		return "member/memberPassword";
+	}
+	//19.09.20작성
+	@GetMapping("/memberDelete")
+	public String memberDelete(@RequestParam(value="memberId") String memberId, Model model) {
+		model.addAttribute("memberId", memberId);
+		return "/member/memberDelete";
 	}
 }

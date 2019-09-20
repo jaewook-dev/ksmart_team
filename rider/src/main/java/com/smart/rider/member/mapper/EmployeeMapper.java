@@ -12,4 +12,8 @@ public interface EmployeeMapper {
 	public int employeeInsert(MemberDTO memberdto);
 	
 	public List<MemberDTO> employeeList();
+	//19.09.20작성
+	public MemberDTO getEmployeeList(String memberId);
+	
+	public int employeeUpdate(MemberDTO memberdto);
 }

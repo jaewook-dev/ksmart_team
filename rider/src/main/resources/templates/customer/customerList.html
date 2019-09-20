@@ -11,14 +11,32 @@
 			<div class="row">
 				<div class="col">
 					<p class="text-white mt-5 mb-5">
-					<h2 class="tm-block-title">직원목록</h2>
+					<h2 class="tm-block-title">대여고객 관리</h2>
 				</div>
 			</div>
 			<hr>
+			<div class="form-group">
+				<a href="/customerInsert" id="customerButton" name="customerButton" class="btn btn-primary text-white" style="float:right;">
+					대여고객 등록
+				</a>
+			</div>
 			<div class="row tm-content-row">
 				<div class="col-12 col-12 tm-block-col">
 					<div class="tm-bg-primary-dark tm-block tm-block-h-auto-copy">
 						<form action="/searchMember" class="tm-signup-form row" method="post">
+							<div class="form-group col-12">
+							<p class="text-white">
+								<div class="form-check-inline">
+									<label class="form-check-label">
+										미반납<input type="checkbox" class="form-check-input" value="">
+									</label>
+								</div>
+								<div class="form-check-inline">
+									<label class="form-check-label">
+										연체유무<input type="checkbox" class="form-check-input" value="">
+									</label>
+								</div>
+							</div>
 							<div class="form-group col-3">
 								<select class="custom-select" name="select">
 									<option value="0">Select</option>
@@ -44,11 +62,12 @@
 						<table class="table">
 							<thead>
 								<tr>
-									<th scope="col">ID</th>
 									<th scope="col">이름</th>
-									<th scope="col">생년월일</th>
 									<th scope="col">전화번호</th>
-									<th scope="col">직원등록일자</th>
+									<th scope="col">대여시작일</th>
+									<th scope="col">대여종료일</th>
+									<th scope="col">대여반납일</th>
+									<th scope="col">연체유무</th>
 									<th scope="col" class="text-center">상세보기</th>
 								</tr>
 							</thead>

@@ -10,8 +10,8 @@
 			<div class="col-xl mx-auto tm-block-col tm-col-account-settings">
 				<!-- 상세보기한 id의 이름과 권한 -->
 				<div class="tm-bg-primary-dark tm-block tm-block-h-auto">
-					<h2 class="tm-block-title" id="searchName">[[${memberList.memberName}]]</h2>
-					<p class="text-white" id="searchLevel">[[${memberList.memberLevel}]]</p>
+					<h2 class="tm-block-title" id="searchName">[[${getEmployeeList.memberName}]]</h2>
+					<p class="text-white" id="searchLevel">[[${getEmployeeList.memberLevel}]]</p>
 				</div>
 			</div>
 		</div>
@@ -19,13 +19,13 @@
 		<div class="row tm-content-row">
 			<div class="col-xl mx-auto tm-block-col tm-col-account-settings">
 				<div class="tm-bg-primary-dark tm-block tm-block-settings">
-					<h2 class="tm-block-title">회원정보</h2>
-					<form action="/memberUpdate" class="tm-signup-form row" method="post">
+					<h2 class="tm-block-title">직원정보</h2>
+					<form action="/employeeUpdate" class="tm-signup-form row" method="post">
 						<!-- 아이디 readonly 색 변경 -->
 						<div class="form-group col-lg-6">
 							<label for="id">아이디</label>
 							<input id="memberId" name="memberId" type="text" 
-								   th:value="${memberList.memberId}" class="form-control validate bg-light text-dark" readonly="readonly"/>
+								   th:value="${getEmployeeList.memberId}" class="form-control validate bg-light text-dark" readonly="readonly"/>
 						</div>
 						<!-- 비밀번호수정버튼 클릭으로 수정 -->
 						<div class="form-group col-lg-6">
@@ -39,32 +39,32 @@
 						<div class="form-group col-lg-6">
 							<label for="name">이름</label>
 							<input id="memberName" name="memberName" type="text" 
-								   th:value="${memberList.memberName}" class="form-control validate" />
+								   th:value="${getEmployeeList.memberName}" class="form-control validate" />
 						</div>
 						<div class="form-group col-lg-6">
 							<label for="birth">생년월일</label>
 							<input id="memberBirth" name="memberBirth" type="text" 
-								   th:value="${memberList.memberBirth}" class="form-control validate" />
+								   th:value="${getEmployeeList.memberBirth}" class="form-control validate" />
 						</div>
 						<div class="form-group col-lg-6">
 							<label for="address">주소</label>
 							<input id="memberAddress" name="memberAddress" type="text" 
-								   th:value="${memberList.memberAddress}" class="form-control validate" />
+								   th:value="${getEmployeeList.memberAddress}" class="form-control validate" />
 						</div>
 						<div class="form-group col-lg-6">
 							<label for="email">이메일</label>
 							<input id="memberEmail" name="memberEmail" type="text" 
-								   th:value="${memberList.memberEmail}" class="form-control validate" />
+								   th:value="${getEmployeeList.memberEmail}" class="form-control validate" />
 						</div>
 						<div class="form-group col-lg-6">
 							<label for="phone">전화번호</label>
 							<input id="memberPhone" name="memberPhone" type="text" 
-								   th:value="${memberList.memberPhone}" class="form-control validate" />
+								   th:value="${getEmployeeList.memberPhone}" class="form-control validate" />
 						</div>
 						<div class="form-group col-lg-6">
 							<label>&nbsp;</label>
 							<button type="submit" class="btn btn-primary btn-block text-uppercase">
-								회원 수정
+								직원 수정
 							</button>
 						</div>
 						
@@ -73,7 +73,7 @@
 						<!-- 탈퇴 버튼 클릭시 새창으로 비밀번호 확인
 							  창 오픈하여 탈퇴 할 수 있다  -->
 						<button type="submit" class="btn btn-primary btn-block text-uppercase">
-							#회원 탈퇴
+							#직원 탈퇴
 						</button>
 					</div>
 				</div>
