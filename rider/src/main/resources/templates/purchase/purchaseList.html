@@ -37,7 +37,7 @@
 							<tbody>
 
 								<tr th:each="pList : ${purchaseList}">
-									<th th:text="${goodsDbCode.goodsDbName}"></th>
+									<th th:text="${goodsDB.goodsDbName}"></th>
 									<th th:text="${pList.purchasePay}"></th>
 									<th th:text="${pList.purchaseState}"></th>
 									<th th:text="${pList.purchaseSDate}"></th>
@@ -72,9 +72,7 @@
 							<thead>
 								<tr>
 									<th scope="col">계약자</th>
-									<th scope="col">서비스 시작일자</th>
-									<th scope="col">서비스 종료일자</th>
-									<th scope="col">계약상태</th>
+									
 									<th scope="col">계약금액</th>
 
 								</tr>
@@ -90,106 +88,7 @@
 									<td><b>330000</b></td>
 
 								</tr>
-								<tr>
-									<th scope="row"><b>#122348</b></th>
-									<td>
-										<div class="tm-status-circle pending"></div>Pending
-									</td>
-									<td><b>Jacob Miller</b></td>
-									<td><b>London, UK</b></td>
-									<td><b>360 km</b></td>
-
-								</tr>
-								<tr>
-									<th scope="row"><b>#122347</b></th>
-									<td>
-										<div class="tm-status-circle cancelled"></div>Cancelled
-									</td>
-									<td><b>George Wilson</b></td>
-									<td><b>London, UK</b></td>
-									<td><b>340 km</b></td>
-
-								</tr>
-								<tr>
-									<th scope="row"><b>#122346</b></th>
-									<td>
-										<div class="tm-status-circle moving"></div>Moving
-									</td>
-									<td><b>William Aung</b></td>
-									<td><b>London, UK</b></td>
-									<td><b>218 km</b></td>
-
-								</tr>
-								<tr>
-									<th scope="row"><b>#122345</b></th>
-									<td>
-										<div class="tm-status-circle pending"></div>Pending
-									</td>
-									<td><b>Harry Ryan</b></td>
-									<td><b>London, UK</b></td>
-									<td><b>280 km</b></td>
-
-								</tr>
-								<tr>
-									<th scope="row"><b>#122344</b></th>
-									<td>
-										<div class="tm-status-circle pending"></div>Pending
-									</td>
-									<td><b>Michael Jones</b></td>
-									<td><b>London, UK</b></td>
-									<td><b>218 km</b></td>
-
-								</tr>
-								<tr>
-									<th scope="row"><b>#122343</b></th>
-									<td>
-										<div class="tm-status-circle moving"></div>Moving
-									</td>
-									<td><b>Timmy Davis</b></td>
-									<td><b>London, UK</b></td>
-									<td><b>218 km</b></td>
-
-								</tr>
-								<tr>
-									<th scope="row"><b>#122342</b></th>
-									<td>
-										<div class="tm-status-circle moving"></div>Moving
-									</td>
-									<td><b>Oscar Phyo</b></td>
-									<td><b>London, UK</b></td>
-									<td><b>420 km</b></td>
-
-								</tr>
-								<tr>
-									<th scope="row"><b>#122341</b></th>
-									<td>
-										<div class="tm-status-circle moving"></div>Moving
-									</td>
-									<td><b>Charlie Brown</b></td>
-									<td><b>London, UK</b></td>
-									<td><b>300 km</b></td>
-
-								</tr>
-								<tr>
-									<th scope="row"><b>#122340</b></th>
-									<td>
-										<div class="tm-status-circle cancelled"></div>Cancelled
-									</td>
-									<td><b>Wilson Cookies</b></td>
-									<td><b>London, UK</b></td>
-									<td><b>218 km</b></td>
-
-								</tr>
-								<tr>
-									<th scope="row"><b>#122339</b></th>
-									<td>
-										<div class="tm-status-circle moving"></div>Moving
-									</td>
-									<td><b>Richard Clamon</b></td>
-									<td><b>London, UK</b></td>
-									<td><b>150 km</b></td>
-
-								</tr>
+								
 							</tbody>
 						</table>
 						<div>

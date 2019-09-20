@@ -1,5 +1,6 @@
 package com.smart.rider.goods.mapper;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -16,5 +17,6 @@ public interface GoodsPurchaseMapper {
 	//매입inset
 	public int purchaseInsert(GoodsPurchaseDTO goodsPurchaseDto);
 	
+	public List<GoodsPurchaseDTO> purchaseList();	
 	
 }

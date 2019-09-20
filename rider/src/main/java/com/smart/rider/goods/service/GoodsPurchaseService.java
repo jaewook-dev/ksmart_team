@@ -2,6 +2,7 @@ package com.smart.rider.goods.service;
 
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -20,6 +21,12 @@ import com.smart.rider.goods.mapper.GoodsPurchaseMapper;
 public class GoodsPurchaseService {
 	@Autowired
 	private GoodsPurchaseMapper goodsPurchaseMapper;
+	
+	//매입리스트
+	public List<GoodsPurchaseDTO> purchaseList(){
+		return goodsPurchaseMapper.purchaseList();
+	}
+	
 	
 	//매입insert
 	public int purchaseInsert(GoodsPurchaseDTO goodsPurchaseDto) {

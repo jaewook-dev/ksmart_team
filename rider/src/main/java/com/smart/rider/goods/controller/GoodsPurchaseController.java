@@ -33,10 +33,12 @@ public class GoodsPurchaseController {
 	
 	//매입리스트 이동
 	@GetMapping("/purchaseList")
-	public String purchase() {
-		
+	public String purchase(Model model) {
+		//System.out.println(model.addAttribute("pList", goodsPurchaseService.purchaseList()));
+		model.addAttribute(model.addAttribute("pList", goodsPurchaseService.purchaseList()));
 		return "purchase/purchaseList";
 	}
+
 	
 	
 	//상품DB코드로 매입상품등록하기
