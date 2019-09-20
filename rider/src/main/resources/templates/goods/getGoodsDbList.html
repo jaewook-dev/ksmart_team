@@ -89,8 +89,8 @@
 						<a th:if="${session.SLEVEL eq '관리자'}" th:href="@{/goodsDbDelete(goodsDbCode=${goodsDB.goodsDbCode})}"
 							class="btn btn-primary btn-block text-uppercase mb-3">DB상품
 							삭제하기</a>
-						<!-- <button class="btn btn-primary btn-block text-uppercase" >							
-							상품 삭제하기</button> -->
+						<a  th:href="@{/purchaseInsert(goodsDbCode=${goodsDB.goodsDbCode})}"
+							class="btn btn-primary btn-block text-uppercase mb-3">매입 등록하기</a>
 					</div>
 				</div>
 				<div class="col-sm-12 col-md-12 col-lg-4 col-xl-4 tm-block-col">

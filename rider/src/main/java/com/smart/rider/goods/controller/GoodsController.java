@@ -13,26 +13,33 @@ import com.smart.rider.goods.dto.GoodsDTO;
 import com.smart.rider.goods.dto.GoodsdbDTO;
 import com.smart.rider.goods.mapper.GoodsMapper;
 import com.smart.rider.goods.service.GoodsService;
+import com.smart.rider.goods.service.GoodsdbService;
 
 @Controller
 public class GoodsController {
 	@Autowired
 	private GoodsService goodsService;
-	
+	@Autowired
+	private GoodsdbService goodsdbservice;
 	//02 판매상품등록 요청
 	//문영성
 	@GetMapping("/goodsInsert")
-	public String goodsInsert() {
-		
+	public String goodsInsert(@RequestParam(value="goodsDbCode")String goodsDbCode,Model model) {
+		//System.out.println(goodsDbCode+"<--------------------코드확인--------------------");
+		model.addAttribute("goodsDbCode", goodsdbservice.getGoodsDbCode(goodsDbCode));
 		return "/goods/goodsInsert";
 	}
 	
-	@PostMapping("/goodsInsert")
-	public String goodsInsert(@RequestParam(value="goodsDbCode")String goodsDbCode) {
-		System.out.println(goodsDbCode+"<--------------------코드확인--------------------");
-		
-		return "redirect:/goodsList";
-	}
+	
+	  @PostMapping("/goodsInsert")
+	  public String goodsInsert(@RequestParam(value="goodsDbCode")String goodsDbCode,
+			  					@RequestParam(value="goodsCode")String goodsCode,GoodsDTO goodsDto,Model model) {
+		 
+	  System.out.println(goodsDbCode+	  "<--------------------코드확인--------------------");
+	  System.out.println(goodsCode+	  "<--------------------코드확인--------------------");
+	  
+	  return "redirect:/goodsList"; }
+	 
 	//01 판매상품 리스트 조회 
 	//19-09-16 문영성
 	@GetMapping("/goodsList")
