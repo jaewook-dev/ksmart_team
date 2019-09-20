@@ -18,6 +18,18 @@
 						</div>
 						<div class="row tm-edit-product-row">
 							<div class="col-xl-6 col-lg-6 col-md-12">
+								<div class="form-group mb-3">
+									<label for="name">DB코드 </label> <input id="goodsDbCode"
+										name="goodsDbCode " type="text" class="form-control validate"
+										th:value="${goodsDbCode.goodsDbCode}"
+										required />
+								</div>
+								<div class="form-group mb-3">
+									<label for="name">등록자 id</label> <input id="memberId"
+										name="memberId " type="text" class="form-control validate"
+										th:value="${goodsDbCode.memberId}"
+										required />
+								</div>
 								
 								<div class="form-group mb-3">
 									<label for="name">판매가격 </label> <input id="goodsPay"
@@ -76,20 +88,19 @@
 										onclick="document.getElementById('goodsImage').click();" />
 								</div>
 							</div>
-							<div class="col-12">
-								<a 
-									th:href="@{/goodsList(goodsCode=${goodsCode})}"
-									class="btn btn-primary btn-block text-uppercase mb-3">판매상품등록하기</a>
-
-							<!-- 	<button type="submit"
+					<!-- 		<div class="col-12">
+								<a th:href="@{/goodsInsert(goodsDbCode=${goodsDbCode})}"
+							class="btn btn-primary btn-block text-uppercase mb-3">판매상품등록</a> -->
+							
+								<button type="submit" 
 									class="btn btn-primary btn-block text-uppercase">판매상품등록완료</button>
-							</div> -->
+							</div>
 
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
+	
 
 		<script src="js/jquery-3.3.1.min.js"></script>
 		<!-- https://jquery.com/download/ -->

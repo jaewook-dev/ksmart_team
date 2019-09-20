@@ -1,5 +1,5 @@
 package com.smart.rider.goods.dto;
 
-public class RentalDTO {
+public class GoodsReturnDTO {
 
 }
