@@ -66,10 +66,10 @@
 												</tr>
 											</thead>
 											<tbody>
-												<tr>
-													<td></td>
-													<td>40,000</td>
-													<td>2019-09-17</td>
+												<tr th:each="list : ${utilityList}">
+													<td th:text="${list.subjectName}"></td>
+													<td th:text="${list.spendUtilityPay}"></td>
+													<td th:text="${list.spendUtilityDate}"></td>
 													<td>상세</td>
 												</tr>
 											</tbody>
