@@ -27,7 +27,6 @@
 			,NOW()
 			,NOW())
 	</insert>
-	
 	<select id="employeeList" resultType="com.smart.rider.member.dto.MemberDTO">
 		SELECT 
 			 member_id 			AS memberId
@@ -43,4 +42,32 @@
 			,member_update_date AS memberUpdateDate
 		FROM member
 	</select>
+	<!-- 19.09.20작성 -->
+	<select id="getEmployeeList" parameterType="String" resultType="com.smart.rider.member.dto.MemberDTO">
+		SELECT 
+			 member_id 			AS memberId
+			,member_pw 			AS memberPw
+			,member_name		AS memberName
+			,member_level 		AS memberLevel
+			,member_birth 		AS memberBirth
+			,member_address 	AS memberAddress
+			,member_email 		AS memberEmail
+			,member_phone 		AS memberPhone
+			,contract_shop_code	AS contractShopCode
+		FROM member
+		WHERE
+			member_id = #{memberId}
+	</select>
+	<update id="employeeUpdate" parameterType="com.smart.rider.member.dto.MemberDTO">
+		UPDATE member
+		SET
+			 member_name		= #{memberName}
+			,member_birth		= #{memberBirth}
+			,member_address		= #{memberAddress}
+			,member_email		= #{memberEmail}
+			,member_phone		= #{memberPhone}
+			,member_update_date	= NOW()
+		WHERE
+			member_id = #{memberId}
+	</update>
 </mapper>

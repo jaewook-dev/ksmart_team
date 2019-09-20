@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.smart.rider.member.dto.MemberDTO;
 import com.smart.rider.member.service.EmployeeService;
@@ -33,5 +34,16 @@ public class EmployeeController {
 		List<MemberDTO> list = employeeService.employeeList();
 		model.addAttribute("employeeList", list);
 		return "employee/employeeList";
+	}
+	//19.09.20작성
+	@GetMapping("/getEmployeeList")
+	public String getEmployeeList(@RequestParam(value="memberId") String memberId, Model model) {
+		model.addAttribute("getEmployeeList", employeeService.getEmployeeList(memberId));
+		return "employee/employeeUpdate";
+	}
+	@PostMapping("/employeeUpdate")
+	public String employeeUpdate(MemberDTO memberdto) {
+		employeeService.employeeUpdate(memberdto);
+		return "redirect:/employeeList";
 	}
 }

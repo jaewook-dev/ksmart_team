@@ -69,11 +69,21 @@
 						</div>
 						
 					</form>
+					
 					<div class="col-lx">
 						<!-------- 탈퇴 버튼 클릭시 팝업으로 비밀번호 확인 후 탈퇴 할 수 있다  --------->
-						<button type="submit" class="btn btn-primary btn-block text-uppercase">
+						<button type="button" id="btnTest" class="btn btn-primary btn-block text-uppercase"
+								>
 							#회원 탈퇴
 						</button>
+						<script type="text/javascript">
+							$(document).ready(function(){
+								$('#btnTest').click(function(){
+									var memberId = [[${memberList.memberId}]];
+									window.open('/memberDelete?memberId='+memberId+'','회원탈퇴','width=430,height=550,location=no,status=no,scrollbars=yes')
+								});
+							});
+						</script>
 					</div>
 				</div>
 			</div>
