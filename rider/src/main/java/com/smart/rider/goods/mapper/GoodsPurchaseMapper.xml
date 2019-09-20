@@ -4,7 +4,5 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- namespace가 인터페이스와 일치해야 연결된다 -->
 <mapper namespace="com.smart.rider.account.mapper.PurchaseMapper">
-	
-
 
 </mapper>

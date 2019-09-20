@@ -1,12 +1,19 @@
 package com.smart.rider.goods.controller;
 
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.smart.rider.account.dto.AccountDTO;
+import com.smart.rider.account.mapper.AccountMapper;
 import com.smart.rider.goods.service.GoodsdbService;
 
 
@@ -28,6 +35,16 @@ public class GoodsPurchaseController {
 		System.out.println(goodsDbCode+"<======매입등록시작 DB코드값 확인");
 		
 		model.addAttribute("goodsDbCode", goodsdbservice.getGoodsDbCode(goodsDbCode));
+		
+		/* 거래처 코드리스트 */
+		model.addAttribute("list", goodsdbservice.goodsDbList());
+		
 		return "purchase/purchaseInsert"; 
 	}
+	@PostMapping("/purchaseInsert")
+	public String purchaseInsert() {
+		return null;
+	}
+	
+	
 }
