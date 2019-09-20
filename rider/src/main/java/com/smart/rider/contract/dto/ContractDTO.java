@@ -13,7 +13,6 @@ public class ContractDTO {
 	private String contractMethod;
 	private int contractAmount;
 	private int contractUnpaid;
-	private String contractContents;
 	private String contractInformation;
 	private String contractDate;
 	
@@ -83,12 +82,7 @@ public class ContractDTO {
 	public void setContractUnpaid(int contractUnpaid) {
 		this.contractUnpaid = contractUnpaid;
 	}
-	public String getContractContents() {
-		return contractContents;
-	}
-	public void setContractContents(String contractContents) {
-		this.contractContents = contractContents;
-	}
+
 	public String getContractInformation() {
 		return contractInformation;
 	}
@@ -107,8 +101,7 @@ public class ContractDTO {
 				+ memberId + ", contractStart=" + contractStart + ", contractFinish=" + contractFinish
 				+ ", contractValid_date=" + contractValidDate + ", contractState=" + contractState + ", contractPay="
 				+ contractPay + ", contractMethod=" + contractMethod + ", contractAmount=" + contractAmount
-				+ ", contractUnpaid=" + contractUnpaid + ", contractContents=" + contractContents
-				+ ", contractInformation=" + contractInformation + ", contractDate=" + contractDate + "]";
+				+ ", contractUnpaid=" + contractUnpaid + ", contractInformation=" + contractInformation + ", contractDate=" + contractDate + "]";
 	}
 	
 	
