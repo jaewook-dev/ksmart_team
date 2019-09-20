@@ -5,6 +5,8 @@
 	  
 <th:block layout:fragment="customTitle">
 </th:block>
+
+<!-- 계정과목수정화면 -->
 <th:block layout:fragment="customContents">
 	<body>
 		<div class="container main-height">
@@ -19,9 +21,11 @@
 				<div class="col-12 tm-block-col" th:each="list : ${subjectList}">
 					<h2 class="tm-block-title">계정과목 수정</h2>
 					<hr>
+					
+					<!-- 계정과목 수정 폼-->
 					<form action="subjectUpdate" method="post">
-					<input type="hidden" name="subjectCode" th:value="${list.subjectCode}">
-					<div class="tm-bg-primary-dark tm-block-sub-in">
+						<input type="hidden" name="subjectCode" th:value="${list.subjectCode}">
+						<div class="tm-bg-primary-dark tm-block-sub-in">
 							<table class="table">
 								<thead>
 									<tr>
@@ -31,17 +35,38 @@
 								</thead>
 								<tbody>
 									<tr>
-										<td><input type="text" class="form-control validate" name="subjectNumber" th:value="${list.subjectNumber}"></td>
-										<td><input type="text" class="form-control validate" name="subjectName"  th:value="${list.subjectName}"></td>
+										<!-- 계정과목코드 입력창 -->
+										<td>
+											<input type="text" class="form-control validate" 
+												   name="subjectNumber" th:value="${list.subjectNumber}">
+										</td>
+										<!-- 계정과목명 입력창 -->
+										<td>
+											<input type="text" class="form-control validate" 
+												   name="subjectName"  th:value="${list.subjectName}">
+										</td>
 									</tr>
 								</tbody>
 							</table>
+							
+							<!-- 계정과목코드에 문자열 입력시 뜨는 경고 text -->
 							<label th:text="${alert}" style="color:red;"></label>
 							</div>
 							<hr>
 							<span>
-								<button type="button" class="btn-sub btn-primary text-uppercase" style="float:left" onclick="location.href='subjectList'">이전</button>
-								<button type="submit" class="btn-sub btn-primary text-uppercase" style="float:right">확인</button>
+								<!-- 이전화면으로 이동 버튼 -->
+								<button type="button" 
+										class="btn-sub btn-primary text-uppercase" 
+										style="float:left" 
+										onclick="location.href='subjectList'">
+										이전
+								</button>
+								<!-- 수정 확인 버튼 -->
+								<button type="submit" 
+										class="btn-sub btn-primary text-uppercase" 
+										style="float:right">
+										확인
+								</button>
 							</span>
 						</form>
 					</div>

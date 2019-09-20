@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="~{layout/default}">
+<html xmlns:th="http://www.thymeleaf.org" 
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	  layout:decorate="~{layout/default}">
 
 <th:block layout:fragment="customTitle">
 </th:block>
+
+<!-- 계정과목관리 -->
 <th:block layout:fragment="customContents">
 	<!-- MAIN -->
 	<div class="main height-sub">
@@ -22,8 +24,8 @@
 				<h2 class="tm-block-title">계정과목관리</h2>
 				<hr>
 				
-				<!-- row -->
-							<div class="row tm-content-row">
+				<!-- 계정과목 검색 -->
+				<div class="row tm-content-row">
 				<div class="col-12 tm-block-col">
 					<div class="tm-bg-primary-dark tm-block tm-block-h-auto-copy">
 						<form action="/subjectList" class="tm-search-form row" method="post">
@@ -34,11 +36,13 @@
 								</select>
 							</div>
 							<div class="form-group col-7">
-								<input id="subjectValue" name="subjectValue" type="text" class="form-control validate" />
+								<input id="subjectValue" name="subjectValue" 
+									   type="text" class="form-control validate" />
 							</div>
 							<div class="form-group col-2">
-								<button type="submit" id="searchButton" name="searchButton" class="btn btn-primary btn-block">
-									검색
+								<button type="submit" id="searchButton" 
+										name="searchButton" class="btn btn-primary btn-block">
+										검색
 								</button>
 							</div>
 						</form>
@@ -46,7 +50,7 @@
 				</div>
 			</div>
 				
-				
+				<!-- 계정과목 리스트 -->
 				<div class="row tm-content-row">
 					<div class="col-12 tm-block-col">
 						<div class="tm-bg-primary-dark tm-block-scroll tm-block-sub">
@@ -70,15 +74,20 @@
 										<td th:text="${impossible.subjectName}"></td>
 										<td th:text="${impossible.memberId}"></td>
 										<td th:text="${impossible.subjectDate}"></td>
-										<td class="text-center"><a
-											th:href="@{/subjectUpdate(subjectCode=${impossible.subjectCode})}"
-											class="tm-product-delete-link"> <i
-												class="fas fa-check tm-product-check-icon"
-												style="color: white"></i>
-										</a></td>
 										<td class="text-center">
-											<a class="tm-product-delete-link impossible" data-toggle="modal" href="#myModal">
-												<i class="far fa-trash-alt tm-product-delete-icon" style="color: black"></i>
+											<a th:href="@{/subjectUpdate(subjectCode=${impossible.subjectCode})}"
+											   class="tm-product-delete-link"> 
+											   <i class="fas fa-check" style="color: white"></i>
+											</a>
+										</td>
+										
+										<!-- 삭제 불가능 모달 알림 -->
+										<td class="text-center">
+											<a class="tm-product-delete-link impossible" 
+											   data-toggle="modal" href="#myModal">
+												<i class="far fa-trash-alt" 
+												   style="color: black">
+												</i>
 											</a>
 										</td>
 									</tr>
@@ -90,18 +99,19 @@
 										<td th:text="${possible.subjectName}"></td>
 										<td th:text="${possible.memberId}"></td>
 										<td th:text="${possible.subjectDate}"></td>
-										<td class="text-center"><a
-											th:href="@{/subjectUpdate(subjectCode=${possible.subjectCode})}"
-											class="tm-product-delete-link"> <i
-												class="fas fa-check tm-product-check-icon"
-												style="color: white"></i>
-										</a></td>
-										<td class="text-center"><a
-											th:href="@{/subjectDelete(subjectCode=${possible.subjectCode})}"
-											class="tm-product-delete-link possibleButton"> <i
-												class="far fa-trash-alt tm-product-delete-icon"
-												style="color: white;"></i>
-										</a></td>
+										<td class="text-center">
+										
+											<a th:href="@{/subjectUpdate(subjectCode=${possible.subjectCode})}"
+											   class="tm-product-delete-link"> 
+											   <i class="fas fa-check tm-product-check-icon" style="color: white"></i>
+											</a>
+										</td>
+										<td class="text-center">
+											<a th:href="@{/subjectDelete(subjectCode=${possible.subjectCode})}"
+											   class="tm-product-delete-link possibleButton"> 
+											   <i class="far fa-trash-alt tm-product-delete-icon" style="color: white;"></i>
+											</a>
+										</td>
 									</tr>
 									<th:block th:if="${alert} neq null">
 										<tr class="text-center">
@@ -114,13 +124,21 @@
 					</div>
 				</div>
 				<hr>
-				<button type="button"
-					onclick="location.href='subjectList'" style="float: left"
-					class="btn btn-primary text-uppercase">전체목록으로</button>
+				<!-- 전체목록으로 이동 버튼 -->
+				<button type="button" 
+						onclick="location.href='subjectList'" 
+						style="float: left"
+						class="btn btn-primary text-uppercase">
+						전체목록으로
+				</button>
 				
+				<!-- 계정과목등록 버튼 -->
 				<button type="button"
-					onclick="location.href='subjectInsert'" style="float: right"
-					class="btn btn-primary text-uppercase">계정과목등록</button>
+						onclick="location.href='subjectInsert'" 
+						style="float: right"
+						class="btn btn-primary text-uppercase">
+						계정과목등록
+				</button>
 					
 				<!-- The Modal -->
 				<div class="modal fade" id="myModal">

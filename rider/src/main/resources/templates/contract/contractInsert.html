@@ -3,53 +3,74 @@
 <th:block layout:fragment="customTitle">
 </th:block>
 <th:block layout:fragment="customContents">
-<form action="/contractInsert" method="post" class="tm-edit-product-form">
+<form action="/#" id="form"  method="post" class="tm-edit-product-form" >
 		<div class="container tm-mt-big tm-mb-big">
 		<div class="row">
 			<div class="col-xl-9 col-lg-10 col-md-12 col-sm-12 mx-auto">
 				<div class="tm-bg-primary-dark tm-block tm-block-h-auto">
 					<div class="row">
 						<div class="col-12">
-							<h2 class="tm-block-title d-inline-block">판매상품 등록하기</h2>
+							<h2 class="tm-block-title d-inline-block">계약서 등록하기</h2>
 						</div>
 					</div>
 					<div class="row tm-edit-product-row">
 						<div class="col-xl-6 col-lg-6 col-md-12">
-							
 								<div class="form-group mb-3">
-									<label for="name">판매가격 </label> <input id="goodsPay"
-										name="goodsPay " type="text" class="form-control validate" required />
+									<label>계약금 납입방식</label> <select id = 'contractMethod'
+										class="custom-select tm-select-accounts"  name="contractMethod">
+										<option selected>계약금 납입</option>
+										<option value="a">월 납부</option>
+										<option value="b">1년 일시불</option>
+										<option value="c">2년 일시불</option>
+									</select>
 								</div>
 								<div class="form-group mb-3">
-									<label for="name">상품위치 </label> <input id="goodsPosition"
-										name="goodsPosition" type="text" class="form-control validate" required />
-								</div>
-								<div class="form-group mb-3">
-									<label for="name">대여가능여부 </label> <input id="goodsRental"
-										name="goodsRental" type="text" class="form-control validate" required />
+									<label for="name">납입 금액 </label><input 	id="contractPay"
+										name="contractPay" type="text" class="form-control validate" required />
 								</div>
 								
 								<div class="form-group mb-3">
-									<label for="name">상품상태 </label> <input id="goodsState"
-										name="goodsState" type="text" class="form-control validate" required />
+									<label for="name">서비스 시작일자 </label> <input id="contractStart" onchange="javascript:change()"
+										name="contractStart" type="date" class="form-control validate" required />
 								</div>
+					
+
+
 								<div class="form-group mb-3">
-									<label for="name">판매완료유무 </label> <input id="goodsCompletionState"
-										name="goodsCompletionState" type="text" class="form-control validate" required />								
+									<label for="name">서비스 종료일자 </label> <input id="contractFinish"
+										name="contractFinish" type="date" class="form-control validate" required />								
 										
 								</div>
 								<div class="form-group mb-3">
-									<label for="name">대여상태 </label> <input id="goodsRentalState"
-										name="goodsRentalState" type="text" class="form-control validate" required />
+									<label for="name">계약 유효기간 </label> <input id="contractValidDate"
+										name="contractValidDate" type="date" class="form-control validate" required />
 								</div>
 								<div class="form-group mb-3">
-									<label for="name">최종재고확인일자 </label> <input id="goodsInventoryDate"
-										name="goodsInventoryDate" type="text" class="form-control validate" required />
+									<label for="name">계약내용 </label> 
+									<textarea cols="80" rows="8" id="textareaId" readonly></textarea>
+									<input type="radio" name="agree"  value = "Y"/> <span class="up">예</span>&nbsp;&nbsp; 
+									<input type="radio" name="agree" value= "N"/> <span class="up">아니오</span>
 								</div>
 								<div class="form-group mb-3">
-									<label for="expire_date">등록일자 </label> <input
+									<label for="name">바퀴사이즈 </label> <input id="goodsDbSize"
+										name="goodsDbSize" type="text" class="form-control validate" required />
+								</div>
+								<div class="form-group mb-3">
+									<label for="name">제조국가 </label> <input id="goodsDbNation"
+										name="goodsDbNation" type="text" class="form-control validate" required />
+								</div>
+								<div class="form-group mb-3">
+									<label for="name">최대하중 </label> <input id="goodsDbLoad"
+										name="goodsDbLoad" type="text" class="form-control validate" required />
+								</div>
+							
+							
+							
+								<div class="form-group mb-3">
+									<label for="expire_date">등록날짜. </label> <input
 										id="goodsDbDate" name="goodsDbDate" type="text"
-										class="form-control validate" data-large-mode="true" />								</div>							
+										class="form-control validate" data-large-mode="true" />
+								</div>
 								
 								
 							</div>
@@ -69,17 +90,117 @@
 							<!-- <a
 				            	href="/goodsdbInsert"
 				              	class="btn btn-primary btn-block text-uppercase mb-3">DB상품 추가하기</a> -->
-							<button type="submit"
-								class="btn btn-primary btn-block text-uppercase">판매상품등록완료</button>
+							<button type="button"  onclick="javascript:btn()"
+								class="btn btn-primary btn-block texst-uppercase">상품등록 확인</button>
 						</div>
 						
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
+			</div>
+	
+
+	
+	<script src="js/jquery-3.3.1.min.js"></script>
+	<!-- https://jquery.com/download/ -->
+	<script src="jquery-ui-datepicker/jquery-ui.min.js"></script>
+	<!-- https://jqueryui.com/download/ -->
+	<script src="js/bootstrap.min.js"></script>
+	<!-- https://getbootstrap.com/ -->
+
 	</form>
 </th:block>
+</th:block>
 <th:block layout:fragment="customScript">
+
+
+
+
+
+
+<script>
+
+
+
+//textarea 담기는 내용
+$('#textareaId').val('1.상태변경은 오프라인 문의 \n\n 2.서비스종료일자 + D10, 유효기간시 까지 서비스 제공, 유효기간 지날시 계약종료 \n\n 3.30일 연체시 이용 중지  \n\n 4.중도 해지시 남은 기간에 따른 금액의 60% 환불')
+
+
+//계약내용에 동의 안할 시 안넘어감 
+function btn(){
+	var a = $('input[name="agree"]:checked').val();
+	if(a == "N" || a =="" || a== null){
+		alert("계약내용에 동의해주세요");
+	}else{
+		
+		$('#form').submit();
+	}
+}
+
+//납부 타입을 선택하면 자동으로 값 설정
+$("select#contractMethod").bind("change",function(){
+
+	var seloption = $("#contractMethod option:selected").val();
+	
+	
+	if(seloption == 'a'){
+		seloption = 30000;
+		$('#contractPay').val(seloption);
+	}else if(seloption == 'b'){
+		seloption = 300000;
+		$('#contractPay').val(seloption);
+	}else if(seloption == 'c'){
+		seloption = 600000;
+		$('#contractPay').val(seloption);
+	}
+	
+});
+
+function change(){
+	var strDate1 = $('#contractStart').val();
+	var strDate2 = $('#contractFinish').val();
+	var arr1 = strDate1.split('-');
+	var arr2 = strDate2.split('-');
+	var dat1 = new Date(arr1[0], arr1[1], arr1[2]);
+	var dat2 = new Date(arr2[0], arr2[1], arr2[2]);
+
+	
+	document.write("* 현재날짜 : " + strDate1 + "<br/>");
+	
+	document.write("* 1년 더하기 : "    + (dat1.getFullYear() + 1) + "-" +
+	        dat1.getMonth() + "-" + dat1.getDate() + "<br/>");
+	
+	document.write("* 2년 더하기 : "    + (dat1.getFullYear() + 2) + "-" +
+	        dat1.getMonth() + "-" + dat1.getDate() + "<br/>");
+	
+}
+
+
+
+
+
+
+
+</script>
 </th:block>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

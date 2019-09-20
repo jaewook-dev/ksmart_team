@@ -5,6 +5,8 @@
 	  
 <th:block layout:fragment="customTitle">
 </th:block>
+
+<!-- 계정과목등록 -->
 <th:block layout:fragment="customContents">
 	<!-- MAIN -->
 	<div class="main-height">
@@ -20,30 +22,43 @@
 				</div>
 				<h2 class="tm-block-title">계정과목 등록</h2>
 				<hr>
-					<form action="subjectInsert" method="post">
-					<div class="tm-bg-primary-dark tm-block-sub-in">
-							<table class="table">
-								<thead>
-									<tr>
-										<th scope="row" style="width:30%">계정과목코드</th>
-										<th scope="row">계정과목명</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td><input type="text" class="form-control validate" name="subjectNumber"></td>
-										<td><input type="text" class="form-control validate" name="subjectName"></td>
-									</tr>
-								</tbody>
-							</table>
-							<label th:text="${alert}" style="color:red;"></label>
-							</div>
-							<hr>
-							<span>
-								<button type="button" class="btn-sub btn-primary text-uppercase" style="float:left" onclick="location.href='subjectList'">이전</button>
-								<button type="submit" class="btn-sub btn-primary text-uppercase" style="float:right">확인</button>
-							</span>
-						</form>
+				
+				<!-- 계정과목 입력 폼-->
+				<form action="subjectInsert" method="post">
+				<div class="tm-bg-primary-dark tm-block-sub-in">
+						<table class="table">
+							<thead>
+								<tr>
+									<th scope="row" style="width:30%">계정과목코드</th>
+									<th scope="row">계정과목명</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td><input type="text" class="form-control validate" name="subjectNumber"></td>
+									<td><input type="text" class="form-control validate" name="subjectName"></td>
+								</tr>
+							</tbody>
+						</table>
+						<label th:text="${alert}" style="color:red;"></label>
+						</div>
+						<hr>
+						<span>
+							<!-- 이전화면 이동 버튼 -->
+							<button type="button" 
+									class="btn-sub btn-primary text-uppercase" 
+									style="float:left" 
+									onclick="location.href='subjectList'">
+									이전
+							</button>
+							<!-- 등록 버튼 -->
+							<button type="submit" 
+									class="btn-sub btn-primary text-uppercase" 
+									style="float:right">
+									확인
+							</button>
+						</span>
+					</form>
 					</div>
 				</div>
 			</div>
