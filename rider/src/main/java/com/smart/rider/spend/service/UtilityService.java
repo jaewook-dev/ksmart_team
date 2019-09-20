@@ -14,8 +14,8 @@ public class UtilityService {
 	@Autowired
 	private UtilityMapper utilityMapper;
 	
-	public List<UtilityDTO> utilityList(){
-		return utilityMapper.utilityList();
+	public List<UtilityDTO> utilityList(String contractShopCode){
+		return utilityMapper.utilityList(contractShopCode);
 	}
 
 }

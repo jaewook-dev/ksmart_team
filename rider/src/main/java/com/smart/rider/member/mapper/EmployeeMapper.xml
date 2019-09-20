@@ -11,7 +11,7 @@
 			,member_address
 			,member_email
 			,member_phone
-			,shop_code
+			,contract_shop_code
 			,member_insert_date
 			,member_update_date
 		)VALUES (
@@ -23,7 +23,7 @@
 			,#{memberAddress}
 			,#{memberEmail}
 			,#{memberPhone}
-			,#{shopCode} 
+			,#{contractShopCode} 
 			,NOW()
 			,NOW())
 	</insert>
@@ -38,7 +38,7 @@
 			,member_address 	AS memberAddress
 			,member_email 		AS memberEmail
 			,member_phone 		AS memberPhone
-			,shop_code 			AS shopCode
+			,contract_shop_code	AS contractShopCode
 			,member_insert_date AS memberInsertDate
 			,member_update_date AS memberUpdateDate
 		FROM member

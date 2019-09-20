@@ -7,6 +7,7 @@
 			,member_pw AS memberPw
 			,member_name AS memberName
 			,member_level AS memberLevel
+			,contract_shop_code AS contractShopCode
 		FROM member
 		WHERE member_id = #{memberId} and member_pw = #{memberPw}
 	</select>

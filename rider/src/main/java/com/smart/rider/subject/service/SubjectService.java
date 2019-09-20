@@ -32,7 +32,17 @@ public class SubjectService {
 		return subjectMapper.subjectInsert(subjectDTO);
 	}
 	
-	// 계정과목 삭제
+	//삭제 가능한 계정과목 리스트
+	public List<SubjectDTO> subjectDeletePossible(String subjectKey, String subjectValue){
+		return subjectMapper.subjectDeletePossible(subjectKey, subjectValue);
+	}
+	
+	//삭제 불가능한 계정과목 리스트 (외래키 참조중)
+	public List<SubjectDTO> subjectDeleteImpossible(String subjectKey, String subjectValue){
+		return subjectMapper.subjectDeleteImpossible(subjectKey, subjectValue);
+	}
+	
+	//계정과목 삭제
 	public int subjectDelete(String subjectCode) {
 		return subjectMapper.subjectDelete(subjectCode);
 	}

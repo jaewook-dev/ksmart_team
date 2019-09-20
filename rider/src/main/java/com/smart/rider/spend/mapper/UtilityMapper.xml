@@ -2,6 +2,16 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.smart.rider.spend.mapper.UtilityMapper">
 
+	<!-- 계정과목 resultMap -->
+	<resultMap type="com.smart.rider.subject.dto.SubjectDTO" id="subjectMap">
+		<result column="subject_code" 	property="subjectCode"/>
+		<result column="member_id" 		property="memberId"/>
+		<result column="subject_number" property="subjectNumber"/>
+		<result column="subject_name" 	property="subjectName"/>
+		<result column="subject_date" 	property="subjectDate"/>
+	</resultMap>
+
+	<!-- 공과금 resultMap -->
 	<resultMap type="com.smart.rider.spend.dto.UtilityDTO" id="utilityMap">
 		<result column="spend_utility_code"		property="spendUtilityCode"/>
 		<result column="subject_code" 			property="subjectCode"/>
@@ -12,14 +22,16 @@
 	</resultMap>
 	
 	<!-- 공과금 등록 내역 -->
-	<select id="utilityList" resultMap="utilityMap">
+	<select id="utilityList" resultMap="utilityMap" parameterType="String">
 		SELECT 
-			 spend_utility_code
-			,subject_code
-			,contract_shop_code
-			,spend_utility_pay
-			,spend_utility_contents
-			,spend_utility_date
-		FROM spend_utility
+			 su.spend_utility_code
+			,su.subject_code
+			,su.contract_shop_code
+			,su.spend_utility_pay
+			,su.spend_utility_contents
+			,su.spend_utility_date
+			,sub.subject_name
+		FROM spend_utility su, subject sub
+		WHERE su.subject_code = sub.subject_code AND contract_shop_code = #{contractShopCode} 
 	</select>
 </mapper>
