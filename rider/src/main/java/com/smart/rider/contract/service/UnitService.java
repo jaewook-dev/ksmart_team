@@ -29,7 +29,7 @@ public class UnitService {
 		if(unitCode.equals("Unull")) { 
 			unitCode = "U0001";
 		}
-
+		
 		unit.setMemberId((String)session.getAttribute("SID"));
 		unit.setContractUnitCode(unitCode);
 		

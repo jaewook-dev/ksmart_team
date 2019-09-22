@@ -34,7 +34,7 @@ public class UnitController {
 	public String unitInsert(UnitDTO unit, HttpSession session) {
 		System.out.println(unit.toString() + "<-- unit.toString");
 		unitService.unitInsert(unit,session);
-		
+
 		return "redirect:/unitList.html";
 	}
 	

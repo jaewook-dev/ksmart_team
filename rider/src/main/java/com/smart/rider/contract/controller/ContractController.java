@@ -2,18 +2,23 @@ package com.smart.rider.contract.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.smart.rider.contract.dto.ContractDTO;
+
 import com.smart.rider.contract.service.ContractService;
+
 
 @Controller
 public class ContractController {
 	
-	@Autowired ContractService contractService;
+	@Autowired  private ContractService contractService;
+
 	
 	@GetMapping("/contract")
 	public String contract(Model model) {
@@ -33,6 +38,10 @@ public class ContractController {
 	@GetMapping("/contractList")
 	public String contractList(Model model) {
 		List<ContractDTO> contractList =  contractService.contractList();
+
+	
+
+		
 		System.out.println("=====test=====");
 		System.out.println("contractList:"+contractList);
 		model.addAttribute("contractList", contractList);
@@ -46,6 +55,9 @@ public class ContractController {
 		
 		return "/contract/contractInsert";
 	}
+	
+
+	
 	
 	
 }
