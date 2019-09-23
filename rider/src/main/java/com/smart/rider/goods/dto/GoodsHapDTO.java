@@ -41,6 +41,13 @@ public class GoodsHapDTO {
 	private String accountAddress;
 	private String accountCategory;
 	private String accountDate;
+	private String shopCode;	
+	private String shopName;
+	private String shopAddress;
+	private String shopPhone;
+	
+	
+	
 	
 	
 	@Override
@@ -59,8 +66,35 @@ public class GoodsHapDTO {
 				+ ", purchaseState=" + purchaseState + ", purchaseDate=" + purchaseDate + ", returnReason="
 				+ returnReason + ", returnDate=" + returnDate + ", accountMarket=" + accountMarket + ", accountName="
 				+ accountName + ", accountPhone=" + accountPhone + ", accountAddress=" + accountAddress
-				+ ", accountCategory=" + accountCategory + ", accountDate=" + accountDate + "]";
+				+ ", accountCategory=" + accountCategory + ", accountDate=" + accountDate + ", shopCode=" + shopCode
+				+ ", shopName=" + shopName + ", shopAddress=" + shopAddress + ", shopPhone=" + shopPhone + "]";
 	}
+	public String getShopCode() {
+		return shopCode;
+	}
+	public void setShopCode(String shopCode) {
+		this.shopCode = shopCode;
+	}
+	public String getShopName() {
+		return shopName;
+	}
+	public void setShopName(String shopName) {
+		this.shopName = shopName;
+	}
+	public String getShopAddress() {
+		return shopAddress;
+	}
+	public void setShopAddress(String shopAddress) {
+		this.shopAddress = shopAddress;
+	}
+	public String getShopPhone() {
+		return shopPhone;
+	}
+	public void setShopPhone(String shopPhone) {
+		this.shopPhone = shopPhone;
+	}
+	
+	
 	public String getGoodsDbCode() {
 		return goodsDbCode;
 	}

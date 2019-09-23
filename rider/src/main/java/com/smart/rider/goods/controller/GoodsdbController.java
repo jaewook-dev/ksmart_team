@@ -54,7 +54,8 @@ public class GoodsdbController {
 		  if(result==0) {
 			  model.addAttribute("result", "비밀번호가 불일치합니다.");
 			  model.addAttribute("goodsDbCode", goodsDbCode); 
-			  return  "/goods/goodsDbDelete"; }
+			  return  "/goods/goodsDbDelete"; 
+			  }
 		  
 		return "redirect:goodsDbList";	
 	}

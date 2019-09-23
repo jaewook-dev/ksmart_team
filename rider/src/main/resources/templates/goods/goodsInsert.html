@@ -19,21 +19,35 @@
 						<div class="row tm-edit-product-row">
 							<div class="col-xl-6 col-lg-6 col-md-12">
 								<div class="form-group mb-3">
-									<label for="name">DB코드 </label> <input id="goodsDbCode"
-										name="goodsDbCode " type="text" class="form-control validate"
-										th:value="${goodsDbCode.goodsDbCode}"
+									<input id="goodsDbCode"
+										name="goodsDbCode" type="hidden" class="form-control validate"
+										th:value="${purchaseCode.goodsDbCode}"
 										required />
 								</div>
 								<div class="form-group mb-3">
-									<label for="name">등록자 id</label> <input id="memberId"
-										name="memberId " type="text" class="form-control validate"
-										th:value="${goodsDbCode.memberId}"
+									<input id="purchaseCode"
+										name="purchaseCode" type="hidden" class="form-control validate"
+										th:value="${purchaseCode.purchaseCode}"
 										required />
 								</div>
-								
+								<div class="form-group mb-3">
+									<label for="name">상품명 </label> <input id="goodsDbName"
+										name="goodsDbName" th:value="${purchaseCode.goodsDbName}"  type="text" class="form-control validate"
+										required style="color: red;" readonly="readonly" />
+								</div>
+								<div class="form-group mb-3">
+									<label for="name">상품카테고리 </label> <input id="goodsDbCategory"
+										name="goodsDbCategory" th:value="${purchaseCode.goodsDbCategory}"  type="text" class="form-control validate"
+										required style="color: red;" readonly="readonly" />
+								</div>
+								<div class="form-group mb-3">
+									<label for="name">매입가격 </label> <input id="purchasePay"
+										name="purchasePay"  th:value="${purchaseCode.purchasePay}" type="text" class="form-control validate"
+										required style="color: red;" readonly="readonly"/>
+								</div>
 								<div class="form-group mb-3">
 									<label for="name">판매가격 </label> <input id="goodsPay"
-										name="goodsPay " type="text" class="form-control validate"
+										name="goodsPay" type="text" class="form-control validate"
 										required />
 								</div>
 								<div class="form-group mb-3">
@@ -73,7 +87,7 @@
 										name="goodsDate" type="text" class="form-control validate"
 										data-large-mode="true" />
 								</div>
-
+							
 
 							</div>
 							<div class="col-xl-6 col-lg-6 col-md-12 mx-auto mb-4">

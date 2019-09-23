@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 
 import com.smart.rider.goods.dto.GoodsDTO;
+import com.smart.rider.goods.dto.GoodsHapDTO;
 import com.smart.rider.goods.dto.GoodsdbDTO;
 import com.smart.rider.goods.mapper.GoodsMapper;
 
@@ -23,13 +24,13 @@ public class GoodsService {
 	
 	//01판매상품 리스트조회 메서드
 	//문영성
-	public List<GoodsDTO> goodsList(){
+	public List<GoodsHapDTO> goodsList(){
 		
 		return goodsMapper.goodsList();
 	}
 	
 	//02판매상품 등록메서드
-	public int goodsInsert(GoodsDTO goodsDto,HttpSession session) {
+	public int goodsInsert(GoodsDTO goodsDto) {
 		String goodsCode = "G" + goodsMapper.goodsCodeCount();
 		System.out.println(goodsCode+"lllllllllllllllllllllllllll");
 		
@@ -37,6 +38,6 @@ public class GoodsService {
 			goodsCode = "G0001";
 		}
 		goodsDto.setGoodsCode(goodsCode);
-		return goodsMapper.goodsInsert(goodsDto, session);
+		return goodsMapper.goodsInsert(goodsDto);
 	}
 }

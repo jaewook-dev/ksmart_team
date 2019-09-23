@@ -36,7 +36,16 @@
     	<result column="account_market"    	property="accountMarket"/>
     	
 	</resultMap>
-
+	
+	<delete id="purchaseDelete" parameterType="String">
+		DELETE 
+ 				p
+ 		FROM purchase p INNER JOIN member m
+ 		WHERE 
+ 				p.purchase_code =#{purchaseCode}
+ 			AND m.member_id = #{memberId} 
+			AND m.member_pw = #{memberPw}
+	</delete>
 	<!-- 매입 검색  -->
 	<select id="purchaseSearchList" parameterType="String" resultMap="ASid">
 			SELECT 

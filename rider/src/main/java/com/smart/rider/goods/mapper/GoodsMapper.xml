@@ -3,51 +3,55 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.smart.rider.goods.mapper.GoodsMapper">
+
+	<resultMap type="com.smart.rider.goods.dto.GoodsHapDTO" id="ASid">
+    	<result column="purchase_code"     property="purchaseCode"/>
+    	<result column="account_code"     property="accountCode"/>
+    	<result column="contract_shop_code"     		property="contractShopCode"/>
+    	<result column="goods_database_code"    	property="goodsDbCode"/>
+    	<result column="purchase_pay" 		property="purchasePay"/>
+    	<result column="purchase_state"     property="purchaseState"/>
+    	<result column="purchase_date"	 	property="purchaseDate"/>
+    	<result column="goods_database_name"	 	property="goodsDbName"/>
+    	<result column="goods_database_category"     property="goodsDbCategory"/>
+    	<result column="goods_database_number"     property="goodsDbNumber"/>
+    	<result column="goods_database_color"     		property="goodsDbColor"/>
+    	<result column="goods_database_speed"     		property="goodsDbSpeed"/>
+    	<result column="goods_database_weight"    	property="goodsDbWeight"/>
+    	<result column="goods_database_size" 		property="goodsDbSize"/>
+    	<result column="goods_database_nation"     property="goodsDbNation"/>
+    	<result column="goods_database_load"	 	property="goodsDbLoad"/>
+    	<result column="goods_database_distance"	 	property="goodsDbDistance"/>
+    	<result column="goods_database_battery"     property="goodsDbBattery"/>
+    	<result column="goods_database_time"     property="goodsDbTime"/>
+    	<result column="goods_database_made"     		property="goodsDbMade"/>
+    	<result column="goods_database_description"    	property="goodsDbDescription"/>
+    	<result column="account_market"    	property="accountMarket"/>
+    	<result column="shop_code"     property="shopCode"/>
+    	<result column="shop_name"     		property="shopName"/>
+    	<result column="shop_address"    	property="shopAddress"/>
+    	<result column="shop_phone"    	property="shopPhone"/>
+    	
+	</resultMap>
 	<!-- 상품DB상세조회  -->
 	
-	<select id="getGoodsDbCode" resultType="com.smart.rider.goods.dto.GoodsdbDTO">
-		SELECT
-		goods_database_code AS goodsDbCode,
-		m.member_id AS memberId,
-		goods_database_name AS goodsDbName,
-		goods_database_category AS	goodsDbCategory,
-		goods_database_number AS goodsDbNumber,
-		goods_database_color AS goodsDbColor,
-		goods_database_weight AS goodsDbWeight,
-		goods_database_speed AS goodsDbSpeed,
-		goods_database_size AS goodsDbSize,
-		goods_database_nation AS goodsDbNation,
-		goods_database_load AS goodsDbLoad,
-		goods_database_distance AS goodsDbDistance,
-		goods_database_battery AS	goodsDbBattery,
-		goods_database_time AS goodsDbTime,
-		goods_database_made	AS goodsDbMade,
-		goods_database_description AS goodsDbDescription,
-		goods_database_image AS goodsDbImage,
-		goods_database_date AS goodsDbDate
-		FROM
-		 goods_database gdb INNER JOIN member m 
-			ON gdb.member_id = m.member_id		
-		WHERE 
-		goods_database_code = #{goodsDbCode}
-	</select>
+	
 	<!-- 상품등록  -->
-	<insert id="goodsInsert" parameterType="com.smart.rider.goods.dto.GoodsDTO">		
-			INSERT INTO goods
-			(
-			goods_code AS goodsCode
-			, goods_database_code AS goodsDbCode
-			, purchase_code AS purchaseCode
-			, contract_shop_code AS contractShopCode
-			, goods_pay AS goodsPay
-			, goods_position AS goodsPosition
-			, goods_rental AS goodsRental
-			, goods_state AS goodsState
-			, goods_completion_state AS goodsCompletionState
-			, goods_rental_state AS goodsRentalState
-			, goods_inventory_date AS goodsInventoryDate
-			, goods_date AS goodsDate
-			)
+	<insert id="goodsInsert" parameterType="com.smart.rider.goods.dto.GoodsDTO" >		
+		INSERT INTO
+			 goods
+			(goods_code
+			, goods_database_code
+			, purchase_code
+			, contract_shop_code
+			, goods_pay
+			, goods_position
+			, goods_rental
+			, goods_state
+			, goods_completion_state
+			, goods_rental_state
+			, goods_inventory_date
+			, goods_date)
 		VALUES
 		 (#{goodsCode}
 		 , #{goodsDbCode}
@@ -59,39 +63,28 @@
 		 , #{goodsState}
 		 , #{goodsCompletionState}
 		 , #{goodsRentalState}
-		 , NOW()
+		 , #{goodsInventoryDate}
 		 , NOW())
 	</insert>
 
 	<select id="goodsCodeCount" resultType="String">
 		SELECT 
-			MAX(LPAD(RIGHT(subject_code, 4)+1, '4' , '0')) 
-		FROM subject;
+			MAX(LPAD(RIGHT(goods_code, 4)+1, '4' , '0')) 
+		FROM goods;
 	</select>
 			
 
-	<select id="goodsList"	resultType="com.smart.rider.goods.dto.GoodsDTO">
-			SELECT
-			g.goods_code AS goodsCode,
-			g.goods_database_code AS goodsDbCode,
-			gdb.goods_database_code AS goodsDbCode,
-			g.purchase_code AS	purchaseCode,
-			p.purchase_code AS purchaseCode,
-			g.contract_shop_code AS	contractShopCode,
-			sr.contract_shop_code AS contractShopCode,
-			goods_pay AS goodsPay,
-			goods_position AS goodsPosition,
-			goods_rental AS	goodsRental,
-			goods_state AS goodsState,
-			goods_completion_state AS	goodsCompletionState,
-			goods_rental_state AS goodsRentalState,
-			goods_inventory_date AS goodsInventoryDate,
-			goods_date AS goodsDate
-			FROM goods g INNER JOIN goods_database gdb 
-			INNER JOIN	purchase p 
-			INNER JOIN shop_relation sr
-			ON g.goods_database_code = gdb.goods_database_code and
-			g.purchase_code = p.purchase_code and
-			g.contract_shop_code = sr.contract_shop_code
+	<select id="goodsList"	resultMap="ASid" parameterType="String">
+		SELECT *
+			FROM
+			goods g
+			INNER JOIN
+			purchase p			 
+			INNER JOIN 
+			goods_database gb
+			ON 
+			gb.goods_database_code = p.goods_database_code
+			and g.goods_database_code = p.goods_database_code
+	
 	</select>
 </mapper>

@@ -22,6 +22,12 @@ import com.smart.rider.goods.mapper.GoodsPurchaseMapper;
 public class GoodsPurchaseService {
 	@Autowired
 	private GoodsPurchaseMapper goodsPurchaseMapper;
+	
+	//매입삭제 메서드
+	public int purchaseDelete(String purchaseCode,String memberId,String memberPw) {
+		return goodsPurchaseMapper.purchaseDelete(purchaseCode, memberId, memberPw); 
+	}
+	
 	//매입 검색 메서드
 	public List<GoodsHapDTO> purchaseSearchList(String select, String searchInput ){
 		List<GoodsHapDTO> search = goodsPurchaseMapper.purchaseSearchList(select, searchInput);

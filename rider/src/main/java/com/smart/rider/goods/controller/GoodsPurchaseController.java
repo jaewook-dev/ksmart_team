@@ -31,6 +31,32 @@ public class GoodsPurchaseController {
 	private GoodsdbService goodsdbservice;
 	@Autowired
 	private AccountService accountService;
+	
+	//매입 삭제메서드
+	@GetMapping("/purchaseDelete")
+	public String purchaseDelete(@RequestParam(value="purchaseCode")String purchaseCode,
+								Model model) {
+		//System.out.println("삭제 코드넘어오는값확인"+purchaseCode);
+		model.addAttribute("pList", goodsPurchaseService.getPurchaseList(purchaseCode));
+		model.addAttribute("purchaseCode", purchaseCode);
+		return "purchase/purchaseDelete";
+	}
+	
+	  @PostMapping("/purchaseDelete")
+	  public String purchaseDelete(@RequestParam(value="purchaseCode")String purchaseCode,
+			  					   @RequestParam(value="memberId")String memberId,
+			  					   @RequestParam(value="memberPw")String memberPw,Model model) {
+		  int result = goodsPurchaseService.purchaseDelete(purchaseCode, memberId, memberPw);
+		  if(result==0) {
+			  model.addAttribute("result", "비밀번호불일치");
+			  model.addAttribute("purchaseCode", purchaseCode);
+			  return"purchase/purchaseDelete";
+		  }
+		
+		  return "redirect:purchaseList";
+	  }
+	 
+	
 	//매입 검색메서드
 	@PostMapping("/purchaseSearchList")
 	public String purchaseSearchList(@RequestParam(value="select")String select
