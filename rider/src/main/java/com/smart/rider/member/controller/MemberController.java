@@ -43,7 +43,7 @@ public class MemberController {
 	}
 	//19.09.16작성
 	@ResponseBody
-	@RequestMapping(value = "/memberIdCheck", method = RequestMethod.POST)
+	@RequestMapping("/memberIdCheck")
 	public int idCheck(@RequestParam(value="memberId") String memberId) {
 		System.out.println(memberId + "아이디체크");
 		
@@ -89,5 +89,17 @@ public class MemberController {
 	public String memberDelete(@RequestParam(value="memberId") String memberId, Model model) {
 		model.addAttribute("memberId", memberId);
 		return "/member/memberDelete";
+	}
+	//19.09.23 작성
+	@PostMapping("/memberDelete")
+	public String memberDelete(MemberDTO memberdto, Model model) {
+		int result = memberService.memberDelete(memberdto.getMemberId(), memberdto.getMemberPw());
+		if(result == 0) {
+			model.addAttribute("result", "비밀번호가 일치하지 않습니다!");
+			model.addAttribute("memberId", memberdto.getMemberId());
+			return "member/memberDelete";
+		}
+		
+		return "redirect:/memberList";
 	}
 }
