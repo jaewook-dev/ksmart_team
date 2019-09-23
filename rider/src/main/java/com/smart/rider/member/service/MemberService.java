@@ -38,8 +38,8 @@ public class MemberService {
 		return search;
 	}
 	//19.09.18작성
-	public int memberDelete(String memberId) {
+	public int memberDelete(String memberId, String memberPw) {
 		System.out.println("삭제 서비스");
-		return memberMapper.memberDelete(memberId);
+		return memberMapper.memberDelete(memberId, memberPw);
 	}
 }

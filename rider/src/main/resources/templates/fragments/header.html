@@ -77,7 +77,7 @@
                                 aria-haspopup="true" aria-expanded="false">
                             	<i class="fas fa-store"></i>
                             	<span>
-                            		#)매장관리<i class="fas fa-angle-down"></i>
+                            		매장관리<i class="fas fa-angle-down"></i>
                             	</span>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -95,7 +95,6 @@
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" th:href="@{/account}">#)거래처관리</a>
-                                <a class="dropdown-item" th:href="@{/purchase}">#)매입상품관리</a>
                             </div>
                         </li>
                         <li class="nav-item dropdown" th:if="${session.SLEVEL eq '관리자'}">
@@ -123,7 +122,7 @@
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             	<a class="dropdown-item" href="/employeeInsert">!직원등록</a>
-                            	<a class="dropdown-item" href="/employeeList">!직원목록</a>
+                            	<a class="dropdown-item" th:href="@{/employeeList(contractShopCode=${session.SCODE})}">!직원목록</a>
                             </div>
                         </li>
                     </ul>

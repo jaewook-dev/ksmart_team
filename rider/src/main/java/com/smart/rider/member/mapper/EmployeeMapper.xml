@@ -23,7 +23,7 @@
 			,#{memberAddress}
 			,#{memberEmail}
 			,#{memberPhone}
-			,#{contractShopCode} 
+			,#{contractShopCode}
 			,NOW()
 			,NOW())
 	</insert>
@@ -41,6 +41,8 @@
 			,member_insert_date AS memberInsertDate
 			,member_update_date AS memberUpdateDate
 		FROM member
+		WHERE
+			contract_shop_code = #{contractShopCode}
 	</select>
 	<!-- 19.09.20작성 -->
 	<select id="getEmployeeList" parameterType="String" resultType="com.smart.rider.member.dto.MemberDTO">

@@ -11,7 +11,7 @@ public interface EmployeeMapper {
 	//19.09.15작성
 	public int employeeInsert(MemberDTO memberdto);
 	
-	public List<MemberDTO> employeeList();
+	public List<MemberDTO> employeeList(String contractShopCode);
 	//19.09.20작성
 	public MemberDTO getEmployeeList(String memberId);
 	
