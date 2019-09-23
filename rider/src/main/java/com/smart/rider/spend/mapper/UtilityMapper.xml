@@ -26,16 +26,12 @@
 	</resultMap>
 	
 	<!-- 년도에 따른 월별 공과금 지출 금액 유무 체크 -->
-	<select id="utilityPayCheck" resultMap="joinUtilityMap" parameterType="String">
+	<select id="utilityPayCheck" resultType="com.smart.rider.spend.dto.UtilityPay" parameterType="String">
 		SELECT 
-			 spend_utility_code
-			,subject_code
-			,contract_shop_code
-			,spend_utility_pay
-			,spend_utility_contents
-			,spend_utility_date
+			DATE_FORMAT(spend_utility_date,'%Y-%m') payMonth
+			,SUM(spend_utility_pay) AS sumUtility
 		FROM spend_utility
-		WHERE DATE_FORMAT(spend_utility_date,'%Y-%m') = #{checkMonth} AND contract_shop_code = #{contractShopCode};
+		WHERE DATE_FORMAT(spend_utility_date,'%Y-%m') = #{checkMonth} AND contract_shop_code = #{contractShopCode}
 	</select>
 	
 	<!-- 년도에 따른 월별 공과금 지출 금액 -->

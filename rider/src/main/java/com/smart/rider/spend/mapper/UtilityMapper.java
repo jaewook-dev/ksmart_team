@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.smart.rider.spend.dto.JoinUtilityDTO;
 import com.smart.rider.spend.dto.UtilityDTO;
 import com.smart.rider.spend.dto.UtilityPay;
 import com.smart.rider.subject.dto.SubjectDTO;
@@ -28,6 +27,6 @@ public interface UtilityMapper {
 	public List<UtilityPay> utilityPayMonth(String utilityYear, String contractShopCode);
 	
 	// 년도에 따른 월별 공과금 지출 금액 유무 체크
-	public List<JoinUtilityDTO> utilityPayCheck(String checkMonth, String contractShopCode);
+	public List<UtilityPay> utilityPayCheck(String checkMonth, String contractShopCode);
 
 }

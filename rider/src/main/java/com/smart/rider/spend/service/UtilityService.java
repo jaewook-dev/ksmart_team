@@ -1,5 +1,6 @@
 package com.smart.rider.spend.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -7,7 +8,6 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.smart.rider.spend.dto.JoinUtilityDTO;
 import com.smart.rider.spend.dto.UtilityDTO;
 import com.smart.rider.spend.dto.UtilityPay;
 import com.smart.rider.spend.mapper.UtilityMapper;
@@ -19,35 +19,32 @@ public class UtilityService {
 	@Autowired
 	private UtilityMapper utilityMapper;
 	
-	
 	// 년도에 따른 월별 공과금 지출 금액 유무 체크
-	public List<JoinUtilityDTO> utilityPayCheck(String utilityYear, String contractShopCode) {
-		Map<String, Object> map = new HashMap<String, Object>();
-
+	public List<UtilityPay> utilityPayCheck(String utilityYear,String contractShopCode){
+		List<UtilityPay> list = new ArrayList<>();
+		
 		String month = "";
 		String checkMonth = "";
+		
 		for(int i=0; i<12; i++) {
-			
-			// DB에 들어있는 월별 데이터 비교를 위한 조건문
 			if(i<9) {
-				month = "0" + String.valueOf(i+1); 
+				month = "0" + String.valueOf(i+1);
 			} else {
 				month = String.valueOf(i+1);
 			}
-			//System.out.println(month + " <-- month utilityPayList UtilityService.java");
-			
 			checkMonth = utilityYear + "-" + month;
-			//System.out.println(checkMonth + " <-- check utilityPayList UtilityService.java");
-			List<JoinUtilityDTO> list = utilityMapper.utilityPayCheck(checkMonth, contractShopCode);
-			//System.out.println(list + " <-- list utilityPayList UtilityService.java");
-			if(list.size()==0) {
-				//System.out.println(checkMonth + " <-- DB 조회 결과 없는 달");
-				
-			}
-			
+			list.add(i, utilityMapper.utilityPayCheck(checkMonth, contractShopCode).get(0));
+
 		}
+		//System.out.println(list + " <-- list ");
+
 		
-		return utilityMapper.utilityPayCheck(checkMonth, contractShopCode);
+		return list;
+	}
+	
+	// 년도에 따른 월별 공과금 지출 금액 
+	public List<UtilityPay> utilityPayMonth(String utilityYear, String contractShopCode){
+		return utilityMapper.utilityPayMonth(utilityYear, contractShopCode);
 	}
 	
 	// 지출_공과금 최근 등록 목록
