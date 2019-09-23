@@ -74,10 +74,22 @@
 
 		 	    
 	</insert>
+	<select id="agreementList"	resultType="com.smart.rider.contract.dto.ContractMemberDTO">
+		SELECT 
+		contract.
+			 member_id AS memberId
+			,contract_start AS contractStart
+			,contract_finish AS contractFinish
+			,contract_valid_date AS contractValidDate
+		,member.
+			 member_id 			AS memberId
+			,member_name		AS memberName
+			,member_phone 		AS memberPhone
+			
+		from contract inner join member
+		on contract.member_id =member.member_id;
+	</select>
 		
-		
-	
-
 
 </mapper>
 

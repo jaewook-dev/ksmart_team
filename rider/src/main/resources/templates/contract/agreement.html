@@ -32,18 +32,17 @@
 				                              <th scope="col">계약자 전화번호</th>
 				                              <th scope="col">서비스 시작일자</th>
 				                              <th scope="col">서비스 종료일자</th>
+				                              <th scope="col">서비스 보류일자</th>
 				                          </tr>
 				                      </thead>
 				                      <tbody>
-		                                <tr>
-		                                    <th scope="row"><b>#122348</b></th>
-		                                    <td>
-		                                        <div class="tm-status-circle pending">
-		                                        </div>Pending
-		                                    </td>
-		                                    <td><b>Jacob Miller</b></td>
-		                                    <td><b>London, UK</b></td>
-		                                    <td><b>360 km</b></td>
+			                           	<tr th:each="agreement : ${agreement}">
+											<th th:text="${agreement.memberId}"></th>
+											<th th:text="${agreement.memberName}"></th>
+											<th th:text="${agreement.memberPhone}"></th>
+											<th th:text="${agreement.contractStart}"></th>
+											<th th:text="${agreement.contractFinish}"></th>
+											<th th:text="${agreement.contractValidDate}"></th>
 		                                </tr>
 		                               </tbody>
 									</table>

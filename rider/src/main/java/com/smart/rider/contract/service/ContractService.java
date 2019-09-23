@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.smart.rider.contract.dto.ContractDTO;
+import com.smart.rider.contract.dto.ContractMemberDTO;
 import com.smart.rider.contract.dto.UnitDTO;
 import com.smart.rider.contract.mapper.ContractMapper;
 
@@ -43,6 +44,10 @@ public class ContractService {
 		System.out.println(contract.getContractCode());
 		return contractMapper.contractInsert(contract);
 	
+	}
+	public List<ContractMemberDTO> agreementList(){
+		
+		return contractMapper.agreementList();
 	}
 	
 }

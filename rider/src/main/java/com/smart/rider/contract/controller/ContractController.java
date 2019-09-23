@@ -38,10 +38,18 @@ public class ContractController {
 	}
 	
 	@GetMapping("/agreement")
-	public String agreement() {
+	public String agreement(Model model) {
+			
+		//입력값 확인
+		System.out.println("=====test=====");
+		System.out.println("agreement:"+contractService.agreementList());
+		model.addAttribute("agreement", contractService.agreementList());
+		
 		
 		return "/contract/agreement";
 	}
+	
+
 	
 	@GetMapping("/contractList")
 	public String contractList(Model model) {
@@ -51,7 +59,7 @@ public class ContractController {
 		System.out.println("contractList:"+contractList);
 		model.addAttribute("contractList", contractList);
 		
-		return "/contract/contractList";
+		return "contract/contractList";
 	}
 	
 	@GetMapping("/contractInsert")
@@ -71,8 +79,10 @@ public class ContractController {
 		System.out.println(contract.toString() + "<-- unit.toString");
 		contractService.contractInsert(contract, session);
 		
-		return "/contract/agreement";
+		return "/redirect:/agreement";
 	}
+	
+
 	
 	
 	
