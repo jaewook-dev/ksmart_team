@@ -5,6 +5,7 @@
 <th:block layout:fragment="customTitle">
 </th:block>
 <th:block layout:fragment="customContents">
+<div class="main-height">
 	<div class="container mt-5">
 		<!-- row -->
 		<div class="row tm-content-row">
@@ -12,39 +13,39 @@
 				<div class="tm-bg-primary-dark tm-block tm-block-settings">
 					<h2 class="tm-block-title">대여고객 등록</h2>
 					
-					<form action="/memberInsert" class="tm-signup-form row" method="post">
-						<label for="id" style="color:white">대여상품</label>
-						<div class="form-group input-group mb-3">
-							<input id="memberId" name="memberId" type="text" class="form-control validate" placeholder="ID" required="required"/>
+					<form action="/customerInsert" class="tm-signup-form row" method="post">
+						<div class="form-group input-group col-lg-12">
+							<input id="rentalGoods" name="rentalGoods" type="text" class="form-control bg-light text-dark" placeholder="대여상품입력" required="required"/>
 							<div class="input-group-append">
-								<button class="btn btn-primary btn-block text-uppercase" type="button" id="checkButton">
-									검색
+								<button class="btn btn-primary btn-block text-uppercase" type="button" id="rentalButton">
+									#검색
 								</button>
 							</div>
 						</div>
 						<div class="form-group col-lg-6">
-							<label for="id">고객 이름</label>
-							<input id="memberId" name="memberId" type="text" class="form-control validate" required="required"/>
+							<label for="name">고객 이름</label>
+							<input id="rentalCustomerName" name="rentalCustomerName" type="text" class="form-control validate" required="required"/>
 						</div>
 						<div class="form-group col-lg-6">
-							<label for="name">주소</label>
-							<input id="memberName" name="memberName" type="text" class="form-control validate" />
+							<label for="address">주소</label>
+							<input id="rentalCustomerAddress" name="rentalCustomerAddress" type="text" class="form-control validate" />
 						</div>
 						<div class="form-group col-lg-6">
-							<label for="birth">전화번호('-' 없이 번호만 입력해주세요)</label>
-							<input id="memberBirth" name="memberBirth" type="text" class="form-control validate" />
+							<label for="rentalStart">대여시작일자</label>
+							<input id="rentalCustomerStart" name="rentalCustomerStart" type="date" class="form-control validate" />
 						</div>
 						<div class="form-group col-lg-6">
-							<label for="phone">대여시작일자</label>
-							<input id="memberPhone" name="memberPhone" type="date" class="form-control validate" />
+							<label for="phone">전화번호('-' 없이 번호만 입력해주세요)</label>
+							<input id="rentalCustomerPhone" name="rentalCustomerPhone" type="text" class="form-control validate" />
 						</div>
 						<div class="form-group col-lg-6">
-							<label for="phone">대여종료일자</label>
-							<input id="memberPhone" name="memberPhone" type="date" class="form-control validate" />
+							<label for="rentalFinish">대여종료일자</label>
+							<input id="rentalCustomerFinish" name="rentalCustomerFinish" type="date" class="form-control validate" />
 						</div>
-						<div>
-							<button type="submit" id="submit" class="btn btn-primary btn-block text-uppercase">
-							대여고객등록
+						<div class="form-group col-lg-6">
+							<label>&nbsp;</label>
+							<button type="submit" class="btn btn-primary btn-block text-uppercase">
+								#대여고객 등록
 							</button>
 						</div>
 					</form>
@@ -52,42 +53,8 @@
 			</div>
 		</div>
 	</div>
+</div>
 </th:block>
-
 <th:block layout:fragment="customScript">
-<!-- 
-=======
-<th:block layout:fragment="customScript">
->>>>>>> branch 'master' of https://github.com/guno923/smartrider.git
-<script>
-	// 아이디 유효성 검사(1 = 중복 / 0 != 중복)
-	$("#checkButton").click(function() {
-		// id = "id_reg" / name = "userId"
-		var memberId = $('#memberId').val();
-		console.log(memberId);
-		$.ajax({
-			url : '${pageContext.request.contextPath}/memberIdCheck?memberId='+ memberId,
-			data : memberId,
-			type : 'post',
-			success : function(data) {
-				if (data == 1) {
-						// 1 : 아이디가 중복되는 문구
-						$("#idCheck").text("사용중인 아이디입니다 :p");
-						$("#idCheck").css("color", "red");
-						//$("#reg_submit").attr("disabled", true);
-					} else {
-						$("#idCheck").text("사용가능한 아이디입니다.");
-						$("#idCheck").css("color", "blue");
-						
-					}
-				}, error : function() {
-						console.log("실패");
-				}
-			});
-		});
-</script>
-<<<<<<< HEAD
- -->
 </th:block>
-
 </html>

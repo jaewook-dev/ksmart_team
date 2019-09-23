@@ -21,6 +21,10 @@
 							<input id="memberPw" name="memberPw" type="password" class="form-control validate"
 								   placeholder="PASSWORD" />
 						</div>
+						<div>
+							<label class="alert alert-danger col-xl" th:if="${result ne null}" th:text="${result}">
+							</label>
+						</div>
 						<div class="form-group col-lg-6">
 							<label>&nbsp;</label>
 							<button type="submit" class="btn btn-primary btn-block text-uppercase">

@@ -30,8 +30,8 @@ public class EmployeeController {
 	}
 	
 	@GetMapping("/employeeList")
-	public String employeeList(Model model) {
-		List<MemberDTO> list = employeeService.employeeList();
+	public String employeeList(@RequestParam(value="contractShopCode") String contractShopCode, Model model) {
+		List<MemberDTO> list = employeeService.employeeList(contractShopCode);
 		model.addAttribute("employeeList", list);
 		return "employee/employeeList";
 	}
