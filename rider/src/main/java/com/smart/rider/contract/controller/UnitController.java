@@ -32,6 +32,7 @@ public class UnitController {
 
 	@PostMapping("/unitInsert")
 	public String unitInsert(UnitDTO unit, HttpSession session) {
+		
 		System.out.println(unit.toString() + "<-- unit.toString");
 		unitService.unitInsert(unit,session);
 

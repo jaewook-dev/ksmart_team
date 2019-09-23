@@ -12,4 +12,9 @@ public interface ContractMapper {
 	public List<UnitDTO> unitNew();
 	
 	public List<ContractDTO> contractList();
+	
+	public String contractCodeMax();
+	
+	public int contractInsert(ContractDTO Contract);
+	
 }

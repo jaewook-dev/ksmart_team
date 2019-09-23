@@ -3,7 +3,7 @@
 <th:block layout:fragment="customTitle">
 </th:block>
 <th:block layout:fragment="customContents">
-<form action="/#" id="form"  method="post" class="tm-edit-product-form" >
+<form action="/contractInsert" id="form" method="post" class="tm-edit-product-form" >
 		<div class="container tm-mt-big tm-mb-big">
 		<div class="row">
 			<div>
@@ -15,80 +15,68 @@
 					</div>
 					<div class="row tm-edit-product-row">
 						<div class="col-xl-6 col-lg-6 col-md-12">
+						<!-- 계약금 납입방식 -->
 								<div class="form-group mb-3">
 									<label>계약금 납입방식</label> <select id = 'contractMethod'
 										class="custom-select tm-select-accounts"  name="contractMethod">
 										<option selected>계약금 납입</option>
-										<option value="a">월 납부</option>
-										<option value="b">1년 일시불</option>
-										<option value="c">2년 일시불</option>
+										<option value="월 납부">월 납부</option>
+										<option value="1년 일시불">1년 일시불</option>
+										<option value="2년 일시불">2년 일시불</option>
 									</select>
 									<br/><br/><br/>
+						<!-- 계약금 납입방식이 월일 경우만 -->
 									<label>월 납부만 입력하세요(개월)</label>
 									<input type="text" id="monthPay" class="form-control validate"  placeholder="사용할 월 수를 입력해주세요(ex)3,5,7">
 								</div>
+						<!-- 계약 금액 -->
 								<div class="form-group mb-3">
-									<label for="name">납입 금액 </label><input 	id="contractPay" readonly style="color:#0000ff;" placeholder="납입방식을 입력해주세요"
+									<label for="name">계약 금액 </label><input 	id="contractPay" readonly style="color:#0000ff;" placeholder="납입방식을 입력해주세요"
 										name="contractPay" type="text" class="form-control validate" required />
 								</div>
-								
+						<!-- 서비스 시작일자 -->
 								<div class="form-group mb-3">
 									<label for="name">서비스 시작일자 </label> <input id="contractStart" 
 										name="contractStart" type="date" class="form-control validate" required />	
 								</div>	
-
+						<!-- 서비스 종료일자(시작일자와 계약금납입방식 선택시 바뀜) -->
 								<div class="form-group mb-3">
 									<label for="name">서비스 종료일자 </label> <input id="contractFinish"
 										name="contractFinish" type="date" class="form-control validate" style="color:#0000ff;"  readonly required />								
 								</div>
+						<!-- 유효기간 : 종료일자  +10DAY-->
 								<div class="form-group mb-3">
 									<label for="name">계약 유효기간 </label> <input id="contractValidDate"
 										name="contractValidDate" type="date" style="color:#0000ff;" class="form-control validate" readonly required />
 								</div>
+						<!--계약내용  아니오나 선택 안할시 페이지 안넘어감  -->	
 								<div class="form-group mb-3">
 									<label for="name">계약내용 </label> 
 									<textarea cols="80" rows="8" id="textareaId" readonly></textarea>
 									<input type="radio" name="agree"  value = "Y"/> <span class="up">예</span>&nbsp;&nbsp; 
 									<input type="radio" name="agree" value= "N"/> <span class="up">아니오</span>
 								</div>
+						<!-- 사용자 등록번호  -->
 								<div class="form-group mb-3">
-									<label for="name">바퀴사이즈 </label> <input id="goodsDbSize"
-										name="goodsDbSize" type="text" class="form-control validate" required />
+									<label for="name">계약자사업자 등록번호 </label> <input id="contractInformation" placeholder="사업자등록번호를 입력해주세요"
+										name="contractInformation" type="text" class="form-control validate" required />
 								</div>
-								<div class="form-group mb-3">
-									<label for="name">제조국가 </label> <input id="goodsDbNation"
-										name="goodsDbNation" type="text" class="form-control validate" required />
-								</div>
-								<div class="form-group mb-3">
-									<label for="name">최대하중 </label> <input id="goodsDbLoad"
-										name="goodsDbLoad" type="text" class="form-control validate" required />
-								</div>
-							
-							
-							
-								<div class="form-group mb-3">
-									<label for="expire_date">등록날짜. </label> <input
-										id="goodsDbDate" name="goodsDbDate" type="text"
-										class="form-control validate" data-large-mode="true" />
-								</div>
-								
-								
 							</div>
+						<!-- 월계약금액   -->
 						<div class="col-xl-6 col-lg-6 col-md-12 mx-auto mb-4">
 							 <table class="table">
                             <thead>
                                 <tr>
-                                    <th scope="col">월 계약금액</th>
+                                    <th scope="col" id = ssa>월 계약금액</th>
                                     <th scope="col">1년 일시불 금액</th>
                                     <th scope="col">2년 일시불 금액</th>
                                 </tr>
                             </thead>
                             <tbody>
-                            	
-                             	<tr>
-									<th ></th>
-									<th ></th>
-									<th ></th>
+                             	<tr th:each="contractInsert : ${contractInsert}">
+									<th id="unitMonth" th:text="${contractInsert.contractUnitMonth}"></th>
+									<th id="unitOneYear" th:text="${contractInsert.contractUnitOneyear}"></th>
+									<th id="unitTweYear" th:text="${contractInsert.contractUnitTwoyear}"></th>
                                 </tr>
                             </tbody>
 						</table>
@@ -98,8 +86,8 @@
 							<!-- <a
 				            	href="/goodsdbInsert"
 				              	class="btn btn-primary btn-block text-uppercase mb-3">DB상품 추가하기</a> -->
-							<button type="button"  onclick="javascript:btn()"
-								class="btn btn-primary btn-block texst-uppercase">상품등록 확인</button>
+							<button type="button"  onclick="javascript:btn()"  
+								class="btn btn-primary btn-block texst-uppercase">계약서 등록</button>
 						</div>
 						
 					</div>
@@ -150,30 +138,29 @@ function btn(){
 $("select#contractMethod").bind("change",function(){
 
 	var seloption = $("#contractMethod option:selected").val();
-	var takepay = null;
-	 
-	if(seloption == 'a'){
-		takepay = 30000;
-		$('#contractPay').val(takepay);
-	}else if(seloption == 'b'){
-		takepay = 300000;
-		$('#contractPay').val(takepay);
-	}else if(seloption == 'c'){
-		takepay = 600000;
-		$('#contractPay').val(takepay);
+	var month = $('#unitMonth').text();
+	var oneYear = $('#unitOneYear').text();
+	var twoYear = $('#unitTweYear').text();
+	//id="unitMonth"
+	if(seloption == '월 납부'){
+		$('#contractPay').val(month);
+	}else if(seloption == '1년 일시불'){
+		$('#contractPay').val(oneYear);
+	}else if(seloption == '2년 일시불'){
+		$('#contractPay').val(twoYear);
 	}
 	
 });
 
+//개월 값 입력시 값 곱해서 나옴
 $('#monthPay').change(function(){
 	var way = $('#contractMethod').val();
-	var monthPay = $('monthPay').val();
-	var takepay = 30000;
-	
+	var monthPay = $('#monthPay').val();
+	var takepay = $('#unitMonth').text();
+	var rob = takepay * monthPay;
 
 	
-	if(way =='a'){
-		var rob = monthPay * takepay;
+	if(way =='월 납부'){
 		$('#contractPay').val(rob);
 	}
 });
@@ -354,7 +341,7 @@ $('#monthPay').change(function(){
 	
 	
 	//납입방식이 1년 일시불일 경우 날짜 계산
-	if(start != null && method == 'b'){
+	if(start != null && method == '1년 일시불'){
 		
 		
 		
@@ -367,7 +354,7 @@ $('#monthPay').change(function(){
 		
 	}
 	//납입방식이 2년 일시불일 경우 날짜 계산
-	else if(start != null && method == 'c'){
+	else if(start != null && method == '2년 일시불'){
 		 finish =  twoYear + "-" + month + "-" + day;
 		 valid = twoYear2 + "-" + nextMonth + "-" + validDay;
 		 
