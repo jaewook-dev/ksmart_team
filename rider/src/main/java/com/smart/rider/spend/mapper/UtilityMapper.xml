@@ -34,14 +34,16 @@
 		WHERE DATE_FORMAT(spend_utility_date,'%Y-%m') = #{checkMonth} AND contract_shop_code = #{contractShopCode}
 	</select>
 	
-	<!-- 년도에 따른 월별 공과금 지출 금액 -->
-	<select id="utilityPayMonth" resultType="com.smart.rider.spend.dto.UtilityPay" parameterType="String">
+	<!-- 년도에 따른 월별 공과금 지출 금액 최대값 -->
+	<select id="utilityPayMax" resultType="com.smart.rider.spend.dto.UtilityPay" parameterType="String">
 		SELECT 
-	     	 DATE_FORMAT(spend_utility_date,'%Y-%m') payMonth 
-	    	,SUM(spend_utility_pay) AS sumUtility
+		  	 DATE_FORMAT(spend_utility_date,'%Y-%m') payMonth 
+		 	,SUM(spend_utility_pay) AS sumUtility
 		FROM spend_utility
 		WHERE DATE_FORMAT(spend_utility_date,'%Y') = #{utilityYear} AND contract_shop_code = #{contractShopCode}
-		GROUP BY payMonth;
+		GROUP BY payMonth
+		ORDER BY sumUtility DESC
+		LIMIT 1;
 		
 	</select>
 	

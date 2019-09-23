@@ -24,7 +24,7 @@ public interface UtilityMapper {
 	public String utilityCodeCount();
 	
 	// 년도에 따른 월별 공과금 지출 금액 
-	public List<UtilityPay> utilityPayMonth(String utilityYear, String contractShopCode);
+	public List<UtilityPay> utilityPayMax(String utilityYear, String contractShopCode);
 	
 	// 년도에 따른 월별 공과금 지출 금액 유무 체크
 	public List<UtilityPay> utilityPayCheck(String checkMonth, String contractShopCode);

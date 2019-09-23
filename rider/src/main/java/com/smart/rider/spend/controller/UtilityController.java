@@ -119,6 +119,9 @@ public class UtilityController {
 			
 		}
 		
+		List<UtilityPay> payMax = utilityService.utilityPayMax(utilityYear, contractShopCode);
+		model.addAttribute("payMax", payMax.get(0).getSumUtility());
+		
 		return "spend/spend";
 	}
 	
