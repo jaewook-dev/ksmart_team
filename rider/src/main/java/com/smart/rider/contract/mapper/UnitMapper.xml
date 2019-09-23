@@ -31,6 +31,7 @@
 	<insert id="unitInsert" parameterType="com.smart.rider.contract.dto.UnitDTO">
 		
 		INSERT INTO contract_unit
+
 			(	contract_unit_code,
 			 	member_id, 
 			 	contract_unit_month,

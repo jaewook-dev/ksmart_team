@@ -8,13 +8,16 @@ public class ContractDTO {
 	private String contractStart;
 	private String contractFinish;
 	private String contractValidDate;
-	private String contractState;
-	private int contractPay;
 	private String contractMethod;
-	private int contractAmount;
-	private int contractUnpaid;
+	private int contractPay;
 	private String contractInformation;
 	private String contractDate;
+	
+	
+	
+	
+	
+	
 	
 	public String getContractCode() {
 		return contractCode;
@@ -49,20 +52,8 @@ public class ContractDTO {
 	public String getContractValidDate() {
 		return contractValidDate;
 	}
-	public void setContractValidDate(String contractValid_date) {
-		this.contractValidDate = contractValid_date;
-	}
-	public String getContractState() {
-		return contractState;
-	}
-	public void setContractState(String contractState) {
-		this.contractState = contractState;
-	}
-	public int getContractPay() {
-		return contractPay;
-	}
-	public void setContractPay(int contractPay) {
-		this.contractPay = contractPay;
+	public void setContractValidDate(String contractValidDate) {
+		this.contractValidDate = contractValidDate;
 	}
 	public String getContractMethod() {
 		return contractMethod;
@@ -70,19 +61,12 @@ public class ContractDTO {
 	public void setContractMethod(String contractMethod) {
 		this.contractMethod = contractMethod;
 	}
-	public int getContractAmount() {
-		return contractAmount;
+	public int getContractPay() {
+		return contractPay;
 	}
-	public void setContractAmount(int contractAmount) {
-		this.contractAmount = contractAmount;
+	public void setContractPay(int contractPay) {
+		this.contractPay = contractPay;
 	}
-	public int getContractUnpaid() {
-		return contractUnpaid;
-	}
-	public void setContractUnpaid(int contractUnpaid) {
-		this.contractUnpaid = contractUnpaid;
-	}
-
 	public String getContractInformation() {
 		return contractInformation;
 	}
@@ -99,11 +83,12 @@ public class ContractDTO {
 	public String toString() {
 		return "ContractDTO [contractCode=" + contractCode + ", contractUnitCode=" + contractUnitCode + ", memberId="
 				+ memberId + ", contractStart=" + contractStart + ", contractFinish=" + contractFinish
-				+ ", contractValid_date=" + contractValidDate + ", contractState=" + contractState + ", contractPay="
-				+ contractPay + ", contractMethod=" + contractMethod + ", contractAmount=" + contractAmount
-				+ ", contractUnpaid=" + contractUnpaid + ", contractInformation=" + contractInformation + ", contractDate=" + contractDate + "]";
+				+ ", contractValidDate=" + contractValidDate + ", contractMethod=" + contractMethod + ", contractPay="
+				+ contractPay + ",contractInformation="+ contractInformation + ", contractDate=" + contractDate + "]";
 	}
+
 	
+
 	
 	
 }

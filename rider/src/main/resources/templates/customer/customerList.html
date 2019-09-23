@@ -68,18 +68,21 @@
 									<th scope="col">대여종료일</th>
 									<th scope="col">대여반납일</th>
 									<th scope="col">연체유무</th>
+									<th scope="col">반납</th>
 									<th scope="col" class="text-center">상세보기</th>
-								</tr>
+ 								</tr>
 							</thead>
 							<tbody>
-								<tr th:each="employee : ${employeeList}">
-									<th th:text="${employee.memberId}"></th>
-									<td th:text="${employee.memberName}"></td>
-									<td th:text="${employee.memberBirth}"></td>
-									<td th:text="${employee.memberPhone}"></td>
-									<td th:text="${employee.memberInsertDate}"></td>
+								<tr th:each="customer : ${custoemrList}">
+									<th th:text="${customer.rentalCustomerName}"></th>
+									<td th:text="${customer.rentalCustomerPhone}"></td>
+									<td th:text="${customer.rentalCustomerStart}"></td>
+									<td th:text="${customer.rentalCustomerFinish}"></td>
+									<td th:text="${customer.rentalCustomerReturn}"></td>
+									<td th:text="${customer.rentalCustomerOverdue}"></td>
+									<td><a>반납</a></td>
 									<td class="text-center">
-										<a th:href="@{/getEmployeeList(memberId=${employee.memberId})}" class="tm-product-delete-link">
+										<a th:href="@{/getCustomerList(rentalCustomerCode=${customer.rentalCustomerCode})}" class="tm-product-delete-link">
 										<i class="far fa-address-card tm-product-delete-icon"></i></a>
 									</td>
 								</tr>

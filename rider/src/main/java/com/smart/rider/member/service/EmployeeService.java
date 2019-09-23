@@ -19,9 +19,9 @@ public class EmployeeService {
 		return employeeMapper.employeeInsert(memberdto);
 	}
 	
-	public List<MemberDTO> employeeList() {
+	public List<MemberDTO> employeeList(String contractShopCode) {
 		
-		List<MemberDTO> list = employeeMapper.employeeList();
+		List<MemberDTO> list = employeeMapper.employeeList(contractShopCode);
 		return list;
 	}
 	//19.09.20작성

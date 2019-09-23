@@ -29,21 +29,67 @@
 				,contract_start AS contractStart
 				,contract_finish AS contractFinish
 				,contract_valid_date AS contractValidDate
-				,contract_state AS contractState
 				,contract_pay AS contractPay
 				,contract_method AS contractMethod
-				,contract_amout AS contractAmount
-				,contract_unpaid AS contractUnpaid
-				,contract_contents AS contractContents
 				,contract_information AS contractInformation
 				,contract_date AS contractDate
 	
 	 		FROM contract
 		
 		</select>
+		
+		<!-- 계약코드 자동증가 -->
 
-	
+		<select id="contractCodeMax" resultType="String">
+			SELECT 
+				MAX(LPAD(RIGHT(contract_code, 4)+1, '4' , '0')) 
+			FROM contract;
+		</select>
+		
+		<insert id="contractInsert" parameterType="com.smart.rider.contract.dto.ContractDTO">
+		
+		INSERT INTO contract
+			(	 contract_code
+				,contract_unit_code
+				,member_id
+				,contract_start
+				,contract_finish
+				,contract_valid_date
+				,contract_method
+				,contract_pay
+				,contract_information
+				,contract_date)
+		VALUES ( 				
+				 #{contractCode}
+				,#{contractUnitCode}
+			 	,#{memberId}
+			 	,#{contractStart}
+		 	  	,#{contractFinish}
+		 	  	,#{contractValidDate}
+		 	  	,#{contractMethod}
+		 	  	,#{contractPay}
+		 	  	,#{contractInformation}
+		 	    ,NOW()
+		 	    )
 
+		 	    
+	</insert>
+	<select id="agreementList"	resultType="com.smart.rider.contract.dto.ContractMemberDTO">
+		SELECT 
+		contract.
+			 member_id AS memberId
+			,contract_start AS contractStart
+			,contract_finish AS contractFinish
+			,contract_valid_date AS contractValidDate
+		,member.
+			 member_id 			AS memberId
+			,member_name		AS memberName
+			,member_phone 		AS memberPhone
+			
+		from contract inner join member
+		on contract.member_id =member.member_id;
+	</select>
+		
 
 </mapper>
 
