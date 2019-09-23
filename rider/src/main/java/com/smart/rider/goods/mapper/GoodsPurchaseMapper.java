@@ -21,5 +21,7 @@ public interface GoodsPurchaseMapper {
 	public List<GoodsHapDTO> purchaseList();
 	//매입 상세조회
 	public GoodsHapDTO getPurchaseList(String purchaseCode);
+	//매입 검색
+	public List<GoodsHapDTO> purchaseSearchList(String select ,String searchInput);
 	
 }

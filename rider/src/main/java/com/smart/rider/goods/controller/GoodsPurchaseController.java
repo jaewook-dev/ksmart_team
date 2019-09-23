@@ -31,13 +31,22 @@ public class GoodsPurchaseController {
 	private GoodsdbService goodsdbservice;
 	@Autowired
 	private AccountService accountService;
-	
+	//매입 검색메서드
+	@PostMapping("/purchaseSearchList")
+	public String purchaseSearchList(@RequestParam(value="select")String select
+									,@RequestParam(value="searchInput")String searchInput
+									,Model model) {
+		List<GoodsHapDTO> search = goodsPurchaseService.purchaseSearchList(select, searchInput);
+		System.out.println("검색ㄷ확인,,,,,,,,,,,,,,,,,,,,,,,,,,"+search);
+		model.addAttribute("hList", search);
+		return "purchase/purchaseList";
+	}
 	
 	//매입상세보기
 	@GetMapping("/getPurchaseList")
 	public String getPurchaseList(@RequestParam(value="purchaseCode")String purchaseCode,Model model) {
-		System.out.println(model.addAttribute("purchaseCode", goodsPurchaseService.getPurchaseList(purchaseCode)));
-		//model.addAttribute("purchaseCode", goodsPurchaseService.getPurchaseList(purchaseCode));
+		//System.out.println(model.addAttribute("purchaseCode", goodsPurchaseService.getPurchaseList(purchaseCode)));
+		model.addAttribute("purchaseCode", goodsPurchaseService.getPurchaseList(purchaseCode));
 		return "purchase/getPurchaseList";
 	}
 	

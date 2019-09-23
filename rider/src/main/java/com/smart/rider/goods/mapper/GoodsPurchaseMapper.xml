@@ -33,11 +33,30 @@
     	<result column="goods_database_time"     property="goodsDbTime"/>
     	<result column="goods_database_made"     		property="goodsDbMade"/>
     	<result column="goods_database_description"    	property="goodsDbDescription"/>
-    	<result column="account_code"    	property="accountCode"/>
+    	<result column="account_market"    	property="accountMarket"/>
     	
 	</resultMap>
 
-	
+	<!-- 매입 검색  -->
+	<select id="purchaseSearchList" parameterType="String" resultMap="ASid">
+			SELECT 
+			*
+			FROM
+			purchase p			 
+			INNER JOIN 
+			goods_database gb
+			ON 
+			gb.goods_database_code = p.goods_database_code
+			INNER JOIN 
+			account a
+			ON p.account_code = a.account_code AND 
+			 p.contract_shop_code = a.contract_shop_code
+			 
+			 <if test="searchInput != null and searchInput neq ''.toString()">
+			WHERE 
+				${select} Like CONCAT('%',#{searchInput},'%')
+			</if>
+	</select>
 	<!-- 매입 상세보기 -->
 	<select id="getPurchaseList" resultMap="ASid" resultType="com.smart.rider.goods.dto.GoodsPurchaseDTO" parameterType="String">
 	SELECT *
