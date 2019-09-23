@@ -8,7 +8,7 @@
 	<!-- 공과금 지출 현황 -->
 	<div class="row tm-content-row">
 		<div class="col-12 tm-block-col">
-			<div class="tm-bg-primary-dark tm-block-sub">
+			<div class="tm-bg-primary-dark tm-block-util">
 				<h4 class="tm-block-title">공과금 지출 현황</h4>
 				<!-- charts.js -->
 				<canvas id="utilityChart"></canvas>
@@ -84,13 +84,13 @@
 	
 	    // The data for our dataset
 	    data: {
-	        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+	        labels: ['1월', '2월', '3월', '4월', '5월', '6월', '7월','8월','9월','10월','11월','12월'],
 	        datasets: [{
 	            label: '공과금 지출 금액',
 	            
 	            backgroundColor: 'rgb(245, 166, 35)',
-	            borderColor: 'rgb(255, 255, 255)',
-	            data: [0, 10, 5, 2, 20, 30, 45]
+	            borderColor: 'rgb(245, 166, 35)',
+	            data: [0, 10, 5, 2, 20, 30, 45, 12, 41, 23, 12, 32]
 	        }]
 	    },
 	
@@ -105,14 +105,14 @@
 		    	// y축
 		        yAxes: [{
 		            ticks: {
-		                beginAtZero:true,
+		                beginAtZero:false,
 		                fontColor:'white' // y축 폰트 color
 		            }
 		     	}],
 		     	// x축
 		     	xAxes: [{
 		            ticks: {
-		                beginAtZero:true,
+		                beginAtZero:false,
 		                fontColor:'white' // x축 폰트 color
 		            }
 		     	}]

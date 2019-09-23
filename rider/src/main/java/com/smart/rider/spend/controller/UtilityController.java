@@ -1,6 +1,8 @@
 package com.smart.rider.spend.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -23,7 +25,8 @@ public class UtilityController {
 	
 	// 지출 화면
 	@GetMapping("/spend")
-	public String spendUtility(Model model, HttpSession session) {
+	public String spendUtility(Model model, HttpSession session ,@RequestParam(value = "utilityYear", required = false, defaultValue = "2019") String utilityYear){
+		
 		String contractShopCode = (String)session.getAttribute("SCODE");
 		//System.out.println(contractShopCode + " <-- contractShopCode spendUtility UtilityController.java");
 		
@@ -34,6 +37,11 @@ public class UtilityController {
 		// 지출_공과금 등록 계정과목 select box 리스트
 		List<SubjectDTO> subjectList = utilityService.subjectSelectBox();
 		model.addAttribute("subjectSelectBox", subjectList);
+		
+		// 년도에 따른 월별 공과금 지출 금액
+		Map<String, Object> map = utilityService.utilityPayMonth(utilityYear, contractShopCode);
+		System.out.println(map.get("noMonth") + " <-- spendUtility UtilityController.java");
+		//model.addAttribute("utilityPayList", utilityPayList);
 		return "spend/spend";
 	}
 	
