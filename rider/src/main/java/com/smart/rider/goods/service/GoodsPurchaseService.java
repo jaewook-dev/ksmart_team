@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.smart.rider.goods.dto.GoodsHapDTO;
 import com.smart.rider.goods.dto.GoodsPurchaseDTO;
 import com.smart.rider.goods.mapper.GoodsPurchaseMapper;
 
@@ -21,9 +22,13 @@ import com.smart.rider.goods.mapper.GoodsPurchaseMapper;
 public class GoodsPurchaseService {
 	@Autowired
 	private GoodsPurchaseMapper goodsPurchaseMapper;
+	//매입 상세조회
+	public GoodsHapDTO getPurchaseList(String purchaseCode) {
+		return goodsPurchaseMapper.getPurchaseList(purchaseCode);
+	}
 	
 	//매입리스트
-	public List<GoodsPurchaseDTO> purchaseList(){
+	public List<GoodsHapDTO> purchaseList(){
 		return goodsPurchaseMapper.purchaseList();
 	}
 	

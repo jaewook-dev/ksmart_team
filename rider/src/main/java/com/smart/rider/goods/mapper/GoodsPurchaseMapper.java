@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.smart.rider.goods.dto.GoodsHapDTO;
 import com.smart.rider.goods.dto.GoodsPurchaseDTO;
 
 @Mapper
@@ -16,7 +17,9 @@ public interface GoodsPurchaseMapper {
 	public String purchaseCodeCount();
 	//매입inset
 	public int purchaseInsert(GoodsPurchaseDTO goodsPurchaseDto);
-	
-	public List<GoodsPurchaseDTO> purchaseList();	
+	//매입 리스트
+	public List<GoodsHapDTO> purchaseList();
+	//매입 상세조회
+	public GoodsHapDTO getPurchaseList(String purchaseCode);
 	
 }

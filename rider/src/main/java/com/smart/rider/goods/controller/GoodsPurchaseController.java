@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.smart.rider.account.dto.AccountDTO;
 import com.smart.rider.account.service.AccountService;
 import com.smart.rider.goods.dto.GoodsPurchaseDTO;
+import com.smart.rider.goods.dto.GoodsdbDTO;
+import com.smart.rider.goods.dto.GoodsHapDTO;
 import com.smart.rider.goods.service.GoodsPurchaseService;
 import com.smart.rider.goods.service.GoodsdbService;
 
@@ -31,11 +33,23 @@ public class GoodsPurchaseController {
 	private AccountService accountService;
 	
 	
-	//매입리스트 이동
+	//매입상세보기
+	@GetMapping("/getPurchaseList")
+	public String getPurchaseList(@RequestParam(value="purchaseCode")String purchaseCode,Model model) {
+		System.out.println(model.addAttribute("purchaseCode", goodsPurchaseService.getPurchaseList(purchaseCode)));
+		//model.addAttribute("purchaseCode", goodsPurchaseService.getPurchaseList(purchaseCode));
+		return "purchase/getPurchaseList";
+	}
+	
+	//매입리스트 
 	@GetMapping("/purchaseList")
 	public String purchase(Model model) {
-		//System.out.println(model.addAttribute("pList", goodsPurchaseService.purchaseList()));
-		model.addAttribute(model.addAttribute("pList", goodsPurchaseService.purchaseList()));
+		List<GoodsHapDTO> hList = goodsPurchaseService.purchaseList();
+		//System.out.println(model.addAttribute("hList", hList));
+		
+		model.addAttribute(model.addAttribute("hList",hList));
+	
+		
 		return "purchase/purchaseList";
 	}
 
