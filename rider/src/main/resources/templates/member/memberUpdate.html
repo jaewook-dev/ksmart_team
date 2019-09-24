@@ -67,7 +67,6 @@
 								회원 수정
 							</button>
 						</div>
-						
 					</form>
 					
 					<div class="col-lx">
@@ -76,14 +75,6 @@
 								>
 							회원 탈퇴
 						</button>
-						<script type="text/javascript">
-							$(document).ready(function(){
-								$('#btnTest').click(function(){
-									var memberId = [[${memberList.memberId}]];
-									window.open('/memberDelete?memberId='+memberId+'','회원탈퇴','width=430,height=550,location=no,status=no,scrollbars=yes')
-								});
-							});
-						</script>
 					</div>
 				</div>
 			</div>
@@ -91,6 +82,13 @@
 	</div>
 </th:block>
 <th:block layout:fragment="customScript">
-
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#btnTest').click(function(){
+			var memberId = [[${memberList.memberId}]];
+			window.open('/memberDelete?memberId='+memberId+'','회원탈퇴','width=430,height=550,location=no,status=no,scrollbars=yes')
+		});
+	});
+</script>
 </th:block>
 </html>

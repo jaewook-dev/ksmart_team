@@ -39,7 +39,10 @@ public class MemberService {
 	}
 	//19.09.18작성
 	public int memberDelete(String memberId, String memberPw) {
-		System.out.println("삭제 서비스");
 		return memberMapper.memberDelete(memberId, memberPw);
+	}
+	//19.09.24작성
+	public int levelDelete(String memberId) {
+		return memberMapper.levelDelete(memberId);
 	}
 }
