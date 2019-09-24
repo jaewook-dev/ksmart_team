@@ -7,7 +7,7 @@
 <mapper namespace="com.smart.rider.contract.mapper.ManagementMapper">
 
 	<select id="agreementList"	resultType="com.smart.rider.contract.dto.ManagementDTO">
-		SELECT 
+		SELECT DISTINCT
 		contract.
 			 member_id AS memberId
 			,contract_start AS contractStart
@@ -21,6 +21,35 @@
 		from contract inner join member
 		on contract.member_id =member.member_id;
 	</select>
+	
+		<select id="managementCodeMax" resultType="String">
+			SELECT 
+				MAX(LPAD(RIGHT(contract_management_code, 4)+1, '4' , '0')) 
+			FROM contract_management;
+		</select>
+	
+	<insert id="managementInsert" parameterType="com.smart.rider.contract.dto.ManagementDTO">
+		
+		INSERT INTO contract_management
+			( contract_management_code
+			 ,contract_code
+			 ,contract_management_amout
+			 ,contract_management_unpaid
+			 ,contract_management_state
+			 ,contract_management_contents
+			 ,contract_management_date)
+		VALUES ( 				
+			  #{contractManagementCode}
+			 ,#{contractCode}
+		 	 ,#{contractManagementAmout}
+		 	 ,#{contractManagementUnpaid}
+	 	  	 ,#{contractManagementState}
+	 	  	 ,#{contractManagementContents}
+	 	     ,NOW()
+	 	    )
+
+		 	    
+	</insert>
 
 
 

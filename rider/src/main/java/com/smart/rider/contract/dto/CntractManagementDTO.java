@@ -1,27 +1,34 @@
 package com.smart.rider.contract.dto;
 
-//계약금관리 DTO
-public class ManagementDTO {
-	
+public class CntractManagementDTO {
 
-	private String contractManagementCode;
-	private String contractCode;
+	
+	private String memberId;
+	private String contractMethod;
+	private int contractPay;
 	private int contractManagementAmout;
 	private int contractManagementUnpaid;
 	private String contractManagementState;
 	private String contractManagementContents;
-	private String contractManagementDate;
-	public String getContractManagementCode() {
-		return contractManagementCode;
+	
+	
+	public String getMemberId() {
+		return memberId;
 	}
-	public void setContractManagementCode(String contractManagementCode) {
-		this.contractManagementCode = contractManagementCode;
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
 	}
-	public String getContractCode() {
-		return contractCode;
+	public String getContractMethod() {
+		return contractMethod;
 	}
-	public void setContractCode(String contractCode) {
-		this.contractCode = contractCode;
+	public void setContractMethod(String contractMethod) {
+		this.contractMethod = contractMethod;
+	}
+	public int getContractPay() {
+		return contractPay;
+	}
+	public void setContractPay(int contractPay) {
+		this.contractPay = contractPay;
 	}
 	public int getContractManagementAmout() {
 		return contractManagementAmout;
@@ -47,22 +54,13 @@ public class ManagementDTO {
 	public void setContractManagementContents(String contractManagementContents) {
 		this.contractManagementContents = contractManagementContents;
 	}
-	public String getContractManagementDate() {
-		return contractManagementDate;
-	}
-	public void setContractManagementDate(String contractManagementDate) {
-		this.contractManagementDate = contractManagementDate;
-	}
 	@Override
 	public String toString() {
-		return "ManagementDTO [contractManagementCode=" + contractManagementCode + ", contractCode=" + contractCode
-				+ ", contractManagementAmout=" + contractManagementAmout + ", contractManagementUnpaid="
+		return "CntractManagementDTO [memberId=" + memberId + ", contractMethod=" + contractMethod + ", contractPay="
+				+ contractPay + ", contractManagementAmout=" + contractManagementAmout + ", contractManagementUnpaid="
 				+ contractManagementUnpaid + ", contractManagementState=" + contractManagementState
-				+ ", contractManagementContents=" + contractManagementContents + ", contractManagementDate="
-				+ contractManagementDate + "]";
+				+ ", contractManagementContents=" + contractManagementContents + "]";
 	}
 	
-
+	
 }
-
-
