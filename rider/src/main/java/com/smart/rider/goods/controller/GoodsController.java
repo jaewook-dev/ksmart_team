@@ -27,6 +27,29 @@ public class GoodsController {
 	private GoodsdbService goodsdbservice;
 	@Autowired
 	private GoodsPurchaseService goodsPurchaseService;
+	
+	//상품 수정하기
+	@GetMapping("/goodsUpdate")
+	public String goodsUpdate(@RequestParam(value="goodsCode")String goodsCode,Model model) {
+		model.addAttribute("goodsCode", goodsService.getGoodsList(goodsCode));	
+		
+		return "goods/goodsUpdate";
+	}
+	@PostMapping("/goodsUpdate")
+	public String goodsUpdate(GoodsDTO goodsDto) {
+		System.out.println(goodsDto);
+		goodsService.goodsUpdate(goodsDto);
+		return "redirect:/goodsList";		
+	}
+		 
+	
+	//상품상세보기
+	@GetMapping("/getGoodsList")
+	public String getGoodsList(@RequestParam(value="goodsCode")String goodsCode,Model model) {
+		//System.out.println(model.addAttribute("goodsCode", goodsService.getGoodsList(goodsCode)));
+		model.addAttribute("goodsCode", goodsService.getGoodsList(goodsCode));
+		return "goods/getGoodsList";		
+	}
 	//02 판매상품등록 요청
 	//문영성
 	@GetMapping("/goodsInsert")
@@ -42,7 +65,7 @@ public class GoodsController {
 		  //System.out.println("판매상품확인"+goodsDto);
 		  String contractShopCode = (String)session.getAttribute("SCODE");
 		  //System.out.println("매장코드"+contractShopCode);
-		  goodsDto.setContractShopCode(contractShopCode);
+		  goodsDto.setContractShopCode(contractShopCode);		 
 		  goodsService.goodsInsert(goodsDto);
 		  return "redirect:goodsList";
 	  }
@@ -52,8 +75,9 @@ public class GoodsController {
 	@GetMapping("/goodsList")
 	public String goodsList(Model model) {
 		List<GoodsHapDTO> gList = goodsService.goodsList();
-		System.out.println(model.addAttribute("gList", goodsService.goodsList()+"<---------------------GoodsController.java------확인"));
-		model.addAttribute("gList", gList);
+		//System.out.println(gList);
+		//System.out.println(model.addAttribute("gList",gList+"<---------------------GoodsController.java------확인"));
+		model.addAttribute("gList", goodsService.goodsList());
 		return "/goods/goodsList";
 	}
 }

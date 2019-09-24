@@ -41,7 +41,7 @@ public class GoodsPurchaseController {
 		model.addAttribute("purchaseCode", purchaseCode);
 		return "purchase/purchaseDelete";
 	}
-	
+	//매입삭제 
 	  @PostMapping("/purchaseDelete")
 	  public String purchaseDelete(@RequestParam(value="purchaseCode")String purchaseCode,
 			  					   @RequestParam(value="memberId")String memberId,
