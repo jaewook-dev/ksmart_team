@@ -69,23 +69,38 @@
 									</tr>																	
 									<tr>	
 										<th scope="col">상품상태</th>
-										<th th:text="${goodsCode.goodsState}"></th>
+										<th>
+										<input type="text" id="goodsState" name="goodsState"
+												th:value="${goodsCode.goodsState}">
+										</th>
 									</tr>
 									<tr>	
-										<th scope="col">대여가능여부</th>
-										<th th:text="${goodsCode.goodsRental}"></th>
+										<th scope="col">대여가능여부</th>										
+										<th>
+										<input type="text" id="goodsRental" name="goodsRental"
+												th:value="${goodsCode.goodsRental}">
+										</th>
 									</tr>
 									<tr>	
-										<th scope="col">대여상태</th>
-										<th th:text="${goodsCode.goodsRentalState}"></th>
+										<th scope="col">대여상태</th>										
+										<th>
+										<input type="text" id="goodsRental" name="goodsRental"
+												th:value="${goodsCode.goodsRental}">
+										</th>
 									</tr>
 									<tr>	
-										<th scope="col">판매완료유무</th>
-										<th th:text="${goodsCode.goodsCompletionState}"></th>
+										<th scope="col">판매완료유무</th>										
+										<th>
+										<input type="text" id="goodsCompletionState" name="goodsCompletionState"
+												th:value="${goodsCode.goodsCompletionState}">
+										</th>
 									</tr>
 									<tr>	
-										<th scope="col">판매가격</th>
-										<th th:text="${goodsCode.goodsPay}"></th>
+										<th scope="col">판매가격</th>										
+										<th>
+										<input type="text" id="goodsPay" name="goodsPay"
+												th:value="${goodsCode.goodsPay}">
+										</th>
 									</tr>
 								</thead>	
 															
@@ -94,9 +109,8 @@
 						</div>						
 						<!-- table container -->
 						<a th:href="@{/goodsUpdate(goodsCode=${goodsCode.goodsCode})}"
-							class="btn btn-primary btn-block text-uppercase mb-3">상품수정하기</a>						
-						<a  th:href="@{/goodsDelete(goodsCode=${goodsCode.goodsCode})}"
-							class="btn btn-primary btn-block text-uppercase mb-3">대여상품 등록하기</a>	
+							class="btn btn-primary btn-block text-uppercase mb-3">수정완료</a>						
+						
 						
 					</div>
 				</div>

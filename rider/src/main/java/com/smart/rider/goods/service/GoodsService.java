@@ -22,6 +22,11 @@ public class GoodsService {
 	
 	private GoodsMapper goodsMapper;
 	
+	//상품수정처리	
+	public int goodsUpdate(GoodsDTO goodsDto) {
+		return goodsMapper.goodsUpdate(goodsDto);
+	}
+	
 	//판매상품 상세보기
 	public GoodsHapDTO getGoodsList(String goodsCode) {
 		return goodsMapper.getGoodsList(goodsCode);

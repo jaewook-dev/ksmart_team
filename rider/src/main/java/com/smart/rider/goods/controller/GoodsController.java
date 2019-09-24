@@ -28,8 +28,22 @@ public class GoodsController {
 	@Autowired
 	private GoodsPurchaseService goodsPurchaseService;
 	
+	//상품 수정하기
+	@GetMapping("/goodsUpdate")
+	public String goodsUpdate(@RequestParam(value="goodsCode")String goodsCode,Model model) {
+		model.addAttribute("goodsCode", goodsService.getGoodsList(goodsCode));	
+		
+		return "goods/goodsUpdate";
+	}
+	@PostMapping("/goodsUpdate")
+	public String goodsUpdate(GoodsDTO goodsDto) {
+		System.out.println(goodsDto);
+		goodsService.goodsUpdate(goodsDto);
+		return "redirect:/goodsList";		
+	}
+		 
 	
-	//상품상세보기,수정화면
+	//상품상세보기
 	@GetMapping("/getGoodsList")
 	public String getGoodsList(@RequestParam(value="goodsCode")String goodsCode,Model model) {
 		//System.out.println(model.addAttribute("goodsCode", goodsService.getGoodsList(goodsCode)));
