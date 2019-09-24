@@ -44,4 +44,8 @@ public class ManagementService {
 		
 		return managementMapper.getManagementList(managementCode);
 	}
+	public int managementUpdate(ManagementDTO management) {
+		
+		return managementMapper.managementUpdate(management);
+	}
 }

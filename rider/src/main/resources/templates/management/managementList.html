@@ -31,6 +31,7 @@
 										<th scope="col">미납금액</th>
 										<th scope="col">계약상태</th>
 										<th scope="col">사유</th>
+										<th scope="col">최종수정일자</th>
 										<th scope="col" style="width: 8%" class="text-center">수정</th>
 									</tr>
 								</thead>
@@ -43,6 +44,7 @@
 										<td th:text="${mlist.contractManagementUnpaid}"></td>
 										<td th:text="${mlist.contractManagementState}"></td>
 										<td th:text="${mlist.contractManagementContents}"></td>
+										<td th:text="${mlist.contractManagementDate}"></td>
 										<td>
 											<a
 											 th:href="@{/managementUpdate(contractManagementCode=${mlist.contractManagementCode})}"

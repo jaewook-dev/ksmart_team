@@ -52,7 +52,7 @@ public class ManagementController {
 	@PostMapping("/managementInsert")
 	public String managementInsert(ManagementDTO management,HttpSession session) {
 		
-		System.out.println(management.toString() + "<-- unit.toString");
+		System.out.println(management.toString() + "<-- management.toString");
 		managementService.managementInsert(management, session);
 		
 		return "redirect:/managementList";
@@ -69,8 +69,16 @@ public class ManagementController {
 		
 		return "management/managementUpdate";
 	}
-	
-
+	@PostMapping("/managementUpdate")
+	public String managementUpdate(ManagementDTO management) {
+		
+		managementService.managementUpdate(management);
+		
+		//들어오는  값 확인 
+		System.out.println(management.toString() + "<-- management.toString");
+		
+		return "redirect:/managementList";
+	}
 	
 	
 }

@@ -10,12 +10,12 @@ public class ContractManagementDTO {
 	private int contractManagementUnpaid;
 	private String contractManagementState;
 	private String contractManagementContents;
-	
-	public void setContractManagementCode(String contractManagementCode) {
-		this.contractManagementCode = contractManagementCode;
-	}
+	private String contractManagementDate;
 	public String getContractManagementCode() {
 		return contractManagementCode;
+	}
+	public void setContractManagementCode(String contractManagementCode) {
+		this.contractManagementCode = contractManagementCode;
 	}
 	public String getContractCode() {
 		return contractCode;
@@ -65,13 +65,20 @@ public class ContractManagementDTO {
 	public void setContractManagementContents(String contractManagementContents) {
 		this.contractManagementContents = contractManagementContents;
 	}
+	public String getContractManagementDate() {
+		return contractManagementDate;
+	}
+	public void setContractManagementDate(String contractManagementDate) {
+		this.contractManagementDate = contractManagementDate;
+	}
 	@Override
 	public String toString() {
 		return "ContractManagementDTO [contractManagementCode=" + contractManagementCode + ", contractCode="
 				+ contractCode + ", memberId=" + memberId + ", contractMethod=" + contractMethod + ", contractPay="
 				+ contractPay + ", contractManagementAmout=" + contractManagementAmout + ", contractManagementUnpaid="
 				+ contractManagementUnpaid + ", contractManagementState=" + contractManagementState
-				+ ", contractManagementContents=" + contractManagementContents + "]";
+				+ ", contractManagementContents=" + contractManagementContents + ", contractManagementDate="
+				+ contractManagementDate + "]";
 	}
 	
 	

@@ -17,6 +17,7 @@
               			<div  class="col-xl-12 col-lg-6 col-md-12" style="float:right;"  th:each=" mlist : ${managementList}">
                 			<form action="/managementUpdate" class="tm-edit-product-form" method="post">
                 			<input type="hidden" name="contractManagementCode"  th:value="${mlist.contractManagementCode}">
+                			<input type="hidden" name="contractCode" th:value="${mlist.contractCode}">
 				                  <div class="form-group mb-3">
 				                    <label
 				                      for="name"
@@ -69,7 +70,7 @@
 				                    <input
 				                      name="contractManagementContents"
 				                      type="text"
-				                       th:value="${contractManagementContents}"
+				                      th:value="${mlist.contractManagementContents}"
 				                      class="form-control validate"
 				                    />
 				                  </div>

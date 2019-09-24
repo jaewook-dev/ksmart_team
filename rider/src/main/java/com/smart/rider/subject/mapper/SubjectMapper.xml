@@ -92,6 +92,8 @@
 			subject_name=#{subjectName},
 			subject_date=NOW()
 		WHERE subject_code=#{subjectCode}
+		
+		
 	</update>
 		
 </mapper>

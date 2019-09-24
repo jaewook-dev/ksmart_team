@@ -20,6 +20,7 @@
 				,contract_management_unpaid 	AS contractManagementUnpaid
 				,contract_management_state 		AS contractManagementState
 				,contract_management_contents 	AS contractManagementContents
+				,contract_management_date 	AS contractManagementDate
 			from contract_management inner join contract
 			on contract_management.contract_code = contract.contract_code;
 	</select>
@@ -61,6 +62,21 @@
 			FROM contract_management
 			WHERE contract_management_code = #{contractManagementCode}
 	</select>
+	
+	<update id="managementUpdate" parameterType="com.smart.rider.contract.dto.ManagementDTO">
+	
+		UPDATE contract_management
+			SET
+				 contract_management_amout=#{contractManagementAmout}
+				,contract_management_unpaid=#{contractManagementUnpaid}
+				,contract_management_state=#{contractManagementState}
+				,contract_management_contents=#{contractManagementContents}
+				,contract_management_date=NOW()
+				
+		WHERE contract_management_code=#{contractManagementCode}
+	
+	
+	</update>
 
 
 

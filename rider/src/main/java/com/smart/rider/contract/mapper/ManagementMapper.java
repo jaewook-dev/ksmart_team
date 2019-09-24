@@ -17,4 +17,6 @@ public interface ManagementMapper {
 	public List<ContractManagementDTO> managementList();
 	
 	public List<ManagementDTO> getManagementList(String managementCode);
+	
+	public int managementUpdate(ManagementDTO management);
 }
