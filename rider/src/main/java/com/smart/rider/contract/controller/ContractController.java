@@ -38,21 +38,13 @@ public class ContractController {
 	}
 	
 	@GetMapping("/agreement")
-	public String agreement(Model model,HttpSession session) {
+	public String agreement(Model model) {
 			
 		//입력값 확인
 		System.out.println("=====test=====");
 		System.out.println("agreement:"+contractService.agreementList());
 		model.addAttribute("agreement", contractService.agreementList());
-		
-		//contractList에 담겨있는 contractCode 중에  마지막에 등록된 코드 가져오기
-		List<ContractDTO> contractList =  contractService.contractList();
-		String getContractCode = contractList.get(contractList.size()-1).getContractCode();
-		System.out.println(getContractCode);
-		session.setAttribute("SCC",getContractCode);
 
-		
-		
 		return "/contract/agreement";
 	}
 	
@@ -88,7 +80,7 @@ public class ContractController {
 		System.out.println(contract.toString() + "<-- unit.toString");
 		contractService.contractInsert(contract, session);
 		
-		return "redirect:/agreement";
+		return "redirect:/managementList";
 	}
 	
 

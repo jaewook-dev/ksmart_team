@@ -26,25 +26,30 @@
 									<tr>
 										<th scope="col">계약자 아이디</th>
 										<th scope="col">납입방식</th>
+										<th scope="col">계약금액</th>
 										<th scope="col">납부금액</th>
 										<th scope="col">미납금액</th>
 										<th scope="col">계약상태</th>
 										<th scope="col">사유</th>
+										<th scope="col" style="width: 8%" class="text-center">수정</th>
 									</tr>
 								</thead>
 								<tbody>
-									<tr th:each="accountList : ${accountList}">
-										<td th:text="${accountList.accountMarket}"></td>
-										<td th:text="${accountList.accountName}"></td>
-										<td th:text="${accountList.accountPhone}"></td>
-										<td th:text="${accountList.accountAddress}"></td>
-										<td th:text="${accountList.accountCategory}"></td>
+									<tr th:each=" mList : ${managementList}">
+										<td th:text="${mList.memberId}"></td>
+										<td th:text="${mList.contractMethod}"></td>
+										<td th:text="${mList.contractPay}"></td>
+										<td th:text="${mList.contractManagementAmout}"></td>
+										<td th:text="${mList.contractManagementUnpaid}"></td>
+										<td th:text="${mList.contractManagementState}"></td>
+										<td th:text="${mList.contractManagementContents}"></td>
 										<td class="text-center"><a
 											href="#"
 											class="tm-product-delete-link"> <i
 												class="fas fa-check tm-product-check-icon"
 												style="color: white"></i>
 										</a></td>
+
 								</tbody>
 							</table>
 						</div>
@@ -55,11 +60,6 @@
 					class="btn btn-primary text-uppercase">계약금 등록</button>
 				</div>
 			
-				<div>
-						<button type="button" id="updateBtn"
-					onclick="location.href='managementUpdate'" style="float: left; margin-left:328px;" 
-					class="btn btn-primary text-uppercase">계약금 수정</button>
-				</div>
 		</div>
 	</div>
 </body>

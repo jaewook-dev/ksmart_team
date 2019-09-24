@@ -6,20 +6,21 @@
 <!-- namespace가 인터페이스와 일치해야 연결된다 -->
 <mapper namespace="com.smart.rider.contract.mapper.ManagementMapper">
 
-	<select id="agreementList"	resultType="com.smart.rider.contract.dto.ManagementDTO">
-		SELECT DISTINCT
-		contract.
-			 member_id AS memberId
-			,contract_start AS contractStart
-			,contract_finish AS contractFinish
-			,contract_valid_date AS contractValidDate
-		,member.
-			 member_id 			AS memberId
-			,member_name		AS memberName
-			,member_phone 		AS memberPhone
-			
-		from contract inner join member
-		on contract.member_id =member.member_id;
+	<select id="managementList"	resultType="com.smart.rider.contract.dto.ContractManagementDTO">
+		SELECT 
+			contract.
+				 contract_code		AS contractCode
+				,member_id 			AS memberId
+				,contract_method 	AS contractMethod
+				,contract_pay 		AS contractPay
+			,contract_management.
+				 contract_code 					AS contractCode
+				,contract_management_amout 		AS contractManagementAmout
+				,contract_management_unpaid 	AS contractManagementUnpaid
+				,contract_management_state 		AS contractManagementState
+				,contract_management_contents 	AS contractManagementContents
+			from contract_management inner join contract
+			on contract_management.contract_code = contract.contract_code;
 	</select>
 	
 		<select id="managementCodeMax" resultType="String">

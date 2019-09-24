@@ -1,10 +1,13 @@
 package com.smart.rider.contract.service;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.smart.rider.contract.dto.ContractManagementDTO;
 import com.smart.rider.contract.dto.ManagementDTO;
 import com.smart.rider.contract.mapper.ManagementMapper;
 
@@ -32,4 +35,9 @@ public class ManagementService {
 		return managementMapper.managementInsert(management);
 	
 	}
+	public List<ContractManagementDTO> managementList(){
+		
+		return managementMapper.managementList();
+	}
+	
 }
