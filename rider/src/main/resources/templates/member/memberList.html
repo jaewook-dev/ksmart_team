@@ -72,8 +72,8 @@
 										</a>
 									</td>
 									<td class="text-center">
-										<a th:href="@{/memberDelete(memberId=${member.memberId})}"
-											class="tm-product-delete-link">
+										<a th:href="@{/levelDelete(memberId=${member.memberId})}"
+											class="tm-product-delete-link" id="deleteLink">
 											<i class="far fa-trash-alt tm-product-delete-icon"></i>
 										</a>
 									</td>
@@ -87,5 +87,15 @@
 	</div>
 </th:block>
 <th:block layout:fragment="customScript">
+<script>
+$("#deleteLink").click(function(){
+    if(confirm("삭제 하시겠습니까?") == true){
+    		alert("삭제되었습니다");
+    }
+    else{
+        return ;
+    }
+});
+</script>
 </th:block>
 </html>

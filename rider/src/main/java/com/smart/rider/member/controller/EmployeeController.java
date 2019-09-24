@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.smart.rider.member.dto.MemberDTO;
@@ -23,9 +24,11 @@ public class EmployeeController {
 		return "employee/employeeInsert";
 	}
 	
-	@PostMapping("/employeeInsert")
-	public String employeeInsert(MemberDTO memberdto) {
+	@RequestMapping("/employeeInsert")
+	public String employeeInsert(@RequestParam(value="contractShopCode") String contractShopCode, MemberDTO memberdto) {
+		System.out.println(contractShopCode + "<--매장릴레코드");
 		employeeService.employeeInsert(memberdto);
+		employeeService.employeeList(contractShopCode);
 		return "redirect:/employeeList";
 	}
 	
