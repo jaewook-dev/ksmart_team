@@ -28,6 +28,8 @@ public class GoodsController {
 	@Autowired
 	private GoodsPurchaseService goodsPurchaseService;
 	
+	
+	
 	//상품 수정하기
 	@GetMapping("/goodsUpdate")
 	public String goodsUpdate(@RequestParam(value="goodsCode")String goodsCode,Model model) {
@@ -35,9 +37,10 @@ public class GoodsController {
 		
 		return "goods/goodsUpdate";
 	}
+	//수정처리
 	@PostMapping("/goodsUpdate")
 	public String goodsUpdate(GoodsDTO goodsDto) {
-		System.out.println(goodsDto);
+		//System.out.println(goodsDto);
 		goodsService.goodsUpdate(goodsDto);
 		return "redirect:/goodsList";		
 	}

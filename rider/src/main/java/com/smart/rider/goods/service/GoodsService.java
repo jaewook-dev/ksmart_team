@@ -22,6 +22,11 @@ public class GoodsService {
 	
 	private GoodsMapper goodsMapper;
 	
+	//상품삭제
+	public int goodsDelete(String goodsCode,String memberId,String memberPw) {
+		return goodsMapper.goodsDelete(goodsCode, memberId, memberPw);
+	}
+	
 	//상품수정처리	
 	public int goodsUpdate(GoodsDTO goodsDto) {
 		return goodsMapper.goodsUpdate(goodsDto);
