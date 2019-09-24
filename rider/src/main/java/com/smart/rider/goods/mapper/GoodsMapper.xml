@@ -52,7 +52,7 @@
 			INNER JOIN 	
 			member m					
 			WHERE 
-		 	g.goods_code=#{goodCode}
+		 	g.goods_code=#{goodsCode}
 		  	AND m.member_id = #{memberId}
 			AND m.member_pw = #{memberPw}
 	</delete>
