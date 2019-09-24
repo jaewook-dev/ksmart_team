@@ -26,26 +26,33 @@
 									<tr>
 										<th scope="col">계약자 아이디</th>
 										<th scope="col">납입방식</th>
+										<th scope="col">계약금액</th>
 										<th scope="col">납부금액</th>
 										<th scope="col">미납금액</th>
 										<th scope="col">계약상태</th>
 										<th scope="col">사유</th>
+										<th scope="col">최종수정일자</th>
 										<th scope="col" style="width: 8%" class="text-center">수정</th>
 									</tr>
 								</thead>
 								<tbody>
-									<tr th:each="accountList : ${accountList}">
-										<td th:text="${accountList.accountMarket}"></td>
-										<td th:text="${accountList.accountName}"></td>
-										<td th:text="${accountList.accountPhone}"></td>
-										<td th:text="${accountList.accountAddress}"></td>
-										<td th:text="${accountList.accountCategory}"></td>
-										<td class="text-center"><a
-											href="#"
-											class="tm-product-delete-link"> <i
-												class="fas fa-check tm-product-check-icon"
-												style="color: white"></i>
-										</a></td>
+									<tr th:each=" mlist : ${managementList}">
+										<td th:text="${mlist.memberId}"></td>
+										<td th:text="${mlist.contractMethod}"></td>
+										<td th:text="${mlist.contractPay}"></td>
+										<td th:text="${mlist.contractManagementAmout}"></td>
+										<td th:text="${mlist.contractManagementUnpaid}"></td>
+										<td th:text="${mlist.contractManagementState}"></td>
+										<td th:text="${mlist.contractManagementContents}"></td>
+										<td th:text="${mlist.contractManagementDate}"></td>
+										<td>
+											<a
+											 th:href="@{/managementUpdate(contractManagementCode=${mlist.contractManagementCode})}"
+											 class="tm-product-delete-link">
+											 <i class="fas fa-check tm-product-check-icon"></i>
+											</a>
+										</td>
+
 								</tbody>
 							</table>
 						</div>
@@ -54,7 +61,8 @@
 				<button type="button" id="insertBtn"
 					onclick="location.href='managementInsert'" style="float: right"
 					class="btn btn-primary text-uppercase">계약금 등록</button>
-			</div>
+				</div>
+			
 		</div>
 	</div>
 </body>

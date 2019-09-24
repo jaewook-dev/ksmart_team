@@ -38,22 +38,24 @@
 					<div class="tm-bg-primary-dark tm-block tm-block-products">
 						<div class="tm-product-table-container">
 							<table class="table table-hover tm-table-small tm-product-table">
+								
 								<thead>
+									
 									<tr>
 										<th scope="col">상품명</th>
-										<th scope="col">상품카테고리</th>
-										<th scope="col">매장이름</th>
+										<th scope="col">상품카테고리</th>										
 										<th scope="col">판매가격</th>																	
 										<th scope="col">상품상태</th>									
 										<th scope="col">재고확인일자</th>
 										<th scope="col">상세보기</th>
+										<th scope="col">삭제하기</th>
+										
 									</tr>
 								</thead>
 								<tbody>
 									<tr th:each="g : ${gList}">
 										<th th:text="${g.goodsDbName}"></th>
-										<th th:text="${g.goodsDbCategory}"></th>
-										<th th:text="${g.contractShopCode}"></th>											
+										<th th:text="${g.goodsDbCategory}"></th>																				
 										<th th:text="${g.goodsPay}"></th>										
 										<th th:text="${g.goodsState}"></th>										
 										<th th:text="${g.goodsInventoryDate}"></th>
@@ -62,6 +64,14 @@
 										 th:href="@{/getGoodsList(goodsCode=${g.goodsCode})}"
 										 class="tm-product-delete-link">
 										 <i class="fas fa-check tm-product-check-icon"></i>
+										</a>									
+										</td>
+										<td>										
+										<a
+										 th:href="@{/goodsDelete(goodsCode=${g.goodsCode})}"
+										 class="tm-product-delete-link">
+										 <i class="far fa-trash-alt" style="color: gray;">
+												</i>
 										</a>
 										</td>
 									</tr>							

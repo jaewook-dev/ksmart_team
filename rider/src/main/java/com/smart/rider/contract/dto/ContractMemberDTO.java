@@ -47,6 +47,7 @@ public class ContractMemberDTO {
 	public void setMemberPhone(String memberPhone) {
 		this.memberPhone = memberPhone;
 	}
+	
 	@Override
 	public String toString() {
 		return "ContractMemberDTO [memberId=" + memberId + ", contractStart=" + contractStart + ", contractFinish="
