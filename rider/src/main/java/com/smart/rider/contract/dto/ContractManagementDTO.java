@@ -1,11 +1,11 @@
 package com.smart.rider.contract.dto;
 
-//계약금관리 DTO
-public class ManagementDTO {
-	
-
+public class ContractManagementDTO {
 	private String contractManagementCode;
 	private String contractCode;
+	private String memberId;
+	private String contractMethod;
+	private int contractPay;
 	private int contractManagementAmout;
 	private int contractManagementUnpaid;
 	private String contractManagementState;
@@ -22,6 +22,24 @@ public class ManagementDTO {
 	}
 	public void setContractCode(String contractCode) {
 		this.contractCode = contractCode;
+	}
+	public String getMemberId() {
+		return memberId;
+	}
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
+	}
+	public String getContractMethod() {
+		return contractMethod;
+	}
+	public void setContractMethod(String contractMethod) {
+		this.contractMethod = contractMethod;
+	}
+	public int getContractPay() {
+		return contractPay;
+	}
+	public void setContractPay(int contractPay) {
+		this.contractPay = contractPay;
 	}
 	public int getContractManagementAmout() {
 		return contractManagementAmout;
@@ -55,14 +73,15 @@ public class ManagementDTO {
 	}
 	@Override
 	public String toString() {
-		return "ManagementDTO [contractManagementCode=" + contractManagementCode + ", contractCode=" + contractCode
-				+ ", contractManagementAmout=" + contractManagementAmout + ", contractManagementUnpaid="
+		return "ContractManagementDTO [contractManagementCode=" + contractManagementCode + ", contractCode="
+				+ contractCode + ", memberId=" + memberId + ", contractMethod=" + contractMethod + ", contractPay="
+				+ contractPay + ", contractManagementAmout=" + contractManagementAmout + ", contractManagementUnpaid="
 				+ contractManagementUnpaid + ", contractManagementState=" + contractManagementState
 				+ ", contractManagementContents=" + contractManagementContents + ", contractManagementDate="
 				+ contractManagementDate + "]";
 	}
 	
-
+	
+	
+	
 }
-
-

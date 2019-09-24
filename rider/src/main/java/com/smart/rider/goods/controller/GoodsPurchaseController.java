@@ -21,6 +21,7 @@ import com.smart.rider.goods.dto.GoodsdbDTO;
 import com.smart.rider.goods.dto.GoodsHapDTO;
 import com.smart.rider.goods.service.GoodsPurchaseService;
 import com.smart.rider.goods.service.GoodsdbService;
+import com.smart.rider.member.dto.MemberDTO;
 
 
 @Controller
@@ -32,26 +33,31 @@ public class GoodsPurchaseController {
 	@Autowired
 	private AccountService accountService;
 	
-	//매입 삭제메서드
+	//매입 요청
 	@GetMapping("/purchaseDelete")
 	public String purchaseDelete(@RequestParam(value="purchaseCode")String purchaseCode,
 								Model model) {
-		//System.out.println("삭제 코드넘어오는값확인"+purchaseCode);
+		//System.out.println("삭제 코드넘어오는값확인"+model.addAttribute("pList", goodsPurchaseService.getPurchaseList(purchaseCode)));
 		model.addAttribute("pList", goodsPurchaseService.getPurchaseList(purchaseCode));
 		model.addAttribute("purchaseCode", purchaseCode);
 		return "purchase/purchaseDelete";
 	}
 	//매입삭제 
 	  @PostMapping("/purchaseDelete")
-	  public String purchaseDelete(@RequestParam(value="purchaseCode")String purchaseCode,
-			  					   @RequestParam(value="memberId")String memberId,
-			  					   @RequestParam(value="memberPw")String memberPw,Model model) {
-		  int result = goodsPurchaseService.purchaseDelete(purchaseCode, memberId, memberPw);
-		  if(result==0) {
-			  model.addAttribute("result", "비밀번호불일치");
-			  model.addAttribute("purchaseCode", purchaseCode);
+	  public String purchaseDelete(GoodsPurchaseDTO goodsPurchaseDto,MemberDTO memberDto,Model model) {
+		
+		  int result = goodsPurchaseService.purchaseDelete(goodsPurchaseDto.getPurchaseCode()
+				  											,memberDto.getMemberId()
+				  											,memberDto.getMemberPw());
+		  //System.out.println(goodsPurchaseDto.getPurchaseCode());
+		  //System.out.println(memberDto.getMemberId());
+		  //System.out.println(memberDto.getMemberPw());
+		  if(result==0 ) {			  
+			  model.addAttribute("result", "비밀번호불일치");			  
+			  model.addAttribute("memberId", memberDto.getMemberId());
+			  model.addAttribute("pList", goodsPurchaseService.getPurchaseList(goodsPurchaseDto.getPurchaseCode()));
 			  return"purchase/purchaseDelete";
-		  }
+		}
 		
 		  return "redirect:purchaseList";
 	  }

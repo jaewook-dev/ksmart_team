@@ -1,10 +1,393 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="EUC-KR">
-<title>Insert title here</title>
-</head>
-<body>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/default}">
+<th:block layout:fragment="customTitle">
+</th:block>
+<th:block layout:fragment="customContents">
+<form action="/contractInsert" id="form" method="post" class="tm-edit-product-form" >
+		<div class="container tm-mt-big tm-mb-big">
+		<div class="row">
+			<div>
+				<div class="tm-bg-primary-dark tm-block tm-block-h-auto">
+					<div class="row">
+						<div class="col-12">
+							<h2 class="tm-block-title d-inline-block">계약서 등록하기</h2>
+						</div>
+					</div>
+					<div class="row tm-edit-product-row">
+						<div class="col-xl-6 col-lg-6 col-md-12">
+						<!-- 계약금 납입방식 -->
+								<div class="form-group mb-3">
+									<label>계약금 납입방식</label> <select id = 'contractMethod'
+										class="custom-select tm-select-accounts"  name="contractMethod">
+										<option selected>계약금 납입</option>
+										<option value="월 납부">월 납부</option>
+										<option value="1년 일시불">1년 일시불</option>
+										<option value="2년 일시불">2년 일시불</option>
+									</select>
+									<br/><br/><br/>
+						<!-- 계약금 납입방식이 월일 경우만 -->
+									<label>월 납부만 입력하세요(개월)</label>
+									<input type="text" id="monthPay" class="form-control validate"  placeholder="사용할 월 수를 입력해주세요(ex)3,5,7">
+								</div>
+						<!-- 계약 금액 -->
+								<div class="form-group mb-3">
+									<label for="name">계약 금액 </label><input 	id="contractPay" readonly style="color:#0000ff;" placeholder="납입방식을 입력해주세요"
+										name="contractPay" type="text" class="form-control validate" required />
+								</div>
+						<!-- 서비스 시작일자 -->
+								<div class="form-group mb-3">
+									<label for="name">서비스 시작일자 </label> <input id="contractStart" 
+										name="contractStart" type="date" class="form-control validate" required />	
+								</div>	
+						<!-- 서비스 종료일자(시작일자와 계약금납입방식 선택시 바뀜) -->
+								<div class="form-group mb-3">
+									<label for="name">서비스 종료일자 </label> <input id="contractFinish"
+										name="contractFinish" type="date" class="form-control validate" style="color:#0000ff;"  readonly required />								
+								</div>
+						<!-- 유효기간 : 종료일자  +10DAY-->
+								<div class="form-group mb-3">
+									<label for="name">계약 유효기간 </label> <input id="contractValidDate"
+										name="contractValidDate" type="date" style="color:#0000ff;" class="form-control validate" readonly required />
+								</div>
+						<!--계약내용  아니오나 선택 안할시 페이지 안넘어감  -->	
+								<div class="form-group mb-3">
+									<label for="name">계약내용 </label> 
+									<textarea cols="80" rows="8" id="textareaId" readonly></textarea>
+									<input type="radio" name="agree"  value = "Y"/> <span class="up">예</span>&nbsp;&nbsp; 
+									<input type="radio" name="agree" value= "N"/> <span class="up">아니오</span>
+								</div>
+						<!-- 사용자 등록번호  -->
+								<div class="form-group mb-3">
+									<label for="name">계약자사업자 등록번호 </label> <input id="contractInformation" placeholder="사업자등록번호를 입력해주세요"
+										name="contractInformation" type="text" class="form-control validate" required />
+								</div>
+							</div>
+						<!-- 월계약금액   -->
+						<div class="col-xl-6 col-lg-6 col-md-12 mx-auto mb-4">
+							 <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col" id = ssa>월 계약금액</th>
+                                    <th scope="col">1년 일시불 금액</th>
+                                    <th scope="col">2년 일시불 금액</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                             	<tr th:each="contractInsert : ${contractInsert}">
+									<th id="unitMonth" th:text="${contractInsert.contractUnitMonth}"></th>
+									<th id="unitOneYear" th:text="${contractInsert.contractUnitOneyear}"></th>
+									<th id="unitTweYear" th:text="${contractInsert.contractUnitTwoyear}"></th>
+                                </tr>
+                            </tbody>
+						</table>
+						
+						</div>
+						<div class="col-12">
+							<!-- <a
+				            	href="/goodsdbInsert"
+				              	class="btn btn-primary btn-block text-uppercase mb-3">DB상품 추가하기</a> -->
+							<button type="button"  onclick="javascript:btn()"  
+								class="btn btn-primary btn-block texst-uppercase">계약서 등록</button>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+			</div>
+	
 
-</body>
+	
+	<script src="js/jquery-3.3.1.min.js"></script>
+	<!-- https://jquery.com/download/ -->
+	<script src="jquery-ui-datepicker/jquery-ui.min.js"></script>
+	<!-- https://jqueryui.com/download/ -->
+	<script src="js/bootstrap.min.js"></script>
+	<!-- https://getbootstrap.com/ -->
+
+	</form>
+</th:block>
+</th:block>
+<th:block layout:fragment="customScript">
+
+
+
+
+
+
+<script>
+
+
+
+//textarea 담기는 내용
+$('#textareaId').val('1.상태변경은 오프라인 문의 \n\n 2.서비스종료일자 + D10, 유효기간시 까지 서비스 제공, 유효기간 지날시 계약종료 \n\n 3.30일 연체시 이용 중지  \n\n 4.중도 해지시 남은 기간에 따른 금액의 60% 환불')
+
+
+//계약내용에 동의 안할 시 안넘어감 
+function btn(){
+	var a = $('input[name="agree"]:checked').val();
+	if(a == "N" || a =="" || a== null){
+		alert("계약내용에 동의해주세요");
+	}else{
+		
+		$('#form').submit();
+	}
+}
+
+//납부 타입을 선택하면 자동으로 값 설정
+$("select#contractMethod").bind("change",function(){
+
+	var seloption = $("#contractMethod option:selected").val();
+	var month = $('#unitMonth').text();
+	var oneYear = $('#unitOneYear').text();
+	var twoYear = $('#unitTweYear').text();
+	//id="unitMonth"
+	if(seloption == '월 납부'){
+		$('#contractPay').val(month);
+	}else if(seloption == '1년 일시불'){
+		$('#contractPay').val(oneYear);
+	}else if(seloption == '2년 일시불'){
+		$('#contractPay').val(twoYear);
+	}
+	
+});
+
+//개월 값 입력시 값 곱해서 나옴
+$('#monthPay').change(function(){
+	var way = $('#contractMethod').val();
+	var monthPay = $('#monthPay').val();
+	var takepay = $('#unitMonth').text();
+	var rob = takepay * monthPay;
+
+	
+	if(way =='월 납부'){
+		$('#contractPay').val(rob);
+	}
+});
+
+//날짜 계산
+ $('#contractStart').change(function(){
+
+
+	var method = $('#contractMethod').val();
+	var start = $('#contractStart').val();	 
+	var finish = $('#contractFinish').val();
+	var valid = $('#contractValidDate').val();
+	var date = new Date(start);
+	//년 계산
+	var year = date.getFullYear();
+	var nextYear =date.getFullYear()+1;
+	var nextYear2 =date.getFullYear()+1;
+	var twoYear =date.getFullYear()+2;
+	var twoYear2 =date.getFullYear()+2;
+	//월
+	var month = date.getMonth()+1;
+	var nextMonth = date.getMonth()+2;
+	var twoMonth =date.getMonth()+3;
+	//일
+	var day = date.getDate();
+	var validDay = date.getDate()+10;
+	    
+	//2월 제외한 모든 일자 계산
+	if(month != 2 && day < 22){
+		nextMonth = month;
+	}
+	//2월 윤년 시
+	else if(month == 2 && nextYear%4 != 0 && day<19 ){
+		nextMonth = month;
+	}
+	//2월 윤년 아닐 경우
+	else if(month == 2 && nextYear%4 == 0 && day<20){
+		nextMonth = month;
+	}
+	//2월 윤년 시 다음 년도 2월 29 x -> 3월 1일
+	if(year%4 ==0 && month == 2 && day == 29){
+		month = month+1;
+		day = day-28;
+	}
+	
+	
+	
+	//2월 윤년시에 10일 후 날짜 계산
+	if(month == 2 && nextYear%4 == 0 && validDay > 29){
+		
+		if(validDay == '40'){
+			validDay = '11';
+		}else if(validDay == '39'){
+			validDay = '10';
+		}else if(validDay == '38'){
+			validDay = '09';
+		}else if(validDay == '37'){
+			validDay = '08';
+		}else if(validDay == '36'){
+			validDay = '07';
+		}else if(validDay == '35'){
+			validDay = '06';
+		}else if(validDay == '34'){
+			validDay = '05';
+		}else if(validDay == '33'){
+			validDay = '04';
+		}else if(validDay == '32'){
+			validDay = '03';
+		}else if(validDay == '31'){
+			validDay = '02';
+		}else if(validDay == '30'){
+			validDay = '01';
+		}
+	}
+	//2월 윤년 아닐시에 10일 날짜 계산
+	else if(month == '2'&& nextYear%4 != 0 && validDay > 28){
+		
+		if(validDay == '39'){
+			validDay = '11';
+		}else if(validDay == '38'){
+			validDay = '10';
+		}else if(validDay == '37'){
+			validDay = '09';
+		}else if(validDay == '36'){
+			validDay = '08';
+		}else if(validDay == '35'){
+			validDay = '07';
+		}else if(validDay == '34'){
+			validDay = '06';
+		}else if(validDay == '33'){
+			validDay = '04';
+		}else if(validDay == '32'){
+			validDay = '04';
+		}else if(validDay == '31'){
+			validDay = '03';
+		}else if(validDay == '30'){
+			validDay = '02';
+		}else if(validDay == '29'){
+			validDay = '01';
+		}
+	}
+	
+	//말일 31일 까지 있는 월, 10일 후 일자 계산
+	if(month == '1' || month =='3' || month =='5' || month =='7' || month =='8' || month =='10' || month =='12' && validDay > 30 ){
+
+		if(validDay == '42'){
+			validDay = '11';
+		}else if(validDay == '41'){
+			validDay = '10';
+		}else if(validDay == '40'){
+			validDay = '09';
+		}else if(validDay == '39'){
+			validDay = '08';
+		}else if(validDay == '38'){
+			validDay = '07';
+		}else if(validDay == '37'){
+			validDay = '06';
+		}else if(validDay == '36'){
+			validDay = '05';
+		}else if(validDay == '35'){
+			validDay = '04';
+		}else if(validDay == '34'){
+			validDay = '03';
+		}else if(validDay == '33'){
+			validDay = '02';
+		}else if(validDay == '32'){
+			validDay = '01';
+		}
+		
+	}
+	//말일이 30일인 월 일자 계산
+	else if(month == '4' || month =='6' || month =='9' || month =='11' && validDay > 29 ){
+		
+		if(validDay == '40'){
+			validDay = '10';
+		}else if(validDay == '39'){
+			validDay = '09';
+		}else if(validDay == '38'){
+			validDay = '08';
+		}else if(validDay == '37'){
+			validDay = '07';
+		}else if(validDay == '36'){
+			validDay = '06';
+		}else if(validDay == '35'){
+			validDay = '05';
+		}else if(validDay == '34'){
+			validDay = '04';
+		}else if(validDay == '33'){
+			validDay = '03';
+		}else if(validDay == '32'){
+			validDay = '02';
+		}else if(validDay == '31'){
+			validDay = '01';
+		}
+	
+	}
+	
+	//유효기간이 12월 22일 이상 일 떄 일자 변환 
+	if( month == 12 && day>21){
+		nextYear2 = nextYear2 +1;
+		twoYear2 = twoYear2+1;
+		nextMonth = "0"+(nextMonth - 12);
+		
+	}
+
+		
+	//1~9월 앞자리 0 추가
+	if(month <10  || nextMonth <10 && twoMonth<10){
+		   month = "0"+month;
+		   nextMonth = "0"+nextMonth;
+	}
+	
+	
+	//일자가 10일 미만일 경우 0추가
+	if(day < 10){
+	   day = "0"+day;
+	}
+	
+	
+	//납입방식이 1년 일시불일 경우 날짜 계산
+	if(start != null && method == '1년 일시불'){
+		
+		
+		
+		 finish =  nextYear + "-" + month + "-" + day;
+		 valid = nextYear2 + "-" + nextMonth + "-" + validDay;
+		 
+		 
+		$('#contractFinish').val(finish);
+		$('#contractValidDate').val(valid);
+		
+	}
+	//납입방식이 2년 일시불일 경우 날짜 계산
+	else if(start != null && method == '2년 일시불'){
+		 finish =  twoYear + "-" + month + "-" + day;
+		 valid = twoYear2 + "-" + nextMonth + "-" + validDay;
+		 
+		 $('#contractFinish').val(finish);
+		 $('#contractValidDate').val(valid);
+	}
+ 
+ });
+
+
+
+
+
+
+</script>
+</th:block>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

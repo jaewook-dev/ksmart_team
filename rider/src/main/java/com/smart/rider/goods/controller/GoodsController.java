@@ -18,6 +18,7 @@ import com.smart.rider.goods.mapper.GoodsMapper;
 import com.smart.rider.goods.service.GoodsPurchaseService;
 import com.smart.rider.goods.service.GoodsService;
 import com.smart.rider.goods.service.GoodsdbService;
+import com.smart.rider.member.dto.MemberDTO;
 
 @Controller
 public class GoodsController {
@@ -28,6 +29,28 @@ public class GoodsController {
 	@Autowired
 	private GoodsPurchaseService goodsPurchaseService;
 	
+	//상품삭제요청
+	@GetMapping("/goodsDelete")
+	public String goodsDelete(@RequestParam(value="goodsCode")String goodsCode,Model model) {
+		
+		model.addAttribute("goodsCode", goodsService.getGoodsList(goodsCode));
+		
+		return "goods/goodsDelete";
+	}
+	//상품삭제
+	@PostMapping("/goodsDelete")
+	public String goodsDelete(GoodsDTO goodsDto,MemberDTO memberDto,MemberDTO memberPw,Model model) {
+		int result = goodsService.goodsDelete(goodsDto.getGoodsCode()
+											,memberDto.getMemberId(),memberDto.getMemberPw());
+		if(result == 0) {
+			model.addAttribute("result","비밀번호가 불일치합니다");
+			model.addAttribute("goodsCode", goodsService.getGoodsList(goodsDto.getGoodsCode()));
+			model.addAttribute("memberId", memberDto.getMemberId());
+			return "goods/goodsDelete";
+		}
+		return "redirect:/goodsList";
+		
+	}
 	//상품 수정하기
 	@GetMapping("/goodsUpdate")
 	public String goodsUpdate(@RequestParam(value="goodsCode")String goodsCode,Model model) {
@@ -35,9 +58,10 @@ public class GoodsController {
 		
 		return "goods/goodsUpdate";
 	}
+	//수정처리
 	@PostMapping("/goodsUpdate")
 	public String goodsUpdate(GoodsDTO goodsDto) {
-		System.out.println(goodsDto);
+		//System.out.println(goodsDto);
 		goodsService.goodsUpdate(goodsDto);
 		return "redirect:/goodsList";		
 	}

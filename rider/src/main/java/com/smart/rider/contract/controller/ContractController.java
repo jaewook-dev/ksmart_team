@@ -44,8 +44,7 @@ public class ContractController {
 		System.out.println("=====test=====");
 		System.out.println("agreement:"+contractService.agreementList());
 		model.addAttribute("agreement", contractService.agreementList());
-		
-		
+
 		return "/contract/agreement";
 	}
 	
@@ -58,6 +57,8 @@ public class ContractController {
 		System.out.println("=====test=====");
 		System.out.println("contractList:"+contractList);
 		model.addAttribute("contractList", contractList);
+		
+	
 		
 		return "contract/contractList";
 	}
@@ -79,7 +80,7 @@ public class ContractController {
 		System.out.println(contract.toString() + "<-- unit.toString");
 		contractService.contractInsert(contract, session);
 		
-		return "/redirect:/agreement";
+		return "redirect:/managementList";
 	}
 	
 
