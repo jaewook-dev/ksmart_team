@@ -4,7 +4,135 @@
 <!-- 지출_급여 레이아웃 -->
 <div id="menu1" class="container tab-pane fade">
 	<br>
-	<h3>급여</h3>
+
+	<!-- 급여 지출 현황 -->
+	<div class="row tm-content-row">
+		<div class="col-12 tm-block-col">
+			<div class="tm-bg-primary-dark tm-block-util">
+				<h4 class="tm-block-title">급여 지출 현황</h4>
+
+				<!-- charts.js -->
+				<canvas id="salaryChart"></canvas>
+			</div>
+		</div>
+	</div>
+	
+	
+	<div class="row tm-content-row">
+
+		<!-- 급여 계산 폼 -->
+		<div class="col-sm-12 col-md-12 col-lg-6 col-xl-5 tm-block-col">
+			<div class="tm-bg-primary-dark tm-block-salary">
+				<h4 class="tm-block-title">급여 등록</h4>
+				<form>
+					<div class="form-group">
+						<label>직원</label> 
+						<select class="custom-select tm-select-accounts">
+							<option></option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label>기본급여</label> 
+						<input class="form-control validate" name="spendUtilityPay">
+					</div>
+					<div class="form-group">
+						<label>시간외수당</label> 
+						<input class="form-control validate" name="spendUtilityContents">
+					</div>
+					<div class="form-group">
+						<label>상여금</label> 
+						<input class="form-control validate" name="spendUtilityContents">
+					</div>
+					<hr>
+					<button type="button"
+							class="btn btn-primary btn-block text-uppercase"
+							id="calculateSalary">계산</button>
+				</form>
+			</div>
+		</div>
+		
+		<!-- 급여 계산 내역 -->
+		<div class="col-sm-12 col-md-12 col-lg-6 col-xl-7 tm-block-col">
+			<div class="tm-bg-primary-dark tm-block-salary">
+				<h4 class="tm-block-title">계산</h4>
+				
+			</div>
+		</div>
+
+		<!-- 최근 등록된 급여 내역 -->
+		<div class="col-12 tm-block-col">
+			<div class="tm-bg-primary-dark tm-block-spend ">
+				<h4 class="tm-block-title">최근 등록내역</h4>
+				<table class="table">
+					<thead>
+						<tr>
+							<th>내역</th>
+							<th>금액</th>
+							<th>등록일자</th>
+							<th style="width: 20%">상세보기</th>
+						</tr>
+					</thead>
+					<tbody>
+						
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+
+	</div>
 </div>
+
+
+<script th:inline="javascript">
+
+	<!-- 급여 계산 -->
+
+
+	<!-- charts.js script-->
+	var sctx = document.getElementById('salaryChart').getContext('2d');
+	var salaryChart = new Chart(sctx, {
+	    // The type of chart we want to create
+	    type: 'bar',
+	
+	    // The data for our dataset
+	    data: {
+	        labels: ['1월', '2월', '3월', '4월', '5월', '6월', '7월','8월','9월','10월','11월','12월'],
+	        datasets: [{
+	            label: '급여 총지출 금액',
+	            
+	            backgroundColor: 'rgb(245, 166, 35)',
+	            borderColor: 'rgb(245, 166, 35)',
+	            data: [0,0,0,0,0,0,0,0,0,0,0,0]
+	        }]
+	    },
+	
+	    // Configuration options
+	    options: {
+	    	legend: {
+	             labels: {
+	                  fontColor: 'white' // label color
+	                 }
+	              },
+		    scales: {
+		    	// y축
+		        yAxes: [{
+		            ticks: {
+		                fontColor:'white' // y축 폰트 color
+		            }
+		     	}],
+		     	// x축
+		     	xAxes: [{
+		            ticks: {
+		            	
+		                fontColor:'white' // x축 폰트 color
+		            }
+		     	}]
+		    }
+	    }
+	});
+	
+	
+</script>
 
 </html>
