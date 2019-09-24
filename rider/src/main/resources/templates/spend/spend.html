@@ -43,7 +43,11 @@
 </th:block>
 <th:block layout:fragment="customScript">
 <script th:inline="javascript">
-
+	$(document).ready(function() {
+		var link = document.location.href;
+		var tab = link.split('/').pop();
+		$('a[href$='+tab+']').trigger('click');
+	})
 </script>
 </th:block>
 </html>
