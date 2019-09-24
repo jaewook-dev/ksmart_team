@@ -10,12 +10,13 @@
 				<div class="tm-bg-primary-dark tm-block tm-block-h-auto">
 					<div class="row">
 						<div class="col-12">
-						 <h2 class="tm-block-title d-inline-block">계약금 관리 등록</h2>
+						 <h2 class="tm-block-title d-inline-block">계약금 관리 수정</h2>
 						</div>
 					</div>
             		<div class="row tm-edit-product-row">
-              			<div  class="col-xl-12 col-lg-6 col-md-12" style="float:right;">
-                			<form action="/managementInsert" class="tm-edit-product-form" method="post">
+              			<div  class="col-xl-12 col-lg-6 col-md-12" style="float:right;"  th:each=" mlist : ${managementList}">
+                			<form action="/managementUpdate" class="tm-edit-product-form" method="post">
+                			<input type="hidden" name="contractManagementCode"  th:value="${mlist.contractManagementCode}">
 				                  <div class="form-group mb-3">
 				                    <label
 				                      for="name"
@@ -26,7 +27,7 @@
 				                      name="contractManagementAmout"
 				                      type="text"
 				                      class="form-control validate"
-				                      value = 0
+				                      th:value="${mlist.contractManagementAmout}"
 				                      required
 				                    />
 				                  </div>
@@ -40,7 +41,7 @@
 				                      name="contractManagementUnpaid"
 				                      type="text"
 				                      class="form-control validate"
-				                      value =0
+				                      th:value="${mlist.contractManagementUnpaid}"
 				                      required
 				                    />
 				                  </div>
@@ -51,7 +52,7 @@
 				                      >계약상태
 				                    </label>
 				                    <!-- required : 입력란 설정  -->
-				                    <select class="custom-select tm-select-accounts" name="contractManagementState">
+				                    <select class="custom-select tm-select-accounts" name="contractManagementState"  th:value="${mlist.contractManagementState}" >
 				                    	<option selected>계약상태</option>
 				                    	<option value= "정상">정상</option>
 				                    	<option value= "종료">종료</option>
@@ -68,13 +69,14 @@
 				                    <input
 				                      name="contractManagementContents"
 				                      type="text"
+				                       th:value="${contractManagementContents}"
 				                      class="form-control validate"
 				                    />
 				                  </div>
                   					<br/>
 					         		<div style="float:right;">
 					              		<div class="col-12">
-					               		 <button type="submit" class="btn btn-primary btn-block text-uppercase">계약단가표 등록</button>
+					               		 <button type="submit" class="btn btn-primary btn-block text-uppercase">계약금관리 수정</button>
 					              		</div>
 					              </div>
             				</form>

@@ -15,4 +15,6 @@ public interface ManagementMapper {
 	public String managementCodeMax();
 	
 	public List<ContractManagementDTO> managementList();
+	
+	public List<ManagementDTO> getManagementList(String managementCode);
 }

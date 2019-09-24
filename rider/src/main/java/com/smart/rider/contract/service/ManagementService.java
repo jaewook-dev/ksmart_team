@@ -40,4 +40,8 @@ public class ManagementService {
 		return managementMapper.managementList();
 	}
 	
+	public List<ManagementDTO> getManagementList(String managementCode){
+		
+		return managementMapper.getManagementList(managementCode);
+	}
 }
