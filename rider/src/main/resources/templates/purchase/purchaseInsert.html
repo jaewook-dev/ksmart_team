@@ -43,7 +43,7 @@
 									<label for="category">거래처</label> 
 									<select	class="custom-select tm-select-accounts" id="accountCode"
 										name="accountCode">
-											<option selected>거래처 선택</option>
+											<option  value="">거래처 선택</option>
 											<th:block th:each="pl : ${pList}">
 												<option th:value="${pl.accountCode}">[[${pl.accountName}]]</option>
 											</th:block>
@@ -104,6 +104,7 @@
 			$(function() {
 				$("#expire_date").datepicker();
 			});
+		
 		</script>
 	</form>
 </th:block>

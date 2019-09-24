@@ -18,6 +18,7 @@ import com.smart.rider.goods.mapper.GoodsMapper;
 import com.smart.rider.goods.service.GoodsPurchaseService;
 import com.smart.rider.goods.service.GoodsService;
 import com.smart.rider.goods.service.GoodsdbService;
+import com.smart.rider.member.dto.MemberDTO;
 
 @Controller
 public class GoodsController {
@@ -27,6 +28,52 @@ public class GoodsController {
 	private GoodsdbService goodsdbservice;
 	@Autowired
 	private GoodsPurchaseService goodsPurchaseService;
+	
+	//상품삭제요청
+	@GetMapping("/goodsDelete")
+	public String goodsDelete(@RequestParam(value="goodsCode")String goodsCode,Model model) {
+		
+		model.addAttribute("goodsCode", goodsService.getGoodsList(goodsCode));
+		
+		return "goods/goodsDelete";
+	}
+	//상품삭제
+	@PostMapping("/goodsDelete")
+	public String goodsDelete(GoodsDTO goodsDto,MemberDTO memberDto,MemberDTO memberPw,Model model) {
+		int result = goodsService.goodsDelete(goodsDto.getGoodsCode()
+											,memberDto.getMemberId(),memberDto.getMemberPw());
+		if(result == 0) {
+			model.addAttribute("result","비밀번호가 불일치합니다");
+			model.addAttribute("goodsCode", goodsService.getGoodsList(goodsDto.getGoodsCode()));
+			model.addAttribute("memberId", memberDto.getMemberId());
+			return "goods/goodsDelete";
+		}
+		return "redirect:/goodsList";
+		
+	}
+	//상품 수정하기
+	@GetMapping("/goodsUpdate")
+	public String goodsUpdate(@RequestParam(value="goodsCode")String goodsCode,Model model) {
+		model.addAttribute("goodsCode", goodsService.getGoodsList(goodsCode));	
+		
+		return "goods/goodsUpdate";
+	}
+	//수정처리
+	@PostMapping("/goodsUpdate")
+	public String goodsUpdate(GoodsDTO goodsDto) {
+		//System.out.println(goodsDto);
+		goodsService.goodsUpdate(goodsDto);
+		return "redirect:/goodsList";		
+	}
+		 
+	
+	//상품상세보기
+	@GetMapping("/getGoodsList")
+	public String getGoodsList(@RequestParam(value="goodsCode")String goodsCode,Model model) {
+		//System.out.println(model.addAttribute("goodsCode", goodsService.getGoodsList(goodsCode)));
+		model.addAttribute("goodsCode", goodsService.getGoodsList(goodsCode));
+		return "goods/getGoodsList";		
+	}
 	//02 판매상품등록 요청
 	//문영성
 	@GetMapping("/goodsInsert")
@@ -42,7 +89,7 @@ public class GoodsController {
 		  //System.out.println("판매상품확인"+goodsDto);
 		  String contractShopCode = (String)session.getAttribute("SCODE");
 		  //System.out.println("매장코드"+contractShopCode);
-		  goodsDto.setContractShopCode(contractShopCode);
+		  goodsDto.setContractShopCode(contractShopCode);		 
 		  goodsService.goodsInsert(goodsDto);
 		  return "redirect:goodsList";
 	  }
@@ -52,8 +99,9 @@ public class GoodsController {
 	@GetMapping("/goodsList")
 	public String goodsList(Model model) {
 		List<GoodsHapDTO> gList = goodsService.goodsList();
-		System.out.println(model.addAttribute("gList", goodsService.goodsList()+"<---------------------GoodsController.java------확인"));
-		model.addAttribute("gList", gList);
+		//System.out.println(gList);
+		//System.out.println(model.addAttribute("gList",gList+"<---------------------GoodsController.java------확인"));
+		model.addAttribute("gList", goodsService.goodsList());
 		return "/goods/goodsList";
 	}
 }

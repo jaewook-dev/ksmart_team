@@ -22,6 +22,21 @@ public class GoodsService {
 	
 	private GoodsMapper goodsMapper;
 	
+	//상품삭제
+	public int goodsDelete(String goodsCode,String memberId,String memberPw) {
+		return goodsMapper.goodsDelete(goodsCode, memberId, memberPw);
+	}
+	
+	//상품수정처리	
+	public int goodsUpdate(GoodsDTO goodsDto) {
+		return goodsMapper.goodsUpdate(goodsDto);
+	}
+	
+	//판매상품 상세보기
+	public GoodsHapDTO getGoodsList(String goodsCode) {
+		return goodsMapper.getGoodsList(goodsCode);
+	}
+	
 	//01판매상품 리스트조회 메서드
 	//문영성
 	public List<GoodsHapDTO> goodsList(){
@@ -32,7 +47,7 @@ public class GoodsService {
 	//02판매상품 등록메서드
 	public int goodsInsert(GoodsDTO goodsDto) {
 		String goodsCode = "G" + goodsMapper.goodsCodeCount();
-		System.out.println(goodsCode+"lllllllllllllllllllllllllll");
+		//System.out.println(goodsCode+"lllllllllllllllllllllllllll");
 		
 		if(goodsCode.equals("Gnull")) {
 			goodsCode = "G0001";

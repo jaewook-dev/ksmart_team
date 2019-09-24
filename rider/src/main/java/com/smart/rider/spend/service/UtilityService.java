@@ -43,8 +43,8 @@ public class UtilityService {
 	}
 	
 	// 년도에 따른 월별 공과금 지출 금액 
-	public List<UtilityPay> utilityPayMonth(String utilityYear, String contractShopCode){
-		return utilityMapper.utilityPayMonth(utilityYear, contractShopCode);
+	public List<UtilityPay> utilityPayMax(String utilityYear, String contractShopCode){
+		return utilityMapper.utilityPayMax(utilityYear, contractShopCode);
 	}
 	
 	// 지출_공과금 최근 등록 목록

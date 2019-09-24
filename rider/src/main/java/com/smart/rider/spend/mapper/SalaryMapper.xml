@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smart.rider.spend.mapper.SalaryMapper">
+
+	<!-- 지출_급여 직원 select box list -->
+	<select id="salarySelectBox" resultType="com.smart.rider.member.dto.MemberDTO" parameterType="String">
+		SELECT 
+			 member_id 			AS memberId
+			,member_name		AS memberName
+			,member_level		AS meberLevel
+			,contract_shop_code	AS contractShopCode
+		FROM member
+		WHERE member_level = '직원'  AND contract_shop_code = #{contractShopCode}	
+	</select>
+	
+</mapper>
