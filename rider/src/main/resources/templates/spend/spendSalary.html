@@ -21,27 +21,29 @@
 	<div class="row tm-content-row">
 
 		<!-- 급여 계산 폼 -->
-		<div class="col-sm-12 col-md-12 col-lg-6 col-xl-5 tm-block-col">
+		<div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
 			<div class="tm-bg-primary-dark tm-block-salary">
 				<h4 class="tm-block-title">급여 등록</h4>
 				<form>
 					<div class="form-group">
 						<label>직원</label> 
-						<select class="custom-select tm-select-accounts">
-							<option></option>
+						<select class="custom-select tm-select-accounts" name="memberId">
+							<th:block th:each="employee : ${employeeSelect}">
+								<option th:text="${employee.memberName}" th:value="${employee.memberId}"></option>
+							</th:block>
 						</select>
 					</div>
-					<div class="form-group">
+					<div class="form-group num">
 						<label>기본급여</label> 
-						<input class="form-control validate" name="spendUtilityPay">
+						<input class="form-control validate" name="spendSalaryPay" id="spendSalaryPay" onkeyup="inputNumberFormat(this)">
 					</div>
 					<div class="form-group">
 						<label>시간외수당</label> 
-						<input class="form-control validate" name="spendUtilityContents">
+						<input class="form-control validate" name="spendSalaryOverpay" id="spendSalaryOverpay" onkeyup="inputNumberFormat(this)">
 					</div>
 					<div class="form-group">
 						<label>상여금</label> 
-						<input class="form-control validate" name="spendUtilityContents">
+						<input class="form-control validate" name="spendSalaryBonus" id="spendSalaryBonus" onkeyup="inputNumberFormat(this)">
 					</div>
 					<hr>
 					<button type="button"
@@ -52,9 +54,29 @@
 		</div>
 		
 		<!-- 급여 계산 내역 -->
-		<div class="col-sm-12 col-md-12 col-lg-6 col-xl-7 tm-block-col">
+		<div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
 			<div class="tm-bg-primary-dark tm-block-salary">
 				<h4 class="tm-block-title">계산</h4>
+				<div class="form-group">
+						<label>4대보험 총액</label> 
+						<input class="form-control validate" name="spendSalaryInsurance" id="spendSalaryInsurance" style="background-color: #54657D" readonly>
+				</div>
+				<div class="form-group">
+						<label>근로자 부담액</label> 
+						<input class="form-control validate" name="spendSalaryEmployee" id="spendSalaryEmployee" style="background-color: #54657D" readonly>
+				</div>
+				<div class="form-group">
+						<label>사업자 부담액</label> 
+						<input class="form-control validate" name="spendSalaryShop" id="spendSalaryShop" style="background-color: #54657D" readonly>
+				</div>
+				<div class="form-group">
+						<label>실수령액</label> 
+						<input class="form-control validate" name="spendSalaryNetpay" id="spendSalaryNetpay" style="background-color: #54657D" readonly >
+				</div>
+				<hr>
+				<button type="button"
+							class="btn btn-primary btn-block text-uppercase"
+							id="insertSalary">등록</button>
 				
 			</div>
 		</div>
@@ -66,7 +88,7 @@
 				<table class="table">
 					<thead>
 						<tr>
-							<th>내역</th>
+							<th>직원명</th>
 							<th>금액</th>
 							<th>등록일자</th>
 							<th style="width: 20%">상세보기</th>
@@ -82,12 +104,52 @@
 
 	</div>
 </div>
-
-
 <script th:inline="javascript">
 
-	<!-- 급여 계산 -->
+	<!-- 숫자 컴마 자동 입력 -->
+	function inputNumberFormat(obj) {
+	    obj.value = comma(uncomma(obj.value));
+	}
 
+	function comma(str) { // 콤마 추가
+	    str = String(str);
+	    return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+	}
+
+	function uncomma(str) { // 콤마 제거
+	    str = String(str);
+	    return str.replace(/[^\d]+/g, '');
+	}
+
+
+
+	<!-- 급여 계산 -->
+	$('#calculateSalary').click(function() {
+		
+		var salaryPay = Number(uncomma($('#spendSalaryPay').val()));
+		var salaryOverpay = Number(uncomma($('#spendSalaryOverpay').val()));
+		var salaryBonus = Number(uncomma($('#spendSalaryBonus').val()));
+		
+		// 계산
+		var salaryTotal = salaryPay + salaryOverpay + salaryBonus;
+		var pension = salaryTotal * 0.09;
+		var health = salaryTotal * 0.0646;
+		var treatment = health * 0.0851;
+		var hiredEmployee = salaryTotal * 0.0065;
+		var hiredShop = salaryTotal * 0.009;
+		var workTax = salaryTotal
+		
+		var salaryInsurance = pension + health + treatment + hiredEmployee + hiredShop; // 4대 보험 총액
+		var salaryEmployee = (pension * 0.5) + (health * 0.5) + (treatment * 0.5) + hiredEmployee; // 근로자 부담 금액
+		var salaryShop = (pension * 0.5) + (health * 0.5) + (treatment * 0.5) + hiredShop; // 사업자 부담 금액
+		var salaryNetpay = salaryTotal - salaryEmployee // 실수령액
+
+		$('#spendSalaryInsurance').val(comma(Math.ceil(salaryInsurance)));
+		$('#spendSalaryEmployee').val(comma(Math.ceil(salaryEmployee)));
+		$('#spendSalaryShop').val(comma(Math.ceil(salaryShop)));
+		$('#spendSalaryNetpay').val(comma(Math.ceil(salaryNetpay)));
+		
+	});
 
 	<!-- charts.js script-->
 	var sctx = document.getElementById('salaryChart').getContext('2d');
