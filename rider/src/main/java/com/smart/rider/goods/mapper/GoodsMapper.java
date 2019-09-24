@@ -16,6 +16,9 @@ public interface GoodsMapper {
 	//코드자동증가
 	public String goodsCodeCount();
 	
+	//상품상세보기메서드
+	public GoodsHapDTO getGoodsList(String goodsCode);
+	
 	//01판매상품 리스트 조회 메서드
 	//테이블 3개조인.. 문영성
 	public List<GoodsHapDTO> goodsList();

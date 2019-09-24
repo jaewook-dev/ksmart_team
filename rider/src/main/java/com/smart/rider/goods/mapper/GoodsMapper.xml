@@ -31,9 +31,34 @@
     	<result column="shop_name"     		property="shopName"/>
     	<result column="shop_address"    	property="shopAddress"/>
     	<result column="shop_phone"    	property="shopPhone"/>
+    	<result column="goods_code"	 	property="goodsCode"/>
+    	<result column="goods_pay"	 	property="goodsPay"/>
+    	<result column="goods_position"     property="goodsPosition"/>
+    	<result column="goods_rental"     property="goodsRental"/>
+    	<result column="goods_state"     		property="goodsState"/>
+    	<result column="goods_completion_state"    	property="goodsCompletionState"/>
+    	<result column="goods_rental_state"    	property="goodsRentalState"/>
+    	<result column="goods_inventory_date"     property="goodsInventoryDate"/>
+    	<result column="goods_date"     		property="goodsDate"/>
+    
     	
 	</resultMap>
-	<!-- 상품DB상세조회  -->
+	<!-- 상품상세조회  -->
+	<select id="getGoodsList" resultMap="ASid" parameterType="String">
+		SELECT 
+			*
+			FROM
+			goods g
+			INNER JOIN
+			purchase p			 
+			INNER JOIN 
+			goods_database gb
+			ON 
+			g.goods_database_code = p.goods_database_code			
+			and gb.goods_database_code = p.goods_database_code
+			WHERE 
+			g.goods_code=#{goodsCode}
+	</select>
 	
 	
 	<!-- 상품등록  -->
@@ -75,7 +100,8 @@
 			
 
 	<select id="goodsList"	resultMap="ASid" parameterType="String">
-		SELECT *
+			SELECT 
+			*
 			FROM
 			goods g
 			INNER JOIN
@@ -83,8 +109,8 @@
 			INNER JOIN 
 			goods_database gb
 			ON 
-			gb.goods_database_code = p.goods_database_code
-			and g.goods_database_code = p.goods_database_code
+			g.goods_database_code = p.goods_database_code			
+			and gb.goods_database_code = p.goods_database_code
 	
 	</select>
 </mapper>
