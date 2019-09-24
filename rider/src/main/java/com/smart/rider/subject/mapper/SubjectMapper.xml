@@ -58,6 +58,18 @@
             AND
                 sub.${subjectKey} LIKE CONCAT('%',#{subjectValue},'%')
         </if>
+        <if test="beginDate neq ''.toString() and endDate eq ''.toString()">
+        	AND 
+        		sub.subject_date between #{beginDate} and NOW()		
+        </if>
+        <if test="beginDate eq ''.toString() and endDate neq ''.toString()">
+        	AND 
+        		sub.subject_date between '2000-01-01' and #{endDate}
+        </if>
+        <if test="beginDate neq ''.toString() and endDate neq ''.toString()">
+        	AND 
+        		sub.subject_date between #{beginDate} and #{endDate}
+        </if>
 	</select>
 	
 	<!-- 삭제 가능한 계정과목 리스트 -->
