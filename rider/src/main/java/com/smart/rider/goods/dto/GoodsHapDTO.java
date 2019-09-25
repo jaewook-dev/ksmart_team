@@ -45,6 +45,11 @@ public class GoodsHapDTO {
 	private String shopName;
 	private String shopAddress;
 	private String shopPhone;
+	private String goodsRentalCode;	
+	private String goodsRentalPeriodPay;
+	private String goodsRentalDeposit;
+	private String goodsRentalPosition;
+	private String goodsRentalDate;
 	
 	
 	
@@ -67,7 +72,40 @@ public class GoodsHapDTO {
 				+ returnReason + ", returnDate=" + returnDate + ", accountMarket=" + accountMarket + ", accountName="
 				+ accountName + ", accountPhone=" + accountPhone + ", accountAddress=" + accountAddress
 				+ ", accountCategory=" + accountCategory + ", accountDate=" + accountDate + ", shopCode=" + shopCode
-				+ ", shopName=" + shopName + ", shopAddress=" + shopAddress + ", shopPhone=" + shopPhone + "]";
+				+ ", shopName=" + shopName + ", shopAddress=" + shopAddress + ", shopPhone=" + shopPhone
+				+ ", goodsRentalCode=" + goodsRentalCode + ", goodsRentalPeriodPay=" + goodsRentalPeriodPay
+				+ ", goodsRentalDeposit=" + goodsRentalDeposit + ", goodsRentalPosition=" + goodsRentalPosition
+				+ ", goodsRentalDate=" + goodsRentalDate + "]";
+	}
+	public String getGoodsRentalCode() {
+		return goodsRentalCode;
+	}
+	public void setGoodsRentalCode(String goodsRentalCode) {
+		this.goodsRentalCode = goodsRentalCode;
+	}
+	public String getGoodsRentalPeriodPay() {
+		return goodsRentalPeriodPay;
+	}
+	public void setGoodsRentalPeriodPay(String goodsRentalPeriodPay) {
+		this.goodsRentalPeriodPay = goodsRentalPeriodPay;
+	}
+	public String getGoodsRentalDeposit() {
+		return goodsRentalDeposit;
+	}
+	public void setGoodsRentalDeposit(String goodsRentalDeposit) {
+		this.goodsRentalDeposit = goodsRentalDeposit;
+	}
+	public String getGoodsRentalPosition() {
+		return goodsRentalPosition;
+	}
+	public void setGoodsRentalPosition(String goodsRentalPosition) {
+		this.goodsRentalPosition = goodsRentalPosition;
+	}
+	public String getGoodsRentalDate() {
+		return goodsRentalDate;
+	}
+	public void setGoodsRentalDate(String goodsRentalDate) {
+		this.goodsRentalDate = goodsRentalDate;
 	}
 	public String getShopCode() {
 		return shopCode;

@@ -23,6 +23,7 @@ public interface GoodsMapper {
 	public int goodsUpdate(GoodsDTO goodsDto);
 	
 	//상품상세보기메서드
+	
 	public GoodsHapDTO getGoodsList(String goodsCode);
 	
 	//01판매상품 리스트 조회 메서드

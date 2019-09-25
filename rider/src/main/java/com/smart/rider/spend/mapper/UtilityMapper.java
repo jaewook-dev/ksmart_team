@@ -1,6 +1,7 @@
 package com.smart.rider.spend.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -12,7 +13,7 @@ import com.smart.rider.subject.dto.SubjectDTO;
 public interface UtilityMapper {
 	
 	// 지출_공과금 최근 등록 목록
-	public List<UtilityDTO> utilityList(String contractShopCode);
+	public List<UtilityDTO> utilityList(Map<String, Object> map);
 	
 	// 지출_공과금 등록 계정과목 selectBox
 	public List<SubjectDTO> subjectSelectBox();
@@ -28,5 +29,11 @@ public interface UtilityMapper {
 	
 	// 년도에 따른 월별 공과금 지출 금액 유무 체크
 	public List<UtilityPay> utilityPayCheck(String checkMonth, String contractShopCode);
+	
+	// 지출_공과금 등록 내역 페이징 AllCount
+	public int utilityAllCount(String contractShopCode);
+	
+	// 지출_공과금 검색 내역 페이징 Count
+	public int utilitySearchCount(Map<String, Object> map);
 
 }

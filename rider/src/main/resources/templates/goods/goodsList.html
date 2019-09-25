@@ -14,6 +14,24 @@
 					<div class="tm-bg-primary-dark tm-block tm-block-h-auto-copy">
 						<form action="goodsDbSearchList" class="tm-search-form row" method="post">
 							<div class="form-group col-3">
+								<select class="custom-select" name="subjectDate">
+									<option value="">등록일자</option>
+								</select>
+							</div>
+							<div class="form-group col-3">
+								<input id="beginDate" name="beginDate" 
+									   type="text" class="form-control validate"/>
+							</div>
+							<div class="form-group col-1 text-center">
+								<h2 class="tm-site-title mb-0">~</h2>
+							</div>
+							<div class="form-group col-3">
+								<input id="endDate" name="endDate" 
+									   type="text" class="form-control validate"/>
+							</div>
+							<div class="form-group col-2">
+							</div>
+							<div class="form-group col-3">
 								
 								<select class="custom-select" name="select">
 									
@@ -46,7 +64,7 @@
 										<th scope="col">상품카테고리</th>										
 										<th scope="col">판매가격</th>																	
 										<th scope="col">상품상태</th>									
-										<th scope="col">재고확인일자</th>
+										<th scope="col">대여가능여부</th>
 										<th scope="col">상세보기</th>
 										<th scope="col">삭제하기</th>
 										
@@ -58,7 +76,7 @@
 										<th th:text="${g.goodsDbCategory}"></th>																				
 										<th th:text="${g.goodsPay}"></th>										
 										<th th:text="${g.goodsState}"></th>										
-										<th th:text="${g.goodsInventoryDate}"></th>
+										<th th:text="${g.goodsRental}"></th>
 										<td>
 										<a
 										 th:href="@{/getGoodsList(goodsCode=${g.goodsCode})}"
@@ -89,7 +107,7 @@
 				<div class="col-sm-12 col-md-12 col-lg-4 col-xl-4 tm-block-col">
 					<div
 						class="tm-bg-primary-dark tm-block tm-block-product-categories">
-						<h2 class="tm-block-title">상품 카테고리</h2>
+						<h2 class="tm-block-title">대여상품</h2>
 						<div class="tm-product-table-container">
 							<table class="table tm-table-small tm-product-table">
 								<tbody>
