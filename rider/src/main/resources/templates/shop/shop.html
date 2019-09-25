@@ -16,8 +16,8 @@
             	
             	
 				<div class="row tm-content-row">
-					<div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
-						<div class="tm-bg-primary-dark tm-block-con">
+					<div class="col-sm-12 col-md-12 col-lg-5 col-xl-5 tm-block-col">
+						<div class="tm-bg-primary-dark tm-block-con tm-block-scroll">
 						<h2 class="tm-block-title">POS관리</h2>
 							 <table class="table">
                             <thead>
@@ -42,59 +42,75 @@
 							</div>
 							
 						</div>
+				
 					</div>
-					
-					<div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
-						<div class="tm-bg-primary-dark tm-block-con">
+						<div class="col-sm-12 col-md-12 col-lg-7 col-xl-7 tm-block-col">
+							<div class="tm-bg-primary-dark tm-block-con tm-block-scroll">
+							<h2 class="tm-block-title">매장릴레이션관리</h2>
+								 <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">매장릴레이션코드</th>
+                                    <th scope="col">매장코드</th>
+                                    <th scope="col">매장점주 아이디코드</th>
+                                    <th scope="col">사용유무</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                            	
+                             	<tr th:each="unitNew : ${unitNew}">
+									<th th:text="${unitNew.contractUnitMonth}"></th>
+									<th th:text="${unitNew.contractUnitOneyear}"></th>
+									<th th:text="${unitNew.contractUnitTwoyear}"></th>
+                                </tr>
+                            </tbody>
+                            
+						</table>
+						<div>
+								<br/><br/><button class="btn btn-secondary btn-sm" type="button" onclick="location.href='unitList.html'">계약매장코드조회</button>
+								
+											<span style="float:right;"><button class="btn btn-secondary btn-sm" type="button" onclick="location.href='unitInsert.html' ">계약매장코드 등록</button></span>
+							</div>
+							</div>
+						</div>
+					<div class="col-sm-12  tm-block-col">
+						<div class="tm-bg-primary-dark tm-block-con tm-block-scroll">
 							<h2 class="tm-block-title">매장 조회</h2>
 							 	<table class="table">
 		                            <thead>
 		                                <tr>
+		                                	<th scope="col">점주 아이디</th>
 		                                    <th scope="col">등록된 매장이름</th>
 		                                    <th scope="col">매장주소</th>
 		                                    <th scope="col">매장 전화번호</th>
+		                                    
 		                                </tr>
 		                            </thead>
 		                            <tbody>	                            	
-		                             	<tr th:each="unitNew : ${unitNew}">
-											<th th:text="${unitNew.contractUnitMonth}"></th>
-											<th th:text="${unitNew.contractUnitOneyear}"></th>
-											<th th:text="${unitNew.contractUnitTwoyear}"></th>
+		                             	<tr th:each="slist : ${shopList}">
+		                             		<th th:text="${slist.memberId}"></th>
+											<th th:text="${slist.shopName}"></th>
+											<th th:text="${slist.shopAddress}"></th>
+											<th th:text="${slist.shopPhone}"></th>
 		                                </tr>
 		                            </tbody>
+	                            								
 								</table>
+								<br/><br/>
+								<div>
+									
+									<button type="button" id="insertBtn"
+										onclick="location.href='shopInsert'" style="float: right"
+										class="btn btn-primary text-uppercase">매장등록</button>
+							
+								
+								</div>
 						</div>
 					</div>
 					
       
-                <div class="col-12 tm-block-col">
-                	<h2 class="tm-block-title">매장 직원조회</h2>
-                    <div class="tm-bg-primary-dark tm-block tm-block-taller tm-block-scroll">
-                        
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th scope="col">매장 직원 이름</th>
-                                    <th scope="col">직원 전화번호</th>
-                                    <th scope="col">직원 주소</th>
-                                    <th scope="col">월 근로 시간</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th scope="row"><b>아이디(FK)</b></th>
-                                    <td><b>2018.03.15</b></td>
-                                    <td><b>2019.03.15</b></td>
-                                    <td>
-                                    	<div class="tm-status-circle moving">	
-                                    	</div><b>정상</b>
-                                    </td>
-                                </tr>
-                              
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+             
             </div>
         </div>
 
