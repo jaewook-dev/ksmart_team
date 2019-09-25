@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.smart.rider.spend.dto.JoinUtilityDTO;
 import com.smart.rider.spend.dto.UtilityDTO;
 import com.smart.rider.spend.dto.UtilityPay;
 import com.smart.rider.subject.dto.SubjectDTO;
@@ -35,5 +36,8 @@ public interface UtilityMapper {
 	
 	// 지출_공과금 검색 내역 페이징 Count
 	public int utilitySearchCount(Map<String, Object> map);
+	
+	// 지출_공과금 등록 내역 상세보기
+	public List<JoinUtilityDTO> utilityDetails(String spendUtilityCode);
 
 }

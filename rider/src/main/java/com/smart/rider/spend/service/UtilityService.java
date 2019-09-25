@@ -8,6 +8,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.smart.rider.spend.dto.JoinUtilityDTO;
 import com.smart.rider.spend.dto.UtilityDTO;
 import com.smart.rider.spend.dto.UtilityPay;
 import com.smart.rider.spend.mapper.UtilityMapper;
@@ -18,6 +19,11 @@ public class UtilityService {
 	
 	@Autowired
 	private UtilityMapper utilityMapper;
+	
+	// 지출_공과금 등록 내역 상세보기
+	public List<JoinUtilityDTO> utilityDetails(String spendUtilityCode) {
+		return utilityMapper.utilityDetails(spendUtilityCode);
+	}
 	
 	// 년도에 따른 월별 공과금 지출 금액 유무 체크
 	public List<UtilityPay> utilityPayCheck(String utilityYear, String contractShopCode){

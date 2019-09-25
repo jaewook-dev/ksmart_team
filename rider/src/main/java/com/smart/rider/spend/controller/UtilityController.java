@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.smart.rider.spend.dto.JoinUtilityDTO;
 import com.smart.rider.spend.dto.UtilityDTO;
 import com.smart.rider.spend.dto.UtilityPay;
 import com.smart.rider.spend.service.UtilityService;
@@ -25,7 +26,12 @@ public class UtilityController {
 	
 	// 지출_공과금 등록내역 상세보기
 	@GetMapping("/spendUtilityDetails")
-	public String spendUtilityDetails() {
+	public String spendUtilityDetails(String spendUtilityCode, Model model) {
+		//System.out.println(spendUtilityCode + " <-- spendUtilityCode spendUtilityDetails UtilityController.java");
+		List<JoinUtilityDTO> detailsList = utilityService.utilityDetails(spendUtilityCode);
+		//System.out.println(detailsList + " <-- detailsList spendUtilityDetails UtilityController.java");
+		model.addAttribute("detailsList", detailsList);
+		
 		return "spend/spendUtilityDetails";
 	}
 	

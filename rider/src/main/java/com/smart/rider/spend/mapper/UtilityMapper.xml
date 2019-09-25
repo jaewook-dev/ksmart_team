@@ -25,6 +25,20 @@
 		<result column="subject_date" 	property="subjectDate"/>
 	</resultMap>
 	
+	<!-- 지출_공과금 등록 내역 상세보기 -->
+	<select id="utilityDetails" parameterType="String" resultMap="joinUtilityMap">
+		SELECT 
+			 su.spend_utility_code
+			,su.subject_code
+			,su.contract_shop_code
+			,su.spend_utility_pay
+			,su.spend_utility_contents
+			,su.spend_utility_date
+			,sub.subject_name
+		FROM spend_utility su, subject sub
+		WHERE su.subject_code = sub.subject_code AND spend_utility_code = #{spendUtilityCode}; 
+	</select>
+	
 	<!-- 년도에 따른 월별 공과금 지출 금액 유무 체크 -->
 	<select id="utilityPayCheck" resultType="com.smart.rider.spend.dto.UtilityPay" parameterType="String">
 		SELECT 

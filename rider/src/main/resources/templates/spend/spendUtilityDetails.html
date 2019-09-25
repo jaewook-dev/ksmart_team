@@ -30,22 +30,22 @@
 							<!-- 등록내역 상세보기 수정 폼-->
 							<form action="/spendUtilityUpdate" method="post">
 								<div class="tm-bg-primary-dark">
-									<table class="table">
+									<table class="table" th:each="list : ${detailsList}">
 										<tr>
 											<td class="text-center" style="width: 15%"><label for="name">내역</label></td>
-											<td><input type="text" class="form-control validate"> </td>
+											<td><input type="text" class="form-control validate" th:value="${list.subjectName}"></td>
 										</tr>
 										<tr>
 											<td class="text-center" style="width: 15%">금액</td>
-											<td><input type="text" class="form-control validate"> </td>
+											<td><input type="text" class="form-control validate" th:value="${list.spendUtilityPay}"> </td>
 										</tr>
 										<tr>
 											<td class="text-center" style="width: 15%">등록날짜</td>
-											<td><input type="text" class="form-control validate"> </td>
+											<td><input type="text" class="form-control validate" th:value="${list.spendUtilityDate}"> </td>
 										</tr>
 										<tr>
 											<td class="text-center" style="width: 15%">내용</td>
-											<td><textarea rows="5" cols="6" class="form-control validate"></textarea> </td>
+											<td><textarea rows="5" cols="6" class="form-control validate" th:text="${list.spendUtilityContents}"></textarea> </td>
 										</tr>
 									</table>
 								</div>
