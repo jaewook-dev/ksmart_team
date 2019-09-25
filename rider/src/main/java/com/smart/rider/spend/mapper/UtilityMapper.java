@@ -30,7 +30,10 @@ public interface UtilityMapper {
 	// 년도에 따른 월별 공과금 지출 금액 유무 체크
 	public List<UtilityPay> utilityPayCheck(String checkMonth, String contractShopCode);
 	
-	// 지출_공과금 등록 목록 페이징 AllCount
-	public int utilityAllCount();
+	// 지출_공과금 등록 내역 페이징 AllCount
+	public int utilityAllCount(String contractShopCode);
+	
+	// 지출_공과금 검색 내역 페이징 Count
+	public int utilitySearchCount(Map<String, Object> map);
 
 }

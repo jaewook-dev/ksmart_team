@@ -84,12 +84,26 @@
 		
 	</select>
 	
-	<!-- 지출_공과금 등록 목록 페이징 AllCount -->
-	<select id="utilityAllCount" resultType="int">
+	<!-- 지출_공과금 등록 내역 페이징 AllCount -->
+	<select id="utilityAllCount" resultType="int" parameterType="String">
+		SELECT 
+			 COUNT(*)
+		FROM spend_utility su, subject sub
+		WHERE su.subject_code = sub.subject_code AND contract_shop_code = #{contractShopCode}
+		ORDER BY spend_utility_date DESC;
+	</select>
+	
+	<!-- 지출_공과금 검색 내역 페이징 Count -->
+	<select id="utilitySearchCount" resultType="int" parameterType="java.util.Map">
 		SELECT 
 			 COUNT(*)
 		FROM spend_utility su, subject sub
 		WHERE su.subject_code = sub.subject_code AND contract_shop_code = 'SR0001'
+		<!-- 지출_공과금 검색 조건문 -->
+        <if test="utilityKey neq null and utilityValue neq ''.toString()">
+            AND
+                sub.${utilityKey} LIKE CONCAT('%',#{utilityValue},'%')
+        </if>
 		ORDER BY spend_utility_date DESC;
 	</select>
 	
@@ -105,11 +119,17 @@
 			,sub.subject_name
 		FROM spend_utility su, subject sub
 		WHERE su.subject_code = sub.subject_code AND contract_shop_code = #{contractShopCode} 
+        
+        <!-- 지출_공과금 검색 조건문 -->
+        <if test="utilityKey neq null and utilityValue neq ''.toString()">
+            AND
+                sub.${utilityKey} LIKE CONCAT('%',#{utilityValue},'%')
+        </if>
 		ORDER BY su.spend_utility_date DESC
-		
-		<!-- 다른 메서드 호출시 반영되지 않기위해 걸어놓은 조건문 -->
+        <!-- 다른 메서드 호출시 반영되지 않기위해 걸어놓은 조건문 -->
         <if test="startRow neq lastPage"> 
             LIMIT #{startRow},#{rowPerPage};
         </if>
+        
 	</select>
 </mapper>

@@ -20,7 +20,7 @@ public class UtilityService {
 	private UtilityMapper utilityMapper;
 	
 	// 년도에 따른 월별 공과금 지출 금액 유무 체크
-	public List<UtilityPay> utilityPayCheck(String utilityYear,String contractShopCode){
+	public List<UtilityPay> utilityPayCheck(String utilityYear, String contractShopCode){
 		List<UtilityPay> list = new ArrayList<>();
 		
 		String month = "";
@@ -48,7 +48,7 @@ public class UtilityService {
 	}
 	
 	// 지출_공과금 최근 등록 목록 paging
-    public Map<String, Object> utilityList(int currentPage, String contractShopCode){
+    public Map<String, Object> utilityList(int currentPage, String contractShopCode, String utilityKey, String utilityValue, String beginDate, String endDate){
         
         // 페이지에 보여줄 행의 개수 ROW_PER_PAGE = 4로 고정
         final int ROW_PER_PAGE = 4; 
@@ -56,31 +56,39 @@ public class UtilityService {
         // 페이지에 보여줄 첫번째 페이지 번호는 1로 초기화
         int startPageNum = 1;
         
-        // 처음 보여줄 마지막 페이지 번호는 4
+        // 처음 보여줄 마지막 페이지 번호는 5
         int lastPageNum = 5;
         
         // 현재 페이지가 lastPageNum/2 보다 클 경우
         if(currentPage > lastPageNum/2) {
-            // 보여지는 페이지 첫번째 페이지 번호는 현재페이지 - ((마지막 페이지 번호/2) -1 )
-            // ex 현재 페이지가 6이라면 첫번째 페이지번호는 2
+            // 보여지는 페이지 첫번째 페이지 번호는 현재페이지 - 2
+            // ex 현재 페이지가 3이라면 첫번째 페이지번호는 1
             startPageNum = currentPage - 2;
             
-            // 보여지는 마지막 페이지 번호는 현재 페이지 번호 + 현재 페이지 번호 - 1 
+            // 보여지는 마지막 페이지 번호는 현재 페이지 번호 + 2
             lastPageNum = currentPage + 2;
         }
         
         // Map Data Type 객체 참조 변수 map 선언
         // HashMap() 생성자 메서드로 새로운 객체를 생성, 생성된 객체의 주소값을 객체 참조 변수에 할당
         Map<String, Object> map = new HashMap<String, Object>();
-        // 한 페이지에 보여지는 첫번째 행은 (현재페이지 - 1) * 10
+        // 한 페이지에 보여지는 첫번째 행은 (현재페이지 - 1) * 4
         int startRow = (currentPage - 1)*ROW_PER_PAGE;
         // 값을 map에 던져줌
         map.put("startRow", startRow);
         map.put("rowPerPage", ROW_PER_PAGE);
         map.put("contractShopCode", contractShopCode);
+        map.put("utilityKey", utilityKey);
+        map.put("utilityValue", utilityValue);
+        map.put("beginDate", beginDate);
+        map.put("endDate", endDate);
         
-        // DB 행의 총 개수를 구하는 getBoardAllCount() 메서드를 호출하여 double Date Type의 boardCount 변수에 대입
-        double utilityCount = utilityMapper.utilityAllCount();
+        // DB 행의 총 개수를 구하는 getBoardAllCount() 메서드를 호출하여 double Date Type의 utilityCount 변수에 대입
+        double utilityCount = utilityMapper.utilityAllCount(contractShopCode);
+        
+        if(!utilityValue.equals("")) {
+        	utilityCount = utilityMapper.utilitySearchCount(map);
+        } 
         
         // 마지막 페이지번호를 구하기 위해 총 개수 / 페이지당 보여지는 행의 개수 -> 올림 처리 -> lastPage 변수에 대입
         int lastPage = (int)(Math.ceil(utilityCount/ROW_PER_PAGE));
@@ -90,8 +98,8 @@ public class UtilityService {
         	//System.out.println(lastPage + " < -- lastPage utilityList() UtilityService.java");
         	lastPage = 1;
         }
-        // 현재 페이지가 (마지막 페이지-4) 보다 같거나 클 경우
-        if(currentPage >= (lastPage-1)) {
+        // 현재 페이지가 (마지막 페이지-3) 보다 같거나 클 경우
+        if(currentPage >= (lastPage-3)) {
             // 마지막 페이지 번호는 lastPage
             lastPageNum = lastPage;
         }
