@@ -15,12 +15,23 @@
 	
 	</select>
 	
+	<!-- 가져온 코드로 데이터 중 member_id값 가져오기 -->
 	<select id="getCode" resultType="com.smart.rider.contract.dto.ContractDTO" parameterType="String">
 		SELECT 
 				member_id AS memberId
 
 		FROM contract
 		WHERE contract_code = #{Code};
+	
+	</select>
+	
+		<!-- 가져온 코드로 데이터 중 member_id값 가져오기 -->
+	<select id="getScode" resultType="com.smart.rider.shop.dto.ShopDTO" parameterType="String">
+		SELECT 
+				member_id AS memberId
+
+		FROM shop
+		WHERE shop_code = #{Code};
 	
 	</select>
 	<!-- 계약코드 자동증가 -->
@@ -30,6 +41,15 @@
 			MAX(LPAD(RIGHT(shop_code, 4)+1, '4' , '0')) 
 		FROM shop;
 	</select>
+	
+	<!-- 매장코드 자동증가에 필요한 데이터중 가장 높은값 가져오기 -->
+	<select id="relationCodeMax" resultType="String">
+		SELECT 
+			MAX(LPAD(RIGHT(contract_shop_code, 4)+1, '4' , '0')) 
+		FROM shop_relation;
+	</select>
+	
+	
 	<insert id="shopInsert" parameterType="com.smart.rider.shop.dto.ShopDTO">
 			INSERT INTO shop
 
@@ -49,6 +69,24 @@
 		 	  	,#{shopPhone}
 		 	    ,NOW()
 		 	    )
+	
+	</insert>
+	<insert id="relationInsert" parameterType="com.smart.rider.shop.dto.ShopRelationDTO">
+		INSERT INTO shop_relation
+		(
+		 contract_shop_code
+		,member_id
+		,shop_code
+		,contract_shop_use
+		,contract_shop_date
+		)
+		VALUES (
+		 #{contractShopCode}
+		,#{memberId}
+		,#{shopCode}
+		,#{contractShopUse}
+		, NOW()
+		)
 	
 	</insert>
 </mapper>

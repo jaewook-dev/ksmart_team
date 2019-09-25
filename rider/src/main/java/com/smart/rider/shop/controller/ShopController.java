@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.smart.rider.contract.dto.ContractDTO;
 import com.smart.rider.contract.service.ContractService;
 import com.smart.rider.shop.dto.ShopDTO;
+import com.smart.rider.shop.dto.ShopRelationDTO;
 import com.smart.rider.shop.service.ShopService;
 
 @Controller
@@ -54,6 +55,25 @@ public class ShopController {
 		
 		return "redirect:/shop";
 	}
+	@GetMapping("/relationInsert")
+	public String relationInsert(Model model) {
+		
+		//shopDTO 데이터 가져오기
+		List<ShopDTO> List = shopService.shopList();
+		System.out.println("shopList"+List);
+		model.addAttribute("shopList", List);
+		
+		
+		return "/relation/relationInsert";
+	}
+	@PostMapping("/relationInsert")
+	public String relationInsert(ShopRelationDTO relation) {
+		
 
+		System.out.println(relation.toString()+"<-담겨있는값");
+		shopService.relationInsert(relation);
+		
+		return "redirect:/shop";
+	}
 
 }
