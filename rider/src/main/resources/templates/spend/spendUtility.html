@@ -1,87 +1,179 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/default}">
 
-<!-- 지출_공과금 레이아웃 -->
-<div id="menu2" class="container tab-pane fade">
-	<br>
+<th:block layout:fragment="customTitle">
+</th:block>
+<th:block layout:fragment="customContents">
 
-	<!-- 공과금 지출 현황 -->
-	<div class="row tm-content-row">
-		<div class="col-12 tm-block-col">
-			<div class="tm-bg-primary-dark tm-block-util">
-				<h4 class="tm-block-title">공과금 지출 현황</h4>
+	<!-- MAIN -->
+	<div class="height-sub">
+		<!-- MAIN CONTENT -->
+		<div class="main-content">
+			<div class="container">
+				<div class="row">
+					<div class="col">
+						<p class="text-white mt-5 mb-5">
+							<b>지출/매출 > 지출 > 공과금</b>
+						</p>
+					</div>
+				</div>
 
-				<!-- charts.js -->
-				<canvas id="utilityChart"></canvas>
-			</div>
-		</div>
-	</div>
+				<!-- 공과금 지출 현황 -->
+				<div class="row tm-content-row">
+					<div class="col-12 tm-block-col">
+						<div class="tm-bg-primary-dark tm-block-util">
+							<h4 class="tm-block-title">공과금 지출 현황</h4>
 
+							<!-- charts.js -->
+							<canvas id="utilityChart" height="100px;"></canvas>
+						</div>
+					</div>
+				</div>
+
+
+				<div class="row tm-content-row">
+
+					<!-- 최근 등록된 공과금 내역 -->
+					<div class="col-sm-12 col-md-12 col-lg-6 col-xl-7 tm-block-col">
+						<div class="tm-bg-primary-dark tm-block-spend ">
+							<h4 class="tm-block-title">최근 등록내역</h4>
+							<table class="table">
+								<thead>
+									<tr>
+										<th>내역</th>
+										<th>금액</th>
+										<th>등록일자</th>
+										<th style="width: 20%">상세보기</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="list : ${utilityList}">
+										<td th:text="${list.subjectName}"></td>
+										<td th:text="${list.spendUtilityPay}"></td>
+										<td th:text="${list.spendUtilityDate}"></td>
+										<td class="text-center"><a class="tm-product-delete-link">
+												<i class="fas fa-search" style="color: white"></i>
+										</a></td>
+									</tr>
+								</tbody>
+							</table>
+							<div>
+								<ul class="pagination pagination-sm justify-content-center" style="margin:20px 0">
+									<li class="page-item">
+										<a class="page-link" id="preBtn" th:onclick="|javascript:page('${currentPage-1}')|" th:if="${currentPage > 1}"> 이전 </a> 
+										<a class="page-link" th:unless="${currentPage > 1}"> 이전 </a></li>
 	
-	<div class="row tm-content-row">
+									<th:block th:each="num : ${#numbers.sequence(startPageNum,lastPageNum)}">
+										<li class="page-item">
+											<span th:if="${currentPage == num}" th:text="${num}" class="text-center page-link"></span> 
+												<a class="page-link" th:unless="${currentPage == num}" th:text="${num}" th:href="@{/spendUtility(currentPage=${num})}"></a>
+										</li>
+									</th:block>
+	
+									<li class="page-item">
+										<a class="page-link" id="nextBtn" th:onclick="|javascript:page('${currentPage+1}')|" th:if="${currentPage != lastPage}"> 다음 </a> 
+										<a class="page-link" th:if="${currentPage == lastPage}">다음</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
 
-		<!-- 공과금 등록 폼 -->
-		<div class="col-sm-12 col-md-12 col-lg-6 col-xl-5 tm-block-col">
-			<div class="tm-bg-primary-dark tm-block-spend">
-				<h4 class="tm-block-title">공과금 등록</h4>
-				<form action="utilityInsert" method="post">
-					<div class="form-group">
-						<label>내역</label> 
-						<select class="custom-select tm-select-accounts" name="subjectCode">
-							<th:block th:each="subject : ${subjectSelectBox}">
-								<option th:text="${subject.subjectName}" th:value="${subject.subjectCode}"></option>
-							</th:block>
-						</select>
+					<!-- 공과금 등록 폼 -->
+					<div class="col-sm-12 col-md-12 col-lg-6 col-xl-5 tm-block-col">
+						<div class="tm-bg-primary-dark tm-block-spend">
+							<h4 class="tm-block-title">공과금 등록</h4>
+							<form action="utilityInsert" method="post">
+								<div class="form-group">
+									<label>내역</label> <select
+										class="custom-select tm-select-accounts" name="subjectCode">
+										<th:block th:each="subject : ${subjectSelectBox}">
+											<option th:text="${subject.subjectName}"
+												th:value="${subject.subjectCode}"></option>
+										</th:block>
+									</select>
+								</div>
+								<div class="form-group">
+									<label>금액</label> <input class="form-control validate"
+										name="spendUtilityPay">
+								</div>
+								<div class="form-group">
+									<label>내용</label> <input class="form-control validate"
+										name="spendUtilityContents">
+								</div>
+								<hr>
+								<button type="submit"
+									class="btn btn-primary btn-block text-uppercase"
+									id="insertUtility">확인</button>
+							</form>
+						</div>
 					</div>
-					<div class="form-group">
-						<label>금액</label> 
-						<input class="form-control validate" name="spendUtilityPay">
+
+
+
+					<!-- 공과금 검색 -->
+					<div class="col-12 tm-block-col">
+						<div class="tm-bg-primary-dark tm-block">
+
+							<!-- begin 검색 폼 -->
+							<form action="/subjectList" class="tm-search-form row"
+								method="post">
+								<div class="form-group col-3">
+									<select class="custom-select" name="searchDate">
+										<option value="spend_utility_date">등록일자</option>
+									</select>
+								</div>
+								<div class="form-group col-3">
+									<input id="beginDate" name="beginDate" type="text"
+										class="form-control validate" />
+								</div>
+								<div class="form-group col-1 text-center">
+									<h2 class="tm-site-title mb-0">~</h2>
+								</div>
+								<div class="form-group col-3">
+									<input id="endDate" name="endDate" type="text"
+										class="form-control validate" />
+								</div>
+								<div class="form-group col-2"></div>
+
+								<div class="form-group col-3">
+									<select class="custom-select" name="utilityKey">
+										<option value="subject_name">내역</option>
+										<option value="spend_utility_contents">내용</option>
+									</select>
+								</div>
+
+								<div class="form-group col-7">
+									<input id="subjectValue" name="utilityValue" type="text"
+										class="form-control validate" />
+								</div>
+								<div class="form-group col-2">
+									<button type="submit" id="searchButton" name="searchButton"
+										class="btn btn-primary btn-block">검색</button>
+								</div>
+							</form>
+							<!-- end 검색 폼 -->
+						</div>
 					</div>
-					<div class="form-group">
-						<label>내용</label> 
-						<input class="form-control validate" name="spendUtilityContents">
-					</div>
-					<hr>
-					<button type="submit"
-							class="btn btn-primary btn-block text-uppercase"
-							id="insertUtility">확인</button>
-				</form>
+				</div>
 			</div>
 		</div>
-		
-		<!-- 최근 등록된 공과금 내역 -->
-		<div class="col-sm-12 col-md-12 col-lg-6 col-xl-7 tm-block-col">
-			<div class="tm-bg-primary-dark tm-block-spend ">
-				<h4 class="tm-block-title">최근 등록내역</h4>
-				<table class="table">
-					<thead>
-						<tr>
-							<th>내역</th>
-							<th>금액</th>
-							<th>등록일자</th>
-							<th style="width: 20%">상세보기</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr th:each="list : ${utilityList}">
-							<td th:text="${list.subjectName}"></td>
-							<td th:text="${list.spendUtilityPay}"></td>
-							<td th:text="${list.spendUtilityDate}"></td>
-							<td class="text-center"><a class="tm-product-delete-link">
-									<i class="fas fa-search" style="color: white"></i>
-							</a></td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-		
 	</div>
-</div>
+</th:block>
+<th:block layout:fragment="customScript">
 
-<!-- charts.js script-->
-<script th:inline="javascript">
+	<script th:inline="javascript">
+	
+	var scriptCurrentPage = [[${currentPage}]];
+	var scriptlastPage = [[${lastPage}]];
+	
 
+    function page(scriptCurrentPage) {
+    	location.href="/spendUtility?currentPage="+scriptCurrentPage; 
+    }
+    
+    <!-- charts.js script-->
 	var utilityJanuary 		= [[${utilityJanuary}]];
 	var utilityFebruary 	= [[${utilityFebruary}]];
 	var utilityMarch 		= [[${utilityMarch}]];
@@ -99,6 +191,7 @@
 
 	var uctx = document.getElementById('utilityChart').getContext('2d');
 	var utilityChart = new Chart(uctx, {
+		
 	    // The type of chart we want to create
 	    type: 'bar',
 	
@@ -107,7 +200,6 @@
 	        labels: ['1월', '2월', '3월', '4월', '5월', '6월', '7월','8월','9월','10월','11월','12월'],
 	        datasets: [{
 	            label: '공과금 총지출 금액',
-	            
 	            backgroundColor: 'rgb(245, 166, 35)',
 	            borderColor: 'rgb(245, 166, 35)',
 	            data: [utilityJanuary,utilityFebruary,utilityMarch,utilityApril,utilityMay,utilityJune,utilityJuly,utilityAugust,utilitySeptember,utilityOctober,utilityNovember,utilityDecember]
@@ -125,7 +217,6 @@
 		    	// y축
 		        yAxes: [{
 		            ticks: {
-		            	max:payMax + 10000,
 		                fontColor:'white' // y축 폰트 color
 		            }
 		     	}],
@@ -140,4 +231,6 @@
 	    }
 	});
 </script>
+</th:block>
 </html>
+
