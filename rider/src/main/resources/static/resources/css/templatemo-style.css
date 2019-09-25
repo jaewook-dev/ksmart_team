@@ -102,6 +102,16 @@ button:focus {
   max-height: 800px;
 }
 
+.dropdown-submenu {
+  position: relative;
+}
+
+.dropdown-submenu .dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -1px;
+}
+
 .tm-block-middle {
   padding: 40px;
   -webkit-box-shadow: 1px 1px 5px 0 #455c71;
