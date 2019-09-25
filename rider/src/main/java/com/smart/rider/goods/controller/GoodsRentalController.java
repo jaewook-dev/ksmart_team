@@ -37,6 +37,10 @@ public class GoodsRentalController {
 		int result = goodsRentalService.goodsRentalDelete(goodsRentalDto.getGoodsRentalCode(),
 														  memberDto.getMemberId(),
 														  memberDto.getMemberPw());
+		System.out.println("############## memberDto goodsRentalDelete GoodsRentalController.java");
+		System.out.println(goodsRentalDto + "<- goodsRentalDto goodsRentalDelete GoodsRentalController.java");
+		System.out.println(memberDto + "<- memberDto goodsRentalDelete GoodsRentalController.java");
+		System.out.println("############## memberDto goodsRentalDelete GoodsRentalController.java");
 		if(result == 0) {
 			model.addAttribute("result", "비밀번호를 바르게입력하세요");
 			model.addAttribute("goodsRentalCode",goodsRentalService.getGoodsRentalList(goodsRentalDto.getGoodsRentalCode()));

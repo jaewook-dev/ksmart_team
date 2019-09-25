@@ -16,13 +16,13 @@
 			gr
 			FROM
 			goods_rental gr
-			INNER JOIN 	
-			member m					
+			INNER JOIN 	member m							
 			WHERE 
 			gr.goods_rental_code=#{goodsRentalCode}
 		  	AND m.member_id = #{memberId}
 			AND m.member_pw = #{memberPw}
 	</delete>
+	
 	<!-- 대여상품수정 update 문영성 -->
 	<update id="goodsRentalUpdate" parameterType="com.smart.rider.goods.dto.GoodsRentalDTO">
 		UPDATE goods_rental
@@ -70,7 +70,7 @@
 				g.goods_database_code = gb.goods_database_code	
 	</select>
 	
-	
+	<!-- 대여상품등록 INSERT  -->
 	<insert id="goodsRentalInsert" parameterType="com.smart.rider.goods.dto.GoodsRentalDTO">
 		INSERT INTO
 			 goods_rental
