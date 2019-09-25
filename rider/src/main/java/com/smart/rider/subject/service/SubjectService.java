@@ -33,13 +33,13 @@ public class SubjectService {
 	}
 	
 	//삭제 가능한 계정과목 리스트
-	public List<SubjectDTO> subjectDeletePossible(String subjectKey, String subjectValue){
-		return subjectMapper.subjectDeletePossible(subjectKey, subjectValue);
+	public List<SubjectDTO> subjectDeletePossible(String subjectKey, String subjectValue, String beginDate, String endDate){
+		return subjectMapper.subjectDeletePossible(subjectKey, subjectValue, beginDate, endDate);
 	}
 	
 	//삭제 불가능한 계정과목 리스트 (외래키 참조중)
-	public List<SubjectDTO> subjectDeleteImpossible(String subjectKey, String subjectValue){
-		return subjectMapper.subjectDeleteImpossible(subjectKey, subjectValue);
+	public List<SubjectDTO> subjectDeleteImpossible(String subjectKey, String subjectValue, String beginDate, String endDate){
+		return subjectMapper.subjectDeleteImpossible(subjectKey, subjectValue, beginDate, endDate);
 	}
 	
 	//계정과목 삭제

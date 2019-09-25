@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.smart.rider.member.dto.MemberDTO;
@@ -25,8 +26,10 @@ public class EmployeeController {
 	
 	@PostMapping("/employeeInsert")
 	public String employeeInsert(MemberDTO memberdto) {
+		System.out.println(memberdto.getContractShopCode() + "<---릴레코드");
+		String contractShopCode = memberdto.getContractShopCode();
 		employeeService.employeeInsert(memberdto);
-		return "redirect:/employeeList";
+		return "redirect:/employeeList?contractShopCode="+contractShopCode+"";
 	}
 	
 	@GetMapping("/employeeList")
@@ -43,7 +46,10 @@ public class EmployeeController {
 	}
 	@PostMapping("/employeeUpdate")
 	public String employeeUpdate(MemberDTO memberdto) {
+		String contractShopCode = memberdto.getContractShopCode();
 		employeeService.employeeUpdate(memberdto);
-		return "redirect:/employeeList";
+		return "redirect:/employeeList?contractShopCode="+contractShopCode+"";
 	}
+	//19.09.25작성
+	
 }

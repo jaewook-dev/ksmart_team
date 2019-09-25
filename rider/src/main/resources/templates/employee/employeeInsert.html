@@ -6,7 +6,7 @@
 </th:block>
 <th:block layout:fragment="customContents">
 	<div class="container mt-5">
-		<!-- row -->
+		<!----------------------------------------------- 19.09.25 수정 직원등록 ------------------------------------------------------->
 		<div class="row tm-content-row">
 			<div class="col-xl-6 mx-auto tm-block-col tm-col-account-settings">
 				<div class="tm-bg-primary-dark tm-block tm-block-settings">
@@ -31,10 +31,8 @@
 						</div>
 						<div class="form-group">
 							<label for="password2">비밀번호 재확인</label>
-							<input id="EmployeePw2" name="EmployeePw2" type="password" class="form-control validate" placeholder="미구현입니다"/>
+							<input id="EmployeePw2" name="EmployeePw2" type="password" class="form-control validate" placeholder="PASSWORD"/>
 						</div>
-							<div class="alert alert-success" id="checkPw">비밀번호가 일치합니다.</div>
-							<div class="alert alert-danger" id="checkPwFail">비밀번호가 일치하지 않습니다!</div>
 						<div class="form-group">
 							<label for="name">이름</label>
 							<input id="memberName" name="memberName" type="text" class="form-control validate" />
@@ -66,28 +64,17 @@
 </th:block>
 
 <th:block layout:fragment="customScript">
-	<!--
-	<script type="text/javascript">
-		$(function(){
-		    $("#checkPw").hide();
-		    $("#checkPwFail").hide();
-		    $("#memberPw2").blur(function(){
-		        var pw1=$("#memberPw").val();
-		        var pw2=$("#memberPw2").val();
-		        if(pw1 != "" || pw2 != ""){
-		            if(pwd1 == pwd2){
-		                $("#checkPw").show();
-		                $("#checkPwFail").hide();
-		                $("submit").removeAttr("disabled");
-		            }else{
-		                $("#checkPw").hide();
-		                $("#checkPwFail").show();
-		                $("submit").attr("disabled", "disabled");
-		            }    
-		        }
-			});
-		});
-	</script>
-	-->
+<script>
+$('#EmployeePw2').blur(function(){
+	if($('#memberPw').val() != $('#EmployeePw2').val()){
+		if($('#EmployeePw2').val()!=''){
+			
+			alert("비밀번호가 일치하지 않습니다!");
+			$('#EmployeePw2').val('');
+			$('#EmployeePw2').focus();
+		}
+ 	}
+});	
+</script>
 </th:block>
 </html>

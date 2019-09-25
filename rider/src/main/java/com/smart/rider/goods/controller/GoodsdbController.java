@@ -25,11 +25,20 @@ public class GoodsdbController {
 	@PostMapping("/goodsDbSearchList")
 	public String goodsDbSearchList(@RequestParam(value="select")String select
 									,@RequestParam(value="searchInput")String searchInput
+									,@RequestParam(value="beginDate")String beginDate
+									,@RequestParam(value="endDate")String endDate
 									,Model model) {
-		
-		List<GoodsdbDTO> search = goodsdbservice.goodsDbSearchList(select, searchInput);
-		//System.out.println(search+"<==========검색확인");
+		//System.out.println(select + " <-- select goodsDbSearchList GoodsdbController.java");
+		//System.out.println(searchInput + " <-- searchInput goodsDbSearchList GoodsdbController.java");
+		//System.out.println(beginDate + " <-- beginDate goodsDbSearchList GoodsdbController.java");
+		//System.out.println(endDate + " <-- endDate goodsDbSearchList GoodsdbController.java");
+		List<GoodsdbDTO> search = goodsdbservice.goodsDbSearchList(select, searchInput, beginDate, endDate);
 		model.addAttribute("goodsDbList", search);
+		//System.out.println(search+"<==========검색확인");
+		if(search.size()==0) {
+			model.addAttribute("alert", "검색 결과가 없습니다");
+		}
+		
 		return "goods/goodsDbList";
 	}
 	

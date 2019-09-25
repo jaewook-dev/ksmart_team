@@ -31,9 +31,8 @@
 						<div class="form-group col-lg-6">
 							<label for="password">비밀번호</label>
 							<!----------------- 팝업으로 수정하기 -------------------->
-							<button class="btn btn-outline-info form-control validate" 
-									onclick="window.open('/changePassword','비밀번호변경','width=430,height=550,location=no,status=no,scrollbars=yes')">
-									!비밀번호 수정
+							<button class="btn btn-outline-info form-control validate" id="updatePw" type="button">
+									비밀번호 수정
 							</button>
 						</div>
 						<div class="form-group col-lg-6">
@@ -67,30 +66,28 @@
 								회원 수정
 							</button>
 						</div>
-						
+						<div class="form-group col">
+							<label>&nbsp;</label>
+							<!-------- 탈퇴 버튼 클릭시 팝업으로 비밀번호 확인 후 탈퇴 할 수 있다  --------->
+							<a id="deleteBtn" class="btn btn-primary btn-block text-uppercase" 
+								th:href="@{/memberDelete(memberId=${memberList.memberId})}">
+								회원 탈퇴
+							</a>
+						</div>
 					</form>
-					
-					<div class="col-lx">
-						<!-------- 탈퇴 버튼 클릭시 팝업으로 비밀번호 확인 후 탈퇴 할 수 있다  --------->
-						<button type="button" id="btnTest" class="btn btn-primary btn-block text-uppercase"
-								>
-							회원 탈퇴
-						</button>
-						<script type="text/javascript">
-							$(document).ready(function(){
-								$('#btnTest').click(function(){
-									var memberId = [[${memberList.memberId}]];
-									window.open('/memberDelete?memberId='+memberId+'','회원탈퇴','width=430,height=550,location=no,status=no,scrollbars=yes')
-								});
-							});
-						</script>
-					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 </th:block>
 <th:block layout:fragment="customScript">
-
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#updatePw').click(function(){
+			var memberId = $("#memberId").val();
+			window.open('/changePassword?memberId='+memberId+'','비밀번호수정','width=430,height=550,location=no,status=no,scrollbars=yes')
+		});
+	});
+</script>
 </th:block>
 </html>

@@ -1,110 +1,133 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/default}">
 
-<!-- 지출_급여 레이아웃 -->
-<div id="menu1" class="container tab-pane fade">
-	<br>
+<th:block layout:fragment="customTitle">
+</th:block>
+<th:block layout:fragment="customContents">
 
-	<!-- 급여 지출 현황 -->
-	<div class="row tm-content-row">
-		<div class="col-12 tm-block-col">
-			<div class="tm-bg-primary-dark tm-block-util">
-				<h4 class="tm-block-title">급여 지출 현황</h4>
+	<!-- MAIN -->
+	<div class="main-height">
+		<!-- MAIN CONTENT -->
+		<div class="main-content">
+			<div class="container">
+				<div class="row">
+					<div class="col">
+						<p class="text-white mt-5 mb-5">
+							<b>지출/매출 > 지출 > 급여</b>
+						</p>
+					</div>
+				</div>
 
-				<!-- charts.js -->
-				<canvas id="salaryChart"></canvas>
+				<!-- 급여 지출 현황 -->
+				<div class="row tm-content-row">
+					<div class="col-12 tm-block-col">
+						<div class="tm-bg-primary-dark tm-block-util">
+							<h4 class="tm-block-title">급여 지출 현황</h4>
+
+							<!-- charts.js -->
+							<canvas id="salaryChart" height="100px;"></canvas>
+						</div>
+					</div>
+				</div>
+				<div class="row tm-content-row">
+
+					<!-- 급여 계산 폼 -->
+					<div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
+						<div class="tm-bg-primary-dark tm-block-salary">
+							<h4 class="tm-block-title">급여 등록</h4>
+							<form>
+								<div class="form-group">
+									<label>직원</label> <select
+										class="custom-select tm-select-accounts" name="memberId">
+										<th:block th:each="employee : ${employeeSelect}">
+											<option th:text="${employee.memberName}"
+												th:value="${employee.memberId}"></option>
+										</th:block>
+									</select>
+								</div>
+								<div class="form-group num">
+									<label>기본급여</label> <input class="form-control validate"
+										name="spendSalaryPay" id="spendSalaryPay"
+										onkeyup="inputNumberFormat(this)">
+								</div>
+								<div class="form-group">
+									<label>시간외수당</label> <input class="form-control validate"
+										name="spendSalaryOverpay" id="spendSalaryOverpay"
+										onkeyup="inputNumberFormat(this)">
+								</div>
+								<div class="form-group">
+									<label>상여금</label> <input class="form-control validate"
+										name="spendSalaryBonus" id="spendSalaryBonus"
+										onkeyup="inputNumberFormat(this)">
+								</div>
+								<hr>
+								<button type="button"
+									class="btn btn-primary btn-block text-uppercase"
+									id="calculateSalary">계산</button>
+							</form>
+						</div>
+					</div>
+
+					<!-- 급여 계산 내역 -->
+					<div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
+						<div class="tm-bg-primary-dark tm-block-salary">
+							<h4 class="tm-block-title">계산</h4>
+							<div class="form-group">
+								<label>4대보험 총액</label> <input class="form-control validate"
+									name="spendSalaryInsurance" id="spendSalaryInsurance"
+									style="background-color: #54657D" readonly>
+							</div>
+							<div class="form-group">
+								<label>근로자 부담액</label> <input class="form-control validate"
+									name="spendSalaryEmployee" id="spendSalaryEmployee"
+									style="background-color: #54657D" readonly>
+							</div>
+							<div class="form-group">
+								<label>사업자 부담액</label> <input class="form-control validate"
+									name="spendSalaryShop" id="spendSalaryShop"
+									style="background-color: #54657D" readonly>
+							</div>
+							<div class="form-group">
+								<label>실수령액</label> <input class="form-control validate"
+									name="spendSalaryNetpay" id="spendSalaryNetpay"
+									style="background-color: #54657D" readonly>
+							</div>
+							<hr>
+							<button type="button"
+								class="btn btn-primary btn-block text-uppercase"
+								id="insertSalary">등록</button>
+
+						</div>
+					</div>
+
+					<!-- 최근 등록된 급여 내역 -->
+					<div class="col-12 tm-block-col">
+						<div class="tm-bg-primary-dark tm-block-spend ">
+							<h4 class="tm-block-title">최근 등록내역</h4>
+							<table class="table">
+								<thead>
+									<tr>
+										<th>직원명</th>
+										<th>금액</th>
+										<th>등록일자</th>
+										<th style="width: 20%">상세보기</th>
+									</tr>
+								</thead>
+								<tbody>
+
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
-	
-	
-	<div class="row tm-content-row">
-
-		<!-- 급여 계산 폼 -->
-		<div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
-			<div class="tm-bg-primary-dark tm-block-salary">
-				<h4 class="tm-block-title">급여 등록</h4>
-				<form>
-					<div class="form-group">
-						<label>직원</label> 
-						<select class="custom-select tm-select-accounts" name="memberId">
-							<th:block th:each="employee : ${employeeSelect}">
-								<option th:text="${employee.memberName}" th:value="${employee.memberId}"></option>
-							</th:block>
-						</select>
-					</div>
-					<div class="form-group num">
-						<label>기본급여</label> 
-						<input class="form-control validate" name="spendSalaryPay" id="spendSalaryPay" onkeyup="inputNumberFormat(this)">
-					</div>
-					<div class="form-group">
-						<label>시간외수당</label> 
-						<input class="form-control validate" name="spendSalaryOverpay" id="spendSalaryOverpay" onkeyup="inputNumberFormat(this)">
-					</div>
-					<div class="form-group">
-						<label>상여금</label> 
-						<input class="form-control validate" name="spendSalaryBonus" id="spendSalaryBonus" onkeyup="inputNumberFormat(this)">
-					</div>
-					<hr>
-					<button type="button"
-							class="btn btn-primary btn-block text-uppercase"
-							id="calculateSalary">계산</button>
-				</form>
-			</div>
-		</div>
-		
-		<!-- 급여 계산 내역 -->
-		<div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
-			<div class="tm-bg-primary-dark tm-block-salary">
-				<h4 class="tm-block-title">계산</h4>
-				<div class="form-group">
-						<label>4대보험 총액</label> 
-						<input class="form-control validate" name="spendSalaryInsurance" id="spendSalaryInsurance" style="background-color: #54657D" readonly>
-				</div>
-				<div class="form-group">
-						<label>근로자 부담액</label> 
-						<input class="form-control validate" name="spendSalaryEmployee" id="spendSalaryEmployee" style="background-color: #54657D" readonly>
-				</div>
-				<div class="form-group">
-						<label>사업자 부담액</label> 
-						<input class="form-control validate" name="spendSalaryShop" id="spendSalaryShop" style="background-color: #54657D" readonly>
-				</div>
-				<div class="form-group">
-						<label>실수령액</label> 
-						<input class="form-control validate" name="spendSalaryNetpay" id="spendSalaryNetpay" style="background-color: #54657D" readonly >
-				</div>
-				<hr>
-				<button type="button"
-							class="btn btn-primary btn-block text-uppercase"
-							id="insertSalary">등록</button>
-				
-			</div>
-		</div>
-
-		<!-- 최근 등록된 급여 내역 -->
-		<div class="col-12 tm-block-col">
-			<div class="tm-bg-primary-dark tm-block-spend ">
-				<h4 class="tm-block-title">최근 등록내역</h4>
-				<table class="table">
-					<thead>
-						<tr>
-							<th>직원명</th>
-							<th>금액</th>
-							<th>등록일자</th>
-							<th style="width: 20%">상세보기</th>
-						</tr>
-					</thead>
-					<tbody>
-						
-					</tbody>
-				</table>
-			</div>
-		</div>
-
-
-	</div>
-</div>
-<script th:inline="javascript">
+</th:block>
+<th:block layout:fragment="customScript">
+	<script th:inline="javascript">
 
 	<!-- 숫자 컴마 자동 입력 -->
 	function inputNumberFormat(obj) {
@@ -120,8 +143,6 @@
 	    str = String(str);
 	    return str.replace(/[^\d]+/g, '');
 	}
-
-
 
 	<!-- 급여 계산 -->
 	$('#calculateSalary').click(function() {
@@ -154,6 +175,7 @@
 	<!-- charts.js script-->
 	var sctx = document.getElementById('salaryChart').getContext('2d');
 	var salaryChart = new Chart(sctx, {
+		
 	    // The type of chart we want to create
 	    type: 'bar',
 	
@@ -162,7 +184,6 @@
 	        labels: ['1월', '2월', '3월', '4월', '5월', '6월', '7월','8월','9월','10월','11월','12월'],
 	        datasets: [{
 	            label: '급여 총지출 금액',
-	            
 	            backgroundColor: 'rgb(245, 166, 35)',
 	            borderColor: 'rgb(245, 166, 35)',
 	            data: [0,0,0,0,0,0,0,0,0,0,0,0]
@@ -194,7 +215,6 @@
 	    }
 	});
 	
-	
 </script>
-
+</th:block>
 </html>

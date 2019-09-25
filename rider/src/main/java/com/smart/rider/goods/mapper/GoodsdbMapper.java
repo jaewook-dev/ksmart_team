@@ -27,5 +27,5 @@ public interface GoodsdbMapper {
 	public GoodsdbDTO getGoodsDbCode(String goodsDbCode);
 	//상품 검색 매서드 문영성
 	//19-09-18
-	public List<GoodsdbDTO> goodsDbSearchList(String select ,String searchInput);
+	public List<GoodsdbDTO> goodsDbSearchList(String select ,String searchInput,String beginDate,String endDate);
 }

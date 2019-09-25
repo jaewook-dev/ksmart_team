@@ -22,4 +22,8 @@ public interface MemberMapper {
 	public List<MemberDTO> searchMember(String select, String searchInput);
 	//19.09.18작성
 	public int memberDelete(String memberId, String memberPw);
+	//19.09.24작성
+	public int levelDelete(String memberId);
+	//19.09.25작성
+	public int changePassword(String memberId, String memberPw, String memberPw2);
 }

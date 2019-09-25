@@ -39,7 +39,7 @@ public class GoodsController {
 	}
 	//상품삭제
 	@PostMapping("/goodsDelete")
-	public String goodsDelete(GoodsDTO goodsDto,MemberDTO memberDto,MemberDTO memberPw,Model model) {
+	public String goodsDelete(GoodsDTO goodsDto,MemberDTO memberDto,Model model) {
 		int result = goodsService.goodsDelete(goodsDto.getGoodsCode()
 											,memberDto.getMemberId(),memberDto.getMemberPw());
 		if(result == 0) {
