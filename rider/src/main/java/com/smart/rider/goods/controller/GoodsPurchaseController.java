@@ -69,7 +69,7 @@ public class GoodsPurchaseController {
 									,@RequestParam(value="searchInput")String searchInput
 									,Model model) {
 		List<GoodsHapDTO> search = goodsPurchaseService.purchaseSearchList(select, searchInput);
-		System.out.println("검색ㄷ확인,,,,,,,,,,,,,,,,,,,,,,,,,,"+search);
+		//System.out.println("검색ㄷ확인,,,,,,,,,,,,,,,,,,,,,,,,,,"+search);
 		model.addAttribute("hList", search);
 		return "purchase/purchaseList";
 	}
