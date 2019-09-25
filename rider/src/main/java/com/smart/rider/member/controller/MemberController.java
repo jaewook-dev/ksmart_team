@@ -75,12 +75,14 @@ public class MemberController {
 	//19.09.18작성
 	//비밀번호 수정화면 팝업으로 띄우기
 	@GetMapping("/changePassword")
-	public String memberPassword() {
+	public String memberPassword(@RequestParam(value="memberId") String memberId, Model model) {
+		model.addAttribute("memberId", memberId);
 		return "member/memberPassword";
 	}
 	//19.09.20작성
 	@GetMapping("/memberDelete")
 	public String memberDelete(@RequestParam(value="memberId") String memberId, Model model) {
+		System.out.println(memberId + "<--딜리트 아이디");
 		model.addAttribute("memberId", memberId);
 		return "/member/memberDelete";
 	}
@@ -101,5 +103,21 @@ public class MemberController {
 		model.addAttribute("alert", "삭제하시겠습니까?");
 		model.addAttribute("deleteMember", memberService.levelDelete(memberId));
 		return "redirect:/memberList";
+	}
+	//19.09.25작성
+	//팝업창 완료 메시지
+	@GetMapping("/memberSuccess")
+	public String memberSuccess() {
+		return "member/memberSuccess";
+	}
+	@PostMapping("/updatePassword")
+	public String changePassword(@RequestParam(value="memberPw2") String memberPw2, MemberDTO memberdto, Model model) {
+		int result = memberService.changePassword(memberdto.getMemberId(), memberdto.getMemberPw(), memberPw2);
+		if(result == 0) {
+			model.addAttribute("result", "비밀번호가 일치하지 않습니다!");
+			model.addAttribute("memberId", memberdto.getMemberId());
+			return "member/memberPassword";
+		}
+		return "redirect:/memberSuccess";
 	}
 }

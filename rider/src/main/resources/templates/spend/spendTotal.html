@@ -1,10 +1,89 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/default}">
 
-<!-- 지출_통합 레이아웃 -->
-<div id="home" class="container tab-pane active">
-	<br>
-	<h3>통합</h3>
-</div>
+<th:block layout:fragment="customTitle">
+</th:block>
+<th:block layout:fragment="customContents">
 
+	<!-- MAIN -->
+	<div class="main-height">
+		<!-- MAIN CONTENT -->
+		<div class="main-content">
+			<div class="container">
+				<div class="row">
+					<div class="col">
+						<p class="text-white mt-5 mb-5">
+							<b>지출/매출 > 지출 > 통합</b>
+						</p>
+					</div>
+				</div>
+
+				<!-- 통합 지출 현황 -->
+				<div class="row tm-content-row">
+					<div class="col-12 tm-block-col">
+						<div class="tm-bg-primary-dark tm-block-util">
+							<h4 class="tm-block-title">통합 지출 현황</h4>
+
+							<!-- charts.js -->
+							<canvas id="utilityChart" height="100px;"></canvas>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</th:block>
+<th:block layout:fragment="customScript">
+
+	<!-- charts.js script-->
+	<script th:inline="javascript">
+
+	var tctx = document.getElementById('totalChart').getContext('2d');
+	var utilityChart = new Chart(tctx, {
+		
+	    // The type of chart we want to create
+	    type: 'bar',
+	
+	    // The data for our dataset
+	    data: {
+	        labels: ['1월', '2월', '3월', '4월', '5월', '6월', '7월','8월','9월','10월','11월','12월'],
+	        datasets: [{
+	            label: '총지출 금액',
+	            backgroundColor: 'rgb(245, 166, 35)',
+	            borderColor: 'rgb(245, 166, 35)',
+	            data: [0,0,0,0,0,0,0,0,0,0,0,0]
+	        }]
+	    },
+	
+	    // Configuration options
+	    options: {
+	    	legend: {
+	             labels: {
+	                  fontColor: 'white' // label color
+	                 }
+	              },
+		    scales: {
+		    	// y축
+		        yAxes: [{
+		            ticks: {
+		            	max:payMax + 10000,
+		                fontColor:'white' // y축 폰트 color
+		            }
+		     	}],
+		     	// x축
+		     	xAxes: [{
+		            ticks: {
+		            	
+		                fontColor:'white' // x축 폰트 color
+		            }
+		     	}]
+		    }
+	    }
+	});
+</script>
+</th:block>
 </html>
+
