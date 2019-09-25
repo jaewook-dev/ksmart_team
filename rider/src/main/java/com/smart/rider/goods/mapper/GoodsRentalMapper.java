@@ -9,6 +9,10 @@ import com.smart.rider.goods.dto.GoodsRentalDTO;
 @Mapper
 public interface GoodsRentalMapper {
 	
+	//대여상품삭제
+	public int goodsRentalDelete(String goodsRentalCode,String memberId,String memberPw);
+	//대여상품수정
+	public int goodsRentalUpdate(GoodsRentalDTO goodsRentalDto);
 	//코드자동증가
 	public String goodsRentalCodeCount();
 	//대여상품 상세조회 insert

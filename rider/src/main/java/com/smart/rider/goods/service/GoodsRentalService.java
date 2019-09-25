@@ -16,6 +16,10 @@ public class GoodsRentalService {
 	@Autowired
 	private GoodsRentalMapper goodsRentalMapper;
 	
+	//대여상품 수정하기
+	public int goodsRentalUpdate(GoodsRentalDTO goodsRentalDto) {
+		return goodsRentalMapper.goodsRentalUpdate(goodsRentalDto);
+	}
 	//대여상품상세보기 select
 	public GoodsHapDTO getGoodsRentalList(String goodsRentalCode) {
 		return goodsRentalMapper.getGoodsRentalList(goodsRentalCode);

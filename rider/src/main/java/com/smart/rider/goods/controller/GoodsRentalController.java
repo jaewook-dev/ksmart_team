@@ -24,6 +24,28 @@ public class GoodsRentalController {
 	@Autowired
 	private GoodsService goodsService;
 	
+	//대여품삭제요청
+	@GetMapping("/goodsRentalDelete")
+	public String goodsRentalDelete(@RequestParam(value="goodsRentalCode")String goodsRentalCode,Model model) {
+		model.addAttribute("goodsRentalCode", goodsRentalService.getGoodsRentalList(goodsRentalCode));
+		return "goods/goodsRentalDelete";
+	}
+	//대여품 수정 요청
+	@GetMapping("/goodsRentalUpdate")
+	public String goodsRentalUpdate(@RequestParam(value="goodsRentalCode")String goodsRentalCode,Model model) {
+		model.addAttribute("goodsRentalCode", goodsRentalService.getGoodsRentalList(goodsRentalCode));
+		return "goods/goodsRentalUpdate";
+	}
+	//수정처리
+	@PostMapping("/goodsRentalUpdate")
+	public String goodsRentalUpdate(GoodsRentalDTO goodsRentalDto) {
+		//System.out.println("대여상품수정값 가져오기 확인"+goodsRentalDto);
+		goodsRentalService.goodsRentalUpdate(goodsRentalDto);
+		return "redirect:goodsRentalList";
+	}
+	
+	
+	
 	//상품상세보기요청
 	@GetMapping("/getGoodsRentalList")
 	public String getGoodsRentalList(@RequestParam("goodsRentalCode")String goodsRentalCode,Model model) {

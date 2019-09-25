@@ -10,6 +10,30 @@
 		FROM goods_rental;
 	</select>
 	
+	<!-- 대여상품삭제  -->
+	<delete id="goodsRentalDelete" parameterType="String">
+		DELETE
+			gr
+			FROM
+			goods_rental gr
+			INNER JOIN 	
+			member m					
+			WHERE 
+			gr.goods_rental_code=#{goodsRentalCode}
+		  	AND m.member_id = #{memberId}
+			AND m.member_pw = #{memberPw}
+	</delete>
+	<!-- 대여상품수정 update 문영성 -->
+	<update id="goodsRentalUpdate" parameterType="com.smart.rider.goods.dto.GoodsRentalDTO">
+		UPDATE goods_rental
+			SET
+				goods_rental_code=#{goodsRentalCode},			
+				goods_rental_period_pay=#{goodsRentalPeriodPay},
+				goods_rental_deposit=#{goodsRentalDeposit},
+				goods_rental_position=#{goodsRentalPosition}				
+		WHERE goods_rental_code=#{goodsRentalCode}
+	</update>
+	
 	<!-- 대여상품상세조회  -->
 	<select id="getGoodsRentalList" resultMap="ASid" parameterType="String">
 		SELECT 
