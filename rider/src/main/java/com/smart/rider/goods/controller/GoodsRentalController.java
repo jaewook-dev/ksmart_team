@@ -16,6 +16,7 @@ import com.smart.rider.goods.dto.GoodsRentalDTO;
 import com.smart.rider.goods.service.GoodsRentalService;
 import com.smart.rider.goods.service.GoodsService;
 import com.smart.rider.goods.service.GoodsdbService;
+import com.smart.rider.member.dto.MemberDTO;
 
 @Controller
 public class GoodsRentalController {
@@ -29,6 +30,19 @@ public class GoodsRentalController {
 	public String goodsRentalDelete(@RequestParam(value="goodsRentalCode")String goodsRentalCode,Model model) {
 		model.addAttribute("goodsRentalCode", goodsRentalService.getGoodsRentalList(goodsRentalCode));
 		return "goods/goodsRentalDelete";
+	}
+	//대여품삭제처리
+	@PostMapping("/goodsRentalDelete")
+	public String goodsRentalDelete(GoodsRentalDTO goodsRentalDto,MemberDTO memberDto,Model model) {
+		int result = goodsRentalService.goodsRentalDelete(goodsRentalDto.getGoodsRentalCode(),
+														  memberDto.getMemberId(),
+														  memberDto.getMemberPw());
+		if(result == 0) {
+			model.addAttribute("result", "비밀번호를 바르게입력하세요");
+			model.addAttribute("goodsRentalCode",goodsRentalService.getGoodsRentalList(goodsRentalDto.getGoodsRentalCode()));
+			return "goods/goodsRentalDelete";
+		}
+		return "redirect:goodsRentalList";	
 	}
 	//대여품 수정 요청
 	@GetMapping("/goodsRentalUpdate")

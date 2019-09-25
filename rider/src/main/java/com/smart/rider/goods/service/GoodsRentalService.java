@@ -16,6 +16,10 @@ public class GoodsRentalService {
 	@Autowired
 	private GoodsRentalMapper goodsRentalMapper;
 	
+	//대여상품 삭제하기
+	public int goodsRentalDelete(String goodsRentalCode,String memberId,String memberPw) {
+		return goodsRentalMapper.goodsRentalDelete(goodsRentalCode, memberId, memberPw);
+	}
 	//대여상품 수정하기
 	public int goodsRentalUpdate(GoodsRentalDTO goodsRentalDto) {
 		return goodsRentalMapper.goodsRentalUpdate(goodsRentalDto);
