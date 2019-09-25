@@ -23,8 +23,14 @@ public class UtilityController {
 	@Autowired
 	private UtilityService utilityService;
 	
+	// 지출_공과금 등록내역 상세보기
+	@GetMapping("/spendUtilityDetails")
+	public String spendUtilityDetails() {
+		return "spend/spendUtilityDetails";
+	}
+	
 	// 지출_공과금 검색
-	@PostMapping("/utilityList")
+	@PostMapping("/spendUtilityList")
 	public String utilityList(@RequestParam(value = "utilityKey") String utilityKey
 							, @RequestParam(value = "utilityValue") String utilityValue
 							, @RequestParam(value = "beginDate") String beginDate
@@ -53,11 +59,15 @@ public class UtilityController {
 		List<UtilityDTO> utilityList = (List<UtilityDTO>)map.get("list");
 		//System.out.println(utilityList + " <-- utilityList spendUtility UtilityController.java");
 		
+		// 검색 결과가 없을시 텍스트 알림
+		if(utilityList.size()==0) {
+			model.addAttribute("alert", "검색 결과가 없습니다");
+		}
+		
 		model.addAttribute("startPageNum", startPageNum);
 		model.addAttribute("lastPageNum", lastPageNum);
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("lastPage", lastPage);
-
 		model.addAttribute("utilityList", utilityList);
 		
 
@@ -154,11 +164,11 @@ public class UtilityController {
 			model.addAttribute("payMax", payMax.get(0).getSumUtility());
 		}
 		
-		return "spend/spendUtility";
+		return "spend/spendUtilityList";
 	}
 
 	// 지출_공과금 화면 
-	@GetMapping("/spendUtility")
+	@GetMapping("/spendUtilityList")
 	public String spend(Model model, HttpSession session 
 					  , @RequestParam(value = "utilityYear", required = false, defaultValue = "2019") String utilityYear
 					  , @RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage){
@@ -285,7 +295,7 @@ public class UtilityController {
 		}
 		
 
-		return "spend/spendUtility";
+		return "spend/spendUtilityList";
 	}
 
 	// 지출_공과금 내역 등록
@@ -297,7 +307,7 @@ public class UtilityController {
 		//System.out.println(utilityDTO.getSpendUtilityContents() + " <-- getSpendUtilityContents() utilityInsert UtilityController.java");
 		utilityService.utilityInsert(utilityDTO, contractShopCode);
 
-		return "redirect:/spendUtility";
+		return "redirect:/spendUtilityList";
 	}
 
 }

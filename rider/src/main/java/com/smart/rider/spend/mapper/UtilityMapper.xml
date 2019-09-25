@@ -98,13 +98,28 @@
 		SELECT 
 			 COUNT(*)
 		FROM spend_utility su, subject sub
-		WHERE su.subject_code = sub.subject_code AND contract_shop_code = 'SR0001'
+		WHERE su.subject_code = sub.subject_code AND contract_shop_code = #{contractShopCode}
+		
 		<!-- 지출_공과금 검색 조건문 -->
         <if test="utilityKey neq null and utilityValue neq ''.toString()">
             AND
                 sub.${utilityKey} LIKE CONCAT('%',#{utilityValue},'%')
         </if>
+        <if test="beginDate neq ''.toString() and endDate eq ''.toString()">
+        	AND 
+        		su.spend_utility_date between #{beginDate} and NOW()		
+        </if>
+        <if test="beginDate eq ''.toString() and endDate neq ''.toString()">
+        	AND 
+        		su.spend_utility_date  between '2000-01-01' and #{endDate}
+        </if>
+        <if test="beginDate neq ''.toString() and endDate neq ''.toString()">
+        	AND 
+        		su.spend_utility_date  between #{beginDate} and #{endDate}
+        </if>
+        
 		ORDER BY spend_utility_date DESC;
+		
 	</select>
 	
 	<!-- 지출_공과금 최근 등록 목록 -->
@@ -125,7 +140,21 @@
             AND
                 sub.${utilityKey} LIKE CONCAT('%',#{utilityValue},'%')
         </if>
+        <if test="beginDate neq ''.toString() and endDate eq ''.toString()">
+        	AND 
+        		su.spend_utility_date between #{beginDate} and NOW()		
+        </if>
+        <if test="beginDate eq ''.toString() and endDate neq ''.toString()">
+        	AND 
+        		su.spend_utility_date  between '2000-01-01' and #{endDate}
+        </if>
+        <if test="beginDate neq ''.toString() and endDate neq ''.toString()">
+        	AND 
+        		su.spend_utility_date  between #{beginDate} and #{endDate}
+        </if>
+        
 		ORDER BY su.spend_utility_date DESC
+		
         <!-- 다른 메서드 호출시 반영되지 않기위해 걸어놓은 조건문 -->
         <if test="startRow neq lastPage"> 
             LIMIT #{startRow},#{rowPerPage};

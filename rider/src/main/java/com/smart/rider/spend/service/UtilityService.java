@@ -88,7 +88,9 @@ public class UtilityService {
         
         if(!utilityValue.equals("")) {
         	utilityCount = utilityMapper.utilitySearchCount(map);
-        } 
+        } else if(!beginDate.equals("") || !endDate.equals("")) {
+        	utilityCount = utilityMapper.utilitySearchCount(map);
+        }
         
         // 마지막 페이지번호를 구하기 위해 총 개수 / 페이지당 보여지는 행의 개수 -> 올림 처리 -> lastPage 변수에 대입
         int lastPage = (int)(Math.ceil(utilityCount/ROW_PER_PAGE));
