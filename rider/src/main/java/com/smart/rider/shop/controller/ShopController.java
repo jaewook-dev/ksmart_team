@@ -26,10 +26,12 @@ public class ShopController {
 	public String shop(Model model) {
 		//값 확인
 		List<ShopDTO> List = shopService.shopList();
+		List<ShopRelationDTO> srList = shopService.relationList();
 		System.out.println("shopList"+List);
+		System.out.println("relationList"+srList );
 		
 		model.addAttribute("shopList", List);
-		
+		model.addAttribute("relationList", srList);
 		
 		return "/shop/shop";
 	}

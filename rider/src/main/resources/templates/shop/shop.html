@@ -50,7 +50,6 @@
 								 <table class="table">
                             <thead>
                                 <tr>
-                                    <th scope="col">매장릴레이션코드</th>
                                     <th scope="col">매장코드</th>
                                     <th scope="col">매장점주 아이디코드</th>
                                     <th scope="col">사용유무</th>
@@ -59,16 +58,16 @@
                             </thead>
                             <tbody>
                             	
-                             	<tr th:each="unitNew : ${unitNew}">
-									<th th:text="${unitNew.contractUnitMonth}"></th>
-									<th th:text="${unitNew.contractUnitOneyear}"></th>
-									<th th:text="${unitNew.contractUnitTwoyear}"></th>
+                             	<tr th:each="srList : ${relationList}">
+									<th th:text="${srList.shopCode}"></th>
+									<th th:text="${srList.memberId}"></th>
+									<th th:text="${srList.contractShopUse}"></th>
                                 </tr>
                             </tbody>
                             
 						</table>
 						<div>
-								<br/><br/><button class="btn btn-secondary btn-sm" type="button" onclick="location.href='unitList.html'">계약매장코드조회</button>
+								<br/><br/><button class="btn btn-secondary btn-sm" type="button" onclick="location.href='unitList.html'">계약매장코드 상세조회</button>
 								
 											<span style="float:right;"><button class="btn btn-secondary btn-sm" type="button" onclick="location.href='relationInsert' ">계약매장코드 등록</button></span>
 							</div>

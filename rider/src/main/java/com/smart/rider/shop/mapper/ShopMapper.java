@@ -31,4 +31,6 @@ public interface ShopMapper {
 	
 	//relation코드 및 데이터 생성
 	public int relationInsert(ShopRelationDTO relation);
+	
+	public List<ShopRelationDTO> relationList();
 }

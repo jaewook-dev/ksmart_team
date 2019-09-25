@@ -63,7 +63,10 @@ public class ShopService {
 		 
 
 		return shopMapper.relationInsert(relation);
-	}
-	
+		}
+	public List<ShopRelationDTO> relationList(){
+		
+		return shopMapper.relationList();
+	};
 	
 }

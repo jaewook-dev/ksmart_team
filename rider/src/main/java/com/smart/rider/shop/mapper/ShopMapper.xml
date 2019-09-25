@@ -15,6 +15,17 @@
 	
 	</select>
 	
+	<select id="relationList" resultType="com.smart.rider.shop.dto.ShopRelationDTO">
+		select
+			 contract_shop_code AS contractShopCode
+			,member_id  AS memberId
+			,shop_code AS shopCode
+			,contract_shop_use AS contractShopUse
+			,contract_shop_date AS contractShopDate
+		FROM shop_relation
+	
+	</select>
+	
 	<!-- 가져온 코드로 데이터 중 member_id값 가져오기 -->
 	<select id="getCode" resultType="com.smart.rider.contract.dto.ContractDTO" parameterType="String">
 		SELECT 
