@@ -66,11 +66,16 @@
 									<tr>	
 										<th scope="col">제조일자</th>
 										<th th:text="${goodsCode.goodsDbMade}"></th>
+									</tr>
+									<tr>	
+										<th scope="col">매입할때상태</th>
+										<th th:text="${goodsCode.purchaseState}"></th>
 									</tr>																	
 									<tr>	
 										<th scope="col">상품상태</th>
 										<th th:text="${goodsCode.goodsState}"></th>
 									</tr>
+									
 									<tr>	
 										<th scope="col">대여가능여부</th>
 										<th th:text="${goodsCode.goodsRental}"></th>

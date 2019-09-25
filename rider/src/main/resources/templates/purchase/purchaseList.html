@@ -106,6 +106,15 @@
 				window.location.href = "#";
 			});
 		});
+		//시작 일자 텍스트상자 클릭시 달력 표기 
+		$('#beginDate').datepicker({
+		});
+		$('#beginDate').datepicker('option','dateFormat','yy-mm-dd'); // 기존 dd/mm/yy에서 yy-mm-dd로 format 변경   
+		
+		//종료 일자 텍스트상자 클릭시 달력 표기 
+		$('#endDate').datepicker({
+		});
+		$('#endDate').datepicker('option','dateFormat','yy-mm-dd'); // 기존 dd/mm/yy에서 yy-mm-dd로 format 변경 
 	</script>
 </th:block>
 </th:block>

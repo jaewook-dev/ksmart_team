@@ -22,8 +22,8 @@ public class GoodsdbService {
 	
 	//05상품 검색 메서드 
 	//19-19-18 문영성
-	public List<GoodsdbDTO> goodsDbSearchList(String select, String searchInput) {
-		List<GoodsdbDTO> search = goodsdbmapper.goodsDbSearchList(select, searchInput);
+	public List<GoodsdbDTO> goodsDbSearchList(String select ,String searchInput,String beginDate,String endDate) {
+		List<GoodsdbDTO> search = goodsdbmapper.goodsDbSearchList(select, searchInput, beginDate, endDate);
 		return search;
 	}
 	
