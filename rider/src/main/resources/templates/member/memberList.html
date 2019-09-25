@@ -59,7 +59,7 @@
 							</thead>
 							<tbody>
 								<tr th:each="member : ${memberList}">
-									<th th:text="${member.memberId}"></th>
+									<th id="member" th:text="${member.memberId}"></th>
 									<td th:text="${member.memberName}"></td>
 									<td th:text="${member.memberLevel}"></td>
 									<td th:text="${member.memberBirth}"></td>
@@ -72,10 +72,10 @@
 										</a>
 									</td>
 									<td class="text-center">
-										<a th:href="@{/levelDelete(memberId=${member.memberId})}"
-											class="tm-product-delete-link" id="deleteLink">
+										<button type="button"
+											class="tm-product-delete-link" id="deleteLink" style="cursor:pointer">
 											<i class="far fa-trash-alt tm-product-delete-icon"></i>
-										</a>
+										</button>
 									</td>
 								</tr>
 							</tbody>
@@ -90,10 +90,12 @@
 <script>
 $("#deleteLink").click(function(){
     if(confirm("삭제 하시겠습니까?") == true){
-    		alert("삭제되었습니다");
+    	var memberId = $("#member").text();
+    	 location.href='/levelDelete?memberId='+memberId+'';
+    	alert("삭제되었습니다");
     }
     else{
-        return ;
+        return;
     }
 });
 </script>

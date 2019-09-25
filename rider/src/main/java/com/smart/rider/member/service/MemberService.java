@@ -45,4 +45,8 @@ public class MemberService {
 	public int levelDelete(String memberId) {
 		return memberMapper.levelDelete(memberId);
 	}
+	//19.09.25작성
+	public int changePassword(String memberId, String memberPw, String memberPw2) {
+		return memberMapper.changePassword(memberId, memberPw, memberPw2);
+	}
 }

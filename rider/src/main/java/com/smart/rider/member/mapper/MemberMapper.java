@@ -24,4 +24,6 @@ public interface MemberMapper {
 	public int memberDelete(String memberId, String memberPw);
 	//19.09.24작성
 	public int levelDelete(String memberId);
+	//19.09.25작성
+	public int changePassword(String memberId, String memberPw, String memberPw2);
 }
