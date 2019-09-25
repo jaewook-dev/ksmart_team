@@ -21,6 +21,8 @@
 				<div class="tm-bg-primary-dark tm-block tm-block-settings">
 					<h2 class="tm-block-title">직원정보</h2>
 					<form action="/employeeUpdate" class="tm-signup-form row" method="post">
+						<!-- 매장 릴레이션 코드 -->
+						<input type="hidden" id="contractShopCode" name="contractShopCode" th:value="${session.SCODE}">
 						<!-- 아이디 readonly 색 변경 -->
 						<div class="form-group col-lg-6">
 							<label for="id">아이디</label>

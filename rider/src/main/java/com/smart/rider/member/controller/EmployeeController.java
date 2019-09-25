@@ -24,12 +24,12 @@ public class EmployeeController {
 		return "employee/employeeInsert";
 	}
 	
-	@RequestMapping("/employeeInsert")
-	public String employeeInsert(@RequestParam(value="contractShopCode") String contractShopCode, MemberDTO memberdto) {
-		System.out.println(contractShopCode + "<--매장릴레코드");
+	@PostMapping("/employeeInsert")
+	public String employeeInsert(MemberDTO memberdto) {
+		System.out.println(memberdto.getContractShopCode() + "<---릴레코드");
+		String contractShopCode = memberdto.getContractShopCode();
 		employeeService.employeeInsert(memberdto);
-		employeeService.employeeList(contractShopCode);
-		return "redirect:/employeeList";
+		return "redirect:/employeeList?contractShopCode="+contractShopCode+"";
 	}
 	
 	@GetMapping("/employeeList")
@@ -46,7 +46,8 @@ public class EmployeeController {
 	}
 	@PostMapping("/employeeUpdate")
 	public String employeeUpdate(MemberDTO memberdto) {
+		String contractShopCode = memberdto.getContractShopCode();
 		employeeService.employeeUpdate(memberdto);
-		return "redirect:/employeeList";
+		return "redirect:/employeeList?contractShopCode="+contractShopCode+"";
 	}
 }
