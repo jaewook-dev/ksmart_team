@@ -96,6 +96,7 @@ public class GoodsRentalController {
 	public String rentalList(Model model) {
 		List<GoodsHapDTO> rList = goodsRentalService.goodsRentalList();
 		//System.out.println("대여상품리스트 값 넘어오는지확
+		model.addAttribute("rList", rList);
 		
 		return "/goods/goodsRentalList";
 	}
