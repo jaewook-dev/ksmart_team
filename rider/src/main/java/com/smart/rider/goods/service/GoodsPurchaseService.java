@@ -1,11 +1,6 @@
 package com.smart.rider.goods.service;
 
-
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,8 +24,8 @@ public class GoodsPurchaseService {
 	}
 	
 	//매입 검색 메서드
-	public List<GoodsHapDTO> purchaseSearchList(String select, String searchInput ){
-		List<GoodsHapDTO> search = goodsPurchaseMapper.purchaseSearchList(select, searchInput);
+	public List<GoodsPurchaseDTO> purchaseSearchList(String select ,String searchInput,String beginDate,String endDate){
+		List<GoodsPurchaseDTO> search = goodsPurchaseMapper.purchaseSearchList(select, searchInput, beginDate, endDate);
 		return search;
 	}
 	

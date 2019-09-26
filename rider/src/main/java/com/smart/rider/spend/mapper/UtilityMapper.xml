@@ -25,26 +25,18 @@
 		<result column="subject_date" 	property="subjectDate"/>
 	</resultMap>
 	
-	<!-- 년도에 따른 월별 공과금 지출 금액 유무 체크 -->
-	<select id="utilityPayCheck" resultType="com.smart.rider.spend.dto.UtilityPay" parameterType="String">
+	<!-- 지출_공과금 등록 내역 상세보기 -->
+	<select id="utilityDetails" parameterType="String" resultMap="joinUtilityMap">
 		SELECT 
-			DATE_FORMAT(spend_utility_date,'%Y-%m') payMonth
-			,SUM(spend_utility_pay) AS sumUtility
-		FROM spend_utility
-		WHERE DATE_FORMAT(spend_utility_date,'%Y-%m') = #{checkMonth} AND contract_shop_code = #{contractShopCode}
-	</select>
-	
-	<!-- 년도에 따른 월별 공과금 지출 금액 최대값 -->
-	<select id="utilityPayMax" resultType="com.smart.rider.spend.dto.UtilityPay" parameterType="String">
-		SELECT 
-		  	 DATE_FORMAT(spend_utility_date,'%Y-%m') payMonth 
-		 	,SUM(spend_utility_pay) AS sumUtility
-		FROM spend_utility
-		WHERE DATE_FORMAT(spend_utility_date,'%Y') = #{utilityYear} AND contract_shop_code = #{contractShopCode}
-		GROUP BY payMonth
-		ORDER BY sumUtility DESC
-		LIMIT 1;
-		
+			 su.spend_utility_code
+			,su.subject_code
+			,su.contract_shop_code
+			,su.spend_utility_pay
+			,su.spend_utility_contents
+			,su.spend_utility_date
+			,sub.subject_name
+		FROM spend_utility su, subject sub
+		WHERE su.subject_code = sub.subject_code AND spend_utility_code = #{spendUtilityCode}; 
 	</select>
 	
 	<!-- 지출_공과금 코드 카운트 -->

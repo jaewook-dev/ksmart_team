@@ -1,22 +1,15 @@
 package com.smart.rider.member.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+
 
 import com.smart.rider.member.dto.MemberDTO;
 import com.smart.rider.member.service.MemberService;
@@ -46,9 +39,16 @@ public class MemberController {
 	}
 	//19.09.16작성
 	@GetMapping("/memberIdCheck")
-	public int idCheck(@RequestParam("memberId") String memberId) {
-
-		return memberService.memberIdCheck(memberId);
+	public String idCheck(@RequestParam(value="memberId") String memberId, Model model) {
+		System.out.println(memberId + "<---체크아이디");
+		System.out.println(memberService.memberIdCheck(memberId) + "<---아이디체크수");
+		int result = memberService.memberIdCheck(memberId);
+		if(result == 1) {
+			model.addAttribute("fail", "사용중인 아이디입니다!");
+		}else {
+			model.addAttribute("success", "사용가능한 아이디입니다.");
+		}
+		return "member/memberInsert";
 	}
 
 	@GetMapping("/getMemberList")
@@ -100,7 +100,6 @@ public class MemberController {
 	@GetMapping("/levelDelete")
 	public String levelDelete(@RequestParam(value="memberId") String memberId, Model model) {
 		System.out.println(memberId + "<--바로 삭제할 아이디");
-		model.addAttribute("alert", "삭제하시겠습니까?");
 		model.addAttribute("deleteMember", memberService.levelDelete(memberId));
 		return "redirect:/memberList";
 	}

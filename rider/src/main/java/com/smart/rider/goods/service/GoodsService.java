@@ -2,16 +2,13 @@ package com.smart.rider.goods.service;
 
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.ui.Model;
 
 import com.smart.rider.goods.dto.GoodsDTO;
 import com.smart.rider.goods.dto.GoodsHapDTO;
-import com.smart.rider.goods.dto.GoodsdbDTO;
 import com.smart.rider.goods.mapper.GoodsMapper;
 
 @Service
@@ -21,7 +18,11 @@ public class GoodsService {
 	
 	
 	private GoodsMapper goodsMapper;
-	
+	//상품검색추가
+	public List<GoodsDTO> goodsSearchList(String select ,String searchInput,String beginDate,String endDate){
+		List<GoodsDTO> search = goodsMapper.goodsSearchList(select, searchInput, beginDate, endDate);
+		return search;
+	}
 	//상품삭제
 	public int goodsDelete(String goodsCode,String memberId,String memberPw) {
 		return goodsMapper.goodsDelete(goodsCode, memberId, memberPw);

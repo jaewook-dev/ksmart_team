@@ -50,6 +50,12 @@ public class GoodsHapDTO {
 	private String goodsRentalDeposit;
 	private String goodsRentalPosition;
 	private String goodsRentalDate;
+	private String salesCode;
+	private String salesGroupCode;
+	private String salesPayType;
+	private String salesType;
+	private String salesAmount;	
+	private String salesDate;
 	
 	
 	
@@ -75,8 +81,49 @@ public class GoodsHapDTO {
 				+ ", shopName=" + shopName + ", shopAddress=" + shopAddress + ", shopPhone=" + shopPhone
 				+ ", goodsRentalCode=" + goodsRentalCode + ", goodsRentalPeriodPay=" + goodsRentalPeriodPay
 				+ ", goodsRentalDeposit=" + goodsRentalDeposit + ", goodsRentalPosition=" + goodsRentalPosition
-				+ ", goodsRentalDate=" + goodsRentalDate + "]";
+				+ ", goodsRentalDate=" + goodsRentalDate + ", salesCode=" + salesCode + ", salesGroupCode="
+				+ salesGroupCode + ", salesPayType=" + salesPayType + ", salesType=" + salesType + ", salesAmount="
+				+ salesAmount + ", salesDate=" + salesDate + "]";
 	}
+	
+	
+	public String getSalesCode() {
+		return salesCode;
+	}
+	public void setSalesCode(String salesCode) {
+		this.salesCode = salesCode;
+	}
+	public String getSalesGroupCode() {
+		return salesGroupCode;
+	}
+	public void setSalesGroupCode(String salesGroupCode) {
+		this.salesGroupCode = salesGroupCode;
+	}
+	public String getSalesPayType() {
+		return salesPayType;
+	}
+	public void setSalesPayType(String salesPayType) {
+		this.salesPayType = salesPayType;
+	}
+	public String getSalesType() {
+		return salesType;
+	}
+	public void setSalesType(String salesType) {
+		this.salesType = salesType;
+	}
+	public String getSalesAmount() {
+		return salesAmount;
+	}
+	public void setSalesAmount(String salesAmount) {
+		this.salesAmount = salesAmount;
+	}
+	public String getSalesDate() {
+		return salesDate;
+	}
+	public void setSalesDate(String salesDate) {
+		this.salesDate = salesDate;	
+	}
+	
 	public String getGoodsRentalCode() {
 		return goodsRentalCode;
 	}

@@ -19,7 +19,7 @@
 		<div class="row tm-content-row">
 			<div class="col-xl mx-auto tm-block-col tm-col-account-settings">
 				<div class="tm-bg-primary-dark tm-block tm-block-settings">
-					<h2 class="tm-block-title">직원정보</h2>
+					<h2 class="tm-block-title">회원정보</h2>
 					<form action="/employeeUpdate" class="tm-signup-form row" method="post">
 						<!-- 매장 릴레이션 코드 -->
 						<input type="hidden" id="contractShopCode" name="contractShopCode" th:value="${session.SCODE}">
@@ -27,7 +27,7 @@
 						<div class="form-group col-lg-6">
 							<label for="id">아이디</label>
 							<input id="memberId" name="memberId" type="text" 
-								   th:value="${getEmployeeList.memberId}" class="form-control validate bg-light text-dark" readonly="readonly"/>
+								   th:value="${getEmployeeList.memberId}" class="form-control validate" style="background-color: #54657D" readonly="readonly"/>
 						</div>
 						<!-- 비밀번호수정버튼 클릭으로 수정 -->
 						<div class="form-group col-lg-6">
@@ -65,14 +65,14 @@
 						<div class="form-group col-lg-6">
 							<label>&nbsp;</label>
 							<button type="submit" class="btn btn-primary btn-block text-uppercase">
-								직원 수정
+								회원 수정
 							</button>
 						</div>
 						<div class="form-group col">
 							<label>&nbsp;</label>
 							<!-------- 탈퇴 버튼 클릭시 팝업으로 비밀번호 확인 후 탈퇴 할 수 있다  --------->
 							<a id="deleteBtn" class="btn btn-primary btn-block text-uppercase" 
-								th:href="@{/memberDelete(memberId=${getEmployeeList.memberId})}">
+								th:href="@{/employeeDelete(memberId=${getEmployeeList.memberId})}">
 								회원 탈퇴
 							</a>
 						</div>
@@ -87,7 +87,7 @@
 	$(document).ready(function(){
 		$('#updatePw').click(function(){
 			var memberId = $("#memberId").val();
-			window.open('/changePassword?memberId='+memberId+'','비밀번호수정','width=430,height=550,location=no,status=no,scrollbars=yes')
+			window.open('/changePassword?memberId='+memberId+'','비밀번호수정','left='+(screen.availWidth-550)/2+',top='+(screen.availHeight-430)/3+',width=430,height=550,location=no,status=no,scrollbars=yes')
 		});
 	});
 </script>

@@ -16,4 +16,8 @@ public interface EmployeeMapper {
 	public MemberDTO getEmployeeList(String memberId);
 	
 	public int employeeUpdate(MemberDTO memberdto);
+	//19.09.25작성
+	public int employeeDelete(String memberId, String memberPw);
+	//19.09.26작성
+	public List<MemberDTO> searchEmployee(String contractShopCode, String select, String searchInput);
 }

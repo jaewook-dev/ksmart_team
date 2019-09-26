@@ -44,10 +44,40 @@
     	<result column="goods_rental_period_pay"    	property="goodsRentalPeriodPay"/>
     	<result column="goods_rental_deposit"    	property="goodsRentalDeposit"/>
     	<result column="goods_rental_position"     property="goodsRentalPosition"/>
-    	<result column="goods_rental_date"     		property="goodsRentalDate"/>
-    
+    	<result column="goods_rental_date"     		property="goodsRentalDate"/>   
     	
 	</resultMap>
+	<select id="goodsSearchList" resultMap="ASid" parameterType="String">
+			SELECT 
+			*
+			FROM
+			goods g
+			INNER JOIN
+			purchase p			 
+			INNER JOIN 
+			goods_database gb
+			ON 
+			g.goods_database_code = p.goods_database_code			
+			and gb.goods_database_code = p.goods_database_code
+			AND g.purchase_code = p.purchase_code
+		<if test="searchInput != null and searchInput neq ''.toString()">
+			WHERE 
+				${select} Like CONCAT('%',#{searchInput},'%')
+		</if>
+		<if test="beginDate neq ''.toString() and endDate eq ''.toString()">
+        	AND 
+        		g.goods_date between #{beginDate} and NOW()		
+        </if>
+        <if test="beginDate eq ''.toString() and endDate neq ''.toString()">
+        	AND 
+        		g.goods_date between '2000-01-01' and #{endDate}
+        </if>
+        <if test="beginDate neq ''.toString() and endDate neq ''.toString()">
+        	AND 
+        		g.goods_date between #{beginDate} and #{endDate}
+        </if>
+	
+	</select>
 	<!-- 판매상품삭제  -->
 	<delete id="goodsDelete" parameterType="String">
 		DELETE
@@ -146,7 +176,7 @@
 			g.goods_database_code = p.goods_database_code			
 			and gb.goods_database_code = p.goods_database_code
 			AND g.purchase_code = p.purchase_code
-	
+		
 	</select>
 	
 	
