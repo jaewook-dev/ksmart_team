@@ -16,7 +16,6 @@ import com.smart.rider.contract.dto.ContractManagementDTO;
 import com.smart.rider.contract.dto.ManagementDTO;
 import com.smart.rider.contract.service.ContractService;
 import com.smart.rider.contract.service.ManagementService;
-import com.smart.rider.subject.dto.SubjectDTO;
 
 @Controller
 public class ManagementController {

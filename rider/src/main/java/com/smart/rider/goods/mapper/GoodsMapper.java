@@ -2,13 +2,10 @@ package com.smart.rider.goods.mapper;
 
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import org.apache.ibatis.annotations.Mapper;
 
 import com.smart.rider.goods.dto.GoodsDTO;
 import com.smart.rider.goods.dto.GoodsHapDTO;
-import com.smart.rider.goods.dto.GoodsdbDTO;
 
 @Mapper
 public interface GoodsMapper {

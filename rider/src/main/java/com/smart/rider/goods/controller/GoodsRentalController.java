@@ -15,7 +15,6 @@ import com.smart.rider.goods.dto.GoodsHapDTO;
 import com.smart.rider.goods.dto.GoodsRentalDTO;
 import com.smart.rider.goods.service.GoodsRentalService;
 import com.smart.rider.goods.service.GoodsService;
-import com.smart.rider.goods.service.GoodsdbService;
 import com.smart.rider.member.dto.MemberDTO;
 
 @Controller

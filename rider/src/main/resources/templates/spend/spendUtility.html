@@ -39,33 +39,44 @@
 					<div class="col-sm-12 col-md-12 col-lg-6 col-xl-7 tm-block-col">
 						<div class="tm-bg-primary-dark tm-block-spend ">
 							<h4 class="tm-block-title">등록내역</h4>
+							<div style="min-height: 330px;">
 							<table class="table">
 								<thead>
-									<tr>
+									<tr class="text-center">
 										<th>내역</th>
 										<th>금액</th>
 										<th>등록일자</th>
-										<th style="width: 20%">상세보기</th>
+										<th style="width: 8%">상세</th>
+										<th style="width: 8%">삭제</th>
 									</tr>
 								</thead>
-								<tbody>
+								<tbody class="text-center">
 									<tr th:each="list : ${utilityList}">
 										<td th:text="${list.subjectName}"></td>
 										<td th:text="${list.spendUtilityPay}"></td>
 										<td th:text="${list.spendUtilityDate}"></td>
-										<td class="text-center">
+										<td>
 											<a class="tm-product-delete-link" th:href="@{/spendUtilityDetails(spendUtilityCode=${list.spendUtilityCode})}">
 												<i class="fas fa-search" style="color: white"></i>
+											</a>
+										</td>
+										<td>
+											<a th:href="@{/spendUtilityDelete(spendUtilityCode=${list.spendUtilityCode})}"
+											   class="tm-product-delete-link possibleButton"> 
+											   <i class="far fa-trash-alt tm-product-delete-icon" style="color: white;"></i>
 											</a>
 										</td>
 									</tr>
 									<th:block th:if="${alert} neq null">
 										<tr class="text-center">
-											<td colspan="4" th:text="${alert}"></td>
+											<td colspan="5" th:text="${alert}"></td>
 										</tr>
 									</th:block>
 								</tbody>
 							</table>
+							</div>
+							
+							<!-- 페이징 페이지 번호 -->
 							<div>
 								<ul class="pagination pagination-sm justify-content-center" style="margin:20px 0">
 									<li class="page-item active">
@@ -75,7 +86,7 @@
 									<th:block th:each="num : ${#numbers.sequence(startPageNum,lastPageNum)}">
 										<li class="page-item active">
 											<span th:if="${currentPage == num}" th:text="${num}" class="text-center page-link"></span> 
-												<a class="page-link" th:unless="${currentPage == num}" th:text="${num}" th:href="@{/spendUtilityList(currentPage=${num})}"></a>
+												<a class="page-link" th:unless="${currentPage == num}" th:text="${num}" th:href="@{/spendUtility(currentPage=${num})}"></a>
 										</li>
 									</th:block>
 	
@@ -87,10 +98,10 @@
 						</div>
 					</div>
 
-					<!-- 공과금 등록 폼 -->
+					<!-- 공과금 지출 등록 폼 -->
 					<div class="col-sm-12 col-md-12 col-lg-6 col-xl-5 tm-block-col">
 						<div class="tm-bg-primary-dark tm-block-spend">
-							<h4 class="tm-block-title">공과금 등록</h4>
+							<h4 class="tm-block-title">공과금 지출 등록</h4>
 							<form action="utilityInsert" method="post">
 								<div class="form-group">
 									<label>내역</label> <select
@@ -119,7 +130,7 @@
 
 
 
-					<!-- 공과금 검색 -->
+					<!-- 공과금 지출 검색 -->
 					<div class="col-12 tm-block-col">
 						<div class="tm-bg-primary-dark tm-block">
 
@@ -171,6 +182,64 @@
 <th:block layout:fragment="customScript">
 
 	<script th:inline="javascript">
+    
+    <!-- charts.js script-->
+	var chartJanuary 	= [[${utility0}]];
+	var chartFebruary 	= [[${utility1}]];
+	var chartMarch 		= [[${utility2}]];
+	var chartApril 		= [[${utility3}]];
+	var chartMay 		= [[${utility4}]];
+	var chartJune		= [[${utility5}]];
+	var chartJuly		= [[${utility6}]];
+	var chartAugust		= [[${utility7}]];
+	var chartSeptember 	= [[${utility8}]];
+	var chartOctober 	= [[${utility9}]];
+	var chartNovember 	= [[${utility10}]];
+	var chartDecember 	= [[${utility11}]];
+
+	$(function() {
+		var uctx = document.getElementById('utilityChart').getContext('2d');
+		var utilityChart = new Chart(uctx, {
+			
+		    // The type of chart we want to create
+		    type: 'bar',
+		
+		    // The data for our dataset
+		    data: {
+		        labels: ['1월', '2월', '3월', '4월', '5월', '6월', '7월','8월','9월','10월','11월','12월'],
+		        datasets: [{
+		            label: '공과금 총지출 금액',
+		            backgroundColor: 'rgb(245, 166, 35)',
+		            borderColor: 'rgb(245, 166, 35)',
+		            data: [chartJanuary,chartFebruary,chartMarch,chartApril,chartMay,chartJune,chartJuly,chartAugust,chartSeptember,chartOctober,chartNovember,chartDecember]
+		        }]
+		    },
+		
+		    // Configuration options
+		    options: {
+		    	legend: {
+		             labels: {
+		                  fontColor: 'white' // label color
+		                 }
+		              },
+			    scales: {
+			    	// y축
+			        yAxes: [{
+			            ticks: {
+			                fontColor:'white' // y축 폰트 color
+			            }
+			     	}],
+			     	// x축
+			     	xAxes: [{
+			            ticks: {
+			            	
+			                fontColor:'white' // x축 폰트 color
+			            }
+			     	}]
+			    }
+		    }
+		});
+	})
 	
 	<!-- datepicker -->
 	//시작 일자 텍스트상자 클릭시 달력 표기 
@@ -187,69 +256,9 @@
 	var scriptCurrentPage = [[${currentPage}]];
 	var scriptlastPage = [[${lastPage}]];
 	
-
     function page(scriptCurrentPage) {
     	location.href="/spendUtilityList?currentPage="+scriptCurrentPage; 
-    }
-    
-    
-    <!-- charts.js script-->
-	var utilityJanuary 		= [[${utilityJanuary}]];
-	var utilityFebruary 	= [[${utilityFebruary}]];
-	var utilityMarch 		= [[${utilityMarch}]];
-	var utilityApril 		= [[${utilityApril}]];
-	var utilityMay 			= [[${utilityMay}]];
-	var utilityJune			= [[${utilityJune}]];
-	var utilityJuly		 	= [[${utilityJuly}]];
-	var utilityAugust		= [[${utilityAugust}]];
-	var utilitySeptember 	= [[${utilitySeptember}]];
-	var utilityOctober 		= [[${utilityOctober}]];
-	var utilityNovember 	= [[${utilityNovember}]];
-	var utilityDecember 	= [[${utilityDecember}]];
-	
-	var payMax = [[${payMax}]];
-
-	var uctx = document.getElementById('utilityChart').getContext('2d');
-	var utilityChart = new Chart(uctx, {
-		
-	    // The type of chart we want to create
-	    type: 'bar',
-	
-	    // The data for our dataset
-	    data: {
-	        labels: ['1월', '2월', '3월', '4월', '5월', '6월', '7월','8월','9월','10월','11월','12월'],
-	        datasets: [{
-	            label: '공과금 총지출 금액',
-	            backgroundColor: 'rgb(245, 166, 35)',
-	            borderColor: 'rgb(245, 166, 35)',
-	            data: [utilityJanuary,utilityFebruary,utilityMarch,utilityApril,utilityMay,utilityJune,utilityJuly,utilityAugust,utilitySeptember,utilityOctober,utilityNovember,utilityDecember]
-	        }]
-	    },
-	
-	    // Configuration options
-	    options: {
-	    	legend: {
-	             labels: {
-	                  fontColor: 'white' // label color
-	                 }
-	              },
-		    scales: {
-		    	// y축
-		        yAxes: [{
-		            ticks: {
-		                fontColor:'white' // y축 폰트 color
-		            }
-		     	}],
-		     	// x축
-		     	xAxes: [{
-		            ticks: {
-		            	
-		                fontColor:'white' // x축 폰트 color
-		            }
-		     	}]
-		    }
-	    }
-	});
+    };
 </script>
 </th:block>
 </html>

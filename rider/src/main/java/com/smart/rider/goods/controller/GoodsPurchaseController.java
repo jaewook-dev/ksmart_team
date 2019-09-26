@@ -1,8 +1,5 @@
 package com.smart.rider.goods.controller;
 
-
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -14,10 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.smart.rider.account.dto.AccountDTO;
 import com.smart.rider.account.service.AccountService;
 import com.smart.rider.goods.dto.GoodsPurchaseDTO;
-import com.smart.rider.goods.dto.GoodsdbDTO;
 import com.smart.rider.goods.dto.GoodsHapDTO;
 import com.smart.rider.goods.service.GoodsPurchaseService;
 import com.smart.rider.goods.service.GoodsdbService;
