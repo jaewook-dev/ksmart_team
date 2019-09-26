@@ -3,9 +3,11 @@ package com.smart.rider.shop.dto;
 public class PosDTO {
 
 	private String posCode;
-	private String shopRelationCode;
+	private String contractShopCode;
 	private String posName;
-	private int posNumber;
+	private String posNumber;
+	private String posUse;
+	
 	
 	public String getPosCode() {
 		return posCode;
@@ -13,11 +15,11 @@ public class PosDTO {
 	public void setPosCode(String posCode) {
 		this.posCode = posCode;
 	}
-	public String getShopRelationCode() {
-		return shopRelationCode;
+	public String getContractShopCode() {
+		return contractShopCode;
 	}
-	public void setShopRelationCode(String shopRelationCode) {
-		this.shopRelationCode = shopRelationCode;
+	public void setContractShopCode(String contractShopCode) {
+		this.contractShopCode = contractShopCode;
 	}
 	public String getPosName() {
 		return posName;
@@ -25,17 +27,25 @@ public class PosDTO {
 	public void setPosName(String posName) {
 		this.posName = posName;
 	}
-	public int getPosNumber() {
+	public String getPosNumber() {
 		return posNumber;
 	}
-	public void setPosNumber(int posNumber) {
+	public void setPosNumber(String posNumber) {
 		this.posNumber = posNumber;
+	}
+	public String getPosUse() {
+		return posUse;
+	}
+	public void setPosUse(String posUse) {
+		this.posUse = posUse;
 	}
 	@Override
 	public String toString() {
-		return "PosDTO [posCode=" + posCode + ", shopRelationCode=" + shopRelationCode + ", posName=" + posName
-				+ ", posNumber=" + posNumber + "]";
+		return "PosDTO [posCode=" + posCode + ", contractShopCode=" + contractShopCode + ", posName=" + posName
+				+ ", posNumber=" + posNumber + ", posUse=" + posUse + "]";
 	}
+	
+
 
 	
 }

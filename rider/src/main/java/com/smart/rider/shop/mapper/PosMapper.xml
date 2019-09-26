@@ -1,4 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.smart.rider.shop.mapper.PosMapper">
+	
+	<!-- POS코드 자동증가 -->
+	<select id="posCodeMax" resultType="String">
+		SELECT 
+			MAX(LPAD(RIGHT(pos_code, 4)+1, '4' , '0')) 
+		FROM pos;
+	</select>
+	
+	<!--세션으로 받은 id값으로 계약매장코드 조회 -->
+	<select id="getMemberId" parameterType="String" resultType="com.smart.rider.shop.dto.SsrHapDTO" >
+
+		SELECT 
+		DISTINCT 
+		 	 sr.contract_shop_code AS contractShopCode
+			,s.shop_name AS shopName
+		FROM shop_relation sr,shop s 
+		WHERE sr.shop_code = s.shop_code AND sr.member_id = 'id006'; 
+	</select>
+	
+	<!-- POS데이터 생성 쿼리 -->
+	<insert id="posInsert" parameterType="com.smart.rider.shop.dto.PosDTO">
+		INSERT INTO pos
+			(
+			 pos_code
+			,contract_shop_code
+			,pos_name
+			,pos_number
+			,pos_use)
+		VALUES (
+			 #{posCode}
+			,#{contractShopCode}
+			,#{posName}
+			,#{posNumber}
+			,#{posUse})
+		
+	
+	</insert>
+
+
+
 </mapper>

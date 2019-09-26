@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.smart.rider.contract.dto.ContractDTO;
 import com.smart.rider.contract.service.ContractService;
+import com.smart.rider.shop.dto.PosDTO;
 import com.smart.rider.shop.dto.ShopDTO;
 import com.smart.rider.shop.dto.ShopRelationDTO;
 import com.smart.rider.shop.service.ShopService;
@@ -27,12 +28,14 @@ public class ShopController {
 		//값 확인
 		List<ShopDTO> List = shopService.shopList();
 		List<ShopRelationDTO> srList = shopService.relationList();
+		List<PosDTO> pList = shopService.posList();
 		System.out.println("shopList"+List);
 		System.out.println("relationList"+srList );
+		System.out.println("posList" + pList);
 		
 		model.addAttribute("shopList", List);
 		model.addAttribute("relationList", srList);
-		
+		model.addAttribute("posList", pList);
 		return "/shop/shop";
 	}
 	
