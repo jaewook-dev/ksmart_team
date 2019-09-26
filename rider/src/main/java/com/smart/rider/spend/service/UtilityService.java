@@ -18,13 +18,26 @@ public class UtilityService {
 	@Autowired
 	private UtilityMapper utilityMapper;
 	
-	// 지출_공과금 등록 내역 상세보기
+	
+	/*** 190926 재욱, 지출_공과금 등록 내역 수정 ***/
+	public int utilityUpdate(UtilityDTO utilityDTO) {
+		return utilityMapper.utilityUpdate(utilityDTO);
+	}
+	
+	
+	/*** 190926 재욱, 지출_공과금 등록 내역 삭제 ***/
+	public int utilityDelete(String spendUtilityCode) {
+		return utilityMapper.utilityDelete(spendUtilityCode);
+	}
+	
+	
+	/*** 190924 재욱, 지출_공과금 등록 내역 상세보기 ***/
 	public List<JoinUtilityDTO> utilityDetails(String spendUtilityCode) {
 		return utilityMapper.utilityDetails(spendUtilityCode);
 	}
 	
 	
-	// 지출_공과금 최근 등록 목록 paging
+	/*** 190924 재욱, 지출_공과금 최근 등록 목록 paging ***/
     public Map<String, Object> utilityList(int currentPage, String contractShopCode, String utilityKey, String utilityValue, String beginDate, String endDate){
         
         // 페이지에 보여줄 행의 개수 ROW_PER_PAGE = 4로 고정
@@ -94,12 +107,12 @@ public class UtilityService {
     }
 	
 	
-	// 지출_공과금 등록 계정과목 selectBox
+    /*** 190924 재욱, 지출_공과금 등록 계정과목 selectBox ***/ 
 	public List<SubjectDTO> subjectSelectBox(){
 		return utilityMapper.subjectSelectBox();
 	}
 	
-	// 지출_공과금 등록 
+	/*** 190924 재욱, 지출_공과금 등록  ***/
 	public int utilityInsert(UtilityDTO utilityDTO, String contractShopCode) {
 		String spendUtilityCode = "SU" + utilityMapper.utilityCodeCount(); // 지출_공과금 코드 자동증가
 		//System.out.println(spendUtilityCode + " <-- spendUtilityCode check utilityInsert UtilityService.java");

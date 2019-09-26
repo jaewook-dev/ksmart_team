@@ -27,10 +27,20 @@ public class UtilityController {
 	@Autowired
 	private MainService mainService;
 	
-	/*** 190925 재욱, 지출_공과금 등록내역 수정 프로세스 ***/ 
+	/*** 190926 재욱, 지출_공과금 등록내역 삭제 프로세스 ***/ 
+	@GetMapping("/spendUtilityDelete")
+	public String spendUtilityDelete(@RequestParam(value = "spendUtilityCode") String spendUtilityCode) {
+		//System.out.println(spendUtilityCode + " <-- spendUtilityCode spendUtilityDelete() UtilityController.java");
+		utilityService.utilityDelete(spendUtilityCode);
+		return "redirect:/spendUtility";
+	}
+	
+	
+	/*** 190926 재욱, 지출_공과금 등록내역 수정 프로세스 ***/ 
 	@PostMapping("/spendUtilityUpdate")
 	public String spendUtilityUpdate(UtilityDTO utilityDTO) {
-		System.out.println(utilityDTO.toString() + " <-- utilityDTO.toString() spendUtilityUpdate UtilityController.java");
+		//System.out.println(utilityDTO.toString() + " <-- utilityDTO.toString() spendUtilityUpdate() UtilityController.java");
+		utilityService.utilityUpdate(utilityDTO);
 		return "redirect:/spendUtility";
 	}
 
@@ -50,13 +60,12 @@ public class UtilityController {
 	/*** 190925 재욱, 지출_공과금 검색 화면 ***/
 	@PostMapping("/spendUtilityList")
 	public String spendUtilityList(@RequestParam(value = "utilityKey") String utilityKey
-							, @RequestParam(value = "utilityValue") String utilityValue
-							, @RequestParam(value = "beginDate") String beginDate
-							, @RequestParam(value = "endDate") String endDate
-							, Model model
-							, @RequestParam(value = "utilityYear", required = false, defaultValue = "2019") String utilityYear
-							, @RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage
-							, HttpSession session) {
+								 , @RequestParam(value = "utilityValue") String utilityValue
+								 , @RequestParam(value = "beginDate") String beginDate
+								 , @RequestParam(value = "endDate") String endDate
+								 , @RequestParam(value = "utilityYear", required = false, defaultValue = "2019") String utilityYear
+								 , @RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage
+								 , HttpSession session, Model model) {
 		
 		//System.out.println(utilityKey + " < -- utilityKey utilityList() UtilityController.java");
 		//System.out.println(utilityValue + " < -- utilityValue utilityList() UtilityController.java");
