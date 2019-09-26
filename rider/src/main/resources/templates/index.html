@@ -19,116 +19,18 @@
 								<b th:if="${session.SLEVEL eq '직원'}">직원으로 로그인중</b>
 							</p>
 						</div>
+						
 					</div>
-					<!-- row -->
+					
+					<!-- 190926 재욱 연습용 -->
 					<div class="row tm-content-row">
-						<div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
-							<div class="tm-bg-primary-dark tm-block tm-block-scroll">
-								<h2 class="tm-block-title">계정과목(재욱)</h2>
-		
-								<!-- Begin 재욱, 초기 index 화면 계정과목 DB 연결 확인용 추후 삭제 -->
-									<table class="table">
-										<thead>
-											<tr>
-												<th scope="col">계정과목코드</th>
-												<th scope="col">계정과목명</th>
-												<th scope="col">계정과목등록일자</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr th:each="subject : ${subjectList}">
-												<th th:text="${subject.subjectNumber}"></th>
-												<th th:text="${subject.subjectName}"></th>
-												<th th:text="${subject.subjectDate}"></th>
-											</tr>
-										</tbody>
-									</table>
-									<!-- End 재욱, 초기 index 화면 계정과목 DB 연결 확인용 추후 삭제 -->
-								</div>
+						<div class="col-12 tm-block-col">
+							<div class="tm-bg-primary-dark tm-block-util">
+								<h4 class="tm-block-title">차트</h4>
+
+								<!-- charts.js -->
+								<canvas id="chart" height="100px;"></canvas>
 							</div>
-							<div class="tm-bg-primary-dark tm-block tm-block-scroll">
-								<h2 class="tm-block-title">계약단가표(석호)</h2>
-								<!-- 석호, 과제용  DB 연결 확인용 추후 삭제 -->
-									<table class="table">
-										<thead>
-											<tr>
-												<th scope="col">월 이용금액</th>
-												<th scope="col">1년일시불금액</th>
-												<th scope="col">2년일시불금액</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr th:each="unitList : ${unitList}">
-												<th th:text="${unitList.contractUnitMonth}"></th>
-												<th th:text="${unitList.contractUnitOneyear}"></th>
-												<th th:text="${unitList.contractUnitTwoyear}"></th>
-											</tr>
-										</tbody>
-									</table>
-								<!-- End 석호, 초기 index 화면 계정과목 DB 연결 확인용 추후 삭제 -->
-							</div>
-							<div></div>
-							<!-- 영성 index 상품DB연결 확인용 (삭제)  시작 -->
-							<div class="col-12 tm-block-col">
-								<div class="tm-bg-primary-dark tm-block-sc tm-block-scroll">
-									<h2 class="tm-block-title">상품DB리스트</h2>
-									<table class="table">
-										<thead>
-											<tr>
-												<th scope="col">DB상품 이름</th>
-												<th scope="col">상품번호</th>
-												<th scope="col">색상</th>
-												<th scope="col">중량</th>
-												<th scope="col">최대속도</th>
-												<th scope="col">상세설명</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr th:each="gdbList : ${goodsDbList}">
-												<th th:text="${gdbList.goodsDbName}"></th>
-												<th th:text="${gdbList.goodsDbNumber}"></th>
-												<th th:text="${gdbList.goodsDbColor}"></th>
-												<th th:text="${gdbList.goodsDbWeight}"></th>
-												<th th:text="${gdbList.goodsDbSpeed}"></th>
-												<th th:text="${gdbList.goodsDbDescription}"></th>
-											</tr>
-										</tbody>
-									</table>
-								</div>
-							</div>
-							<!-- 영성 index 상품db연결확인 삭제용 끝 -->
-							
-							<div class="col-12 tm-block-col">
-								<div
-									class="tm-bg-primary-dark tm-block-sc tm-block-taller tm-block-scroll">
-									<h2 class="tm-block-title">회원목록(건영)</h2>
-									<table class="table">
-										<thead>
-											<tr>
-												<th scope="col">ID</th>
-												<th scope="col">이름</th>
-												<th scope="col">접근권한</th>
-												<th scope="col">생년월일</th>
-												<th scope="col">주소</th>
-												<th scope="col">이메일</th>
-												<th scope="col">전화번호</th>
-												<th scope="col">회원가입일자</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr th:each="member : ${memberList}">
-												<th th:text="${member.memberId}"></th>
-												<th th:text="${member.memberName}"></th>
-												<th th:text="${member.memberLevel}"></th>
-												<th th:text="${member.memberBirth}"></th>
-												<th th:text="${member.memberAddress}"></th>
-												<th th:text="${member.memberEmail}"></th>
-												<th th:text="${member.memberPhone}"></th>
-												<th th:text="${member.memberInsertDate}"></th>
-											</tr>
-										</tbody>
-									</table>
-								</div>
 						</div>
 					</div>
 				</div>
@@ -138,5 +40,50 @@
 </th:block>
 </th:block>
 <th:block layout:fragment="customScript">
+
+<script th:inline="javascript">
+	
+	var ctx = document.getElementById('chart').getContext('2d');
+	var chart = new Chart(ctx, {
+		
+	    // The type of chart we want to create
+	    type: 'bar',
+	
+	    // The data for our dataset
+	    data: {
+	        labels: ['1월', '2월', '3월', '4월', '5월', '6월', '7월','8월','9월','10월','11월','12월'],
+	        datasets: [{
+	            label: '연습 차트',
+	            backgroundColor: 'rgb(245, 166, 35)',
+	            borderColor: 'rgb(245, 166, 35)',
+	            data: [0,0,0,0,0,0,0,0,0,0,10,0]
+	        }]
+	    },
+	
+	    // Configuration options
+	    options: {
+	    	legend: {
+	             labels: {
+	                  fontColor: 'white' // label color
+	                 }
+	              },
+		    scales: {
+		    	// y축
+		        yAxes: [{
+		            ticks: {
+		                fontColor:'white' // y축 폰트 color
+		            }
+		     	}],
+		     	// x축
+		     	xAxes: [{
+		            ticks: {
+		                fontColor:'white' // x축 폰트 color
+		            }
+		     	}]
+		    }
+	    }
+	});
+</script>
+
 </th:block>
 </html>
