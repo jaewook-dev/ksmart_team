@@ -19,4 +19,17 @@ public class AccountService {
 		
 		return accountmapper.accountList();
 	}
+	public int accountInsert(AccountDTO account) {
+		//매입거래처 코드 생성
+		String accountCode = "AC"+ accountmapper.accountMaxCode();
+		if(accountCode.equals("ACnull")) { 
+			accountCode = "AC0001";
+		}
+		
+		account.setAccountCode(accountCode);
+		System.out.println(account.getAccountCode()+"<--값 담겨있는지 확인");
+		
+		
+		return accountmapper.accountInsert(account);
+	}
 }

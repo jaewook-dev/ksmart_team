@@ -16,7 +16,7 @@ public class AccountController {
 	@Autowired
 	private AccountService accountService;
 	
-	@GetMapping("/account")
+	@GetMapping("/accountList")
 	public String account(Model model) {
 		List<AccountDTO> accountList =  accountService.accountList();
 		System.out.println("=====test=====");
@@ -24,6 +24,13 @@ public class AccountController {
 		model.addAttribute("accountList", accountService.accountList());
 		
 		
-		return "/account/account.html";
+		return "/account/accountList";
+	}
+	@GetMapping("/accountInsert")
+	public String accountInsert(AccountDTO account) {
+		System.out.println(account +"<--accountInsert에서 넘어온  값");
+		accountService.accountInsert(account);
+		
+		return "/account/accountInsert";
 	}
 }

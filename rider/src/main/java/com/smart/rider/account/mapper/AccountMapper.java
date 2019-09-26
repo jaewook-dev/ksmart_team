@@ -11,4 +11,8 @@ import com.smart.rider.account.dto.AccountDTO;
 public interface AccountMapper {
 
 	public List<AccountDTO> accountList();
+	
+	public String accountMaxCode();
+	
+	public int accountInsert(AccountDTO account);
 }
