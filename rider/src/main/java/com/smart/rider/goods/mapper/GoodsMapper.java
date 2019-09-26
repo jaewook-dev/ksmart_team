@@ -16,6 +16,9 @@ public interface GoodsMapper {
 	
 	//코드자동증가
 	public String goodsCodeCount();
+	
+	//상품검색추가
+	public List<GoodsDTO> goodsSearchList(String select ,String searchInput,String beginDate,String endDate);
 	//상품삭제
 	public int goodsDelete(String goodsCode,String memberId,String memberPw);
 	

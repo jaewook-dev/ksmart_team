@@ -29,6 +29,24 @@ public class GoodsController {
 	@Autowired
 	private GoodsPurchaseService goodsPurchaseService;
 	
+	//상품검색추가 2019-09-26
+	@PostMapping("/goodsSearchList")
+	public String goodsSearchList(@RequestParam(value="select")String select
+									,@RequestParam(value="searchInput")String searchInput
+									,@RequestParam(value="beginDate")String beginDate
+									,@RequestParam(value="endDate")String endDate
+									,Model model) {
+		//System.out.println(select + " <-- select goodsSearchList GoodsController.java");
+		//System.out.println(searchInput + " <-- searchInput goodsSearchList GoodsController.java");
+		//System.out.println(beginDate + " <-- beginDate goodsSearchList GoodsController.java");
+		//System.out.println(endDate + " <-- endDate goodsSearchList GoodsController.java");
+		List<GoodsDTO> search = goodsService.goodsSearchList(select, searchInput, beginDate, endDate);
+		model.addAttribute("gList", search);
+		if(search.size()==0) {
+			model.addAttribute("alert", "검색 결과가 없습니다");
+		}
+		return "goods/goodsList";
+	}
 	//상품삭제요청
 	@GetMapping("/goodsDelete")
 	public String goodsDelete(@RequestParam(value="goodsCode")String goodsCode,Model model) {

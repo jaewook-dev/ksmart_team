@@ -14,7 +14,7 @@
 					<div class="tm-bg-primary-dark tm-block tm-block-h-auto-copy">
 						<form action="goodsDbSearchList" class="tm-search-form row" method="post">
 							<div class="form-group col-3">
-								<select class="custom-select" name="goodDbDate">
+								<select class="custom-select" name="goodsDbDate">
 									<option value="goods_database_date">등록일자</option>
 								</select>
 							</div>
@@ -91,7 +91,12 @@
 										 <i class="fas fa-check tm-product-check-icon"></i>
 										</a>
 										</td> -->
-									</tr>							
+									</tr>
+									<th:block th:if="${alert} neq null">
+										<tr class="text-center">
+											<td colspan="7" th:text="${alert}"></td>
+										</tr>
+									</th:block>								
 								</tbody>
 							</table>
 						</div>

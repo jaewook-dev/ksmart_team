@@ -21,7 +21,11 @@ public class GoodsService {
 	
 	
 	private GoodsMapper goodsMapper;
-	
+	//상품검색추가
+	public List<GoodsDTO> goodsSearchList(String select ,String searchInput,String beginDate,String endDate){
+		List<GoodsDTO> search = goodsMapper.goodsSearchList(select, searchInput, beginDate, endDate);
+		return search;
+	}
 	//상품삭제
 	public int goodsDelete(String goodsCode,String memberId,String memberPw) {
 		return goodsMapper.goodsDelete(goodsCode, memberId, memberPw);
