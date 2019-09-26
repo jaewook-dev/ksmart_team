@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import com.smart.rider.account.dto.AccountDTO;
 import com.smart.rider.account.service.AccountService;
-import com.smart.rider.contract.dto.ContractDTO;
 
 
 @Controller

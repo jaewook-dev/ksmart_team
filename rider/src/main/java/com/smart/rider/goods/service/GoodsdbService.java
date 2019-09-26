@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.smart.rider.goods.dto.GoodsdbDTO;
 import com.smart.rider.goods.mapper.GoodsdbMapper;
-import com.smart.rider.member.dto.MemberDTO;
 
 
 

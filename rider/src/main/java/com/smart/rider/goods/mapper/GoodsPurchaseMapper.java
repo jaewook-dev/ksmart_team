@@ -1,9 +1,6 @@
 package com.smart.rider.goods.mapper;
 
 import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -22,7 +19,7 @@ public interface GoodsPurchaseMapper {
 	//매입 상세조회
 	public GoodsHapDTO getPurchaseList(String purchaseCode);
 	//매입 검색
-	public List<GoodsHapDTO> purchaseSearchList(String select ,String searchInput);
+	public List<GoodsPurchaseDTO> purchaseSearchList(String select ,String searchInput,String beginDate,String endDate);
 	//매입 삭제
 	public int purchaseDelete(String purchaseCode,String memberId,String memberPw);
 	

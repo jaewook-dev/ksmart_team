@@ -2,68 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.smart.rider.main.mapper.MainMapper">
 
-	<!-- 재욱, 초기 index 화면 계정과목 DB 연결 확인용 추후 삭제제 -->
-	<select id="subjectList" resultType="com.smart.rider.subject.dto.SubjectDTO">
-		SELECT
-		subject_code AS subjectCode
-		, member_id AS memberId
-		, subject_number AS subjectNumber
-		, subject_name AS subjectName
-		, subject_date AS subjectDate
-		FROM subject
-	</select>
-
-	<select id="UnitList" resultType="com.smart.rider.contract.dto.UnitDTO">
-		SELECT
-		contract_unit_code AS contractUnitCode
-		, member_id AS memberId
-		, contract_unit_month AS contractUnitMonth
-		, contract_unit_oneyear AS contractUnitOneyear
-		, contract_unit_twoyear AS contractUnitTwoyear
-		, contract_unit_date AS contractUnitDate
-
-		FROM contract_unit
-	</select>
-
-	<!-- 영성 INDEX 화면 상품DB 연결확인 -->
-	<select id="goodsDbList" resultType="com.smart.rider.goods.dto.GoodsdbDTO">
-		SELECT
-		goods_database_code AS goodsDbCode,
-		member_id AS memberId,
-		goods_database_name AS goodsDbName,
-		goods_database_category AS goodsDbCategory,
-		goods_database_number AS goodsDbNumber,
-		goods_database_color AS goodsDbColor,
-		goods_database_weight AS goodsDbWeight,
-		goods_database_speed AS goodsDbSpeed,
-		goods_database_size AS goodsDbSize,
-		goods_database_nation AS goodsDbNation,
-		goods_database_load AS goodsDbLoad,
-		goods_database_distance AS goodsDbDistance,
-		goods_database_battery AS goodsDbBattery,
-		goods_database_time AS goodsDbTime,
-		goods_database_made AS goodsDbMade,
-		goods_database_description AS goodsDbDescription,
-		goods_database_image AS goodsDbImage,
-		goods_database_date AS goodsDbDate
-		FROM goods_database
-	</select>
-
-	<select id="memberList" resultType="com.smart.rider.member.dto.MemberDTO">
-		SELECT
-		member_id AS memberId
-		,member_pw AS memberPw
-		,member_name AS memberName
-		,member_level AS memberLevel
-		,member_birth AS memberBirth
-		,member_address AS memberAddress
-		,member_email AS memberEmail
-		,member_phone AS memberPhone
-		,contract_shop_code AS contractShopCode
-		,member_insert_date AS memberInsertDate
-		,member_update_date AS memberUpdateDate
-		FROM member
-
+	<!-- 190926 재욱,  월별로 컬럼의 합을 구하는 쿼리, 값이  없을 경우 null -->
+	<select id="chartValue" resultType="com.smart.rider.main.dto.ChartValueDTO" parameterType="java.util.Map">
+		SELECT 
+			 DATE_FORMAT(${columnDate},'%Y-%m') chartValueMonth
+			,SUM(${columnInt}) AS chartValueSum
+		FROM ${chartTable}
+		WHERE DATE_FORMAT(${columnDate},'%Y-%m') = #{checkMonth} AND contract_shop_code = #{contractShopCode}
 	</select>
 </mapper>
 

@@ -85,7 +85,7 @@
 												
 						</div>						
 						<!-- table container -->
-						<a th:href="@{/purchaseDelete(purchaseCode=${purchaseCode.purchaseCode})}"
+						<a  th:if="${session.SLEVEL eq '관리자' || session.SLEVEL eq'점주'}" th:href="@{/purchaseDelete(purchaseCode=${purchaseCode.purchaseCode})}"
 							class="btn btn-primary btn-block text-uppercase mb-3">매입 삭제하기</a>
 						<a  th:href="@{/goodsInsert(purchaseCode=${purchaseCode.purchaseCode})}"
 							class="btn btn-primary btn-block text-uppercase mb-3">판매상품 등록하기</a>	

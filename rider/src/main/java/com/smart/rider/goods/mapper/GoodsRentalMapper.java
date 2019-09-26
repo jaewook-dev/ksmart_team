@@ -4,11 +4,14 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.smart.rider.goods.dto.GoodsDTO;
 import com.smart.rider.goods.dto.GoodsHapDTO;
 import com.smart.rider.goods.dto.GoodsRentalDTO;
 @Mapper
 public interface GoodsRentalMapper {
 	
+	//대여상품검색기능추가
+	public List<GoodsRentalDTO> goodsRentalSearchList(String select ,String searchInput,String beginDate,String endDate);
 	//대여상품삭제
 	public int goodsRentalDelete(String goodsRentalCode,String memberId,String memberPw);
 	//대여상품수정

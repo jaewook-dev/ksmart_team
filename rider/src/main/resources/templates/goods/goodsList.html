@@ -12,10 +12,10 @@
 			<div class="row tm-content-row">
 			<div class="col-12 tm-block-col">
 					<div class="tm-bg-primary-dark tm-block tm-block-h-auto-copy">
-						<form action="goodsDbSearchList" class="tm-search-form row" method="post">
+						<form action="goodsSearchList" class="tm-search-form row" method="post">
 							<div class="form-group col-3">
-								<select class="custom-select" name="subjectDate">
-									<option value="">등록일자</option>
+								<select class="custom-select" name="goodsDate">
+									<option value="goods_date">등록일자</option>
 								</select>
 							</div>
 							<div class="form-group col-3">
@@ -31,6 +31,7 @@
 							</div>
 							<div class="form-group col-2">
 							</div>
+							
 							<div class="form-group col-3">
 								
 								<select class="custom-select" name="select">
@@ -92,7 +93,12 @@
 												</i>
 										</a>
 										</td>
-									</tr>							
+									</tr>
+									<th:block th:if="${alert} neq null">
+										<tr class="text-center">
+											<td colspan="7" th:text="${alert}"></td>
+										</tr>
+									</th:block>							
 								</tbody>
 							</table>
 						</div>
@@ -113,7 +119,7 @@
 								<tbody>
 									<tr>
 										<td class="tm-product-name">전동 킥보드</td>
-										<td class="text-center"><a href="#"
+										<td class="text-center"><a href="/goodsRentalList"
 											class="tm-product-delete-link"> <i
 												class="fas fa-check tm-product-check-icon"></i>
 
@@ -121,21 +127,21 @@
 									</tr>
 									<tr>
 										<td class="tm-product-name">전동 휠</td>
-										<td class="text-center"><a href="#"
+										<td class="text-center"><a href="/goodsRentalList"
 											class="tm-product-delete-link"> <i
 												class="fas fa-check tm-product-check-icon"></i>
 										</a></td>
 									</tr>
 									<tr>
 										<td class="tm-product-name">전동 자전거</td>
-										<td class="text-center"><a href="#"
+										<td class="text-center"><a href="/goodsRentalList"
 											class="tm-product-delete-link"> <i
 												class="fas fa-check tm-product-check-icon"></i>
 										</a></td>
 									</tr>
 									<tr>
 										<td class="tm-product-name">전동 바이크</td>
-										<td class="text-center"><a href="#"
+										<td class="text-center"><a href="/goodsRentalList"
 											class="tm-product-delete-link"> <i
 												class="fas fa-check tm-product-check-icon"></i>
 										</a></td>
