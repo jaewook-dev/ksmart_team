@@ -16,6 +16,11 @@ public class GoodsRentalService {
 	@Autowired
 	private GoodsRentalMapper goodsRentalMapper;
 	
+	//대여상품검색추가
+	public List<GoodsRentalDTO> goodsRentalSearchList(String select ,String searchInput,String beginDate,String endDate){
+		List<GoodsRentalDTO> search = goodsRentalMapper.goodsRentalSearchList(select, searchInput, beginDate, endDate);
+		return search;
+	}
 	//대여상품 삭제하기
 	public int goodsRentalDelete(String goodsRentalCode,String memberId,String memberPw) {
 		return goodsRentalMapper.goodsRentalDelete(goodsRentalCode, memberId, memberPw);
