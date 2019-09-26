@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="~{layout/default}">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/default}">
 
 <th:block layout:fragment="customTitle">
 </th:block>
@@ -28,43 +26,67 @@
 							<h4 class="tm-block-title">등록내역 상세보기</h4>
 							
 							<!-- 등록내역 상세보기 수정 폼-->
-							<form action="/spendUtilityUpdate" method="post">
+							<form action="/spendUtilityUpdate" method="post" th:each="list : ${detailsList}">
+								<input type="hidden" th:value="${list.spendUtilityCode}" name="spendUtilityCode">
 								<div class="tm-bg-primary-dark">
-									<table class="table" th:each="list : ${detailsList}">
+									<table class="table">
 										<tr>
-											<td class="text-center" style="width: 15%"><label for="name">내역</label></td>
-											<td><input type="text" class="form-control validate" th:value="${list.subjectName}"></td>
+											<td class="text-center" style="width: 15%">내역
+											</td>
+											<td>
+												<input type="text" class="form-control validate" 
+													   th:value="${list.subjectName}" 
+													   name="subjectName"
+													   style="background-color: #54657D" readonly>
+											</td>
 										</tr>
 										<tr>
 											<td class="text-center" style="width: 15%">금액</td>
-											<td><input type="text" class="form-control validate" th:value="${list.spendUtilityPay}"> </td>
+											<td>
+												<input type="text" class="form-control validate" 
+													   name="spendUtilityPay"
+													   th:value="${list.spendUtilityPay}"> 
+											</td>
 										</tr>
 										<tr>
 											<td class="text-center" style="width: 15%">등록날짜</td>
-											<td><input type="text" class="form-control validate" th:value="${list.spendUtilityDate}"> </td>
+											<td>
+												<input type="text" class="form-control validate"
+													   name="spendUtilityDate" 
+													   th:value="${list.spendUtilityDate}"
+												 	   style="background-color: #54657D" readonly> 
+											</td>
 										</tr>
 										<tr>
 											<td class="text-center" style="width: 15%">내용</td>
-											<td><textarea rows="5" cols="6" class="form-control validate" th:text="${list.spendUtilityContents}"></textarea> </td>
+											<td>
+												<textarea rows="5" cols="6" style="resize: none" 
+														  class="form-control validate" 
+														  name="spendUtilityContents"
+														  th:text="${list.spendUtilityContents}">
+												</textarea> 
+											</td>
 										</tr>
 									</table>
 								</div>
 								<hr>
+								
 								<span>
-								<!-- 이전화면으로 이동 버튼 -->
-								<button type="button" 
-										class="btn-sub btn-primary text-uppercase" 
-										style="float:left" 
-										onclick="location.href='spendUtilityList'">
-										이전
-								</button>
-								<!-- 수정 확인 버튼 -->
-								<button type="submit" 
-										class="btn-sub btn-primary text-uppercase" 
-										style="float:right">
-										확인
-								</button>
-							</span>
+									<!-- 이전화면으로 이동 버튼 -->
+									<button type="button" 
+											class="btn-sub btn-primary text-uppercase" 
+											style="float:left" 
+											onclick="location.href='spendUtilityList'">
+											이전
+									</button>
+									
+									<!-- 수정 확인 버튼 -->
+									<button type="submit" 
+											class="btn-sub btn-primary text-uppercase" 
+											style="float:right">
+											수정
+									</button>
+								</span>
 							</form>
 						</div>
 					</div>

@@ -13,19 +13,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.smart.rider.goods.dto.GoodsDTO;
 import com.smart.rider.goods.dto.GoodsHapDTO;
-import com.smart.rider.goods.dto.GoodsdbDTO;
-import com.smart.rider.goods.mapper.GoodsMapper;
 import com.smart.rider.goods.service.GoodsPurchaseService;
 import com.smart.rider.goods.service.GoodsService;
-import com.smart.rider.goods.service.GoodsdbService;
 import com.smart.rider.member.dto.MemberDTO;
 
 @Controller
 public class GoodsController {
 	@Autowired
 	private GoodsService goodsService;
-	@Autowired
-	private GoodsdbService goodsdbservice;
+
 	@Autowired
 	private GoodsPurchaseService goodsPurchaseService;
 	
@@ -101,7 +97,7 @@ public class GoodsController {
 		List<GoodsHapDTO> gList = goodsService.goodsList();
 		//System.out.println(gList);
 		//System.out.println(model.addAttribute("gList",gList+"<---------------------GoodsController.java------확인"));
-		model.addAttribute("gList", goodsService.goodsList());
+		model.addAttribute("gList", gList);
 		return "/goods/goodsList";
 	}
 }

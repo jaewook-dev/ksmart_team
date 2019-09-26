@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.smart.rider.spend.dto.UtilityDTO;
 import com.smart.rider.subject.dto.SubjectDTO;
 
 @Mapper

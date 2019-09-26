@@ -27,6 +27,14 @@ public class UtilityController {
 	@Autowired
 	private MainService mainService;
 	
+	/*** 190925 재욱, 지출_공과금 등록내역 수정 프로세스 ***/ 
+	@PostMapping("/spendUtilityUpdate")
+	public String spendUtilityUpdate(UtilityDTO utilityDTO) {
+		System.out.println(utilityDTO.toString() + " <-- utilityDTO.toString() spendUtilityUpdate UtilityController.java");
+		return "redirect:/spendUtility";
+	}
+
+	
 	/*** 190925 재욱, 지출_공과금 등록내역 상세보기 화면 ***/ 
 	@GetMapping("/spendUtilityDetails")
 	public String spendUtilityDetails(String spendUtilityCode, Model model) {
@@ -38,9 +46,10 @@ public class UtilityController {
 		return "spend/spendUtilityDetails";
 	}
 	
+	
 	/*** 190925 재욱, 지출_공과금 검색 화면 ***/
 	@PostMapping("/spendUtilityList")
-	public String utilityList(@RequestParam(value = "utilityKey") String utilityKey
+	public String spendUtilityList(@RequestParam(value = "utilityKey") String utilityKey
 							, @RequestParam(value = "utilityValue") String utilityValue
 							, @RequestParam(value = "beginDate") String beginDate
 							, @RequestParam(value = "endDate") String endDate
@@ -106,12 +115,13 @@ public class UtilityController {
 		/*** 190926 재욱, end 년도에 따른 월별 공과금 지출 금액 차트 ***/
 		
 		
-		return "spend/spendUtilityList";
+		return "spend/spendUtility";
 	}
 
+	
 	/*** 190925 재욱, 지출_공과금 화면 ***/
-	@GetMapping("/spendUtilityList")
-	public String spend(Model model, HttpSession session 
+	@GetMapping("/spendUtility")
+	public String spendUtility(Model model, HttpSession session 
 					  , @RequestParam(value = "utilityYear", required = false, defaultValue = "2019") String utilityYear
 					  , @RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage){
 
@@ -167,9 +177,10 @@ public class UtilityController {
 		
 		
 
-		return "spend/spendUtilityList";
+		return "spend/spendUtility";
 	}
 
+	
 	/*** 190925 재욱, 지출_공과금 내역 등록 ***/
 	@PostMapping("/utilityInsert")
 	public String utilityInsert(@RequestParam(value = "subjectCode") String subjectCode ,UtilityDTO utilityDTO, HttpSession session) {
@@ -180,7 +191,7 @@ public class UtilityController {
 		
 		utilityService.utilityInsert(utilityDTO, contractShopCode);
 
-		return "redirect:/spendUtilityList";
+		return "redirect:/spendUtility";
 	}
 
 }

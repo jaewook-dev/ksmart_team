@@ -42,32 +42,41 @@
 							<div style="min-height: 330px;">
 							<table class="table">
 								<thead>
-									<tr>
+									<tr class="text-center">
 										<th>내역</th>
 										<th>금액</th>
 										<th>등록일자</th>
-										<th style="width: 20%">상세보기</th>
+										<th style="width: 8%">상세</th>
+										<th style="width: 8%">삭제</th>
 									</tr>
 								</thead>
-								<tbody>
+								<tbody class="text-center">
 									<tr th:each="list : ${utilityList}">
 										<td th:text="${list.subjectName}"></td>
 										<td th:text="${list.spendUtilityPay}"></td>
 										<td th:text="${list.spendUtilityDate}"></td>
-										<td class="text-center">
+										<td>
 											<a class="tm-product-delete-link" th:href="@{/spendUtilityDetails(spendUtilityCode=${list.spendUtilityCode})}">
 												<i class="fas fa-search" style="color: white"></i>
+											</a>
+										</td>
+										<td>
+											<a th:href="@{/spendUtilityDelete(spendUtilityCode=${list.spendUtilityCode})}"
+											   class="tm-product-delete-link possibleButton"> 
+											   <i class="far fa-trash-alt tm-product-delete-icon" style="color: white;"></i>
 											</a>
 										</td>
 									</tr>
 									<th:block th:if="${alert} neq null">
 										<tr class="text-center">
-											<td colspan="4" th:text="${alert}"></td>
+											<td colspan="5" th:text="${alert}"></td>
 										</tr>
 									</th:block>
 								</tbody>
 							</table>
 							</div>
+							
+							<!-- 페이징 페이지 번호 -->
 							<div>
 								<ul class="pagination pagination-sm justify-content-center" style="margin:20px 0">
 									<li class="page-item active">
@@ -77,7 +86,7 @@
 									<th:block th:each="num : ${#numbers.sequence(startPageNum,lastPageNum)}">
 										<li class="page-item active">
 											<span th:if="${currentPage == num}" th:text="${num}" class="text-center page-link"></span> 
-												<a class="page-link" th:unless="${currentPage == num}" th:text="${num}" th:href="@{/spendUtilityList(currentPage=${num})}"></a>
+												<a class="page-link" th:unless="${currentPage == num}" th:text="${num}" th:href="@{/spendUtility(currentPage=${num})}"></a>
 										</li>
 									</th:block>
 	
@@ -89,10 +98,10 @@
 						</div>
 					</div>
 
-					<!-- 공과금 등록 폼 -->
+					<!-- 공과금 지출 등록 폼 -->
 					<div class="col-sm-12 col-md-12 col-lg-6 col-xl-5 tm-block-col">
 						<div class="tm-bg-primary-dark tm-block-spend">
-							<h4 class="tm-block-title">공과금 등록</h4>
+							<h4 class="tm-block-title">공과금 지출 등록</h4>
 							<form action="utilityInsert" method="post">
 								<div class="form-group">
 									<label>내역</label> <select
@@ -121,7 +130,7 @@
 
 
 
-					<!-- 공과금 검색 -->
+					<!-- 공과금 지출 검색 -->
 					<div class="col-12 tm-block-col">
 						<div class="tm-bg-primary-dark tm-block">
 
