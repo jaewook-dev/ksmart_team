@@ -24,6 +24,9 @@ public class GoodsRentalController {
 	@Autowired
 	private GoodsService goodsService;
 	
+	
+	
+	
 	//대여품삭제요청
 	@GetMapping("/goodsRentalDelete")
 	public String goodsRentalDelete(@RequestParam(value="goodsRentalCode")String goodsRentalCode,Model model) {
@@ -95,5 +98,23 @@ public class GoodsRentalController {
 		//System.out.println("대여상품리스트 값 넘어오는지확인"+rList);
 		model.addAttribute("rList", rList);
 		return "/goods/goodsRentalList";
+	}
+	//대여상품 검색
+	@PostMapping("/goodsRentalSearchList")
+	public String goodsRentalSearchList(@RequestParam(value="select")String select
+										,@RequestParam(value="searchInput")String searchInput
+										,@RequestParam(value="beginDate")String beginDate
+										,@RequestParam(value="endDate")String endDate
+										,Model model) {
+		////System.out.println("대여상품 앞날짜검색"+beginDate);
+		//System.out.println("대여상품 뒤날짜검색"+endDate);
+		//System.out.println("대여상품 카테고리"+select);
+		//System.out.println("대여상품 카테고리명"+searchInput);
+		List<GoodsRentalDTO> search = goodsRentalService.goodsRentalSearchList(select, searchInput, beginDate, endDate);
+		model.addAttribute("rList", search);
+		if(search.size()==0) {
+			model.addAttribute("alert", "검색 결과가 없습니다");
+		}		
+		return "goods/goodsRentalList";
 	}
 }

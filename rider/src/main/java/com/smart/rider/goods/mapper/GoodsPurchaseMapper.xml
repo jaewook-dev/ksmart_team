@@ -59,12 +59,23 @@
 			INNER JOIN 
 			account a
 			ON p.account_code = a.account_code AND 
-			 p.contract_shop_code = a.contract_shop_code
-			 
-			 <if test="searchInput != null and searchInput neq ''.toString()">
+			 p.contract_shop_code = a.contract_shop_code			 
+			<if test="searchInput != null and searchInput neq ''.toString()">
 			WHERE 
 				${select} Like CONCAT('%',#{searchInput},'%')
-			</if>
+		</if>
+		<if test="beginDate neq ''.toString() and endDate eq ''.toString()">
+        	AND 
+        		p.purchase_date between #{beginDate} and NOW()		
+        </if>
+        <if test="beginDate eq ''.toString() and endDate neq ''.toString()">
+        	AND 
+        		p.purchase_date between '2000-01-01' and #{endDate}
+        </if>
+        <if test="beginDate neq ''.toString() and endDate neq ''.toString()">
+        	AND 
+        		p.purchase_date between #{beginDate} and #{endDate}
+        </if>
 	</select>
 	<!-- 매입 상세보기 -->
 	<select id="getPurchaseList" resultMap="ASid" resultType="com.smart.rider.goods.dto.GoodsPurchaseDTO" parameterType="String">

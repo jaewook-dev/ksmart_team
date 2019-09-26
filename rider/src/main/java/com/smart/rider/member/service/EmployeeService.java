@@ -31,4 +31,8 @@ public class EmployeeService {
 	public int employeeUpdate(MemberDTO memberdto) {
 		return employeeMapper.employeeUpdate(memberdto);
 	}
+	//19.09.25작성
+	public int employeeDelete(String memberId, String memberPw) {
+		return employeeMapper.employeeDelete(memberId, memberPw);
+	}
 }
