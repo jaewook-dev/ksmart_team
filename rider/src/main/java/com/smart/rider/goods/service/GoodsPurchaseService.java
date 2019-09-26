@@ -29,8 +29,8 @@ public class GoodsPurchaseService {
 	}
 	
 	//매입 검색 메서드
-	public List<GoodsHapDTO> purchaseSearchList(String select, String searchInput ){
-		List<GoodsHapDTO> search = goodsPurchaseMapper.purchaseSearchList(select, searchInput);
+	public List<GoodsPurchaseDTO> purchaseSearchList(String select ,String searchInput,String beginDate,String endDate){
+		List<GoodsPurchaseDTO> search = goodsPurchaseMapper.purchaseSearchList(select, searchInput, beginDate, endDate);
 		return search;
 	}
 	
