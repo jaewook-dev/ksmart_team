@@ -35,4 +35,8 @@ public class EmployeeService {
 	public int employeeDelete(String memberId, String memberPw) {
 		return employeeMapper.employeeDelete(memberId, memberPw);
 	}
+	//19.09.26작성
+	public List<MemberDTO> searchEmployee(String contractShopCode, String select, String searchInput) {
+		return employeeMapper.searchEmployee(contractShopCode, select, searchInput);
+	}
 }

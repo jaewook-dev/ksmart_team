@@ -95,8 +95,8 @@ public class GoodsRentalController {
 	//대여상품 리스트조회
 	public String rentalList(Model model) {
 		List<GoodsHapDTO> rList = goodsRentalService.goodsRentalList();
-		//System.out.println("대여상품리스트 값 넘어오는지확인"+rList);
-		model.addAttribute("rList", rList);
+		//System.out.println("대여상품리스트 값 넘어오는지확
+		
 		return "/goods/goodsRentalList";
 	}
 	//대여상품 검색

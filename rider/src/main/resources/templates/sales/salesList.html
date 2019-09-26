@@ -31,25 +31,45 @@
 									<th scope="col">판매/대여</th>
 									<th scope="col">금액</th>									
 									<th scope="col">매출일자</th>
+									<th scope="col">상세보기</th>
+									<th scope="col">매출삭제</th>
 								</tr>
 							</thead>
 							<tbody>
 
-								<tr th:each="unitNew : ${unitNew}">
-									<th th:text="${unitNew.contractUnitMonth}"></th>
-									<th th:text="${unitNew.contractUnitOneyear}"></th>
-									<th th:text="${unitNew.contractUnitTwoyear}"></th>
+								<tr th:each="s : ${sList}">
+									<th th:text="${s.shopName}"></th>
+									<th th:text="${s.salesPayType}"></th>
+									<th th:text="${s.salesType}"></th>
+									<th th:text="${s.salesAmount}"></th>
+									<th th:text="${s.salesDate}"></th>
+									<td>
+									<!-- 	<a
+										 th:href="@{/getGoodsList(goodsCode=${g.goodsCode})}"
+										 class="tm-product-delete-link">
+										 <i class="fas fa-check tm-product-check-icon"></i>
+										</a>									
+										</td>
+										<td>										
+										<a
+										 th:href="@{/goodsDelete(goodsCode=${g.goodsCode})}"
+										 class="tm-product-delete-link">
+										 <i class="far fa-trash-alt" style="color: gray;">
+												</i>
+										</a>
+										</td> -->
 								</tr>
+								
 							</tbody>
 						</table>
 						<div>
 							<br /> <br />
 							<button class="btn btn-primary btn-sm" type="button"
-								onclick="location.href='#'">판매 매출등록</button>
+								onclick="location.href='/goodsList'">판매 매출등록</button>
 
 							<span style="float: left;"><button
 									class="btn btn-primary btn-block" type="button"
-									onclick="location.href='#' ">대여 매출등록</button></span>
+									onclick="location.href='goodsRentalList' ">대여 매출등록</button></span>
 						</div>
 
 					</div>

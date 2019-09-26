@@ -1,1 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smart.rider.sales.mapper.SalesMapper">
+	<select id="salesList" resultMap="ASid" parameterType="String">
+			SELECT 
+			*
+			FROM
+			sales s			
+			INNER JOIN
+			goods g			 
+			INNER join
+			goods_rental gr
+			INNER JOIN 
+			shop sp	
+			ON 
+			s.goods_code = g.goods_code
+	
+	</select>
+
+		<resultMap type="com.smart.rider.goods.dto.GoodsHapDTO" id="ASid">
+    	<result column="purchase_code"     property="purchaseCode"/>
+    	<result column="account_code"     property="accountCode"/>
+    	<result column="contract_shop_code"     		property="contractShopCode"/>
+    	<result column="goods_database_code"    	property="goodsDbCode"/>
+    	<result column="purchase_pay" 		property="purchasePay"/>
+    	<result column="purchase_state"     property="purchaseState"/>
+    	<result column="purchase_date"	 	property="purchaseDate"/>
+    	<result column="goods_database_name"	 	property="goodsDbName"/>
+    	<result column="goods_database_category"     property="goodsDbCategory"/>
+    	<result column="goods_database_number"     property="goodsDbNumber"/>
+    	<result column="goods_database_color"     		property="goodsDbColor"/>
+    	<result column="goods_database_speed"     		property="goodsDbSpeed"/>
+    	<result column="goods_database_weight"    	property="goodsDbWeight"/>
+    	<result column="goods_database_size" 		property="goodsDbSize"/>
+    	<result column="goods_database_nation"     property="goodsDbNation"/>
+    	<result column="goods_database_load"	 	property="goodsDbLoad"/>
+    	<result column="goods_database_distance"	 	property="goodsDbDistance"/>
+    	<result column="goods_database_battery"     property="goodsDbBattery"/>
+    	<result column="goods_database_time"     property="goodsDbTime"/>
+    	<result column="goods_database_made"     		property="goodsDbMade"/>
+    	<result column="goods_database_description"    	property="goodsDbDescription"/>
+    	<result column="account_market"    	property="accountMarket"/>
+    	<result column="shop_code"     property="shopCode"/>
+    	<result column="shop_name"     		property="shopName"/>
+    	<result column="shop_address"    	property="shopAddress"/>
+    	<result column="shop_phone"    	property="shopPhone"/>
+    	<result column="goods_code"	 	property="goodsCode"/>
+    	<result column="goods_pay"	 	property="goodsPay"/>
+    	<result column="goods_position"     property="goodsPosition"/>
+    	<result column="goods_rental"     property="goodsRental"/>
+    	<result column="goods_state"     		property="goodsState"/>
+    	<result column="goods_completion_state"    	property="goodsCompletionState"/>
+    	<result column="goods_rental_state"    	property="goodsRentalState"/>
+    	<result column="goods_inventory_date"     property="goodsInventoryDate"/>
+    	<result column="goods_date"     		property="goodsDate"/>    	
+    	<result column="goods_rental_code"     		property="goodsRentalCode"/>
+    	<result column="goods_rental_period_pay"    	property="goodsRentalPeriodPay"/>
+    	<result column="goods_rental_deposit"    	property="goodsRentalDeposit"/>
+    	<result column="goods_rental_position"     property="goodsRentalPosition"/>
+    	<result column="goods_rental_date"     		property="goodsRentalDate"/>    	
+    	<result column="sales_code"     		property="salesCode"/>    	
+    	<result column="sales_group_code"     		property="salesGroupCode"/>
+    	<result column="sales_pay_type"    	property="salesPayType"/>
+    	<result column="sales_type"    	property="salesType"/>
+    	<result column="sales_amount"     property="salesAmount"/>
+    	<result column="sales_date"     		property="salesDate"/>
+    	
+    </resultMap>
+</mapper>

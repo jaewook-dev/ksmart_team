@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.smart.rider.contract.dto.ContractDTO;
+import com.smart.rider.shop.dto.PosDTO;
 import com.smart.rider.shop.dto.ShopDTO;
 import com.smart.rider.shop.dto.ShopRelationDTO;
 import com.smart.rider.shop.mapper.ShopMapper;
@@ -63,7 +64,14 @@ public class ShopService {
 		 
 
 		return shopMapper.relationInsert(relation);
-	}
+		}
+	public List<ShopRelationDTO> relationList(){
+		
+		return shopMapper.relationList();
+	};
+	public List<PosDTO> posList(){
 	
+		return shopMapper.posList();
+	}
 	
 }

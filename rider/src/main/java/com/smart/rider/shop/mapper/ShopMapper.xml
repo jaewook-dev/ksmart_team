@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.smart.rider.shop.mapper.ShopMapper">
-
+	<!-- 매장관리 전체조회 쿼리 -->
 	<select id="shopList" resultType="com.smart.rider.shop.dto.ShopDTO">
 		select
 			shop_code AS shopCode
@@ -12,6 +12,17 @@
 			,shop_phone AS shopPhone
 			,shop_date AS shopDate
 		FROM shop
+	
+	</select>
+	<!-- 매장계약관리 전체조회 쿼리 -->
+	<select id="relationList" resultType="com.smart.rider.shop.dto.ShopRelationDTO">
+		select
+			 contract_shop_code AS contractShopCode
+			,member_id  AS memberId
+			,shop_code AS shopCode
+			,contract_shop_use AS contractShopUse
+			,contract_shop_date AS contractShopDate
+		FROM shop_relation
 	
 	</select>
 	
@@ -34,22 +45,21 @@
 		WHERE shop_code = #{Code};
 	
 	</select>
-	<!-- 계약코드 자동증가 -->
-
+	<!-- 매장코드  자동증가 -->
 	<select id="shopCodeMax" resultType="String">
 		SELECT 
 			MAX(LPAD(RIGHT(shop_code, 4)+1, '4' , '0')) 
 		FROM shop;
 	</select>
 	
-	<!-- 매장코드 자동증가에 필요한 데이터중 가장 높은값 가져오기 -->
+	<!-- 매장계약코드 자동증가 -->
 	<select id="relationCodeMax" resultType="String">
 		SELECT 
 			MAX(LPAD(RIGHT(contract_shop_code, 4)+1, '4' , '0')) 
 		FROM shop_relation;
 	</select>
 	
-	
+	<!--매장 생성 쿼리 -->
 	<insert id="shopInsert" parameterType="com.smart.rider.shop.dto.ShopDTO">
 			INSERT INTO shop
 
@@ -71,6 +81,7 @@
 		 	    )
 	
 	</insert>
+	<!-- 계약릴레이션  생성 쿼리  -->
 	<insert id="relationInsert" parameterType="com.smart.rider.shop.dto.ShopRelationDTO">
 		INSERT INTO shop_relation
 		(
@@ -89,5 +100,16 @@
 		)
 	
 	</insert>
+	<select id="posList" resultType="com.smart.rider.shop.dto.PosDTO">
+		SELECT 
+		 	pos_code 				AS posCode
+			,contract_shop_code 	AS contractShopCode
+			,pos_name 				AS posName
+			,pos_number 			AS posNumber
+			,pos_use 				AS posUse
+		FROM pos
+	
+	
+	</select>
 </mapper>
 

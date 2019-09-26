@@ -60,6 +60,7 @@
 		WHERE
 			member_id 			= #{memberId}
 	</select>
+	<!-- 19.09.25작성 -->
 	<update id="employeeUpdate" parameterType="com.smart.rider.member.dto.MemberDTO">
 		UPDATE member
 		SET
@@ -78,6 +79,27 @@
 		FROM member
 		WHERE
 			member_id = #{memberId}
-		and member_pw = #{memberPw}
+		AND member_pw = #{memberPw}
 	</delete>
+	<!-- 19.09.26작성 -->
+	<select id="searchEmployee" parameterType="String" resultType="com.smart.rider.member.dto.MemberDTO">
+		SELECT 
+			 member_id 			AS memberId
+			,member_pw 			AS memberPw
+			,member_name		AS memberName
+			,member_level 		AS memberLevel
+			,member_birth 		AS memberBirth
+			,member_address 	AS memberAddress
+			,member_email 		AS memberEmail
+			,member_phone 		AS memberPhone
+			,contract_shop_code AS contractShopCode
+			,member_insert_date AS memberInsertDate
+			,member_update_date AS memberUpdateDate
+		FROM member
+		<if test="searchInput != null and searchInput neq ''.toString()">
+			WHERE 
+				${select} Like CONCAT('%',#{searchInput},'%')
+			AND contract_shop_code = #{contractShopCode}
+		</if>
+	</select>
 </mapper>
