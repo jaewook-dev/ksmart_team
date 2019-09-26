@@ -46,9 +46,16 @@ public class MemberController {
 	}
 	//19.09.16작성
 	@GetMapping("/memberIdCheck")
-	public int idCheck(@RequestParam("memberId") String memberId) {
-
-		return memberService.memberIdCheck(memberId);
+	public String idCheck(@RequestParam(value="memberId") String memberId, Model model) {
+		System.out.println(memberId + "<---체크아이디");
+		System.out.println(memberService.memberIdCheck(memberId) + "<---아이디체크수");
+		int result = memberService.memberIdCheck(memberId);
+		if(result == 1) {
+			model.addAttribute("fail", "사용중인 아이디입니다!");
+		}else {
+			model.addAttribute("success", "사용가능한 아이디입니다.");
+		}
+		return "member/memberInsert";
 	}
 
 	@GetMapping("/getMemberList")
@@ -100,7 +107,6 @@ public class MemberController {
 	@GetMapping("/levelDelete")
 	public String levelDelete(@RequestParam(value="memberId") String memberId, Model model) {
 		System.out.println(memberId + "<--바로 삭제할 아이디");
-		model.addAttribute("alert", "삭제하시겠습니까?");
 		model.addAttribute("deleteMember", memberService.levelDelete(memberId));
 		return "redirect:/memberList";
 	}

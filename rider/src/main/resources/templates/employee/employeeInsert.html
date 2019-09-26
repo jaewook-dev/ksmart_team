@@ -72,6 +72,9 @@ $('#EmployeePw2').blur(function(){
 			alert("비밀번호가 일치하지 않습니다!");
 			$('#EmployeePw2').val('');
 			$('#EmployeePw2').focus();
+		}else if($('#EmployeePw2').val()==''){
+			alert("비밀번호를 확인해주세요!")
+			$('#memberPw').focus();
 		}
  	}
 });	

@@ -67,4 +67,13 @@ public class EmployeeController {
 		model.addAttribute("memberId", memberId);
 		return "employee/employeeDelete";
 	}
+	//19.09.26작성
+	@PostMapping("/searchEmployee")
+	public String searchEmployee(@RequestParam(value="contractShopCode") String contractShopCode,
+								 @RequestParam(value="select") String select,
+								 @RequestParam(value="searchInput") String searchInput, Model model) {
+		List<MemberDTO> searchList = employeeService.searchEmployee(contractShopCode, select, searchInput);
+		model.addAttribute("employeeList", searchList);
+		return "employee/employeeList";
+	}
 }

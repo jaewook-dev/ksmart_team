@@ -25,7 +25,7 @@
 						<div class="form-group col-lg-6">
 							<label for="id">아이디</label>
 							<input id="memberId" name="memberId" type="text" 
-								   th:value="${memberList.memberId}" class="form-control validate bg-light text-dark" readonly="readonly"/>
+								   th:value="${memberList.memberId}" class="form-control validate" style="background-color: #54657D" readonly="readonly"/>
 						</div>
 						<!-- 비밀번호수정버튼 클릭으로 수정 -->
 						<div class="form-group col-lg-6">
@@ -85,7 +85,7 @@
 	$(document).ready(function(){
 		$('#updatePw').click(function(){
 			var memberId = $("#memberId").val();
-			window.open('/changePassword?memberId='+memberId+'','비밀번호수정','width=430,height=550,location=no,status=no,scrollbars=yes')
+			window.open('/changePassword?memberId='+memberId+'','비밀번호수정','left='+(screen.availWidth-550)/2+',top='+(screen.availHeight-430)/3+',width=430,height=550,location=no,status=no,scrollbars=yes')
 		});
 	});
 </script>
