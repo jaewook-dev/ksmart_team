@@ -1,6 +1,5 @@
 package com.smart.rider.spend.service;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import com.smart.rider.spend.dto.JoinUtilityDTO;
 import com.smart.rider.spend.dto.UtilityDTO;
-import com.smart.rider.spend.dto.UtilityPay;
 import com.smart.rider.spend.mapper.UtilityMapper;
 import com.smart.rider.subject.dto.SubjectDTO;
 
@@ -25,33 +23,6 @@ public class UtilityService {
 		return utilityMapper.utilityDetails(spendUtilityCode);
 	}
 	
-	// 년도에 따른 월별 공과금 지출 금액 유무 체크
-	public List<UtilityPay> utilityPayCheck(String utilityYear, String contractShopCode){
-		List<UtilityPay> list = new ArrayList<>();
-		
-		String month = "";
-		String checkMonth = "";
-		
-		for(int i=0; i<12; i++) {
-			if(i<9) {
-				month = "0" + String.valueOf(i+1);
-			} else {
-				month = String.valueOf(i+1);
-			}
-			checkMonth = utilityYear + "-" + month;
-			list.add(i, utilityMapper.utilityPayCheck(checkMonth, contractShopCode).get(0));
-
-		}
-		//System.out.println(list + " <-- list ");
-
-		
-		return list;
-	}
-	
-	// 년도에 따른 월별 공과금 지출 금액 
-	public List<UtilityPay> utilityPayMax(String utilityYear, String contractShopCode){
-		return utilityMapper.utilityPayMax(utilityYear, contractShopCode);
-	}
 	
 	// 지출_공과금 최근 등록 목록 paging
     public Map<String, Object> utilityList(int currentPage, String contractShopCode, String utilityKey, String utilityValue, String beginDate, String endDate){

@@ -17,7 +17,7 @@ public class MainService {
 	@Autowired
 	private MainMapper mainMapper;
 	
-	// 190926 재욱, 월별 컬럼의 합
+	/*** 190926 재욱, 월별 컬럼의 합 ***/
 	public int[] chartValue(Map<String, Object> map){
 		
 		List<ChartValueDTO> list = new ArrayList<>();

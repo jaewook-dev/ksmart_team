@@ -22,17 +22,6 @@
 						
 					</div>
 					
-					<!-- 190926 재욱 연습용 -->
-					<div class="row tm-content-row">
-						<div class="col-12 tm-block-col">
-							<div class="tm-bg-primary-dark tm-block-util">
-								<h4 class="tm-block-title">차트</h4>
-
-								<!-- charts.js -->
-								<canvas id="chart" height="100px;"></canvas>
-							</div>
-						</div>
-					</div>
 				</div>
 			</div>
 		</div>
@@ -43,46 +32,6 @@
 
 <script th:inline="javascript">
 	
-	var ctx = document.getElementById('chart').getContext('2d');
-	var chart = new Chart(ctx, {
-		
-	    // The type of chart we want to create
-	    type: 'bar',
-	
-	    // The data for our dataset
-	    data: {
-	        labels: ['1월', '2월', '3월', '4월', '5월', '6월', '7월','8월','9월','10월','11월','12월'],
-	        datasets: [{
-	            label: '연습 차트',
-	            backgroundColor: 'rgb(245, 166, 35)',
-	            borderColor: 'rgb(245, 166, 35)',
-	            data: [0,0,0,0,0,0,0,0,0,0,10,0]
-	        }]
-	    },
-	
-	    // Configuration options
-	    options: {
-	    	legend: {
-	             labels: {
-	                  fontColor: 'white' // label color
-	                 }
-	              },
-		    scales: {
-		    	// y축
-		        yAxes: [{
-		            ticks: {
-		                fontColor:'white' // y축 폰트 color
-		            }
-		     	}],
-		     	// x축
-		     	xAxes: [{
-		            ticks: {
-		                fontColor:'white' // x축 폰트 color
-		            }
-		     	}]
-		    }
-	    }
-	});
 </script>
 
 </th:block>
