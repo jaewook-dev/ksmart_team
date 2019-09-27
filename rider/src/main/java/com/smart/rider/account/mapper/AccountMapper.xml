@@ -18,6 +18,40 @@
 		FROM account
 		
 	</select>
-
+	<select id="accountMaxCode" resultType="String">
+		SELECT 
+				MAX(LPAD(RIGHT(account_code, 4)+1, '4' , '0')) 
+			FROM account;
+	
+	</select>
+	<insert id="accountInsert" parameterType="com.smart.rider.account.dto.AccountDTO">
+		INSERT INTO account
+		(
+		  account_code
+		 ,contract_shop_code
+		 ,account_market, account_name
+		 ,account_phone, account_address
+		 ,account_category
+		 ,account_date)
+	VALUES (
+		  #{accountCode}
+		 ,#{contractShopCode}
+		 ,#{accountMarket}
+		 ,#{accountName}
+		 ,#{accountPhone}
+		 ,#{accountAddress}
+		 ,#{accountCategory}
+		 , NOW())
+	
+	</insert>
+	<select id="getShopRelationCode" parameterType="String" resultType="com.smart.rider.shop.dto.SsrHapDTO">
+		SELECT DISTINCT
+			sr.contract_shop_code AS contractShopCode 
+			,s.shop_name AS shopName
+		
+		FROM shop_relation sr, shop s
+		WHERE sr.shop_code =s.shop_code AND sr.member_id =#{SID}
+	
+	</select>
 
 </mapper>

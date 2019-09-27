@@ -17,7 +17,7 @@
 		 	 sr.contract_shop_code AS contractShopCode
 			,s.shop_name AS shopName
 		FROM shop_relation sr,shop s 
-		WHERE sr.shop_code = s.shop_code AND sr.member_id = 'id006'; 
+		WHERE sr.shop_code = s.shop_code AND sr.member_id = #{memberId}; 
 	</select>
 	
 	<!-- POS데이터 생성 쿼리 -->

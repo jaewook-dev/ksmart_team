@@ -30,7 +30,7 @@ public class ContractService {
 	}
 	
 	public int contractInsert(ContractDTO contract,HttpSession session) {
-		//전체 삭제 후 다시 등록시 null을 받아오는 문제
+		//계약코드 생성
 		String contractCode = "C"+ contractMapper.contractCodeMax();
 		if(contractCode.equals("Cnull")) { 
 			contractCode = "C0001";

@@ -3,6 +3,31 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.smart.rider.sales.mapper.SalesMapper">
+
+	<insert id="salesInsert" parameterType="com.smart.rider.sales.dto.SalesDTO">
+		INSERT INTO
+			 sales
+			(sales_code
+			, goods_code
+			, contract_shop_code
+			, sales_group_code
+			, sales_pay_type
+			, sales_type
+			, sales_amount
+			, sales_date)
+			VALUES
+			 (#{salesCode}
+			 , #{goodsCode}
+			 , #{contractShopCode}
+			 , #{salesGroupCode}
+			 , #{salesPayType}
+			 , #{salesType}
+			 , #{salesAmount}
+			 , NOW())
+	
+	</insert>
+	
+	<!-- 매출리스트조회  -->
 	<select id="salesList" resultMap="ASid" parameterType="String">
 			SELECT 
 			*
@@ -18,8 +43,13 @@
 			s.goods_code = g.goods_code
 	
 	</select>
+	<select id="salesCodeCount" resultType="String">
+		SELECT 
+			MAX(LPAD(RIGHT(sales_code, 4)+1, '4' , '0')) 
+		FROM sales;
+	</select>
 
-		<resultMap type="com.smart.rider.goods.dto.GoodsHapDTO" id="ASid">
+	<resultMap type="com.smart.rider.goods.dto.GoodsHapDTO" id="ASid">
     	<result column="purchase_code"     property="purchaseCode"/>
     	<result column="account_code"     property="accountCode"/>
     	<result column="contract_shop_code"     		property="contractShopCode"/>
