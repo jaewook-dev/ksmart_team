@@ -34,15 +34,16 @@
 			FROM
 			sales s			
 			INNER JOIN
-			goods g			 
+			goods g
 			INNER join
-			goods_rental gr
-			INNER JOIN 
-			shop sp	
+			goods_rental gr			 
+		
 			ON 
 			s.goods_code = g.goods_code
+			AND s.goods_code = gr.goods_code
 	
 	</select>
+	<!-- 코드자동증가  -->
 	<select id="salesCodeCount" resultType="String">
 		SELECT 
 			MAX(LPAD(RIGHT(sales_code, 4)+1, '4' , '0')) 
