@@ -23,7 +23,7 @@
 			,#{memberAddress}
 			,#{memberEmail}
 			,#{memberPhone}
-			,#{contractShopCode} 
+			,'SR0000'
 			,NOW()
 			,NOW())
 	</insert>
