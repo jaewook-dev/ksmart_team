@@ -11,9 +11,9 @@
 			<div class="col-xl-6 mx-auto tm-block-col tm-col-account-settings">
 				<div class="tm-bg-primary-dark tm-block tm-block-settings">
 					<h2 class="tm-block-title">직원등록</h2>
-					<form action="/employeeInsert" class="tm-signup-form" method="post">
-
-						
+					<form onsubmit="return validate();" action="/employeeInsert" class="tm-signup-form" method="post">
+						<!-- 매장 릴레이션 코드 -->
+						<input type="hidden" id="contractShopCode" name="contractShopCode" th:value="${session.SCODE}">
 						<label for="id" style="color:white">아이디</label>
 						<div class="form-group input-group mb-3">
 							<input id="memberId" name="memberId" type="text" class="form-control validate" placeholder="ID" required="required"/>
@@ -26,45 +26,32 @@
 						<div class="check_font" id="idCheck"></div>
 						<div class="form-group">
 							<label for="password">비밀번호</label>
-							<input id="memberPw" name="memberPw" type="password" class="form-control validate" placeholder="PASSWORD"/>
+							<input id="memberPw" name="memberPw" type="password" class="form-control validate" placeholder="PASSWORD" />
 						</div>
 						<div class="form-group">
 							<label for="password2">비밀번호 재확인</label>
-							<input id="EmployeePw2" name="EmployeePw2" type="password" class="form-control validate" placeholder="PASSWORD"/>
+							<input id="EmployeePw2" name="EmployeePw2" type="password" class="form-control validate" placeholder="PASSWORD" />
 						</div>
 						<div class="form-group">
 							<label for="name">이름</label>
-							<input id="memberName" name="memberName" type="text" class="form-control validate" />
+							<input id="memberName" name="memberName" type="text" class="form-control validate" required="required"/>
 						</div>
 						<div class="form-group">
 							<label for="birth">생년월일</label>
-							<input id="memberBirth" name="memberBirth" type="text" class="form-control validate" placeholder="예)920311"/>
+							<input id="memberBirth" name="memberBirth" type="text" class="form-control validate" placeholder="예)920311" required="required"/>
 						</div>
 						<div class="form-group">
 							<label for="phone">전화번호('-' 없이 번호만 입력해주세요)</label>
-							<input id="memberPhone" name="memberPhone" type="text" class="form-control validate" />
+							<input id="memberPhone" name="memberPhone" type="text" class="form-control validate" required="required"/>
 						</div>
 						<div class="form-group">
 							<label for="address">주소</label>
-							<input id="memberAddress" name="memberAddress" type="text" class="form-control validate" />
+							<input id="memberAddress" name="memberAddress" type="text" class="form-control validate" required="required"/>
 						</div>
 						<div class="form-group">
 							<label for="email">이메일</label>
 							<input id="memberEmail" name="memberEmail" type="text" class="form-control validate" />
 						</div>
-						<div class="form-group mb-3">
-							<label for="category">매장 선택</label> <select
-								class="custom-select tm-select-accounts" id="contractShopCode" name="contractShopCode">
-								<option selected>매장을 선택해주세요</option>
-								<option th:each="ssrlist : ${ssrList}" 
-										th:text="${ssrlist.shopName}" 
-										th:value="${ssrlist.contractShopCode}"> 
-								</option>
-							
-							</select>
-						</div>
-						
-						
 						<div>
 							<input type="submit" class="btn btn-primary btn-block text-uppercase" value="직원등록" />
 						</div>
@@ -77,19 +64,35 @@
 
 <th:block layout:fragment="customScript">
 <script>
-$('#EmployeePw2').blur(function(){
+$('#memberPw2').blur(function(){
 	if($('#memberPw').val() != $('#EmployeePw2').val()){
 		if($('#EmployeePw2').val()!=''){
-			
-			alert("비밀번호가 일치하지 않습니다!");
+			alert("비밀번호가 일치하지 않습니다.");
 			$('#EmployeePw2').val('');
 			$('#EmployeePw2').focus();
 		}else if($('#EmployeePw2').val()==''){
 			alert("비밀번호를 확인해주세요!")
-			$('#memberPw').focus();
+			$('#EmployeePw2').focus();
 		}
  	}
-});	
+});
+function validate() {
+	var re = /^[a-zA-Z0-9]{4,12}$/ // 아이디와 패스워드가 적합한지 검사할 정규식
+	var re2 = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+    // 이메일이 적합한지 검사할 정규식
+	if(!re.test($("#memberId").val())){
+        alert("형식에 맞게 입력해주세요");
+        $("#memberId").val("");
+        $("#memberId").focus();
+        return false;
+      }
+	if(!getCheck.test($("#memberPw").val())) {
+	      alert("형식에 맞춰서 PW를 입력해줘용");
+	      $("#memberPw").val("");
+	      $("#memberPw").focus();
+	      return false;
+	      }
+}
 </script>
 </th:block>
 </html>

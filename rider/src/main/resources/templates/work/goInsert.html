@@ -1,47 +1,134 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="~{layout/default}">
-<th:block layout:fragment="customTitle">
-</th:block>
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head th:replace="fragments/head :: headFrament"></head>
 <th:block layout:fragment="customContents">
 
-	<div class="main-height">
-		<div class="container">
-			<div class="row">
-				<div class="col">
-					<p class="text-white mt-5 mb-5">
-					<h2 class="tm-block-title">출근등록</h2>
+<div class="main-height">
+<div class="container">
+	<!-- row -->
+	<div class="row tm-content-row">
+		<div class="col-xl-6 mx-auto tm-block-col tm-col-account-settings">
+			<div class="tm-bg-primary-dark tm-block tm-block-settings">
+				<h2 class="tm-block-title">출근 등록</h2>
+				<h1 id="digital" class="tm-block-title"></h1>
+				<canvas id="canvas" width="350" height="350" style="background-color:#333"></canvas>
+					<form action="/memberInsert" class="tm-signup-form" method="post">
+						<div class="form-group">
+							<label for="id">아이디</label>
+							<input id="memberName" name="memberName" type="text" class="form-control validate" placeholder="ID"/>
+						</div>
+						<div class="form-group">
+							<label for="pw">비밀번호</label>
+							<input id="memberPW" name="memberBirth" type="password" class="form-control validate" placeholder="PASSWORD"/>
+						</div>
+						<div>
+							<button type="submit" id="submit" class="btn btn-primary btn-block text-uppercase">
+							출근등록
+							</button>
+						</div>
+					</form>
 				</div>
 			</div>
-			<hr>
-			<div class="row tm-content-row">
-				<div class="col tm-block-col">
-					<div class="tm-bg-primary-dark tm-block tm-block-h-auto btn-group col">
-						<div class="btn-group col-4">
-						<button type="button" id="goInsert" class="btn btn-primary btn-block">
-							#출근 등록
-						</button>
-						</div>
-						<div class="btn-group col-4">
-						<button type="button" id="leaveInsert" class="btn btn-primary btn-block">
-							#퇴근 등록
-						</button>
-						</div>
-						<div class="btn-group col-4">
-						<button type="button" id="offInsert" class="btn btn-primary btn-block">
-							#휴무 등록
-						</button>
-						</div>
-					</div>
-				</div>
-			</div>
-			<h1>CLOCK</h1>
-			<canvas id="canvas" width="400" height="400" style="background-color:#333"></canvas>
 		</div>
 	</div>
+</div>
 </th:block>
 <th:block layout:fragment="customScript">
+<script>
+setInterval(function(){
+	var timer = new Date();
+    var h = timer.getHours();
+    var m = timer.getMinutes();
+    var s = timer.getSeconds();
+    document.getElementById('digital').innerHTML = "현재시간 " + h + ":" + m + ":" + s;
+},1000);
 
+var canvas = document.getElementById("canvas");
+var ctx = canvas.getContext("2d");
+var radius = canvas.height / 2;
+ctx.translate(radius, radius);
+radius = radius * 0.90
+drawClock();
+//drawClock();
+setInterval(drawClock, 1000);
+
+function drawClock() {
+  ctx.arc(0, 0, radius, 0 , 2 * Math.PI);
+  ctx.fillStyle = "white";
+  ctx.fill();
+}
+function drawClock() {
+	  drawFace(ctx, radius);
+	  drawNumbers(ctx, radius);
+	  drawTime(ctx, radius);
+	}
+
+function drawFace(ctx, radius) {
+  var grad;
+
+  ctx.beginPath();
+  ctx.arc(0, 0, radius, 0, 2 * Math.PI);
+  ctx.fillStyle = 'white';
+  ctx.fill();
+
+  grad = ctx.createRadialGradient(0, 0 ,radius * 0.95, 0, 0, radius * 1.05);
+  grad.addColorStop(0, '#333');
+  grad.addColorStop(0.5, 'white');
+  grad.addColorStop(1, '#333');
+  ctx.strokeStyle = grad;
+  ctx.lineWidth = radius*0.1;
+  ctx.stroke();
+
+  ctx.beginPath();
+  ctx.arc(0, 0, radius * 0.1, 0, 2 * Math.PI);
+  ctx.fillStyle = '#333';
+  ctx.fill();
+}
+function drawNumbers(ctx, radius) {
+	  var ang;
+	  var num;
+	  ctx.font = radius * 0.15 + "px arial";
+	  ctx.textBaseline = "middle";
+	  ctx.textAlign = "center";
+	  for(num = 1; num < 13; num++){
+	    ang = num * Math.PI / 6;
+	    ctx.rotate(ang);
+	    ctx.translate(0, -radius * 0.85);
+	    ctx.rotate(-ang);
+	    ctx.fillText(num.toString(), 0, 0);
+	    ctx.rotate(ang);
+	    ctx.translate(0, radius * 0.85);
+	    ctx.rotate(-ang);
+	  }
+	}
+function drawTime(ctx, radius){
+	  var now = new Date();
+	  var hour = now.getHours();
+	  var minute = now.getMinutes();
+	  var second = now.getSeconds();
+	  //hour
+  hour = hour%12;
+  hour = (hour*Math.PI/6)+(minute*Math.PI/(6*60))+(second*Math.PI/(360*60));
+  drawHand(ctx, hour, radius*0.5, radius*0.07);
+  //minute
+  minute = (minute*Math.PI/30)+(second*Math.PI/(30*60));
+  drawHand(ctx, minute, radius*0.8, radius*0.07);
+  // second
+  second = (second*Math.PI/30);
+  drawHand(ctx, second, radius*0.9, radius*0.02);
+}
+
+function drawHand(ctx, pos, length, width) {
+  ctx.beginPath();
+  ctx.lineWidth = width;
+  ctx.lineCap = "round";
+  ctx.moveTo(0,0);
+  ctx.rotate(pos);
+  ctx.lineTo(0, -length);
+  ctx.stroke();
+  ctx.rotate(-pos);
+}
+</script>
 </th:block>
 </html>

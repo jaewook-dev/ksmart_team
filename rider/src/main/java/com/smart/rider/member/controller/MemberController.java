@@ -28,6 +28,7 @@ public class MemberController {
 	@PostMapping("/memberInsert")
 	public String memberInsert(MemberDTO memberdto) {
 		memberService.memberInsert(memberdto);
+		
 		return "redirect:/login";
 	}
 	
@@ -44,9 +45,9 @@ public class MemberController {
 		System.out.println(memberService.memberIdCheck(memberId) + "<---아이디체크수");
 		int result = memberService.memberIdCheck(memberId);
 		if(result == 1) {
-			model.addAttribute("fail", "사용중인 아이디입니다!");
+			model.addAttribute("check", "사용중인 아이디입니다!");
 		}else {
-			model.addAttribute("success", "사용가능한 아이디입니다.");
+			model.addAttribute("check", "사용가능한 아이디입니다.");
 		}
 		return "member/memberInsert";
 	}
