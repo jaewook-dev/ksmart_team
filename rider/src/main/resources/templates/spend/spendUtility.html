@@ -78,12 +78,12 @@
 											</a>
 										</td>
 									</tr>
-									<th:block th:if="${result} neq null">
+									<th:block th:if="${result} ne null">
 										<tr class="text-center">
 											<td colspan="5" th:text="${result}"></td>
 										</tr>
 									</th:block>
-									<th:block th:if="${alert} neq null">
+									<th:block th:if="${alert} ne null">
 										<tr class="text-center">
 											<td colspan="5" th:text="${alert}"></td>
 										</tr>

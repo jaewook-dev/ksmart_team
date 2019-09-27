@@ -48,6 +48,7 @@ public class LoginController {
 			
 			if(loginCheck.getContractShopCode() == null) {
 				session.setAttribute("SCODE", "SR0000");
+				//System.out.println(session.getAttribute("SCODE") + " <-- SCODE loginProcess LoginController.java");
 			} else {
 				session.setAttribute("SCODE", loginCheck.getContractShopCode());
 			}
