@@ -127,7 +127,8 @@
 									<th:block th:each="num : ${#numbers.sequence(startPageNum,lastPageNum)}">
 										<li class="page-item active">
 											<span th:if="${currentPage == num}" th:text="${num}" class="text-center page-link"></span> 
-												<a class="page-link" th:unless="${currentPage == num}" th:text="${num}" th:href="@{/spendUtility(currentPage=${num})}"></a>
+												<a class="page-link" th:unless="${currentPage == num}" th:text="${num}" th:href="@{/spendUtility(currentPage=${num})}" th:if="${session.SLEVEL eq '점주'}"></a>
+												<a class="page-link" th:unless="${currentPage == num}" th:text="${num}" th:href="@{/spendUtility(selectShopCode=${param?.selectShopCode?.toString()}, currentPage=${num})}" th:if="${session.SLEVEL eq '관리자'}"></a>
 										</li>
 									</th:block>
 	
