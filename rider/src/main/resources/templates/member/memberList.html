@@ -90,7 +90,7 @@
 <script>
 $("#deleteLink").click(function(){
     if(confirm("삭제하시겠습니까?") == true){
-    	var memberId = $("#member").text();
+    	var memberId = $("#member").val();
     	 location.href='/levelDelete?memberId='+memberId+'';
     	alert("삭제되었습니다");
     }

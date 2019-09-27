@@ -140,7 +140,7 @@
 			,su.spend_utility_date
 			,sub.subject_name
 		FROM spend_utility su, subject sub
-		WHERE su.subject_code = sub.subject_code AND contract_shop_code = #{contractShopCode} 
+		WHERE su.subject_code = sub.subject_code AND su.contract_shop_code = #{contractShopCode} 
         
         <!-- 지출_공과금 검색 조건문 -->
         <if test="utilityKey neq null and utilityValue neq ''.toString()">

@@ -42,7 +42,9 @@
 									<div class="dropdown-menu">
 								    	<a class="dropdown-item" href="/spendTotal">!)통합</a>
 								    	<a class="dropdown-item" href="/spendSalary">!)급여</a>
-								    	<a class="dropdown-item" href="/spendUtility">공과금/기타</a>
+								    	<th:block th:if="${session.SLEVEL ne '직원'}">
+								    		<a class="dropdown-item" href="/spendUtility">공과금/기타</a>
+								    	</th:block>
 									</div>
 								</div>
                        		</div>
@@ -102,7 +104,7 @@
                                 </span>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" th:href="@{/account}">!)거래처관리</a>
+                                <a class="dropdown-item" th:href="@{/accountList}">!)거래처관리</a>
                             </div>
                         </li>
                         <li class="nav-item dropdown" th:if="${session.SLEVEL eq '관리자'}">
@@ -130,7 +132,7 @@
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             	<a class="dropdown-item" href="/employeeInsert">직원등록</a>
-                            	<a class="dropdown-item" th:href="@{/employeeList(contractShopCode=${session.SCODE})}">!직원목록</a>
+                            	
                             	<a class="dropdown-item" href="/workAdmin">!근태관리</a>
                             </div>
                         </li>
