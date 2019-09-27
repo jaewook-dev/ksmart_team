@@ -27,6 +27,9 @@ public class SalesController {
 	@Autowired
 	private GoodsService goodsService;
 	
+	
+	//매출리스트 상세보기
+
 	//매출등록요청
 	@GetMapping("/salesInsert")
 	public String salesInsert(Model model,String goodsCode) {
