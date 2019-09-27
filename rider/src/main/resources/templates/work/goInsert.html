@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/default}">
+<th:block layout:fragment="customTitle">
+</th:block>
+<th:block layout:fragment="customContents">
+
+	<div class="main-height">
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<p class="text-white mt-5 mb-5">
+					<h2 class="tm-block-title">출근등록</h2>
+				</div>
+			</div>
+			<hr>
+			<div class="row tm-content-row">
+				<div class="col tm-block-col">
+					<div class="tm-bg-primary-dark tm-block tm-block-h-auto btn-group col">
+						<div class="btn-group col-4">
+						<button type="button" id="goInsert" class="btn btn-primary btn-block">
+							#출근 등록
+						</button>
+						</div>
+						<div class="btn-group col-4">
+						<button type="button" id="leaveInsert" class="btn btn-primary btn-block">
+							#퇴근 등록
+						</button>
+						</div>
+						<div class="btn-group col-4">
+						<button type="button" id="offInsert" class="btn btn-primary btn-block">
+							#휴무 등록
+						</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<h1>CLOCK</h1>
+			<canvas id="canvas" width="400" height="400" style="background-color:#333"></canvas>
+		</div>
+	</div>
+</th:block>
+<th:block layout:fragment="customScript">
+
+</th:block>
+</html>

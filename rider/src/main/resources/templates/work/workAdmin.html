@@ -15,13 +15,51 @@
 				</div>
 			</div>
 			<hr>
-			
+			<div class="row tm-content-row">
+				<div class="col tm-block-col">
+					<div class="tm-bg-primary-dark tm-block tm-block-h-auto btn-group col">
+						<div class="btn-group col-4">
+						<button type="button" id="goInsert" class="btn btn-primary btn-block" onclick="location.href='/goInsert';">
+							#출근 등록
+						</button>
+						</div>
+						<div class="btn-group col-4">
+						<button type="button" id="leaveInsert" class="btn btn-primary btn-block">
+							#퇴근 등록
+						</button>
+						</div>
+						<div class="btn-group col-4">
+						<button type="button" id="offInsert" class="btn btn-primary btn-block">
+							#휴무 등록
+						</button>
+						</div>
+					</div>
+				</div>
+			</div>
 			<div class="row tm-content-row">
 				<div class="col tm-block-col">
 					<div class="tm-bg-primary-dark tm-block tm-block-h-auto-copy">
 						<form action="#" class="tm-search-form row" method="post">
 							<div class="form-group col-3">
-								
+								<select class="custom-select" name="searchDate">
+									<option value="subject_date">등록일자</option>
+								</select>
+							</div>
+							<div class="form-group col-3">
+								<input id="beginDate" name="beginDate" 
+									   type="text" class="form-control validate" style="background-color: #54657D" readonly/>
+							</div>
+							<div class="form-group col-1 text-center">
+								<h2 class="tm-site-title mb-0">~</h2>
+							</div>
+							<div class="form-group col-3">
+								<input id="endDate" name="endDate" 
+									   type="text" class="form-control validate" style="background-color: #54657D" readonly/>
+							</div>
+							<div class="form-group col-2">
+							</div>
+							
+							<div class="form-group col-3">
 								<select class="custom-select" name="select">
 									<option value="0">Select</option>
 									<option value="member_name">이름</option>
@@ -37,17 +75,6 @@
 							</div>
 						</form>
 					</div>
-				</div>
-				<div>
-					<a href="#" id="customerButton" class="btn btn-primary text-white">
-						#출근 등록
-					</a>
-					<a href="#" id="customerButton" class="btn btn-primary text-white">
-						#퇴근 등록
-					</a>
-					<a href="#" id="customerButton" class="btn btn-primary text-white">
-						#휴무 등록
-					</a>
 				</div>
 			</div>
 			
@@ -71,7 +98,18 @@
 	</div>
 </th:block>
 <th:block layout:fragment="customScript">
-<script>
+<script type="text/javascript">
+
+	//시작 일자 텍스트상자 클릭시 달력 표기 
+	$('#beginDate').datepicker({
+	});
+	$('#beginDate').datepicker('option','dateFormat','yy-mm-dd'); // 기존 dd/mm/yy에서 yy-mm-dd로 format 변경   
+	
+	//종료 일자 텍스트상자 클릭시 달력 표기 
+	$('#endDate').datepicker({
+	});
+	$('#endDate').datepicker('option','dateFormat','yy-mm-dd'); // 기존 dd/mm/yy에서 yy-mm-dd로 format 변경 
+	
 </script>
 </th:block>
 </html>

@@ -31,7 +31,8 @@ public class SalesController {
 	@GetMapping("/salesInsert")
 	public String salesInsert(Model model,String goodsCode) {
 		//System.out.println("매출등록시 상품코드값"+goodsCode);
-		//System.out.println("매출등록시 대여상품코드값확인"+goodsRentalCode);		
+		//System.out.println("등록요청시 값확인"+goodsService.getGoodsList(goodsCode));
+		
 		model.addAttribute("goodsCode", goodsService.getGoodsList(goodsCode));
 		//model.addAttribute("goodsRentalCode", goodsRentalService.getGoodsRentalList(goodsRentalCode));
 		

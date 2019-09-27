@@ -16,4 +16,9 @@ public class WorkController {
 	public String workAdmin() {
 		return "work/workAdmin";
 	}
+	
+	@GetMapping("/goInsert")
+	public String goInsert() {
+		return "work/goInsert";
+	}
 }

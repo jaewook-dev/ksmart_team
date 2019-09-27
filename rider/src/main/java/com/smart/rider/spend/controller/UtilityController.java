@@ -74,7 +74,6 @@ public class UtilityController {
 		
 		String contractShopCode = (String)session.getAttribute("SCODE");
 		
-		
 		/*** 190925 재욱, begin 페이징 ***/
 		Map<String, Object> map = utilityService.utilityList(currentPage, contractShopCode, utilityKey, utilityValue, beginDate, endDate);
 		//System.out.println(map + " <-- map spendUtility UtilityController.java");
@@ -136,6 +135,9 @@ public class UtilityController {
 
 		String contractShopCode = (String)session.getAttribute("SCODE");
 		//System.out.println(contractShopCode + " <-- contractShopCode spendUtility UtilityController.java");
+		//System.out.println(utilityYear + " <-- utilityYear spendUtility() UtilityController.java");
+		
+		model.addAttribute("selectedYear", utilityYear);
 		
 		String utilityKey = "";
 		String utilityValue = "";
@@ -161,6 +163,10 @@ public class UtilityController {
 		model.addAttribute("utilityList", utilityList);
 		/*** 190925 재욱, end 페이징 ***/
 		
+		// 등록된 내역이 없을 시 텍스트 알림
+		if(utilityList.size()==0) {
+			model.addAttribute("result", "등록된 내역이 없습니다");
+		}
 
 		// 지출_공과금 등록 계정과목 select box 리스트
 		List<SubjectDTO> subjectList = utilityService.subjectSelectBox();
@@ -177,10 +183,10 @@ public class UtilityController {
 		int[] chartValueArrays = mainService.chartValue(map);
 		//System.out.println(Arrays.toString(chartValueArrays) + " <-- chartValueArrays spendUtility UtilityController.java");
 		
-		// to view model.addAttribute
+		//반복문을 통해 배열에 값 입력
 		for(int i=0; i<12; i++) {
-			String utilityChart = "utility" + String.valueOf(i);
-			model.addAttribute(utilityChart, chartValueArrays[i]);
+			String utilityChart = "utility" + String.valueOf(i); // model에 담기 위한 변수명 생성
+			model.addAttribute(utilityChart, chartValueArrays[i]); // 생성된 변수명에 각 배열의 값 담기
 		}
 		/*** 190926 재욱, end 년도에 따른 월별 공과금 지출 금액 차트 ***/
 		
