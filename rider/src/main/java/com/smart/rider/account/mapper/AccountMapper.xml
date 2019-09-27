@@ -44,5 +44,14 @@
 		 , NOW())
 	
 	</insert>
+	<select id="getShopRelationCode" parameterType="String" resultType="com.smart.rider.shop.dto.SsrHapDTO">
+		SELECT DISTINCT
+			sr.contract_shop_code AS contractShopCode 
+			,s.shop_name AS shopName
+		
+		FROM shop_relation sr, shop s
+		WHERE sr.shop_code =s.shop_code AND sr.member_id =#{SID}
+	
+	</select>
 
 </mapper>
