@@ -38,6 +38,17 @@ public class SalesController {
 		
 		return "sales/salesInsert";
 	}
+	//대여품매출등록
+	@GetMapping("/salesInsert2")
+	public String salesInsert2(Model model,String goodsRentalCode) {
+		//System.out.println("매출등록시 상품코드값"+goodsCode);
+		//System.out.println("등록요청시 값확인"+goodsService.getGoodsList(goodsCode));
+		
+		model.addAttribute("goodsRentalCode", goodsRentalService.getGoodsRentalList(goodsRentalCode));
+		//model.addAttribute("goodsRentalCode", goodsRentalService.getGoodsRentalList(goodsRentalCode));
+		
+		return "sales/salesInsert2";
+	}
 	//매출등록처리
 	@PostMapping("/salesInsert")
 	public String salesInsert(SalesDTO salesDto,HttpSession session) {
