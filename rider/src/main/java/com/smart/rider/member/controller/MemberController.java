@@ -40,7 +40,7 @@ public class MemberController {
 	}
 	//19.09.16작성
 	@GetMapping("/memberIdCheck")
-	public String idCheck(@RequestParam(value="memberId") String memberId, Model model) {
+	public int idCheck(@RequestParam(value="memberId") String memberId, Model model) {
 		System.out.println(memberId + "<---체크아이디");
 		System.out.println(memberService.memberIdCheck(memberId) + "<---아이디체크수");
 		int result = memberService.memberIdCheck(memberId);
@@ -49,7 +49,7 @@ public class MemberController {
 		}else {
 			model.addAttribute("check", "사용가능한 아이디입니다.");
 		}
-		return "member/memberInsert";
+		return 0;
 	}
 
 	@GetMapping("/getMemberList")

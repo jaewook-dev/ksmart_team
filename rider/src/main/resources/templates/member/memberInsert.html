@@ -73,7 +73,7 @@
 $('#checkButton').click(function() {
 	var memberId = $('#memberId').val();
 	console.log('memberId' + memberId);
-	$(location).attr('/memberIdCheck?memberId ='+memberId'');
+	location.href='/memberIdCheck?memberId ='+memberId+'';
 });
 
 $('#memberPw2').blur(function(){
