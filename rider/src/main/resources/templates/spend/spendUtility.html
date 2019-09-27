@@ -32,10 +32,10 @@
     							<select style="width: 800px;" class="custom-select" name="selectShopCode" id="selectShopCode" >
    									<th:block th:each="shop : ${utilityShop}">
    										<option 
-   										th:text="${shop.memberId} +' : '+ ${shop.shopName}" 
-   										th:value="${shop.contractShopCode}" 
-   										th:selected="${shop.contractShopCode eq param?.selectShopCode?.toString()}"
-   										id="shopValue"
+   											th:text="${shop.memberId} +' : '+ ${shop.shopName}" 
+   											th:value="${shop.contractShopCode}" 
+   											th:selected="${shop.contractShopCode eq param?.selectShopCode?.toString()}"
+   											id="shopValue"
    										></option>
    									</th:block>
 								</select>
