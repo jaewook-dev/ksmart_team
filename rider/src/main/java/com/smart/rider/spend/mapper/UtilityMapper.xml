@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.smart.rider.spend.mapper.UtilityMapper">
-
+	
 	<!-- JoinUtilityDTO resultMap -->
 	<resultMap type="com.smart.rider.spend.dto.JoinUtilityDTO" id="joinUtilityMap">
     	<result column="spend_utility_code"     property="spendUtilityCode"/>
@@ -24,6 +24,21 @@
 		<result column="subject_name" 	property="subjectName"/>
 		<result column="subject_date" 	property="subjectDate"/>
 	</resultMap>
+	
+	<!-- 190926 재욱, 지출_공과금 등록 내역 수정 프로세스 -->
+	<update id="utilityUpdate" parameterType="com.smart.rider.spend.dto.UtilityDTO">
+		UPDATE spend_utility 
+			SET
+			  spend_utility_pay=#{spendUtilityPay}
+			, spend_utility_contents=#{spendUtilityContents}
+			, spend_utility_date=NOW()
+		WHERE spend_utility_code = #{spendUtilityCode};
+	</update>
+	
+	<!-- 190926 재욱, 지출_공과금 등록 내역 삭제 프로세스 -->
+	<delete id="utilityDelete" parameterType="String">
+		DELETE FROM spend_utility WHERE spend_utility_code= #{spendUtilityCode}; 
+	</delete>
 	
 	<!-- 지출_공과금 등록 내역 상세보기 -->
 	<select id="utilityDetails" parameterType="String" resultMap="joinUtilityMap">

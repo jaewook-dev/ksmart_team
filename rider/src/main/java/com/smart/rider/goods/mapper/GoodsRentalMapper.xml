@@ -87,7 +87,7 @@
 	
 	</select>
 	
-	<!-- 대여상품리스트 등록  -->
+	<!-- 대여상품리스트  -->
 	<select id="goodsRentalList" resultMap="ASid" parameterType="String">
 			SELECT 
 				*

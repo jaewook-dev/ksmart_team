@@ -15,7 +15,7 @@
 				<div class="row">
 					<div class="col">
 						<p class="text-white mt-5 mb-5">
-							<b>지출/매출 > 지출 > 공과금</b>
+							<b>지출/매출 > 지출 > 공과금/기타</b>
 						</p>
 					</div>
 				</div>
@@ -24,7 +24,7 @@
 				<div class="row tm-content-row">
 					<div class="col-12 tm-block-col">
 						<div class="tm-bg-primary-dark tm-block-util">
-							<h4 class="tm-block-title">공과금 지출 현황</h4>
+							<h4 class="tm-block-title">공과금/기타 지출 현황</h4>
 
 							<!-- charts.js -->
 							<canvas id="utilityChart" height="100px;"></canvas>
@@ -38,16 +38,16 @@
 					<!-- 최근 등록된 공과금 내역 -->
 					<div class="col-sm-12 col-md-12 col-lg-6 col-xl-7 tm-block-col">
 						<div class="tm-bg-primary-dark tm-block-spend ">
-							<h4 class="tm-block-title">등록내역</h4>
+							<h4 class="tm-block-title">지출 내역</h4>
 							<div style="min-height: 330px;">
 							<table class="table">
 								<thead>
 									<tr class="text-center">
-										<th>내역</th>
-										<th>금액</th>
-										<th>등록일자</th>
-										<th style="width: 8%">상세</th>
-										<th style="width: 8%">삭제</th>
+										<th style="width: 30%">내역</th>
+										<th style="width: 20%">금액</th>
+										<th style="width: 30%">등록일자</th>
+										<th style="width: 10%">상세</th>
+										<th style="width: 10%">삭제</th>
 									</tr>
 								</thead>
 								<tbody class="text-center">
@@ -101,7 +101,7 @@
 					<!-- 공과금 지출 등록 폼 -->
 					<div class="col-sm-12 col-md-12 col-lg-6 col-xl-5 tm-block-col">
 						<div class="tm-bg-primary-dark tm-block-spend">
-							<h4 class="tm-block-title">공과금 지출 등록</h4>
+							<h4 class="tm-block-title">지출 등록</h4>
 							<form action="utilityInsert" method="post">
 								<div class="form-group">
 									<label>내역</label> <select
@@ -208,7 +208,7 @@
 		    data: {
 		        labels: ['1월', '2월', '3월', '4월', '5월', '6월', '7월','8월','9월','10월','11월','12월'],
 		        datasets: [{
-		            label: '공과금 총지출 금액',
+		            label: '공과금/기타 총지출 금액',
 		            backgroundColor: 'rgb(245, 166, 35)',
 		            borderColor: 'rgb(245, 166, 35)',
 		            data: [chartJanuary,chartFebruary,chartMarch,chartApril,chartMay,chartJune,chartJuly,chartAugust,chartSeptember,chartOctober,chartNovember,chartDecember]
