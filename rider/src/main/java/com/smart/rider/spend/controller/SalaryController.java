@@ -18,14 +18,20 @@ public class SalaryController {
 	@Autowired
 	private SalaryService salaryService;
 	
+	/*** 190927 재욱, 지출_급여 화면 ***/
 	@GetMapping("/spendSalary")
 	public String spendSalary(HttpSession session, Model model) {
 		
 		String contractShopCode = (String)session.getAttribute("SCODE");
+		
 		// 지출_급여 직원 select box list
 		List<MemberDTO> employeeSelect = salaryService.salarySelectBox(contractShopCode);
-		//System.out.println(salarySelectList + " <-- salarySelectList spend UtilityController.java");
+		//System.out.println(salarySelectList + " <-- salarySelectList spendSalary() UtilityController.java");
 		model.addAttribute("employeeSelect", employeeSelect);
+		
+		if(employeeSelect.size() == 0) {
+			model.addAttribute("alert", "등록된 직원이 없습니다");
+		}
 		
 		return "spend/spendSalary";
 	}

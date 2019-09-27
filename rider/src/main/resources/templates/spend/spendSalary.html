@@ -45,6 +45,9 @@
 											<option th:text="${employee.memberName}"
 												th:value="${employee.memberId}"></option>
 										</th:block>
+										<th:block th:if="${alert} neq null">
+											<option th:text="${alert}"></option>
+										</th:block>
 									</select>
 								</div>
 								<div class="form-group num">
