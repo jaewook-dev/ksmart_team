@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.smart.rider.spend.mapper.UtilityMapper">
+
+	<!-- 계약된 매장 정보 불러오기 SsrHapDTO resultMap -->
+	<resultMap type="com.smart.rider.shop.dto.SsrHapDTO" id="shopMap">
+		<result column="shop_code"			property="shopCode"/>
+		<result column="contract_shop_code"	property="contractShopCode"/>
+		<result column="member_id"			property="memberId"/>
+		<result column="shop_name"			property="shopName"/>
+	</resultMap>
 	
 	<!-- JoinUtilityDTO resultMap -->
 	<resultMap type="com.smart.rider.spend.dto.JoinUtilityDTO" id="joinUtilityMap">
@@ -24,6 +32,17 @@
 		<result column="subject_name" 	property="subjectName"/>
 		<result column="subject_date" 	property="subjectDate"/>
 	</resultMap>
+	
+	<!-- 190926 재욱, 관리자 권한으로 계약된 매장 내역 -->
+	<select id="utilityShop" resultMap="shopMap">
+		SELECT 
+			 s.shop_code
+			,s.shop_name
+			,sr.contract_shop_code
+			,sr.member_id
+		FROM shop s, shop_relation sr
+		WHERE s.shop_code = sr.shop_code
+	</select>
 	
 	<!-- 190926 재욱, 지출_공과금 등록 내역 수정 프로세스 -->
 	<update id="utilityUpdate" parameterType="com.smart.rider.spend.dto.UtilityDTO">

@@ -19,9 +19,35 @@
 						</p>
 					</div>
 				</div>
-
+				<th:block th:if="${session.SLEVEL eq '관리자'}">
+				<div class="row tm-content-row">
+					<div class="col-12 tm-block-col">
+						<div class="tm-bg-primary-dark tm-block-select">
+							<form action="/spendUtility" method="get" id="selectShopForm">
+							<span style="float: left">
+								<strong class="tm-block-title text-center">계약된 매장 </strong>
+							</span>
+    						<span style="float: right">
+    						
+    							<select style="width: 800px;" class="custom-select" name="selectShopCode" id="selectShopCode" >
+   									<th:block th:each="shop : ${utilityShop}">
+   										<option 
+   										th:text="${shop.memberId} +' : '+ ${shop.shopName}" 
+   										th:value="${shop.contractShopCode}" 
+   										th:selected="${shop.contractShopCode eq param?.selectShopCode?.toString()}"
+   										id="shopValue"
+   										></option>
+   									</th:block>
+								</select>
+    						</span>
+    						</form>
+						</div>
+					</div>
+				</div>
+				</th:block>
 				<!-- 공과금 지출 현황 -->
 				<div class="row tm-content-row">
+					
 					<div class="col-12 tm-block-col">
 						<div class="tm-bg-primary-dark tm-block-util">
 						<form action="/spendUtility" method="get" id="selectYearForm" name="selectYearForm">
@@ -72,8 +98,7 @@
 											</a>
 										</td>
 										<td style="width: 10%">
-											<a th:href="@{/spendUtilityDelete(spendUtilityCode=${list.spendUtilityCode})}"
-											   class="tm-product-delete-link possibleButton"> 
+											<a class="tm-product-delete-link possibleButton" data-toggle="modal" href="#deleteModal"> 
 											   <i class="far fa-trash-alt tm-product-delete-icon" style="color: white;"></i>
 											</a>
 										</td>
@@ -118,7 +143,7 @@
 					<div class="col-sm-12 col-md-12 col-lg-6 col-xl-5 tm-block-col">
 						<div class="tm-bg-primary-dark tm-block-spend">
 							<h4 class="tm-block-title">지출 등록</h4>
-							<form action="utilityInsert" method="post">
+							<form action="utilityInsert" method="post" id="utilityInsertForm">
 								<div class="form-group">
 									<label>내역</label> <select
 										class="custom-select tm-select-accounts" name="subjectCode">
@@ -137,7 +162,10 @@
 										name="spendUtilityContents">
 								</div>
 								<hr>
-								<button type="submit"
+								<th:block th:if="${session.SLEVEL eq '관리자'}">
+									<input type="hidden" name="masterShopCode" th:value="${masterShopCode}">
+								</th:block>
+								<button type="button"
 									class="btn btn-primary btn-block text-uppercase"
 									id="insertUtility">확인</button>
 							</form>
@@ -190,6 +218,25 @@
 							<!-- end 검색 폼 -->
 						</div>
 					</div>
+					
+					<!-- 모달 -->
+					<div class="modal fade" id="deleteModal">
+						<div class="modal-dialog">
+							<div class="modal-content">
+					      
+							<!-- Modal Header -->
+							<div class="modal-header">
+								<h4 class="modal-title">알림</h4>
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+							</div>
+					        
+							<!-- Modal body -->
+							<div class="modal-body">
+								작업중
+							</div>				        
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -198,7 +245,12 @@
 <th:block layout:fragment="customScript">
 
 	<script th:inline="javascript">
-    
+	
+	<!-- 계약된 매장 선택 -->
+	$('#selectShopCode').change(function() {
+		$('#selectShopForm').submit();
+	})
+	
     <!-- charts.js script-->
 	var chartJanuary 	= [[${utility0}]];
 	var chartFebruary 	= [[${utility1}]];
@@ -214,8 +266,8 @@
 	var chartDecember 	= [[${utility11}]];
 
 	$(function() {
-		var uctx = document.getElementById('utilityChart').getContext('2d');
-		var utilityChart = new Chart(uctx, {
+		var ctx = document.getElementById('utilityChart').getContext('2d');
+		var utilityChart = new Chart(ctx, {
 			
 		    // The type of chart we want to create
 		    type: 'bar',
@@ -291,6 +343,11 @@
     function page(scriptCurrentPage) {
     	location.href="/spendUtilityList?currentPage="+scriptCurrentPage; 
     };
+    
+    $('#insertUtility').click(function() {
+		$('#utilityInsertForm').submit();
+	})
+    
 </script>
 </th:block>
 </html>
