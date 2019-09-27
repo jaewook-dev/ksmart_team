@@ -10,6 +10,7 @@
 			(sales_code
 			, goods_code
 			, contract_shop_code
+			, goods_rental_code
 			, sales_group_code
 			, sales_pay_type
 			, sales_type
@@ -19,6 +20,7 @@
 			 (#{salesCode}
 			 , #{goodsCode}
 			 , #{contractShopCode}
+			 , #{goodsRentalCode}
 			 , #{salesGroupCode}
 			 , #{salesPayType}
 			 , #{salesType}
@@ -32,17 +34,10 @@
 			SELECT 
 			*
 			FROM
-			sales s			
-			INNER JOIN
-			goods g			 
-			INNER join
-			goods_rental gr
-			INNER JOIN 
-			shop sp	
-			ON 
-			s.goods_code = g.goods_code
+			sales 
 	
 	</select>
+	<!-- 코드자동증가  -->
 	<select id="salesCodeCount" resultType="String">
 		SELECT 
 			MAX(LPAD(RIGHT(sales_code, 4)+1, '4' , '0')) 

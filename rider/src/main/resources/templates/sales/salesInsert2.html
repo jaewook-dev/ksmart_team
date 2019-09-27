@@ -5,6 +5,7 @@
 <th:block layout:fragment="customTitle">
 </th:block>
 <th:block layout:fragment="customContents">
+<form action="/salesInsert" method="post" class="tm-edit-product-form">
 	<!-- MAIN -->
 	<div class="main">
 		<div class="container mt-6">
@@ -12,9 +13,18 @@
 				<div class="col-sm-12 col-md-12  tm-block-col">
 					<div class="tm-bg-primary-dark tm-block tm-block-products">
 						<div class="tm-product-table-container">
-											
+									
 							<table class="table table-hover tm-table-small tm-product-table">							
 								<thead>
+									<tr>
+										<th></th>
+										<th>
+											<input type="hidden" id="goodsCode" name="goodsCode" >
+											<input type="hidden" id="goodsRentalCode" name="goodsRentalCode" th:value="${goodsRentalCode.goodsRentalCode}">
+											<input type="hidden" id="salesType" name="salesType" value="대여" >
+										</th>
+										
+									</tr>
 									<tr>
 										<th scope="col">상품명</th>
 										<th th:text="${goodsRentalCode.goodsDbName}"></th>
@@ -99,20 +109,40 @@
 										<th scope="col">대여등록일</th>
 										<th th:text="${goodsRentalCode.goodsRentalDate}"></th>
 									</tr>		
-									
-									
+									<tr>
+										<th>매출금액</th>
+										<th>
+											<input type="text" id="salesAmount" name="salesAmount" required />
+										</th>
+									</tr>
+									<tr>
+										<th>결제수단</th>	
+										<td>
+											<select	class="custom-select tm-select-accounts" 
+													id="salesPayType" name="salesPayType">
+												<option selected>결제방법선택</option>
+												<option value="카드">카드</option>
+												<option value="현금">현금</option>
+											</select>
+										</td>
+									</tr>									
+									<tr>
+										<th>매출등록일</th>
+										<th>
+										<input type="text" id="salesDate" name="salesDate" readonly="readonly">
+										</th>
+									</tr>
 								</thead>	
 															
 							</table>
 												
 						</div>						
 						<!-- table container -->
-						<a th:href="@{/goodsRentalUpdate(goodsRentalCode=${goodsRentalCode.goodsRentalCode})}"
-							class="btn btn-primary btn-block text-uppercase mb-3">대여상품수정</a>						
-						<a  th:href="@{/goodsRentalDelete(goodsRentalCode=${goodsRentalCode.goodsRentalCode})}"
-							class="btn btn-primary btn-block text-uppercase mb-3">대여상품 삭제</a>
-						<a  th:href="@{/salesInsert2(goodsRentalCode=${goodsRentalCode.goodsRentalCode})}"
-							class="btn btn-primary btn-block text-uppercase mb-3" style="color: red">매출등록</a>		
+						<!-- <a th:href="@{/salesInsert(salesCode=${salesCode})}"
+							class="btn btn-primary btn-block text-uppercase mb-3">매출등록완료</a> -->
+						<button type="submit"
+							class="btn btn-primary btn-block text-uppercase">매출등록완료</button>						
+						
 						
 					</div>
 				</div>
@@ -122,7 +152,7 @@
 
 	</div>
 	<!-- END MAIN -->
-	
+	</form>
 </th:block>
 </th:block>
 <th:block layout:fragment="customScript">

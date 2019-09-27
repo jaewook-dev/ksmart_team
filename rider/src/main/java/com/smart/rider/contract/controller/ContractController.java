@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.smart.rider.contract.dto.ContractDTO;
+import com.smart.rider.contract.dto.ManagementDTO;
 import com.smart.rider.contract.dto.UnitDTO;
 import com.smart.rider.contract.service.ContractService;
 
@@ -71,16 +72,17 @@ public class ContractController {
 		System.out.println("contractList:"+contractInsert);
 		model.addAttribute("contractInsert", contractInsert);
 		
+	
 		return "/contract/contractInsert";
 	}
 	
 	@PostMapping("/contractInsert")
-	public String contractInsert(ContractDTO contract,HttpSession session) {
+	public String contractInsert(ContractDTO contract,HttpSession session,ManagementDTO management) {
 		
-		System.out.println(contract.toString() + "<-- unit.toString");
-		contractService.contractInsert(contract, session);
+		System.out.println(contract.toString() + "<-- contract.toString");
+		contractService.contractInsert(contract, session, management);
 		
-		return "redirect:/managementList";
+		return "redirect:/contractList";
 	}
 	
 

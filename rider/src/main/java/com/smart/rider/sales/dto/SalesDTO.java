@@ -5,6 +5,7 @@ public class SalesDTO {
 	private String salesCode;
 	private String goodsCode;
 	private String contractShopCode;
+	private String goodsRentalCode;
 	private String salesGroupCode;
 	private String salesPayType;
 	private String salesType;
@@ -12,11 +13,19 @@ public class SalesDTO {
 	private String salesDate;
 	
 	
+	
 	@Override
 	public String toString() {
 		return "SalesDTO [salesCode=" + salesCode + ", goodsCode=" + goodsCode + ", contractShopCode="
-				+ contractShopCode + ", salesGroupCode=" + salesGroupCode + ", salesPayType=" + salesPayType
-				+ ", salesType=" + salesType + ", salesAmount=" + salesAmount + ", salesDate=" + salesDate + "]";
+				+ contractShopCode + ", goodsRentalCode=" + goodsRentalCode + ", salesGroupCode=" + salesGroupCode
+				+ ", salesPayType=" + salesPayType + ", salesType=" + salesType + ", salesAmount=" + salesAmount
+				+ ", salesDate=" + salesDate + "]";
+	}
+	public String getGoodsRentalCode() {
+		return goodsRentalCode;
+	}
+	public void setGoodsRentalCode(String goodsRentalCode) {
+		this.goodsRentalCode = goodsRentalCode;
 	}
 	public String getSalesCode() {
 		return salesCode;
