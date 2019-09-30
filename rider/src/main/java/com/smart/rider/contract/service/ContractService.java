@@ -83,6 +83,14 @@ public class ContractService {
 	
 		
 		result += managementService.managementInsert(management, session);
+		
+		
+		
+		
+		
+		
+		
+		
 		return result;
 		
 		
