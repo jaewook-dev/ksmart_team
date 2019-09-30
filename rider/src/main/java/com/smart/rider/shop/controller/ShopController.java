@@ -2,6 +2,8 @@ package com.smart.rider.shop.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -51,34 +53,16 @@ public class ShopController {
 	}
 	
 	@PostMapping("/shopInsert")
-	public String shopInsert(ShopDTO shop) {
+	public String shopInsert(ShopDTO shop,HttpSession session,ShopRelationDTO relation) {
 
 		
 		System.out.println(shop.toString()+"<-담겨있는값");
-		shopService.shopInsert(shop);
+		shopService.shopInsert(shop,session,relation);
 		
 		
 		return "redirect:/shop";
 	}
-	@GetMapping("/relationInsert")
-	public String relationInsert(Model model) {
-		
-		//shopDTO 데이터 가져오기
-		List<ShopDTO> List = shopService.shopList();
-		System.out.println("shopList"+List);
-		model.addAttribute("shopList", List);
-		
-		
-		return "/relation/relationInsert";
-	}
-	@PostMapping("/relationInsert")
-	public String relationInsert(ShopRelationDTO relation) {
-		
 
-		System.out.println(relation.toString()+"<-담겨있는값");
-		shopService.relationInsert(relation);
-		
-		return "redirect:/shop";
-	}
+
 
 }
