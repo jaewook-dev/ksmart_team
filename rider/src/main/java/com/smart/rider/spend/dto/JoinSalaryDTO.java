@@ -1,10 +1,11 @@
 package com.smart.rider.spend.dto;
 
-public class SalaryDTO {
+public class JoinSalaryDTO {
 
 	private String spendSalaryCode;
 	private String contractShopCode;
 	private String memberId;
+	private String memberName;
 	private int spendSalaryPay;
 	private int spendSalaryOverpay;
 	private int spendSalaryBouns;
@@ -33,6 +34,12 @@ public class SalaryDTO {
 	}
 	public void setMemberId(String memberId) {
 		this.memberId = memberId;
+	}
+	public String getMemberName() {
+		return memberName;
+	}
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
 	}
 	public int getSpendSalaryPay() {
 		return spendSalaryPay;
@@ -97,11 +104,13 @@ public class SalaryDTO {
 	
 	@Override
 	public String toString() {
-		return "SalaryDTO [spendSalaryCode=" + spendSalaryCode + ", contractShopCode=" + contractShopCode
-				+ ", memberId=" + memberId + ", spendSalaryPay=" + spendSalaryPay + ", spendSalaryOverpay="
-				+ spendSalaryOverpay + ", spendSalaryBouns=" + spendSalaryBouns + ", spendSalaryFree=" + spendSalaryFree
-				+ ", spendSalaryEmployee=" + spendSalaryEmployee + ", spendSalaryShop=" + spendSalaryShop
-				+ ", spendSalaryInsurance=" + spendSalaryInsurance + ", spendSalaryTotal=" + spendSalaryTotal
-				+ ", spendSalaryNetpay=" + spendSalaryNetpay + ", spendSalaryDate=" + spendSalaryDate + "]";
+		return "JoinSalaryDTO [spendSalaryCode=" + spendSalaryCode + ", contractShopCode=" + contractShopCode
+				+ ", memberId=" + memberId + ", memberName=" + memberName + ", spendSalaryPay=" + spendSalaryPay
+				+ ", spendSalaryOverpay=" + spendSalaryOverpay + ", spendSalaryBouns=" + spendSalaryBouns
+				+ ", spendSalaryFree=" + spendSalaryFree + ", spendSalaryEmployee=" + spendSalaryEmployee
+				+ ", spendSalaryShop=" + spendSalaryShop + ", spendSalaryInsurance=" + spendSalaryInsurance
+				+ ", spendSalaryTotal=" + spendSalaryTotal + ", spendSalaryNetpay=" + spendSalaryNetpay
+				+ ", spendSalaryDate=" + spendSalaryDate + "]";
 	}
+
 }

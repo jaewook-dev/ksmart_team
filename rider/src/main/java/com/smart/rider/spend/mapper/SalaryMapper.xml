@@ -3,10 +3,11 @@
 <mapper namespace="com.smart.rider.spend.mapper.SalaryMapper">
 
 	<!-- SalaryDTO resultMap -->
-	<resultMap type="com.smart.rider.spend.dto.SalaryDTO" id="salaryMap">
+	<resultMap type="com.smart.rider.spend.dto.JoinSalaryDTO" id="salaryMap">
 		<result column="spend_salary_code" 		property="spendSalaryCode"/>
 		<result column="contract_shop_code" 	property="contractShopCode"/>
 		<result column="member_id" 				property="memberId"/>
+		<result column="member_name" 			property="memberName"/>
 		<result column="spend_salary_pay" 		property="spendSalaryPay"/>
 		<result column="spend_salary_overpay"	property="spendSalaryOverpay"/>
 		<result column="spend_salary_bouns" 	property="spendSalaryBouns"/>
@@ -19,6 +20,28 @@
 		<result column="spend_salary_date" 		property="spendSalaryDate"/>
 	</resultMap>
 	
+	<!-- 190930 재욱, 지출_급여 등록 내역 -->
+	<select id="salaryList" resultMap="salaryMap" parameterType="String">
+		SELECT 
+	 		 ss.spend_salary_code
+			,m.member_name
+			,ss.contract_shop_code
+			,ss.member_id
+			,ss.spend_salary_pay
+			,ss.spend_salary_overpay
+			,ss.spend_salary_bouns
+			,ss.spend_salary_free
+			,ss.spend_salary_employee
+			,ss.spend_salary_shop
+			,ss.spend_salary_insurance
+			,ss.spend_salary_total
+			,ss.spend_salary_netpay
+			,ss.spend_salary_date	
+		FROM spend_salary ss, member m
+		WHERE ss.member_id = m.member_id and ss.contract_shop_code = #{contractShopCode}
+		
+	</select>
+	
 	<!-- 190930 재욱, 지출_급여 코드 자동증가용 카운트 -->
 	<select id="salaryCodeCount" resultType="String">
 		SELECT 
@@ -27,7 +50,7 @@
 	</select>
 
 	<!-- 190930 재욱, 지출_급여 내역 등록 -->
-	<insert id="salaryInsert" parameterType="com.smart.rider.spend.dto.SalaryDTO">
+	<insert id="salaryInsert" parameterType="com.smart.rider.spend.dto.JoinSalaryDTO">
 		INSERT INTO spend_salary(
 			  spend_salary_code
 			, contract_shop_code

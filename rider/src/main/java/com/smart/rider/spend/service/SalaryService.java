@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.smart.rider.member.dto.MemberDTO;
-import com.smart.rider.spend.dto.SalaryDTO;
+import com.smart.rider.spend.dto.JoinSalaryDTO;
 import com.smart.rider.spend.mapper.SalaryMapper;
 
 @Service
@@ -15,8 +15,13 @@ public class SalaryService {
 	@Autowired
 	private SalaryMapper salaryMapper;
 	
+	/*** 190930 재욱, 지출_급여 등록 내역 ***/
+	public List<JoinSalaryDTO> salaryList(String contractShopCode){
+		return salaryMapper.salaryList(contractShopCode);
+	}
+	
 	/*** 190927 재욱, 지출_급여 내역 등록 ***/
-	public int salaryInsert(SalaryDTO salaryDTO, String contractShopCode) {
+	public int salaryInsert(JoinSalaryDTO salaryDTO, String contractShopCode) {
 		
 		String spendSalaryCode = "SS" + salaryMapper.salaryCodeCount(); // 지출_급여 코드 자동증가
 		//System.out.println(spendUtilityCode + " <-- spendUtilityCode check utilityInsert UtilityService.java");

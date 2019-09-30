@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.smart.rider.main.service.MainService;
 import com.smart.rider.member.dto.MemberDTO;
 import com.smart.rider.shop.dto.SsrHapDTO;
-import com.smart.rider.spend.dto.SalaryDTO;
+import com.smart.rider.spend.dto.JoinSalaryDTO;
 import com.smart.rider.spend.service.SalaryService;
 import com.smart.rider.spend.service.UtilityService;
 
@@ -29,7 +29,7 @@ public class SalaryController {
 	
 	/*** 190930 재욱, 지출_급여 등록 ***/
 	@PostMapping("/salaryInsert")
-	public String salaryInsert(SalaryDTO salaryDTO, HttpSession session) {
+	public String salaryInsert(JoinSalaryDTO salaryDTO, HttpSession session) {
 		//System.out.println(salaryDTO + " <-- salaryDTO salaryInsert() SalaryController.java");
 		
 		String contractShopCode = (String)session.getAttribute("SCODE");
@@ -50,6 +50,11 @@ public class SalaryController {
 		
 		//System.out.println(salaryYear + " <-- salaryYear spendSalary() SalaryController.java");
 		
+		/*** 190930 재욱, 지출_급여 등록 내역 ***/
+		List<JoinSalaryDTO> salaryList = salaryService.salaryList(contractShopCode);
+		//System.out.println(salaryList + " <-- salaryList spendSalary() SalaryController.java");
+		model.addAttribute("salaryList", salaryList);
+		
 		/*** 190930 재욱, 관리자 권한으로 계약된 매장 내역 ***/
 		if(userLevel.equals("관리자")) {
 			contractShopCode = selectShopCode;
@@ -59,12 +64,13 @@ public class SalaryController {
 			model.addAttribute("masterShopCode", contractShopCode);
 		}
 		
-		// 지출_급여 직원 select box list
+		/*** 190927 재욱, 지출_급여 직원 select box list ***/// 
 		List<MemberDTO> employeeSelect = salaryService.salarySelectBox(contractShopCode);
 		//System.out.println(salarySelectList + " <-- salarySelectList spendSalary() SalaryController.java");
 		model.addAttribute("employeeSelect", employeeSelect);
 		model.addAttribute("selectedYear", salaryYear);
 		
+		// 등록된 직업이 없을시 select box alert
 		if(employeeSelect.size() == 0) {
 			model.addAttribute("alert", "등록된 직원이 없습니다");
 		}

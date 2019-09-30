@@ -206,13 +206,25 @@
 								<thead>
 									<tr>
 										<th>직원명</th>
-										<th>금액</th>
+										<th>급여 지출 총액</th>
 										<th>등록일자</th>
 										<th style="width: 20%">상세보기</th>
 									</tr>
 								</thead>
 								<tbody>
-
+									<tr th:each="list : ${salaryList}">
+										<td th:text="${list.memberName}"></td>
+										<td th:text="${list.spendSalaryTotal}"></td>
+										<td th:text="${list.spendSalaryDate}"></td>
+										<!-- 상세 아이콘 -->
+										<td style="width: 10%">
+											<a 
+											class="tm-product-delete-link"
+											th:href="@{/spendSalaryDetails(spendSalaryCode=${list.spendSalaryCode})}"
+											><i class="fas fa-search" style="color: white"></i> 
+											</a>
+										</td>
+									</tr>
 								</tbody>
 							</table>
 						</div>
@@ -267,6 +279,7 @@
 					
 				</div>
 			</div>
+		</div>
 		</div>
 </th:block>
 <th:block layout:fragment="customScript">
