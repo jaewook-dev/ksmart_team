@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.smart.rider.main.service.MainService;
+import com.smart.rider.main.dto.SearchDTO;
 import com.smart.rider.member.dto.MemberDTO;
 import com.smart.rider.shop.dto.SsrHapDTO;
 import com.smart.rider.spend.dto.JoinSalaryDTO;
@@ -36,6 +36,17 @@ public class SalaryController {
 		salaryService.salaryInsert(salaryDTO, contractShopCode);
 		
 		return "redirect:/spendSalary";
+	}
+	
+	/*** 190930 재욱, 지출_급여 검색화면 ***/
+	@PostMapping("/spendSalaryList")
+	public String spendSalaryList(@RequestParam(value = "selectShopCode", required = false, defaultValue = "SR0000") String selectShopCode
+								, @RequestParam(value = "salaryYear", required = false, defaultValue = "2019") String salaryYear
+								, SearchDTO searchDTO
+								, HttpSession session
+								, Model model) {
+		System.out.println(searchDTO + " <-- searchDTO spendSalaryList() SalaryController.java");
+		return "spend/spendSalary";
 	}
 	
 	/*** 190927 재욱, 지출_급여 화면 ***/
@@ -70,7 +81,7 @@ public class SalaryController {
 		model.addAttribute("employeeSelect", employeeSelect);
 		model.addAttribute("selectedYear", salaryYear);
 		
-		// 등록된 직업이 없을시 select box alert
+		// 등록된 직원이 없을시 select box alert
 		if(employeeSelect.size() == 0) {
 			model.addAttribute("alert", "등록된 직원이 없습니다");
 		}

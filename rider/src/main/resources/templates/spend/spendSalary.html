@@ -259,13 +259,13 @@
 								<div class="form-group col-2"></div>
 
 								<div class="form-group col-3">
-									<select class="custom-select" name="salaryKey">
+									<select class="custom-select" name="searchKey">
 										<option value="member_id">직원명</option>
 									</select>
 								</div>
 
 								<div class="form-group col-7">
-									<input id="subjectValue" name="utilityValue" type="text"
+									<input id="subjectValue" name="searchValue" type="text"
 										class="form-control validate" />
 								</div>
 								<div class="form-group col-2">
@@ -403,6 +403,17 @@
 		    }
 		});
 	})
+	
+	<!-- datepicker -->
+	//시작 일자 텍스트상자 클릭시 달력 표기 
+	$('#beginDate').datepicker({
+	});
+	$('#beginDate').datepicker('option','dateFormat','yy-mm-dd'); // 기존 dd/mm/yy에서 yy-mm-dd로 format 변경   
+	
+	//종료 일자 텍스트상자 클릭시 달력 표기 
+	$('#endDate').datepicker({
+	});
+	$('#endDate').datepicker('option','dateFormat','yy-mm-dd'); // 기존 dd/mm/yy에서 yy-mm-dd로 format 변경 
 	
 </script>
 </th:block>
