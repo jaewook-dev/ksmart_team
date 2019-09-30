@@ -8,7 +8,7 @@
 		<div class="row tm-content-row">
 			<div class="col-xl-6 mx-auto tm-block-col tm-col-account-settings">
 				<div class="tm-bg-primary-dark tm-block tm-block-settings">
-					<!------------------------------ 19.09.30작성 출퇴근등록 성공시 안내창 --------------------------------->
+					<!------------------------------ 19.09.25작성 비밀번호수정, 삭제 성공시 안내창 --------------------------------->
 					<h2 class="tm-block-title">안내</h2>
 					<form>
 						<div class="form-group">
@@ -27,11 +27,10 @@
 	</div>
 </th:block>
 <th:block layout:fragment="customScript">
-<script type="text/javascript">
-
-		opener.document.location.reload();
-
+<script>
+	function success() {
 		self.close();
+	}
 </script>
 </th:block>
 </html>

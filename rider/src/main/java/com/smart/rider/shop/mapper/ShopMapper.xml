@@ -20,7 +20,6 @@
 			 contract_shop_code AS contractShopCode
 			,member_id  AS memberId
 			,shop_code AS shopCode
-			,contract_shop_use AS contractShopUse
 			,contract_shop_date AS contractShopDate
 		FROM shop_relation
 	
@@ -88,14 +87,12 @@
 		 contract_shop_code
 		,member_id
 		,shop_code
-		,contract_shop_use
 		,contract_shop_date
 		)
 		VALUES (
 		 #{contractShopCode}
 		,#{memberId}
 		,#{shopCode}
-		,#{contractShopUse}
 		, NOW()
 		)
 	
