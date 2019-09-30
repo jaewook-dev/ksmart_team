@@ -29,10 +29,12 @@ public class SalaryController {
 	
 	/*** 190930 재욱, 지출_급여 등록 ***/
 	@PostMapping("/salaryInsert")
-	public String salaryInsert(@RequestParam(value = "memberId", required = false) String memberId
-							 , SalaryDTO salaryDTO) {
-		System.out.println(salaryDTO + " <-- salaryDTO salaryInsert() SalaryController.java");
-		System.out.println(memberId + " <-- memberId salaryInsert() SalaryController.java");
+	public String salaryInsert(SalaryDTO salaryDTO, HttpSession session) {
+		//System.out.println(salaryDTO + " <-- salaryDTO salaryInsert() SalaryController.java");
+		
+		String contractShopCode = (String)session.getAttribute("SCODE");
+		salaryService.salaryInsert(salaryDTO, contractShopCode);
+		
 		return "redirect:/spendSalary";
 	}
 	

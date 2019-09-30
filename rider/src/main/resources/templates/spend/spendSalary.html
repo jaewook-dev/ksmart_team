@@ -198,6 +198,7 @@
 					
 					
 					<!-- 최근 등록된 급여 내역 -->
+					<div class="row tm-content-row">
 					<div class="col-12 tm-block-col">
 						<div class="tm-bg-primary-dark tm-block-spend ">
 							<h4 class="tm-block-title">최근 등록내역</h4>
@@ -338,7 +339,7 @@
 	<!-- 급여등록 -->
 	$('#insertSalary').click(function() {
 		if($('#spendSalaryInsurance').val()==0){
-			alert('계산먼저');
+			alert('0은 입력할 수 없습니다');
 		} else{
 			$('#salaryInsertForm').submit();
 		}

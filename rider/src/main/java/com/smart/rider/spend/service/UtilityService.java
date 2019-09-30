@@ -119,6 +119,7 @@ public class UtilityService {
 	
 	/*** 190924 재욱, 지출_공과금 등록  ***/
 	public int utilityInsert(UtilityDTO utilityDTO, String contractShopCode) {
+		
 		String spendUtilityCode = "SU" + utilityMapper.utilityCodeCount(); // 지출_공과금 코드 자동증가
 		//System.out.println(spendUtilityCode + " <-- spendUtilityCode check utilityInsert UtilityService.java");
 		
