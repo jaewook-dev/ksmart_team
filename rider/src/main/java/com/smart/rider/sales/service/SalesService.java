@@ -17,7 +17,10 @@ import com.smart.rider.sales.mapper.SalesMapper;
 public class SalesService {
 	@Autowired
 	private SalesMapper salesMapper;
-	
+	//매출삭제
+	public int salesDelete(String salesCode,String memberId,String memberPw) {
+		return salesMapper.salesDelete(salesCode, memberId, memberPw);
+	}
 	//매출수정
 	public int salesUpdate(SalesDTO salesDto) {
 		return salesMapper.salesUpdate(salesDto);

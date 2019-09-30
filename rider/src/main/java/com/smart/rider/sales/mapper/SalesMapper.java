@@ -9,6 +9,8 @@ import com.smart.rider.sales.dto.SalesDTO;
 
 @Mapper
 public interface SalesMapper {
+	//매출삭제
+	public int salesDelete(String salesCode,String memberId,String memberPw);
 	//매출수정
 	public int salesUpdate(SalesDTO salesDto);
 	//매출상세보기

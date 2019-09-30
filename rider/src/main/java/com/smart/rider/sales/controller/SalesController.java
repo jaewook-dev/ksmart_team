@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.smart.rider.goods.dto.GoodsHapDTO;
+import com.smart.rider.goods.dto.GoodsRentalDTO;
 import com.smart.rider.goods.service.GoodsRentalService;
 import com.smart.rider.goods.service.GoodsService;
+import com.smart.rider.member.dto.MemberDTO;
 import com.smart.rider.sales.dto.SalesDTO;
 import com.smart.rider.sales.service.SalesService;
 
@@ -27,7 +29,25 @@ public class SalesController {
 	@Autowired
 	private GoodsService goodsService;
 	
+	//매출삭제
 	
+	@GetMapping("/salesDelete")
+	public String salesDelete(@RequestParam(value="salesCode")String salesCode,Model model) {
+		model.addAttribute("salesCode", salesService.getSalesList(salesCode));
+		return "sales/salesDelete";
+	}
+	//매출삭제처리
+	@PostMapping("/salesDelete")
+	public String goodsRentalDelete(SalesDTO salesDto,MemberDTO memberDto,Model model) {
+		int result = salesService.salesDelete(salesDto.getSalesCode(), memberDto.getMemberId(),memberDto.getMemberPw());
+		if(result == 0) {
+			model.addAttribute("result", "비밀번호를 바르게입력하세요");
+			model.addAttribute("salesCode", salesService.getSalesList(salesDto.getSalesCode()));
+			return "sales/salesDelete";
+		}
+		return "redirect:salesList";
+	
+	}	
 
 	//매출수정
 	@PostMapping("/salesUpdate")
