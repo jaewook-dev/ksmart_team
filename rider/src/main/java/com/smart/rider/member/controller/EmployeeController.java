@@ -22,16 +22,7 @@ public class EmployeeController {
 	private EmployeeService employeeService;
 	//19.09.15작성
 	@GetMapping("/employeeInsert")
-	public String employeeInsert(Model model,HttpSession session) {
-		//session 값 확인
-		String SID = (String)session.getAttribute("SID");
-		System.out.println(SID+"<----세션에 담긴 아이디 값");
-		//model 담을 값 가져오기 및 확인
-		List<SsrHapDTO> ssrList = employeeService.getShopRelationCode(SID);
-		System.out.println( ssrList +"<---ssrList에 담긴 값 확인");
-		//model에 담기
-		model.addAttribute("ssrList", ssrList);
-		System.out.println( ssrList + "<--제대로 담겨 있는지 확인");	
+	public String employeeInsert() {
 		return "employee/employeeInsert";
 	}
 	

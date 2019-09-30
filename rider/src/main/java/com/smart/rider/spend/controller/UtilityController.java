@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.smart.rider.main.service.MainService;
+import com.smart.rider.shop.dto.SsrHapDTO;
 import com.smart.rider.spend.dto.JoinUtilityDTO;
 import com.smart.rider.spend.dto.UtilityDTO;
 import com.smart.rider.spend.service.UtilityService;
@@ -26,6 +27,8 @@ public class UtilityController {
 	
 	@Autowired
 	private MainService mainService;
+	
+	
 	
 	/*** 190926 재욱, 지출_공과금 등록내역 삭제 프로세스 ***/ 
 	@GetMapping("/spendUtilityDelete")
@@ -65,6 +68,7 @@ public class UtilityController {
 								 , @RequestParam(value = "endDate") String endDate
 								 , @RequestParam(value = "utilityYear", required = false, defaultValue = "2019") String utilityYear
 								 , @RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage
+								 , @RequestParam(value = "selectShopCode", required = false, defaultValue = "SR0000") String selectShopCode
 								 , HttpSession session, Model model) {
 		
 		//System.out.println(utilityKey + " < -- utilityKey utilityList() UtilityController.java");
@@ -73,6 +77,17 @@ public class UtilityController {
 		//System.out.println(endDate + " < -- endDate utilityList() UtilityController.java");
 		
 		String contractShopCode = (String)session.getAttribute("SCODE");
+		String userLevel = (String)session.getAttribute("SLEVEL");
+		
+		/*** 190926 재욱, 관리자 권한으로 계약된 매장 내역 ***/
+		if(userLevel.equals("관리자")) {
+			contractShopCode = selectShopCode;
+			List<SsrHapDTO> utilityShop = utilityService.utilityShop();
+			//System.out.println(utilityShop + " <-- utilityShop spendUtility() UtilityController.java");
+			model.addAttribute("utilityShop", utilityShop);
+			model.addAttribute("masterShopCode", contractShopCode);
+		}
+		
 		
 		/*** 190925 재욱, begin 페이징 ***/
 		Map<String, Object> map = utilityService.utilityList(currentPage, contractShopCode, utilityKey, utilityValue, beginDate, endDate);
@@ -131,11 +146,25 @@ public class UtilityController {
 	@GetMapping("/spendUtility")
 	public String spendUtility(Model model, HttpSession session 
 					  , @RequestParam(value = "utilityYear", required = false, defaultValue = "2019") String utilityYear
-					  , @RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage){
+					  , @RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage
+					  , @RequestParam(value = "selectShopCode", required = false, defaultValue = "SR0000") String selectShopCode){
 
 		String contractShopCode = (String)session.getAttribute("SCODE");
+		String userLevel = (String)session.getAttribute("SLEVEL");
+		
+		/*** 190926 재욱, 관리자 권한으로 계약된 매장 내역 ***/
+		if(userLevel.equals("관리자")) {
+			contractShopCode = selectShopCode;
+			List<SsrHapDTO> utilityShop = utilityService.utilityShop();
+			//System.out.println(utilityShop + " <-- utilityShop spendUtility() UtilityController.java");
+			model.addAttribute("utilityShop", utilityShop);
+			model.addAttribute("masterShopCode", contractShopCode);
+		}
+		
+		
 		//System.out.println(contractShopCode + " <-- contractShopCode spendUtility UtilityController.java");
 		//System.out.println(utilityYear + " <-- utilityYear spendUtility() UtilityController.java");
+		//System.out.println(contractShopCode + " <-- contractShopCode spendUtility() UtilityController.java");
 		
 		model.addAttribute("selectedYear", utilityYear);
 		
@@ -143,6 +172,7 @@ public class UtilityController {
 		String utilityValue = "";
 		String beginDate = "";
 		String endDate = "";
+		
 		
 		/*** 190925 재욱, begin 페이징 ***/
 		Map<String, Object> map = utilityService.utilityList(currentPage, contractShopCode, utilityKey, utilityValue, beginDate, endDate);
@@ -189,8 +219,6 @@ public class UtilityController {
 			model.addAttribute(utilityChart, chartValueArrays[i]); // 생성된 변수명에 각 배열의 값 담기
 		}
 		/*** 190926 재욱, end 년도에 따른 월별 공과금 지출 금액 차트 ***/
-		
-		
 
 		return "spend/spendUtility";
 	}
@@ -198,11 +226,24 @@ public class UtilityController {
 	
 	/*** 190925 재욱, 지출_공과금 내역 등록 ***/
 	@PostMapping("/utilityInsert")
-	public String utilityInsert(@RequestParam(value = "subjectCode") String subjectCode ,UtilityDTO utilityDTO, HttpSession session) {
+	public String utilityInsert(@RequestParam(value = "subjectCode") String subjectCode
+							  , @RequestParam(value = "masterShopCode", required = false, defaultValue = "SR0000") String masterShopCode
+							  , UtilityDTO utilityDTO
+							  , HttpSession session) {
+		
 		String contractShopCode = (String)session.getAttribute("SCODE");
+		String userLevel = (String)session.getAttribute("SLEVEL");
 		//System.out.println(subjectCode + " <-- subjectCode utilityInsert UtilityController.java");
 		//System.out.println(utilityDTO.getSpendUtilityPay() + " <-- getSpendUtilityPay() utilityInsert UtilityController.java");
 		//System.out.println(utilityDTO.getSpendUtilityContents() + " <-- getSpendUtilityContents() utilityInsert UtilityController.java");
+		
+		/*** 190926 재욱, 관리자 권한으로 계약된 매장 내역 ***/
+		if(userLevel.equals("관리자")) {
+			contractShopCode = masterShopCode;
+			utilityService.utilityInsert(utilityDTO, contractShopCode);
+			return "redirect:/spendUtility?selectShopCode=" + contractShopCode;
+		}
+		
 		
 		utilityService.utilityInsert(utilityDTO, contractShopCode);
 

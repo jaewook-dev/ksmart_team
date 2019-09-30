@@ -6,7 +6,7 @@
 		 <nav class="navbar navbar-expand-xl">
             <div class="container h-100">
                 <a class="navbar-brand" href="/">
-                	<h2 class="tm-site-title mb-0"> 배포 190926</h2>             
+                	<h2 class="tm-site-title mb-0"> 배포 190927</h2>             
                 </a>
 
                 <button class="navbar-toggler ml-auto mr-0" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -132,7 +132,7 @@
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             	<a class="dropdown-item" href="/employeeInsert">직원등록</a>
-                            	
+                            	<a class="dropdown-item" th:href="@{/employeeList(contractShopCode=${session.SCODE})}">!직원목록</a>
                             	<a class="dropdown-item" href="/workAdmin">!근태관리</a>
                             </div>
                         </li>

@@ -36,8 +36,8 @@ public class SubjectController {
 		model.addAttribute("deletePossible", deletePossible);
 		
 		// 삭제 불가능한 계정과목 리스트 (외래키 참조중)
-		List<SubjectDTO> DeleteImpossible = subjectService.subjectDeleteImpossible(subjectKey, subjectValue, beginDate, endDate);
-		model.addAttribute("deleteImpossible", DeleteImpossible);
+		List<SubjectDTO> deleteImpossible = subjectService.subjectDeleteImpossible(subjectKey, subjectValue, beginDate, endDate);
+		model.addAttribute("deleteImpossible", deleteImpossible);
 		
 		return "subject/subjectList";
 	}

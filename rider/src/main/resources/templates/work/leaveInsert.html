@@ -1,6 +1,48 @@
-$(function () {
-	
-})
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head th:replace="fragments/head :: headFrament"></head>
+<th:block layout:fragment="customContents">
+
+<div class="main-height">
+<div class="container">
+	<!-- row -->
+	<div class="row tm-content-row">
+		<div class="col-xl-6 mx-auto tm-block-col tm-col-account-settings">
+			<div class="tm-bg-primary-dark tm-block tm-block-settings">
+				<h2 class="tm-block-title">퇴근 등록</h2>
+				<h1 id="digital" class="tm-block-title"></h1>
+				<canvas id="canvas" width="350" height="350" style="background-color:fffff"></canvas>
+					<form action="/memberInsert" class="tm-signup-form" method="post">
+						<div class="form-group">
+							<label for="id">아이디</label>
+							<input id="memberName" name="memberName" type="text" class="form-control validate" placeholder="ID"/>
+						</div>
+						<div class="form-group">
+							<label for="pw">비밀번호</label>
+							<input id="memberPW" name="memberBirth" type="password" class="form-control validate" placeholder="PASSWORD"/>
+						</div>
+						<div>
+							<button type="submit" id="submit" class="btn btn-primary btn-block text-uppercase">
+							퇴근등록
+							</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</th:block>
+<th:block layout:fragment="customScript">
+<script>
+setInterval(function(){
+	var timer = new Date();
+    var h = timer.getHours();
+    var m = timer.getMinutes();
+    var s = timer.getSeconds();
+    document.getElementById('digital').innerHTML = "현재시간 " + h + ":" + m + ":" + s;
+},1000);
 
 var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
@@ -47,8 +89,8 @@ function drawNumbers(ctx, radius) {
 	  var ang;
 	  var num;
 	  ctx.font = radius * 0.15 + "px arial";
-  ctx.textBaseline = "middle";
-  ctx.textAlign = "center";
+	  ctx.textBaseline = "middle";
+	  ctx.textAlign = "center";
 	  for(num = 1; num < 13; num++){
 	    ang = num * Math.PI / 6;
 	    ctx.rotate(ang);
@@ -87,3 +129,6 @@ function drawHand(ctx, pos, length, width) {
   ctx.stroke();
   ctx.rotate(-pos);
 }
+</script>
+</th:block>
+</html>
