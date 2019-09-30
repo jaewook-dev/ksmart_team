@@ -20,4 +20,8 @@ public interface AccountMapper {
 	public int accountInsert(AccountDTO account);
 	
 	public List<AccountDTO> accountSearchList(String select,String searchName,String beginDate,String endDate);
+
+	public List<AccountDTO> accountUpdate(String acCode);
+	
+	public int accountUpdateSet(AccountDTO account);
 }

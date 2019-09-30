@@ -71,13 +71,35 @@ public class AccountController {
 		
 		// model에 값 넣기
 		List<AccountDTO> accountList = accountService.accountSearchList(select, searchName, beginDate ,endDate);
-		//System.out.println(deletePossible +  " <-- deletePossible subject SubjectController.java");
+		//model에 대입값 넣기
 		model.addAttribute("accountList", accountList);
-		
+		//조회 결과가 없으면 나오는 문장
 		if(accountList.size() == 0 ) {
 			model.addAttribute("alert", "검색 결과가 없습니다");
 		}
 		
 		return "/account/accountList";
+	}
+	@GetMapping("/accountUpdate")
+	public String accountUpdate(@RequestParam(value="accountCode")String accountCode,Model model) {
+		
+		System.out.println(accountCode+"<--넘어오는 코드값 확인");
+		
+		//대입값 넣어서 나온 결과 updateList에 담기
+		List<AccountDTO> updateList = accountService.accountUpdate(accountCode);
+		System.out.println(updateList+"<--대입 결과 확인");
+		//결과값 model에 담기
+		model.addAttribute("updateList", updateList);
+		return "account/accountUpdate";
+	}
+	@PostMapping("/accountUpdate")
+	public String accountUpdate(AccountDTO account) {
+		
+		System.out.println(account+"넘어오는값확인");
+		
+		accountService.accountUpdateSet(account);
+		
+		return "redirect:/accountList";
+	
 	}
 }

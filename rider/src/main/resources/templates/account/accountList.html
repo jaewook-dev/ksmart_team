@@ -88,7 +88,7 @@
 										<td th:text="${accountList.accountAddress}"></td>
 										<td th:text="${accountList.accountCategory}"></td>
 										<td class="text-center"><a
-											href="#"
+											th:href="@{/accountUpdate(accountCode=${accountList.accountCode})}"
 											class="tm-product-delete-link"> <i
 												class="fas fa-check tm-product-check-icon"
 												style="color: white"></i>

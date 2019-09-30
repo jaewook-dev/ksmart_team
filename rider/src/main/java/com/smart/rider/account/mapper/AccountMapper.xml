@@ -102,5 +102,39 @@
         		account_date between #{beginDate} and #{endDate}
         </if>
 	</select>
+	<!-- 거래처 목록 code로 조회 -->
+	<select id="accountUpdate" parameterType="String" resultMap="accountMap">
+		SELECT 
+			 account_code
+			,contract_shop_code
+			,account_market
+			,account_name
+			,account_phone
+			,account_address
+			,account_category
+			,account_date
+		FROM account
+		WHERE account_code = #{acCode}
+
+	</select>
+	
+	<!-- 거래처 수정  -->
+	<update id="accountUpdateSet" parameterType="com.smart.rider.account.dto.AccountDTO" >
+	
+	UPDATE account
+	SET
+		contract_shop_code=#{contractShopCode}
+		,account_market=#{accountMarket}
+		,account_name=#{accountName}
+		,account_phone=#{accountPhone}
+		,account_address=#{accountAddress}
+		,account_category=#{accountCategory}
+		,account_date= NOW()
+	WHERE account_code=#{accountCode}
+	
+	
+	
+	</update>
+	
 	
 </mapper>
