@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.smart.rider.account.dto.AccountDTO;
 import com.smart.rider.account.mapper.AccountMapper;
 import com.smart.rider.shop.dto.SsrHapDTO;
+import com.smart.rider.subject.dto.SubjectDTO;
 
 
 @Service
@@ -42,5 +43,9 @@ public class AccountService {
 		
 		
 		return accountmapper.accountInsert(account);
+	}
+	
+	public List<AccountDTO> accountSearchList(String select, String searchName, String beginDate, String endDate){
+		return accountmapper.accountSearchList(select, searchName, beginDate, endDate);
 	}
 }

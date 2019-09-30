@@ -15,8 +15,55 @@
 						</p>
 					</div>
 				</div>
-
-
+				<div class="tm-bg-primary-dark tm-block tm-block-h-auto-copy">
+						<form action="accountSearchList" class="tm-search-form row" method="post">
+							<div class="form-group col-3">
+								<select class="custom-select" name="accountDate">
+									<option selected="selected">거래처등록일자</option>
+								</select>
+							</div>
+							<div class="form-group col-3">
+								<input id="beginDate" name="beginDate" 
+									   type="text" class="form-control validate"/>
+							</div>
+							<div class="form-group col-1 text-center">
+								<h2 class="tm-site-title mb-0">~</h2>
+							</div>
+							<div class="form-group col-3">
+								<input id="endDate" name="endDate" 
+									   type="text" class="form-control validate"/>
+							</div>
+							<div class="form-group col-2">
+							</div>
+							
+							<div class="form-group col-3">
+								
+								<select class="custom-select" name="select" >
+									
+									<option selected>주요품목</option>
+									<option value="전동 자전거">전동 자전거</option>
+									<option value="전동 휠">전동 휠</option>
+									<option value="전동 킥보드">전동 킥보드</option>
+									<option value="전동 바이크">전동 바이크</option>
+																
+								</select>
+							</div>
+							
+							
+							<div class="form-group col-7">
+								
+								<input id="searchInput" name="searchName" type="text" placeholder="검색 할 거래처명을 입력해주세요" class="form-control validate" />
+							</div>
+							<div class="form-group col-2">
+								
+								<button type="submit"  class="btn btn-primary btn-block">
+									검색
+								</button>
+							</div>
+						</form>
+					</div>
+			
+				<br/><br/><br/>
 				<!-- row -->
 				<div class="row tm-content-row">
 					<div class="col-12 tm-block-col">
@@ -54,6 +101,12 @@
 									</tr>
 								
 								</tbody>
+								
+								<th:block th:if="${alert} neq null">
+										<tr class="text-center">
+											<td colspan="7" th:text="${alert}"></td>
+										</tr>
+								</th:block>
 							</table>
 						</div>
 					</div>
@@ -62,12 +115,33 @@
 					onclick="location.href='accountInsert'" style="float: right"
 					class="btn btn-primary text-uppercase">거래처등록</button>
 			</div>
+			<br/><br/><br/>
 		</div>
 	</div>
 </body>
 </th:block>
 </th:block>
 <th:block layout:fragment="customScript">
+
+<script type="text/javascript">
+$(function() {
+	$(".tm-product-name").on("click", function() {
+		window.location.href = "#";
+	});
+});
+//시작 일자 텍스트상자 클릭시 달력 표기 
+$('#beginDate').datepicker({
+});
+$('#beginDate').datepicker('option','dateFormat','yy-mm-dd'); // 기존 dd/mm/yy에서 yy-mm-dd로 format 변경   
+
+//종료 일자 텍스트상자 클릭시 달력 표기 
+$('#endDate').datepicker({
+});
+$('#endDate').datepicker('option','dateFormat','yy-mm-dd'); // 기존 dd/mm/yy에서 yy-mm-dd로 format 변경 
+
+</script>
+
+
 
 	
 </th:block>

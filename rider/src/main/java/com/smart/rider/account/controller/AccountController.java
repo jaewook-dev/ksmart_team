@@ -9,10 +9,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.smart.rider.account.dto.AccountDTO;
 import com.smart.rider.account.service.AccountService;
 import com.smart.rider.shop.dto.SsrHapDTO;
+import com.smart.rider.subject.dto.SubjectDTO;
 
 
 @Controller
@@ -52,7 +54,30 @@ public class AccountController {
 		accountService.accountInsert(account);
 		
 
-		
 		return "redirect:/accountList";
+	}
+	@PostMapping("/accountSearchList")
+	public String accountSearchList(@RequestParam(value = "select") String select
+									, @RequestParam(value = "searchName") String searchName
+									, @RequestParam(value = "beginDate") String beginDate
+									, @RequestParam(value = "endDate") String endDate
+									, Model model) {
+		//입력값 확인
+		System.out.println(select+"<--선택된 값");
+		System.out.println(searchName +"<-- 입력된 매장이름");
+		System.out.println(beginDate+"<--시작일자");
+		System.out.println(endDate+"<--종료일자");
+		
+		
+		// model에 값 넣기
+		List<AccountDTO> accountList = accountService.accountSearchList(select, searchName, beginDate ,endDate);
+		//System.out.println(deletePossible +  " <-- deletePossible subject SubjectController.java");
+		model.addAttribute("accountList", accountList);
+		
+		if(accountList.size() == 0 ) {
+			model.addAttribute("alert", "검색 결과가 없습니다");
+		}
+		
+		return "/account/accountList";
 	}
 }

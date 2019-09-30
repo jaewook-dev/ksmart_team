@@ -18,4 +18,6 @@ public interface AccountMapper {
 	public List<SsrHapDTO> getShopRelationCode(String SID);
 	
 	public int accountInsert(AccountDTO account);
+	
+	public List<AccountDTO> accountSearchList(String select,String searchName,String beginDate,String endDate);
 }
