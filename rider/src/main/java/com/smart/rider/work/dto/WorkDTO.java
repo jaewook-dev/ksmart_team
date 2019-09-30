@@ -4,10 +4,11 @@ public class WorkDTO {
 	
 	private String workCode;
 	private String contractShopCode;
+	private String memberId;
 	private String workStart;
 	private String workFinish;
 	private String workOver;
-	private int workTotal;
+	private String workTotal;
 	private String workRest;
 	private String workDate;
 	public String getWorkCode() {
@@ -21,6 +22,12 @@ public class WorkDTO {
 	}
 	public void setContractShopCode(String contractShopCode) {
 		this.contractShopCode = contractShopCode;
+	}
+	public String getMemberId() {
+		return memberId;
+	}
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
 	}
 	public String getWorkStart() {
 		return workStart;
@@ -40,10 +47,10 @@ public class WorkDTO {
 	public void setWorkOver(String workOver) {
 		this.workOver = workOver;
 	}
-	public int getWorkTotal() {
+	public String getWorkTotal() {
 		return workTotal;
 	}
-	public void setWorkTotal(int workTotal) {
+	public void setWorkTotal(String workTotal) {
 		this.workTotal = workTotal;
 	}
 	public String getWorkRest() {
@@ -60,10 +67,9 @@ public class WorkDTO {
 	}
 	@Override
 	public String toString() {
-		return "WorkDTO [workCode=" + workCode + ", contractShopCode=" + contractShopCode + ", workStart=" + workStart
-				+ ", workFinish=" + workFinish + ", workOver=" + workOver + ", workTotal=" + workTotal + ", workRest="
-				+ workRest + ", workDate=" + workDate + "]";
+		return "WorkDTO [workCode=" + workCode + ", contractShopCode=" + contractShopCode + ", memberId=" + memberId
+				+ ", workStart=" + workStart + ", workFinish=" + workFinish + ", workOver=" + workOver + ", workTotal="
+				+ workTotal + ", workRest=" + workRest + ", workDate=" + workDate + "]";
 	}
-	
 	
 }

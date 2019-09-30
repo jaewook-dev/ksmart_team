@@ -1,4 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.smart.rider.work.mapper.WorkMapper">
+<select id="employeeCheck" parameterType="String" resultType="com.smart.rider.member.dto.MemberDTO">
+	SELECT 
+		 member_id AS memberId
+		,member_pw AS memberPw
+		,member_name AS memberName
+		,member_level AS memberLevel
+		,contract_shop_code AS contractShopCode
+	FROM member
+	WHERE member_id = #{memberId} and member_pw = #{memberPw}
+</select>
+<!-- 코드 자동증가 -->
+<select id="workCodeCount" resultType="String">
+	SELECT 
+		MAX(LPAD(RIGHT(work_code, 4)+1, '4' , '0')) 
+	FROM work;
+</select>
+<insert id="goInsert" parameterType="com.smart.rider.work.dto.WorkDTO">
+	INSERT INTO work(
+			 work_code
+			,contract_shop_code
+			,member_id
+			,work_start
+			,work_date
+		)VALUES (
+			 #{workCode}
+			,#{contractShopCode}
+			,#{memberId}
+			,NOW()
+			,NOW())
+</insert>
+<update id="leaveInsert" parameterType="com.smart.rider.work.dto.WorkDTO">
+		UPDATE work
+		SET
+			 work_finish		= NOW()
+			,work_over			= 
+		WHERE
+			member_id = #{memberId}
+</update>
 </mapper>
