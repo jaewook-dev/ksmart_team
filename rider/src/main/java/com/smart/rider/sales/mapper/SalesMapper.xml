@@ -4,6 +4,41 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.smart.rider.sales.mapper.SalesMapper">
 
+	<!-- 매출상세보기 -->
+	<select id="getSalesList" resultMap="ASid" parameterType="String">
+		SELECT
+			 IFNULL(SA.goods_code, SA.goods_rental_code) AS goods_code
+			,SA.*	
+			,GD.*
+			,GR.*	
+		FROM
+			sales AS SA
+			LEFT OUTER JOIN
+			goods AS GD
+			ON
+			GD.goods_code = SA.goods_code
+			
+			LEFT OUTER JOIN
+			goods_rental AS GR		
+			ON
+			SA.goods_rental_code = GR.goods_rental_code
+			WHERE SA.sales_code = #{salesCode}
+	</select>
+	<!-- 매출수정  -->
+	<update id="salesUpdate" parameterType="com.smart.rider.sales.dto.SalesDTO">
+		UPDATE sales
+		SET
+		sales_code=#{salesCode},		
+		goods_code=#{goodsCode},
+		goods_rental_code=#{goodsRentalCode},
+		sales_group_code=#{salesGroupCode},
+		sales_pay_type=#{salesPayType},
+		sales_amount=#{salesAmount},
+		sales_type=#{salesType}
+		WHERE sales_code=#{salesCode}
+	</update>
+
+	<!-- 매출등록 insert  -->
 	<insert id="salesInsert" parameterType="com.smart.rider.sales.dto.SalesDTO">
 		INSERT INTO
 			 sales
@@ -31,11 +66,22 @@
 	
 	<!-- 매출리스트조회  -->
 	<select id="salesList" resultMap="ASid" parameterType="String">
-			SELECT 
-			*
+		SELECT
+			 IFNULL(SA.goods_code, SA.goods_rental_code) AS goods_code
+			,SA.*	
+			,GD.*
+			,GR.*	
 			FROM
-			sales 
-	
+			sales AS SA
+			LEFT OUTER JOIN
+			goods AS GD
+			ON
+			GD.goods_code = SA.goods_code
+			
+			LEFT OUTER JOIN
+			goods_rental AS GR		
+			ON
+			SA.goods_rental_code = GR.goods_rental_code
 	</select>
 	<!-- 코드자동증가  -->
 	<select id="salesCodeCount" resultType="String">

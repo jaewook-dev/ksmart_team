@@ -28,8 +28,22 @@ public class SalesController {
 	private GoodsService goodsService;
 	
 	
-	//매출리스트 상세보기
 
+	//매출수정
+	@PostMapping("/salesUpdate")
+	public String salesUpdate(SalesDTO salesDto) {
+		//System.out.println("매출수정값 가져오기"+salesDto);
+		salesService.salesUpdate(salesDto);
+		return "redirect:salesList";
+		
+	}
+	//매출상세보기
+	@GetMapping("/getSalesList")
+	public String getSalesList(@RequestParam(value="salesCode")String salesCode,Model model) {
+		model.addAttribute("salesCode", salesService.getSalesList(salesCode));
+		return "sales/getSalesList";
+	}
+	
 	//매출등록요청
 	@GetMapping("/salesInsert")
 	public String salesInsert(Model model,String goodsCode) {

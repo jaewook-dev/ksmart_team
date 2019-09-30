@@ -17,6 +17,15 @@ import com.smart.rider.sales.mapper.SalesMapper;
 public class SalesService {
 	@Autowired
 	private SalesMapper salesMapper;
+	
+	//매출수정
+	public int salesUpdate(SalesDTO salesDto) {
+		return salesMapper.salesUpdate(salesDto);
+	}
+	//매출상세보기
+	public GoodsHapDTO getSalesList(String salesCode) {
+		return salesMapper.getSalesList(salesCode);
+	}
 	//매출등록
 	public int salesInsert(SalesDTO salesDto) {
 		String salesCode = "SI"+salesMapper.salesCodeCount();

@@ -20,11 +20,11 @@
 					</div>
 				</div>
 
-				<!-- 공과금 지출 현황 -->
+				<!-- 매출 현황 -->
 				<div class="row tm-content-row">
 					<div class="col-12 tm-block-col">
 						<div class="tm-bg-primary-dark tm-block-util">
-						<form action="/salesList" method="get" id="selectYearForm" name="selectYearForm">
+						<form action="/salesList" method="get" id="salesYearForm" name="salesYearForm">
 							<span style="display:inline-block; float: left">
 								<strong class="tm-block-title">매출현황 </strong>
 							</span>
@@ -59,7 +59,7 @@
 										<th scope="col">판매/대여</th>
 										<th scope="col">금액</th>									
 										<th scope="col">매출일자</th>
-										<th scope="col">상세보기</th>
+										<th scope="col">매출수정</th>
 										<th scope="col">매출삭제</th>
 									</tr>
 								</thead>
@@ -72,14 +72,14 @@
 										<th th:text="${s.salesDate}"></th>
 									<td>
 										<a
-										 th:href="@{/getSalesList(salesCode=${s.goodsCode},salesCode=${s.goodsRentalCode})}"
+										 th:href="@{/getSalesList(salesCode=${s.salesCode})}"
 										 class="tm-product-delete-link">
 										 <i class="fas fa-check tm-product-check-icon"></i>
 										</a>									
 									</td>
 									<td>										
 										<a
-										  th:href="@{/getSalesList(salesCode=${s.goodsCode},salesCode=${s.goodsRentalCode})}"
+										  th:href="@{/salesDelete(salesCode=${s.goodsCode},salesCode=${s.goodsRentalCode},salesCode=${s.salesCode})}"
 										 class="tm-product-delete-link">
 										 <i class="far fa-trash-alt" style="color: gray;">
 												</i>
@@ -102,8 +102,8 @@
 							</table>
 							</div>
 							
-							<!-- 페이징 페이지 번호 -->
-							<div>
+							<!-- <!-- 페이징 페이지 번호 -->
+				<!-- 			<div>
 								<ul class="pagination pagination-sm justify-content-center" style="margin:20px 0">
 									<li class="page-item active">
 										<a class="page-link" id="preBtn" th:onclick="|javascript:page('${currentPage-1}')|" th:if="${currentPage > 1}"> 이전 </a> 
@@ -120,21 +120,21 @@
 										<a class="page-link" id="nextBtn" th:onclick="|javascript:page('${currentPage+1}')|" th:if="${currentPage != lastPage}"> 다음 </a> 
 										<a class="page-link" th:if="${currentPage == lastPage}">다음</a></li>
 								</ul>
-							</div>
+							</div>  -->
 						</div>
 					</div>
 
 
-					<!-- 공과금 지출 검색 -->
-					<div class="col-12 tm-block-col">
+					<!-- 매출 검색 -->
+			<!-- 		<div class="col-12 tm-block-col">
 						<div class="tm-bg-primary-dark tm-block">
 
-							<!-- begin 검색 폼 -->
+							begin 검색 폼
 							<form action="/spendUtilityList" class="tm-search-form row"
 								method="post">
 								<div class="form-group col-3">
-									<select class="custom-select" name="searchDate">
-										<option value="spend_utility_date">등록일자</option>
+									<select class="custom-select" name="salesDate">
+										<option value="sales_date">등록일자</option>
 									</select>
 								</div>
 								<div class="form-group col-3">
@@ -150,12 +150,7 @@
 								</div>
 								<div class="form-group col-2"></div>
 
-								<div class="form-group col-3">
-									<select class="custom-select" name="utilityKey">
-										<option value="subject_name">내역</option>
-										<option value="spend_utility_contents">내용</option>
-									</select>
-								</div>
+							
 
 								<div class="form-group col-7">
 									<input id="subjectValue" name="utilityValue" type="text"
@@ -166,9 +161,9 @@
 										class="btn btn-primary btn-block">검색</button>
 								</div>
 							</form>
-							<!-- end 검색 폼 -->
+							end 검색 폼
 						</div>
-					</div>
+					</div> -->
 				</div>
 			</div>
 		</div>
@@ -249,7 +244,7 @@
 	
 	<!-- 연도 선택 화면전환 -->
 	$('#salesYear').change(function() {
-		$('#selectYearForm').submit();
+		$('#salesYearForm').submit();
 	})
 	
 	<!-- datepicker -->

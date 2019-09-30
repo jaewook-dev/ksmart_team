@@ -9,11 +9,16 @@ import com.smart.rider.sales.dto.SalesDTO;
 
 @Mapper
 public interface SalesMapper {
+	//매출수정
+	public int salesUpdate(SalesDTO salesDto);
+	//매출상세보기
+	public GoodsHapDTO getSalesList(String salesCode);
 	//매출등록
 	public int salesInsert(SalesDTO salesDto);
 	//매출리스트
 	public List<GoodsHapDTO> salesList();
 	//insert 시 코드자동증가
 	public String salesCodeCount();
+	
 
 }

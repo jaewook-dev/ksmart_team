@@ -28,7 +28,7 @@ public class GoodsPurchaseController {
 	@Autowired
 	private AccountService accountService;
 	
-	//매입 요청
+	//매입 삭제
 	@GetMapping("/purchaseDelete")
 	public String purchaseDelete(@RequestParam(value="purchaseCode")String purchaseCode,
 								Model model) {
