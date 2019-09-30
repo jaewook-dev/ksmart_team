@@ -3,6 +3,42 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.smart.rider.sales.mapper.SalesMapper">
+	<!-- 매출날자별 검색  -->
+	<select id="salesSearchList" resultMap="ASid" parameterType="String">
+		SELECT
+			 IFNULL(SA.goods_code, SA.goods_rental_code) AS goods_code
+			,SA.*	
+			,GD.*
+			,GR.*	
+			FROM
+			sales AS SA
+			LEFT OUTER JOIN
+			goods AS GD
+			ON
+			GD.goods_code = SA.goods_code
+			
+			LEFT OUTER JOIN
+			goods_rental AS GR		
+			ON
+			SA.goods_rental_code = GR.goods_rental_code
+			<if test="searchInput != null and searchInput neq ''.toString()">
+			WHERE 
+				${select} Like CONCAT('%',#{searchInput},'%')
+			</if>
+			<if test="beginDate neq ''.toString() and endDate eq ''.toString()">
+	        	AND 
+	        		SA.sales_date between #{beginDate} and NOW()		
+	        </if>
+	        <if test="beginDate eq ''.toString() and endDate neq ''.toString()">
+	        	AND 
+	        		SA.sales_date between '2000-01-01' and #{endDate}
+	        </if>
+	        <if test="beginDate neq ''.toString() and endDate neq ''.toString()">
+	        	AND 
+	        		SA.sales_date between #{beginDate} and #{endDate}
+	        </if>	
+	</select>
+	
 	<!-- 매출삭제하기  -->
 	<delete id="salesDelete" parameterType="String">
 			DELETE

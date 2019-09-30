@@ -107,7 +107,7 @@ public class GoodsRentalController {
 										,@RequestParam(value="beginDate")String beginDate
 										,@RequestParam(value="endDate")String endDate
 										,Model model) {
-		////System.out.println("대여상품 앞날짜검색"+beginDate);
+		//System.out.println("대여상품 앞날짜검색"+beginDate);
 		//System.out.println("대여상품 뒤날짜검색"+endDate);
 		//System.out.println("대여상품 카테고리"+select);
 		//System.out.println("대여상품 카테고리명"+searchInput);

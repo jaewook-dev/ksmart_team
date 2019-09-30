@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.smart.rider.goods.dto.GoodsHapDTO;
-import com.smart.rider.goods.dto.GoodsRentalDTO;
+
 import com.smart.rider.goods.service.GoodsRentalService;
 import com.smart.rider.goods.service.GoodsService;
 import com.smart.rider.member.dto.MemberDTO;
@@ -29,8 +29,26 @@ public class SalesController {
 	@Autowired
 	private GoodsService goodsService;
 	
-	//매출삭제
-	
+	//매출검색
+	@PostMapping("/salesSearchList")
+	public String salesSearchList(@RequestParam(value="select")String select
+									,@RequestParam(value="searchInput")String searchInput
+									,@RequestParam(value="beginDate")String beginDate
+									,@RequestParam(value="endDate")String endDate
+									,Model model) {
+		//System.out.println("매출 앞날짜검색----"+beginDate);
+		//System.out.println("매출 뒤날짜검색-*---"+endDate);
+		//System.out.println("판매/대여 카테고리*****"+select);
+		//System.out.println("판매/대여!!!!!!!!!!!!!"+searchInput);
+		List<SalesDTO> search = salesService.salesSearchList(select, searchInput, beginDate, endDate);
+		model.addAttribute("sList", search);
+		if(search.size()==0) {
+			
+			model.addAttribute("alert", "검색 결과가 없습니다");
+		}		
+		return "sales/salesList";
+	}
+	//매출삭제	
 	@GetMapping("/salesDelete")
 	public String salesDelete(@RequestParam(value="salesCode")String salesCode,Model model) {
 		model.addAttribute("salesCode", salesService.getSalesList(salesCode));
