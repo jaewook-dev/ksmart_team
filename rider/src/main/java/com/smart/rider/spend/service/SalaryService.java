@@ -1,10 +1,13 @@
 package com.smart.rider.spend.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.smart.rider.main.dto.SearchDTO;
 import com.smart.rider.member.dto.MemberDTO;
 import com.smart.rider.spend.dto.JoinSalaryDTO;
 import com.smart.rider.spend.mapper.SalaryMapper;
@@ -15,9 +18,19 @@ public class SalaryService {
 	@Autowired
 	private SalaryMapper salaryMapper;
 	
+	
 	/*** 190930 재욱, 지출_급여 등록 내역 ***/
-	public List<JoinSalaryDTO> salaryList(String contractShopCode){
-		return salaryMapper.salaryList(contractShopCode);
+	public Map<String, Object> salaryList(String contractShopCode, SearchDTO searchDTO){
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("contractShopCode", contractShopCode);
+		map.put("searchKey", searchDTO.getSearchKey());
+		map.put("searchValue", searchDTO.getSearchValue());
+		map.put("beginDate", searchDTO.getBeginDate());
+		map.put("endDate", searchDTO.getEndDate());
+		
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		resultMap.put("salaryList", salaryMapper.salaryList(map));
+		return resultMap;
 	}
 	
 	/*** 190927 재욱, 지출_급여 내역 등록 ***/

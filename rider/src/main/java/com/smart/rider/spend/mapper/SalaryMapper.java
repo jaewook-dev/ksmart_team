@@ -1,6 +1,7 @@
 package com.smart.rider.spend.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -11,7 +12,7 @@ import com.smart.rider.spend.dto.JoinSalaryDTO;
 public interface SalaryMapper {
 	
 	/*** 190930 재욱, 지출_급여 등록 내역 ***/
-	public List<JoinSalaryDTO> salaryList(String contractShopCode);
+	public List<JoinSalaryDTO> salaryList(Map<String, Object> map);
 	
 	/*** 190930 재욱, 지출_급여 코드 자동증가용 카운트 ***/
 	public String salaryCodeCount();
