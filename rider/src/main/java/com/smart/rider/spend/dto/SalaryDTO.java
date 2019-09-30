@@ -9,11 +9,10 @@ public class SalaryDTO {
 	private int spendSalaryOverpay;
 	private int spendSalaryBouns;
 	private int spendSalaryFree;
-	private int spendSalaryPlus;
 	private int spendSalaryEmployee;
 	private int spendSalaryShop;
 	private int spendSalaryInsurance;
-	private int spendSalaryMinus;
+	private int spendSalaryTotal;
 	private int spendSalaryNetpay;
 	private String spendSalaryDate;
 	
@@ -59,12 +58,6 @@ public class SalaryDTO {
 	public void setSpendSalaryFree(int spendSalaryFree) {
 		this.spendSalaryFree = spendSalaryFree;
 	}
-	public int getSpendSalaryPlus() {
-		return spendSalaryPlus;
-	}
-	public void setSpendSalaryPlus(int spendSalaryPlus) {
-		this.spendSalaryPlus = spendSalaryPlus;
-	}
 	public int getSpendSalaryEmployee() {
 		return spendSalaryEmployee;
 	}
@@ -83,11 +76,11 @@ public class SalaryDTO {
 	public void setSpendSalaryInsurance(int spendSalaryInsurance) {
 		this.spendSalaryInsurance = spendSalaryInsurance;
 	}
-	public int getSpendSalaryMinus() {
-		return spendSalaryMinus;
+	public int getSpendSalaryTotal() {
+		return spendSalaryTotal;
 	}
-	public void setSpendSalaryMinus(int spendSalaryMinus) {
-		this.spendSalaryMinus = spendSalaryMinus;
+	public void setSpendSalaryTotal(int spendSalaryTotal) {
+		this.spendSalaryTotal = spendSalaryTotal;
 	}
 	public int getSpendSalaryNetpay() {
 		return spendSalaryNetpay;
@@ -107,9 +100,8 @@ public class SalaryDTO {
 		return "SalaryDTO [spendSalaryCode=" + spendSalaryCode + ", contractShopCode=" + contractShopCode
 				+ ", memberId=" + memberId + ", spendSalaryPay=" + spendSalaryPay + ", spendSalaryOverpay="
 				+ spendSalaryOverpay + ", spendSalaryBouns=" + spendSalaryBouns + ", spendSalaryFree=" + spendSalaryFree
-				+ ", spendSalaryPlus=" + spendSalaryPlus + ", spendSalaryEmployee=" + spendSalaryEmployee
-				+ ", spendSalaryShop=" + spendSalaryShop + ", spendSalaryInsurance=" + spendSalaryInsurance
-				+ ", spendSalaryMinus=" + spendSalaryMinus + ", spendSalaryNetpay=" + spendSalaryNetpay
-				+ ", spendSalaryDate=" + spendSalaryDate + "]";
-	}	
+				+ ", spendSalaryEmployee=" + spendSalaryEmployee + ", spendSalaryShop=" + spendSalaryShop
+				+ ", spendSalaryInsurance=" + spendSalaryInsurance + ", spendSalaryTotal=" + spendSalaryTotal
+				+ ", spendSalaryNetpay=" + spendSalaryNetpay + ", spendSalaryDate=" + spendSalaryDate + "]";
+	}
 }

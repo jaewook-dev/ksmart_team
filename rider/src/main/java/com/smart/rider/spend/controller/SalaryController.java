@@ -8,11 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.smart.rider.main.service.MainService;
 import com.smart.rider.member.dto.MemberDTO;
 import com.smart.rider.shop.dto.SsrHapDTO;
+import com.smart.rider.spend.dto.SalaryDTO;
 import com.smart.rider.spend.service.SalaryService;
 import com.smart.rider.spend.service.UtilityService;
 
@@ -25,8 +27,14 @@ public class SalaryController {
 	@Autowired
 	private UtilityService utilityService;
 	
-	@Autowired
-	private MainService mainService;
+	/*** 190930 재욱, 지출_급여 등록 ***/
+	@PostMapping("/salaryInsert")
+	public String salaryInsert(@RequestParam(value = "memberId", required = false) String memberId
+							 , SalaryDTO salaryDTO) {
+		System.out.println(salaryDTO + " <-- salaryDTO salaryInsert() SalaryController.java");
+		System.out.println(memberId + " <-- memberId salaryInsert() SalaryController.java");
+		return "redirect:/spendSalary";
+	}
 	
 	/*** 190927 재욱, 지출_급여 화면 ***/
 	@GetMapping("/spendSalary")

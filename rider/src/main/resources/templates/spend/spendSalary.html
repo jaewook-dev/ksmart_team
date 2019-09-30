@@ -75,45 +75,66 @@
 						</div>
 					</div>
 				</div>
+				
+				<form action="/salaryInsert" method="post" id="salaryInsertForm">
 				<div class="row tm-content-row">
-
 					<!-- 급여 계산 폼 -->
 					<div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
 						<div class="tm-bg-primary-dark tm-block-salary">
 							<h4 class="tm-block-title">급여 등록</h4>
-							<form>
 								<div class="form-group">
-									<label>직원</label> <select
-										class="custom-select tm-select-accounts" name="memberId">
-										<th:block th:each="employee : ${employeeSelect}">
-											<option th:text="${employee.memberName}"
-												th:value="${employee.memberId}"></option>
-										</th:block>
-										<th:block th:if="${alert} neq null">
-											<option th:text="${alert}"></option>
-										</th:block>
+									<label>직원</label> 
+									<select
+										class="custom-select tm-select-accounts" 
+										name="memberId"
+									><th:block 
+										th:each="employee : ${employeeSelect}"
+										><option 
+											th:text="${employee.memberName}"
+											th:value="${employee.memberId}"
+										></option>
+									</th:block>
+									<th:block th:if="${alert} neq null">
+										<option th:text="${alert}"></option>
+									</th:block>
 									</select>
 								</div>
 								<div class="form-group num">
-									<label>기본급여</label> <input class="form-control validate"
-										name="spendSalaryPay" id="spendSalaryPay"
-										onkeyup="inputNumberFormat(this)">
+									<label>기본급여</label> 
+									<input 
+									class="form-control validate"
+									name="spendSalaryPay" 
+									id="spendSalaryPay"
+									>
 								</div>
 								<div class="form-group">
-									<label>시간외수당</label> <input class="form-control validate"
-										name="spendSalaryOverpay" id="spendSalaryOverpay"
-										onkeyup="inputNumberFormat(this)">
+									<label>시간외수당</label> 
+									<input 
+									class="form-control validate"
+									name="spendSalaryOverpay" 
+									id="spendSalaryOverpay"
+									>
 								</div>
 								<div class="form-group">
-									<label>상여금</label> <input class="form-control validate"
-										name="spendSalaryBonus" id="spendSalaryBonus"
-										onkeyup="inputNumberFormat(this)">
+									<label>상여금</label> 
+									<input 
+									class="form-control validate"
+									name="spendSalaryBonus" 
+									id="spendSalaryBonus"
+									>
+								</div>
+								<div class="form-group">
+									<label>비과세액</label> 
+									<input 
+									class="form-control validate"
+									name="spendSalaryFree" 
+									id="spendSalaryFree"
+									>
 								</div>
 								<hr>
 								<button type="button"
 									class="btn btn-primary btn-block text-uppercase"
 									id="calculateSalary">계산</button>
-							</form>
 						</div>
 					</div>
 
@@ -122,33 +143,60 @@
 						<div class="tm-bg-primary-dark tm-block-salary">
 							<h4 class="tm-block-title">계산</h4>
 							<div class="form-group">
-								<label>4대보험 총액</label> <input class="form-control validate"
-									name="spendSalaryInsurance" id="spendSalaryInsurance"
-									style="background-color: #54657D" readonly>
+								<label>4대보험 총액</label> 
+								<input 
+								class="form-control validate"
+								name="spendSalaryInsurance" 
+								id="spendSalaryInsurance"
+								style="background-color: #54657D" readonly
+								>
 							</div>
 							<div class="form-group">
-								<label>근로자 부담액</label> <input class="form-control validate"
-									name="spendSalaryEmployee" id="spendSalaryEmployee"
-									style="background-color: #54657D" readonly>
+								<label>근로자 부담액</label> 
+								<input 
+								class="form-control validate"
+								name="spendSalaryEmployee" 
+								id="spendSalaryEmployee"
+								style="background-color: #54657D" readonly
+								>
 							</div>
 							<div class="form-group">
-								<label>사업자 부담액</label> <input class="form-control validate"
-									name="spendSalaryShop" id="spendSalaryShop"
-									style="background-color: #54657D" readonly>
+								<label>사업자 부담액</label> 
+								<input 
+								class="form-control validate"
+								name="spendSalaryShop" 
+								id="spendSalaryShop"
+								style="background-color: #54657D" readonly
+								>
 							</div>
 							<div class="form-group">
-								<label>실수령액</label> <input class="form-control validate"
-									name="spendSalaryNetpay" id="spendSalaryNetpay"
-									style="background-color: #54657D" readonly>
+								<label>실수령액</label> 
+								<input 
+								class="form-control validate"
+								name="spendSalaryNetpay" 
+								id="spendSalaryNetpay"
+								style="background-color: #54657D" readonly
+								>
+							</div>
+							<div class="form-group">
+								<label>급여 지출 총액</label> 
+								<input 
+								class="form-control validate"
+								name="spendSalaryTotal" 
+								id="spendSalaryTotal"
+								style="background-color: #54657D" readonly
+								>
 							</div>
 							<hr>
 							<button type="button"
 								class="btn btn-primary btn-block text-uppercase"
 								id="insertSalary">등록</button>
-
 						</div>
 					</div>
-
+					</div>
+					</form>
+					
+					
 					<!-- 최근 등록된 급여 내역 -->
 					<div class="col-12 tm-block-col">
 						<div class="tm-bg-primary-dark tm-block-spend ">
@@ -168,10 +216,57 @@
 							</table>
 						</div>
 					</div>
+					
+					<!-- 급여 지출 검색 -->
+					<div class="col-12 tm-block-col">
+						<div class="tm-bg-primary-dark tm-block">
+
+							<!-- begin 검색 폼 -->
+							<form action="/spendSalaryList" class="tm-search-form row"
+								method="post">
+								<input type="hidden" name="selectShopCode" th:value="${param?.selectShopCode?.toString()}">
+								<div class="form-group col-3">
+									<select class="custom-select" name="searchDate">
+										<option value="spend_utility_date">등록일자</option>
+									</select>
+								</div>
+								<div class="form-group col-3">
+									<input id="beginDate" name="beginDate" type="text"
+										class="form-control validate"
+										style="background-color: #54657D" readonly />
+								</div>
+								<div class="form-group col-1 text-center">
+									<h2 class="tm-site-title mb-0">~</h2>
+								</div>
+								<div class="form-group col-3">
+									<input id="endDate" name="endDate" type="text"
+										class="form-control validate"
+										style="background-color: #54657D" readonly />
+								</div>
+								<div class="form-group col-2"></div>
+
+								<div class="form-group col-3">
+									<select class="custom-select" name="salaryKey">
+										<option value="member_id">직원명</option>
+									</select>
+								</div>
+
+								<div class="form-group col-7">
+									<input id="subjectValue" name="utilityValue" type="text"
+										class="form-control validate" />
+								</div>
+								<div class="form-group col-2">
+									<button type="submit" id="searchButton" name="searchButton"
+										class="btn btn-primary btn-block">검색</button>
+								</div>
+							</form>
+							<!-- end 검색 폼 -->
+						</div>
+					</div>
+					
 				</div>
 			</div>
 		</div>
-	</div>
 </th:block>
 <th:block layout:fragment="customScript">
 	<script th:inline="javascript">
@@ -197,27 +292,25 @@
 		$('#selectShopForm').submit();
 	})
 
-	<!-- 숫자 컴마 자동 입력 -->
-	function inputNumberFormat(obj) {
-	    obj.value = comma(uncomma(obj.value));
-	}
-
-	function comma(str) { // 콤마 추가
-	    str = String(str);
-	    return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
-	}
-
-	function uncomma(str) { // 콤마 제거
-	    str = String(str);
-	    return str.replace(/[^\d]+/g, '');
-	}
-
 	<!-- 급여 계산 -->
 	$('#calculateSalary').click(function() {
+		if($('#spendSalaryPay').val()==0){
+			$('#spendSalaryPay').attr('value','0');
+		} 
+		if($('#spendSalaryOverpay').val()==0){
+			$('#spendSalaryOverpay').attr('value','0');
+		}
+		if($('#spendSalaryBonus').val()==0){
+			$('#spendSalaryBonus').attr('value','0');
+		}
+		if($('#spendSalaryFree').val()==0){
+			$('#spendSalaryFree').attr('value','0');
+		}
 		
-		var salaryPay = Number(uncomma($('#spendSalaryPay').val()));
-		var salaryOverpay = Number(uncomma($('#spendSalaryOverpay').val()));
-		var salaryBonus = Number(uncomma($('#spendSalaryBonus').val()));
+		var salaryPay = Number($('#spendSalaryPay').val());
+		var salaryOverpay = Number($('#spendSalaryOverpay').val());
+		var salaryBonus = Number($('#spendSalaryBonus').val());
+		var salaryFree = Number($('#spendSalaryFree').val())
 		
 		// 계산
 		var salaryTotal = salaryPay + salaryOverpay + salaryBonus;
@@ -228,18 +321,30 @@
 		var hiredShop = salaryTotal * 0.009;
 		var workTax = salaryTotal
 		
-		var salaryInsurance = pension + health + treatment + hiredEmployee + hiredShop; // 4대 보험 총액
-		var salaryEmployee = (pension * 0.5) + (health * 0.5) + (treatment * 0.5) + hiredEmployee; // 근로자 부담 금액
-		var salaryShop = (pension * 0.5) + (health * 0.5) + (treatment * 0.5) + hiredShop; // 사업자 부담 금액
-		var salaryNetpay = salaryTotal - salaryEmployee // 실수령액
-
-		$('#spendSalaryInsurance').val(comma(Math.ceil(salaryInsurance)));
-		$('#spendSalaryEmployee').val(comma(Math.ceil(salaryEmployee)));
-		$('#spendSalaryShop').val(comma(Math.ceil(salaryShop)));
-		$('#spendSalaryNetpay').val(comma(Math.ceil(salaryNetpay)));
+		var salaryInsurance = Math.ceil(pension + health + treatment + hiredEmployee + hiredShop); // 4대 보험 총액
+		var salaryEmployee = Math.ceil((pension * 0.5) + (health * 0.5) + (treatment * 0.5) + hiredEmployee); // 근로자 부담 금액
+		var salaryShop = Math.ceil((pension * 0.5) + (health * 0.5) + (treatment * 0.5) + hiredShop); // 사업자 부담 금액
+		var salaryNetpay = Math.ceil(salaryTotal - salaryEmployee + salaryFree) // 실수령액
+		var salarySpendTotal = Math.ceil(salaryShop + salaryTotal + salaryFree);
+		
+		$('#spendSalaryInsurance').val(salaryInsurance);
+		$('#spendSalaryEmployee').val(salaryEmployee);
+		$('#spendSalaryShop').val(salaryShop);
+		$('#spendSalaryNetpay').val(salaryNetpay);
+		$('#spendSalaryTotal').val(salarySpendTotal);
 		
 	});
-
+	
+	<!-- 급여등록 -->
+	$('#insertSalary').click(function() {
+		if($('#spendSalaryInsurance').val()==0){
+			alert('계산먼저');
+		} else{
+			$('#salaryInsertForm').submit();
+		}
+		
+	})
+	
 
 	$(function() {
 		var ctx = document.getElementById('salaryChart').getContext('2d');
@@ -255,7 +360,7 @@
 		            label: '공과금/기타 총지출 금액',
 		            backgroundColor: 'rgb(245, 166, 35)',
 		            borderColor: 'rgb(245, 166, 35)',
-		            data: [chartJanuary,chartFebruary,chartMarch,chartApril,chartMay,chartJune,chartJuly,chartAugust,chartSeptember,chartOctober,chartNovember,chartDecember]
+		            data: [0,0,0,0,0,0,0,0,0,0,0,0]
 		        }]
 		    },
 		
