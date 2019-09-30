@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.smart.rider.account.dto.AccountDTO;
 import com.smart.rider.account.mapper.AccountMapper;
+import com.smart.rider.member.dto.MemberDTO;
 import com.smart.rider.shop.dto.SsrHapDTO;
 import com.smart.rider.subject.dto.SubjectDTO;
 
@@ -59,6 +60,25 @@ public class AccountService {
 	//거래처 수정
 	public int accountUpdateSet(AccountDTO account){
 		return accountmapper.accountUpdateSet(account);
+	}
+	
+	public List<MemberDTO> getPw(String SID){
+		return accountmapper.getPw(SID);
+	}
+	
+	public int accountDelete(String memberPw,String accountCode,HttpSession session) {
+		String exactPw = (String)session.getAttribute("SACPW");
+		
+		if(memberPw.equals(exactPw)) {
+			
+			return 	accountmapper.accountDelete(accountCode);
+		}else {
+			accountCode = "false";
+			
+		}
+		
+		
+		return 	accountmapper.accountDelete(accountCode);
 	}
 	
 }

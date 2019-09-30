@@ -132,9 +132,22 @@
 		,account_date= NOW()
 	WHERE account_code=#{accountCode}
 	
-	
-	
 	</update>
+	<!-- 세션의 아이디 값으로 비밀번호 사용 -->
+	<select id="getPw" parameterType="String" resultType="com.smart.rider.member.dto.MemberDTO">
+		SELECT
+			member_pw AS memberPw
+		FROM member
+		WHERE member_id = #{SID};
+	
+	</select>
+	<delete id="accountDelete" parameterType="String">
+		DELETE 
+		FROM account 
+		WHERE account_code=#{accountCode}
+	
+	
+	</delete>
 	
 	
 </mapper>

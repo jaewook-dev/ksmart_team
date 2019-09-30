@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.smart.rider.account.dto.AccountDTO;
+import com.smart.rider.member.dto.MemberDTO;
 import com.smart.rider.shop.dto.SsrHapDTO;
 
 
@@ -24,4 +25,8 @@ public interface AccountMapper {
 	public List<AccountDTO> accountUpdate(String acCode);
 	
 	public int accountUpdateSet(AccountDTO account);
+	
+	public List<MemberDTO> getPw(String SID);
+	
+	public int accountDelete(String accountCode);
 }
