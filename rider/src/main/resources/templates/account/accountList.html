@@ -65,9 +65,9 @@
 			
 				<br/><br/><br/>
 				<!-- row -->
-				<div class="row tm-content-row">
+				<div class="row tm-content-row ">
 					<div class="col-12 tm-block-col">
-						<div class="tm-bg-primary-dark tm-block-scroll tm-block-sc">
+						<div class="tm-bg-primary-dark tm-block-big tm-block-scroll table-responsive">
 							<table class="table">
 								<thead>
 									<tr>
@@ -76,8 +76,8 @@
 										<th scope="col">전화번호</th>
 										<th scope="col">주소</th>
 										<th scope="col">주요 품목</th>
-										<th scope="col" style="width: 8%" class="text-center">수정</th>
-										<th scope="col" style="width: 8%" class="text-center">삭제</th>
+										<th scope="col" style="width: 8%" class="text-center" >수정</th>
+										<th scope="col" style="width: 8%" class="text-center" >삭제</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -89,12 +89,14 @@
 										<td th:text="${yeslist.accountAddress}"></td>
 										<td th:text="${yeslist.accountCategory}"></td>
 										<td class="text-center"><a
+											th:if="${session.SLEVEL eq '관리자'  or session.SLEVEL eq '점주'   }"
 											th:href="@{/accountUpdate(accountCode=${yeslist.accountCode})}"
 											class="tm-product-delete-link"> <i
 												class="fas fa-check tm-product-check-icon"
 												style="color: white"></i>
 										</a></td>
 										<td class="text-center"><a
+											th:if="${session.SLEVEL eq '관리자'  or session.SLEVEL eq '점주'   }"
 											th:href="@{/accountDelete(accountCode=${yeslist.accountCode})}"
 											class="tm-product-delete-link"> <i
 												class="far fa-trash-alt tm-product-delete-icon"></i>
@@ -108,6 +110,7 @@
 										<td th:text="${nolist.accountAddress}"></td>
 										<td th:text="${nolist.accountCategory}"></td>
 										<td class="text-center"><a
+											th:if="${session.SLEVEL eq '관리자'  or session.SLEVEL eq '점주'   }"
 											th:href="@{/accountUpdate(accountCode=${nolist.accountCode})}"
 											class="tm-product-delete-link"> <i
 												class="fas fa-check tm-product-check-icon"
@@ -116,6 +119,7 @@
 										
 										<!--삭제 할 수 없는 데이터 클릭시 모달  -->
 										<td class="text-center"><a
+											th:if="${session.SLEVEL eq '관리자'  or session.SLEVEL eq '점주'   }"
 											href="#myModal"
 											class="tm-product-delete-link"
 											data-toggle="modal"> <i
@@ -123,22 +127,22 @@
 												style="color: black"></i>
 										</a></td>
 									</tr>
-			
-			
-								</tbody>
-								
+								</tbody>		
 								<th:block th:if="${alert} neq null">
 										<tr class="text-center">
 											<td colspan="7" th:text="${alert}"></td>
 										</tr>
-								</th:block>
+								</th:block>								
 							</table>
+							
 						</div>
-					</div>
+					</div>			
 				</div>
-				<button type="button" id="insertBtn"
+       										<button type="button" id="insertBtn"
+       				th:if="${session.SLEVEL eq '관리자'  or session.SLEVEL eq '점주'   }"
 					onclick="location.href='accountInsert'" style="float: right"
 					class="btn btn-primary text-uppercase">거래처등록</button>
+
 			</div>
 			<br/><br/><br/>
 			<!-- 모달 -->
@@ -159,7 +163,6 @@
 						</div>
 					</div>
 				</div>
-
 		</div>
 	</div>
 </body>

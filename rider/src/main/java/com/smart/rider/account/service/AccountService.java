@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.smart.rider.account.dto.AccountDTO;
 import com.smart.rider.account.mapper.AccountMapper;
@@ -17,6 +18,7 @@ import com.smart.rider.subject.dto.SubjectDTO;
 
 
 @Service
+@Transactional
 public class AccountService {
 
 	@Autowired
@@ -109,4 +111,6 @@ public class AccountService {
 		
 		return accountmapper.deleteNo();
 	}
+	
+	
 }

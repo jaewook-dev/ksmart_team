@@ -1,6 +1,7 @@
 package com.smart.rider.account.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -35,4 +36,6 @@ public interface AccountMapper {
 	public int accountDelete(String accountCode);
 	
 	public List<AccountDTO> deleteNo();
+	
+
 }

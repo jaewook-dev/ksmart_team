@@ -26,6 +26,7 @@ public class AccountController {
 	
 	@GetMapping("/accountList")
 	public String account(Model model) {
+		
 		//맵으로 받기
 		Map<String, Object> map =  accountService.accountList();
 		//맵에 담겨져 있는 값 가져오기
