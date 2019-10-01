@@ -1,6 +1,8 @@
 package com.smart.rider.work.dto;
 
-public class WorkDTO {
+import com.smart.rider.member.dto.MemberDTO;
+
+public class WorkDTO extends MemberDTO{
 	
 	private String workCode;
 	private String contractShopCode;

@@ -1,5 +1,7 @@
 package com.smart.rider.work.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import com.smart.rider.member.dto.MemberDTO;
@@ -12,4 +14,6 @@ public interface WorkMapper {
 	
 	public String workCodeCount();
 	public int goInsert(WorkDTO workdto);
+	
+	public List<WorkDTO> workList();
 }
