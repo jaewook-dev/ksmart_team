@@ -72,6 +72,8 @@ public class UtilityService {
         // 값을 map에 던져줌
         map.put("startRow", startRow);
         map.put("rowPerPage", ROW_PER_PAGE);
+        
+        
         map.put("contractShopCode", contractShopCode);
         map.put("utilityKey", utilityKey);
         map.put("utilityValue", utilityValue);
@@ -119,6 +121,7 @@ public class UtilityService {
 	
 	/*** 190924 재욱, 지출_공과금 등록  ***/
 	public int utilityInsert(UtilityDTO utilityDTO, String contractShopCode) {
+		
 		String spendUtilityCode = "SU" + utilityMapper.utilityCodeCount(); // 지출_공과금 코드 자동증가
 		//System.out.println(spendUtilityCode + " <-- spendUtilityCode check utilityInsert UtilityService.java");
 		

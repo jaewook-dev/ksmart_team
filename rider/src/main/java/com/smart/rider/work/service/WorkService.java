@@ -6,7 +6,6 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.smart.rider.goods.dto.GoodsDTO;
 import com.smart.rider.member.dto.MemberDTO;
 import com.smart.rider.member.mapper.MemberMapper;
 import com.smart.rider.work.dto.WorkDTO;

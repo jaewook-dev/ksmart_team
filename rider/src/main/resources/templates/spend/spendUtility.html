@@ -1,7 +1,9 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
+<html 
+	xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="~{layout/default}">
+	layout:decorate="~{layout/default}"
+>
 
 <th:block layout:fragment="customTitle">
 </th:block>
@@ -20,49 +22,55 @@
 					</div>
 				</div>
 				<th:block th:if="${session.SLEVEL eq '관리자'}">
-				<div class="row tm-content-row">
-					<div class="col-12 tm-block-col">
-						<div class="tm-bg-primary-dark tm-block-select">
-							<form action="/spendUtility" method="get" id="selectShopForm">
-							<span style="float: left">
-								<strong class="tm-block-title text-center">계약된 매장 </strong>
-							</span>
-    						<span style="float: right">
-    						
-    							<select style="width: 800px;" class="custom-select" name="selectShopCode" id="selectShopCode" >
-   									<th:block th:each="shop : ${utilityShop}">
-   										<option 
-   											th:text="${shop.memberId} +' : '+ ${shop.shopName}" 
-   											th:value="${shop.contractShopCode}" 
-   											th:selected="${shop.contractShopCode eq param?.selectShopCode?.toString()}"
-   											id="shopValue"
-   										></option>
-   									</th:block>
-								</select>
-    						</span>
-    						</form>
+					<div class="row tm-content-row">
+						<div class="col-12 tm-block-col">
+							<div class="tm-bg-primary-dark tm-block-select">
+								<form action="/spendUtility" method="get" id="selectShopForm">
+									<span style="float: left">
+										<strong class="tm-block-title text-center">계약된 매장 </strong>
+									</span> 
+									<span style="float: right"> 
+									<select
+										style="width: 800px;"
+										class="custom-select"
+										name="selectShopCode"
+										id="selectShopCode"
+									><th:block th:each="shop : ${utilityShop}">
+										<option 
+											th:text="${shop.memberId} +' : '+ ${shop.shopName}"
+											th:value="${shop.contractShopCode}"
+											th:selected="${shop.contractShopCode eq param?.selectShopCode?.toString()}"
+											id="shopValue"
+										></option>
+									</th:block>
+									</select>
+									</span>
+								</form>
+							</div>
 						</div>
 					</div>
-				</div>
 				</th:block>
 				<!-- 공과금 지출 현황 -->
 				<div class="row tm-content-row">
-					
 					<div class="col-12 tm-block-col">
 						<div class="tm-bg-primary-dark tm-block-util">
-						<form action="/spendUtility" method="get" id="selectYearForm" name="selectYearForm">
-							<span style="display:inline-block; float: left">
-								<strong class="tm-block-title">공과금/기타 지출 현황 </strong>
-							</span>
-    						<span style="display:inline-block; float: right">
-    							<select style="width: 80px;" class="custom-select" name="utilityYear" id="utilityYear">
-   									<option value="2019" id="2019">2019</option>
-									<option value="2018" id="2018">2018</option>
-									<option value="2017" id="2017">2017</option>
-								</select>
-    						</span>
-						</form>
-							
+							<form action="/spendUtility" method="get" id="selectYearForm" name="selectYearForm">
+								<span style="display: inline-block; float: left"> 
+									<strong class="tm-block-title">공과금/기타 지출 현황 </strong>
+								</span> 
+								<span style="display: inline-block; float: right"> 
+									<select
+										style="width: 80px;" 
+										class="custom-select" 
+										name="utilityYear"
+										id="utilityYear"
+										><option value="2019" id="2019">2019</option>
+										 <option value="2018" id="2018">2018</option>
+										 <option value="2017" id="2017">2017</option>
+									</select>
+								</span>
+							</form>
+
 							<!-- charts.js -->
 							<canvas id="utilityChart" height="100px;"></canvas>
 						</div>
@@ -70,71 +78,115 @@
 				</div>
 
 
-				<div class="row tm-content-row">
+				<div class="row tm-content-row" >
 
 					<!-- 최근 등록된 공과금 내역 -->
 					<div class="col-sm-12 col-md-12 col-lg-6 col-xl-7 tm-block-col">
 						<div class="tm-bg-primary-dark tm-block-spend ">
 							<h4 class="tm-block-title">최근 지출 내역</h4>
 							<div style="min-height: 330px;">
-							<table class="table">
-								<thead>
-									<tr class="text-center">
-										<th>내역</th>
-										<th>금액</th>
-										<th>등록일자</th>
-										<th>상세</th>
-										<th>삭제</th>
-									</tr>
-								</thead>
-								<tbody class="text-center">
-									<tr th:each="list : ${utilityList}">
-										<td th:text="${list.subjectName}"></td>
-										<td th:text="${list.spendUtilityPay}"></td>
-										<td th:text="${list.spendUtilityDate}"></td>
-										<td style="width: 10%">
-											<a class="tm-product-delete-link" th:href="@{/spendUtilityDetails(spendUtilityCode=${list.spendUtilityCode})}">
-												<i class="fas fa-search" style="color: white"></i>
-											</a>
-										</td>
-										<td style="width: 10%">
-											<a class="tm-product-delete-link possibleButton" data-toggle="modal" href="#deleteModal"> 
-											   <i class="far fa-trash-alt tm-product-delete-icon" style="color: white;"></i>
-											</a>
-										</td>
-									</tr>
-									<th:block th:if="${result} ne null">
+								<table class="table">
+									<thead>
 										<tr class="text-center">
-											<td colspan="5" th:text="${result}"></td>
+											<th>내역</th>
+											<th>금액</th>
+											<th>등록일자</th>
+											<th>상세</th>
+											<th>삭제</th>
 										</tr>
-									</th:block>
-									<th:block th:if="${alert} ne null">
-										<tr class="text-center">
-											<td colspan="5" th:text="${alert}"></td>
+									</thead>
+									<tbody class="text-center">
+										<tr th:each="list : ${utilityList}">
+											<td th:text="${list.subjectName}"></td>
+											<td th:text="${list.spendUtilityPay}"></td>
+											<td th:text="${list.spendUtilityDate}"></td>
+											
+											<!-- 상세 아이콘 -->
+											<td style="width: 10%">
+												<a 
+												class="tm-product-delete-link"
+												th:href="@{/spendUtilityDetails(spendUtilityCode=${list.spendUtilityCode})}"
+												><i class="fas fa-search" style="color: white"></i> 
+												</a>
+											</td>
+											
+											<!-- 삭제 아이콘 -->
+											<td style="width: 10%">
+												<a
+												class="tm-product-delete-link"
+												th:href="@{/spendUtilityDelete(spendUtilityCode=${list.spendUtilityCode}, selectShopCode=${param?.selectShopCode?.toString()})}"
+												><i class="far fa-trash-alt tm-product-delete-icon"
+													style="color: white;"
+												></i> 
+												</a>
+											</td>
 										</tr>
-									</th:block>
-								</tbody>
-							</table>
+										<th:block th:if="${result} ne null">
+											<tr class="text-center">
+												<td colspan="5" th:text="${result}"></td>
+											</tr>
+										</th:block>
+										<th:block th:if="${alert} ne null">
+											<tr class="text-center">
+												<td colspan="5" th:text="${alert}"></td>
+											</tr>
+										</th:block>
+									</tbody>
+								</table>
 							</div>
-							
+
 							<!-- 페이징 페이지 번호 -->
 							<div>
-								<ul class="pagination pagination-sm justify-content-center" style="margin:20px 0">
+								<ul class="pagination pagination-sm justify-content-center"
+									style="margin: 20px 0">
 									<li class="page-item active">
-										<a class="page-link" id="preBtn" th:onclick="|javascript:page('${currentPage-1}')|" th:if="${currentPage > 1}"> 이전 </a> 
-										<a class="page-link" th:unless="${currentPage > 1}"> 이전 </a></li>
-	
+										<a 
+										class="page-link"
+										id="preBtn" 
+										th:onclick="|javascript:page('${currentPage-1}')|"
+										th:if="${currentPage > 1}"
+										> 이전 </a> 
+										<a class="page-link"
+										th:unless="${currentPage > 1}"
+										> 이전 </a>
+									</li>
+
 									<th:block th:each="num : ${#numbers.sequence(startPageNum,lastPageNum)}">
 										<li class="page-item active">
-											<span th:if="${currentPage == num}" th:text="${num}" class="text-center page-link"></span> 
-												<a class="page-link" th:unless="${currentPage == num}" th:text="${num}" th:href="@{/spendUtility(currentPage=${num})}" th:if="${session.SLEVEL eq '점주'}"></a>
-												<a class="page-link" th:unless="${currentPage == num}" th:text="${num}" th:href="@{/spendUtility(selectShopCode=${param?.selectShopCode?.toString()}, currentPage=${num})}" th:if="${session.SLEVEL eq '관리자'}"></a>
+											<span
+											th:if="${currentPage == num}" 
+											th:text="${num}"
+											class="text-center page-link"
+											></span> 
+												<a 
+												class="page-link"
+												th:unless="${currentPage == num}" 
+												th:text="${num}"
+												th:href="@{/spendUtility(currentPage=${num})}"
+												th:if="${session.SLEVEL eq '점주'}"
+												></a> 
+												<a 
+												class="page-link"
+												th:unless="${currentPage == num}" 
+												th:text="${num}"
+												th:href="@{/spendUtility(selectShopCode=${param?.selectShopCode?.toString()}, currentPage=${num})}"
+												th:if="${session.SLEVEL eq '관리자'}"
+												></a>
 										</li>
 									</th:block>
-	
+
 									<li class="page-item active">
-										<a class="page-link" id="nextBtn" th:onclick="|javascript:page('${currentPage+1}')|" th:if="${currentPage != lastPage}"> 다음 </a> 
-										<a class="page-link" th:if="${currentPage == lastPage}">다음</a></li>
+										<a 
+										class="page-link"
+										id="nextBtn"
+										th:onclick="|javascript:page('${currentPage+1}')|"
+										th:if="${currentPage != lastPage}"
+										> 다음 </a> 
+										<a
+										class="page-link" 
+										th:if="${currentPage == lastPage}"
+										>다음</a>
+									</li>
 								</ul>
 							</div>
 						</div>
@@ -146,25 +198,36 @@
 							<h4 class="tm-block-title">지출 등록</h4>
 							<form action="utilityInsert" method="post" id="utilityInsertForm">
 								<div class="form-group">
-									<label>내역</label> <select
-										class="custom-select tm-select-accounts" name="subjectCode">
+									<label>내역</label> 
+									<select
+									class="custom-select tm-select-accounts" 
+									name="subjectCode">
 										<th:block th:each="subject : ${subjectSelectBox}">
-											<option th:text="${subject.subjectName}"
-												th:value="${subject.subjectCode}"></option>
+											<option 
+											th:text="${subject.subjectName}"
+											th:value="${subject.subjectCode}"
+											></option>
 										</th:block>
 									</select>
 								</div>
 								<div class="form-group">
-									<label>금액</label> <input class="form-control validate"
-										name="spendUtilityPay">
+									<label>금액</label> 
+									<input 
+									class="form-control validate"
+									name="spendUtilityPay"
+									>
 								</div>
 								<div class="form-group">
-									<label>내용</label> <input class="form-control validate"
-										name="spendUtilityContents">
+									<label>내용</label> 
+									<input 
+									class="form-control validate"
+									name="spendUtilityContents"
+									>
 								</div>
 								<hr>
 								<th:block th:if="${session.SLEVEL eq '관리자'}">
-									<input type="hidden" name="masterShopCode" th:value="${masterShopCode}">
+									<input type="hidden" name="masterShopCode"
+										th:value="${masterShopCode}">
 								</th:block>
 								<button type="button"
 									class="btn btn-primary btn-block text-uppercase"
@@ -182,6 +245,7 @@
 							<!-- begin 검색 폼 -->
 							<form action="/spendUtilityList" class="tm-search-form row"
 								method="post">
+								<input type="hidden" name="selectShopCode" th:value="${param?.selectShopCode?.toString()}">
 								<div class="form-group col-3">
 									<select class="custom-select" name="searchDate">
 										<option value="spend_utility_date">등록일자</option>
@@ -189,14 +253,16 @@
 								</div>
 								<div class="form-group col-3">
 									<input id="beginDate" name="beginDate" type="text"
-										class="form-control validate" style="background-color: #54657D" readonly/>
+										class="form-control validate"
+										style="background-color: #54657D" readonly />
 								</div>
 								<div class="form-group col-1 text-center">
 									<h2 class="tm-site-title mb-0">~</h2>
 								</div>
 								<div class="form-group col-3">
 									<input id="endDate" name="endDate" type="text"
-										class="form-control validate" style="background-color: #54657D" readonly/>
+										class="form-control validate"
+										style="background-color: #54657D" readonly />
 								</div>
 								<div class="form-group col-2"></div>
 
@@ -219,22 +285,27 @@
 							<!-- end 검색 폼 -->
 						</div>
 					</div>
-					
-					<!-- 모달 -->
+
+					<!-- 삭제모달 -->
 					<div class="modal fade" id="deleteModal">
 						<div class="modal-dialog">
 							<div class="modal-content">
-					      
-							<!-- Modal Header -->
-							<div class="modal-header">
-								<h4 class="modal-title">알림</h4>
-								<button type="button" class="close" data-dismiss="modal">&times;</button>
-							</div>
-					        
-							<!-- Modal body -->
-							<div class="modal-body">
-								작업중
-							</div>				        
+
+								<!-- Modal Header -->
+								<div class="modal-header">
+									<h4 class="modal-title">알림</h4>
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
+								</div>
+
+								<!-- Modal body -->
+								<div class="modal-body">
+									정말로 삭제하시겠습니까?
+								</div>
+
+								<!-- Modal footer -->
+								<div class="modal-footer">
+									<button type="button" class="btn btn-primary">확인</button>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -310,7 +381,7 @@
 		});
 	})
 	
-	<!-- 화면 전환 후 select box 고정 -->
+	<!-- 연도 선택 화면 전환 후 select box 고정 -->
 	var selectedYear = [[${selectedYear}]];
 	
 	if(selectedYear == 2018){

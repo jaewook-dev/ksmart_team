@@ -1,19 +1,19 @@
 package com.smart.rider.spend.dto;
 
-public class SalaryDTO {
+public class JoinSalaryDTO {
 
 	private String spendSalaryCode;
 	private String contractShopCode;
 	private String memberId;
+	private String memberName;
 	private int spendSalaryPay;
 	private int spendSalaryOverpay;
 	private int spendSalaryBouns;
 	private int spendSalaryFree;
-	private int spendSalaryPlus;
 	private int spendSalaryEmployee;
 	private int spendSalaryShop;
 	private int spendSalaryInsurance;
-	private int spendSalaryMinus;
+	private int spendSalaryTotal;
 	private int spendSalaryNetpay;
 	private String spendSalaryDate;
 	
@@ -34,6 +34,12 @@ public class SalaryDTO {
 	}
 	public void setMemberId(String memberId) {
 		this.memberId = memberId;
+	}
+	public String getMemberName() {
+		return memberName;
+	}
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
 	}
 	public int getSpendSalaryPay() {
 		return spendSalaryPay;
@@ -59,12 +65,6 @@ public class SalaryDTO {
 	public void setSpendSalaryFree(int spendSalaryFree) {
 		this.spendSalaryFree = spendSalaryFree;
 	}
-	public int getSpendSalaryPlus() {
-		return spendSalaryPlus;
-	}
-	public void setSpendSalaryPlus(int spendSalaryPlus) {
-		this.spendSalaryPlus = spendSalaryPlus;
-	}
 	public int getSpendSalaryEmployee() {
 		return spendSalaryEmployee;
 	}
@@ -83,11 +83,11 @@ public class SalaryDTO {
 	public void setSpendSalaryInsurance(int spendSalaryInsurance) {
 		this.spendSalaryInsurance = spendSalaryInsurance;
 	}
-	public int getSpendSalaryMinus() {
-		return spendSalaryMinus;
+	public int getSpendSalaryTotal() {
+		return spendSalaryTotal;
 	}
-	public void setSpendSalaryMinus(int spendSalaryMinus) {
-		this.spendSalaryMinus = spendSalaryMinus;
+	public void setSpendSalaryTotal(int spendSalaryTotal) {
+		this.spendSalaryTotal = spendSalaryTotal;
 	}
 	public int getSpendSalaryNetpay() {
 		return spendSalaryNetpay;
@@ -104,12 +104,13 @@ public class SalaryDTO {
 	
 	@Override
 	public String toString() {
-		return "SalaryDTO [spendSalaryCode=" + spendSalaryCode + ", contractShopCode=" + contractShopCode
-				+ ", memberId=" + memberId + ", spendSalaryPay=" + spendSalaryPay + ", spendSalaryOverpay="
-				+ spendSalaryOverpay + ", spendSalaryBouns=" + spendSalaryBouns + ", spendSalaryFree=" + spendSalaryFree
-				+ ", spendSalaryPlus=" + spendSalaryPlus + ", spendSalaryEmployee=" + spendSalaryEmployee
+		return "JoinSalaryDTO [spendSalaryCode=" + spendSalaryCode + ", contractShopCode=" + contractShopCode
+				+ ", memberId=" + memberId + ", memberName=" + memberName + ", spendSalaryPay=" + spendSalaryPay
+				+ ", spendSalaryOverpay=" + spendSalaryOverpay + ", spendSalaryBouns=" + spendSalaryBouns
+				+ ", spendSalaryFree=" + spendSalaryFree + ", spendSalaryEmployee=" + spendSalaryEmployee
 				+ ", spendSalaryShop=" + spendSalaryShop + ", spendSalaryInsurance=" + spendSalaryInsurance
-				+ ", spendSalaryMinus=" + spendSalaryMinus + ", spendSalaryNetpay=" + spendSalaryNetpay
+				+ ", spendSalaryTotal=" + spendSalaryTotal + ", spendSalaryNetpay=" + spendSalaryNetpay
 				+ ", spendSalaryDate=" + spendSalaryDate + "]";
-	}	
+	}
+
 }
