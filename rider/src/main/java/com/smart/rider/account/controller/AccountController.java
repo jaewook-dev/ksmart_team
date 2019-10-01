@@ -1,6 +1,7 @@
 package com.smart.rider.account.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -15,7 +16,7 @@ import com.smart.rider.account.dto.AccountDTO;
 import com.smart.rider.account.service.AccountService;
 import com.smart.rider.member.dto.MemberDTO;
 import com.smart.rider.shop.dto.SsrHapDTO;
-import com.smart.rider.subject.dto.SubjectDTO;
+
 
 
 @Controller
@@ -25,11 +26,25 @@ public class AccountController {
 	
 	@GetMapping("/accountList")
 	public String account(Model model) {
-		List<AccountDTO> accountList =  accountService.accountList();
-		System.out.println("=====test=====");
-		System.out.println("accountList:"+accountList);
-		model.addAttribute("accountList", accountService.accountList());
+		//맵으로 받기
+		Map<String, Object> map =  accountService.accountList();
+		//맵에 담겨져 있는 값 가져오기
+		map.get("accountListYes");
+		map.get("accountListNo");
 		
+		//SuppressWarnings("unchecked") 메소드상태가 경고 일 때 나오지 않게 해주기
+		@SuppressWarnings("unchecked")
+		List<AccountDTO> accountListYes = (List<AccountDTO>)map.get("accountListYes");
+		@SuppressWarnings("unchecked")
+		List<AccountDTO> accountListNo = (List<AccountDTO>)map.get("accountListNo");
+		System.out.println(accountListYes);
+		System.out.println(accountListNo);
+		
+		//입력값 확인 후 모델값 값을 넣는다.
+		model.addAttribute("accountListYes", accountListYes);
+		model.addAttribute("accountListNo", accountListNo);
+
+
 		
 		return "/account/accountList";
 	}
@@ -53,8 +68,8 @@ public class AccountController {
 	public String accountInsert(AccountDTO account) {
 		System.out.println(account +"<--accountInsert에서 넘어온  값");
 		accountService.accountInsert(account);
-		
 
+		
 		return "redirect:/accountList";
 	}
 	@PostMapping("/accountSearchList")
@@ -69,15 +84,23 @@ public class AccountController {
 		System.out.println(beginDate+"<--시작일자");
 		System.out.println(endDate+"<--종료일자");
 		
-		
+		Map<String,Object> map = accountService.accountSearchList(select, searchName, beginDate, endDate);
 		// model에 값 넣기
-		List<AccountDTO> accountList = accountService.accountSearchList(select, searchName, beginDate ,endDate);
+		@SuppressWarnings("unchecked")
+		List<AccountDTO> accountListYes = (List<AccountDTO>)map.get("accountSearchListYes");
+		@SuppressWarnings("unchecked")
+		List<AccountDTO> accountListNo = (List<AccountDTO>)map.get("accountSearchListNo");
+		
+		System.out.println(accountListYes +"<--삭제가능리스트 확인");
+		System.out.println(accountListNo +"<--삭제불가능리스트 확인");
 		//model에 대입값 넣기
-		model.addAttribute("accountList", accountList);
+		model.addAttribute("accountListYes", accountListYes);
+		model.addAttribute("accountListNo", accountListNo);
 		//조회 결과가 없으면 나오는 문장
-		if(accountList.size() == 0 ) {
+		if(accountListYes.size()  == 0  && accountListNo.size() == 0) {
 			model.addAttribute("alert", "검색 결과가 없습니다");
 		}
+		
 		
 		return "/account/accountList";
 	}
@@ -104,7 +127,8 @@ public class AccountController {
 	
 	}
 	@GetMapping("/accountDelete")
-	public String accountDelete(@RequestParam(value="accountCode")String accountCode,Model model,HttpSession session) {
+	public String accountDelete(@RequestParam(value="accountCode")String accountCode,
+								Model model,HttpSession session) {
 		
 		System.out.println(accountCode+"<--넘어오는 코드값 확인");
 		String SID = (String)session.getAttribute("SID");
@@ -121,6 +145,7 @@ public class AccountController {
 		System.out.println(updateList+"<--대입 결과 확인");
 		//결과값 model에 담기
 		model.addAttribute("updateList", updateList);
+		
 		return "account/accountDelete";
 	}
 	@PostMapping("/accountDelete")
@@ -140,6 +165,7 @@ public class AccountController {
 		if(deleteCk == 0 ) {
 			model.addAttribute("result", "비밀번호가 일치하지 않습니다.");
 			model.addAttribute("updateList", accountService.accountUpdate(accountCode));
+	
 			
 			return "account/accountDelete";
 		}

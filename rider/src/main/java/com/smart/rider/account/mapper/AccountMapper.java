@@ -12,7 +12,9 @@ import com.smart.rider.shop.dto.SsrHapDTO;
 @Mapper
 public interface AccountMapper {
 
-	public List<AccountDTO> accountList();
+	public List<AccountDTO> accountListYes();
+	
+	public List<AccountDTO> accountListNo();
 	
 	public String accountMaxCode();
 	
@@ -20,8 +22,10 @@ public interface AccountMapper {
 	
 	public int accountInsert(AccountDTO account);
 	
-	public List<AccountDTO> accountSearchList(String select,String searchName,String beginDate,String endDate);
-
+	public List<AccountDTO> accountSearchListYes(String select,String searchName,String beginDate,String endDate);
+	
+	public List<AccountDTO> accountSearchListNo(String select,String searchName,String beginDate,String endDate);
+	
 	public List<AccountDTO> accountUpdate(String acCode);
 	
 	public int accountUpdateSet(AccountDTO account);
@@ -29,4 +33,6 @@ public interface AccountMapper {
 	public List<MemberDTO> getPw(String SID);
 	
 	public int accountDelete(String accountCode);
+	
+	public List<AccountDTO> deleteNo();
 }
