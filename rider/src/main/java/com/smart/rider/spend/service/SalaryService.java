@@ -25,10 +25,15 @@ public class SalaryService {
 		Map<String, Object> map = new HashMap<String, Object>();
 		Map<String, Object> resultMap = new HashMap<>();
 		
-		System.out.println(contractShopCode + " <-- contractShopCode salaryList() SalaryService.java");
-		System.out.println(searchDTO.toString() + " <-- searchDTO salaryList() SalaryService.java");
+		//System.out.println(contractShopCode + " <-- contractShopCode salaryList() SalaryService.java");
+		//System.out.println(searchDTO.toString() + " <-- searchDTO salaryList() SalaryService.java");
+		
 		map.put("contractShopCode", contractShopCode);
-		map.put("searchDTO", searchDTO);
+		map.put("searchKey", searchDTO.getSearchKey());
+		map.put("searchValue", searchDTO.getSearchValue());
+		map.put("beginDate", searchDTO.getBeginDate());
+		map.put("endDate", searchDTO.getEndDate());
+		//System.out.println(map.toString() + " <-- map.toString() salaryList() SalaryService.java");
 		
 		List<JoinSalaryDTO> list = salaryMapper.salaryList(map);
 		//System.out.println(list + " <-- list salaryList() SalaryService.java");

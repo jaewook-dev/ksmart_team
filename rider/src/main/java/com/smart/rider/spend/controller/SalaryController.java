@@ -40,12 +40,22 @@ public class SalaryController {
 		return "redirect:/spendSalary";
 	}
 	
+	
 	/**** 191001 재욱, 지출_급여 검색 화면 ****/
 	@PostMapping("/spendSalaryList")
-	public String spendSalaryList(SearchDTO searchDTO) {
-		System.out.println(searchDTO.toString() + " <-- searchDTO.toString() spendSalaryList() SalaryController.java");
+	public String spendSalaryList(@RequestParam(value = "selectShopCode", required = false, defaultValue = "SR0000") String selectShopCode
+								, @RequestParam(value = "salaryYear", required = false, defaultValue = "2019") String salaryYear
+								, SearchDTO searchDTO
+								, HttpSession session
+								, Model model) {
+		
+		//System.out.println(searchDTO.toString() + " <-- searchDTO.toString() spendSalaryList() SalaryController.java");
+		
+		this.spendSalary(selectShopCode, salaryYear, searchDTO, session, model);
+		
 		return "spend/spendSalary";
 	}
+	
 	
 	
 	/**** 190927 재욱, 지출_급여 화면 ****/
@@ -84,7 +94,7 @@ public class SalaryController {
 		
 		@SuppressWarnings("unchecked")
 		List<JoinSalaryDTO> salaryList = (List<JoinSalaryDTO>)map.get("salaryList");
-		//System.out.println(list + " <-- list pendSalary() SalaryController.java");
+		//System.out.println(salaryList + " <-- list spendSalary() SalaryController.java");
 		model.addAttribute("salaryList", salaryList);
 		
 		return "spend/spendSalary";
