@@ -5,7 +5,6 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.smart.rider.shop.dto.PosDTO;
-import com.smart.rider.shop.dto.ShopRelationDTO;
 import com.smart.rider.shop.dto.SsrHapDTO;
 
 @Mapper

@@ -2,7 +2,6 @@ package com.smart.rider.contract.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,10 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.smart.rider.contract.dto.ContractDTO;
 import com.smart.rider.contract.dto.ContractManagementDTO;
 import com.smart.rider.contract.dto.ManagementDTO;
-import com.smart.rider.contract.service.ContractService;
 import com.smart.rider.contract.service.ManagementService;
 
 @Controller

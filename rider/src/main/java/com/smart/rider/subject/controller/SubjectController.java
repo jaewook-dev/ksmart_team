@@ -68,6 +68,9 @@ public class SubjectController {
 			//System.out.println("미스 매칭 subjectInsert SubjectController.java");
 			model.addAttribute("alert", "계정과목코드는 숫자만 입력하세요");
 			return "subject/subjectInsert";
+		} else if(subjectDTO.getSubjectName().equals("")){
+			model.addAttribute("alert", "공백은 입력할 수 없습니다");
+			return "subject/subjectInsert";
 		} else {
 			subjectService.subjectInsert(subjectDTO, memberId);
 			return "redirect:/subjectList";
@@ -95,6 +98,10 @@ public class SubjectController {
 		
 		if(StringCheck.isNumeric(subjectDTO.getSubjectNumber()) == false) {
 			model.addAttribute("alert", "계정과목코드는 숫자만 입력하세요");
+			model.addAttribute("subjectList", list);
+			return "subject/subjectUpdate";
+		} else if(subjectDTO.getSubjectName().equals("")) {
+			model.addAttribute("alert", "공백은 입력할 수 없습니다");
 			model.addAttribute("subjectList", list);
 			return "subject/subjectUpdate";
 		} else {

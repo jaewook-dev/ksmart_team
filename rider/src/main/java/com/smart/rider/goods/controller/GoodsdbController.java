@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.smart.rider.goods.dto.GoodsdbDTO;
+import com.smart.rider.goods.mapper.GoodsdbMapper;
 import com.smart.rider.goods.service.GoodsdbService;
 
 @Controller
@@ -33,7 +34,7 @@ public class GoodsdbController {
 		//System.out.println(beginDate + " <-- beginDate goodsDbSearchList GoodsdbController.java");
 		//System.out.println(endDate + " <-- endDate goodsDbSearchList GoodsdbController.java");
 		List<GoodsdbDTO> search = goodsdbservice.goodsDbSearchList(select, searchInput, beginDate, endDate);
-		model.addAttribute("goodsDbList", search);
+		model.addAttribute("gList", search);
 		//System.out.println(search+"<==========검색확인");
 		if(search.size()==0) {
 			model.addAttribute("alert", "검색 결과가 없습니다");
@@ -86,16 +87,6 @@ public class GoodsdbController {
 		return "goods/getGoodsDbList";
 		
 	}
-	/*
-	 * @PostMapping("/getGoodsDbList") public String getGoodsDbList(GoodsdbDTO
-	 * goodsdbdto) {
-	 * 
-	 * return "redirect:/goodsDbList";
-	 * 
-	 * }
-	 */
-
-
 
 	//03상품db 세션아이디가져와서 코드자동증가, db에값들어가는지확인.
 	//19-09-10 문영성
@@ -113,27 +104,26 @@ public class GoodsdbController {
 	}
 	
 
-	//02
-	// 상품DB등록 확인메서드(처음단계)
-	// 문영성
 
-	/*
-	 * @PostMapping("/goodsDbInsert") public String goodsdbInsert(GoodsdbDTO
-	 * goodsdbdto,Model model) {
-	 * System.out.println(goodsdbdto+"<<<<<<<<<<넘어오는값 확인하기");
-	 * //model.addAttribute("goodsdbdto",goodsdbservice.goodsDbInsert(goodsdbdto));
-	 * return "/goods/goodsDbInsert";
-	 * 
-	 * }
-	 */
-	 
-	
 	//01상품db관리 페이지이동
 	//04상품DB리스트 조회
 		@GetMapping("/goodsDbList")
 		public String goodsDbList(Model model) {
-			//System.out.println(model.addAttribute("goodsDbList", goodsdbservice.goodsDbList())+"<======================");	
-			model.addAttribute("goodsDbList", goodsdbservice.goodsDbList());
+			String select = null;
+			String searchInput = "";
+			String beginDate = "";
+			String endDate = "";
+			
+				
+			List<GoodsdbDTO> yList = goodsdbservice.goodsDbYlist(select, searchInput, beginDate, endDate);
+			//System.out.println("삭제가능리스트 확인"+yList);
+			//model.addAttribute("yList", yList);
+			List<GoodsdbDTO> nList = goodsdbservice.goodsDbNlist(select, searchInput, beginDate, endDate);
+			//System.out.println("삭제불가능한 리스트"+nList);
+			//model.addAttribute("nList", nList);
+			List<GoodsdbDTO> gList = goodsdbservice.goodsDbList();
+			//System.out.println("전체리스트"+gList);
+			model.addAttribute("gList", gList);
 			return "goods/goodsDbList";
 		}
 

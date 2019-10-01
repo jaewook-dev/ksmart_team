@@ -8,7 +8,10 @@
 			 DATE_FORMAT(${columnDate},'%Y-%m') chartValueMonth
 			,SUM(${columnInt}) AS chartValueSum
 		FROM ${chartTable}
-		WHERE DATE_FORMAT(${columnDate},'%Y-%m') = #{checkMonth} AND contract_shop_code = #{contractShopCode}
+		WHERE DATE_FORMAT(${columnDate},'%Y-%m') = #{checkMonth} 
+		<if test="contractShopCode neq ''.toString() and contractShopCode neq null">
+			AND contract_shop_code = #{contractShopCode}
+		</if>
 	</select>
 </mapper>
 

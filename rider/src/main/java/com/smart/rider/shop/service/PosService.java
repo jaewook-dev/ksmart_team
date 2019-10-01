@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.smart.rider.shop.dto.PosDTO;
-import com.smart.rider.shop.dto.ShopRelationDTO;
 import com.smart.rider.shop.dto.SsrHapDTO;
 import com.smart.rider.shop.mapper.PosMapper;
 

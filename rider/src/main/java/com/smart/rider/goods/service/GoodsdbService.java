@@ -18,7 +18,15 @@ import com.smart.rider.goods.mapper.GoodsdbMapper;
 public class GoodsdbService {
 	@Autowired
 	private GoodsdbMapper goodsdbmapper;
-	
+	//삭제가능 DB리스트
+	public List<GoodsdbDTO> goodsDbYlist(String select ,String searchInput,String beginDate,String endDate){
+		//System.out.println("DB서비스단확인"+goodsdbmapper.goodsDbYlist(select, searchInput, beginDate, endDate));
+		return goodsdbmapper.goodsDbYlist(select, searchInput, beginDate, endDate); 
+	}
+	//삭제불가능 DB리스트
+	public List<GoodsdbDTO> goodsDbNlist(String select ,String searchInput,String beginDate,String endDate){
+		return goodsdbmapper.goodsDbNlist(select, searchInput, beginDate, endDate);
+	}
 	//05상품 검색 메서드 
 	//19-19-18 문영성
 	public List<GoodsdbDTO> goodsDbSearchList(String select ,String searchInput,String beginDate,String endDate) {
