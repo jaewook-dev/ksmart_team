@@ -22,15 +22,9 @@ public class SalaryService {
 	/*** 190930 재욱, 지출_급여 등록 내역 ***/
 	public Map<String, Object> salaryList(String contractShopCode, SearchDTO searchDTO){
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("contractShopCode", contractShopCode);
-		map.put("searchKey", searchDTO.getSearchKey());
-		map.put("searchValue", searchDTO.getSearchValue());
-		map.put("beginDate", searchDTO.getBeginDate());
-		map.put("endDate", searchDTO.getEndDate());
-		
-		Map<String, Object> resultMap = new HashMap<String, Object>();
-		resultMap.put("salaryList", salaryMapper.salaryList(map));
-		return resultMap;
+		System.out.println(contractShopCode + " <-- contractShopCode salaryList() UtilityService.java");
+		System.out.println(searchDTO.toString() + " <-- searchDTO salaryList() UtilityService.java");
+		return map;
 	}
 	
 	/*** 190927 재욱, 지출_급여 내역 등록 ***/

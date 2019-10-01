@@ -9,10 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.smart.rider.shop.dto.PosDTO;
-import com.smart.rider.shop.dto.ShopRelationDTO;
 import com.smart.rider.shop.dto.SsrHapDTO;
 import com.smart.rider.shop.service.PosService;
 

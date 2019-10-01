@@ -15,7 +15,6 @@ import com.smart.rider.account.dto.AccountDTO;
 import com.smart.rider.account.service.AccountService;
 import com.smart.rider.member.dto.MemberDTO;
 import com.smart.rider.shop.dto.SsrHapDTO;
-import com.smart.rider.subject.dto.SubjectDTO;
 
 
 @Controller

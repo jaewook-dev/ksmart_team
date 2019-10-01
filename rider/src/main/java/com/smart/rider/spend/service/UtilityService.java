@@ -72,6 +72,8 @@ public class UtilityService {
         // 값을 map에 던져줌
         map.put("startRow", startRow);
         map.put("rowPerPage", ROW_PER_PAGE);
+        
+        
         map.put("contractShopCode", contractShopCode);
         map.put("utilityKey", utilityKey);
         map.put("utilityValue", utilityValue);

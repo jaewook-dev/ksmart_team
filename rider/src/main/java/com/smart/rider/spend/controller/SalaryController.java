@@ -1,8 +1,6 @@
 package com.smart.rider.spend.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -40,20 +38,6 @@ public class SalaryController {
 		return "redirect:/spendSalary";
 	}
 	
-	/*** 190930 재욱, 지출_급여 검색 화면 ***/
-	@PostMapping("/spendSalaryList")
-	public String spendSalaryList(@RequestParam(value = "selectShopCode", required = false, defaultValue = "SR0000") String selectShopCode
-								, @RequestParam(value = "salaryYear", required = false, defaultValue = "2019") String salaryYear
-								, SearchDTO searchDTO
-								, HttpSession session
-								, Model model) {
-		//System.out.println(searchDTO + " <-- searchDTO spendSalaryList() SalaryController.java");
-		
-		String contractShopCode = (String)session.getAttribute("SCODE");
-		
-		return "spend/spendSalary";
-	}
-	
 	/*** 190927 재욱, 지출_급여 화면 ***/
 	@GetMapping("/spendSalary")
 	public String spendSalary(@RequestParam(value = "selectShopCode", required = false, defaultValue = "SR0000") String selectShopCode
@@ -64,15 +48,6 @@ public class SalaryController {
 		
 		String contractShopCode = (String)session.getAttribute("SCODE");
 		String userLevel = (String)session.getAttribute("SLEVEL");
-		
-		//System.out.println(salaryYear + " <-- salaryYear spendSalary() SalaryController.java");
-		Map<String, Object> map = new HashMap<String,Object>();
-		
-		/*** 190930 재욱, 지출_급여 등록 내역 ***/
-		@SuppressWarnings("unchecked")
-		List<JoinSalaryDTO> salaryList = (List<JoinSalaryDTO>)map.get("salaryList");
-		System.out.println(salaryList + " <-- salaryList spendSalary() SalaryController.java");
-		//model.addAttribute("salaryList", salaryList);
 		
 		/*** 190930 재욱, 관리자 권한으로 계약된 매장 내역 ***/
 		if(userLevel.equals("관리자")) {
