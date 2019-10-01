@@ -16,4 +16,6 @@ public interface WorkMapper {
 	public int goInsert(WorkDTO workdto);
 	
 	public List<WorkDTO> workList();
+	
+	public int leaveInsert(WorkDTO workdto);
 }

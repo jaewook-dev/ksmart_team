@@ -17,7 +17,6 @@ public class WorkService{
 	
 	@Autowired
 	private WorkMapper workMapper;
-	private MemberMapper memberMapper;
 	
 	public Map<String, Object> employeeCheck(MemberDTO memberdto) {
 		
@@ -53,4 +52,7 @@ public class WorkService{
 		return workMapper.workList();
 	}
 
+	public int leaveInsert(WorkDTO workdto) {
+		return workMapper.leaveInsert(workdto);
+	}
 }
