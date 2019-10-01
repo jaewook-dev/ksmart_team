@@ -116,8 +116,14 @@
 											<td style="width: 10%">
 												<a
 												class="tm-product-delete-link"
+												href="#deleteModal"
+												data-toggle="modal" 
+												data-target="#deleteModal"
+												>
+												<!-- 
 												th:href="@{/spendUtilityDelete(spendUtilityCode=${list.spendUtilityCode}, selectShopCode=${param?.selectShopCode?.toString()})}"
-												><i class="far fa-trash-alt tm-product-delete-icon"
+												 -->
+												<i class="far fa-trash-alt tm-product-delete-icon"
 													style="color: white;"
 												></i> 
 												</a>
@@ -301,8 +307,9 @@
 								</div>
 
 								<!-- Modal body -->
-								<div class="modal-body">
-									정말로 삭제하시겠습니까?
+								<div class="modal-body text-center">
+								<br>
+									<p>정말로 삭제하시겠습니까?(작업중)</p>
 								</div>
 
 								<!-- Modal footer -->

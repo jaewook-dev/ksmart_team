@@ -18,6 +18,16 @@ public class SalaryService {
 	@Autowired
 	private SalaryMapper salaryMapper;
 	
+	/**** 191001 재욱, Read : 지출_급여 상세보기 ****/
+	public List<JoinSalaryDTO> spendSalaryDetails(String contractShopCode, String spendSalaryCode){
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("contractShopCode", contractShopCode);
+		map.put("spendSalaryCode", spendSalaryCode);
+		
+		List<JoinSalaryDTO> list = salaryMapper.salaryList(map);
+		//System.out.println(list + " <-- list spendSalaryDetails()  SalaryService.java");
+		return list;
+	}
 	
 	/**** 190930 재욱, Read : 지출_급여 등록 내역  ****/
 	public Map<String, Object> salaryList(String contractShopCode, SearchDTO searchDTO){

@@ -32,6 +32,21 @@ public class SalaryController {
 	@Autowired
 	private MainService mainService;
 	
+	/**** 190930 재욱, Read : 지출_급여 상세보기 ****/
+	@GetMapping("/spendSalaryDetails")
+	public String spendSalaryDetails(@RequestParam(value = "spendSalaryCode") String spendSalaryCode
+									, HttpSession session
+									, Model model) {
+		//System.out.println(spendSalaryCode + " <-- spendSalaryCode spendSalaryDetails SalaryController.java");
+		
+		String contractShopCode = (String)session.getAttribute("SCODE");
+		
+		List<JoinSalaryDTO> list = salaryService.spendSalaryDetails(contractShopCode, spendSalaryCode);
+		model.addAttribute("salaryDetails", list);
+		return "spend/spendSalaryDetails";
+	}
+	
+	
 	/**** 190930 재욱, 지출_급여 등록 ****/
 	@PostMapping("/salaryInsert")
 	public String salaryInsert(@RequestParam(value = "masterShopCode", required = false, defaultValue = "SR0000") String masterShopCode 

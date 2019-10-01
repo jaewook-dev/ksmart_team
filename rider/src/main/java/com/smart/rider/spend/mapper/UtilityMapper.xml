@@ -50,7 +50,6 @@
 			SET
 			  spend_utility_pay=#{spendUtilityPay}
 			, spend_utility_contents=#{spendUtilityContents}
-			, spend_utility_date=NOW()
 		WHERE spend_utility_code = #{spendUtilityCode};
 	</update>
 	
