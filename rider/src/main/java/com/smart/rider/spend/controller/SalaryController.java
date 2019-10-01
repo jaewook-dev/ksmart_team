@@ -1,6 +1,8 @@
 package com.smart.rider.spend.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -27,7 +29,7 @@ public class SalaryController {
 	@Autowired
 	private UtilityService utilityService;
 	
-	/*** 190930 재욱, 지출_급여 등록 ***/
+	/**** 190930 재욱, 지출_급여 등록 ****/
 	@PostMapping("/salaryInsert")
 	public String salaryInsert(JoinSalaryDTO salaryDTO, HttpSession session) {
 		//System.out.println(salaryDTO + " <-- salaryDTO salaryInsert() SalaryController.java");
@@ -38,7 +40,15 @@ public class SalaryController {
 		return "redirect:/spendSalary";
 	}
 	
-	/*** 190927 재욱, 지출_급여 화면 ***/
+	/**** 191001 재욱, 지출_급여 검색 화면 ****/
+	@PostMapping("/spendSalaryList")
+	public String spendSalaryList(SearchDTO searchDTO) {
+		System.out.println(searchDTO.toString() + " <-- searchDTO.toString() spendSalaryList() SalaryController.java");
+		return "spend/spendSalary";
+	}
+	
+	
+	/**** 190927 재욱, 지출_급여 화면 ****/
 	@GetMapping("/spendSalary")
 	public String spendSalary(@RequestParam(value = "selectShopCode", required = false, defaultValue = "SR0000") String selectShopCode
 							, @RequestParam(value = "salaryYear", required = false, defaultValue = "2019") String salaryYear
@@ -49,7 +59,7 @@ public class SalaryController {
 		String contractShopCode = (String)session.getAttribute("SCODE");
 		String userLevel = (String)session.getAttribute("SLEVEL");
 		
-		/*** 190930 재욱, 관리자 권한으로 계약된 매장 내역 ***/
+		/** 190930 재욱, 관리자 권한으로 계약된 매장 내역 **/
 		if(userLevel.equals("관리자")) {
 			contractShopCode = selectShopCode;
 			List<SsrHapDTO> salaryShop = utilityService.utilityShop();
@@ -58,7 +68,7 @@ public class SalaryController {
 			model.addAttribute("masterShopCode", contractShopCode);
 		}
 		
-		/*** 190927 재욱, 지출_급여 직원 select box list ***/// 
+		/** 190927 재욱, 지출_급여 직원 select box list **/
 		List<MemberDTO> employeeSelect = salaryService.salarySelectBox(contractShopCode);
 		//System.out.println(salarySelectList + " <-- salarySelectList spendSalary() SalaryController.java");
 		model.addAttribute("employeeSelect", employeeSelect);
@@ -69,6 +79,13 @@ public class SalaryController {
 			model.addAttribute("alert", "등록된 직원이 없습니다");
 		}
 		
+		/** 191001 재욱, Read : 지출_급여 등록 내역 **/
+		Map<String, Object> map = salaryService.salaryList(contractShopCode, searchDTO);
+		
+		@SuppressWarnings("unchecked")
+		List<JoinSalaryDTO> salaryList = (List<JoinSalaryDTO>)map.get("salaryList");
+		//System.out.println(list + " <-- list pendSalary() SalaryController.java");
+		model.addAttribute("salaryList", salaryList);
 		
 		return "spend/spendSalary";
 	}
