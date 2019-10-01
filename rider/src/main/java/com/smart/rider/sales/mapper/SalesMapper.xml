@@ -6,7 +6,7 @@
 	<!-- 매출날자별 검색  -->
 	<select id="salesSearchList" resultMap="ASid" parameterType="String">
 		SELECT
-			 IFNULL(SA.goods_code, SA.goods_rental_code) AS goods_code
+			 IFNULL(SA.goods_code, SA.goods_rental_code)
 			,SA.*	
 			,GD.*
 			,GR.*	

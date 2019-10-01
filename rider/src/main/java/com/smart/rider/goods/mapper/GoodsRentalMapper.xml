@@ -24,7 +24,7 @@
 				g.goods_code =  gr.goods_code		
 				and
 				g.goods_database_code = gb.goods_database_code
-				<if test="searchInput != null and searchInput neq ''.toString()">
+			<if test="searchInput != null and searchInput neq ''.toString()">
 			WHERE 
 				${select} Like CONCAT('%',#{searchInput},'%')
 			</if>

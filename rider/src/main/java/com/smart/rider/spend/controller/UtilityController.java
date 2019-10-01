@@ -180,6 +180,7 @@ public class UtilityController {
 		
 		int lastPageNum = (int)map.get("lastPageNum");
 		int startPageNum = (int)map.get("startPageNum");
+		
 		int lastPage = (int)map.get("lastPage");
 		
 		@SuppressWarnings("unchecked")

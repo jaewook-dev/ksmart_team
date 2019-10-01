@@ -1,8 +1,10 @@
 package com.smart.rider.sales.controller;
 
 
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
-
+import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,7 @@ import com.smart.rider.goods.dto.GoodsHapDTO;
 
 import com.smart.rider.goods.service.GoodsRentalService;
 import com.smart.rider.goods.service.GoodsService;
+import com.smart.rider.main.service.MainService;
 import com.smart.rider.member.dto.MemberDTO;
 import com.smart.rider.sales.dto.SalesDTO;
 import com.smart.rider.sales.service.SalesService;
@@ -28,6 +31,8 @@ public class SalesController {
 	private GoodsRentalService goodsRentalService;
 	@Autowired
 	private GoodsService goodsService;
+	@Autowired
+	private MainService mainService;
 	
 	//매출검색
 	@PostMapping("/salesSearchList")
@@ -35,17 +40,41 @@ public class SalesController {
 									,@RequestParam(value="searchInput")String searchInput
 									,@RequestParam(value="beginDate")String beginDate
 									,@RequestParam(value="endDate")String endDate
+									,@RequestParam(value = "salesYear", required = false, defaultValue = "2019") String salesYear
 									,Model model) {
-		//System.out.println("매출 앞날짜검색----"+beginDate);
-		//System.out.println("매출 뒤날짜검색-*---"+endDate);
-		//System.out.println("판매/대여 카테고리*****"+select);
-		//System.out.println("판매/대여!!!!!!!!!!!!!"+searchInput);
-		List<SalesDTO> search = salesService.salesSearchList(select, searchInput, beginDate, endDate);
-		model.addAttribute("sList", search);
-		if(search.size()==0) {
+		/*
+		 * System.out.println("매출 앞날짜검색----"+beginDate);
+		 * System.out.println("매출 뒤날짜검색-*---"+endDate);
+		 * System.out.println("판매/대여 카테고리*****"+select);
+		 * System.out.println("판매/대여!!!!!!!!!!!!!"+searchInput);
+		 */
+		Map<String,Object> map = new HashMap<String, Object>();
+			map.put("columnDate", "sales_date");	// 조회할 날짜 db 컬럼
+			map.put("columnInt", "sales_amount"); 		// 합산할 db 컬럼 
+			map.put("chartTable", "sales");			// 조회할 db 테이블명
+			//map.put("contractShopCode", contractShopCode);	// 검색 조건, contractShopCode
+			map.put("chartYear", salesYear);				// 검색할 연도	
+			int[] chartValueArrays = mainService.chartValue(map);
+			System.out.println(Arrays.toString(chartValueArrays) + " <-- salesController.java");
 			
-			model.addAttribute("alert", "검색 결과가 없습니다");
-		}		
+			//반복문을 통해 배열에 값 입력
+			for(int i=0; i<12; i++) {
+				String salesChart = "sales" + String.valueOf(i); // model에 담기 위한 변수명 생성
+				model.addAttribute(salesChart, chartValueArrays[i]); // 생성된 변수명에 각 배열의 값 담기
+				System.out.println("차트값확인~~~~~~~~~~~~~~~~~~~~~~~~~~"+salesChart.toString());
+			}
+		
+		  List<SalesDTO> search = salesService.salesSearchList(select, searchInput,  beginDate, endDate);
+		  model.addAttribute("sList", search);
+		  if(search.size()==0) {
+		  
+		  model.addAttribute("alert", "검색 결과가 없습니다");
+		 
+		  }
+		
+		  
+		 
+		 		
 		return "sales/salesList";
 	}
 	//매출삭제	
