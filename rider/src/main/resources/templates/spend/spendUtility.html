@@ -21,6 +21,7 @@
 						</p>
 					</div>
 				</div>
+				
 				<th:block th:if="${session.SLEVEL eq '관리자'}">
 					<div class="row tm-content-row">
 						<div class="col-12 tm-block-col">
@@ -50,6 +51,7 @@
 						</div>
 					</div>
 				</th:block>
+				
 				<!-- 공과금 지출 현황 -->
 				<div class="row tm-content-row">
 					<div class="col-12 tm-block-col">
@@ -215,6 +217,7 @@
 									<input 
 									class="form-control validate"
 									name="spendUtilityPay"
+									id="spendUtilityPay"
 									>
 								</div>
 								<div class="form-group">
@@ -417,7 +420,15 @@
     };
     
     $('#insertUtility').click(function() {
-		$('#utilityInsertForm').submit();
+    	var utilityPayCheck = $('#spendUtilityPay').val();
+    	
+    	if($('#spendUtilityPay').val().length == 0){
+    		alert('공백불가');
+    	} else if (isNaN(utilityPayCheck) == true) {
+    		alert('문자열불가');
+		} else {
+			$('#utilityInsertForm').submit();
+		}
 	})
     
 </script>

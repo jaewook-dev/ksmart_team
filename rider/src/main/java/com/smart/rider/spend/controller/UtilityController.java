@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.smart.rider.main.controller.StringCheck;
 import com.smart.rider.main.service.MainService;
 import com.smart.rider.shop.dto.SsrHapDTO;
 import com.smart.rider.spend.dto.JoinUtilityDTO;
@@ -188,7 +189,7 @@ public class UtilityController {
 		}
 		
 		
-		utilityService.utilityInsert(utilityDTO, contractShopCode);
+		//utilityService.utilityInsert(utilityDTO, contractShopCode);
 
 		return "redirect:/spendUtility";
 	}

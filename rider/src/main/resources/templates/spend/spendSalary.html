@@ -200,7 +200,7 @@
 					<!-- 최근 등록된 급여 내역 -->
 					<div class="row tm-content-row">
 					<div class="col-12 tm-block-col">
-						<div class="tm-bg-primary-dark tm-block-spend ">
+						<div class="tm-bg-primary-dark tm-block-spend tm-block-scroll">
 							<h4 class="tm-block-title">최근 등록내역</h4>
 							<table class="table">
 								<thead>
@@ -241,7 +241,7 @@
 								<input type="hidden" name="selectShopCode" th:value="${param?.selectShopCode?.toString()}">
 								<div class="form-group col-3">
 									<select class="custom-select" name="searchDate">
-										<option value="spend_utility_date">등록일자</option>
+										<option value="spend_salary_date">등록일자</option>
 									</select>
 								</div>
 								<div class="form-group col-3">
@@ -360,10 +360,24 @@
 		
 	})
 	
+	
+	<!-- charts.js script-->
+	var chartJanuary 	= [[${salary0}]];
+	var chartFebruary 	= [[${salary1}]];
+	var chartMarch 		= [[${salary2}]];
+	var chartApril 		= [[${salary3}]];
+	var chartMay 		= [[${salary4}]];
+	var chartJune		= [[${salary5}]];
+	var chartJuly		= [[${salary6}]];
+	var chartAugust		= [[${salary7}]];
+	var chartSeptember 	= [[${salary8}]];
+	var chartOctober 	= [[${salary9}]];
+	var chartNovember 	= [[${salary10}]];
+	var chartDecember 	= [[${salary11}]];
 
 	$(function() {
 		var ctx = document.getElementById('salaryChart').getContext('2d');
-		var utilityChart = new Chart(ctx, {
+		var salaryChart = new Chart(ctx, {
 			
 		    // The type of chart we want to create
 		    type: 'bar',
@@ -375,7 +389,7 @@
 		            label: '공과금/기타 총지출 금액',
 		            backgroundColor: 'rgb(245, 166, 35)',
 		            borderColor: 'rgb(245, 166, 35)',
-		            data: [0,0,0,0,0,0,0,0,0,0,0,0]
+		            data: [chartJanuary,chartFebruary,chartMarch,chartApril,chartMay,chartJune,chartJuly,chartAugust,chartSeptember,chartOctober,chartNovember,chartDecember]
 		        }]
 		    },
 		

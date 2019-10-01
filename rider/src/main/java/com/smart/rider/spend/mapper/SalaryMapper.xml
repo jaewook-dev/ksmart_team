@@ -58,7 +58,11 @@
         		ss.spend_salary_date  between #{beginDate} and #{endDate}
         </if>
         
-		ORDER BY ss.spend_salary_date DESC;
+		ORDER BY ss.spend_salary_date DESC
+		
+		<if test="searchKey eq null">
+			limit 4;
+		</if>
 		
 	</select>
 	

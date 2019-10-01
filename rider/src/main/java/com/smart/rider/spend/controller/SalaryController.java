@@ -1,6 +1,6 @@
 package com.smart.rider.spend.controller;
 
-import java.util.HashMap;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.smart.rider.main.dto.SearchDTO;
+import com.smart.rider.main.service.MainService;
 import com.smart.rider.member.dto.MemberDTO;
 import com.smart.rider.shop.dto.SsrHapDTO;
 import com.smart.rider.spend.dto.JoinSalaryDTO;
@@ -28,6 +29,9 @@ public class SalaryController {
 	
 	@Autowired
 	private UtilityService utilityService;
+	
+	@Autowired
+	private MainService mainService;
 	
 	/**** 190930 재욱, 지출_급여 등록 ****/
 	@PostMapping("/salaryInsert")
@@ -96,6 +100,23 @@ public class SalaryController {
 		List<JoinSalaryDTO> salaryList = (List<JoinSalaryDTO>)map.get("salaryList");
 		//System.out.println(salaryList + " <-- list spendSalary() SalaryController.java");
 		model.addAttribute("salaryList", salaryList);
+		
+		/** 191001 재욱, Read : 지출_급여 월별 총 지출 금액 차트 **/
+		map.put("columnDate", "spend_salary_date");	// 조회할 날짜 db 컬럼
+		map.put("columnInt", "spend_salary_total"); 		// 합산할 db 컬럼 
+		map.put("chartTable", "spend_salary");			// 조회할 db 테이블명
+		map.put("contractShopCode", contractShopCode);	// 검색 조건, contractShopCode
+		map.put("chartYear", salaryYear);				// 검색할 연도
+		
+		int[] chartValueArrays = mainService.chartValue(map);
+		//System.out.println(Arrays.toString(chartValueArrays) + " <-- chartValueArrays spendUtility UtilityController.java");
+		
+		// to view model.addAttribute
+		for(int i=0; i<12; i++) { 
+			String salaryChart = "salary" + String.valueOf(i);
+			model.addAttribute(salaryChart, chartValueArrays[i]);
+		}
+		
 		
 		return "spend/spendSalary";
 	}
