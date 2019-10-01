@@ -87,6 +87,7 @@
 									<select
 										class="custom-select tm-select-accounts" 
 										name="memberId"
+										id="memberId"
 									><th:block 
 										th:each="employee : ${employeeSelect}"
 										><option 
@@ -322,39 +323,47 @@
 			$('#spendSalaryFree').attr('value','0');
 		}
 		
-		var salaryPay = Number($('#spendSalaryPay').val());
-		var salaryOverpay = Number($('#spendSalaryOverpay').val());
-		var salaryBonus = Number($('#spendSalaryBonus').val());
-		var salaryFree = Number($('#spendSalaryFree').val())
-		
-		// 계산
-		var salaryTotal = salaryPay + salaryOverpay + salaryBonus;
-		var pension = salaryTotal * 0.09;
-		var health = salaryTotal * 0.0646;
-		var treatment = health * 0.0851;
-		var hiredEmployee = salaryTotal * 0.0065;
-		var hiredShop = salaryTotal * 0.009;
-		var workTax = salaryTotal
-		
-		var salaryInsurance = Math.ceil(pension + health + treatment + hiredEmployee + hiredShop); // 4대 보험 총액
-		var salaryEmployee = Math.ceil((pension * 0.5) + (health * 0.5) + (treatment * 0.5) + hiredEmployee); // 근로자 부담 금액
-		var salaryShop = Math.ceil((pension * 0.5) + (health * 0.5) + (treatment * 0.5) + hiredShop); // 사업자 부담 금액
-		var salaryNetpay = Math.ceil(salaryTotal - salaryEmployee + salaryFree) // 실수령액
-		var salarySpendTotal = Math.ceil(salaryShop + salaryTotal + salaryFree);
-		
-		$('#spendSalaryInsurance').val(salaryInsurance);
-		$('#spendSalaryEmployee').val(salaryEmployee);
-		$('#spendSalaryShop').val(salaryShop);
-		$('#spendSalaryNetpay').val(salaryNetpay);
-		$('#spendSalaryTotal').val(salarySpendTotal);
+		if(isNaN($('#spendSalaryPay').val()) == true || isNaN($('#spendSalaryOverpay').val()) == true || isNaN($('#spendSalaryBonus').val()) == true || isNaN($('#spendSalaryFree').val()) == true){
+			alert('문자열 불가');
+		} else {
+			var salaryPay = Number($('#spendSalaryPay').val());
+			var salaryOverpay = Number($('#spendSalaryOverpay').val());
+			var salaryBonus = Number($('#spendSalaryBonus').val());
+			var salaryFree = Number($('#spendSalaryFree').val())
+			
+			// 계산
+			var salaryTotal = salaryPay + salaryOverpay + salaryBonus;
+			var pension = salaryTotal * 0.09;
+			var health = salaryTotal * 0.0646;
+			var treatment = health * 0.0851;
+			var hiredEmployee = salaryTotal * 0.0065;
+			var hiredShop = salaryTotal * 0.009;
+			var workTax = salaryTotal
+			
+			var salaryInsurance = Math.ceil(pension + health + treatment + hiredEmployee + hiredShop); // 4대 보험 총액
+			var salaryEmployee = Math.ceil((pension * 0.5) + (health * 0.5) + (treatment * 0.5) + hiredEmployee); // 근로자 부담 금액
+			var salaryShop = Math.ceil((pension * 0.5) + (health * 0.5) + (treatment * 0.5) + hiredShop); // 사업자 부담 금액
+			var salaryNetpay = Math.ceil(salaryTotal - salaryEmployee + salaryFree) // 실수령액
+			var salarySpendTotal = Math.ceil(salaryShop + salaryTotal + salaryFree);
+			
+			$('#spendSalaryInsurance').val(salaryInsurance);
+			$('#spendSalaryEmployee').val(salaryEmployee);
+			$('#spendSalaryShop').val(salaryShop);
+			$('#spendSalaryNetpay').val(salaryNetpay);
+			$('#spendSalaryTotal').val(salarySpendTotal);
+		}
 		
 	});
 	
 	<!-- 급여등록 -->
 	$('#insertSalary').click(function() {
+		var selectValue = $('#memberId').val();
+		
 		if($('#spendSalaryInsurance').val()==0){
-			alert('0은 입력할 수 없습니다');
-		} else{
+			alert('0 혹은 공백은 입력할 수 없습니다');
+		} else if(selectValue == '등록된 직원이 없습니다') {
+			alert('등록된 직원이 없습니다');
+		} else {
 			$('#salaryInsertForm').submit();
 		}
 		
