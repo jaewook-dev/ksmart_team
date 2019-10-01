@@ -34,10 +34,21 @@ public class SalaryController {
 	
 	/**** 190930 재욱, 지출_급여 등록 ****/
 	@PostMapping("/salaryInsert")
-	public String salaryInsert(JoinSalaryDTO salaryDTO, HttpSession session) {
+	public String salaryInsert(@RequestParam(value = "masterShopCode", required = false, defaultValue = "SR0000") String masterShopCode 
+							, JoinSalaryDTO salaryDTO
+							, HttpSession session) {
 		//System.out.println(salaryDTO + " <-- salaryDTO salaryInsert() SalaryController.java");
 		
 		String contractShopCode = (String)session.getAttribute("SCODE");
+		String userLevel = (String)session.getAttribute("SLEVEL");
+		
+		/** 191001 재욱, 관리자 권한으로 계약된 매장 내역 **/
+		if(userLevel.equals("관리자")) {
+			contractShopCode = masterShopCode;
+			salaryService.salaryInsert(salaryDTO, contractShopCode);	
+			return "redirect:/spendSalary?selectShopCode=" + contractShopCode;
+		}
+		
 		salaryService.salaryInsert(salaryDTO, contractShopCode);
 		
 		return "redirect:/spendSalary";
@@ -100,6 +111,11 @@ public class SalaryController {
 		//System.out.println(salaryList + " <-- list spendSalary() SalaryController.java");
 		model.addAttribute("salaryList", salaryList);
 		
+		// 검색 결과가 없을시 텍스트 알림
+		if(salaryList.size()==0) {
+			model.addAttribute("result", "검색 결과가 없습니다");
+		}
+		
 		/** 191001 재욱, Read : 지출_급여 월별 총 지출 금액 차트 **/
 		map.put("columnDate", "spend_salary_date");	// 조회할 날짜 db 컬럼
 		map.put("columnInt", "spend_salary_total"); 		// 합산할 db 컬럼 
@@ -116,6 +132,7 @@ public class SalaryController {
 			model.addAttribute(salaryChart, chartValueArrays[i]);
 		}
 		
+		model.addAttribute("selectedYear", salaryYear);
 		
 		return "spend/spendSalary";
 	}

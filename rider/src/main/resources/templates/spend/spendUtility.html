@@ -423,9 +423,9 @@
     	var utilityPayCheck = $('#spendUtilityPay').val();
     	
     	if($('#spendUtilityPay').val().length == 0){
-    		alert('공백불가');
+    		alert('공백 입력불가');
     	} else if (isNaN(utilityPayCheck) == true) {
-    		alert('문자열불가');
+    		alert('문자열 입력불가');
 		} else {
 			$('#utilityInsertForm').submit();
 		}

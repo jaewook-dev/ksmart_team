@@ -188,6 +188,10 @@
 								style="background-color: #54657D" readonly
 								>
 							</div>
+							<th:block th:if="${session.SLEVEL eq '관리자'}">
+									<input type="hidden" name="masterShopCode"
+										th:value="${masterShopCode}">
+							</th:block>
 							<hr>
 							<button type="button"
 								class="btn btn-primary btn-block text-uppercase"
@@ -227,6 +231,11 @@
 											</a>
 										</td>
 									</tr>
+									<th:block th:if="${result} ne null">
+										<tr class="text-center">
+											<td colspan="4" th:text="${result}"></td>
+										</tr>
+									</th:block>
 								</tbody>
 							</table>
 						</div>
