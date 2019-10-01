@@ -2,8 +2,6 @@ package com.smart.rider.member.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.smart.rider.member.dto.MemberDTO;
 import com.smart.rider.member.service.EmployeeService;
-import com.smart.rider.shop.dto.SsrHapDTO;
 
 @Controller
 public class EmployeeController {

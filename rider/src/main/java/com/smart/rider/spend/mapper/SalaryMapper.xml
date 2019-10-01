@@ -20,7 +20,7 @@
 		<result column="spend_salary_date" 		property="spendSalaryDate"/>
 	</resultMap>
 	
-	<!-- 190930 재욱, 지출_급여 등록 내역 -->
+	<!-- 190930 재욱, Read : 지출_급여 등록 내역 -->
 	<select id="salaryList" resultMap="salaryMap" parameterType="java.util.Map">
 		SELECT 
 	 		 ss.spend_salary_code
@@ -53,7 +53,7 @@
         	AND 
         		ss.spend_salary_date  between '2000-01-01' and #{endDate}
         </if>
-        <if test="beginDate neq ''.toString() and endDate neq ''.toString()">
+        <if test="beginDate neq ''.toString() and beginDate neq null and endDate neq ''.toString() and endDate neq null">
         	AND 
         		ss.spend_salary_date  between #{beginDate} and #{endDate}
         </if>
@@ -62,14 +62,14 @@
 		
 	</select>
 	
-	<!-- 190930 재욱, 지출_급여 코드 자동증가용 카운트 -->
+	<!-- 190930 재욱, Read : 지출_급여 코드 자동증가용 카운트 -->
 	<select id="salaryCodeCount" resultType="String">
 		SELECT 
 			MAX(LPAD(RIGHT(spend_salary_code, 4)+1, '4' , '0')) 
 		FROM spend_salary;
 	</select>
 
-	<!-- 190930 재욱, 지출_급여 내역 등록 -->
+	<!-- 190930 재욱, Insert : 지출_급여 내역 등록 -->
 	<insert id="salaryInsert" parameterType="com.smart.rider.spend.dto.JoinSalaryDTO">
 		INSERT INTO spend_salary(
 			  spend_salary_code

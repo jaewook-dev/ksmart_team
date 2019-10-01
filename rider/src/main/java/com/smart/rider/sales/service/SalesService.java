@@ -21,6 +21,7 @@ public class SalesService {
 	//매출검색
 	public List<SalesDTO> salesSearchList(String select ,String searchInput,String beginDate,String endDate){
 		List<SalesDTO> search = salesMapper.salesSearchList(select, searchInput, beginDate, endDate);
+		//System.out.println("매출서비스확인@@@@@@@@@@@@@@@@@@@@@"+search);
 		return search;
 	}
 	//매출삭제

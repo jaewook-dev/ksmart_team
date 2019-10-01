@@ -24,7 +24,7 @@
 				<div class="row tm-content-row">
 					<div class="col-12 tm-block-col">
 						<div class="tm-bg-primary-dark tm-block-util">
-						<form action="/salesList" method="get" id="salesYearForm" name="salesYearForm">
+						<form action="/salesList" method="get" id="selectYearForm" name="selectYearForm">
 							<span style="display:inline-block; float: left">
 								<strong class="tm-block-title">매출현황 </strong>
 							</span>
@@ -162,18 +162,18 @@
 	<script th:inline="javascript">
     
     <!-- charts.js script-->
-	var chartJanuary 	= [[${utility0}]];
-	var chartFebruary 	= [[${utility1}]];
-	var chartMarch 		= [[${utility2}]];
-	var chartApril 		= [[${utility3}]];
-	var chartMay 		= [[${utility4}]];
-	var chartJune		= [[${utility5}]];
-	var chartJuly		= [[${utility6}]];
-	var chartAugust		= [[${utility7}]];
-	var chartSeptember 	= [[${utility8}]];
-	var chartOctober 	= [[${utility9}]];
-	var chartNovember 	= [[${utility10}]];
-	var chartDecember 	= [[${utility11}]];
+	var chartJanuary 	= [[${sales0}]];
+	var chartFebruary 	= [[${sales1}]];
+	var chartMarch 		= [[${sales2}]];
+	var chartApril 		= [[${sales3}]]; 
+	var chartMay 		= [[${sales4}]];
+	var chartJune		= [[${sales5}]];
+	var chartJuly		= [[${sales6}]];
+	var chartAugust		= [[${sales7}]];
+	var chartSeptember 	= [[${sales8}]];
+	var chartOctober 	= [[${sales9}]];
+	var chartNovember 	= [[${sales10}]];
+	var chartDecember 	= [[${sales11}]];
 
 	$(function() {
 		var uctx = document.getElementById('salesChart').getContext('2d');
@@ -232,7 +232,7 @@
 	
 	<!-- 연도 선택 화면전환 -->
 	$('#salesYear').change(function() {
-		$('#salesYearForm').submit();
+		$('#selectYearForm').submit();
 	})
 	
 	<!-- datepicker -->
@@ -246,13 +246,7 @@
 	});
 	$('#endDate').datepicker('option','dateFormat','yy-mm-dd'); // 기존 dd/mm/yy에서 yy-mm-dd로 format 변경 
 	
-	<!-- 페이징 -->
-	var scriptCurrentPage = [[${currentPage}]];
-	var scriptlastPage = [[${lastPage}]];
 	
-    function page(scriptCurrentPage) {
-    	location.href="/spendUtilityList?currentPage="+scriptCurrentPage; 
-    };
 </script>
 </th:block>
 </html>
