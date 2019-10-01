@@ -21,11 +21,6 @@ public class WorkController {
 	@Autowired
 	private WorkService workService;
 	
-	@GetMapping("/workAdmin")
-	public String workAdmin() {
-		return "work/workAdmin";
-	}
-	
 	@GetMapping("/goInsert")
 	public String goInsert() {
 		return "work/goInsert";
@@ -41,11 +36,11 @@ public class WorkController {
 	}
 	@PostMapping("/goInsert")
 	public String goInsert(@RequestParam(value="memberId") String memberId
-						 , @RequestParam(value="memberPw") String memberPw, WorkDTO workdto, MemberDTO memberdto
-						 , HttpSession session, Model model) {
+						 , @RequestParam(value="memberPw") String memberPw
+						 , WorkDTO workdto, MemberDTO memberdto, Model model) {
 		
 		Map<String,Object> map = workService.employeeCheck(memberdto);
-		String result 			= (String) map.get("result"); 
+		String result 			= (String) map.get("result");
 		
 		if(!result.equals("확인")) {
 			model.addAttribute("result", result);
@@ -54,9 +49,30 @@ public class WorkController {
 		}
 		System.out.println(result + "<--직원아이디확인");
 		
-		String contractShopCode = (String)session.getAttribute("SCODE");
 		workService.goInsert(workdto);
 		return "redirect:/workSuccess";
 	}
+	@GetMapping("/workAdmin")
+	public String workList(Model model) {
+		model.addAttribute("workList", workService.workList());
+		return "work/workAdmin";
+	}
 	
+	@PostMapping("/leaveInsert")
+	public String leaveInsert(@RequestParam(value="memberId") String memberId
+			 				, @RequestParam(value="memberPw") String memberPw
+			 				, WorkDTO workdto, MemberDTO memberdto, Model model) {
+		Map<String,Object> map = workService.employeeCheck(memberdto);
+		String result 			= (String) map.get("result");
+		
+		if(!result.equals("확인")) {
+			model.addAttribute("result", result);
+			System.out.println(result + "<--퇴근실패");
+			return "work/leaveInsert";
+		}
+		System.out.println(result + "<--퇴근 직원아이디확인");
+		
+		workService.leaveInsert(workdto);
+		return "redirect:/workSuccess";
+	}
 }

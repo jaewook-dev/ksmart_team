@@ -17,7 +17,7 @@
 			<hr>
 			<div class="form-group">
 				<a href="/customerInsert" id="customerButton" class="btn btn-primary text-white" style="float:right;">
-					대여고객 등록
+					!대여고객 등록
 				</a>
 			</div>
 			<div class="row tm-content-row">
@@ -68,8 +68,8 @@
 									<th scope="col">대여종료일</th>
 									<th scope="col">대여반납일</th>
 									<th scope="col">연체유무</th>
-									<th scope="col">반납</th>
 									<th scope="col" class="text-center">상세보기</th>
+									<th scope="col" class="text-center">반납</th>
  								</tr>
 							</thead>
 							<tbody>
@@ -80,10 +80,14 @@
 									<td th:text="${customer.rentalCustomerFinish}"></td>
 									<td th:text="${customer.rentalCustomerReturn}"></td>
 									<td th:text="${customer.rentalCustomerOverdue}"></td>
-									<td><a>반납</a></td>
 									<td class="text-center">
 										<a th:href="@{/getCustomerList(rentalCustomerCode=${customer.rentalCustomerCode})}" class="tm-product-delete-link">
 										<i class="far fa-address-card tm-product-delete-icon"></i></a>
+									</td>
+									<td class="text-center">
+										<a href="#" id="finishButton" class="btn btn-primary text-white">
+											#반납
+										</a>
 									</td>
 								</tr>
 							</tbody>

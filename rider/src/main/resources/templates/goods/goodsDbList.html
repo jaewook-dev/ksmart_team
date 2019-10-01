@@ -71,15 +71,16 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr th:each="gDbList : ${goodsDbList}">
-										<th th:text="${gDbList.goodsDbCode}"></th>	
-										<th th:text="${gDbList.goodsDbName}"></th>										
-										<th th:text="${gDbList.goodsDbNumber}"></th>
-										<th th:text="${gDbList.goodsDbColor}"></th>										
-										<th th:text="${gDbList.goodsDbDescription}"></th>
+								<!-- 삭제가능 리스트 -->
+									<tr th:each="g : ${gList}">
+										<th th:text="${g.goodsDbCode}"></th>	
+										<th th:text="${g.goodsDbName}"></th>										
+										<th th:text="${g.goodsDbNumber}"></th>
+										<th th:text="${g.goodsDbColor}"></th>										
+										<th th:text="${g.goodsDbDescription}"></th>
 										<td>
 										<a
-										 th:href="@{/getGoodsDbList(goodsDbCode=${gDbList.goodsDbCode})}"
+										 th:href="@{/getGoodsDbList(goodsDbCode=${g.goodsDbCode})}"
 										 class="tm-product-delete-link">
 										 <i class="fas fa-check tm-product-check-icon"></i>
 										</a>
@@ -92,6 +93,28 @@
 										</a>
 										</td> -->
 									</tr>
+									<!-- 삭제불가능리스트 -->
+									<!-- <tr th:each="n : ${nList}">
+										<th th:text="${n.goodsDbCode}"></th>	
+										<th th:text="${n.goodsDbName}"></th>										
+										<th th:text="${n.goodsDbNumber}"></th>
+										<th th:text="${n.goodsDbColor}"></th>										
+										<th th:text="${n.goodsDbDescription}"></th>
+										<td>
+										<a
+										 th:href="@{/getGoodsDbList(goodsDbCode=${n.goodsDbCode})}"
+										 class="tm-product-delete-link">
+										 <i class="fas fa-check tm-product-check-icon"></i>
+										</a>
+										</td>
+										<td>
+										<a
+										 th:href="@{/goodsInsert(goodsDbCode=${gDbList.goodsDbCode})}"
+										 class="tm-product-delete-link">
+										 <i class="fas fa-check tm-product-check-icon"></i>
+										</a>
+										</td>
+									</tr> -->
 									<th:block th:if="${alert} neq null">
 										<tr class="text-center">
 											<td colspan="7" th:text="${alert}"></td>

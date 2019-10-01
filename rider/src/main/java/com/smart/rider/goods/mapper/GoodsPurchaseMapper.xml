@@ -58,8 +58,7 @@
 			gb.goods_database_code = p.goods_database_code
 			INNER JOIN 
 			account a
-			ON p.account_code = a.account_code AND 
-			 p.contract_shop_code = a.contract_shop_code			 
+			ON p.account_code = a.account_code 		 
 			<if test="searchInput != null and searchInput neq ''.toString()">
 			WHERE 
 				${select} Like CONCAT('%',#{searchInput},'%')

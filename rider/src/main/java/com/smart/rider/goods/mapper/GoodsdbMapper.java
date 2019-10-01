@@ -8,7 +8,10 @@ import com.smart.rider.goods.dto.GoodsdbDTO;
 
 @Mapper
 public interface GoodsdbMapper {
-	
+	//삭제가능 DB리스트
+	public List<GoodsdbDTO> goodsDbYlist(String select ,String searchInput,String beginDate,String endDate);
+	//삭제 불가능 DB리스트
+	public List<GoodsdbDTO> goodsDbNlist(String select ,String searchInput,String beginDate,String endDate);
 	//상품DB삭제 메서드 문영성
 	//상품코드.아이디,비밀번호가져오기
 	public int goodsDbDelete(String goodsDbCode,String memberId,String memberPw);

@@ -1,14 +1,15 @@
 package com.smart.rider.work.dto;
 
-public class WorkDTO {
+import com.smart.rider.member.dto.MemberDTO;
+
+public class WorkDTO extends MemberDTO{
 	
 	private String workCode;
 	private String contractShopCode;
 	private String memberId;
 	private String workStart;
 	private String workFinish;
-	private String workOver;
-	private String workTotal;
+	private String workToday;
 	private String workRest;
 	private String workDate;
 	public String getWorkCode() {
@@ -41,17 +42,11 @@ public class WorkDTO {
 	public void setWorkFinish(String workFinish) {
 		this.workFinish = workFinish;
 	}
-	public String getWorkOver() {
-		return workOver;
+	public String getWorkToday() {
+		return workToday;
 	}
-	public void setWorkOver(String workOver) {
-		this.workOver = workOver;
-	}
-	public String getWorkTotal() {
-		return workTotal;
-	}
-	public void setWorkTotal(String workTotal) {
-		this.workTotal = workTotal;
+	public void setWorkToday(String workToday) {
+		this.workToday = workToday;
 	}
 	public String getWorkRest() {
 		return workRest;
@@ -68,8 +63,8 @@ public class WorkDTO {
 	@Override
 	public String toString() {
 		return "WorkDTO [workCode=" + workCode + ", contractShopCode=" + contractShopCode + ", memberId=" + memberId
-				+ ", workStart=" + workStart + ", workFinish=" + workFinish + ", workOver=" + workOver + ", workTotal="
-				+ workTotal + ", workRest=" + workRest + ", workDate=" + workDate + "]";
+				+ ", workStart=" + workStart + ", workFinish=" + workFinish + ", workRest=" + workRest + ","
+				+ " workDate=" + workDate + "]";
 	}
 	
 }

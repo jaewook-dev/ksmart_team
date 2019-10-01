@@ -93,7 +93,7 @@ public class GoodsPurchaseController {
 		List<GoodsHapDTO> hList = goodsPurchaseService.purchaseList();
 		//System.out.println(model.addAttribute("hList", hList));
 		
-		model.addAttribute(model.addAttribute("hList",hList));
+		model.addAttribute("hList",hList);
 	
 		
 		return "purchase/purchaseList";

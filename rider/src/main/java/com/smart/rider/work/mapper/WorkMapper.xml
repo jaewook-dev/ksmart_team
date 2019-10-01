@@ -23,20 +23,47 @@
 			,contract_shop_code
 			,member_id
 			,work_start
+			,work_finish
+			,work_today
 			,work_date
 		)VALUES (
 			 #{workCode}
 			,#{contractShopCode}
 			,#{memberId}
 			,NOW()
+			,0
+			,0
 			,NOW())
 </insert>
+<select id="workList" resultType="com.smart.rider.work.dto.WorkDTO">
+	SELECT 
+		 w.work_code AS workCode
+		,w.contract_shop_code AS contractShopCode
+		,w.member_id AS memberId
+		,w.work_start AS workStart
+		,w.work_finish AS workFinish
+		,w.work_today AS workToday
+		,w.work_rest AS workRest
+		,w.work_date AS workDate
+		,m.member_name AS memberName
+	FROM 
+		work w
+	INNER JOIN
+		member m			 
+	INNER JOIN 
+		shop_relation s
+	ON 
+		m.member_id = w.member_id			
+	AND s.contract_shop_code = w.contract_shop_code
+	AND s.contract_shop_code = m.contract_shop_code
+</select>
 <update id="leaveInsert" parameterType="com.smart.rider.work.dto.WorkDTO">
-		UPDATE work
-		SET
-			 work_finish		= NOW()
-			,work_over			= 
-		WHERE
-			member_id = #{memberId}
+	UPDATE work
+	SET
+		work_finish	=NOW(),
+		work_today	=TIMEDIFF(CURTIME(),work_start)
+	WHERE 
+		member_id = #{memberId}
+	AND CURDATE()
 </update>
 </mapper>
