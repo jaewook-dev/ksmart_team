@@ -11,6 +11,9 @@ import com.smart.rider.spend.dto.JoinSalaryDTO;
 @Mapper
 public interface SalaryMapper {
 	
+	/**** 191002 재욱, Update : 지출_급여 수정 ****/
+	public int salaryUpdate(JoinSalaryDTO joinSalaryDTO);
+	
 	/*** 190930 재욱, Read : 지출_급여 등록 내역 ***/
 	public List<JoinSalaryDTO> salaryList(Map<String, Object> map);
 	

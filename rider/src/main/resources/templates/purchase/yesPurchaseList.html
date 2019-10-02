@@ -17,71 +17,71 @@
 								<thead>
 									<tr>
 										<th scope="col">상품명</th>
-										<th th:text="${purchaseCode.goodsDbName}"></th>
+										<th th:text="${y.goodsDbName}"></th>
 									</tr>
 									<tr>
 										<th scope="col">상품카테고리</th>
-										<th th:text="${purchaseCode.goodsDbCategory}" ></th>
+										<th th:text="${y.goodsDbCategory}" ></th>
 									</tr>									
 									<tr>
 										<th scope="col">상품번호</th>
-										<th th:text="${purchaseCode.goodsDbNumber}"></th>
+										<th th:text="${y.goodsDbNumber}"></th>
 									</tr>									
 									<tr>
 										<th scope="col">색상</th>
-										<th th:text="${purchaseCode.goodsDbColor}"></th>
+										<th th:text="${y.goodsDbColor}"></th>
 									</tr>
 									<tr>
 										<th scope="col">중량</th>
-										<th th:text="${purchaseCode.goodsDbWeight}"></th>
+										<th th:text="${y.goodsDbWeight}"></th>
 									</tr>
 									<tr>
 										<th scope="col">최대속도</th>
-										<th th:text="${purchaseCode.goodsDbSpeed}"></th>
+										<th th:text="${y.goodsDbSpeed}"></th>
 									</tr>
 									<tr>
 										<th scope="col">박퀴사이즈</th>
-										<th th:text="${purchaseCode.goodsDbSize}"></th>
+										<th th:text="${y.goodsDbSize}"></th>
 									</tr>
 									<tr>	
 										<th scope="col">제조국가</th>
-										<th th:text="${purchaseCode.goodsDbNation}"></th>
+										<th th:text="${y.goodsDbNation}"></th>
 									</tr>
 									<tr>	
 										<th scope="col">최대하중</th>
-										<th th:text="${purchaseCode.goodsDbLoad}"></th>
+										<th th:text="${y.goodsDbLoad}"></th>
 									</tr>
 									<tr>	
 										<th scope="col">주행가능거리</th>
-										<th th:text="${purchaseCode.goodsDbDistance}"></th>
+										<th th:text="${y.goodsDbDistance}"></th>
 									</tr>
 									<tr>	
 										<th scope="col">베터리용량</th>
-										<th th:text="${purchaseCode.goodsDbBattery}"></th>
+										<th th:text="${y.goodsDbBattery}"></th>
 									</tr>
 									<tr>	
 										<th scope="col">완충시간</th>
-										<th th:text="${purchaseCode.goodsDbTime}"></th>
+										<th th:text="${y.goodsDbTime}"></th>
 									</tr>
 									<tr>	
 										<th scope="col">상세설명</th>
-										<th th:text="${purchaseCode.goodsDbDescription}"></th>
+										<th th:text="${y.goodsDbDescription}"></th>
 									</tr>
 									<tr>	
 										<th scope="col">제조일자</th>
-										<th th:text="${purchaseCode.goodsDbMade}"></th>
+										<th th:text="${y.goodsDbMade}"></th>
 									</tr>
 									<tr>	
 										<th scope="col">매입가격</th>
-										<th th:text="${purchaseCode.purchasePay}"></th>
+										<th th:text="${y.purchasePay}"></th>
 									</tr>
 									<tr>	
 										<th scope="col">거래처</th>
-										<th th:text="${purchaseCode.accountMarket}"></th>
+										<th th:text="${y.accountMarket}"></th>
 									</tr>
 									<tr>	
 										<th scope="col">상품상태</th>
-										<th th:text="${purchaseCode.purchaseState}"></th>
+										<th th:text="${y.purchaseState}"></th>
 									</tr>
 								</thead>	
 															
@@ -89,31 +89,15 @@
 												
 						</div>						
 						<!-- table container -->
-						<a  th:if="${session.SLEVEL eq '관리자' || session.SLEVEL eq'점주'}" href="#myModal" data-toggle="modal"
+						<a  th:if="${session.SLEVEL eq '관리자' || session.SLEVEL eq'점주'}" th:href="@{/purchaseDelete(purchaseCode=${y.purchaseCode})}"
 							class="btn btn-primary btn-block text-uppercase mb-3">매입 삭제하기</a>
-						<a  th:href="@{/goodsInsert(purchaseCode=${purchaseCode.purchaseCode})}"
-							class="btn btn-primary btn-block text-uppercase mb-3">판매상품 등록하기</a>	
+						<a  th:href="@{/goodsInsert(purchaseCode=${y.purchaseCode})}"
+							class="btn btn-primary btn-block text-uppercase mb-3">판매상품 등록하기</a>
+					
 						
 					</div>
 				</div>
-				<!-- 모달 -->
-					<div class="modal fade" id="myModal">
-						<div class="modal-dialog">
-							<div class="modal-content">
-					      
-							<!-- Modal Header -->
-							<div class="modal-header">
-								<h4 class="modal-title">알림</h4>
-								<button type="button" class="close" data-dismiss="modal">&times;</button>
-							</div>
-					        
-							<!-- Modal body -->
-							<div class="modal-body">
-								판매상품으로 등록되어 삭제할수없습니다.
-							</div>				        
-							</div>
-						</div>
-					</div>
+		
 			</div>
 		</div>
 

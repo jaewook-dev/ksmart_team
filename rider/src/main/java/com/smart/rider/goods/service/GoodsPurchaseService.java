@@ -18,6 +18,20 @@ public class GoodsPurchaseService {
 	@Autowired
 	private GoodsPurchaseMapper goodsPurchaseMapper;
 	
+	//삭제가능 매입리스트상세조회
+	public GoodsHapDTO yesPurchaseList(String purchaseCode) {
+		return goodsPurchaseMapper.yesPurchaseList(purchaseCode);
+	}
+	
+	//삭제가능 매입리스트
+	public List<GoodsHapDTO> purchaseYlist(String select ,String searchInput,String beginDate,String endDate) {
+		return goodsPurchaseMapper.purchaseYlist(select, searchInput, beginDate, endDate);
+	}
+	//삭제가능 매입리스트
+	public List<GoodsHapDTO> purchaseNlist(String select ,String searchInput,String beginDate,String endDate) {
+		return goodsPurchaseMapper.purchaseNlist(select, searchInput, beginDate, endDate);
+	}
+		
 	//매입삭제 메서드
 	public int purchaseDelete(String purchaseCode,String memberId,String memberPw) {
 		return goodsPurchaseMapper.purchaseDelete(purchaseCode, memberId, memberPw); 
