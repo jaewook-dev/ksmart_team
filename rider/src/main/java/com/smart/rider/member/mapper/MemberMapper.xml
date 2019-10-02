@@ -41,6 +41,8 @@
 			,member_insert_date AS memberInsertDate
 			,member_update_date AS memberUpdateDate
 		FROM member
+		ORDER BY member_id DESC 
+		LIMIT #{startRow},#{rowPerPage}
 	</select>
 	<!-- 19.09.16작성 -->
 	<select id="memberIdCheck" parameterType="String" resultType="int">
@@ -121,4 +123,10 @@
 			member_id = #{memberId}
 		and member_pw = #{memberPw}
 	</update>
+	<!-- 19.10.02페이지작업위한작성  -->
+	<select id="getMemberAllCount" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM member
+	</select>
 </mapper>
