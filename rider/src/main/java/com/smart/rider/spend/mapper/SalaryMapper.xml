@@ -12,11 +12,7 @@
 		<result column="spend_salary_overpay"	property="spendSalaryOverpay"/>
 		<result column="spend_salary_bonus" 	property="spendSalaryBonus"/>
 		<result column="spend_salary_free" 		property="spendSalaryFree"/>
-		<result column="spend_salary_employee" 	property="spendSalaryEmployee"/>
-		<result column="spend_salary_shop" 		property="spendSalaryShop"/>
-		<result column="spend_salary_insurance" property="spendSalaryInsurance"/>
 		<result column="spend_salary_total" 	property="spendSalaryTotal"/>
-		<result column="spend_salary_netpay" 	property="spendSalaryNetpay"/>
 		<result column="spend_salary_date" 		property="spendSalaryDate"/>
 	</resultMap>
 	
@@ -31,11 +27,7 @@
 			,ss.spend_salary_overpay
 			,ss.spend_salary_bonus
 			,ss.spend_salary_free
-			,ss.spend_salary_employee
-			,ss.spend_salary_shop
-			,ss.spend_salary_insurance
 			,ss.spend_salary_total
-			,ss.spend_salary_netpay
 			,ss.spend_salary_date	
 		FROM spend_salary ss, member m
 		WHERE ss.member_id = m.member_id and ss.contract_shop_code = #{contractShopCode}
@@ -66,7 +58,7 @@
 		ORDER BY ss.spend_salary_date DESC
 		
 		<if test="searchKey eq null">
-			limit 4;
+			limit 6;
 		</if>
 		
 	</select>
@@ -88,11 +80,7 @@
 			, spend_salary_overpay
 			, spend_salary_bonus
 			, spend_salary_free
-			, spend_salary_employee
-			, spend_salary_shop
-			, spend_salary_insurance
 			, spend_salary_total
-			, spend_salary_netpay
 			, spend_salary_date)
 		VALUES (
 			  #{spendSalaryCode}
@@ -102,11 +90,7 @@
 			, #{spendSalaryOverpay}
 			, #{spendSalaryBonus}
 			, #{spendSalaryFree}
-			, #{spendSalaryEmployee}
-			, #{spendSalaryShop}
-			, #{spendSalaryInsurance}
 			, #{spendSalaryTotal}
-			, #{spendSalaryNetpay}
 			, NOW())
 	</insert>
 

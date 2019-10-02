@@ -220,7 +220,7 @@
 								</div>
 								<div class="form-group">
 									<label>금액</label> 
-									<inputy
+									<input
 									class="form-control validate"
 									name="spendUtilityPay"
 									id="spendUtilityPay"
@@ -432,7 +432,7 @@
     	if($('#spendUtilityPay').val().length == 0){
     		alert('공백 입력불가');
     	} else if (isNaN(utilityPayCheck) == true) {
-    		alert('문자열 입력불가');
+    		alert('숫자만 입력하세요');
 		} else {
 			$('#utilityInsertForm').submit();
 		}

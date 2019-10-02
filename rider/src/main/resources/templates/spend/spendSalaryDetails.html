@@ -25,6 +25,7 @@
 					<!-- 공과금 내역 상세보기-->
 					<div class="col-12 tm-block-col">
 						<div class="tm-bg-primary-dark tm-block-details-salary">
+						<form action="/salaryUpdate" method="post">
 						<th:block th:each="details : ${salaryDetails}">
 							<h4 class="tm-block-title">등록내역 상세보기</h4>
 							<table class="table">
@@ -81,75 +82,13 @@
 											style="background-color: #54657D;">
 									</td>
 								</tr>
-								
 							</table>
-							
-							<hr>
-							<!-- 계산 버튼 -->
-							<button type="button" 
-									id="calculateSalary"
-									class="btn-sub btn-primary text-uppercase" 
-									style="float:right">
-									계산
-							</button>
-							
-							<br>
-							<br>
-							<br>
-							<br>
-							
-							<table class="table">
-								<tr>
-									<td class="text-center" style="width: 15%">4대보험 총액</td>
-									<td><input 
-											type="text" 
-											class="form-control validate"
-											name="spendSalaryInsurance"
-											id="spendSalaryInsurance"
-											th:value="${details.spendSalaryInsurance}" 
-											style="background-color: #54657D;" 
-											readonly>
-									</td>
-									<td class="text-center" style="width: 15%">근로자부담금</td>
-									<td><input 
-											type="text" 
-											class="form-control validate"
-											name="spendSalaryEmployee"
-											id="spendSalaryEmployee"
-											th:value="${details.spendSalaryEmployee}" 
-											style="background-color: #54657D;" 
-											readonly>
-									</td>
-								</tr>
-								<tr>
-									<td class="text-center" style="width: 15%">사업자부담금</td>
-									<td><input 
-											type="text" 
-											class="form-control validate"
-											name="spendSalaryShop"
-											id="spendSalaryShop"
-											th:value="${details.spendSalaryShop}"
-											style="background-color: #54657D;" 
-											readonly>
-									</td>
-									<td class="text-center" style="width: 15%">실수령액</td>
-									<td><input 
-											type="text" 
-											class="form-control validate"
-											name="spendSalaryNetpay"
-											id="spendSalaryNetpay"
-											th:value="${details.spendSalaryNetpay}"
-											style="background-color: #54657D;" 
-											readonly>
-									</td>
-								</tr>
-							</table>
-							
+														
 							<hr>
 
 							<table class="table">
 								<tr>
-									<td class="text-center" style="width: 15%">급여 지출 총액</td>
+									<td class="text-center" style="width: 15%">총액</td>
 									<td>
 										<input 
 											type="text" 
@@ -171,6 +110,7 @@
 										수정
 								</button>
 							</th:block>
+							</form>
 						</div>
 					</div>
 				</div>
