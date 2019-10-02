@@ -73,7 +73,7 @@
 									</td>
 									<td class="text-center">
 										<button type="button" class="tm-product-delete-link" 
-												id="deleteLink" data-toggle="modal" data-target="#myModal" data-memberId="${member.memberId}" style="cursor:pointer">
+												id="deleteLink" data-toggle="modal" data-target="#deleteModal" th:value="${member.memberId}" style="cursor:pointer">
 											<i class="far fa-trash-alt tm-product-delete-icon"></i>
 										</button>
 									</td>
@@ -104,8 +104,8 @@
 				</div>
 			</div>
 			<!-- The Modal -->
-			<div class="modal fade" id="myModal">
-				<div class="modal-dialog">
+			<div class="modal fade" id="deleteModal" role="dialog">
+				<div class="modal-dialog" role="document">
 					<div class="modal-content">
 						<!-- Modal Header -->
 						<div class="modal-header">
@@ -132,8 +132,8 @@
 <script>
 var memberId ="";
 $(document).ready(function() {     
-    $('#myModal').on('show.bs.modal', function(event) {          
-    	memberId = $(event.relatedTarget).data('memberId');
+    $('#deleteModal').on('show.bs.modal', function(event) {          
+    	memberId = $('#deleteLink').val();
     	console.log(memberId+"<---삭제할아이디");
     });
 });
