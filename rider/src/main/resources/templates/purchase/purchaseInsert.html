@@ -44,8 +44,9 @@
 									<select	class="custom-select tm-select-accounts" id="accountCode"
 										name="accountCode">
 											<option  value="">거래처 선택</option>
-											<th:block th:each="a : ${aList}">
-												<option th:value="${a.accountCode}">[[${pl.accountName}]]</option>
+											<th:block >
+												<option th:each=" py : ${pListYes} "  th:value="${py.accountCode}" >[[${py.accountName}]]</option>
+												<option th:each = "pn : ${pListNo}" th:value="${pn.accountCode}">[[${pn.accountName}]]</option>
 											</th:block>
 									</select>
 								</div>

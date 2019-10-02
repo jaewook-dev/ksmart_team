@@ -125,7 +125,7 @@
 		#{memberPw}
 	</delete>
 
-	<select id="getGoodsDbCodeMax" resultType="int">
+	<select id="getGoodsDbCodeMax" resultType="String">
 		SELECT 
 			MAX(LPAD(RIGHT(goods_database_code, 4)+1, 4 , '0')) 
 		FROM goods_database;

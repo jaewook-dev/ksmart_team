@@ -1,8 +1,10 @@
 package com.smart.rider.goods.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.smart.rider.account.dto.AccountDTO;
 import com.smart.rider.account.service.AccountService;
 import com.smart.rider.goods.dto.GoodsPurchaseDTO;
 import com.smart.rider.goods.dto.GoodsHapDTO;
@@ -104,15 +107,24 @@ public class GoodsPurchaseController {
 	//상품DB코드로 매입상품등록요청
 	//19-09-20 문영성
 	@GetMapping("/purchaseInsert")
-	public String purchaseInsert(@RequestParam(value="goodsDbCode")String goodsDbCode, Model model,HttpSession session
-									,String sCode,String sLevel) {
+	public String purchaseInsert(@RequestParam(value="goodsDbCode")String goodsDbCode, Model model,HttpSession session) {
 		//System.out.println(goodsDbCode+"<======매입등록시작 DB코드값 확인");
 		model.addAttribute("goodsDbCode", goodsdbservice.getGoodsDbCode(goodsDbCode));
 		
-	
-		/* 거래처 코드리스트 */
-		//System.out.println("어카운트 리스트값 넘어오는지ㅗ학인 매입컨트롤러"+ accountService.accountList((String)session.getAttribute("SCODE"), (String)session.getAttribute("SLEVEL")));
-		model.addAttribute("aList", accountService.accountList(sCode, sLevel));
+		String sCode = (String)session.getAttribute("SCODE");
+		String sLevel = (String)session.getAttribute("SLEVEL");
+		Map<String, Object> map =  accountService.accountList(sCode,sLevel);
+		@SuppressWarnings("unchecked")
+		List<AccountDTO> pListYes = (List<AccountDTO>)map.get("accountListYes");
+		@SuppressWarnings("unchecked")
+		List<AccountDTO> pListNo = (List<AccountDTO>)map.get("accountListNo");
+		map.get("accountListNo");
+		/* 거래처 코드리스트 */	
+		model.addAttribute("pListYes", pListYes);
+		model.addAttribute("pListNo", pListNo);
+		//System.out.println(pListYes + "<- Yes 담겨있는값");
+		//System.out.println(pListNo + "<-No 담겨있는값");
+
 		
 		return "purchase/purchaseInsert"; 
 	}
