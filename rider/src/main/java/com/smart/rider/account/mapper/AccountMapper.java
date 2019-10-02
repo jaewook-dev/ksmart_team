@@ -12,10 +12,10 @@ import com.smart.rider.shop.dto.SsrHapDTO;
 
 @Mapper
 public interface AccountMapper {
-
-	public List<AccountDTO> accountListYes();
-	
-	public List<AccountDTO> accountListNo();
+	//리스트 조회 시
+	public List<AccountDTO> accountListYes(String sCode);
+	//리스트 조회 시
+	public List<AccountDTO> accountListNo(String sCode);
 	
 	public String accountMaxCode();
 	

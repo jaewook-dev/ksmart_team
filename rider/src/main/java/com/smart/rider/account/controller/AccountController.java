@@ -25,10 +25,17 @@ public class AccountController {
 	private AccountService accountService;
 	
 	@GetMapping("/accountList")
-	public String account(Model model) {
+	public String account(Model model,HttpSession session) {
+		
+		
+		//세션값 받아오지
+		String sCode = (String)session.getAttribute("SCODE");
+		String sLevel = (String)session.getAttribute("SLEVEL");
+		System.out.println(sCode + "<-- 세션에 담긴 값");
+		System.out.println(sLevel + "<-- 세션에 담긴 값");
 		
 		//맵으로 받기
-		Map<String, Object> map =  accountService.accountList();
+		Map<String, Object> map =  accountService.accountList(sCode,sLevel);
 		//맵에 담겨져 있는 값 가져오기
 		map.get("accountListYes");
 		map.get("accountListNo");
