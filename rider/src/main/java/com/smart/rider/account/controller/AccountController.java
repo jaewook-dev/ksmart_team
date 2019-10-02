@@ -36,10 +36,7 @@ public class AccountController {
 		
 		//맵으로 받기
 		Map<String, Object> map =  accountService.accountList(sCode,sLevel);
-		//맵에 담겨져 있는 값 가져오기
-		map.get("accountListYes");
-		map.get("accountListNo");
-		
+
 		//SuppressWarnings("unchecked") 메소드상태가 경고 일 때 나오지 않게 해주기
 		@SuppressWarnings("unchecked")
 		List<AccountDTO> accountListYes = (List<AccountDTO>)map.get("accountListYes");

@@ -122,6 +122,7 @@ public class GoodsPurchaseController {
 		@SuppressWarnings("unchecked")
 		List<AccountDTO> pListNo = (List<AccountDTO>)map.get("accountListNo");
 		map.get("accountListNo");
+		
 		/* 거래처 코드리스트 */
 		model.addAttribute("pListYes", pListYes);
 		model.addAttribute("pListNo", pListNo);
