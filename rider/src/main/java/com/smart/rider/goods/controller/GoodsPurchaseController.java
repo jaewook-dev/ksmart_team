@@ -118,8 +118,14 @@ public class GoodsPurchaseController {
 		List<AccountDTO> pListYes = (List<AccountDTO>)map.get("accountListYes");
 		@SuppressWarnings("unchecked")
 		List<AccountDTO> pListNo = (List<AccountDTO>)map.get("accountListNo");
+
+		map.get("accountListNo");
+		
+		/* 거래처 코드리스트 */
+
 		map.get("accountListNo");
 		/* 거래처 코드리스트 */	
+
 		model.addAttribute("pListYes", pListYes);
 		model.addAttribute("pListNo", pListNo);
 		//System.out.println(pListYes + "<- Yes 담겨있는값");
