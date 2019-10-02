@@ -82,14 +82,11 @@ public class AccountController {
 									, @RequestParam(value = "searchName") String searchName
 									, @RequestParam(value = "beginDate") String beginDate
 									, @RequestParam(value = "endDate") String endDate
-									, Model model) {
-		//입력값 확인
-		System.out.println(select+"<--선택된 값");
-		System.out.println(searchName +"<-- 입력된 매장이름");
-		System.out.println(beginDate+"<--시작일자");
-		System.out.println(endDate+"<--종료일자");
+									, Model model
+									, HttpSession session) {
 		
-		Map<String,Object> map = accountService.accountSearchList(select, searchName, beginDate, endDate);
+		
+		Map<String,Object> map = accountService.accountSearchList(select, searchName, beginDate, endDate, session);
 		// model에 값 넣기
 		@SuppressWarnings("unchecked")
 		List<AccountDTO> accountListYes = (List<AccountDTO>)map.get("accountSearchListYes");

@@ -23,9 +23,9 @@ public interface AccountMapper {
 	
 	public int accountInsert(AccountDTO account);
 	
-	public List<AccountDTO> accountSearchListYes(String select,String searchName,String beginDate,String endDate);
+	public List<AccountDTO> accountSearchListYes(String select,String searchName,String beginDate,String endDate,String sCode);
 	
-	public List<AccountDTO> accountSearchListNo(String select,String searchName,String beginDate,String endDate);
+	public List<AccountDTO> accountSearchListNo(String select,String searchName,String beginDate,String endDate,String sCode);
 	
 	public List<AccountDTO> accountUpdate(String acCode);
 	
