@@ -35,7 +35,8 @@ public class SalaryController {
 	/**** 190102 재욱, Update : 지출_급여 수정 ****/
 	@PostMapping("/salaryUpdate")
 	public String salaryUpdate(JoinSalaryDTO joinSalaryDTO) {
-		System.out.println(joinSalaryDTO.toString() + " <-- joinSalaryDTO.toString() salaryUpdate SalaryController.java");
+		//System.out.println(joinSalaryDTO.toString() + " <-- joinSalaryDTO.toString() salaryUpdate SalaryController.java");
+		
 		return "redirect:/spendSalary";
 	}
 	

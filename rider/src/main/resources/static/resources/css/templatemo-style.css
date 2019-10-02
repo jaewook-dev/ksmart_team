@@ -78,9 +78,11 @@ button:focus {
   background-color: #567086;
   padding: 0;
 }
+
 .navbar .container {
   position: relative;
 }
+
 .tm-logout-icon {
   font-size: 1.5em;
 }
@@ -315,6 +317,10 @@ button:focus {
 .navbar-nav a:hover,
 .navbar-nav a:hover i {
   color: #f5a623;
+}
+.navbar-nav-admin a:hover,
+.navbar-nav-admin a:hover i {
+  color: #ffffff;
 }
 .nav-item {
   text-align: center;
