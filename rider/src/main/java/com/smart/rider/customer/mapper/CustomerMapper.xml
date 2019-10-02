@@ -15,6 +15,8 @@
 				,rental_customer_return 	AS rentalCustomerReturn
 		FROM 
 			rental_customer
+		ORDER BY rental_customer_code DESC 
+		LIMIT #{startRow},#{rowPerPage}
 	</select>
 	<select id="getCustomerList" parameterType="String" resultType="com.smart.rider.customer.dto.CustomerDTO">
 		SELECT 	 rental_customer_code 		AS rentalCustomerCode
