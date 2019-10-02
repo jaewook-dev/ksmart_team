@@ -36,6 +36,7 @@ public class SalaryController {
 	@PostMapping("/salaryUpdate")
 	public String salaryUpdate(JoinSalaryDTO joinSalaryDTO) {
 		//System.out.println(joinSalaryDTO.toString() + " <-- joinSalaryDTO.toString() salaryUpdate SalaryController.java");
+		salaryService.salaryUpdate(joinSalaryDTO);
 		
 		return "redirect:/spendSalary";
 	}
