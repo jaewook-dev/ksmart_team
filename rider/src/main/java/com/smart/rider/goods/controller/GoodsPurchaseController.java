@@ -1,9 +1,11 @@
 package com.smart.rider.goods.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.logging.log4j.core.pattern.AbstractStyleNameConverter.Magenta;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.smart.rider.account.dto.AccountDTO;
 import com.smart.rider.account.service.AccountService;
 import com.smart.rider.goods.dto.GoodsPurchaseDTO;
 import com.smart.rider.goods.dto.GoodsHapDTO;
@@ -108,10 +111,22 @@ public class GoodsPurchaseController {
 		//System.out.println(goodsDbCode+"<======매입등록시작 DB코드값 확인");
 		model.addAttribute("goodsDbCode", goodsdbservice.getGoodsDbCode(goodsDbCode));
 		
-		String sCode = (String)session.getAttribute("sCode");
-		String sLevel = (String)session.getAttribute("sLevel");
+
+		
+		
+		String sCode = (String)session.getAttribute("SCODE");
+		String sLevel = (String)session.getAttribute("SLEVEL");
+		Map<String, Object> map =  accountService.accountList(sCode,sLevel);
+		@SuppressWarnings("unchecked")
+		List<AccountDTO> pListYes = (List<AccountDTO>)map.get("accountListYes");
+		@SuppressWarnings("unchecked")
+		List<AccountDTO> pListNo = (List<AccountDTO>)map.get("accountListNo");
+		map.get("accountListNo");
 		/* 거래처 코드리스트 */
-		model.addAttribute("pList", accountService.accountList(sCode, sLevel));
+		model.addAttribute("pListYes", pListYes);
+		model.addAttribute("pListNo", pListNo);
+		System.out.println(pListYes + "<- Yes 담겨있는값");
+		System.out.println(pListNo + "<-No 담겨있는값");
 		
 		return "purchase/purchaseInsert"; 
 	}
