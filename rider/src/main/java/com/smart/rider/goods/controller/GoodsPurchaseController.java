@@ -78,7 +78,7 @@ public class GoodsPurchaseController {
 										,@RequestParam(value="beginDate")String beginDate
 										,@RequestParam(value="endDate")String endDate
 										,Model model) {
-		List<GoodsPurchaseDTO> search = goodsPurchaseService.purchaseSearchList(select, searchInput, beginDate, endDate);
+		//List<GoodsPurchaseDTO> search = goodsPurchaseService.purchaseSearchList(select, searchInput, beginDate, endDate);
 		
 		List<GoodsHapDTO> yList = goodsPurchaseService.purchaseYlist(select, searchInput, beginDate, endDate);
 		model.addAttribute("yList",yList);
@@ -89,7 +89,7 @@ public class GoodsPurchaseController {
 		//System.out.println(beginDate + " <-- beginDate goodsSearchList GoodsController.java");
 		//System.out.println(endDate + " <-- endDate goodsSearchList GoodsController.java");
 		//System.out.println("검색ㄷ확인,,,,,,,,,,,,,,,,,,,,,,,,,,"+search);
-		model.addAttribute("hList", search);
+		//model.addAttribute("hList", search);
 		
 		if(yList.size()==0 && nList.size()==0 ) {
 			model.addAttribute("alert", "검색 결과가 없습니다");

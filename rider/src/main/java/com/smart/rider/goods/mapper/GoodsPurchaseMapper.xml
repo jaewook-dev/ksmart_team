@@ -39,7 +39,7 @@
 		AND p.goods_database_code = gb.goods_database_code
 		<if test="searchInput neq null and searchInput neq ''.toString()">
 			AND
-			p.${select} LIKE CONCAT('%',#{searchInput},'%')
+			${select} LIKE CONCAT('%',#{searchInput},'%')
 		</if>
 		<if test="beginDate neq ''.toString() and endDate eq ''.toString()">
 			AND
@@ -69,7 +69,7 @@
 				WHERE g.purchase_code IS NULL 
 		<if test="searchInput neq null and searchInput neq ''.toString()">
 			AND
-			p.${select} LIKE CONCAT('%',#{searchInput},'%')
+			${select} LIKE CONCAT('%',#{searchInput},'%')
 		</if>
 		<if test="beginDate neq ''.toString() and endDate eq ''.toString()">
 			AND
