@@ -1,6 +1,7 @@
 package com.smart.rider.member.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -11,7 +12,7 @@ public interface MemberMapper {
 
 	public int memberInsert(MemberDTO memberdto);
 	
-	public List<MemberDTO> memberList();
+	public List<MemberDTO> memberList(Map<String, Object> map);
 	//19.09.16작성
 	public int memberIdCheck(String memberId);
 	
@@ -26,4 +27,6 @@ public interface MemberMapper {
 	public int levelDelete(String memberId);
 	//19.09.25작성
 	public int changePassword(String memberId, String memberPw, String memberPw2);
+	//19.10.02 페이지작업위한 작성
+	public int getMemberAllCount();
 }
