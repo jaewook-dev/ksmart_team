@@ -9,7 +9,12 @@ import com.smart.rider.goods.dto.GoodsPurchaseDTO;
 
 @Mapper
 public interface GoodsPurchaseMapper {
-	
+	//삭제가능한 매입리스트상세조회
+	public GoodsHapDTO yesPurchaseList(String purchaseCode);
+	//삭제불가한 매입리스트
+	public List<GoodsHapDTO> purchaseNlist(String select ,String searchInput,String beginDate,String endDate);
+	//삭제가능한 매입리스트
+	public List<GoodsHapDTO> purchaseYlist(String select ,String searchInput,String beginDate,String endDate);
 	//코드자동증가메서드
 	public String purchaseCodeCount();
 	//매입inset

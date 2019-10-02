@@ -44,6 +44,22 @@
 	
 	<!--19.09.24 재욱 추가 bootstrapcdn -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+	
+	<!--191002 재욱, 관리자 일때 헤더 색 변경 -->
+	<style type="text/css" th:if="${session.SLEVEL eq '관리자'}"> 
+		.navbar {
+			height: 100px;
+		  	background-color: #f5a623;
+		  	padding: 0;
+		}
+		
+		.navbar-nav a:hover,
+		.navbar-nav a:hover i {
+  			color: #ffffff;
+		}
+	</style>
+	
+</head>
 
 
 	<!-- 사용자 css -->
