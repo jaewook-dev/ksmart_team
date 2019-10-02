@@ -80,19 +80,24 @@
 								</tr>
 							</tbody>
 						</table>
+						<hr>
+						<div class="text-center">
 						<!-- 맨처음 -->
-						<a th:href="@{/memberList}">[처음]</a>
+						<a class="text-white" th:href="@{/memberList}">[처음]</a>
 						<!-- 이전 -->
-						<a th:if="${currentPage > 1}" th:href="@{/memberList(currentPage=${currentPage - 1})}">[이전]</a>
+						<a class="text-white" th:if="${currentPage > 1}" 
+						   th:href="@{/memberList(currentPage=${currentPage - 1})}">[이전]</a>
 						<th:block th:each="num:${#numbers.sequence(startPageNum, lastPageNum)}">
-							<span th:if="${currentPage == num}" th:text="${'['+num+']'}"></span>
-							<a th:unless="${currentPage == num}" th:text="${'['+num+']'}"
+							<span class="text-info" th:if="${currentPage == num}" th:text="${'['+num+']'}"></span>
+							<a class="text-white" th:unless="${currentPage == num}" th:text="${'['+num+']'}"
 							   th:href="@{/memberList(currentPage=${num})}"></a>
 						</th:block>
 						<!-- 다음 -->
-						<a th:if="${currentPage < lastPage}" th:href="@{/memberList(currentPage=${currentPage + 1})}">[다음]</a>
+						<a class="text-white" th:if="${currentPage < lastPage}" 
+						   th:href="@{/memberList(currentPage=${currentPage + 1})}">[다음]</a>
 						<!-- 맨마지막 -->
-						<a th:href="@{/memberList(currentPage=${lastPage})}">[마지막]</a>
+						<a class="text-white" th:href="@{/memberList(currentPage=${lastPage})}">[마지막]</a>
+						</div>
 					</div>
 				</div>
 			</div>
