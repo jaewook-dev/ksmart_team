@@ -12,13 +12,22 @@
 		<result column="spend_salary_overpay"	property="spendSalaryOverpay"/>
 		<result column="spend_salary_bonus" 	property="spendSalaryBonus"/>
 		<result column="spend_salary_free" 		property="spendSalaryFree"/>
-		<result column="spend_salary_employee" 	property="spendSalaryEmployee"/>
-		<result column="spend_salary_shop" 		property="spendSalaryShop"/>
-		<result column="spend_salary_insurance" property="spendSalaryInsurance"/>
 		<result column="spend_salary_total" 	property="spendSalaryTotal"/>
-		<result column="spend_salary_netpay" 	property="spendSalaryNetpay"/>
 		<result column="spend_salary_date" 		property="spendSalaryDate"/>
 	</resultMap>
+	
+	<!-- 191002 재욱, Update : 지출_급여 수정 -->
+	<update id="salaryUpdate" parameterType="com.smart.rider.spend.dto.JoinSalaryDTO">
+		UPDATE spend_salary
+			SET
+				 spend_salary_pay=#{spendSalaryPay}
+			   , spend_salary_overpay=#{spendSalaryOverpay}
+			   , spend_salary_bonus=#{spendSalaryBonus}
+			   , spend_salary_free=#{spendSalaryFree}
+			   , spend_salary_total=#{spendSalaryTotal}
+		WHERE spend_salary_code = #{spendSalaryCode};
+	</update>
+	
 	
 	<!-- 190930 재욱, Read : 지출_급여 등록 내역 -->
 	<select id="salaryList" resultMap="salaryMap" parameterType="java.util.Map">
@@ -31,11 +40,7 @@
 			,ss.spend_salary_overpay
 			,ss.spend_salary_bonus
 			,ss.spend_salary_free
-			,ss.spend_salary_employee
-			,ss.spend_salary_shop
-			,ss.spend_salary_insurance
 			,ss.spend_salary_total
-			,ss.spend_salary_netpay
 			,ss.spend_salary_date	
 		FROM spend_salary ss, member m
 		WHERE ss.member_id = m.member_id and ss.contract_shop_code = #{contractShopCode}
@@ -66,7 +71,7 @@
 		ORDER BY ss.spend_salary_date DESC
 		
 		<if test="searchKey eq null">
-			limit 4;
+			limit 6;
 		</if>
 		
 	</select>
@@ -88,11 +93,7 @@
 			, spend_salary_overpay
 			, spend_salary_bonus
 			, spend_salary_free
-			, spend_salary_employee
-			, spend_salary_shop
-			, spend_salary_insurance
 			, spend_salary_total
-			, spend_salary_netpay
 			, spend_salary_date)
 		VALUES (
 			  #{spendSalaryCode}
@@ -102,11 +103,7 @@
 			, #{spendSalaryOverpay}
 			, #{spendSalaryBonus}
 			, #{spendSalaryFree}
-			, #{spendSalaryEmployee}
-			, #{spendSalaryShop}
-			, #{spendSalaryInsurance}
 			, #{spendSalaryTotal}
-			, #{spendSalaryNetpay}
 			, NOW())
 	</insert>
 

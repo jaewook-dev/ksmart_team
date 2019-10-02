@@ -32,6 +32,16 @@ public class SalaryController {
 	@Autowired
 	private MainService mainService;
 	
+	/**** 190102 재욱, Update : 지출_급여 수정 ****/
+	@PostMapping("/salaryUpdate")
+	public String salaryUpdate(JoinSalaryDTO joinSalaryDTO) {
+		//System.out.println(joinSalaryDTO.toString() + " <-- joinSalaryDTO.toString() salaryUpdate SalaryController.java");
+		salaryService.salaryUpdate(joinSalaryDTO);
+		
+		return "redirect:/spendSalary";
+	}
+	
+	
 	/**** 190930 재욱, Read : 지출_급여 상세보기 ****/
 	@GetMapping("/spendSalaryDetails")
 	public String spendSalaryDetails(@RequestParam(value = "spendSalaryCode") String spendSalaryCode
@@ -52,7 +62,7 @@ public class SalaryController {
 	public String salaryInsert(@RequestParam(value = "masterShopCode", required = false, defaultValue = "SR0000") String masterShopCode 
 							, JoinSalaryDTO salaryDTO
 							, HttpSession session) {
-		//System.out.println(salaryDTO + " <-- salaryDTO salaryInsert() SalaryController.java");
+		System.out.println(salaryDTO.toString() + " <-- salaryDTO.toString() salaryInsert() SalaryController.java");
 		
 		String contractShopCode = (String)session.getAttribute("SCODE");
 		String userLevel = (String)session.getAttribute("SLEVEL");
