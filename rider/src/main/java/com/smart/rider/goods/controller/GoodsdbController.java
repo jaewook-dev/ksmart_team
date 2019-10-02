@@ -30,10 +30,10 @@ public class GoodsdbController {
 									,@RequestParam(value="beginDate")String beginDate
 									,@RequestParam(value="endDate")String endDate
 									,Model model) {
-		System.out.println(select + " <-- select goodsDbSearchList GoodsdbController.java");
-		System.out.println(searchInput + " <-- searchInput goodsDbSearchList GoodsdbController.java");
-		System.out.println(beginDate + " <-- beginDate goodsDbSearchList GoodsdbController.java");
-		System.out.println(endDate + " <-- endDate goodsDbSearchList GoodsdbController.java");
+		//System.out.println(select + " <-- select goodsDbSearchList GoodsdbController.java");
+		//System.out.println(searchInput + " <-- searchInput goodsDbSearchList GoodsdbController.java");
+		//System.out.println(beginDate + " <-- beginDate goodsDbSearchList GoodsdbController.java");
+		//System.out.println(endDate + " <-- endDate goodsDbSearchList GoodsdbController.java");
 		
 		List<GoodsdbDTO> search = goodsdbservice.goodsDbSearchList(select, searchInput, beginDate, endDate);
 		model.addAttribute("gList", search);

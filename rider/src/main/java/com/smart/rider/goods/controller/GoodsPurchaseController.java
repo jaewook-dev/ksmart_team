@@ -31,6 +31,16 @@ public class GoodsPurchaseController {
 	@Autowired
 	private AccountService accountService;
 	
+	//삭제가능한매입리스트상세보기
+	@GetMapping("/yesPurchaseList")
+	public String yesGoodsDbList(@RequestParam(value="purchaseCode")String purchaseCode,Model model) {
+			
+		model.addAttribute("y", goodsPurchaseService.yesPurchaseList(purchaseCode));
+		
+		return "purchase/yesPurchaseList";
+		
+	}
+	
 	//매입 삭제
 	@GetMapping("/purchaseDelete")
 	public String purchaseDelete(@RequestParam(value="purchaseCode")String purchaseCode,
@@ -69,13 +79,19 @@ public class GoodsPurchaseController {
 										,@RequestParam(value="endDate")String endDate
 										,Model model) {
 		List<GoodsPurchaseDTO> search = goodsPurchaseService.purchaseSearchList(select, searchInput, beginDate, endDate);
+		
+		List<GoodsHapDTO> yList = goodsPurchaseService.purchaseYlist(select, searchInput, beginDate, endDate);
+		model.addAttribute("yList",yList);
+		List<GoodsHapDTO> nList = goodsPurchaseService.purchaseNlist(select, searchInput, beginDate, endDate);		
+		model.addAttribute("nList",nList);
 		//System.out.println(select + " <-- select goodsSearchList GoodsController.java");
 		//System.out.println(searchInput + " <-- searchInput goodsSearchList GoodsController.java");
 		//System.out.println(beginDate + " <-- beginDate goodsSearchList GoodsController.java");
 		//System.out.println(endDate + " <-- endDate goodsSearchList GoodsController.java");
 		//System.out.println("검색ㄷ확인,,,,,,,,,,,,,,,,,,,,,,,,,,"+search);
-		model.addAttribute("hList", search);		
-		if(search.size()==0) {
+		model.addAttribute("hList", search);
+		
+		if(yList.size()==0 && nList.size()==0 ) {
 			model.addAttribute("alert", "검색 결과가 없습니다");
 		}
 		
@@ -93,8 +109,23 @@ public class GoodsPurchaseController {
 	//매입리스트 
 	@GetMapping("/purchaseList")
 	public String purchase(Model model) {
+		String select = null;
+		String searchInput = "";
+		String beginDate = "";
+		String endDate = "";
+		
+		
+		List<GoodsHapDTO> yList = goodsPurchaseService.purchaseYlist(select, searchInput, beginDate, endDate);
+		model.addAttribute("yList",yList);
+		List<GoodsHapDTO> nList = goodsPurchaseService.purchaseNlist(select, searchInput, beginDate, endDate);		
+		model.addAttribute("nList",nList);
+		
 		List<GoodsHapDTO> hList = goodsPurchaseService.purchaseList();
 		//System.out.println(model.addAttribute("hList", hList));
+		
+		/*
+		 * model.addAttribute("yList",yList); model.addAttribute("nList",nList);
+		 */
 		
 		model.addAttribute("hList",hList);
 	

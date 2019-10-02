@@ -73,7 +73,7 @@
 								</thead>
 								<tbody>
 									
-									
+								<!-- 	
 									<tr th:each="pl: ${hList}">
 										<th th:text="${pl.goodsDbName}"></th>
 										<th th:text="${pl.goodsDbCategory}"></th>																			
@@ -86,7 +86,40 @@
 												class="fas fa-check tm-product-check-icon"></i>
 										</a></td>										
 
+									</tr> -->
+									
+									<!-- 삭제가능한 매입리스트  -->
+									<tr th:each="y: ${yList}">
+										<th th:text="${y.goodsDbName}"></th>
+										<th th:text="${y.goodsDbCategory}"></th>																			
+										<th th:text="${y.purchasePay}"></th>
+										<th th:text="${y.purchaseState}"></th>
+										<th th:text="${y.purchaseDate}"></th>
+										<td>
+										<a
+											th:href="@{/yesPurchaseList(purchaseCode=${y.purchaseCode})}"
+											class="tm-product-delete-link"> <i
+												class="fas fa-check tm-product-check-icon"></i>
+										</a>
+										</td>
 									</tr>
+									
+									<!-- 삭제불가한 리스트 -->
+									<tr th:each="n: ${nList}">
+										<th th:text="${n.goodsDbName}"></th>
+										<th th:text="${n.goodsDbCategory}"></th>																			
+										<th th:text="${n.purchasePay}"></th>
+										<th th:text="${n.purchaseState}"></th>
+										<th th:text="${n.purchaseDate}"></th>
+										<td><a
+											th:href="@{/getPurchaseList(purchaseCode=${n.purchaseCode})}"
+											class="tm-product-delete-link"> <i
+												class="fas fa-check tm-product-check-icon"></i>
+										</a></td>										
+
+									</tr>
+									
+									 
 									<th:block th:if="${alert} neq null">
 										<tr class="text-center">
 											<td colspan="7" th:text="${alert}"></td>
