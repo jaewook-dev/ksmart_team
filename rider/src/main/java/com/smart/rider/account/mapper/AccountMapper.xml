@@ -31,7 +31,7 @@
 		FROM account ac LEFT JOIN purchase pu
 		ON ac.account_code = pu.account_code
 		WHERE pu.account_code IS null
-		<if test="sCode neq A.toString()">
+		<if test="sCode neq 'A'.toString()">
         	AND 
         		ac.contract_shop_code  = #{sCode}
         </if>
@@ -50,7 +50,7 @@
 			,ac.account_date
 		FROM account ac, purchase pu
 		WHERE ac.account_code = pu.account_code
-	 	<if test="sCode neq A.toString()">
+	 	<if test="sCode neq 'A'.toString()">
         	AND 
         		ac.contract_shop_code  = #{sCode}
         </if>

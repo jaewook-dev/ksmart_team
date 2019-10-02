@@ -30,22 +30,18 @@ public class AccountService {
 		//맵으로 선언
 		Map<String,Object> map = new HashMap<String,Object>();
 		
-		if(sLevel == "관리자") {
+		if(sLevel.equals("관리자")) {
 			//map 넣을 내용을 String,Object 형식으로 넣어준다.
 			sCode = "A";
-			
 			map.put("accountListYes", accountmapper.accountListYes(sCode));
 			map.put("accountListNo", accountmapper.accountListNo(sCode));
 			
 			return map;
 			
-		}else if(sLevel != "관리자") {
-			
-			map.put("accountListYes", accountmapper.accountListYes(sCode));
-			map.put("accountListNo", accountmapper.accountListNo(sCode));
 		}
 		
-
+		map.put("accountListYes", accountmapper.accountListYes(sCode));
+		map.put("accountListNo", accountmapper.accountListNo(sCode));
 
 	
 	

@@ -65,9 +65,12 @@ public class GoodsdbService {
 		goodsdbdto.setMemberId((String) session.getAttribute("SID"));
 		
 		if(goodsDbCode.equals("GDnull")) {
+			
 			goodsDbCode = "GD0001";
 		}
+		
 		goodsdbdto.setGoodsDbCode(goodsDbCode);
+		
 		return goodsdbmapper.goodsDbInsert(goodsdbdto);
 	}
 
