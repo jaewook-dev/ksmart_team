@@ -10,7 +10,7 @@
 		<result column="member_name" 			property="memberName"/>
 		<result column="spend_salary_pay" 		property="spendSalaryPay"/>
 		<result column="spend_salary_overpay"	property="spendSalaryOverpay"/>
-		<result column="spend_salary_bouns" 	property="spendSalaryBouns"/>
+		<result column="spend_salary_bonus" 	property="spendSalaryBonus"/>
 		<result column="spend_salary_free" 		property="spendSalaryFree"/>
 		<result column="spend_salary_employee" 	property="spendSalaryEmployee"/>
 		<result column="spend_salary_shop" 		property="spendSalaryShop"/>
@@ -29,7 +29,7 @@
 			,ss.member_id
 			,ss.spend_salary_pay
 			,ss.spend_salary_overpay
-			,ss.spend_salary_bouns
+			,ss.spend_salary_bonus
 			,ss.spend_salary_free
 			,ss.spend_salary_employee
 			,ss.spend_salary_shop
@@ -39,6 +39,11 @@
 			,ss.spend_salary_date	
 		FROM spend_salary ss, member m
 		WHERE ss.member_id = m.member_id and ss.contract_shop_code = #{contractShopCode}
+		
+		<if test="spendSalaryCode neq null and spendSalaryCode neq ''.toString()">
+			AND
+				spend_salary_code = #{spendSalaryCode}
+		</if>
 		
 		<!-- 지출_급여 검색 조건문 -->
         <if test="searchKey neq null and searchValue neq ''.toString()">
@@ -58,7 +63,11 @@
         		ss.spend_salary_date  between #{beginDate} and #{endDate}
         </if>
         
-		ORDER BY ss.spend_salary_date DESC;
+		ORDER BY ss.spend_salary_date DESC
+		
+		<if test="searchKey eq null">
+			limit 4;
+		</if>
 		
 	</select>
 	
@@ -77,7 +86,7 @@
 			, member_id
 			, spend_salary_pay
 			, spend_salary_overpay
-			, spend_salary_bouns
+			, spend_salary_bonus
 			, spend_salary_free
 			, spend_salary_employee
 			, spend_salary_shop
@@ -91,7 +100,7 @@
 			, #{memberId}
 			, #{spendSalaryPay}
 			, #{spendSalaryOverpay}
-			, #{spendSalaryBouns}
+			, #{spendSalaryBonus}
 			, #{spendSalaryFree}
 			, #{spendSalaryEmployee}
 			, #{spendSalaryShop}

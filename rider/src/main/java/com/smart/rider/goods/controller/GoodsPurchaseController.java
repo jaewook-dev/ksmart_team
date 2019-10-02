@@ -104,12 +104,14 @@ public class GoodsPurchaseController {
 	//상품DB코드로 매입상품등록하기
 	//19-09-20 문영성
 	@GetMapping("/purchaseInsert")
-	public String purchaseInsert(@RequestParam(value="goodsDbCode")String goodsDbCode, Model model) {
+	public String purchaseInsert(@RequestParam(value="goodsDbCode")String goodsDbCode, Model model,HttpSession session) {
 		//System.out.println(goodsDbCode+"<======매입등록시작 DB코드값 확인");
 		model.addAttribute("goodsDbCode", goodsdbservice.getGoodsDbCode(goodsDbCode));
 		
+		String sCode = (String)session.getAttribute("sCode");
+		String sLevel = (String)session.getAttribute("sLevel");
 		/* 거래처 코드리스트 */
-		model.addAttribute("pList", accountService.accountList());
+		model.addAttribute("pList", accountService.accountList(sCode, sLevel));
 		
 		return "purchase/purchaseInsert"; 
 	}

@@ -28,10 +28,9 @@
 </th:block>
 <th:block layout:fragment="customScript">
 <script type="text/javascript">
-
-		opener.document.location.reload();
-
-		self.close();
+function success() {
+	self.close();
+}
 </script>
 </th:block>
 </html>

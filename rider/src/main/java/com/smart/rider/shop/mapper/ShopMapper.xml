@@ -108,5 +108,16 @@
 	
 	
 	</select>
+	<update id="memberUpdate" parameterType="String"> 
+	
+	UPDATE member
+	SET
+		contract_shop_code=#{getrelationCode}
+	WHERE member_id=#{getrelationId}
+	
+	
+	</update>
+	
+	
 </mapper>
 

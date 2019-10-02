@@ -1,6 +1,7 @@
 package com.smart.rider.work.service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,11 +13,10 @@ import com.smart.rider.work.dto.WorkDTO;
 import com.smart.rider.work.mapper.WorkMapper;
 
 @Service
-public class WorkService {
+public class WorkService{
 	
 	@Autowired
 	private WorkMapper workMapper;
-	private MemberMapper memberMapper;
 	
 	public Map<String, Object> employeeCheck(MemberDTO memberdto) {
 		
@@ -27,13 +27,8 @@ public class WorkService {
 		MemberDTO employeeCheck = workMapper.employeeCheck(memberdto);
 		
 		if(employeeCheck == null) {
-			MemberDTO memberIdCheck = memberMapper.getMemberList(memberdto.getMemberId());
-			if(memberIdCheck == null) {
-				result = "등록된 아이디의 정보가 없습니다.";
-			}else {
-				result = "비밀번호가 일치하지 않습니다.";
-			}
-
+			System.out.println(employeeCheck +"<--입력값");
+			result = "아이디와 비밀번호를 확인해주세요!";
 		}else {
 			result = "확인";
 			map.put("checkEmployee", employeeCheck);
@@ -51,5 +46,13 @@ public class WorkService {
 		}
 		workdto.setWorkCode(workCode);
 		return workMapper.goInsert(workdto);
+	}
+	/***********************19.10.01 작성******************************8*/
+	public List<WorkDTO> workList() {
+		return workMapper.workList();
+	}
+
+	public int leaveInsert(WorkDTO workdto) {
+		return workMapper.leaveInsert(workdto);
 	}
 }

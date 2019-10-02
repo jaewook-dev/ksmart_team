@@ -38,4 +38,7 @@ public interface ShopMapper {
 	
 	//posDTO 조회
 	public List<PosDTO> posList();
+	
+	//member에 계약매장코드 수정하기
+	public int memberUpdate(String getrelationCode,String getrelationId);
 }

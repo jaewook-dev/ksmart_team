@@ -29,23 +29,26 @@ public class ContractController {
 		model.addAttribute("unitNew", contractService.unitNew());
 		System.out.println(UnitDTO.toString());
 		
-		//최근 계약 단가표 코드 session으로 받아오기
-		String getContractUnitCode = UnitDTO.get(0).getContractUnitCode();
-		System.out.println(getContractUnitCode);
-		session.setAttribute("SCUC",getContractUnitCode);
-		
-		
+
+			
 		return "/contract/contract";
 	}
 	
 	@GetMapping("/agreement")
-	public String agreement(Model model) {
+	public String agreement(Model model,HttpSession session) {
 			
 		//입력값 확인
 		System.out.println("=====test=====");
 		System.out.println("agreement:"+contractService.agreementList());
 		model.addAttribute("agreement", contractService.agreementList());
 
+		List<UnitDTO>  UnitDTO = contractService.unitNew();
+		//최근 계약 단가표 코드 session으로 받아오기
+		String getContractUnitCode = UnitDTO.get(0).getContractUnitCode();
+		System.out.println(getContractUnitCode + "<--최근 단가표 값 받는가 확인");
+		session.setAttribute("SCUC",getContractUnitCode);
+		
+		
 		return "/contract/agreement";
 	}
 	
