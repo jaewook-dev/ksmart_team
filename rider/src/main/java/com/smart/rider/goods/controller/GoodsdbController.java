@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.smart.rider.goods.dto.GoodsdbDTO;
-import com.smart.rider.goods.mapper.GoodsdbMapper;
+
 import com.smart.rider.goods.service.GoodsdbService;
 
 @Controller
@@ -33,6 +33,7 @@ public class GoodsdbController {
 		//System.out.println(searchInput + " <-- searchInput goodsDbSearchList GoodsdbController.java");
 		//System.out.println(beginDate + " <-- beginDate goodsDbSearchList GoodsdbController.java");
 		//System.out.println(endDate + " <-- endDate goodsDbSearchList GoodsdbController.java");
+		
 		List<GoodsdbDTO> search = goodsdbservice.goodsDbSearchList(select, searchInput, beginDate, endDate);
 		model.addAttribute("gList", search);
 		//System.out.println(search+"<==========검색확인");
@@ -109,18 +110,22 @@ public class GoodsdbController {
 	//04상품DB리스트 조회
 		@GetMapping("/goodsDbList")
 		public String goodsDbList(Model model) {
-			String select = null;
-			String searchInput = "";
-			String beginDate = "";
-			String endDate = "";
+			//String select = null;
+			//String searchInput = "";
+			//String beginDate = "";
+			//String endDate = "";
 			
 				
-			List<GoodsdbDTO> yList = goodsdbservice.goodsDbYlist(select, searchInput, beginDate, endDate);
+			//List<GoodsdbDTO> yList = goodsdbservice.goodsDbYlist(select, searchInput, beginDate, endDate);
 			//System.out.println("삭제가능리스트 확인"+yList);
+			
 			//model.addAttribute("yList", yList);
-			List<GoodsdbDTO> nList = goodsdbservice.goodsDbNlist(select, searchInput, beginDate, endDate);
+			
+			//List<GoodsdbDTO> nList = goodsdbservice.goodsDbNlist(select, searchInput, beginDate, endDate);
 			//System.out.println("삭제불가능한 리스트"+nList);
+			
 			//model.addAttribute("nList", nList);
+			
 			List<GoodsdbDTO> gList = goodsdbservice.goodsDbList();
 			//System.out.println("전체리스트"+gList);
 			model.addAttribute("gList", gList);
