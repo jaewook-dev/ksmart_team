@@ -17,7 +17,7 @@ public interface GoodsdbMapper {
 	public int goodsDbDelete(String goodsDbCode,String memberId,String memberPw);
 	
 	//상품코드자동추가하기위한 메서드 문영성
-	public int getGoodsDbCodeMax();
+	public String getGoodsDbCodeMax();
 	
 	//상품DB등록하기 
 	//날짜 19-09-10 문영성

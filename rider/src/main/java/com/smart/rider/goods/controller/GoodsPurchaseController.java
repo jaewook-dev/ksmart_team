@@ -5,7 +5,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.logging.log4j.core.pattern.AbstractStyleNameConverter.Magenta;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -104,15 +104,12 @@ public class GoodsPurchaseController {
 
 	
 	
-	//상품DB코드로 매입상품등록하기
+	//상품DB코드로 매입상품등록요청
 	//19-09-20 문영성
 	@GetMapping("/purchaseInsert")
 	public String purchaseInsert(@RequestParam(value="goodsDbCode")String goodsDbCode, Model model,HttpSession session) {
 		//System.out.println(goodsDbCode+"<======매입등록시작 DB코드값 확인");
 		model.addAttribute("goodsDbCode", goodsdbservice.getGoodsDbCode(goodsDbCode));
-		
-
-		
 		
 		String sCode = (String)session.getAttribute("SCODE");
 		String sLevel = (String)session.getAttribute("SLEVEL");
@@ -121,16 +118,23 @@ public class GoodsPurchaseController {
 		List<AccountDTO> pListYes = (List<AccountDTO>)map.get("accountListYes");
 		@SuppressWarnings("unchecked")
 		List<AccountDTO> pListNo = (List<AccountDTO>)map.get("accountListNo");
+
 		map.get("accountListNo");
 		
 		/* 거래처 코드리스트 */
+
+		map.get("accountListNo");
+		/* 거래처 코드리스트 */	
+
 		model.addAttribute("pListYes", pListYes);
 		model.addAttribute("pListNo", pListNo);
-		System.out.println(pListYes + "<- Yes 담겨있는값");
-		System.out.println(pListNo + "<-No 담겨있는값");
+		//System.out.println(pListYes + "<- Yes 담겨있는값");
+		//System.out.println(pListNo + "<-No 담겨있는값");
+
 		
 		return "purchase/purchaseInsert"; 
 	}
+	//상품등록 
 	@PostMapping("/purchaseInsert")
 	public String purchaseInsert(GoodsPurchaseDTO goodsPurchaseDto,HttpSession session, Model model) {
 		/* System.out.println(goodsPurchaseDto+"<<<<<<<<<<<<<<<<<<<<<<매입insert 확인"); */
