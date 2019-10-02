@@ -17,7 +17,8 @@ public class GoodsHapDTO {
 	private String goodsDbBattery;
 	private String goodsDbTime;
 	private String goodsDbMade;
-	private String goodsDbDescription;	
+	private String goodsDbDescription;
+	private String goodsDbDate;
 	private String goodsCode;	
 	private String purchaseCode;
 	private String contractShopCode;
@@ -61,6 +62,8 @@ public class GoodsHapDTO {
 	
 	
 	
+
+	
 	@Override
 	public String toString() {
 		return "GoodsHapDTO [goodsDbCode=" + goodsDbCode + ", memberId=" + memberId + ", goodsDbName=" + goodsDbName
@@ -69,24 +72,28 @@ public class GoodsHapDTO {
 				+ ", goodsDbSize=" + goodsDbSize + ", goodsDbNation=" + goodsDbNation + ", goodsDbLoad=" + goodsDbLoad
 				+ ", goodsDbDistance=" + goodsDbDistance + ", goodsDbBattery=" + goodsDbBattery + ", goodsDbTime="
 				+ goodsDbTime + ", goodsDbMade=" + goodsDbMade + ", goodsDbDescription=" + goodsDbDescription
-				+ ", goodsCode=" + goodsCode + ", purchaseCode=" + purchaseCode + ", contractShopCode="
-				+ contractShopCode + ", goodsPay=" + goodsPay + ", goodsPosition=" + goodsPosition + ", goodsRental="
-				+ goodsRental + ", goodsState=" + goodsState + ", goodsCompletionState=" + goodsCompletionState
-				+ ", goodsRentalState=" + goodsRentalState + ", goodsInventoryDate=" + goodsInventoryDate
-				+ ", goodsDate=" + goodsDate + ", accountCode=" + accountCode + ", purchasePay=" + purchasePay
-				+ ", purchaseState=" + purchaseState + ", purchaseDate=" + purchaseDate + ", returnReason="
-				+ returnReason + ", returnDate=" + returnDate + ", accountMarket=" + accountMarket + ", accountName="
-				+ accountName + ", accountPhone=" + accountPhone + ", accountAddress=" + accountAddress
-				+ ", accountCategory=" + accountCategory + ", accountDate=" + accountDate + ", shopCode=" + shopCode
-				+ ", shopName=" + shopName + ", shopAddress=" + shopAddress + ", shopPhone=" + shopPhone
-				+ ", goodsRentalCode=" + goodsRentalCode + ", goodsRentalPeriodPay=" + goodsRentalPeriodPay
-				+ ", goodsRentalDeposit=" + goodsRentalDeposit + ", goodsRentalPosition=" + goodsRentalPosition
-				+ ", goodsRentalDate=" + goodsRentalDate + ", salesCode=" + salesCode + ", salesGroupCode="
-				+ salesGroupCode + ", salesPayType=" + salesPayType + ", salesType=" + salesType + ", salesAmount="
-				+ salesAmount + ", salesDate=" + salesDate + "]";
+				+ ", goodsDbDate=" + goodsDbDate + ", goodsCode=" + goodsCode + ", purchaseCode=" + purchaseCode
+				+ ", contractShopCode=" + contractShopCode + ", goodsPay=" + goodsPay + ", goodsPosition="
+				+ goodsPosition + ", goodsRental=" + goodsRental + ", goodsState=" + goodsState
+				+ ", goodsCompletionState=" + goodsCompletionState + ", goodsRentalState=" + goodsRentalState
+				+ ", goodsInventoryDate=" + goodsInventoryDate + ", goodsDate=" + goodsDate + ", accountCode="
+				+ accountCode + ", purchasePay=" + purchasePay + ", purchaseState=" + purchaseState + ", purchaseDate="
+				+ purchaseDate + ", returnReason=" + returnReason + ", returnDate=" + returnDate + ", accountMarket="
+				+ accountMarket + ", accountName=" + accountName + ", accountPhone=" + accountPhone
+				+ ", accountAddress=" + accountAddress + ", accountCategory=" + accountCategory + ", accountDate="
+				+ accountDate + ", shopCode=" + shopCode + ", shopName=" + shopName + ", shopAddress=" + shopAddress
+				+ ", shopPhone=" + shopPhone + ", goodsRentalCode=" + goodsRentalCode + ", goodsRentalPeriodPay="
+				+ goodsRentalPeriodPay + ", goodsRentalDeposit=" + goodsRentalDeposit + ", goodsRentalPosition="
+				+ goodsRentalPosition + ", goodsRentalDate=" + goodsRentalDate + ", salesCode=" + salesCode
+				+ ", salesGroupCode=" + salesGroupCode + ", salesPayType=" + salesPayType + ", salesType=" + salesType
+				+ ", salesAmount=" + salesAmount + ", salesDate=" + salesDate + "]";
 	}
-	
-	
+	public String getGoodsDbDate() {
+		return goodsDbDate;
+	}
+	public void setGoodsDbDate(String goodsDbDate) {
+		this.goodsDbDate = goodsDbDate;
+	}
 	public String getSalesCode() {
 		return salesCode;
 	}
