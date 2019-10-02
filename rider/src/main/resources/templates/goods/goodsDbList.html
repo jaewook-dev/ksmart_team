@@ -61,18 +61,17 @@
 							<table class="table table-hover tm-table-small tm-product-table">
 								<thead>
 									<tr>
-										<th scope="col">DB상품 코드</th>
-										<th scope="col">DB상품 이름</th>										
+										<th scope="col">종류</th>
+										<th scope="col">이름</th>										
 										<th scope="col">상품번호</th>
-										<th scope="col">색상</th>										
-										<th scope="col">상세설명</th>
+										<th scope="col">색상</th>	
 										<th scope="col">상세보기</th>
 										
 									</tr>
 								</thead>
 								<tbody>
-								<!-- 삭제가능 리스트 -->
-									<tr th:each="g : ${gList}">
+									<!--전체 리스트 -->
+									<!-- <tr th:each="g : ${gList}">
 										<th th:text="${g.goodsDbCode}"></th>	
 										<th th:text="${g.goodsDbName}"></th>										
 										<th th:text="${g.goodsDbNumber}"></th>
@@ -85,28 +84,6 @@
 										 <i class="fas fa-check tm-product-check-icon"></i>
 										</a>
 										</td>
-										<!-- <td>
-										<a
-										 th:href="@{/goodsInsert(goodsDbCode=${gDbList.goodsDbCode})}"
-										 class="tm-product-delete-link">
-										 <i class="fas fa-check tm-product-check-icon"></i>
-										</a>
-										</td> -->
-									</tr>
-									<!-- 삭제불가능리스트 -->
-									<!-- <tr th:each="n : ${nList}">
-										<th th:text="${n.goodsDbCode}"></th>	
-										<th th:text="${n.goodsDbName}"></th>										
-										<th th:text="${n.goodsDbNumber}"></th>
-										<th th:text="${n.goodsDbColor}"></th>										
-										<th th:text="${n.goodsDbDescription}"></th>
-										<td>
-										<a
-										 th:href="@{/getGoodsDbList(goodsDbCode=${n.goodsDbCode})}"
-										 class="tm-product-delete-link">
-										 <i class="fas fa-check tm-product-check-icon"></i>
-										</a>
-										</td>
 										<td>
 										<a
 										 th:href="@{/goodsInsert(goodsDbCode=${gDbList.goodsDbCode})}"
@@ -115,6 +92,51 @@
 										</a>
 										</td>
 									</tr> -->
+								<!-- 삭제가능 리스트 -->
+									<tr th:each="y : ${yList}">
+										<th th:text="${y.goodsDbCategory}"></th>	
+										<th th:text="${y.goodsDbName}"></th>										
+										<th th:text="${y.goodsDbNumber}"></th>
+										<th th:text="${y.goodsDbColor}"></th>										
+										
+										<td>
+										<a
+										 th:href="@{/yesGoodsDbList(goodsDbCode=${y.goodsDbCode})}"
+										 class="tm-product-delete-link">
+										 <i class="fas fa-check tm-product-check-icon"></i>
+										</a>
+										</td>
+									<!-- 	<td>
+										<a
+										 th:href="@{/goodsInsert(goodsDbCode=${gDbList.goodsDbCode})}"
+										 class="tm-product-delete-link">
+										 <i class="fas fa-check tm-product-check-icon"></i>
+										</a>
+										</td> -->
+									</tr>
+									<!-- 삭제불가능리스트 -->
+									<tr th:each="n : ${nList}">
+										<th th:text="${n.goodsDbCategory}"></th>
+										<th th:text="${n.goodsDbName}"></th>										
+										<th th:text="${n.goodsDbNumber}"></th>
+										<th th:text="${n.goodsDbColor}"></th>										
+										
+										<td>
+										<a
+										 th:href="@{/getGoodsDbList(goodsDbCode=${n.goodsDbCode})}"
+										 class="tm-product-delete-link">
+										 <i class="fas fa-check tm-product-check-icon"></i>
+										</a>
+										</td>
+										
+										<!-- <td>
+										<a
+										 th:href="@{/goodsInsert(goodsDbCode=${gDbList.goodsDbCode})}"
+										 class="tm-product-delete-link">
+										 <i class="fas fa-check tm-product-check-icon"></i>
+										</a>
+										</td> -->
+									</tr>
 									<th:block th:if="${alert} neq null">
 										<tr class="text-center">
 											<td colspan="7" th:text="${alert}"></td>
@@ -132,9 +154,8 @@
 					</div>
 				</div>
 				<div class="col-sm-12 col-md-12 col-lg-4 col-xl-4 tm-block-col">
-					<div
-						class="tm-bg-primary-dark tm-block tm-block-product-categories">
-						<h2 class="tm-block-title">상품 카테고리</h2>
+					<div class="tm-bg-primary-dark tm-block tm-block-product-categories">
+						<h2 class="tm-block-title">상품 카테고리 종류</h2>
 						<div class="tm-product-table-container">
 							<table class="table tm-table-small tm-product-table">
 								<tbody>
@@ -147,8 +168,8 @@
 										</a></td>
 									</tr>
 									<tr>
-										<td class="tm-product-name">전동 휠</td>
-										<td class="text-center"><a href="#"
+										<td class="tm-product-name" >전동 휠</td>
+										<td class="text-center" ><a href="#"
 											class="tm-product-delete-link"> <i
 												class="fas fa-check tm-product-check-icon"></i>
 										</a></td>
@@ -161,7 +182,7 @@
 										</a></td>
 									</tr>
 									<tr>
-										<td class="tm-product-name">전동 바이크</td>
+										<td class="tm-product-name" id="goods_database_category">전동 바이크</td>
 										<td class="text-center"><a href="#"
 											class="tm-product-delete-link"> <i
 												class="fas fa-check tm-product-check-icon"></i>
@@ -176,6 +197,8 @@
 							카테고리추가하기</button>
 					</div>
 				</div>
+						
+				
 			</div>
 		</div>
 

@@ -25,14 +25,25 @@ public class AccountService {
 	
 	//거래처 조회
 	//맵으로 리턴 시키기 위해서 맵으로 선언해준다.
-	public Map<String, Object> accountList(){
+	public Map<String, Object> accountList(String sCode,String sLevel){
 		
 		//맵으로 선언
 		Map<String,Object> map = new HashMap<String,Object>();
 		
-		//map 넣을 내용을 String,Object 형식으로 넣어준다.
-		map.put("accountListYes", accountmapper.accountListYes());
-		map.put("accountListNo", accountmapper.accountListNo());
+		if(sLevel.equals("관리자")) {
+			//map 넣을 내용을 String,Object 형식으로 넣어준다.
+			sCode = "A";
+			map.put("accountListYes", accountmapper.accountListYes(sCode));
+			map.put("accountListNo", accountmapper.accountListNo(sCode));
+			
+			return map;
+			
+		}
+		
+		map.put("accountListYes", accountmapper.accountListYes(sCode));
+		map.put("accountListNo", accountmapper.accountListNo(sCode));
+
+	
 	
 		//맵으로 리턴 시킨다.
 		return map;

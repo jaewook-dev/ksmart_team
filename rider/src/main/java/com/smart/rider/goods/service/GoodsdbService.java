@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.smart.rider.goods.dto.GoodsHapDTO;
 import com.smart.rider.goods.dto.GoodsdbDTO;
 import com.smart.rider.goods.mapper.GoodsdbMapper;
 
@@ -18,13 +19,18 @@ import com.smart.rider.goods.mapper.GoodsdbMapper;
 public class GoodsdbService {
 	@Autowired
 	private GoodsdbMapper goodsdbmapper;
+	//삭제가능리스트 상세보기	
+	public GoodsHapDTO yesGoodsDblist(String goodsDbCode) {
+			
+		return goodsdbmapper.yesGoodsDblist(goodsDbCode);
+	}
 	//삭제가능 DB리스트
-	public List<GoodsdbDTO> goodsDbYlist(String select ,String searchInput,String beginDate,String endDate){
-		//System.out.println("DB서비스단확인"+goodsdbmapper.goodsDbYlist(select, searchInput, beginDate, endDate));
+	public List<GoodsHapDTO> goodsDbYlist(String select ,String searchInput,String beginDate,String endDate){
+		//System.out.println("DB서비스단확인 삭제가능리스트"+goodsdbmapper.goodsDbYlist(select, searchInput, beginDate, endDate));
 		return goodsdbmapper.goodsDbYlist(select, searchInput, beginDate, endDate); 
 	}
 	//삭제불가능 DB리스트
-	public List<GoodsdbDTO> goodsDbNlist(String select ,String searchInput,String beginDate,String endDate){
+	public List<GoodsHapDTO> goodsDbNlist(String select ,String searchInput,String beginDate,String endDate){
 		return goodsdbmapper.goodsDbNlist(select, searchInput, beginDate, endDate);
 	}
 	//05상품 검색 메서드 
@@ -61,15 +67,20 @@ public class GoodsdbService {
 	//dto멤버아이디에 세션 셋팅
 	//19-19-10 문영성
 	public int goodsDbInsert(GoodsdbDTO goodsdbdto, HttpSession session) { 
-		int  max = goodsdbmapper.getGoodsDbCodeMax()+1;
-		String tempCode ="goods_database_code";
-
+		String goodsDbCode = "GD" + goodsdbmapper.getGoodsDbCodeMax();
 		goodsdbdto.setMemberId((String) session.getAttribute("SID"));
-		goodsdbdto.setGoodsDbCode(tempCode+max);
-
+		
+		if(goodsDbCode.equals("GDnull")) {
+			
+			goodsDbCode = "GD0001";
+		}
+		
+		goodsdbdto.setGoodsDbCode(goodsDbCode);
+		
 		return goodsdbmapper.goodsDbInsert(goodsdbdto);
-
 	}
+
+	
 
 	//01첫번쨰
 	// 상품DB등록 확인메서드

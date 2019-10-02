@@ -1,7 +1,7 @@
 package com.smart.rider.sales.controller;
 
 
-import java.util.Arrays;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -56,13 +56,13 @@ public class SalesController {
 			//map.put("contractShopCode", contractShopCode);	// 검색 조건, contractShopCode
 			map.put("chartYear", salesYear);				// 검색할 연도	
 			int[] chartValueArrays = mainService.chartValue(map);
-			System.out.println(Arrays.toString(chartValueArrays) + " <-- salesController.java");
+			//System.out.println(Arrays.toString(chartValueArrays) + " <-- salesController.java");
 			
 			//반복문을 통해 배열에 값 입력
 			for(int i=0; i<12; i++) {
 				String salesChart = "sales" + String.valueOf(i); // model에 담기 위한 변수명 생성
 				model.addAttribute(salesChart, chartValueArrays[i]); // 생성된 변수명에 각 배열의 값 담기
-				System.out.println("차트값확인~~~~~~~~~~~~~~~~~~~~~~~~~~"+salesChart.toString());
+				//System.out.println("차트값확인~~~~~~~~~~~~~~~~~~~~~~~~~~"+salesChart.toString());
 			}
 		
 		  List<SalesDTO> search = salesService.salesSearchList(select, searchInput,  beginDate, endDate);
@@ -156,13 +156,13 @@ public class SalesController {
 		//map.put("contractShopCode", contractShopCode);	// 검색 조건, contractShopCode
 		map.put("chartYear", salesYear);				// 검색할 연도	
 		int[] chartValueArrays = mainService.chartValue(map);
-		System.out.println(Arrays.toString(chartValueArrays) + " <-- salesController.java");
+		//System.out.println(Arrays.toString(chartValueArrays) + " <-- salesController.java");
 		
 		//반복문을 통해 배열에 값 입력
 		for(int i=0; i<12; i++) {
 			String salesChart = "sales" + String.valueOf(i); // model에 담기 위한 변수명 생성
 			model.addAttribute(salesChart, chartValueArrays[i]); // 생성된 변수명에 각 배열의 값 담기
-			System.out.println("차트값확인~~~~~~~~~~~~~~~~~~~~~~~~~~"+salesChart.toString());
+			//System.out.println("차트값확인~~~~~~~~~~~~~~~~~~~~~~~~~~"+salesChart.toString());
 		}
 	
 		//System.out.println("매출리스트 뽑아오기"+sList);

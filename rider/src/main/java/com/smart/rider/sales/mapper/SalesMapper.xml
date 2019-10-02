@@ -22,21 +22,22 @@
 			ON
 			SA.goods_rental_code = GR.goods_rental_code
 			<if test="searchInput != null and searchInput neq ''.toString()">
-			WHERE 
-				${select} Like CONCAT('%',#{searchInput},'%')
-			</if>
-			<if test="beginDate neq ''.toString() and endDate eq ''.toString()">
-	        	AND 
-	        		SA.sales_date between #{beginDate} and NOW()		
-	        </if>
-	        <if test="beginDate eq ''.toString() and endDate neq ''.toString()">
-	        	AND 
-	        		SA.sales_date between '2000-01-01' and #{endDate}
-	        </if>
-	        <if test="beginDate neq ''.toString() and endDate neq ''.toString()">
-	        	AND 
-	        		SA.sales_date between #{beginDate} and #{endDate}
-	        </if>	
+			WHERE
+			${select} Like CONCAT('%',#{searchInput},'%')
+		</if>
+		<if test="beginDate neq ''.toString() and endDate eq ''.toString()">
+			AND
+			SA.sales_date between #{beginDate} and NOW()
+		</if>
+		<if test="beginDate eq ''.toString() and endDate neq ''.toString()">
+			AND
+			SA.sales_date between '2000-01-01' and #{endDate}
+		</if>
+		<if
+			test="beginDate neq ''.toString() and endDate neq ''.toString()">
+			AND
+			SA.sales_date between #{beginDate} and #{endDate}
+		</if>
 	</select>
 	
 	<!-- 매출삭제하기  -->
@@ -115,8 +116,7 @@
 	<!-- 매출리스트조회  -->
 	<select id="salesList" resultMap="ASid" parameterType="String">
 		SELECT
-			 IFNULL(SA.goods_code, SA.goods_rental_code) AS goods_code
-			,SA.*	
+			SA.*	
 			,GD.*
 			,GR.*	
 			FROM

@@ -50,7 +50,7 @@
 						<form action="salesSearchList" class="tm-search-form row" method="post">
 							<div class="form-group col-3">
 								<select class="custom-select" name="salesDate">
-									<option value="sales_Date">매출등록일자검색</option>
+									<option value="sales_date">매출등록일자검색</option>
 								</select>
 							</div>
 							<div class="form-group col-3">
@@ -114,7 +114,7 @@
 										
 										<th th:text="${s.salesPayType}"></th>
 										<th th:text="${s.salesType}"></th>
-										<th th:text="${s.salesAmount}"></th>
+										<th th:text="${s.salesAmount}+원"></th>
 										<th th:text="${s.salesDate}"></th>
 									<td>
 										<a

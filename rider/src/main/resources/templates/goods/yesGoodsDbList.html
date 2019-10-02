@@ -11,80 +11,74 @@
 			<div class="row tm-content-row">
 				<div class="col-sm-12 col-md-12 col-lg-8 col-xl-8 tm-block-col">
 					<div class="tm-bg-primary-dark tm-block tm-block-products">
-						<div class="tm-product-table-container">
-											
+						<div class="tm-product-table-container">											
 							<table class="table table-hover tm-table-small tm-product-table">							
 								<thead>
 									<tr>
 										<th scope="col">상품DB코드</th>
-										<th th:text="${goodsDB.goodsDbCode}"></th>
-																			
+										<th th:text="${y.goodsDbCode}"></th>																			
 									</tr>
-								
 									<tr>
 										<th scope="col">상품명</th>
-										<th th:text="${goodsDB.goodsDbName}"></th>										
-									</tr>	
+										<th th:text="${y.goodsDbName}"></th>										
+									</tr>					
 									
 									<tr>
 										<th scope="col">상품카테고리</th>
-										<th th:text="${goodsDB.goodsDbCategory}" ></th>
+										<th th:text="${y.goodsDbCategory}" ></th>
 									</tr>									
 									<tr>
 										<th scope="col">상품번호</th>
-										<th th:text="${goodsDB.goodsDbNumber}"></th>
+										<th th:text="${y.goodsDbNumber}"></th>
 									</tr>									
 									<tr>
 										<th scope="col">색상</th>
-										<th th:text="${goodsDB.goodsDbColor}"></th>
+										<th th:text="${y.goodsDbColor}"></th>
 									</tr>
 									<tr>
 										<th scope="col">중량</th>
-										<th th:text="${goodsDB.goodsDbWeight}"></th>
+										<th th:text="${y.goodsDbWeight}"></th>
 									</tr>
 									<tr>
 										<th scope="col">최대속도</th>
-										<th th:text="${goodsDB.goodsDbSpeed}"></th>
+										<th th:text="${y.goodsDbSpeed}"></th>
 									</tr>
 									<tr>
 										<th scope="col">박퀴사이즈</th>
-										<th th:text="${goodsDB.goodsDbSize}"></th>
+										<th th:text="${y.goodsDbSize}"></th>
 									</tr>
 									<tr>	
 										<th scope="col">제조국가</th>
-										<th th:text="${goodsDB.goodsDbNation}"></th>
+										<th th:text="${y.goodsDbNation}"></th>
 									</tr>
 									<tr>	
 										<th scope="col">최대하중</th>
-										<th th:text="${goodsDB.goodsDbLoad}"></th>
+										<th th:text="${y.goodsDbLoad}"></th>
 									</tr>
 									<tr>	
 										<th scope="col">주행가능거리</th>
-										<th th:text="${goodsDB.goodsDbDistance}"></th>
+										<th th:text="${y.goodsDbDistance}"></th>
 									</tr>
 									<tr>	
 										<th scope="col">베터리용량</th>
-										<th th:text="${goodsDB.goodsDbBattery}"></th>
+										<th th:text="${y.goodsDbBattery}"></th>
 									</tr>
 									<tr>	
 										<th scope="col">완충시간</th>
-										<th th:text="${goodsDB.goodsDbTime}"></th>
+										<th th:text="${y.goodsDbTime}"></th>
 									</tr>
 									<tr>	
 										<th scope="col">제조일자</th>
-										<th th:text="${goodsDB.goodsDbMade}"></th>
+										<th th:text="${y.goodsDbMade}"></th>
 									</tr>
-									<tr>	
-										<th scope="col">상품이미지</th>
-										<th th:text="${goodsDB.goodsDbImage}"></th>
-									</tr>
+									
 									<tr>	
 										<th scope="col">상품설명</th>
-										<th th:text="${goodsDB.goodsDbDescription}"></th>
+										<th th:text="${y.goodsDbDescription}"></th>
 									</tr>									
 									<tr>	
 										<th scope="col">DB등록일자</th>
-										<th th:text="${goodsDB.goodsDbDate}"></th>
+										<th th:text="${y.goodsDbDate}"></th>
 									</tr>
 								</thead>								
 							</table>							
@@ -92,10 +86,9 @@
 						
 						<!-- table container -->
 						
-						<a th:if="${session.SLEVEL eq '관리자'}" href="#myModal" data-toggle="modal">
-							<i class="btn btn-primary btn-block text-uppercase mb-3" >DB상품삭제하기</i>
-							</a>
-						<a  th:href="@{/purchaseInsert(goodsDbCode=${goodsDB.goodsDbCode})}"
+						<a  th:href="@{/goodsDbDelete(goodsDbCode=${y.goodsDbCode})}"
+							class="btn btn-primary btn-block text-uppercase mb-3" >DB상품 삭제하기</a>
+						<a  th:href="@{/purchaseInsert(goodsDbCode=${y.goodsDbCode})}"
 							class="btn btn-primary btn-block text-uppercase mb-3">매입 등록하기</a>
 					</div>
 				</div>
@@ -145,24 +138,6 @@
 							카테고리추가하기</button>
 					</div>
 				</div>
-					<!-- 모달 -->
-					<div class="modal fade" id="myModal">
-						<div class="modal-dialog">
-							<div class="modal-content">
-					      
-							<!-- Modal Header -->
-							<div class="modal-header">
-								<h4 class="modal-title">알림</h4>
-								<button type="button" class="close" data-dismiss="modal">&times;</button>
-							</div>
-					        
-							<!-- Modal body -->
-							<div class="modal-body">
-								판매상품으로 등록되어 삭제할수없습니다.
-							</div>				        
-							</div>
-						</div>
-					</div>
 			</div>
 		</div>
 

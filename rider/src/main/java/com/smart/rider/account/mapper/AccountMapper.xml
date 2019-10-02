@@ -18,7 +18,7 @@
 	</resultMap>
 	<!-- 거래처 목록 -->
 	<!-- 삭제 가능 -->
-	<select id="accountListYes" resultMap="accountMap">
+	<select id="accountListYes" parameterType="String" resultMap="accountMap">
 		SELECT 
 			 ac.account_code
 			,ac.contract_shop_code 
@@ -31,9 +31,14 @@
 		FROM account ac LEFT JOIN purchase pu
 		ON ac.account_code = pu.account_code
 		WHERE pu.account_code IS null
+		<if test="sCode neq 'A'.toString()">
+        	AND 
+        		ac.contract_shop_code  = #{sCode}
+        </if>
+		
 	</select>
 	<!-- 삭제 불가능  -->
-	<select id="accountListNo" resultMap="accountMap">
+	<select id="accountListNo" parameterType="String" resultMap="accountMap">
 		SELECT DISTINCT 
 			 ac.account_code
 			,ac.contract_shop_code
@@ -45,6 +50,10 @@
 			,ac.account_date
 		FROM account ac, purchase pu
 		WHERE ac.account_code = pu.account_code
+	 	<if test="sCode neq 'A'.toString()">
+        	AND 
+        		ac.contract_shop_code  = #{sCode}
+        </if>
 	</select>
 	
 	

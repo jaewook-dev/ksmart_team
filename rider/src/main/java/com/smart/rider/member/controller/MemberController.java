@@ -1,6 +1,7 @@
 package com.smart.rider.member.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,9 +34,15 @@ public class MemberController {
 	}
 	
 	@GetMapping("/memberList")
-	public String memberList(Model model) {
-		List<MemberDTO> list = memberService.memberList();
-		model.addAttribute("memberList", list);
+	public String memberList(Model model
+			, @RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage) {
+		Map<String, Object> map = memberService.memberList(currentPage);
+		
+		model.addAttribute("memberList", map.get("list"));
+		model.addAttribute("currentPage", map.get("currentPage"));
+		model.addAttribute("lastPage", map.get("lastPage"));
+		model.addAttribute("startPageNum", map.get("startPageNum"));
+		model.addAttribute("lastPageNum", map.get("lastPageNum"));
 		return "member/memberList";
 	}
 	//19.09.16작성
