@@ -126,22 +126,14 @@
 	</delete>
 
 	<select id="getGoodsDbCodeMax" resultType="int">
-		SELECT
-		MAX(CAST(SUBSTRING(goods_database_code,5) AS DECIMAL)) as maxcol
-		FROM
-		goods_database
+		SELECT 
+			MAX(LPAD(RIGHT(goods_database_code, 4)+1, 4 , '0')) 
+		FROM goods_database;
 	</select>
 
 
 	<insert id="goodsDbInsert"	parameterType="com.smart.rider.goods.dto.GoodsdbDTO">
-		<selectKey keyProperty="goodsDbCode" resultType="String"
-			order="BEFORE">
-			SELECT
-			CONCAT('GDB00', MAX(CAST(SUBSTRING(goods_database_code,5)
-			AS DECIMAL)+1)) AS
-			goodsDbCode
-			FROM goods_database
-		</selectKey>
+		
 		INSERT INTO goods_database(
 		goods_database_code,
 		member_id,

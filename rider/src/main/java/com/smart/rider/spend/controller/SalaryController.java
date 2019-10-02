@@ -1,6 +1,5 @@
 package com.smart.rider.spend.controller;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.smart.rider.main.dto.SearchDTO;
+import com.smart.rider.main.service.MainService;
 import com.smart.rider.member.dto.MemberDTO;
 import com.smart.rider.shop.dto.SsrHapDTO;
 import com.smart.rider.spend.dto.JoinSalaryDTO;
@@ -29,23 +29,62 @@ public class SalaryController {
 	@Autowired
 	private UtilityService utilityService;
 	
+	@Autowired
+	private MainService mainService;
+	
+	/**** 190930 재욱, Read : 지출_급여 상세보기 ****/
+	@GetMapping("/spendSalaryDetails")
+	public String spendSalaryDetails(@RequestParam(value = "spendSalaryCode") String spendSalaryCode
+									, HttpSession session
+									, Model model) {
+		//System.out.println(spendSalaryCode + " <-- spendSalaryCode spendSalaryDetails SalaryController.java");
+		
+		String contractShopCode = (String)session.getAttribute("SCODE");
+		
+		List<JoinSalaryDTO> list = salaryService.spendSalaryDetails(contractShopCode, spendSalaryCode);
+		model.addAttribute("salaryDetails", list);
+		return "spend/spendSalaryDetails";
+	}
+	
+	
 	/**** 190930 재욱, 지출_급여 등록 ****/
 	@PostMapping("/salaryInsert")
-	public String salaryInsert(JoinSalaryDTO salaryDTO, HttpSession session) {
+	public String salaryInsert(@RequestParam(value = "masterShopCode", required = false, defaultValue = "SR0000") String masterShopCode 
+							, JoinSalaryDTO salaryDTO
+							, HttpSession session) {
 		//System.out.println(salaryDTO + " <-- salaryDTO salaryInsert() SalaryController.java");
 		
 		String contractShopCode = (String)session.getAttribute("SCODE");
+		String userLevel = (String)session.getAttribute("SLEVEL");
+		
+		/** 191001 재욱, 관리자 권한으로 계약된 매장 내역 **/
+		if(userLevel.equals("관리자")) {
+			contractShopCode = masterShopCode;
+			salaryService.salaryInsert(salaryDTO, contractShopCode);	
+			return "redirect:/spendSalary?selectShopCode=" + contractShopCode;
+		}
+		
 		salaryService.salaryInsert(salaryDTO, contractShopCode);
 		
 		return "redirect:/spendSalary";
 	}
 	
+	
 	/**** 191001 재욱, 지출_급여 검색 화면 ****/
 	@PostMapping("/spendSalaryList")
-	public String spendSalaryList(SearchDTO searchDTO) {
-		System.out.println(searchDTO.toString() + " <-- searchDTO.toString() spendSalaryList() SalaryController.java");
+	public String spendSalaryList(@RequestParam(value = "selectShopCode", required = false, defaultValue = "SR0000") String selectShopCode
+								, @RequestParam(value = "salaryYear", required = false, defaultValue = "2019") String salaryYear
+								, SearchDTO searchDTO
+								, HttpSession session
+								, Model model) {
+		
+		//System.out.println(searchDTO.toString() + " <-- searchDTO.toString() spendSalaryList() SalaryController.java");
+		
+		this.spendSalary(selectShopCode, salaryYear, searchDTO, session, model);
+		
 		return "spend/spendSalary";
 	}
+	
 	
 	
 	/**** 190927 재욱, 지출_급여 화면 ****/
@@ -84,8 +123,31 @@ public class SalaryController {
 		
 		@SuppressWarnings("unchecked")
 		List<JoinSalaryDTO> salaryList = (List<JoinSalaryDTO>)map.get("salaryList");
-		//System.out.println(list + " <-- list pendSalary() SalaryController.java");
+		//System.out.println(salaryList + " <-- list spendSalary() SalaryController.java");
 		model.addAttribute("salaryList", salaryList);
+		
+		// 검색 결과가 없을시 텍스트 알림
+		if(salaryList.size()==0) {
+			model.addAttribute("result", "검색 결과가 없습니다");
+		}
+		
+		/** 191001 재욱, Read : 지출_급여 월별 총 지출 금액 차트 **/
+		map.put("columnDate", "spend_salary_date");	// 조회할 날짜 db 컬럼
+		map.put("columnInt", "spend_salary_total"); 		// 합산할 db 컬럼 
+		map.put("chartTable", "spend_salary");			// 조회할 db 테이블명
+		map.put("contractShopCode", contractShopCode);	// 검색 조건, contractShopCode
+		map.put("chartYear", salaryYear);				// 검색할 연도
+		
+		int[] chartValueArrays = mainService.chartValue(map);
+		//System.out.println(Arrays.toString(chartValueArrays) + " <-- chartValueArrays spendUtility UtilityController.java");
+		
+		// to view model.addAttribute
+		for(int i=0; i<12; i++) { 
+			String salaryChart = "salary" + String.valueOf(i);
+			model.addAttribute(salaryChart, chartValueArrays[i]);
+		}
+		
+		model.addAttribute("selectedYear", salaryYear);
 		
 		return "spend/spendSalary";
 	}

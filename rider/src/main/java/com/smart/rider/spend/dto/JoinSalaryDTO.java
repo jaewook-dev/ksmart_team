@@ -8,7 +8,7 @@ public class JoinSalaryDTO {
 	private String memberName;
 	private int spendSalaryPay;
 	private int spendSalaryOverpay;
-	private int spendSalaryBouns;
+	private int spendSalaryBonus;
 	private int spendSalaryFree;
 	private int spendSalaryEmployee;
 	private int spendSalaryShop;
@@ -16,6 +16,7 @@ public class JoinSalaryDTO {
 	private int spendSalaryTotal;
 	private int spendSalaryNetpay;
 	private String spendSalaryDate;
+	
 	
 	public String getSpendSalaryCode() {
 		return spendSalaryCode;
@@ -53,11 +54,11 @@ public class JoinSalaryDTO {
 	public void setSpendSalaryOverpay(int spendSalaryOverpay) {
 		this.spendSalaryOverpay = spendSalaryOverpay;
 	}
-	public int getSpendSalaryBouns() {
-		return spendSalaryBouns;
+	public int getSpendSalaryBonus() {
+		return spendSalaryBonus;
 	}
-	public void setSpendSalaryBouns(int spendSalaryBouns) {
-		this.spendSalaryBouns = spendSalaryBouns;
+	public void setSpendSalaryBonus(int spendSalaryBonus) {
+		this.spendSalaryBonus = spendSalaryBonus;
 	}
 	public int getSpendSalaryFree() {
 		return spendSalaryFree;
@@ -106,11 +107,10 @@ public class JoinSalaryDTO {
 	public String toString() {
 		return "JoinSalaryDTO [spendSalaryCode=" + spendSalaryCode + ", contractShopCode=" + contractShopCode
 				+ ", memberId=" + memberId + ", memberName=" + memberName + ", spendSalaryPay=" + spendSalaryPay
-				+ ", spendSalaryOverpay=" + spendSalaryOverpay + ", spendSalaryBouns=" + spendSalaryBouns
+				+ ", spendSalaryOverpay=" + spendSalaryOverpay + ", spendSalaryBonus=" + spendSalaryBonus
 				+ ", spendSalaryFree=" + spendSalaryFree + ", spendSalaryEmployee=" + spendSalaryEmployee
 				+ ", spendSalaryShop=" + spendSalaryShop + ", spendSalaryInsurance=" + spendSalaryInsurance
 				+ ", spendSalaryTotal=" + spendSalaryTotal + ", spendSalaryNetpay=" + spendSalaryNetpay
 				+ ", spendSalaryDate=" + spendSalaryDate + "]";
 	}
-
 }

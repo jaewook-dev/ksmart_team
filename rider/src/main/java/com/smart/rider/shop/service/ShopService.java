@@ -51,6 +51,7 @@ public class ShopService {
 		String getshopCode = shopList.get(shopList.size()-1).getShopCode();
 		String getmemberId = shopList.get(shopList.size()-1).getMemberId();
 		System.out.println(getshopCode);
+		//세션에 담기
 		session.setAttribute("SSHOPCODE",getshopCode);
 		
 
@@ -65,7 +66,23 @@ public class ShopService {
 		relation.setShopCode(getshopCode);
 
 		result += shopMapper.relationInsert(relation);
-
+		
+		
+		//계약매장코드 확인 후 가장 마지막 코드 값 가져오기 및 아이디값 가져오기
+		List<ShopRelationDTO> relationList = relationList();
+		String getrelationCode = relationList.get(relationList.size()-1).getContractShopCode();
+		String getrelationId = relationList.get(relationList.size()-1).getMemberId();
+		System.out.println(getrelationCode + "리스트에 마지막에서 가져온 코드값");
+		System.out.println(getrelationId + "리스트에 마지막에서 가져온 id값");
+		
+		
+		result += shopMapper.memberUpdate(getrelationCode,getrelationId);
+		
+		
+		
+		
+		
+		//점주 아이디 
 		return result;
 	}
 	
