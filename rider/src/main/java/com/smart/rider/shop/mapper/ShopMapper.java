@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.smart.rider.account.dto.AccountDTO;
 import com.smart.rider.contract.dto.ContractDTO;
+import com.smart.rider.main.dto.SearchDTO;
 import com.smart.rider.shop.dto.PosDTO;
 import com.smart.rider.shop.dto.ShopDTO;
 import com.smart.rider.shop.dto.ShopRelationDTO;
@@ -41,4 +43,14 @@ public interface ShopMapper {
 	
 	//member에 계약매장코드 수정하기
 	public int memberUpdate(String getrelationCode,String getrelationId);
+	
+	
+	//리스트 조회 시
+	public List<ShopDTO> shopListYes();
+	public List<ShopDTO> shopListNo();
+	
+	//리스트 검색시
+	public List<ShopDTO> shopSearchListYes(SearchDTO serach);
+	public List<ShopDTO> shopSearchListNo(SearchDTO serach);
 }
+
