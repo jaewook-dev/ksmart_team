@@ -14,17 +14,19 @@ import com.smart.rider.shop.dto.SsrHapDTO;
 public interface AccountMapper {
 	//리스트 조회 시
 	public List<AccountDTO> accountListYes(String sCode);
-	//리스트 조회 시
 	public List<AccountDTO> accountListNo(String sCode);
 	
+
+	
+	//가장높은코드 가져오기
 	public String accountMaxCode();
 	
 	public List<SsrHapDTO> getShopRelationCode(String SID);
 	
 	public int accountInsert(AccountDTO account);
 	
+	//리스트 검색시
 	public List<AccountDTO> accountSearchListYes(String select,String searchName,String beginDate,String endDate,String sCode);
-	
 	public List<AccountDTO> accountSearchListNo(String select,String searchName,String beginDate,String endDate,String sCode);
 	
 	public List<AccountDTO> accountUpdate(String acCode);

@@ -35,16 +35,11 @@ public class AccountService {
 			sCode = "A";
 			map.put("accountListYes", accountmapper.accountListYes(sCode));
 			map.put("accountListNo", accountmapper.accountListNo(sCode));
-			
 			return map;
-			
 		}
-		
 		map.put("accountListYes", accountmapper.accountListYes(sCode));
 		map.put("accountListNo", accountmapper.accountListNo(sCode));
 
-	
-	
 		//맵으로 리턴 시킨다.
 		return map;
 	}
