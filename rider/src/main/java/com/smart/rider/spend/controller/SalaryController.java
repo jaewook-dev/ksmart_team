@@ -62,7 +62,7 @@ public class SalaryController {
 	public String salaryInsert(@RequestParam(value = "masterShopCode", required = false, defaultValue = "SR0000") String masterShopCode 
 							, JoinSalaryDTO salaryDTO
 							, HttpSession session) {
-		System.out.println(salaryDTO.toString() + " <-- salaryDTO.toString() salaryInsert() SalaryController.java");
+		//System.out.println(salaryDTO.toString() + " <-- salaryDTO.toString() salaryInsert() SalaryController.java");
 		
 		String contractShopCode = (String)session.getAttribute("SCODE");
 		String userLevel = (String)session.getAttribute("SLEVEL");

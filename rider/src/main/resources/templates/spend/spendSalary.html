@@ -266,18 +266,23 @@
 </th:block>
 <th:block layout:fragment="customScript">
 	<script th:inline="javascript">
-		
+	
 	$('#spendSalaryPay').click(function() {
 		$('#spendSalaryPay').val('');
 		
 		$('#spendSalaryPay').blur(function() {
-			if($('#spendSalaryPay').val() == ''){
-				$('#spendSalaryPay').val('0');
-			}
+			
 			var spendSalaryPay = $.trim($('#spendSalaryPay').val());
 			var spendSalaryOverpay = $.trim($('#spendSalaryOverpay').val());
 			var spendSalaryBonus = $.trim($('#spendSalaryBonus').val());
 			var spendSalaryFree = $.trim($('#spendSalaryFree').val());
+			
+			if($('#spendSalaryPay').val() == ''){
+				$('#spendSalaryPay').val('0');
+			} else if(spendSalaryPay == ''){
+				$('#spendSalaryPay').val('0');
+			}
+			
 			$('#spendSalaryTotal').val('0');
 			$('#spendSalaryTotal').val(Number(spendSalaryPay) + Number(spendSalaryOverpay) + Number(spendSalaryBonus) + Number(spendSalaryFree));
 		})
@@ -287,13 +292,18 @@
 		$('#spendSalaryOverpay').val('');
 		
 		$('#spendSalaryOverpay').blur(function() {
-			if($('#spendSalaryOverpay').val() == ''){
-				$('#spendSalaryOverpay').val('0');
-			}
+			
 			var spendSalaryPay = $.trim($('#spendSalaryPay').val());
 			var spendSalaryOverpay = $.trim($('#spendSalaryOverpay').val());
 			var spendSalaryBonus = $.trim($('#spendSalaryBonus').val());
 			var spendSalaryFree = $.trim($('#spendSalaryFree').val());
+			
+			if($('#spendSalaryOverpay').val() == ''){
+				$('#spendSalaryOverpay').val('0');
+			} else if(spendSalaryOverpay == ''){
+				$('#spendSalaryOverpay').val('0');
+			}
+			
 			$('#spendSalaryTotal').val('0');
 			$('#spendSalaryTotal').val(Number(spendSalaryPay) + Number(spendSalaryOverpay) + Number(spendSalaryBonus) + Number(spendSalaryFree));
 		})
@@ -303,13 +313,18 @@
 		$('#spendSalaryBonus').val('');
 		
 		$('#spendSalaryBonus').blur(function() {
-			if($('#spendSalaryBonus').val() == ''){
-				$('#spendSalaryBonus').val('0');
-			}
+			
 			var spendSalaryPay = $.trim($('#spendSalaryPay').val());
 			var spendSalaryOverpay = $.trim($('#spendSalaryOverpay').val());
 			var spendSalaryBonus = $.trim($('#spendSalaryBonus').val());
 			var spendSalaryFree = $.trim($('#spendSalaryFree').val());
+			
+			if($('#spendSalaryBonus').val() == ''){
+				$('#spendSalaryBonus').val('0');
+			} else if(spendSalaryBonus == ''){
+				$('#spendSalaryBonus').val('0');
+			}
+			
 			$('#spendSalaryTotal').val('0');
 			$('#spendSalaryTotal').val(Number(spendSalaryPay) + Number(spendSalaryOverpay) + Number(spendSalaryBonus) + Number(spendSalaryFree));
 		})
@@ -319,13 +334,18 @@
 		$('#spendSalaryFree').val('');
 		
 		$('#spendSalaryFree').blur(function() {
-			if($('#spendSalaryFree').val() == ''){
-				$('#spendSalaryFree').val('0');
-			}
+			
 			var spendSalaryPay = $.trim($('#spendSalaryPay').val());
 			var spendSalaryOverpay = $.trim($('#spendSalaryOverpay').val());
 			var spendSalaryBonus = $.trim($('#spendSalaryBonus').val());
 			var spendSalaryFree = $.trim($('#spendSalaryFree').val());
+			
+			if($('#spendSalaryFree').val() == ''){
+				$('#spendSalaryFree').val('0');
+			} else if(spendSalaryFree == ''){
+				$('#spendSalaryFree').val('0');
+			}
+			
 			$('#spendSalaryTotal').val('0');
 			$('#spendSalaryTotal').val(Number(spendSalaryPay) + Number(spendSalaryOverpay) + Number(spendSalaryBonus) + Number(spendSalaryFree));
 		})
