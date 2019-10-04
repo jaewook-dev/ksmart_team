@@ -15,19 +15,6 @@
 	</resultMap>
 	
 	
-	<!-- 매장관리 전체조회 쿼리 -->
-	<select id="shopList" resultMap="shopMap">
-		select
-			shop_code 
-			,contract_code 
-			,member_id 
-			,shop_name
-			,shop_address
-			,shop_phone
-			,shop_date
-		FROM shop
-	
-	</select>
 	<!-- 매장계약관리 전체조회 쿼리 -->
 	<select id="relationList" resultType="com.smart.rider.shop.dto.ShopRelationDTO">
 		select
@@ -220,7 +207,57 @@
         </if>
 	</select>
 	
+	<!-- 매장관리 전체조회 쿼리 -->
+	<select id="shopListAll" resultMap="shopMap">
+		select
+			shop_code 
+			,contract_code 
+			,member_id 
+			,shop_name
+			,shop_address
+			,shop_phone
+			,shop_date
+		FROM shop
+	
+	</select>
+	
+	<!-- 전체리스트 -->
+	<select id="shopList" parameterType="java.util.Map" resultMap="shopMap">
+		SELECT 
+			shop_code 
+			,contract_code 
+			,member_id 
+			,shop_name
+			,shop_address
+			,shop_phone
+			,shop_date
+		FROM shop 
+		ORDER BY shop_code DESC 
+		LIMIT #{currentPage}, #{rowPerPage}	
+	</select>
+	
+	<!-- 페이징 처리를 위한 전체행의 갯수 -->
+	<select id="selectShopCount" resultType="int">
+		SELECT 
+			COUNT(*) 
+		FROM shop
+	</select>
+	
+	<!-- 매장 인원 조회 -->
+		<select id="personnelList" parameterType="String"  resultType="com.smart.rider.member.dto.MemberDTO">
+		SELECT 
+			 member_level AS memberLevel
+			,member_name AS memberName
+			,member_birth AS memberBirth
+			,member_address AS memberAddress
+			,member_phone AS memberPhone
+			FROM member
+		WHERE contract_shop_code = #{code}
+	
+	</select>
 	
 	
+	
+
 </mapper>
 

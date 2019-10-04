@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.smart.rider.account.dto.AccountDTO;
+
 import com.smart.rider.contract.dto.ContractDTO;
 import com.smart.rider.contract.service.ContractService;
 import com.smart.rider.main.dto.SearchDTO;
@@ -28,23 +28,9 @@ public class ShopController {
 	private ShopService shopService;
 	@Autowired
 	private ContractService contractService;
-	
-	@GetMapping("/shop")
-	public String shop(Model model) {
-		//값 확인
-		List<ShopDTO> List = shopService.shopList();
-		List<ShopRelationDTO> srList = shopService.relationList();
-		List<PosDTO> pList = shopService.posList();
-		System.out.println("shopList"+List);
-		System.out.println("relationList"+srList );
-		System.out.println("posList" + pList);
-		
-		model.addAttribute("shopList", List);
-		model.addAttribute("relationList", srList);
-		model.addAttribute("posList", pList);
-		return "/shop/shop";
-	}
-	
+	//매장 관리쪽 목록들 받기
+
+	//매장으로 넘어 갈때 필요한 값들
 	@GetMapping("/shopInsert")
 	public String shopInsert(Model model) {
 		List<ContractDTO> contractList =  contractService.contractList();
@@ -55,7 +41,7 @@ public class ShopController {
 		 
 		return  "/shop/shopInsert";
 	}
-	
+	//매장 생성
 	@PostMapping("/shopInsert")
 	public String shopInsert(ShopDTO shop,HttpSession session,ShopRelationDTO relation) {
 
@@ -66,6 +52,16 @@ public class ShopController {
 		
 		return "redirect:/shop";
 	}
+	//수정입력 값 받기
+	@GetMapping("/shopUpdate")
+	public String shopUpdate(@RequestParam(value ="shopCode") String shopCode) {
+		
+		System.out.println(shopCode + "<--넘어오는 코드값 확인");
+		
+		return "shop/shopUpdate";
+	}
+	
+	//상세보기
 	@GetMapping("/shopList")
 	public String getShopList(Model model,HttpSession session) {
 		//맵으로 받기
@@ -86,8 +82,7 @@ public class ShopController {
 
 		return "shop/shopList";
 	}
-	
-	
+	//상세보기에서 검색시
 	@PostMapping("/shopSearchList")
 	public String shopSearchList(SearchDTO search, Model model) {
 		System.out.println(search + "<-- 담겨있는값 ");
@@ -109,10 +104,46 @@ public class ShopController {
 		if(shopListYes.size()  == 0  && shopListNo.size() == 0) {
 			model.addAttribute("alert", "검색 결과가 없습니다");
 		}
-		
-		
+			
 		return "shop/shopList";
 	}
+	
+	
+	//매장 목록 5개씩 보여주기
+	@GetMapping("/shop")
+	public String shop(@RequestParam(value="currentPage",required=false, defaultValue="1") int currentPage
+						,Model model,HttpSession session) {
+		//값 확인
+		List<ShopRelationDTO> srList = shopService.relationList();
+		List<PosDTO> pList = shopService.posList();
+		List<ShopDTO> personnelList = shopService.personnelList(session);
+		System.out.println("relationList"+srList );
+		System.out.println("posList" + pList);
+		System.out.println("personnelList" + personnelList);
+		
+		
+		Map<String, Object> returnMap = shopService.shopList(currentPage);
+    	//Map객체주소로 보내는 경우(model.addAttribute("map", returnMap);
+		System.out.println(returnMap + " map 담긴 값 확인 ");
+		
+		//returnMap(Map타입 객체)에 담겨있는 값 -> model(Model타입 객체)에 복사 ->  view전달
+		//매장 목록
+    	model.addAttribute("shopList", returnMap.get("list"));
+    	//현재 페이지
+    	model.addAttribute("currentPage",returnMap.get("currentPage"));
+    	//마지막페이지
+    	model.addAttribute("lastPage",returnMap.get("lastPage"));	
+    	//계약매장 목록
+		model.addAttribute("relationList", srList);
+		//pos 목록
+		model.addAttribute("posList", pList);
+		//매장인원 목록
+		model.addAttribute("personnelList", personnelList);
+		
+		return "/shop/shop";
+	}
+	
+	
 
 
 }

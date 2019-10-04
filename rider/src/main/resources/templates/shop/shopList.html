@@ -85,7 +85,7 @@
 										<td th:text="${syeslist.shopDate}"></td>
 										<td class="text-center"><a
 											th:if="${session.SLEVEL eq '관리자'}"
-											th:href="@{#})}"
+											th:href="@{/shopUpdate(shopCode=${snolist.shopCode})}"
 											class="tm-product-delete-link"> <i
 												class="fas fa-check tm-product-check-icon"
 												style="color: white"></i>
@@ -106,7 +106,7 @@
 										<td th:text="${snolist.shopDate}"></td>
 										<td class="text-center"><a
 											th:if="${session.SLEVEL eq '관리자'}"
-											th:href="@{#}"
+											th:href="@{/shopUpdate(shopCode=${snolist.shopCode})}"
 											class="tm-product-delete-link"> <i
 												class="fas fa-check tm-product-check-icon"
 												style="color: white"></i>
