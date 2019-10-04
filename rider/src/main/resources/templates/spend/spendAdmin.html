@@ -15,17 +15,102 @@
 				<div class="row">
 					<div class="col">
 						<p class="text-white mt-5 mb-5">
-							<b>지출/매출 > 지출 > 급여 > 상세보기</b>
+							<b> 지출/매출 > 지출관리(관리자 페이지) </b>
 						</p>
 					</div>
 				</div>
 
 				<div class="row tm-content-row">
+					
+					<!-- 계약된 매장 -->
+					<div class="col-12 tm-block-col">
+						<div class="tm-bg-primary-dark tm-block-details-salary">
+							<h4 class="tm-block-title">계약된 매장</h4>
+							<table class="table">
+								<thead>
+									<tr>
+										<td>매장코드</td>
+										<td>매장명</td>
+										<td>아이디</td>
+										<td>계약상태</td>
+										<td>상세보기</td>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="list : ${shopList}">
+										<td th:text="${list.shopCode}"></td>
+										<td th:text="${list.shopName}"></td>
+										<td th:text="${list.memberId}"></td>
+										<td th:text="${list.contractManagementState}"></td>
+										
+										<!-- 상세 아이콘 -->
+										<td>
+											<a 
+											class="tm-product-delete-link"
+											th:href="@{/spendAdminDetails(shopCode=${list.shopCode})}"
+											><i class="fas fa-search" style="color: white"></i> 
+											</a>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					
+					
+					<!-- 지출 관리자 페이지, 계약매장 검색 -->
+					<div class="col-12 tm-block-col">
+						<div class="tm-bg-primary-dark tm-block">
 
+							<!-- begin 검색 폼 -->
+							<form action="/spendAdmin" class="tm-search-form row" method="post">
+							
+								<div class="form-group col-3">
+									<select class="custom-select" name="searchDate">
+										<option value="contract_date">계약일자</option>
+									</select>
+								</div>
+								<div class="form-group col-3">
+									<input id="beginDate" name="beginDate" type="text"
+										class="form-control validate"
+										style="background-color: #54657D" readonly />
+								</div>
+								<div class="form-group col-1 text-center">
+									<h2 class="tm-site-title mb-0">~</h2>
+								</div>
+								<div class="form-group col-3">
+									<input id="endDate" name="endDate" type="text"
+										class="form-control validate"
+										style="background-color: #54657D" readonly />
+								</div>
+								<div class="form-group col-2"></div>
+
+								<div class="form-group col-3">
+									<select class="custom-select" name="searchKey">
+										<option value="member_id">아이디</option>
+										<option value="shop_name">매장명</option>
+										<option value="contract_management_state">계약상태</option>
+									</select>
+								</div>
+
+								<div class="form-group col-7">
+									<input id="subjectValue" name="searchValue" type="text"
+										class="form-control validate" />
+								</div>
+								<div class="form-group col-2">
+									<button type="submit" id="searchButton" name="searchButton"
+										class="btn btn-primary btn-block">검색</button>
+								</div>
+							</form>
+							<!-- end 검색 폼 -->
+						</div>
+					</div>
+					</div>
+					
+					
 				</div>
 			</div>
 		</div>
-	</div>
 </th:block>
 <th:block layout:fragment="customScript">
 
