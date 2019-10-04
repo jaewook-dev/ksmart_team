@@ -14,10 +14,22 @@ import com.smart.rider.goods.mapper.GoodsMapper;
 @Service
 @Transactional
 public class GoodsService {
-	@Autowired
-	
-	
+	@Autowired	
 	private GoodsMapper goodsMapper;
+	//삭제가능상품 리스트상세보기
+	public GoodsHapDTO yesGoodsList(String goodsCode) {
+		return goodsMapper.yesGoodsList(goodsCode);
+	}
+	//삭제 불 가능상품리스트
+	public List<GoodsHapDTO> goodsNlist(String select ,String searchInput,String beginDate,String endDate){
+		return goodsMapper.goodsNlist(select, searchInput, beginDate, endDate);
+		}
+	//삭제가능상품리스트
+	public List<GoodsHapDTO> goodsYlist(String select ,String searchInput,String beginDate,String endDate){
+		return goodsMapper.goodsYlist(select, searchInput, beginDate, endDate);
+	}
+	
+	
 	//상품검색추가
 	public List<GoodsDTO> goodsSearchList(String select ,String searchInput,String beginDate,String endDate){
 		List<GoodsDTO> search = goodsMapper.goodsSearchList(select, searchInput, beginDate, endDate);
