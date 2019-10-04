@@ -181,7 +181,15 @@ public class ShopService {
 		return shopMapper.personnelList(code);
 	}
 	
-		
+	//코드 값 확인 후 데이터 조회
+	public List<ShopDTO> shopUpdate(String shopCode){
+		return shopMapper.shopUpdate(shopCode); 
+	}
+	
+	//수정하기
+	public int shopUpdateSet(ShopDTO shop) {
+		return shopMapper.shopUpdateSet(shop);
+	}
 		
 		
 }

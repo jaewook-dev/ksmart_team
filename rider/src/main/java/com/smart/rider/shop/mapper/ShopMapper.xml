@@ -256,7 +256,29 @@
 	
 	</select>
 	
+	<!--코드로 데이터 조회-->
+	<select id="shopUpdate" parameterType="String" resultMap="shopMap">
+		SELECT 
+			shop_code 
+			,contract_code 
+			,member_id 
+			,shop_name
+			,shop_address
+			,shop_phone
+			,shop_date
+		FROM shop 
+		WHERE shop_code=#{shop_code}
+	</select>
+	<update id="shopUpdateSet" parameterType="com.smart.rider.shop.dto.ShopDTO">
+		UPDATE shop
+		SET
+			 shop_name=#{shopName}
+			,shop_address=#{shopAddress}
+			,shop_phone=#{shopPhone}
+			,shop_date=NOW()
+		WHERE shop_code=#{shopCode}
 	
+	</update>
 	
 
 </mapper>

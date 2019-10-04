@@ -54,11 +54,23 @@ public class ShopController {
 	}
 	//수정입력 값 받기
 	@GetMapping("/shopUpdate")
-	public String shopUpdate(@RequestParam(value ="shopCode") String shopCode) {
+	public String shopUpdate(@RequestParam(value ="shopCode") String shopCode,Model model) {
 		
 		System.out.println(shopCode + "<--넘어오는 코드값 확인");
+		List<ShopDTO> shopList = shopService.shopUpdate(shopCode);
+		System.out.println(shopList + "<--코드로 조회하는 데이터 확인");
 		
+		model.addAttribute("shopList", shopList);
 		return "shop/shopUpdate";
+	}
+	//수정
+	@PostMapping("/shopUpdate")
+	public String shopUpdate(ShopDTO shop) {
+		System.out.println(shop + "<--  수정된 값");
+		
+		shopService.shopUpdateSet(shop);
+		
+		return "redirect:/shop";
 	}
 	
 	//상세보기

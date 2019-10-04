@@ -74,5 +74,11 @@ public interface ShopMapper {
 	//매장 인원
 	public List<ShopDTO> personnelList(String code);
 	
+	//코드 값으로 조회(수정)
+	public List<ShopDTO> shopUpdate(String shopCode);
+	
+	//수정하기
+	public int shopUpdateSet(ShopDTO shop);
+	
 }
 
