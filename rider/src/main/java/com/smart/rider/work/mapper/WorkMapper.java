@@ -1,6 +1,7 @@
 package com.smart.rider.work.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -15,7 +16,9 @@ public interface WorkMapper {
 	public String workCodeCount();
 	public int goInsert(WorkDTO workdto);
 	
-	public List<WorkDTO> workList();
+	public List<WorkDTO> workList(Map<String, Object> map);
 	
 	public int leaveInsert(WorkDTO workdto);
+	//페이지작업위한 목록 총 카운트
+	public int getWorkAllCount();
 }

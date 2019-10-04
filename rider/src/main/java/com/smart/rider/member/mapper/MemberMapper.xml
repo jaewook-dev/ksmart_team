@@ -41,7 +41,7 @@
 			,member_insert_date AS memberInsertDate
 			,member_update_date AS memberUpdateDate
 		FROM member
-		ORDER BY member_id DESC 
+		ORDER BY member_insert_date DESC 
 		LIMIT #{startRow},#{rowPerPage}
 	</select>
 	<!-- 19.09.16작성 -->

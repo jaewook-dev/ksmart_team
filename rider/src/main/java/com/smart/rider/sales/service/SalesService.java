@@ -18,6 +18,8 @@ import com.smart.rider.sales.mapper.SalesMapper;
 public class SalesService {
 	@Autowired
 	private SalesMapper salesMapper;
+	
+	
 	//매출검색
 	public List<SalesDTO> salesSearchList(String select ,String searchInput,String beginDate,String endDate){
 		List<SalesDTO> search = salesMapper.salesSearchList(select, searchInput, beginDate, endDate);

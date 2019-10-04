@@ -5,8 +5,8 @@
 <th:block layout:fragment="customTitle">
 </th:block>
 <th:block layout:fragment="customContents">
-	<!-- MAIN -->
-	<div class="main">
+	<!-- MAIN --> 
+   	<div class="main">
 		<div class="container mt-5">
 		<h2 class="tm-block-title">상품리스트</h2>		
 			<div class="row tm-content-row">
@@ -55,6 +55,7 @@
 				</div>
 				<div class="col-sm-12 col-md-12 col-lg-8 col-xl-8 tm-block-col">
 					<div class="tm-bg-primary-dark tm-block tm-block-products">
+						<h5 style="color: white;">판매상품상세보기로 대여상품으로 등록할수있고 매출입력할수있음</h5>
 						<div class="tm-product-table-container">
 							<table class="table table-hover tm-table-small tm-product-table">
 								
@@ -72,7 +73,7 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr th:each="g : ${gList}">
+				<!-- 					<tr th:each="g : ${gList}">
 										<th th:text="${g.goodsDbName}"></th>
 										<th th:text="${g.goodsDbCategory}"></th>																				
 										<th th:text="${g.goodsPay}"></th>										
@@ -93,7 +94,58 @@
 												</i>
 										</a>
 										</td>
+									</tr> -->
+									
+									<!-- 삭제가능리스트 추가 19-10-04 문영성  -->
+									
+									<tr th:each="y : ${yList}">
+										<th th:text="${y.goodsDbName}"></th>
+										<th th:text="${y.goodsDbCategory}"></th>																				
+										<th th:text="${y.goodsPay}"></th>										
+										<th th:text="${y.goodsState}"></th>										
+										<th th:text="${y.goodsRental}"></th>
+										<td>
+										<a
+										 th:href="@{/getGoodsList(goodsCode=${y.goodsCode})}"
+										 class="tm-product-delete-link">
+										 <i class="fas fa-check tm-product-check-icon"></i>
+										</a>									
+										</td>										
+										<td class="text-center">
+											<a th:href="@{/goodsDelete(goodsCode=${y.goodsCode})}"
+											   class="tm-product-delete-link possibleButton"> 
+											   <i class="far fa-trash-alt tm-product-delete-icon" style="color: white;"></i>
+											</a>
+										</td>
 									</tr>
+									
+									<!--삭제불가능리스트추가 19.10.04 문영성  -->
+									
+									<tr th:each="n : ${nList}">
+										<th th:text="${n.goodsDbName}"></th>
+										<th th:text="${n.goodsDbCategory}"></th>																				
+										<th th:text="${n.goodsPay}"></th>										
+										<th th:text="${n.goodsState}"></th>										
+										<th th:text="${n.goodsRental}"></th>
+										<td>
+										<a
+										 th:href="@{/getGoodsList(goodsCode=${n.goodsCode})}"
+										 class="tm-product-delete-link">
+										 <i class="fas fa-check tm-product-check-icon"></i>
+										</a>									
+										</td>
+										<!-- 삭제 불가능 모달 알림 -->
+										<td class="text-center">
+											<a class="tm-product-delete-link impossible" 
+											   data-toggle="modal" href="#myModal">
+												<i class="far fa-trash-alt tm-product-delete-icon" 
+												   style="color: black">
+												</i>
+											</a>
+										</td>
+									</tr>
+									
+									
 									<th:block th:if="${alert} neq null">
 										<tr class="text-center">
 											<td colspan="7" th:text="${alert}"></td>
@@ -156,6 +208,25 @@
 					</div>
 				</div>
 			</div>
+					
+				<!-- 모달 -->
+				<div class="modal fade" id="myModal">
+					<div class="modal-dialog">
+						<div class="modal-content">
+				      
+						<!-- Modal Header -->
+						<div class="modal-header">
+							<h4 class="modal-title">알림</h4>
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+						</div>
+				        
+						<!-- Modal body -->
+						<div class="modal-body">
+							대여상품으로 등록되어있어 삭제할 수 없습니다
+						</div>				        
+						</div>
+					</div>
+				</div>
 		</div>
 
 	</div>
