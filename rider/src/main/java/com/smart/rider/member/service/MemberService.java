@@ -50,6 +50,7 @@ public class MemberService {
 		}
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		resultMap.put("list", memberMapper.memberList(map));
+		System.out.println(memberMapper.memberList(map) + "<-----");
 		resultMap.put("currentPage", currentPage);
 		resultMap.put("lastPage", lastPage);
 		resultMap.put("startPageNum", startPageNum);
@@ -68,9 +69,43 @@ public class MemberService {
 	public int memberUpdate(MemberDTO memberdto) {
 		return memberMapper.memberUpdate(memberdto);
 	}
-	public List<MemberDTO> searchMember(String select, String searchInput) {
-		List<MemberDTO> search = memberMapper.searchMember(select, searchInput);
-		return search;
+	public Map<String, Object> searchMember(int currentPage, String select, String searchInput, String beginDate, String endDate) {
+		System.out.println(beginDate+"<--시작날짜");
+		//페이지 구성 할 행의 갯수
+		final int rowPerPage = 10;
+		//보여줄 첫번째 페이지번호 초기화
+		int startPageNum = 1;
+		//보여줄 페이지번호의 갯수 초기화
+		int lastPageNum = rowPerPage;
+		
+		if(currentPage > (rowPerPage/2)) {
+			startPageNum = currentPage - ((lastPageNum/2)-1);
+			lastPageNum += (startPageNum-1);
+		}
+		// limit 적용될 값 startRow, 상수 ROW_PER_PAGE
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		int startRow = (currentPage-1)*rowPerPage;
+		
+		map.put("startRow", startRow);
+		map.put("rowPerPage", rowPerPage);
+		
+		//전체행의 갯수를 가져오는 쿼리
+		double memberCount = memberMapper.getSearchAllCount(select, searchInput, beginDate, endDate);
+							//올림함수 소수점이있으면 무조건 올림
+		int lastPage = (int)(Math.ceil(memberCount/rowPerPage));
+		
+		if(currentPage >= (lastPage-4)) {
+			lastPageNum = lastPage;
+		}
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		resultMap.put("list", memberMapper.searchMember(map));
+		System.out.println(memberMapper.searchMember(map) + "<-----");
+		resultMap.put("currentPage", currentPage);
+		resultMap.put("lastPage", lastPage);
+		resultMap.put("startPageNum", startPageNum);
+		resultMap.put("lastPageNum", lastPageNum);
+		return resultMap;
 	}
 	//19.09.18작성
 	public int memberDelete(String memberId, String memberPw) {

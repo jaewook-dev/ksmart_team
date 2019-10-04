@@ -27,7 +27,7 @@
 			,NOW()
 			,NOW())
 	</insert>
-	<select id="memberList" resultType="com.smart.rider.member.dto.MemberDTO">
+	<select id="memberList" parameterType="java.util.Map" resultType="com.smart.rider.member.dto.MemberDTO">
 		SELECT 
 			 member_id 			AS memberId
 			,member_pw 			AS memberPw
@@ -80,7 +80,7 @@
 		WHERE
 			member_id = #{memberId}
 	</update>
-	<select id="searchMember" parameterType="String" resultType="com.smart.rider.member.dto.MemberDTO">
+	<select id="searchMember" parameterType="java.util.Map" resultType="com.smart.rider.member.dto.MemberDTO">
 		SELECT 
 			 member_id 			AS memberId
 			,member_pw 			AS memberPw
@@ -94,10 +94,22 @@
 			,member_insert_date AS memberInsertDate
 			,member_update_date AS memberUpdateDate
 		FROM member
-		<if test="searchInput != null and searchInput neq ''.toString()">
-			WHERE 
-				${select} Like CONCAT('%',#{searchInput},'%')
-		</if>
+		<trim prefix="where" prefixOverrides="AND|OR">
+			<if test="searchInput neq null and searchInput neq ''.toString()">
+				AND ${select} Like CONCAT('%',#{searchInput},'%')
+			</if>
+			<if test="beginDate neq ''.toString() and endDate neq ''.toString()">
+				AND member_insert_date between #{beginDate} and #{endDate}
+			</if>
+			<if test="beginDate eq ''.toString() and endDate neq ''.toString()">
+				AND member_insert_date between '2000-01-01' and #{endDate}
+			</if>
+			<if test="beginDate neq ''.toString() and endDate eq ''.toString()">
+				AND member_insert_date between #{beginDate} and NOW()
+			</if>
+		</trim>
+		ORDER BY member_insert_date DESC
+		LIMIT #{startRow},#{rowPerPage}
 	</select>
 	<!-- 19.09.18작성 -->
 	<delete id="memberDelete" parameterType="String">
@@ -128,5 +140,25 @@
 		SELECT
 			COUNT(*)
 		FROM member
+	</select>
+	<!-- 19.10.04 검색페이지작업 -->
+	<select id="getSearchAllCount" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM member
+		<trim prefix="where" prefixOverrides="AND|OR">
+			<if test="searchInput neq null and searchInput neq ''.toString()">
+				AND ${select} Like CONCAT('%',#{searchInput},'%')
+			</if>
+			<if test="beginDate neq ''.toString() and endDate neq ''.toString()">
+				AND member_insert_date between #{beginDate} and #{endDate}
+			</if>
+			<if test="beginDate eq ''.toString() and endDate neq ''.toString()">
+				AND member_insert_date between '2000-01-01' and #{endDate}
+			</if>
+			<if test="beginDate neq ''.toString() and endDate eq ''.toString()">
+				AND member_insert_date between #{beginDate} and NOW()
+			</if>
+		</trim>
 	</select>
 </mapper>
