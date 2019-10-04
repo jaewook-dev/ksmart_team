@@ -45,7 +45,7 @@
 						</div>
 				
 					</div>
-						<div class="col-sm-12 col-md-12 col-lg-7 col-xl-7 tm-block-col">
+						<div class="col-sm-12 col-md-12 col-lg-7 col-xl-7 tm-block-col" th:if="${session.SLEVEL eq '관리자'}">
 							<div class="tm-bg-primary-dark tm-block-con tm-block-scroll">
 							<h2 class="tm-block-title">매장릴레이션관리</h2>
 								 <table class="table">
@@ -70,13 +70,25 @@
 						<div>
 								<br/><br/>
 								
-											<span style="float:right;"><button class="btn btn-secondary btn-sm" type="button" onclick="location.href='unitList.html' ">계약매장코드 상세조회</button></span>
+								<span style="float:right;"><button class="btn btn-secondary btn-sm" type="button" onclick="location.href='unitList.html' ">계약매장코드 상세조회</button></span>
 							</div>
 							</div>
 						</div>
-					<div class="col-sm-12  tm-block-col">
-						<div class="tm-bg-primary-dark tm-block-con tm-block-scroll">
+					<div class="col-sm-12  tm-block-col" th:if="${session.SLEVEL eq '관리자'}">
+						<div class="tm-bg-primary-dark tm-block-big">
+								<div>
+	
+									<button type="button" id="insertBtn"
+										onclick="location.href='shopInsert'" style="float: right"
+										class="btn btn-primary text-uppercase">매장등록</button>
+										
+										<button type="button" id="shopListSerachBtn"
+										onclick="location.href='shopList'" style="float: right; margin-right: 50px; "
+										class="btn btn-primary text-uppercase">매장상세조회</button>
+								
+								</div>
 							<h2 class="tm-block-title">매장 조회</h2>
+							<br/><br/>
 							 	<table class="table">
 		                            <thead>
 		                                <tr>
@@ -97,15 +109,64 @@
 		                            </tbody>
 	                            								
 								</table>
-								<br/><br/>
-								<div>
-									
-									<button type="button" id="insertBtn"
-										onclick="location.href='shopInsert'" style="float: right"
-										class="btn btn-primary text-uppercase">매장등록</button>
-							
+								<br/>
+								<ul class="pagination justify-content-center mt-3 mr-3">
+								  <li class="page-item">
+								    <a class="page-link btn-primary" style="color: white;" th:href="@{/shop}">맨처음</a>
+								  </li>
+								  <li class="page-item" th:if="${currentPage > 1}">
+								    <a class="page-link btn-primary" style="color: white;" th:href="@{/shop(currentPage=${currentPage-1})}">이전</a>
+								  </li>
+								  <li class="page-item" th:if="${currentPage < lastPage}">
+								    <a class="page-link btn-primary" style="color: white;" th:href="@{/shop(currentPage=${currentPage+1})}">다음</a>
+								  </li>
+								  <li class="page-item">
+								    <a class="page-link btn-primary" style="color: white;"  th:href="@{/shop(currentPage=${lastPage})}">마지막</a>
+								  </li>
+								</ul>
 								
+								<br/><br/>
+						</div>
+					</div>
+					
+					<div class="col-sm-12  tm-block-col" >
+						<div class="tm-bg-primary-dark tm-block-taller tm-block-middle">
+								<div>
+										
+									
+										<h2 class="tm-block-title" style="float: left;">매장 인원</h2>
+									<button type="button" 
+										onclick="location.href='employeeInsert'" style="float: right"
+										class="btn btn-primary text-uppercase">매장직원등록</button>
+									<span style="float: left; margin-left: 400px; color:white; font-size: 20px">자세한 내용은 직원관리를 이용해주세요</span>
+										<Br/>
 								</div>
+						
+							
+							<br/><br/>
+							 	<table class="table">
+		                            <thead>
+		                                <tr>
+		                                	<th scope="col">직급</th>
+		                                    <th scope="col">이름</th>
+		                                    <th scope="col">생년월일</th>
+		                                    <th scope="col">전화번호</th>
+		                                    <th scope="col">주소</th>
+		                                    
+		                                </tr>
+		                            </thead>
+		                            <tbody>	                            	
+		                             	<tr th:each="plist : ${personnelList}">
+		                             		<th th:text="${plist.memberLevel}"></th>
+											<th th:text="${plist.memberName}"></th>
+											<th th:text="${plist.memberBirth}"></th>
+											<th th:text="${plist.memberPhone}"></th>
+											<th th:text="${plist.memberAddress}"></th>
+		                                </tr>
+		                            </tbody>
+	                            								
+								</table>
+								<br/><br/>
 						</div>
 					</div>
 					
@@ -120,7 +181,6 @@
 </th:block>
 <th:block layout:fragment="customScript">
 <script>
-
 
 </script>
 

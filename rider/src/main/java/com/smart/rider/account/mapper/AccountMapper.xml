@@ -129,6 +129,10 @@
         	AND 
         		account_date between #{beginDate} and #{endDate}
         </if>
+       	<if test="sCode neq 'A'.toString()">
+        	AND 
+        		ac.contract_shop_code  = #{sCode}
+        </if>
 	</select>
 	<!-- 삭제 가능 검색시 조회 결과-->
 	<select id="accountSearchListYes" parameterType="String" resultMap="accountMap">
@@ -164,6 +168,10 @@
         <if test="beginDate neq ''.toString() and endDate neq ''.toString()">
         	AND 
         		account_date between #{beginDate} and #{endDate}
+        </if>
+       	<if test="sCode neq 'A'.toString()">
+        	AND 
+        		ac.contract_shop_code  = #{sCode}
         </if>
 
 	</select>

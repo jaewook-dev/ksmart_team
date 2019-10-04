@@ -35,16 +35,11 @@ public class AccountService {
 			sCode = "A";
 			map.put("accountListYes", accountmapper.accountListYes(sCode));
 			map.put("accountListNo", accountmapper.accountListNo(sCode));
-			
 			return map;
-			
 		}
-		
 		map.put("accountListYes", accountmapper.accountListYes(sCode));
 		map.put("accountListNo", accountmapper.accountListNo(sCode));
 
-	
-	
 		//맵으로 리턴 시킨다.
 		return map;
 	}
@@ -71,14 +66,31 @@ public class AccountService {
 		return accountmapper.accountInsert(account);
 	}
 	//특정 값으로 목록 조회
-	public Map<String,Object> accountSearchList(String select, String searchName, String beginDate, String endDate){
+	public Map<String,Object> accountSearchList(String select, String searchName, String beginDate, String endDate,HttpSession session){
 		
 		//맵으로 선언
 		Map<String,Object> map = new HashMap<String,Object>();
 		
+		
+		String sCode = (String)session.getAttribute("SCODE");
+		String sLevel = (String)session.getAttribute("SLEVEL");
+		System.out.println(sCode + "세션 코드 입력값");
+		System.out.println(sLevel + "세션 권한 입력값");
+		
+		if(sLevel.equals("관리자")) {
+			//map 넣을 내용을 String,Object 형식으로 넣어준다.
+			sCode = "A";
+			map.put("accountSearchListYes", accountmapper.accountSearchListYes(select, searchName, beginDate, endDate, sCode));
+			map.put("accountSearchListNo", accountmapper.accountSearchListNo(select, searchName, beginDate, endDate, sCode));
+			
+			return map;
+			
+		}
+		
+
 		//map 넣을 내용을 String,Object 형식으로 넣어준다.
-		map.put("accountSearchListYes", accountmapper.accountSearchListYes(select, searchName, beginDate, endDate));
-		map.put("accountSearchListNo", accountmapper.accountSearchListNo(select, searchName, beginDate, endDate));
+		map.put("accountSearchListYes", accountmapper.accountSearchListYes(select, searchName, beginDate, endDate, sCode));
+		map.put("accountSearchListNo", accountmapper.accountSearchListNo(select, searchName, beginDate, endDate, sCode));
 
 		
 		return map;

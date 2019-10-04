@@ -52,8 +52,15 @@ public class WorkController {
 		return "redirect:/workSuccess";
 	}
 	@GetMapping("/workAdmin")
-	public String workList(Model model) {
-		model.addAttribute("workList", workService.workList());
+	public String workList(Model model
+			, @RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage) {
+		Map<String, Object> map = workService.workList(currentPage);
+		
+		model.addAttribute("workList", map.get("list"));
+		model.addAttribute("currentPage", map.get("currentPage"));
+		model.addAttribute("lastPage", map.get("lastPage"));
+		model.addAttribute("startPageNum", map.get("startPageNum"));
+		model.addAttribute("lastPageNum", map.get("lastPageNum"));
 		return "work/workAdmin";
 	}
 	

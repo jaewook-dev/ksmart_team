@@ -1,10 +1,13 @@
 package com.smart.rider.shop.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+
 import com.smart.rider.contract.dto.ContractDTO;
+import com.smart.rider.main.dto.SearchDTO;
 import com.smart.rider.shop.dto.PosDTO;
 import com.smart.rider.shop.dto.ShopDTO;
 import com.smart.rider.shop.dto.ShopRelationDTO;
@@ -12,8 +15,7 @@ import com.smart.rider.shop.dto.ShopRelationDTO;
 @Mapper
 public interface ShopMapper {
 
-	//명단조회
-	public List<ShopDTO> shopList();
+
 	
 	//shop코드 생성 및 데이터생성
 	public int shopInsert(ShopDTO shop);
@@ -41,4 +43,42 @@ public interface ShopMapper {
 	
 	//member에 계약매장코드 수정하기
 	public int memberUpdate(String getrelationCode,String getrelationId);
+	
+	
+	//리스트 조회 시
+	public List<ShopDTO> shopListYes();
+	public List<ShopDTO> shopListNo();
+	
+	//리스트 검색시
+	public List<ShopDTO> shopSearchListYes(SearchDTO serach);
+	public List<ShopDTO> shopSearchListNo(SearchDTO serach);
+	
+	public List<ShopDTO> shopListAll();
+	
+	
+	//명단조회
+	public List<ShopDTO> shopList(Map<String, Integer> map);
+	/* - shop table의 전체 행의 갯수 -
+	 * @brief ShopMapper.xml(id)를 인터페이스 ShopMapper.java(메서드명)와 맵핑
+	 * @return int
+	 */
+
+	int selectShopCount();
+	
+	/* -insert처리-
+	 * @param ShopDTO shop
+	 * @brief ShopMapper.xml(id)를 인터페이스 ShopMapper.java(메서드명)와 맵핑
+	 * @return int
+	 */
+	
+	//매장 인원
+	public List<ShopDTO> personnelList(String code);
+	
+	//코드 값으로 조회(수정)
+	public List<ShopDTO> shopUpdate(String shopCode);
+	
+	//수정하기
+	public int shopUpdateSet(ShopDTO shop);
+	
 }
+

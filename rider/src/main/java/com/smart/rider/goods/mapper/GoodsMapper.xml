@@ -3,8 +3,79 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.smart.rider.goods.mapper.GoodsMapper">
+	<!-- 삭제가능상품 상세보기  -->
+	<select id="yesGoodsList" resultMap="ASid">
+		SELECT	
+			 g.*
+			 ,gr.*
+			 ,gb.* 
+		FROM goods g LEFT JOIN goods_rental gr 
+		ON g.goods_code = gr.goods_code
+		LEFT JOIN goods_database gb
+		ON g.goods_database_code = gb.goods_database_code
+		WHERE gr.goods_code IS NULL 
+		AND g.goods_code = #{goodsCode}
+	</select>
 
-	
+	<!-- 삭제불가능한 상품쿼리  -->
+	<select id="goodsNlist" resultMap="ASid" parameterType="String">
+		SELECT	
+				 g.*
+				 ,gr.*
+				 ,gb.*
+			FROM goods g , goods_rental gr , goods_database gb
+			where g.goods_code = gr.goods_code
+			AND gb.goods_database_code = g.goods_database_code
+			<if test="searchInput neq null and searchInput neq ''.toString()">
+			AND
+			${select} LIKE CONCAT('%',#{searchInput},'%')
+		</if>
+		<if test="beginDate neq ''.toString() and endDate eq ''.toString()">
+			AND
+			g.goods_date between #{beginDate} and NOW()
+		</if>
+		<if test="beginDate eq ''.toString() and endDate neq ''.toString()">
+			AND
+			g.goods_date  between '2000-01-01' and #{endDate}
+		</if>
+		<if
+			test="beginDate neq ''.toString() and endDate neq ''.toString()">
+			AND
+			g.goods_date between #{beginDate} and #{endDate}
+		</if> 
+		
+	</select>
+	<!-- 삭제가능한 상품쿼리 -->
+	<select id="goodsYlist" resultMap="ASid" parameterType="String">
+		SELECT	
+			 g.*
+			 ,gr.*
+			 ,gb.* 
+		FROM goods g LEFT JOIN goods_rental gr 
+		ON g.goods_code = gr.goods_code
+		LEFT JOIN goods_database gb
+		ON g.goods_database_code = gb.goods_database_code
+		WHERE gr.goods_code IS NULL 
+		<if test="searchInput neq null and searchInput neq ''.toString()">
+			AND
+			${select} LIKE CONCAT('%',#{searchInput},'%')
+		</if>
+		<if test="beginDate neq ''.toString() and endDate eq ''.toString()">
+			AND
+			g.goods_date between #{beginDate} and NOW()
+		</if>
+		<if test="beginDate eq ''.toString() and endDate neq ''.toString()">
+			AND
+			g.goods_date  between '2000-01-01' and #{endDate}
+		</if>
+		<if
+			test="beginDate neq ''.toString() and endDate neq ''.toString()">
+			AND
+			g.goods_date between #{beginDate} and #{endDate}
+		</if> 
+		
+	</select>
+	<!-- 상품검색  -->
 	<select id="goodsSearchList" resultMap="ASid" parameterType="String">
 			SELECT 
 			*

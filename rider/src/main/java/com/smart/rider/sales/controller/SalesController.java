@@ -66,14 +66,13 @@ public class SalesController {
 			}
 		
 		  List<SalesDTO> search = salesService.salesSearchList(select, searchInput,  beginDate, endDate);
+		  
 		  model.addAttribute("sList", search);
+		  
 		  if(search.size()==0) {
 		  
 		  model.addAttribute("alert", "검색 결과가 없습니다");
-		 
-		  }
-		
-		  
+		  } 
 		 
 		 		
 		return "sales/salesList";

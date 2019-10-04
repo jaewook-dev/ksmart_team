@@ -1,6 +1,7 @@
 package com.smart.rider.customer.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,15 +24,22 @@ public class CustomerController {
 		return "customer/customerInsert";
 	}
 	//19.09.23작성
-	@GetMapping("/customerList")
-	public String customerList(Model model) {
-		List<CustomerDTO> list = customerService.customerList();
-		model.addAttribute("custoemrList", list);
-		return "customer/customerList";
-	}
 	@GetMapping("/getCustomerList")
 	public String getCustomerList(@RequestParam(value="rentalCustomerCode") String rentalCustomerCode, Model model) {
 		model.addAttribute("customerList", customerService.getCustomerList(rentalCustomerCode));
 		return "customer/customerUpdate";
+	}
+	//19.10.02 페이지 작업
+	@GetMapping("/customerList")
+	public String customerList(Model model
+							 , @RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage) {
+		Map<String, Object> map = customerService.customerList(currentPage);
+		
+		model.addAttribute("customerList", map.get("list"));
+		model.addAttribute("currentPage", map.get("currentPage"));
+		model.addAttribute("lastPage", map.get("lastPage"));
+		model.addAttribute("startPageNum", map.get("startPageNum"));
+		model.addAttribute("lastPageNum", map.get("lastPageNum"));
+		return "customer/customerList";
 	}
 }

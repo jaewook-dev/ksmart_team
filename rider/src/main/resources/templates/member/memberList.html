@@ -59,7 +59,7 @@
 							</thead>
 							<tbody>
 								<tr th:each="member : ${memberList}">
-									<th id="member" th:text="${member.memberId}"></th>
+									<th th:text="${member.memberId}"></th>
 									<td th:text="${member.memberName}"></td>
 									<td th:text="${member.memberLevel}"></td>
 									<td th:text="${member.memberBirth}"></td>
@@ -72,27 +72,56 @@
 										</a>
 									</td>
 									<td class="text-center">
-										<button type="button"
-											class="tm-product-delete-link" id="deleteLink" style="cursor:pointer">
+										<button type="button" class="tm-product-delete-link" 
+												id="deleteLink" data-toggle="modal" data-target="#deleteModal" th:value="${member.memberId}" style="cursor:pointer">
 											<i class="far fa-trash-alt tm-product-delete-icon"></i>
 										</button>
 									</td>
 								</tr>
 							</tbody>
 						</table>
+						<hr>
+						<!--------------------------------------------- 페이지 버튼 ---------------------------------------------->
+						<div class="text-center">
 						<!-- 맨처음 -->
-						<a th:href="@{/memberList}">[처음]</a>
+						<a class="text-white" th:href="@{/memberList}">[처음]</a>
 						<!-- 이전 -->
-						<a th:if="${currentPage > 1}" th:href="@{/memberList(currentPage=${currentPage - 1})}">[이전]</a>
+						<a class="text-white" th:if="${currentPage > 1}" 
+						   th:href="@{/memberList(currentPage=${currentPage - 1})}">[이전]</a>
 						<th:block th:each="num:${#numbers.sequence(startPageNum, lastPageNum)}">
-							<span th:if="${currentPage == num}" th:text="${'['+num+']'}"></span>
-							<a th:unless="${currentPage == num}" th:text="${'['+num+']'}"
+							<span class="text-info" th:if="${currentPage == num}" th:text="${'['+num+']'}"></span>
+							<a class="text-white" th:unless="${currentPage == num}" th:text="${'['+num+']'}"
 							   th:href="@{/memberList(currentPage=${num})}"></a>
 						</th:block>
 						<!-- 다음 -->
-						<a th:if="${currentPage < lastPage}" th:href="@{/memberList(currentPage=${currentPage + 1})}">[다음]</a>
+						<a class="text-white" th:if="${currentPage < lastPage}" 
+						   th:href="@{/memberList(currentPage=${currentPage + 1})}">[다음]</a>
 						<!-- 맨마지막 -->
-						<a th:href="@{/memberList(currentPage=${lastPage})}">[마지막]</a>
+						<a class="text-white" th:href="@{/memberList(currentPage=${lastPage})}">[마지막]</a>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+			<!-- The Modal -->
+			<div class="modal fade" id="deleteModal" role="dialog">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<!-- Modal Header -->
+						<div class="modal-header">
+							<h4 class="modal-title">알림</h4>
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+						</div>
+						<!-- Modal body -->
+						<div class="modal-body">
+							아이디를 삭제하시겠습니까?
+						</div>
+						<!-- Modal footer -->
+						<div class="modal-footer">
+							<button type="button" class="btn btn-outline-primary btn-sm" onclick="deleteOk();">확인</button>
+							<button type="button" class="btn btn-outline-danger btn-sm" data-dismiss="modal">취소</button>
+						</div>
+			
 					</div>
 				</div>
 			</div>
@@ -101,16 +130,17 @@
 </th:block>
 <th:block layout:fragment="customScript">
 <script>
-$("#deleteLink").click(function(){
-    if(confirm("삭제하시겠습니까?") == true){
-    	var memberId = $("#member").text();
-    	 location.href='/levelDelete?memberId='+memberId+'';
-    	alert("삭제되었습니다");
-    }
-    else{
-        return;
-    }
+var memberId ="";
+$(document).ready(function() {     
+    $('#deleteModal').on('show.bs.modal', function(event) {          
+    	memberId = $('#deleteLink').val();
+    	console.log(memberId+"<---삭제할아이디");
+    });
 });
+
+function deleteOk() {
+    location.href='/levelDelete?memberId='+memberId+'';
+}
 </script>
 </th:block>
 </html>
