@@ -209,7 +209,7 @@
             var request = $.ajax({
               url: "/adminCheck", // 호출 url
               method: "POST", // 전송방식
-              data: { shopCode : shopCode, adminPw : adminPw, memberBirth : memberBirth }, // 파라미터
+              data: {shopCode, adminPw, memberBirth}, // 파라미터
               dataType: "text" // 전송 받을 타입 ex) xml, html, text, json
             });
              
