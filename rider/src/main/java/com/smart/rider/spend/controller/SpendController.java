@@ -7,7 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.smart.rider.main.dto.SearchDTO;
 import com.smart.rider.spend.dto.SpendAdminDTO;
@@ -25,25 +27,14 @@ public class SpendController {
 		return "spend/spendTotal";
 	}
 	
-	/**** 191004 재욱, Read : 관리자 확인을 통한 지출관리 페이지 이동 ****/
-	@PostMapping("/spendAdminCheck")
-	public String spendAdminCheck(@RequestParam(value = "shopCode") String shopCode
-								, @RequestParam(value = "adminPw") String adminPw
-								, @RequestParam(value = "memberBirth") String memberBirth) {
+	/**** 191004 재욱, Modal ajax 호출, 관리자 확인 카운트, 2일 때 관리자 비밀번호와 점주 생년월일 일치 ****/
+	@RequestMapping(value = "/adminCheck") // 요청에 반응하는 url
+	public @ResponseBody int adminCheck(String shopCode, String memberBirth, String adminPw) {
 		
-		//System.out.println(shopCode + " <-- shopCode spendAdminCheck() SpendController.java");
-		//System.out.println(adminPw + " <-- adminPw spendAdminCheck() SpendController.java");
-		//System.out.println(memberBirth + " <-- memberBirth spendAdminCheck() SpendController.java");
+		int result = spendService.spendAdminCheck(shopCode, memberBirth, adminPw); // DB 조회 결과
+		//System.out.println(result + " <-- result adminCheck() SpendController.java"); 
 		
-		// adminCheck의 값이 2일 때 관리자 비밀번호 및 해당 매장의 점주의 생년월일 일치
-		int adminCheck = spendService.spendAdminCheck(shopCode, memberBirth, adminPw);
-		//System.out.println(adminCheck + " <-- adimnCheck spendAdminCheck() SpendController.java");
-		
-		if(adminCheck == 2) {
-			return "spend/spendSalary?shopCode=" + shopCode;
-		}
-		
-		return "redirect:/spendAdminDetails";
+		return result;
 	}
 	
 	/**** 191004 재욱, Read : 계약된 매장 리스트 상세보기 ****/

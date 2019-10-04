@@ -30,7 +30,7 @@
 						<div class="tm-bg-primary-dark tm-block-details-salary" th:each="list : ${detailsList}">
 							<table class="table">
 								<tr>
-									<td>매장코드</td>
+									<td style="width: 15%;">매장코드</td>
 									<td colspan="3">
 										<input 
 											type="text" 
@@ -82,7 +82,7 @@
 								<table class="table">
 								
 									<tr>
-										<td>계약일</td>
+										<td style="width: 15%">계약일</td>
 										<td>
 											<input 
 												type="text" 
@@ -120,7 +120,10 @@
 								</tr>
 							</table>
 							<hr>
-							<button type="button" class="btn btn-primary" style="float: right;" data-toggle="modal" data-target="#checkModal">
+							<button type="button"
+									class="btn btn-primary" 
+									style="float: right;" 
+									data-toggle="modal" data-target="#checkModal">
 								매장 지출 관리하기
 							</button>
 							
@@ -143,15 +146,33 @@
 											<b> ※편의성을 위해 값은 입력되어 있습니다 </b>
 										</p>
 										
-										<input type="hidden" name="shopCode" th:value="${list.shopCode}">
+										<input 
+											type="hidden"
+											 name="shopCode" 
+											 id="shopCode" 
+											 th:value="${list.shopCode}">
 										
 										<label>관리자 비밀번호</label>
-										<input type="password" class="form-control" name="adminPw" value="pw001">
+										<input 
+											type="password" 
+											class="form-control" 
+											name="adminPw"
+											id="adminPw" 
+											value="pw001">
 										
 										<br>
 										
 										<label>점주 생년월일</label>
-										<input type="text" class="form-control" name="memberBirth" th:value="${list.memberBirth}">
+										<input 
+											type="text" 
+											class="form-control" 
+											name="memberBirth"
+											id="memberBirth" 
+											th:value="${list.memberBirth}">
+										<div id="failAlert" style="display: none;">
+											<br>
+											<label style="color: red;">비밀번호 혹은 생년월일이 일치하지 않습니다</label>	
+										</div>
 									</div>
 							
 									<!-- Modal footer -->
@@ -175,10 +196,45 @@
 <th:block layout:fragment="customScript">
 
 <script th:inline="javascript">
+	
+	
+	$(function() {
+        $('#adminCheck').click(function() {
+            
+        	var shopCode = $('#shopCode').val();
+        	var adminPw = $('#adminPw').val();
+        	var memberBirth = $('#memberBirth').val();     	
+        	
+            // ajax 호출을 위한 정보 기입
+            var request = $.ajax({
+              url: "/adminCheck", // 호출 url
+              method: "POST", // 전송방식
+              data: { shopCode : shopCode, adminPw : adminPw, memberBirth : memberBirth }, // 파라미터
+              dataType: "text" // 전송 받을 타입 ex) xml, html, text, json
+            });
+             
+            // 호출 정상일 시 실행되는 메서드
+            request.done(function( data ) {
+            	if(data == 2){
+            		$('#adminCheckForm').submit();
+            	} else {
+            		$('#failAlert').attr('style', 'display:inline;');
 
-	$('#adminCheck').click(function() {
-		$('#adminCheckForm').submit();
-	})
+            	}
+              
+            });
+ 
+            // 호출 에러일 시 실행되는 메서드
+            request.fail(function( jqXHR, textStatus ) {
+              alert( "Request failed: " + textStatus );
+            });
+ 
+            // 호출 정상 또는 에러 상관없이 실행
+            request.always(function() {
+                console.log('완료');
+            });
+        });
+    });
 	
 </script>
 </th:block>
