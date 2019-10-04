@@ -107,6 +107,25 @@
 								</tr>
 							</tbody>
 						</table>
+						<!------------------------------------ 19.10.02 근태 페이지 --------------------------------->
+						<hr>
+						<div class="text-center">
+						<!-- 맨처음 -->
+						<a class="text-white" th:href="@{/workList}">[처음]</a>
+						<!-- 이전 -->
+						<a class="text-white" th:if="${currentPage > 1}" 
+						   th:href="@{/workList(currentPage=${currentPage - 1})}">[이전]</a>
+						<th:block th:each="num:${#numbers.sequence(startPageNum, lastPageNum)}">
+							<span class="text-info" th:if="${currentPage == num}" th:text="${'['+num+']'}"></span>
+							<a class="text-white" th:unless="${currentPage == num}" th:text="${'['+num+']'}"
+							   th:href="@{/workList(currentPage=${num})}"></a>
+						</th:block>
+						<!-- 다음 -->
+						<a class="text-white" th:if="${currentPage < lastPage}" 
+						   th:href="@{/memberList(currentPage=${currentPage + 1})}">[다음]</a>
+						<!-- 맨마지막 -->
+						<a class="text-white" th:href="@{/workList(currentPage=${lastPage})}">[마지막]</a>
+						</div>					
 					</div>
 				</div>
 				<div class="col-4 tm-block-col">

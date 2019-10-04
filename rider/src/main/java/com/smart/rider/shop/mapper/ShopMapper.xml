@@ -1,16 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.smart.rider.shop.mapper.ShopMapper">
+	
+	<!-- 매장 resultMap -->
+	<resultMap type="com.smart.rider.shop.dto.ShopDTO" id="shopMap">
+		<result column="shop_code" 			property="shopCode"/>
+		<result column="contract_code" 		property="contractCode"/>
+		<result column="member_id" 			property="memberId"/>
+		<result column="shop_name" 			property="shopName"/>
+		<result column="shop_address" 		property="shopAddress"/>
+		<result column="shop_phone" 		property="shopPhone"/>
+		<result column="shop_date" 			property="shopDate"/>
+
+	</resultMap>
+	
+	
 	<!-- 매장관리 전체조회 쿼리 -->
-	<select id="shopList" resultType="com.smart.rider.shop.dto.ShopDTO">
+	<select id="shopList" resultMap="shopMap">
 		select
-			shop_code AS shopCode
-			,contract_code AS contractCode
-			,member_id AS memberId
-			,shop_name AS shopName
-			,shop_address AS shopAddress
-			,shop_phone AS shopPhone
-			,shop_date AS shopDate
+			shop_code 
+			,contract_code 
+			,member_id 
+			,shop_name
+			,shop_address
+			,shop_phone
+			,shop_date
 		FROM shop
 	
 	</select>
@@ -115,8 +129,97 @@
 		contract_shop_code=#{getrelationCode}
 	WHERE member_id=#{getrelationId}
 	
-	
 	</update>
+	
+	<!--매장 삭제 가능 -->
+	<select id="shopListYes" resultMap="shopMap">
+		SELECT 
+			 s.shop_code
+			,s.contract_code
+			,s.member_id
+			,s.shop_name
+			,s.shop_address
+			,s.shop_phone
+			,s.shop_date
+		FROM shop s LEFT JOIN shop_relation sr
+		ON s.shop_code = sr.shop_code
+		WHERE sr.shop_code IS null
+
+	</select>
+	<!--매장 삭제 불가능  -->
+	<select id="shopListNo" resultMap="shopMap">
+		SELECT DISTINCT 
+			 s.shop_code
+			,s.contract_code
+			,s.member_id
+			,s.shop_name
+			,s.shop_address
+			,s.shop_phone
+			,s.shop_date
+		FROM shop s, shop_relation sr
+		WHERE s.shop_code = sr.shop_code
+	</select>
+	
+		<!--매장 삭제 가능 검색 -->
+	<select id="shopSearchListYes" parameterType="com.smart.rider.main.dto.SearchDTO" resultMap="shopMap">
+		SELECT 
+			 s.shop_code
+			,s.contract_code
+			,s.member_id
+			,s.shop_name
+			,s.shop_address
+			,s.shop_phone
+			,s.shop_date
+		FROM shop s LEFT JOIN shop_relation sr
+		ON s.shop_code = sr.shop_code
+		WHERE sr.shop_code IS null
+		<if test="searchValue neq null and searchValue neq ''.toString()">
+            AND
+                s.shop_name LIKE CONCAT('%',#{searchValue},'%')
+        </if>
+        <if test="beginDate neq ''.toString() and endDate eq ''.toString()">
+        	AND 
+        		s.shop_date between #{beginDate} and NOW()		
+        </if>
+        <if test="beginDate eq ''.toString() and endDate neq ''.toString()">
+        	AND 
+        		s.shop_date between '1990-01-01' and #{endDate}
+        </if>
+        <if test="beginDate neq ''.toString() and endDate neq ''.toString()">
+        	AND 
+        		s.shop_date between #{beginDate} and #{endDate}
+        </if>
+	</select>
+	<!--매장 삭제 불가능  검색  -->
+	<select id="shopSearchListNo" parameterType="com.smart.rider.main.dto.SearchDTO" resultMap="shopMap">
+		SELECT DISTINCT 
+			 s.shop_code
+			,s.contract_code
+			,s.member_id
+			,s.shop_name
+			,s.shop_address
+			,s.shop_phone
+			,s.shop_date
+		FROM shop s, shop_relation sr
+		WHERE s.shop_code = sr.shop_code
+			<if test="searchValue neq null and searchValue neq ''.toString()">
+            AND
+                s.shop_name LIKE CONCAT('%',#{searchValue},'%')
+        </if>
+        <if test="beginDate neq ''.toString() and endDate eq ''.toString()">
+        	AND 
+        		s.shop_date between #{beginDate} and NOW()		
+        </if>
+        <if test="beginDate eq ''.toString() and endDate neq ''.toString()">
+        	AND 
+        		s.shop_date between '1990-01-01' and #{endDate}
+        </if>
+        <if test="beginDate neq ''.toString() and endDate neq ''.toString()">
+        	AND 
+        		s.shop_date between #{beginDate} and #{endDate}
+        </if>
+	</select>
+	
 	
 	
 </mapper>

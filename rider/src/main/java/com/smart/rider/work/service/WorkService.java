@@ -47,11 +47,44 @@ public class WorkService{
 		workdto.setWorkCode(workCode);
 		return workMapper.goInsert(workdto);
 	}
-	/***********************19.10.01 작성******************************8*/
-	public List<WorkDTO> workList() {
-		return workMapper.workList();
+	/***********************19.10.01 작성********************************/
+	//페이지 작업
+	public Map<String, Object> workList(int currentPage) {
+		//페이지 구성 할 행의 갯수
+		final int rowPerPage = 10;
+		//보여줄 첫번째 페이지번호 초기화
+		int startPageNum = 1;
+		//보여줄 페이지번호의 갯수 초기화
+		int lastPageNum = rowPerPage;
+		
+		if(currentPage > (rowPerPage/2)) {
+			startPageNum = currentPage - ((lastPageNum/2)-1);
+			lastPageNum += (startPageNum-1);
+		}
+		// limit 적용될 값 startRow, 상수 ROW_PER_PAGE
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		int startRow = (currentPage-1)*rowPerPage;
+		
+		map.put("startRow", startRow);
+		map.put("rowPerPage", rowPerPage);
+		
+		//전체행의 갯수를 가져오는 쿼리
+		double workCount = workMapper.getWorkAllCount();
+							//올림함수 소수점이있으면 무조건 올림
+		int lastPage = (int)(Math.ceil(workCount/rowPerPage));
+		
+		if(currentPage >= (lastPage-4)) {
+			lastPageNum = lastPage;
+		}
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		resultMap.put("list", workMapper.workList(map));
+		resultMap.put("currentPage", currentPage);
+		resultMap.put("lastPage", lastPage);
+		resultMap.put("startPageNum", startPageNum);
+		resultMap.put("lastPageNum", lastPageNum);
+		return resultMap;
 	}
-
 	public int leaveInsert(WorkDTO workdto) {
 		return workMapper.leaveInsert(workdto);
 	}
