@@ -7,7 +7,7 @@
 		 <nav class="navbar navbar-expand-xl">
             <div class="container h-100">
                 <a class="navbar-brand" href="/">
-                	<h2 class="tm-site-title mb-0"> 배포 191001</h2>             
+                	<h2 class="tm-site-title mb-0"> 배포 191002</h2>             
                 </a>
 
                 <button class="navbar-toggler ml-auto mr-0" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -37,6 +37,7 @@
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="/salesList">!)매출</a>
                                 <a class="dropdown-item" href="/inventoryList">!)재고</a>
+                                <a class="dropdown-item" href="/spendAdmin" th:if="${session.SLEVEL eq '관리자'}">지출관리</a>
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
              					   aria-haspopup="true" aria-expanded="false">지출</a>
                                 <div class="dropdown dropright" style="position: absolute; left: 90px; top:103px;">

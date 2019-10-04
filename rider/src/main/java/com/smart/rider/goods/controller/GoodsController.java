@@ -26,6 +26,7 @@ public class GoodsController {
 	private GoodsPurchaseService goodsPurchaseService;
 	
 	//상품검색추가 2019-09-26
+	//삭제가능 불가능 리스트 추가하여 검색 추가 10.04
 	@PostMapping("/goodsSearchList")
 	public String goodsSearchList(@RequestParam(value="select")String select
 									,@RequestParam(value="searchInput")String searchInput
@@ -38,7 +39,13 @@ public class GoodsController {
 		//System.out.println(endDate + " <-- endDate goodsSearchList GoodsController.java");
 		List<GoodsDTO> search = goodsService.goodsSearchList(select, searchInput, beginDate, endDate);
 		model.addAttribute("gList", search);
-		if(search.size()==0) {
+		
+		List<GoodsHapDTO> yList = goodsService.goodsYlist(select, searchInput, beginDate, endDate);
+		model.addAttribute("yList", yList);
+		List<GoodsHapDTO> nList = goodsService.goodsNlist(select, searchInput, beginDate, endDate);
+		model.addAttribute("nList", nList);
+				
+		if(yList.size()==0 && nList.size()==0 ) {
 			model.addAttribute("alert", "검색 결과가 없습니다");
 		}
 		return "goods/goodsList";
@@ -110,9 +117,21 @@ public class GoodsController {
 	 
 	//01 판매상품 리스트 조회 
 	//19-09-16 문영성
+	//19-10-04 삭제가능불가능 상품 추가 문영성
 	@GetMapping("/goodsList")
 	public String goodsList(Model model) {
+
+		String select = null;
+		String searchInput = "";
+		String beginDate = "";
+		String endDate = "";
+		
 		List<GoodsHapDTO> gList = goodsService.goodsList();
+		
+		List<GoodsHapDTO> yList = goodsService.goodsYlist(select, searchInput, beginDate, endDate);
+		model.addAttribute("yList", yList);
+		List<GoodsHapDTO> nList = goodsService.goodsNlist(select, searchInput, beginDate, endDate);
+		model.addAttribute("nList", nList);
 		//System.out.println(gList);
 		//System.out.println(model.addAttribute("gList",gList+"<---------------------GoodsController.java------확인"));
 		model.addAttribute("gList", gList);

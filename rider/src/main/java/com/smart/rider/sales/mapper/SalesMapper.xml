@@ -6,38 +6,30 @@
 	<!-- 매출날자별 검색  -->
 	<select id="salesSearchList" resultMap="ASid" parameterType="String">
 		SELECT
-			 IFNULL(SA.goods_code, SA.goods_rental_code)
-			,SA.*	
-			,GD.*
-			,GR.*	
-			FROM
+			SA.*	
+		FROM
 			sales AS SA
-			LEFT OUTER JOIN
-			goods AS GD
-			ON
-			GD.goods_code = SA.goods_code
-			
-			LEFT OUTER JOIN
-			goods_rental AS GR		
-			ON
-			SA.goods_rental_code = GR.goods_rental_code
-			<if test="searchInput != null and searchInput neq ''.toString()">
-			WHERE
-			${select} Like CONCAT('%',#{searchInput},'%')
-		</if>
-		<if test="beginDate neq ''.toString() and endDate eq ''.toString()">
-			AND
-			SA.sales_date between #{beginDate} and NOW()
-		</if>
-		<if test="beginDate eq ''.toString() and endDate neq ''.toString()">
-			AND
-			SA.sales_date between '2000-01-01' and #{endDate}
-		</if>
-		<if
-			test="beginDate neq ''.toString() and endDate neq ''.toString()">
-			AND
-			SA.sales_date between #{beginDate} and #{endDate}
-		</if>
+		<where>		
+			<if test="searchInput neq null and searchInput neq ''.toString()">			
+				AND
+				${select} LIKE CONCAT('%',#{searchInput},'%')
+			</if>
+			<if test="beginDate neq ''.toString() and endDate eq ''.toString()">
+				AND
+				SA.sales_date between #{beginDate} and NOW()
+			</if>
+			<if test="beginDate eq ''.toString() and endDate neq ''.toString()">
+				AND
+				SA.sales_date  between '2000-01-01' and #{endDate}
+			</if>
+			<if
+				test="beginDate neq ''.toString() and endDate neq ''.toString()">
+				AND
+				SA.sales_date between #{beginDate} and #{endDate}
+			</if> 
+		</where>
+		
+		
 	</select>
 	
 	<!-- 매출삭제하기  -->
