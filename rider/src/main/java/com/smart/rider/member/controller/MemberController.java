@@ -53,10 +53,9 @@ public class MemberController {
 		int result = memberService.memberIdCheck(memberId);
 		if(result == 1) {
 			model.addAttribute("check", "사용중인 아이디입니다!");
-		}else {
-			model.addAttribute("check", "사용가능한 아이디입니다.");
 		}
-		return 0;
+			model.addAttribute("check", "사용가능한 아이디입니다.");
+		return result;
 	}
 
 	@GetMapping("/getMemberList")
