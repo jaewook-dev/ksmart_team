@@ -1,10 +1,13 @@
 package com.smart.rider.spend.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.smart.rider.main.dto.SearchDTO;
 import com.smart.rider.spend.dto.SpendAdminDTO;
 import com.smart.rider.spend.mapper.SpendMapper;
 
@@ -25,8 +28,24 @@ public class SpendService {
 	}
 	
 	/**** 191004 재욱, Read : 계약된 매장 리스트  ****/
-	public List<SpendAdminDTO> spendAdmin(){
-		return spendMapper.spendAdmin();
+	public Map<String, Object> spendShopList(int currentPage, SearchDTO searchDTO){
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+        
+        map.put("searchKey", searchDTO.getSearchKey());
+		map.put("searchValue", searchDTO.getSearchValue());
+		map.put("beginDate", searchDTO.getBeginDate());
+		map.put("endDate", searchDTO.getEndDate());
+		
+		System.out.println(map.toString() + " <-- map.toString() spendShopList() SpendService.java");
+		
+		List<SpendAdminDTO> list = spendMapper.spendShopList(map);
+		
+		System.out.println(list + " <-- list spendShopList() SpendService.java");
+		
+		map.put("spendShopList", list);
+		
+		return map;
 	}
 
 }

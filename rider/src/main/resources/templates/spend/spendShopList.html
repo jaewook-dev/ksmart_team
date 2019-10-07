@@ -17,6 +17,9 @@
 						<p class="text-white mt-5 mb-5">
 							<b> 지출/매출 > 지출관리(관리자 페이지) </b>
 						</p>
+						<p class="text-white mt-5 mb-5">
+							<b> ※ 각 매장의 리스트화면입니다. 상세보기에서 관리자 권한으로 각 매장의 지출을 관리할 수 있습니다 ※ </b>
+						</p>
 					</div>
 				</div>
 
@@ -33,6 +36,7 @@
 										<td>매장명</td>
 										<td>아이디</td>
 										<td>계약상태</td>
+										<td>계약일</td>
 										<td>상세보기</td>
 									</tr>
 								</thead>
@@ -42,6 +46,7 @@
 										<td th:text="${list.shopName}"></td>
 										<td th:text="${list.memberId}"></td>
 										<td th:text="${list.contractManagementState}"></td>
+										<td th:text="${list.contractDate}"></td>
 										
 										<!-- 상세 아이콘 -->
 										<td>
@@ -63,7 +68,7 @@
 						<div class="tm-bg-primary-dark tm-block">
 
 							<!-- begin 검색 폼 -->
-							<form action="/spendAdmin" class="tm-search-form row" method="post">
+							<form action="/spendShopList" class="tm-search-form row" method="post">
 							
 								<div class="form-group col-3">
 									<select class="custom-select" name="searchDate">
@@ -89,7 +94,6 @@
 									<select class="custom-select" name="searchKey">
 										<option value="member_id">아이디</option>
 										<option value="shop_name">매장명</option>
-										<option value="contract_management_state">계약상태</option>
 									</select>
 								</div>
 
@@ -115,6 +119,17 @@
 <th:block layout:fragment="customScript">
 
 <script th:inline="javascript">
+	<!-- datepicker -->
+	//시작 일자 텍스트상자 클릭시 달력 표기 
+	$('#beginDate').datepicker({
+	});
+	$('#beginDate').datepicker('option','dateFormat','yy-mm-dd'); // 기존 dd/mm/yy에서 yy-mm-dd로 format 변경   
+	
+	//종료 일자 텍스트상자 클릭시 달력 표기 
+	$('#endDate').datepicker({
+	});
+	$('#endDate').datepicker('option','dateFormat','yy-mm-dd'); // 기존 dd/mm/yy에서 yy-mm-dd로 format 변경 
+
 </script>
 
 </th:block>

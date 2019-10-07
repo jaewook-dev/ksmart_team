@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.smart.rider.main.dto.SearchDTO;
 import com.smart.rider.main.service.MainService;
 import com.smart.rider.spend.dto.SpendAdminDTO;
 import com.smart.rider.spend.service.SpendService;
@@ -116,11 +117,27 @@ public class SpendController {
 		return "spend/spendShopDetails";
 	}
 	
+	/**** 191007 재욱, Read : 계약된 매장 검색 리스트 ****/
+	@PostMapping("/spendShopList")
+	public String spendShopList(@RequestParam(value =  "currentPage", required = false, defaultValue = "1") int currentPage
+							   ,Model model
+							   ,SearchDTO searchDTO) {
+		System.out.println(searchDTO.getSearchKey() + " <-- searchDTO.getSearchKey() spendShopList() SpendController.java");
+		System.out.println(searchDTO.getSearchValue() + " <-- searchDTO.getSearchKey() spendShopList() SpendController.java");
+		System.out.println(searchDTO.getBeginDate() + " <-- searchDTO.getSearchKey() spendShopList() SpendController.java");
+		System.out.println(searchDTO.getEndDate() + " <-- searchDTO.getSearchKey() spendShopList() SpendController.java");
+		this.spendShop(currentPage, model, searchDTO);
+		
+		return "spend/spendShopList";
+	}
 	
 	/**** 191004 재욱, Read : 계약된 매장 리스트 ****/
 	@GetMapping("/spendShopList")
-	public String spendAdmin(Model model) {
-		List<SpendAdminDTO> list = spendService.spendAdmin();
+	public String spendShop(@RequestParam(value =  "currentPage", required = false, defaultValue = "1") int currentPage
+							,Model model
+							,SearchDTO searchDTO) {
+		Map<String, Object> map = spendService.spendShopList(currentPage, searchDTO);
+		List<SpendAdminDTO> list = (List<SpendAdminDTO>)map.get("spendShopList");
 		//System.out.println(list + " <-- list spendAdmin() SpendController.java");
 		model.addAttribute("shopList", list);
 		return "spend/spendShopList";
