@@ -107,16 +107,11 @@ public class SalaryController {
 							, HttpSession session
 							, Model model) {
 		
-		String contractShopCode = (String)session.getAttribute("SCODE");
+		String contractShopCode = selectShopCode;
 		String userLevel = (String)session.getAttribute("SLEVEL");
 		
-		/** 190930 재욱, 관리자 권한으로 계약된 매장 내역 **/
-		if(userLevel.equals("관리자")) {
-			contractShopCode = selectShopCode;
-			List<SsrHapDTO> salaryShop = utilityService.utilityShop();
-			//System.out.println(salaryShop + " <-- salaryShop spendSalary() SalaryController.java");
-			model.addAttribute("salaryShop", salaryShop);
-			model.addAttribute("masterShopCode", contractShopCode);
+		if(!userLevel.equals("관리자")) {
+			contractShopCode = (String)session.getAttribute("SCODE");
 		}
 		
 		/** 190927 재욱, 지출_급여 직원 select box list **/
@@ -170,6 +165,8 @@ public class SalaryController {
 		model.addAttribute("lastPageNum", lastPageNum);
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("lastPage", lastPage);
+		
+		model.addAttribute("contractShopCode", contractShopCode);
 		
 		return "spend/spendSalary";
 	}

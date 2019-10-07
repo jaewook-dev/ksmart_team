@@ -39,14 +39,12 @@
                                 <a class="dropdown-item" href="/inventoryList">!)재고</a>
                                 <a class="dropdown-item" href="/spendShopList" th:if="${session.SLEVEL eq '관리자'}">지출관리</a>
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-             					   aria-haspopup="true" aria-expanded="false">지출</a>
+             					   aria-haspopup="true" aria-expanded="false" th:if="${session.SLEVEL eq '점주'}">지출</a>
                                 <div class="dropdown dropright" style="position: absolute; left: 90px; top:103px;">
 									<div class="dropdown-menu">
-								    	<a class="dropdown-item" href="/spendTotal">!)통합</a>
+								    	<a class="dropdown-item" href="/spendTotal">통합</a>
 								    	<a class="dropdown-item" href="/spendSalary">급여</a>
-								    	<th:block th:if="${session.SLEVEL ne '직원'}">
-								    		<a class="dropdown-item" href="/spendUtility">공과금/기타</a>
-								    	</th:block>
+								    	<a class="dropdown-item" href="/spendUtility">공과금/기타</a>
 									</div>
 								</div>
                        		</div>

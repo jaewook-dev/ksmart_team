@@ -29,7 +29,8 @@
 					<div class="row tm-content-row">
 						<div class="col-12 tm-block-col">
 							<div class="tm-bg-primary-dark tm-block-select">
-								<form action="/spendSelect" method="get" id="selectShopForm">
+								<form action="/spendManagement" method="get" id="spendManagementForm">
+									<input type="hidden" name="selectShopCode" th:value="${contractShopCode}">
 									<span style="float: left">
 										<strong class="tm-block-title text-center"> 지출 관리 </strong>
 									</span> 
@@ -39,9 +40,9 @@
 										class="custom-select"
 										name="spendManagement"
 										id="spendManagement">
-										<option>통합</option>
-										<option>급여</option>
-										<option>공과금/기타</option>
+										<option value="spendTotal" id="spendTotal">통합</option>
+										<option value="spendSalary" id="spendSalary">급여</option>
+										<option value="spendUtility" id="spendUtility">공과금/기타</option>
 									</select>
 									</span>
 								</form>
@@ -326,10 +327,24 @@
 
 	<script th:inline="javascript">
 	
-	<!-- 계약된 매장 선택 -->
-	$('#selectShopCode').change(function() {
-		$('#selectShopForm').submit();
+	$('#spendManagement').change(function() {
+		$('#spendManagementForm').submit()
+	});
+	
+	$(function() {
+		var url = $(location).attr('pathname');
+		//console.log(url);
+		
+		if(url == '/spendUtility'){
+			$('#spendUtility').attr('selected', 'selected');
+		} else if(url == '/spendSalary'){
+			$('#spendSalary').attr('selected', 'selected');
+		} else {
+			$('#spendTotal').attr('selected', 'selected');
+		}
 	})
+	
+	
 	
     <!-- charts.js script-->
 	var chartJanuary 	= [[${utility0}]];

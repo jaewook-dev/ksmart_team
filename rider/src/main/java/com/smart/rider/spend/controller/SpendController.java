@@ -29,6 +29,27 @@ public class SpendController {
 	@Autowired
 	private MainService mainService;
 	
+	
+	/**** 191007 재욱, 관리자 권한, 매장 지출 관리 통합, 급여, 공과금/기타 화면이동 ****/
+	@GetMapping("/spendManagement")
+	public String spendManagement(@RequestParam(value = "selectShopCode", required = false, defaultValue = "SR0000") String selectShopCode
+								, @RequestParam(value = "spendManagement", required = false, defaultValue = "spendTotal") String spendManagement
+								, Model model
+								, HttpSession session) {
+		
+		//System.out.println(selectShopCode + " <-- selectShopCode spendManagement() SpendController.java");
+		//System.out.println(spendManagement + " <-- spendManagement spendManagement() SpendController.java");
+
+		if(spendManagement.equals("spendSalary")) {
+			return "redirect:/spendSalary?selectShopCode=" + selectShopCode;
+		} else if(spendManagement.equals("spendUtility")) {
+			return "redirect:/spendUtility?selectShopCode=" + selectShopCode;
+		} else {
+			return "redirect:/spendTotal?selectShopCode=" + selectShopCode;
+		}
+	}
+	
+	
 	/**** 191007 재욱, 매장 지출 관리하기 화면이동 ****/
 	@PostMapping("/spendAdmin")
 	public String spendAdmin(@RequestParam(value = "contractShopCode", required = false, defaultValue = "SR0000") String contractShopCode
@@ -43,13 +64,14 @@ public class SpendController {
 	
 	/**** 191007 재욱, 지출_통합 화면 ****/
 	@GetMapping("/spendTotal")
-	public String spendTotal(@RequestParam(value = "contractShopCode", required = false, defaultValue = "SR0000") String contractShopCode
+	public String spendTotal(@RequestParam(value = "selectShopCode", required = false, defaultValue = "SR0000") String selectShopCode
 							,@RequestParam(value = "totalYear", required = false, defaultValue = "2019") String totalYear
 							,Model model
 							,HttpSession session) {
 		
 		//System.out.println(contractShopCode + " <-- contractShopCode spendTotal() SpendController.java");
 		
+		String contractShopCode = selectShopCode;
 		String userLevel = (String)session.getAttribute("SLEVEL");
 		
 		if(!userLevel.equals("관리자")) {
@@ -107,7 +129,9 @@ public class SpendController {
 		}
 		
 		model.addAttribute("selectedYear", totalYear);
+		
 		model.addAttribute("contractShopCode", contractShopCode);
+		
 		return "spend/spendTotal";
 	}
 	
