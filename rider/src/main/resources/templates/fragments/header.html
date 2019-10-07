@@ -62,9 +62,9 @@
                             </a>
 
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" th:href="@{/contract}"> !)계약관리</a>
-                                <a class="dropdown-item" th:href="@{/agreement}"> !)계약서관리</a>
-                                <a class="dropdown-item" th:href="@{/managementList}"> !)계약금관리</a>
+                                <a class="dropdown-item" th:href="@{/contract}">계약 관리</a>
+                                <a class="dropdown-item" th:href="@{/agreement}">계약 및 계약내용</a>
+                                <a class="dropdown-item" th:href="@{/managementList}">계약금 납부관리</a>
                             </div>
                         </li>
                         <li class="nav-item dropdown">
@@ -94,7 +94,7 @@
                             	</span>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            	<a class="dropdown-item" href="/shop">!)매장</a>
+                            	<a class="dropdown-item" href="/shop">매장</a>
                                 <a class="dropdown-item" href="/customerList">!대여고객 관리</a>
                             </div>
                         </li>
@@ -107,7 +107,7 @@
                                 </span>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" th:href="@{/accountList}">!)거래처관리</a>
+                                <a class="dropdown-item" th:href="@{/accountList}">거래처관리</a>
                             </div>
                         </li>
                         <li class="nav-item dropdown" th:if="${session.SLEVEL eq '관리자'}">

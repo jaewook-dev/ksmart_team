@@ -20,7 +20,7 @@ public interface AccountMapper {
 	//세션에 담긴 아이디로 계약매장코드 가져오기
 	public List<SsrHapDTO> getShopRelationCode(String SID);
 	
-	//거래처 생성
+	//거래처 생성하기
 	public int accountInsert(AccountDTO account);
 	
 	//리스트 검색시
@@ -30,12 +30,12 @@ public interface AccountMapper {
 	//거래처 코드로 특정 데이터 불러오기
 	public List<AccountDTO> accountUpdate(String acCode);
 	
-	//거래처 수정
+	//거래처 수정하기
 	public int accountUpdateSet(AccountDTO account);
 	
 	//세션 아이디로 패스워드 불러오기
 	public List<MemberDTO> getPw(String SID);
 	
-	//거래처 삭제
+	//거래처 삭제하기
 	public int accountDelete(String accountCode);	
 }

@@ -19,23 +19,19 @@ public class ManagementController {
 
 	@Autowired
 	private ManagementService managementService;
-
 	
-	
+	//계약금 목록
 	@GetMapping("/managementList")
 	public String managementList(Model model) {
 		List<ContractManagementDTO> managementList = managementService.managementList();
-		
-
 		//모델에 넣기 전에 managementList들어있는 값을 확인  
 		System.out.println("ContractManagementDTO" + managementList);
 		model.addAttribute("managementList", managementList);
-		
+
 		return "management/managementList";
 	}
 	
-
-	
+	//계약금 수정화면
 	@GetMapping("/managementUpdate")
 	public String managementUpdate(@RequestParam(value = "contractManagementCode") String managementCode, Model model) {
 		//값들어오는지 확인
@@ -47,16 +43,14 @@ public class ManagementController {
 		
 		return "management/managementUpdate";
 	}
+	
+	//계약금 수정하기
 	@PostMapping("/managementUpdate")
 	public String managementUpdate(ManagementDTO management) {
-		
 		managementService.managementUpdate(management);
-		
 		//들어오는  값 확인 
 		System.out.println(management.toString() + "<-- management.toString");
 		
 		return "redirect:/managementList";
-	}
-	
-	
+	}	
 }

@@ -26,41 +26,42 @@ public class ContractService {
 	@Autowired
 	private ManagementMapper ManagementMapper;
 	
+	//최근단가표
 	public List<UnitDTO> unitNew(){
-		
-		
-		
 		return contractMapper.unitNew();
 	}
+	
+	//단가표 목록
 	public List<ContractDTO> contractList(){
-		
 		return contractMapper.contractList();
 	}
 	
+	//단가표 생성하기
 	public int contractInsert(ContractDTO contract,HttpSession session,ManagementDTO management) {
 		//계약코드 생성
 		String contractCode = "C"+ contractMapper.contractCodeMax();
 		if(contractCode.equals("Cnull")) { 
 			contractCode = "C0001";
 		}
-		
+		//로그인 되어있는 아이디값 가져오기
 		contract.setMemberId((String)session.getAttribute("SID"));
 		System.out.println(contract.getMemberId());
+		//최근단가표 세션으로 가져오기
 		contract.setContractUnitCode((String)session.getAttribute("SCUC"));
 		System.out.println(contract.getContractUnitCode());
+		//계약코드 생성 후 ContractDTO에 넣기
 		contract.setContractCode(contractCode);
 		System.out.println(contract.getContractCode());
-		
+		//리턴을 2번 하기 위해  선언
 		int result = 0;
 		result += contractMapper.contractInsert(contract);
-		
-		
 		//contractList에 담겨있는 contractCode 중에  마지막에 등록된 코드 가져오기
 		List<ContractDTO> contractList = contractList();
 		String getContractCode = contractList.get(contractList.size()-1).getContractCode();
 		System.out.println(getContractCode);
-		session.setAttribute("SCC",getContractCode);
 		
+		//가장 최근에 계약한 코드 가져오기
+		session.setAttribute("SCC",getContractCode);
 		
 		//계약관리쪽 마지막 contractCode를 가져와서  managemenDTO 쪽에 set을 한다.
 		management.setContractCode((String)session.getAttribute("SCC"));
@@ -79,26 +80,14 @@ public class ContractService {
 		//만든 코드를  ContractManagementCode에다가 set 해주고 get으로 값이 들어가있는지 확인
 		management.setContractManagementCode(managementCode);
 		System.out.println(management.getContractManagementCode());
-				
-	
-		
+		//리턴
 		result += managementService.managementInsert(management, session);
 		
-		
-		
-		
-		
-		
-		
-		
 		return result;
-		
-		
-	
 	}
+	
+	//계약서 목록
 	public List<ContractMemberDTO> agreementList(){
-		
 		return contractMapper.agreementList();
 	}
-	
 }
