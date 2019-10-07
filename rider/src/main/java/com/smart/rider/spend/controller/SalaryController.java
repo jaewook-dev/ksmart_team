@@ -84,13 +84,14 @@ public class SalaryController {
 	@PostMapping("/spendSalaryList")
 	public String spendSalaryList(@RequestParam(value = "selectShopCode", required = false, defaultValue = "SR0000") String selectShopCode
 								, @RequestParam(value = "salaryYear", required = false, defaultValue = "2019") String salaryYear
+								, @RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage
 								, SearchDTO searchDTO
 								, HttpSession session
 								, Model model) {
 		
 		//System.out.println(searchDTO.toString() + " <-- searchDTO.toString() spendSalaryList() SalaryController.java");
 		
-		this.spendSalary(selectShopCode, salaryYear, searchDTO, session, model);
+		this.spendSalary(selectShopCode, salaryYear, currentPage, searchDTO, session, model);
 		
 		return "spend/spendSalary";
 	}
@@ -101,6 +102,7 @@ public class SalaryController {
 	@GetMapping("/spendSalary")
 	public String spendSalary(@RequestParam(value = "selectShopCode", required = false, defaultValue = "SR0000") String selectShopCode
 							, @RequestParam(value = "salaryYear", required = false, defaultValue = "2019") String salaryYear
+							, @RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage
 							, SearchDTO searchDTO
 							, HttpSession session
 							, Model model) {
@@ -129,7 +131,7 @@ public class SalaryController {
 		}
 		
 		/** 191001 재욱, Read : 지출_급여 등록 내역 **/
-		Map<String, Object> map = salaryService.salaryList(contractShopCode, searchDTO);
+		Map<String, Object> map = salaryService.salaryList(contractShopCode, searchDTO, currentPage);
 		
 		@SuppressWarnings("unchecked")
 		List<JoinSalaryDTO> salaryList = (List<JoinSalaryDTO>)map.get("salaryList");
@@ -158,6 +160,16 @@ public class SalaryController {
 		}
 		
 		model.addAttribute("selectedYear", salaryYear);
+		
+		/** 191007 재욱, Read : 지출_급여 등록 내역 페이징 **/
+		int lastPageNum = (int)map.get("lastPageNum");
+		int startPageNum = (int)map.get("startPageNum");
+		int lastPage = (int)map.get("lastPage");
+		
+		model.addAttribute("startPageNum", startPageNum);
+		model.addAttribute("lastPageNum", lastPageNum);
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("lastPage", lastPage);
 		
 		return "spend/spendSalary";
 	}
