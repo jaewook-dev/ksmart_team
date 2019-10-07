@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.smart.rider.member.dto.MemberDTO;
 import com.smart.rider.shop.dto.PosDTO;
 import com.smart.rider.shop.dto.SsrHapDTO;
 
@@ -24,6 +25,16 @@ public interface PosMapper {
 	//수정하기 위한 목록
 	public List<PosDTO> posUpdate(String posCode);
 	
+	//아이디값으로 비밀번호,생년월일 조회
+	public List<MemberDTO> getMember(String memberId);
+	
 	//수정하기
 	public int posUpdateSet(PosDTO pos);
+	
+	//POS코드로 ID값 가져오기
+	public String getId(String posCode);
+	
+	
+	//삭제하기
+	public int posDeleteSet(String posCode);
 }

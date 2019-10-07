@@ -93,29 +93,25 @@ public class PosController {
 	
 	//삭제하기
 	@PostMapping("/posDelete")
-	public String posDeleteSet(@RequestParam(value="memberPw")String memberPw,
+	public String posDeleteSet(	@RequestParam(value="memberPw")String memberPw,
 								@RequestParam(value="posCode")String posCode,
 								HttpSession session,
 								Model model){
-		
-		//입력되는 PW 값 과 삭제할 Code값 확인
-		System.out.println(memberPw +"<--PW에 입력된 값");
-		System.out.println(accountCode +"<--accountCode에 입력된 값");
-		
+		//삭제할 Code값 과 입력된 PW값 확인
+		System.out.println(memberPw +"<--memberPw에 입력된 값");
+		System.out.println(posCode +"<--posCode에 입력된 값");
 		//삭제 확인을 위해서 변수를 선언한다.
-		int deleteCk = accountService.accountDelete(memberPw, accountCode, session);
-		
+		int deleteCk = posService.posDeleteSet(memberPw,posCode,session);
+		System.out.println(deleteCk +"<--값 확인");
 		//deleteCk가 0이면  삭제가 안되므로 다시 값을 가지고 삭제화면으로 리턴 시킨다.
 		if(deleteCk == 0 ) {
 			model.addAttribute("result", "비밀번호가 일치하지 않습니다.");
-			model.addAttribute("updateList", accountService.accountUpdate(accountCode));
-	
-			
-			return "account/accountDelete";
+			model.addAttribute("posDelete", posService.posUpdate(posCode));
+			return "pos/posDelete";
 		}
 		
 		
-		return "redirect:/accountList";
+		return "redirect:/shop";
 		
 	}
 }

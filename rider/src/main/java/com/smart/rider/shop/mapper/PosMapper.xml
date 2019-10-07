@@ -73,11 +73,38 @@
 	
 	<!--입력 데이터로 수정 -->
 	<update id="posUpdateSet" parameterType="com.smart.rider.shop.dto.PosDTO">
-	UPDATE pos
-	SET
-		pos_name=#{posName},
-		pos_number=#{posNumber},
-		pos_use=#{posUse}
-	WHERE pos_code=#{posCode}
+		UPDATE pos
+		SET
+			pos_name=#{posName},
+			pos_number=#{posNumber},
+			pos_use=#{posUse}
+		WHERE pos_code=#{posCode}
 	</update>
+	
+	
+	<!--posCode로 memberId구하기 -->
+	<select id="getId" parameterType="String" resultType="String">
+		SELECT 
+			sr.member_id
+		FROM pos p INNER JOIN shop_relation sr
+		ON p.contract_shop_code = sr.contract_shop_code
+		WHERE p.pos_code=#{posCode}
+	</select>
+	
+	<!-- id로 pw와 birth조회 -->
+	<select id="getMember" parameterType="String" resultType="com.smart.rider.member.dto.MemberDTO">
+		SELECT
+			 member_pw AS memberPw
+			,member_birth AS memberBirth
+		FROM member
+		WHERE member_id = #{memberId}
+	</select>
+	
+	<!-- 삭제 -->
+	<delete id="posDeleteSet" parameterType="String">
+		DELETE 
+			FROM pos
+		WHERE 
+			pos_code= #{posCode}
+	</delete>
 </mapper>

@@ -11,10 +11,10 @@ import org.springframework.stereotype.Service;
 
 import com.smart.rider.contract.dto.ContractDTO;
 import com.smart.rider.main.dto.SearchDTO;
-import com.smart.rider.shop.dto.PosDTO;
+
 import com.smart.rider.shop.dto.ShopDTO;
 import com.smart.rider.shop.dto.ShopRelationDTO;
-import com.smart.rider.shop.mapper.PosMapper;
+
 import com.smart.rider.shop.mapper.ShopMapper;
 
 @Service

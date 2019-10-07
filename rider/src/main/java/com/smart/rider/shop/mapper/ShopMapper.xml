@@ -23,7 +23,7 @@
 		FROM shop_relation
 	</select>
 	
-	<!-- 가져온 코드로 데이터 중 member_id값 가져오기 -->
+	<!-- 가져온 코드로 데이터 중 member_id 값 가져오기 -->
 	<select id="getCode" resultType="com.smart.rider.contract.dto.ContractDTO" parameterType="String">
 		SELECT 
 				member_id AS memberId
