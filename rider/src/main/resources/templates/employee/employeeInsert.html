@@ -11,38 +11,33 @@
 			<div class="col-xl-6 mx-auto tm-block-col tm-col-account-settings">
 				<div class="tm-bg-primary-dark tm-block tm-block-settings">
 					<h2 class="tm-block-title">직원등록</h2>
-					<form onsubmit="return validate();" action="/employeeInsert" class="tm-signup-form" method="post">
+					<form onsubmit="return sendIt();" action="/employeeInsert" class="tm-signup-form" method="post">
 						<!-- 매장 릴레이션 코드 -->
 						<input type="hidden" id="contractShopCode" name="contractShopCode" th:value="${session.SCODE}">
 						<label for="id" style="color:white">아이디</label>
-						<div class="form-group input-group mb-3">
-							<input id="memberId" name="memberId" type="text" class="form-control validate" placeholder="ID" required="required"/>
-							<div class="input-group-append">
-								<button class="btn btn-primary btn-block text-uppercase" type="button" id="checkButton">
-									#중복확인
-								</button>
-							</div>
+						<div class="form-group mb-3">
+							<input id="memberId" name="memberId" type="text" class="form-control validate" placeholder="ID" maxlength="12" required="required"/>
 						</div>
 						<div class="check_font" id="idCheck"></div>
 						<div class="form-group">
 							<label for="password">비밀번호</label>
-							<input id="memberPw" name="memberPw" type="password" class="form-control validate" placeholder="PASSWORD" />
+							<input id="memberPw" name="memberPw" type="password" class="form-control validate" maxlength="12" placeholder="PASSWORD" />
 						</div>
 						<div class="form-group">
 							<label for="password2">비밀번호 재확인</label>
-							<input id="EmployeePw2" name="EmployeePw2" type="password" class="form-control validate" placeholder="PASSWORD" />
+							<input id="EmployeePw2" name="EmployeePw2" type="password" class="form-control validate" maxlength="12" placeholder="PASSWORD" />
 						</div>
 						<div class="form-group">
 							<label for="name">이름</label>
-							<input id="memberName" name="memberName" type="text" class="form-control validate" required="required"/>
+							<input id="memberName" name="memberName" type="text" class="form-control validate" maxlength="5" required="required"/>
 						</div>
 						<div class="form-group">
 							<label for="birth">생년월일</label>
-							<input id="memberBirth" name="memberBirth" type="text" class="form-control validate" placeholder="예)920311" required="required"/>
+							<input id="memberBirth" name="memberBirth" type="text" class="form-control validate" placeholder="예)920311" maxlength="6" required="required"/>
 						</div>
 						<div class="form-group">
 							<label for="phone">전화번호('-' 없이 번호만 입력해주세요)</label>
-							<input id="memberPhone" name="memberPhone" type="text" class="form-control validate" required="required"/>
+							<input id="memberPhone" name="memberPhone" type="text" class="form-control validate" maxlength="11" required="required"/>
 						</div>
 						<div class="form-group">
 							<label for="address">주소</label>
@@ -50,10 +45,10 @@
 						</div>
 						<div class="form-group">
 							<label for="email">이메일</label>
-							<input id="memberEmail" name="memberEmail" type="text" class="form-control validate" />
+							<input id="memberEmail" name="memberEmail" type="text" class="form-control validate" placeholder="abc@abc.abc"/>
 						</div>
 						<div>
-							<input type="submit" class="btn btn-primary btn-block text-uppercase" value="직원등록" />
+							<input type="submit" class="btn btn-primary btn-block text-uppercase" value="직원등록" onclick="sendIt()"/>
 						</div>
 					</form>
 				</div>
@@ -64,7 +59,7 @@
 
 <th:block layout:fragment="customScript">
 <script>
-$('#memberPw2').blur(function(){
+$('#EmployeePw2').blur(function(){
 	if($('#memberPw').val() != $('#EmployeePw2').val()){
 		if($('#EmployeePw2').val()!=''){
 			alert("비밀번호가 일치하지 않습니다.");
@@ -72,26 +67,49 @@ $('#memberPw2').blur(function(){
 			$('#EmployeePw2').focus();
 		}else if($('#EmployeePw2').val()==''){
 			alert("비밀번호를 확인해주세요!")
-			$('#EmployeePw2').focus();
+			$('#EmployeePw2').val('');
+			$('#memberPw').focus();
 		}
  	}
 });
+
 function validate() {
-	var re = /^[a-zA-Z0-9]{4,12}$/ // 아이디와 패스워드가 적합한지 검사할 정규식
-	var re2 = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-    // 이메일이 적합한지 검사할 정규식
-	if(!re.test($("#memberId").val())){
-        alert("형식에 맞게 입력해주세요");
-        $("#memberId").val("");
-        $("#memberId").focus();
-        return false;
-      }
+	var getCheck= RegExp(/^[a-zA-Z0-9]{4,12}$/);
+	var getName= RegExp(/^[가-힣]+$/);
+	var getMail = RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/);
+	//아이디
+	if(!getCheck.test($("#memberId").val())){
+		alert("ID를 영문으로 4자이상 12자이하로 입력해주세요.");
+		$("#memberId").val("");
+		$("#memberId").focus();
+		return false;
+	}
+	//비밀번호
 	if(!getCheck.test($("#memberPw").val())) {
-	      alert("형식에 맞춰서 PW를 입력해줘용");
-	      $("#memberPw").val("");
-	      $("#memberPw").focus();
-	      return false;
-	      }
+		alert("비밀번호를 영문으로 4자이상 12자이하로 입력해주세요.");
+		$("#memberPw").val("");
+		$("#memberPw").focus();
+		return false;
+	}
+	if ($("#memberId").val()==($("#memberPw").val())) {
+		alert("ID와 비밀번호가 같습니다!");
+		$("#memberPw").val("");
+		$("#memberPw").focus();
+	}
+	//이름
+	if (!getName.test($("#memberName").val())) {
+		alert("이름이 올바르지 않습니다.");
+		$("#memberName").val("");
+		$("#memberName").focus();
+		return false;
+	}
+	//이메일
+	if(!getMail.test($("#memberEmail").val())){
+		alert("이메일형식에 맞게 입력해주세요.")
+		$("#memberEmail").val("");
+		$("#memberEmail").focus();
+		return false;
+	}
 }
 </script>
 </th:block>

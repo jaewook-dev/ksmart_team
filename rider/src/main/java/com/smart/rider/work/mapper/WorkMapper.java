@@ -14,11 +14,14 @@ public interface WorkMapper {
 	public MemberDTO employeeCheck(MemberDTO memberdto);
 	
 	public String workCodeCount();
+	
 	public int goInsert(WorkDTO workdto);
 	
 	public List<WorkDTO> workList(Map<String, Object> map);
 	
 	public int leaveInsert(WorkDTO workdto);
 	//페이지작업위한 목록 총 카운트
-	public int getWorkAllCount();
+	public int getWorkAllCount(String contractShopCode);
+	
+	public List<WorkDTO> searchWork(Map<String, Object> map);
 }
