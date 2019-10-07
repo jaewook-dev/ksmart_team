@@ -56,8 +56,7 @@
 				                      >매장이름 선택 
 				                    </label>
 				                    <!-- required : 입력란 설정  -->
-				                   	<select class="custom-select tm-select-accounts" id="contractShopCode" name="contractShopCode">
-				                   		<option selected>선택해주세요</option>
+				                   	<select class="custom-select-sj tm-select-accounts" id="contractShopCode" name="contractShopCode">
 				                   		<option th:each="ssrlist : ${ssrHapList}"
 				                   		th:text="${ssrlist.shopName}"
 				                   		th:value="${ssrlist.contractShopCode}"

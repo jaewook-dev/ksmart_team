@@ -35,7 +35,7 @@
                                 </span>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="/salesList">!)매출</a>
+                                <a class="dropdown-item" href="/salesList">매출</a>
                                 <a class="dropdown-item" href="/inventoryList">!)재고</a>
                                 <a class="dropdown-item" href="/spendShopList" th:if="${session.SLEVEL eq '관리자'}">지출관리</a>
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
@@ -76,9 +76,9 @@
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" th:if="${session.SLEVEL ne '직원'}" href="/goodsDbList">상품DB관리</a>
-                                <a class="dropdown-item" href="/purchaseList">!)매입상풍</a>
-                                <a class="dropdown-item" href="/goodsList">!)판매상품</a>
-                                <a class="dropdown-item" href="/goodsRentalList">!)대여상품</a>
+                                <a class="dropdown-item" href="/purchaseList">매입상풍</a>
+                                <a class="dropdown-item" href="/goodsList">판매상품</a>
+                                <a class="dropdown-item" href="/goodsRentalList">대여상품</a>
                                 
                             </div>
                         </li>

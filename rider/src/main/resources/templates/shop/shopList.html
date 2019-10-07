@@ -79,13 +79,13 @@
 								<!-- 삭제 가능 -->
 									<tr th:each="syeslist : ${shopListYes}">
 										<td th:text="${syeslist.memberId}"></td>
-										<td th:text="${ssyeslist.shopName}"></td>
+										<td th:text="${syeslist.shopName}"></td>
 										<td th:text="${syeslist.shopPhone}"></td>
 										<td th:text="${syeslist.shopAddress}"></td>
 										<td th:text="${syeslist.shopDate}"></td>
 										<td class="text-center"><a
 											th:if="${session.SLEVEL eq '관리자'}"
-											th:href="@{/shopUpdate(shopCode=${snolist.shopCode})}"
+											th:href="@{/shopUpdate(shopCode=${syeslist.shopCode})}"
 											class="tm-product-delete-link"> <i
 												class="fas fa-check tm-product-check-icon"
 												style="color: white"></i>
