@@ -1,6 +1,5 @@
 package com.smart.rider.spend.controller;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -101,9 +100,9 @@ public class SpendController {
 	/**** 191004 재욱, Modal ajax 호출, 관리자 확인 카운트, 2일 때 관리자 비밀번호와 점주 생년월일 일치 ****/
 	@RequestMapping(value = "/adminCheck") // 요청에 반응하는 url
 	public @ResponseBody int adminCheck(String contractShopCode, String memberBirth, String adminPw) {
-		System.out.println(contractShopCode + memberBirth + adminPw + " <-- check adminCheck() SpendController.java" );
+		//System.out.println(contractShopCode + memberBirth + adminPw + " <-- check adminCheck() SpendController.java" );
 		int result = spendService.spendAdminCheck(contractShopCode, memberBirth, adminPw); // DB 조회 결과
-		System.out.println(result + " <-- result adminCheck() SpendController.java"); 
+		//System.out.println(result + " <-- result adminCheck() SpendController.java"); 
 		
 		return result;
 	}

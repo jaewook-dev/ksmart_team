@@ -32,12 +32,12 @@
 									<div class="form-group">
 										<label for="username">ID</label> <input name="memberId"
 											type="text" class="form-control validate" id="memberId" 
-											placeholder="ID를 입력하세요" required value="id001"/>
+											placeholder="ID를 입력하세요" required/>
 									</div>
 									<div class="form-group mt-3">
 										<label for="password">Password</label> <input name="memberPw"
 											type="password" class="form-control validate" id="memberPw" 
-											placeholder="Password를 입력하세요" required  value="pw001"/>
+											placeholder="Password를 입력하세요" required/>
 									</div>
 									<h6 style="text-align: center" id="white">권한별 버튼 클릭시 자동 로그인</h6>
 									<br>
@@ -47,15 +47,40 @@
 										<button type="button" class="btn btn-primary" style="float: right" id="employeeButton">직원</button>
 									</div>
 									<div class="form-group mt-4">
-										<button type="submit" class="btn btn-primary btn-block text-uppercase">Login</button>
+										<button 
+											type="button" 
+											class="btn btn-primary btn-block text-uppercase"
+											id="loginButton">Login</button>
 									</div>
 								</form>
 								<hr>
 								<a href="/memberInsert" class="mt-4 btn btn-primary btn-block text-uppercase">회원가입</a>
 								<a href="#" class="mt-4 btn btn-primary btn-block text-uppercase">아이디/비밀번호 찾기</a>
 							</div>
+							
 						</div>
 					</div>
+					
+					<!-- The Modal -->
+					<div class="modal fade" id="loginModal">
+					    <div class="modal-dialog">
+					        <div class="modal-content">
+					            <!-- Modal Header -->
+					            <div class="modal-header">
+					                <h4 class="modal-title"> 알림! </h4>
+					                <button type="button" class="close" data-dismiss="modal">×</button>
+					            </div>
+					            <!-- Modal body -->
+					            <div class="modal-body text-center">
+									아이디 혹은 비밀번호가 일치하지않습니다
+					            </div>
+					            <!-- Modal footer -->
+					            <div class="modal-footer">
+					            </div>
+					        </div>
+					    </div>
+					</div>
+					
 				</div>
 			</div>
 		</div>
@@ -65,6 +90,44 @@
 </th:block>
 <th:block layout:fragment="customScript">
 	<script type="text/javascript">
+	
+		$(function() {
+	        $('#loginButton').click(function() {
+	            
+	        	var memberId = $('#memberId').val();
+	        	var memberPw = $('#memberPw').val(); 
+	        	
+	            // ajax 호출을 위한 정보 기입
+	            var request = $.ajax({
+	              url: "/loginCheck", // 호출 url
+	              method: "POST", // 전송방식
+	              data: {memberId, memberPw}, // 파라미터
+	              dataType: "text" // 전송 받을 타입 ex) xml, html, text, json
+	            });
+	             
+	            // 호출 정상일 시 실행되는 메서드
+	            request.done(function( data ) {
+	            	if(data == 1){
+	            		$('#loginForm').submit();
+	            	} else {
+	            		alert('아이디 혹은 비밀번호가 일치하지 않습니다');
+	            	}
+	              
+	            });
+	 
+	            // 호출 에러일 시 실행되는 메서드
+	            request.fail(function( jqXHR, textStatus ) {
+	              alert( "Request failed: " + textStatus );
+	            });
+	 
+	            // 호출 정상 또는 에러 상관없이 실행
+	            request.always(function() {
+	                console.log('완료');
+	            });
+	        });
+	    });
+	
+	
 		$('#adminButton').click(function() {
 			$('#memberId').val('');
 			$('#memberPw').val('');
