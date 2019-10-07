@@ -7,7 +7,7 @@
 		 <nav class="navbar navbar-expand-xl">
             <div class="container h-100">
                 <a class="navbar-brand" href="/">
-                	<h2 class="tm-site-title mb-0"> 배포 191002</h2>             
+                	<h2 class="tm-site-title mb-0"> 배포 191004</h2>             
                 </a>
 
                 <button class="navbar-toggler ml-auto mr-0" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -35,18 +35,16 @@
                                 </span>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="/salesList">!)매출</a>
+                                <a class="dropdown-item" href="/salesList">매출</a>
                                 <a class="dropdown-item" href="/inventoryList">!)재고</a>
-                                <a class="dropdown-item" href="/spendAdmin" th:if="${session.SLEVEL eq '관리자'}">지출관리</a>
+                                <a class="dropdown-item" href="/spendShopList" th:if="${session.SLEVEL eq '관리자'}">지출관리</a>
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-             					   aria-haspopup="true" aria-expanded="false">지출</a>
+             					   aria-haspopup="true" aria-expanded="false" th:if="${session.SLEVEL eq '점주'}">지출</a>
                                 <div class="dropdown dropright" style="position: absolute; left: 90px; top:103px;">
 									<div class="dropdown-menu">
-								    	<a class="dropdown-item" href="/spendTotal">!)통합</a>
-								    	<a class="dropdown-item" href="/spendSalary">!)급여</a>
-								    	<th:block th:if="${session.SLEVEL ne '직원'}">
-								    		<a class="dropdown-item" href="/spendUtility">공과금/기타</a>
-								    	</th:block>
+								    	<a class="dropdown-item" href="/spendTotal">통합</a>
+								    	<a class="dropdown-item" href="/spendSalary">급여</a>
+								    	<a class="dropdown-item" href="/spendUtility">공과금/기타</a>
 									</div>
 								</div>
                        		</div>
@@ -62,9 +60,9 @@
                             </a>
 
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" th:href="@{/contract}"> !)계약관리</a>
-                                <a class="dropdown-item" th:href="@{/agreement}"> !)계약서관리</a>
-                                <a class="dropdown-item" th:href="@{/managementList}"> !)계약금관리</a>
+                                <a class="dropdown-item" th:href="@{/contract}">계약 관리</a>
+                                <a class="dropdown-item" th:href="@{/agreement}">계약 및 계약내용</a>
+                                <a class="dropdown-item" th:href="@{/managementList}">계약금 납부관리</a>
                             </div>
                         </li>
                         <li class="nav-item dropdown">
@@ -78,9 +76,9 @@
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" th:if="${session.SLEVEL ne '직원'}" href="/goodsDbList">상품DB관리</a>
-                                <a class="dropdown-item" href="/purchaseList">!)매입상풍</a>
-                                <a class="dropdown-item" href="/goodsList">!)판매상품</a>
-                                <a class="dropdown-item" href="/goodsRentalList">!)대여상품</a>
+                                <a class="dropdown-item" href="/purchaseList">매입상풍</a>
+                                <a class="dropdown-item" href="/goodsList">판매상품</a>
+                                <a class="dropdown-item" href="/goodsRentalList">대여상품</a>
                                 
                             </div>
                         </li>
@@ -94,7 +92,7 @@
                             	</span>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            	<a class="dropdown-item" href="/shop">!)매장</a>
+                            	<a class="dropdown-item" href="/shop">매장</a>
                                 <a class="dropdown-item" href="/customerList">!대여고객 관리</a>
                             </div>
                         </li>
@@ -107,7 +105,7 @@
                                 </span>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" th:href="@{/accountList}">!)거래처관리</a>
+                                <a class="dropdown-item" th:href="@{/accountList}">거래처관리</a>
                             </div>
                         </li>
                         <li class="nav-item dropdown" th:if="${session.SLEVEL eq '관리자'}">

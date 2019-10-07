@@ -128,7 +128,7 @@
 							</button>
 							
 							<!-- The Modal -->
-							<form action="/spendAdminCheck" method="post" id="adminCheckForm">
+							<form action="/spendAdmin" method="post" id="adminCheckForm">
 							<div class="modal fade" id="checkModal">
 								<div class="modal-dialog">
 									<div class="modal-content">
@@ -148,9 +148,9 @@
 										
 										<input 
 											type="hidden"
-											 name="shopCode" 
-											 id="shopCode" 
-											 th:value="${list.shopCode}">
+											 name="contractShopCode" 
+											 id="contractShopCode" 
+											 th:value="${list.contractShopCode}">
 										
 										<label>관리자 비밀번호</label>
 										<input 
@@ -201,7 +201,7 @@
 	$(function() {
         $('#adminCheck').click(function() {
             
-        	var shopCode = $('#shopCode').val();
+        	var contractShopCode = $('#contractShopCode').val();
         	var adminPw = $('#adminPw').val();
         	var memberBirth = $('#memberBirth').val();     	
         	
@@ -209,7 +209,7 @@
             var request = $.ajax({
               url: "/adminCheck", // 호출 url
               method: "POST", // 전송방식
-              data: {shopCode, adminPw, memberBirth}, // 파라미터
+              data: {contractShopCode, adminPw, memberBirth}, // 파라미터
               dataType: "text" // 전송 받을 타입 ex) xml, html, text, json
             });
              

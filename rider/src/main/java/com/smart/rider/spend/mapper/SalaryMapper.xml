@@ -16,6 +16,16 @@
 		<result column="spend_salary_date" 		property="spendSalaryDate"/>
 	</resultMap>
 	
+	<!--  191002 재욱, Read : 지출_급여 등록 내역 페이징 AllCount -->
+	<select id="salaryAllCount" resultType="int" parameterType="String">
+		SELECT 
+			COUNT(*)
+		FROM spend_salary 
+		WHERE contract_shop_code = #{contractShopCode}
+		ORDER BY spend_salary_date DESC;
+	</select>
+	
+	
 	<!-- 191002 재욱, Update : 지출_급여 수정 -->
 	<update id="salaryUpdate" parameterType="com.smart.rider.spend.dto.JoinSalaryDTO">
 		UPDATE spend_salary
@@ -75,9 +85,10 @@
         
 		ORDER BY ss.spend_salary_date DESC
 		
-		<if test="searchKey eq null">
-			limit 6;
-		</if>
+		<!-- 다른 메서드 호출시 반영되지 않기위해 걸어놓은 조건문 -->
+        <if test="startRow neq lastPage"> 
+            LIMIT #{startRow},#{rowPerPage}
+        </if>
 		
 	</select>
 	

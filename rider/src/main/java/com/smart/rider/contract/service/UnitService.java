@@ -16,25 +16,23 @@ public class UnitService {
 	@Autowired 
 	private UnitMapper unitMapper;
 	
+	//계약단가표 목록
 	public List<UnitDTO> unitList(){
-		
 		return unitMapper.unitList();
 	}
 	
-
-	
+	//계약단가표 생성
 	public int unitInsert(UnitDTO unit,HttpSession session) {
-		//전체 삭제 후 다시 등록시 null을 받아오는 문제
+		//계약코드 만들기
 		String unitCode = "U"+ unitMapper.unitCodeMax();
+		//전체 삭제 후 다시 등록시 null을 받아올 때 null을 변환
 		if(unitCode.equals("Unull")) { 
 			unitCode = "U0001";
 		}
-		
+		//만든 계약코드 UnitDTO 세팅 및 로그인한 아이디의 값 넣어주기
 		unit.setMemberId((String)session.getAttribute("SID"));
 		unit.setContractUnitCode(unitCode);
 		
 		return unitMapper.unitInsert(unit);
-	
 	}
-	
 }

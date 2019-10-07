@@ -16,23 +16,24 @@ public class UnitController {
 
 	@Autowired UnitService unitService;
 	
+	//계약단가표 생성화면
 	@GetMapping("/unitInsert.html")
 	public String unitInsert() {
-		
+	
 		return "/unit/unitInsert";
 	}
 	
+	//계약단가표 목록
 	@GetMapping("/unitList.html")
 	public String unitList(Model model) {
-		
 		model.addAttribute("unitList", unitService.unitList());
 		
 		return "/unit/unitList";
 	}
 
+	//계약단가표 생성하기
 	@PostMapping("/unitInsert")
 	public String unitInsert(UnitDTO unit, HttpSession session) {
-		
 		System.out.println(unit.toString() + "<-- unit.toString");
 		unitService.unitInsert(unit,session);
 

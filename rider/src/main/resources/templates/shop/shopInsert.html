@@ -24,7 +24,6 @@
 				                      >계약코드
 				                    </label>
 				                    <!-- required : 입력란 설정  -->
-				                    
 				                    <select class="custom-select tm-select-accounts" name="contractCode" id="contractCode">
 				                    	<option selected >계약코드 선택</option>
 				                        <option th:each="clist : ${contractList}"  th:text="${clist.contractCode}"></option>

@@ -168,6 +168,15 @@ button:focus {
   height: 100%;
   max-height: 475px;
 }
+.tm-block-spend-shop {
+  padding: 40px;
+  -webkit-box-shadow: 1px 1px 5px 0 #455c71;
+  -moz-box-shadow: 1px 1px 5px 0 #455c71;
+  box-shadow: 1px 1px 5px 0 #455c71;
+  min-height: 950px;
+  height: 100%;
+  max-height: 950px;
+}
 .tm-block-select {
   padding: 40px;
   -webkit-box-shadow: 1px 1px 5px 0 #455c71;
