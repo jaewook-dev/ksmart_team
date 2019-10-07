@@ -25,22 +25,17 @@
 							<div class="tm-bg-primary-dark tm-block-select">
 								<form action="/spendSalary" method="get" id="selectShopForm">
 									<span style="float: left">
-										<strong class="tm-block-title text-center">계약된 매장 </strong>
+										<strong class="tm-block-title text-center"> 지출 관리 </strong>
 									</span> 
 									<span style="float: right"> 
 									<select
 										style="width: 800px;"
 										class="custom-select"
-										name="selectShopCode"
-										id="selectShopCode"
-									><th:block th:each="shop : ${salaryShop}">
-										<option 
-											th:text="${shop.memberId} +' : '+ ${shop.shopName}"
-											th:value="${shop.contractShopCode}"
-											th:selected="${shop.contractShopCode eq param?.selectShopCode?.toString()}"
-											id="shopValue"
-										></option>
-									</th:block>
+										name="spendManagement"
+										id="spendManagement">
+										<option>통합</option>
+										<option>급여</option>
+										<option>공과금/기타</option>
 									</select>
 									</span>
 								</form>
@@ -266,18 +261,23 @@
 </th:block>
 <th:block layout:fragment="customScript">
 	<script th:inline="javascript">
-		
+	
 	$('#spendSalaryPay').click(function() {
 		$('#spendSalaryPay').val('');
 		
 		$('#spendSalaryPay').blur(function() {
-			if($('#spendSalaryPay').val() == ''){
-				$('#spendSalaryPay').val('0');
-			}
+			
 			var spendSalaryPay = $.trim($('#spendSalaryPay').val());
 			var spendSalaryOverpay = $.trim($('#spendSalaryOverpay').val());
 			var spendSalaryBonus = $.trim($('#spendSalaryBonus').val());
 			var spendSalaryFree = $.trim($('#spendSalaryFree').val());
+			
+			if($('#spendSalaryPay').val() == ''){
+				$('#spendSalaryPay').val('0');
+			} else if(spendSalaryPay == ''){
+				$('#spendSalaryPay').val('0');
+			}
+			
 			$('#spendSalaryTotal').val('0');
 			$('#spendSalaryTotal').val(Number(spendSalaryPay) + Number(spendSalaryOverpay) + Number(spendSalaryBonus) + Number(spendSalaryFree));
 		})
@@ -287,13 +287,18 @@
 		$('#spendSalaryOverpay').val('');
 		
 		$('#spendSalaryOverpay').blur(function() {
-			if($('#spendSalaryOverpay').val() == ''){
-				$('#spendSalaryOverpay').val('0');
-			}
+			
 			var spendSalaryPay = $.trim($('#spendSalaryPay').val());
 			var spendSalaryOverpay = $.trim($('#spendSalaryOverpay').val());
 			var spendSalaryBonus = $.trim($('#spendSalaryBonus').val());
 			var spendSalaryFree = $.trim($('#spendSalaryFree').val());
+			
+			if($('#spendSalaryOverpay').val() == ''){
+				$('#spendSalaryOverpay').val('0');
+			} else if(spendSalaryOverpay == ''){
+				$('#spendSalaryOverpay').val('0');
+			}
+			
 			$('#spendSalaryTotal').val('0');
 			$('#spendSalaryTotal').val(Number(spendSalaryPay) + Number(spendSalaryOverpay) + Number(spendSalaryBonus) + Number(spendSalaryFree));
 		})
@@ -303,13 +308,18 @@
 		$('#spendSalaryBonus').val('');
 		
 		$('#spendSalaryBonus').blur(function() {
-			if($('#spendSalaryBonus').val() == ''){
-				$('#spendSalaryBonus').val('0');
-			}
+			
 			var spendSalaryPay = $.trim($('#spendSalaryPay').val());
 			var spendSalaryOverpay = $.trim($('#spendSalaryOverpay').val());
 			var spendSalaryBonus = $.trim($('#spendSalaryBonus').val());
 			var spendSalaryFree = $.trim($('#spendSalaryFree').val());
+			
+			if($('#spendSalaryBonus').val() == ''){
+				$('#spendSalaryBonus').val('0');
+			} else if(spendSalaryBonus == ''){
+				$('#spendSalaryBonus').val('0');
+			}
+			
 			$('#spendSalaryTotal').val('0');
 			$('#spendSalaryTotal').val(Number(spendSalaryPay) + Number(spendSalaryOverpay) + Number(spendSalaryBonus) + Number(spendSalaryFree));
 		})
@@ -319,13 +329,18 @@
 		$('#spendSalaryFree').val('');
 		
 		$('#spendSalaryFree').blur(function() {
-			if($('#spendSalaryFree').val() == ''){
-				$('#spendSalaryFree').val('0');
-			}
+			
 			var spendSalaryPay = $.trim($('#spendSalaryPay').val());
 			var spendSalaryOverpay = $.trim($('#spendSalaryOverpay').val());
 			var spendSalaryBonus = $.trim($('#spendSalaryBonus').val());
 			var spendSalaryFree = $.trim($('#spendSalaryFree').val());
+			
+			if($('#spendSalaryFree').val() == ''){
+				$('#spendSalaryFree').val('0');
+			} else if(spendSalaryFree == ''){
+				$('#spendSalaryFree').val('0');
+			}
+			
 			$('#spendSalaryTotal').val('0');
 			$('#spendSalaryTotal').val(Number(spendSalaryPay) + Number(spendSalaryOverpay) + Number(spendSalaryBonus) + Number(spendSalaryFree));
 		})

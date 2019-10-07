@@ -8,7 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
@@ -35,7 +35,7 @@ public class MemberController {
 	
 	@GetMapping("/memberList")
 	public String memberList(Model model
-			, @RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage) {
+						    ,@RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage) {
 		Map<String, Object> map = memberService.memberList(currentPage);
 		
 		model.addAttribute("memberList", map.get("list"));
@@ -53,10 +53,9 @@ public class MemberController {
 		int result = memberService.memberIdCheck(memberId);
 		if(result == 1) {
 			model.addAttribute("check", "사용중인 아이디입니다!");
-		}else {
-			model.addAttribute("check", "사용가능한 아이디입니다.");
 		}
-		return 0;
+			model.addAttribute("check", "사용가능한 아이디입니다.");
+		return result;
 	}
 
 	@GetMapping("/getMemberList")
@@ -73,11 +72,20 @@ public class MemberController {
 		return "redirect:/memberList";
 	}
 	@PostMapping("/searchMember")
-	public String searchMember( @RequestParam(value="select") String select
-							   ,@RequestParam(value="searchInput") String searchInput
-							   ,Model model) {
-		List<MemberDTO> search = memberService.searchMember(select, searchInput);
-		model.addAttribute("memberList", search);
+	public String searchMember(@RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage
+							  ,@RequestParam(value="select") String select
+							  ,@RequestParam(value="searchInput") String searchInput
+							  ,@RequestParam(value="beginDate") String beginDate
+							  ,@RequestParam(value="endDate") String endDate
+							  ,Model model) {
+		Map<String, Object> map = memberService.searchMember(currentPage, select, searchInput, beginDate, endDate);
+		model.addAttribute("memberList", map.get("list"));
+		model.addAttribute("currentPage", map.get("currentPage"));
+		model.addAttribute("lastPage", map.get("lastPage"));
+		model.addAttribute("startPageNum", map.get("startPageNum"));
+		model.addAttribute("lastPageNum", map.get("lastPageNum"));
+		//List<MemberDTO> search = memberService.searchMember(select, searchInput, beginDate, endDate);
+		//model.addAttribute("memberList", search);
 		return "member/memberList";
 	}
 	//19.09.18작성

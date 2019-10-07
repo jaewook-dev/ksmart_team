@@ -43,7 +43,12 @@
 			,ss.spend_salary_total
 			,ss.spend_salary_date	
 		FROM spend_salary ss, member m
-		WHERE ss.member_id = m.member_id and ss.contract_shop_code = #{contractShopCode}
+		WHERE ss.member_id = m.member_id 
+		
+		<if test="contractShopCode neq null and contractShopCode neq ''.toString()">
+			AND 
+				ss.contract_shop_code = #{contractShopCode}
+		</if>
 		
 		<if test="spendSalaryCode neq null and spendSalaryCode neq ''.toString()">
 			AND
