@@ -15,6 +15,11 @@ public class LoginService {
 	@Autowired
 	private LoginMapper loginMapper;
 	
+	/**** 191007 재욱, 로그인 ajax 호출용 카운트 ****/
+	public int loginCount(String memberId, String memberPw) {
+		return loginMapper.loginCount(memberId, memberPw);
+	}
+	
 	//로그인
 	public Map<String, Object> loginCheck(String memberId, String memberPw){
 		String check = "";

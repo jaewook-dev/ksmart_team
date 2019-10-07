@@ -76,16 +76,11 @@ public class UtilityController {
 		//System.out.println(beginDate + " < -- beginDate utilityList() UtilityController.java");
 		//System.out.println(endDate + " < -- endDate utilityList() UtilityController.java");
 		
-		String contractShopCode = (String)session.getAttribute("SCODE");
+		String contractShopCode = selectShopCode;
 		String userLevel = (String)session.getAttribute("SLEVEL");
 		
-		/*** 190926 재욱, 관리자 권한으로 계약된 매장 내역 ***/
-		if(userLevel.equals("관리자")) {
-			contractShopCode = selectShopCode;
-			List<SsrHapDTO> utilityShop = utilityService.utilityShop();
-			//System.out.println(utilityShop + " <-- utilityShop spendUtility() UtilityController.java");
-			model.addAttribute("utilityShop", utilityShop);
-			model.addAttribute("masterShopCode", contractShopCode);
+		if(!userLevel.equals("관리자")) {
+			contractShopCode = (String)session.getAttribute("SCODE");
 		}
 		
 		
@@ -137,6 +132,8 @@ public class UtilityController {
 		}
 		/*** 190926 재욱, end 년도에 따른 월별 공과금 지출 금액 차트 ***/
 		
+		model.addAttribute("contractShopCode", contractShopCode);
+		
 		
 		return "spend/spendUtility";
 	}
@@ -149,16 +146,11 @@ public class UtilityController {
 					  , @RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage
 					  , @RequestParam(value = "selectShopCode", required = false, defaultValue = "SR0000") String selectShopCode){
 
-		String contractShopCode = (String)session.getAttribute("SCODE");
+		String contractShopCode = selectShopCode;
 		String userLevel = (String)session.getAttribute("SLEVEL");
 		
-		/*** 190926 재욱, 관리자 권한으로 계약된 매장 내역 ***/
-		if(userLevel.equals("관리자")) {
-			contractShopCode = selectShopCode;
-			List<SsrHapDTO> utilityShop = utilityService.utilityShop();
-			//System.out.println(utilityShop + " <-- utilityShop spendUtility() UtilityController.java");
-			model.addAttribute("utilityShop", utilityShop);
-			model.addAttribute("masterShopCode", contractShopCode);
+		if(!userLevel.equals("관리자")) {
+			contractShopCode = (String)session.getAttribute("SCODE");
 		}
 		
 		
@@ -221,6 +213,8 @@ public class UtilityController {
 		}
 		/*** 190926 재욱, end 년도에 따른 월별 공과금 지출 금액 차트 ***/
 
+		model.addAttribute("contractShopCode", contractShopCode);
+		
 		return "spend/spendUtility";
 	}
 
