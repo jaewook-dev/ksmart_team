@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.smart.rider.member.dto.MemberDTO;
 import com.smart.rider.member.mapper.MemberMapper;
+import com.smart.rider.shop.dto.SsrHapDTO;
 
 @Service
 public class MemberService {
@@ -69,7 +70,7 @@ public class MemberService {
 	public int memberUpdate(MemberDTO memberdto) {
 		return memberMapper.memberUpdate(memberdto);
 	}
-	public Map<String, Object> searchMember(int currentPage, String select, String searchInput, String beginDate, String endDate) {
+	public Map<String, Object> searchMember(int currentPage, String select, String searchInput, String beginDate, String endDate, String shopCode) {
 		System.out.println(beginDate+"<--시작날짜");
 		//페이지 구성 할 행의 갯수
 		final int rowPerPage = 10;
@@ -89,9 +90,13 @@ public class MemberService {
 		
 		map.put("startRow", startRow);
 		map.put("rowPerPage", rowPerPage);
-		
+		map.put("select", select);
+		map.put("searchInput", searchInput);
+		map.put("beginDate", beginDate);
+		map.put("endDate", endDate);
+		map.put("shopCode", shopCode);
 		//전체행의 갯수를 가져오는 쿼리
-		double memberCount = memberMapper.getSearchAllCount(select, searchInput, beginDate, endDate);
+		double memberCount = memberMapper.getSearchAllCount(select, searchInput, beginDate, endDate, shopCode);
 							//올림함수 소수점이있으면 무조건 올림
 		int lastPage = (int)(Math.ceil(memberCount/rowPerPage));
 		
@@ -118,5 +123,8 @@ public class MemberService {
 	//19.09.25작성
 	public int changePassword(String memberId, String memberPw, String memberPw2) {
 		return memberMapper.changePassword(memberId, memberPw, memberPw2);
+	}
+	public List<SsrHapDTO> utilityShop() {
+		return memberMapper.utilityShop();
 	}
 }

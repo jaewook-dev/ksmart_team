@@ -107,6 +107,9 @@
 			<if test="beginDate neq ''.toString() and endDate eq ''.toString()">
 				AND member_insert_date between #{beginDate} and NOW()
 			</if>
+			<if test="shopCode neq ''.toString() and shopCode neq null">
+				AND contract_shop_code = #{shopCode}
+			</if>
 		</trim>
 		ORDER BY member_insert_date DESC
 		LIMIT #{startRow},#{rowPerPage}
@@ -159,6 +162,18 @@
 			<if test="beginDate neq ''.toString() and endDate eq ''.toString()">
 				AND member_insert_date between #{beginDate} and NOW()
 			</if>
+			<if test="shopCode neq ''.toString() and shopCode neq null">
+				AND contract_shop_code = #{shopCode}
+			</if>
 		</trim>
+	</select>
+	<select id="utilityShop" resultType="com.smart.rider.shop.dto.SsrHapDTO">
+		SELECT 
+			 s.shop_code AS shopCode
+			,s.shop_name AS shopName
+			,sr.contract_shop_code AS contractShopCode
+			,sr.member_id AS memberId
+		FROM shop s, shop_relation sr
+		WHERE s.shop_code = sr.shop_code
 	</select>
 </mapper>

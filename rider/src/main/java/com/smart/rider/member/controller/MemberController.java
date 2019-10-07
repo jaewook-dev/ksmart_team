@@ -9,8 +9,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.smart.rider.member.dto.MemberDTO;
 import com.smart.rider.member.service.MemberService;
@@ -36,6 +37,7 @@ public class MemberController {
 	@GetMapping("/memberList")
 	public String memberList(Model model
 						    ,@RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage) {
+		model.addAttribute("utilityShop", memberService.utilityShop());
 		Map<String, Object> map = memberService.memberList(currentPage);
 		
 		model.addAttribute("memberList", map.get("list"));
@@ -46,16 +48,12 @@ public class MemberController {
 		return "member/memberList";
 	}
 	//19.09.16작성
-	@GetMapping("/memberIdCheck")
-	public int idCheck(@RequestParam(value="memberId") String memberId, Model model) {
-		System.out.println(memberId + "<---체크아이디");
-		System.out.println(memberService.memberIdCheck(memberId) + "<---아이디체크수");
+	@RequestMapping(value = "/memberIdCheck", method = RequestMethod.POST)
+	@ResponseBody
+	public String idCheck(@RequestParam("memberId") String memberId) {
+		System.out.println(memberId + "<--memberId 중복체크");
 		int result = memberService.memberIdCheck(memberId);
-		if(result == 1) {
-			model.addAttribute("check", "사용중인 아이디입니다!");
-		}
-			model.addAttribute("check", "사용가능한 아이디입니다.");
-		return result;
+		return String.valueOf(result);
 	}
 
 	@GetMapping("/getMemberList")
@@ -77,8 +75,10 @@ public class MemberController {
 							  ,@RequestParam(value="searchInput") String searchInput
 							  ,@RequestParam(value="beginDate") String beginDate
 							  ,@RequestParam(value="endDate") String endDate
+							  ,@RequestParam(value="shopCode") String shopCode
 							  ,Model model) {
-		Map<String, Object> map = memberService.searchMember(currentPage, select, searchInput, beginDate, endDate);
+		System.out.println(shopCode +"<---검색매장");
+		Map<String, Object> map = memberService.searchMember(currentPage, select, searchInput, beginDate, endDate, shopCode);
 		model.addAttribute("memberList", map.get("list"));
 		model.addAttribute("currentPage", map.get("currentPage"));
 		model.addAttribute("lastPage", map.get("lastPage"));

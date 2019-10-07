@@ -14,16 +14,11 @@
 					
 					<form action="/memberInsert" class="tm-signup-form" method="post" onsubmit="return sendIt();">
 						<label for="id" style="color:white">아이디</label>
-						<div class="form-group input-group mb-3">
+						<div class="form-group mb-3">
 							<input id="memberId" name="memberId" type="text" class="form-control validate"  maxlength="12" placeholder="ID" required="required"/>
-							<div class="input-group-append">
-								<button class="btn btn-primary btn-block text-uppercase" id="checkButton" type="button">
-									#중복확인
-								</button>
-							</div>
 						</div>
 						<div>
-							<label class="alert alert-danger col-xl" th:if="${result != null}" th:text="${check}"></label>
+							<label class="alert alert-danger col-xl" id="idCheckText"></label>
 						</div>
 						<div class="form-group">
 							<label for="password">비밀번호</label>
@@ -43,7 +38,7 @@
 						</div>
 						<div class="form-group">
 							<label for="phone">전화번호('-' 없이 번호만 입력해주세요)</label>
-							<input id="memberPhone" name="memberPhone" type="text"  maxlength="10" class="form-control validate" required="required"/>
+							<input id="memberPhone" name="memberPhone" type="text"  maxlength="11" class="form-control validate" required="required"/>
 						</div>
 						<div class="form-group">
 							<label for="address">주소</label>
@@ -67,11 +62,27 @@
 <th:block layout:fragment="customScript">
 
 <script>
-
-$('#checkButton').click(function() {
-	var memberId = $('#memberId').val();
-	console.log('memberId' + memberId);
-	location.href='/memberIdCheck?memberId ='+memberId+'';
+$(function(){
+	$('#memberId').blur(function() {
+		var memberId = $('#memberId').val();
+		
+		$.ajax({
+			url : '/memberIdCheck',
+			type : 'POST',
+			data : memberId,
+			success : function(result) {
+				console.log(result + '<---------')
+				if ($.trim(result) == 1) {
+					// 1 : 아이디가 중복되는 문구
+					$("#idCheckText").text("사용중인 아이디입니다!");
+					$("#memberId").val("");
+					$("#memberId").focus();
+				}else{
+					$("#idCheckText").text("사용가능한 아이디입니다.");
+				}
+			}
+		});
+	});
 });
 
 $('#memberPw2').blur(function(){
