@@ -27,7 +27,7 @@
 					<div class="row tm-content-row">
 						<div class="col-12 tm-block-col">
 							<div class="tm-bg-primary-dark tm-block-select">
-								<form action="/spendSalary" method="get" id="selectShopForm">
+								<form action="/spendSelect" method="get" id="selectShopForm">
 									<span style="float: left">
 										<strong class="tm-block-title text-center"> 지출 관리 </strong>
 									</span> 
@@ -54,6 +54,7 @@
 					<div class="col-12 tm-block-col">
 						<div class="tm-bg-primary-dark tm-block-util">
 						<form action="/spendTotal" method="get" id="selectYearForm" name="selectYearForm">
+								<input type="hidden" name="contractShopCode" th:value="${contractShopCode}">
 								<span style="display: inline-block; float: left"> 
 									<strong class="tm-block-title">통합 지출 현황 </strong>
 								</span> 

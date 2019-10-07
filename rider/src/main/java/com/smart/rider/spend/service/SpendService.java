@@ -31,21 +31,50 @@ public class SpendService {
 	public Map<String, Object> spendShopList(int currentPage, SearchDTO searchDTO){
 		
 		Map<String, Object> map = new HashMap<String, Object>();
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		
+		
+        final int ROW_PER_PAGE = 10; // 페이지에 보여줄 행의 개수 ROW_PER_PAGE = 6으로 고정
+        int startPageNum = 1; // 페이지에 보여줄 첫번째 페이지 번호는 1로 초기화
+        int lastPageNum = 5; // 처음 보여줄 마지막 페이지 번호는 5
+        
+        // 현재 페이지가 lastPageNum/2 보다 클 경우
+        if(currentPage > lastPageNum/2) {
+            startPageNum = currentPage - 2; // 보여지는 페이지 첫번째 페이지 번호는 현재페이지 - 2, ex) 현재 페이지가 3이라면 첫번째 페이지번호는 1
+            lastPageNum = currentPage + 2; // 보여지는 마지막 페이지 번호는 현재 페이지 번호 + 2
+        }
+        
+        int startRow = (currentPage - 1)*ROW_PER_PAGE;
+        map.put("startRow", startRow);
+        map.put("rowPerPage", ROW_PER_PAGE);
+        
+        double shopCount = spendMapper.shopAllCount();
+        
+        int lastPage = (int)(Math.ceil(shopCount/ROW_PER_PAGE));
+
+        if(lastPage == 0) {
+        	lastPage = 1;
+        }
+        if(currentPage >= (lastPage-3)) {
+            lastPageNum = lastPage;
+        }
         
         map.put("searchKey", searchDTO.getSearchKey());
 		map.put("searchValue", searchDTO.getSearchValue());
 		map.put("beginDate", searchDTO.getBeginDate());
 		map.put("endDate", searchDTO.getEndDate());
-		
-		System.out.println(map.toString() + " <-- map.toString() spendShopList() SpendService.java");
+		//System.out.println(map.toString() + " <-- map.toString() spendShopList() SpendService.java");
 		
 		List<SpendAdminDTO> list = spendMapper.spendShopList(map);
+		//System.out.println(list + " <-- list spendShopList() SpendService.java");
 		
-		System.out.println(list + " <-- list spendShopList() SpendService.java");
+		resultMap.put("spendShopList", list);
+        resultMap.put("currentPage", currentPage);
+        resultMap.put("lastPage", lastPage);
+        resultMap.put("startPageNum", startPageNum);
+        resultMap.put("lastPageNum", lastPageNum);
 		
-		map.put("spendShopList", list);
-		
-		return map;
+		return resultMap;
 	}
 
 }

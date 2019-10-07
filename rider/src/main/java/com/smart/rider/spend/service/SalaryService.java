@@ -42,10 +42,10 @@ public class SalaryService {
 	public Map<String, Object> salaryList(String contractShopCode, SearchDTO searchDTO, int currentPage){
 		
 		Map<String, Object> map = new HashMap<String, Object>();
-		Map<String, Object> resultMap = new HashMap<>();
+		Map<String, Object> resultMap = new HashMap<String, Object>();
 		
 		
-        final int ROW_PER_PAGE = 6; // 페이지에 보여줄 행의 개수 ROW_PER_PAGE = 4로 고정
+        final int ROW_PER_PAGE = 6; // 페이지에 보여줄 행의 개수 ROW_PER_PAGE = 6으로 고정
         int startPageNum = 1; // 페이지에 보여줄 첫번째 페이지 번호는 1로 초기화
         int lastPageNum = 5; // 처음 보여줄 마지막 페이지 번호는 5
         

@@ -29,12 +29,32 @@ public class SpendController {
 	@Autowired
 	private MainService mainService;
 	
+	/**** 191007 재욱, 매장 지출 관리하기 화면이동 ****/
+	@PostMapping("/spendAdmin")
+	public String spendAdmin(@RequestParam(value = "contractShopCode", required = false, defaultValue = "SR0000") String contractShopCode
+							,@RequestParam(value = "totalYear", required = false, defaultValue = "2019") String totalYear
+							,Model model
+							,HttpSession session) {
+		//System.out.println(contractShopCode + " <-- contractShopCode spendAdmin() SpendController.java");
+		this.spendTotal(contractShopCode, totalYear, model, session);
+		model.addAttribute("contractShopCode", contractShopCode);
+		return "spend/spendTotal";
+	}
+	
+	/**** 191007 재욱, 지출_통합 화면 ****/
 	@GetMapping("/spendTotal")
-	public String spendTotal(@RequestParam(value = "totalYear", required = false, defaultValue = "2019") String totalYear
+	public String spendTotal(@RequestParam(value = "contractShopCode", required = false, defaultValue = "SR0000") String contractShopCode
+							,@RequestParam(value = "totalYear", required = false, defaultValue = "2019") String totalYear
 							,Model model
 							,HttpSession session) {
 		
-		String contractShopCode = (String)session.getAttribute("SCODE");
+		//System.out.println(contractShopCode + " <-- contractShopCode spendTotal() SpendController.java");
+		
+		String userLevel = (String)session.getAttribute("SLEVEL");
+		
+		if(!userLevel.equals("관리자")) {
+			contractShopCode = (String)session.getAttribute("SCODE");
+		}
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
@@ -87,13 +107,7 @@ public class SpendController {
 		}
 		
 		model.addAttribute("selectedYear", totalYear);
-		
-		return "spend/spendTotal";
-	}
-	
-	/**** 191007 재욱, 매장 지출 관리하기 화면이동 ****/
-	@PostMapping("/spendAdmin")
-	public String spendAdmin() {
+		model.addAttribute("contractShopCode", contractShopCode);
 		return "spend/spendTotal";
 	}
 	
@@ -122,10 +136,8 @@ public class SpendController {
 	public String spendShopList(@RequestParam(value =  "currentPage", required = false, defaultValue = "1") int currentPage
 							   ,Model model
 							   ,SearchDTO searchDTO) {
-		System.out.println(searchDTO.getSearchKey() + " <-- searchDTO.getSearchKey() spendShopList() SpendController.java");
-		System.out.println(searchDTO.getSearchValue() + " <-- searchDTO.getSearchKey() spendShopList() SpendController.java");
-		System.out.println(searchDTO.getBeginDate() + " <-- searchDTO.getSearchKey() spendShopList() SpendController.java");
-		System.out.println(searchDTO.getEndDate() + " <-- searchDTO.getSearchKey() spendShopList() SpendController.java");
+		//System.out.println(searchDTO.toString() + " <-- searchDTO.toString() spendShopList() SpendController.java");
+		
 		this.spendShop(currentPage, model, searchDTO);
 		
 		return "spend/spendShopList";
@@ -137,9 +149,25 @@ public class SpendController {
 							,Model model
 							,SearchDTO searchDTO) {
 		Map<String, Object> map = spendService.spendShopList(currentPage, searchDTO);
+		
+		@SuppressWarnings("unchecked")
 		List<SpendAdminDTO> list = (List<SpendAdminDTO>)map.get("spendShopList");
 		//System.out.println(list + " <-- list spendAdmin() SpendController.java");
 		model.addAttribute("shopList", list);
+		
+		if(list.size() == 0) {
+			model.addAttribute("result", "검색 결과가 없습니다");
+		}
+		
+		int lastPageNum = (int)map.get("lastPageNum");
+		int startPageNum = (int)map.get("startPageNum");
+		int lastPage = (int)map.get("lastPage");
+		
+		model.addAttribute("startPageNum", startPageNum);
+		model.addAttribute("lastPageNum", lastPageNum);
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("lastPage", lastPage);
+		
 		return "spend/spendShopList";
 	}
 
