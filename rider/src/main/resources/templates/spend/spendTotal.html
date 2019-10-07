@@ -17,17 +17,61 @@
 						<p class="text-white mt-5 mb-5">
 							<b>지출/매출 > 지출 > 통합</b>
 						</p>
+						<p class="text-white mt-5 mb-5">
+							<b>※ 지출 통합 현황 페이지입니다. 매출, 급여, 공과금/기타 지출이 통합되어 차트로 보여집니다 ※</b>
+						</p>
 					</div>
 				</div>
+
+				<th:block th:if="${session.SLEVEL eq '관리자'}">
+					<div class="row tm-content-row">
+						<div class="col-12 tm-block-col">
+							<div class="tm-bg-primary-dark tm-block-select">
+								<form action="/spendSalary" method="get" id="selectShopForm">
+									<span style="float: left">
+										<strong class="tm-block-title text-center"> 지출 관리 </strong>
+									</span> 
+									<span style="float: right"> 
+									<select
+										style="width: 800px;"
+										class="custom-select"
+										name="spendManagement"
+										id="spendManagement">
+										<option>통합</option>
+										<option>급여</option>
+										<option>공과금/기타</option>
+									</select>
+									</span>
+								</form>
+							</div>
+						</div>
+					</div>
+				</th:block>
+
 
 				<!-- 통합 지출 현황 -->
 				<div class="row tm-content-row">
 					<div class="col-12 tm-block-col">
 						<div class="tm-bg-primary-dark tm-block-util">
-							<h4 class="tm-block-title">통합 지출 현황</h4>
+						<form action="/spendTotal" method="get" id="selectYearForm" name="selectYearForm">
+								<span style="display: inline-block; float: left"> 
+									<strong class="tm-block-title">통합 지출 현황 </strong>
+								</span> 
+								<span style="display: inline-block; float: right"> 
+									<select
+										style="width: 100px;" 
+										class="custom-select" 
+										name="totalYear"
+										id="totalYear"
+										><option value="2019" id="2019">2019</option>
+										 <option value="2018" id="2018">2018</option>
+										 <option value="2017" id="2017">2017</option>
+									</select>
+								</span>
+							</form>
 
 							<!-- charts.js -->
-							<canvas id="utilityChart" height="100px;"></canvas>
+							<canvas id="totalChart" height="100px;"></canvas>
 						</div>
 					</div>
 				</div>
@@ -40,9 +84,48 @@
 
 	<!-- charts.js script-->
 	<script th:inline="javascript">
+	
+	var salaryJanuary 	= [[${salary0}]];
+	var salaryFebruary 	= [[${salary1}]];
+	var salaryMarch 	= [[${salary2}]];
+	var salaryApril 	= [[${salary3}]];
+	var salaryMay 		= [[${salary4}]];
+	var salaryJune		= [[${salary5}]];
+	var salaryJuly		= [[${salary6}]];
+	var salaryAugust	= [[${salary7}]];
+	var salarySeptember = [[${salary8}]];
+	var salaryOctober 	= [[${salary9}]];
+	var salaryNovember 	= [[${salary10}]];
+	var salaryDecember 	= [[${salary11}]];
+	
+	var utilityJanuary 		= [[${utility0}]];
+	var utilityFebruary 	= [[${utility1}]];
+	var utilityMarch 		= [[${utility2}]];
+	var utilityApril 		= [[${utility3}]];
+	var utilityMay 			= [[${utility4}]];
+	var utilityJune			= [[${utility5}]];
+	var utilityJuly			= [[${utility6}]];
+	var utilityAugust		= [[${utility7}]];
+	var utilitySeptember	= [[${utility8}]];
+	var utilityOctober 		= [[${utility9}]];
+	var utilityNovember 	= [[${utility10}]];
+	var utilityDecember 	= [[${utility11}]];
+	
+	var purchaseJanuary 	= [[${purchase0}]];
+	var purchaseFebruary 	= [[${purchase1}]];
+	var purchaseMarch 		= [[${purchase2}]];
+	var purchaseApril 		= [[${purchase3}]];
+	var purchaseMay 		= [[${purchase4}]];
+	var purchaseJune		= [[${purchase5}]];
+	var purchaseJuly		= [[${purchase6}]];
+	var purchaseAugust		= [[${purchase7}]];
+	var purchaseSeptember	= [[${purchase8}]];
+	var purchaseOctober 	= [[${purchase9}]];
+	var purchaseNovember 	= [[${purchase10}]];
+	var purchaseDecember 	= [[${purchase11}]];
 
 	var tctx = document.getElementById('totalChart').getContext('2d');
-	var utilityChart = new Chart(tctx, {
+	var totalChart = new Chart(tctx, {
 		
 	    // The type of chart we want to create
 	    type: 'bar',
@@ -51,11 +134,30 @@
 	    data: {
 	        labels: ['1월', '2월', '3월', '4월', '5월', '6월', '7월','8월','9월','10월','11월','12월'],
 	        datasets: [{
-	            label: '총지출 금액',
-	            backgroundColor: 'rgb(245, 166, 35)',
-	            borderColor: 'rgb(245, 166, 35)',
-	            data: [0,0,0,0,0,0,0,0,0,0,0,0]
-	        }]
+				label: '매입',
+				backgroundColor: 'rgb(255, 204, 102)',
+	            borderColor: 'rgb(255, 204, 102)',
+				data: [
+					purchaseJanuary, purchaseFebruary, purchaseMarch, purchaseApril, purchaseMay, purchaseJune, purchaseJuly
+					, purchaseAugust, purchaseSeptember, purchaseOctober, purchaseNovember, purchaseDecember
+				]
+			}, {
+				label: '급여',
+				backgroundColor: 'rgb(255, 153, 0)',
+	            borderColor: 'rgb(255, 153, 0)',
+				data: [
+					salaryJanuary, salaryFebruary, salaryMarch, salaryApril, salaryMay, salaryJune, salaryJuly
+					, salaryAugust, salarySeptember, salaryOctober, salaryNovember, salaryDecember, salaryDecember
+				]
+			}, {
+				label: '공과금/기타',
+				backgroundColor: 'rgb(255, 204, 0)',
+	            borderColor: 'rgb(255, 204, 0)',
+				data: [
+					utilityJanuary, utilityFebruary, utilityMarch, utilityApril, utilityMay, utilityJune, utilityJuly
+					, utilityAugust, utilitySeptember, utilityOctober, utilityNovember, 
+				]
+			}]
 	    },
 	
 	    // Configuration options
@@ -68,21 +170,38 @@
 		    scales: {
 		    	// y축
 		        yAxes: [{
+		        	stacked: true,
 		            ticks: {
-		            	max:payMax + 10000,
 		                fontColor:'white' // y축 폰트 color
 		            }
 		     	}],
 		     	// x축
 		     	xAxes: [{
+		     		stacked: true,
 		            ticks: {
-		            	
 		                fontColor:'white' // x축 폰트 color
 		            }
 		     	}]
 		    }
 	    }
 	});
+	
+	<!-- 연도 선택 화면 전환 후 select box 고정 -->
+	var selectedYear = [[${selectedYear}]];
+	
+	if(selectedYear == 2018){
+		$('#2018').attr('selected','selected');
+	} else if(selectedYear == 2017){
+		$('#2017').attr('selected','selected');
+	} else{
+		$('#2019').attr('selected','selected');
+	}
+	
+	<!-- 연도 선택 화면전환 -->
+	$('#totalYear').change(function() {
+		$('#selectYearForm').submit();
+	})
+	
 </script>
 </th:block>
 </html>
