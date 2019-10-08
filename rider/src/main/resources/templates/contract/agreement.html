@@ -16,13 +16,14 @@
 						<div class="tm-bg-primary-dark tm-block-big tm-block-scroll ">
 							<div>
 								<img src="./resources/img/contra.jpg" width="750"
-									style="float: left;"> <input type="button"
-									class="btn btn-primary"
-									style="float: right; line-height: 50pt; WIDTH: 150pt; margin-top: 75pt;"
-									onclick="location.href='contractInsert' " value="등록버튼" /> <input
-									type="button" class="btn btn-primary"
-									style="float: right; line-height: 50pt; WIDTH: 150pt; margin-top: 75pt;"
-									onclick="location.href='contractList' " value="상세조회버튼" />
+									style="float: left;"> 
+									<input type="button" class="btn btn-primary"
+											style="float: right; line-height: 50pt; WIDTH: 150pt; margin-top: 75pt;"
+											onclick="location.href='contractInsert' " value="계약" />
+									<input type="button" class="btn btn-primary"
+											th:if="${session.SLEVEL eq '관리자'}" 
+											style="float: right; line-height: 50pt; WIDTH: 150pt; margin-top: 75pt;"
+											onclick="location.href='contractList' " value="계약자 명단 조회" />
 							</div>
 						</div>
 					</div>

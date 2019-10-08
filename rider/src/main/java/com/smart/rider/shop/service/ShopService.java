@@ -27,15 +27,15 @@ public class ShopService {
 	public int shopInsert(ShopDTO shop,HttpSession session,ShopRelationDTO relation) {
 		// 담겨있는 contractCode로 contractDTO조회
 		String contractCode = shop.getContractCode();
-		System.out.println(contractCode + "-->담겨 있는 값");
+		//System.out.println(contractCode + "-->담겨 있는 값");
 		// 조회된 값에서 id만 가져오기 및 확인작업
 		List<ContractDTO> List = shopMapper.getCode(contractCode);
-		System.out.println(List + "<--담긴 데이터");
+		//System.out.println(List + "<--담긴 데이터");
 		String memberId = List.get(0).getMemberId();
-		System.out.println(memberId+"<--담긴 ID값");
+		//System.out.println(memberId+"<--담긴 ID값");
 		//자동코드 증가
 		String shopCode = "S"+ shopMapper.shopCodeMax();
-		if(shopCode.equals("Cnull")) { 
+		if(shopCode.equals("Snull")) { 
 			shopCode = "S0001";
 		}
 		//ShopDTO에 자동 코드 증가 값과 아이디값 담기
@@ -49,7 +49,7 @@ public class ShopService {
 		List<ShopDTO> shopList = shopListAll();
 		String getshopCode = shopList.get(shopList.size()-1).getShopCode();
 		String getmemberId = shopList.get(shopList.size()-1).getMemberId();
-		System.out.println(getshopCode);
+		//System.out.println(getshopCode);
 		//세션에 담기
 		session.setAttribute("SSHOPCODE",getshopCode);
 		//자동코드 증가
@@ -67,8 +67,8 @@ public class ShopService {
 		List<ShopRelationDTO> relationList = relationList();
 		String getrelationCode = relationList.get(relationList.size()-1).getContractShopCode();
 		String getrelationId = relationList.get(relationList.size()-1).getMemberId();
-		System.out.println(getrelationCode + "리스트에 마지막에서 가져온 코드값");
-		System.out.println(getrelationId + "리스트에 마지막에서 가져온 id값");
+		//System.out.println(getrelationCode + "리스트에 마지막에서 가져온 코드값");
+		//System.out.println(getrelationId + "리스트에 마지막에서 가져온 id값");
 		//점주 아이디
 		result += shopMapper.memberUpdate(getrelationCode,getrelationId);
 		return result;
@@ -96,8 +96,8 @@ public class ShopService {
 		//map 넣을 내용을 String,Object 형식으로 넣어준다.
 		map.put("shopSearchListYes", shopMapper.shopSearchListYes(search));
 		map.put("shopSearchListNo", shopMapper.shopSearchListNo(search));
-		System.out.println(shopMapper.shopSearchListYes(search) + "yes서비스에서 담긴값 확인");
-		System.out.println(shopMapper.shopSearchListNo(search) + " no서비스에서 담긴값 확인");
+		//System.out.println(shopMapper.shopSearchListYes(search) + "yes서비스에서 담긴값 확인");
+		//System.out.println(shopMapper.shopSearchListNo(search) + " no서비스에서 담긴값 확인");
 		return map;
 	}
 	
@@ -149,7 +149,7 @@ public class ShopService {
 	//매장인원
 	public List<ShopDTO> personnelList(HttpSession session){
 		String code = (String)session.getAttribute("SCODE");
-		System.out.println(code+"<--현재 아이디에 담겨잇는 세션의 코드값");
+		//System.out.println(code+"<--현재 아이디에 담겨잇는 세션의 코드값");
 		return shopMapper.personnelList(code);
 	}
 	
