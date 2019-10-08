@@ -27,7 +27,7 @@ public class ContractController {
 	public String contract(Model model,HttpSession session) {
 		List<UnitDTO>  UnitDTO = contractService.unitNew();
 		model.addAttribute("unitNew", contractService.unitNew());
-		System.out.println(UnitDTO.toString());
+		//System.out.println(UnitDTO.toString());
 		
 		return "/contract/contract";
 	}
@@ -35,15 +35,15 @@ public class ContractController {
 	@GetMapping("/agreement")
 	public String agreement(Model model,HttpSession session) {
 		//입력값 확인
-		System.out.println("=====test=====");
-		System.out.println("agreement:"+contractService.agreementList());
-		model.addAttribute("agreement", contractService.agreementList());
+		//System.out.println("=====test=====");
+		//System.out.println("agreement:"+contractService.agreementList());
+		model.addAttribute("agreement", contractService.agreementList(session));
 		List<UnitDTO>  UnitDTO = contractService.unitNew();
 		//최근 계약 단가표 코드 session으로 받아오기
 		String getContractUnitCode = null;
 		if(UnitDTO.size() != 0) {
 		getContractUnitCode = UnitDTO.get(0).getContractUnitCode();
-		System.out.println(getContractUnitCode + "<--최근 단가표 값 받는가 확인");
+		//System.out.println(getContractUnitCode + "<--최근 단가표 값 받는가 확인");
 		session.setAttribute("SCUC",getContractUnitCode);
 		}
 		return "/contract/agreement";
@@ -53,8 +53,8 @@ public class ContractController {
 	@GetMapping("/contractList")
 	public String contractList(Model model) {
 		List<ContractDTO> contractList =  contractService.contractList();
-		System.out.println("=====test=====");
-		System.out.println("contractList:"+contractList);
+		//System.out.println("=====test=====");
+		//System.out.println("contractList:"+contractList);
 		model.addAttribute("contractList", contractList);
 		
 		return "contract/contractList";
@@ -65,8 +65,8 @@ public class ContractController {
 	@GetMapping("/contractInsert")
 	public String contractInsert(Model model){
 		List<UnitDTO> contractInsert =   contractService.unitNew();
-		System.out.println("=====test=====");
-		System.out.println("contractList:"+contractInsert);
+		//System.out.println("=====test=====");
+		//System.out.println("contractList:"+contractInsert);
 		model.addAttribute("contractInsert", contractInsert);
 		
 		return "/contract/contractInsert";
@@ -75,7 +75,7 @@ public class ContractController {
 	//계약 생성하기
 	@PostMapping("/contractInsert")
 	public String contractInsert(ContractDTO contract,HttpSession session,ManagementDTO management) {
-		System.out.println(contract.toString() + "<-- contract.toString");
+		//System.out.println(contract.toString() + "<-- contract.toString");
 		contractService.contractInsert(contract, session, management);
 		
 		return "redirect:/contractList";

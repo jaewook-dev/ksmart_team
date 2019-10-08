@@ -10,7 +10,7 @@
 			<div class="row">
 				<div class="col">
 					<p class="text-white mt-5 mb-5">
-						<b>계약 관리 >계약서 관리</b>
+						<b>계약 관리 >계약 및 계약내용</b>
 					</p>
 					<div class="tm-block-col ">
 						<div class="tm-bg-primary-dark tm-block-big tm-block-scroll ">
@@ -19,7 +19,7 @@
 									style="float: left;"> 
 									<input type="button" class="btn btn-primary"
 											style="float: right; line-height: 50pt; WIDTH: 150pt; margin-top: 75pt;"
-											onclick="location.href='contractInsert' " value="계약" />
+											onclick="location.href='contractInsert' " value="계약하기" />
 									<input type="button" class="btn btn-primary"
 											th:if="${session.SLEVEL eq '관리자'}" 
 											style="float: right; line-height: 50pt; WIDTH: 150pt; margin-top: 75pt;"
@@ -28,8 +28,8 @@
 						</div>
 					</div>
 					<div class=" tm-block-col ">
-						<h2 class="tm-block-title">계약자 명단</h2>
-						<div class="tm-bg-primary-dark tm-block tm-block-scroll">
+						<h2 class="tm-block-title">계약 내용</h2>
+						<div class="tm-bg-primary-dark tm-block-big">
 							<table class="table">
 								<thead>
 									<tr>
@@ -39,6 +39,7 @@
 										<th scope="col">서비스 시작일자</th>
 										<th scope="col">서비스 종료일자</th>
 										<th scope="col">서비스 보류일자</th>
+										<th scope="col">더보기</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -49,6 +50,12 @@
 										<th th:text="${agreement.contractStart}"></th>
 										<th th:text="${agreement.contractFinish}"></th>
 										<th th:text="${agreement.contractValidDate}"></th>
+										<td class="text-center"><a
+											href="#"
+											class="tm-product-delete-link"> <i
+												class="fas fa-search-plus tm-product-check-icon"
+												style="color: white"></i>
+										</a></td>
 									</tr>
 								</tbody>
 							</table>

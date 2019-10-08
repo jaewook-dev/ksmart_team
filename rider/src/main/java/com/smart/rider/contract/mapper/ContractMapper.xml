@@ -69,7 +69,7 @@
 	</insert>
 	
 	<!-- 계약된 매장 목록 -->
-	<select id="agreementList"	resultType="com.smart.rider.contract.dto.ContractMemberDTO">
+	<select id="agreementList" parameterType="String" resultType="com.smart.rider.contract.dto.ContractMemberDTO">
 		SELECT 
 		contract.
 			 member_id AS memberId
@@ -81,7 +81,10 @@
 			,member_name		AS memberName
 			,member_phone 		AS memberPhone
 		from contract inner join member
-		on contract.member_id =member.member_id;
+		on contract.member_id =member.member_id
+		<if test="memberLevel neq '관리자'.toString()">
+			WHERE contract.member_id = #{memberId}
+		</if>
 	</select>
 </mapper>
 

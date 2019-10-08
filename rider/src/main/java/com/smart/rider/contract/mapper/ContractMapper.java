@@ -24,6 +24,6 @@ public interface ContractMapper {
 	public int contractInsert(ContractDTO Contract);
 	
 	//계약된 매장 목록
-	public List<ContractMemberDTO> agreementList();
+	public List<ContractMemberDTO> agreementList(String memberId,String memberLevel);
 	
 }
