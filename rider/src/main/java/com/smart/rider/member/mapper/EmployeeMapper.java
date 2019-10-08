@@ -20,8 +20,8 @@ public interface EmployeeMapper {
 	//19.09.25작성
 	public int employeeDelete(String memberId, String memberPw);
 	//19.09.26작성
-	public List<MemberDTO> searchEmployee(String contractShopCode, String select, String searchInput);
+	public List<MemberDTO> searchEmployee(String contractShopCode, String select, String searchInput, String beginDate, String endDate);
 	
-	//09.09.27 계약매장코드 
+	//19.09.27 계약매장코드 
 	public List<SsrHapDTO> getShopRelationCode(String SID);
 }

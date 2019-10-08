@@ -40,6 +40,7 @@ public class AccountService {
 		map.put("accountListYes", accountmapper.accountListYes(sCode));
 		map.put("accountListNo", accountmapper.accountListNo(sCode));
 		//맵으로 리턴 시킨다.
+		
 		return map;
 	}
 	
@@ -48,7 +49,7 @@ public class AccountService {
 		return accountmapper.getShopRelationCode(SID);
 	}
 	
-	//매입거래처 생성
+	//거래처 생성하기
 	public int accountInsert(AccountDTO account) {
 		//매입거래처 코드 생성
 		String accountCode = "AC"+ accountmapper.accountMaxCode();
@@ -58,10 +59,11 @@ public class AccountService {
 		//AccountDTO 매입거래처 코드 담기
 		account.setAccountCode(accountCode);
 		System.out.println(account.getAccountCode()+"<--값 담겨있는지 확인");
+		
 		return accountmapper.accountInsert(account);
 	}
 	
-	//특정 값으로 목록 조회
+	//거래처 검색
 	public Map<String,Object> accountSearchList(String select, String searchName, String beginDate, String endDate,HttpSession session){
 		//맵으로 선언
 		Map<String,Object> map = new HashMap<String,Object>();
@@ -82,21 +84,25 @@ public class AccountService {
 		//map 넣을 내용을 String,Object 형식으로 넣어준다.
 		map.put("accountSearchListYes", accountmapper.accountSearchListYes(select, searchName, beginDate, endDate, sCode));
 		map.put("accountSearchListNo", accountmapper.accountSearchListNo(select, searchName, beginDate, endDate, sCode));	
+		
 		return map;
 	}
 	
-	//특정 거래처 코드로 다른데이터 조회
+	//수정화면(특정 거래처코드로 데이터 조회)
 	public List<AccountDTO> accountUpdate(String acCode){
+		
 		return accountmapper.accountUpdate(acCode);
 	}
 	
-	//거래처 수정
+	//거래처 수정하기
 	public int accountUpdateSet(AccountDTO account){
+		
 		return accountmapper.accountUpdateSet(account);
 	}
 	
 	//아이디를 이용해서 PW 구하기
 	public List<MemberDTO> getPw(String SID){
+		
 		return accountmapper.getPw(SID);
 	}
 	
@@ -112,6 +118,7 @@ public class AccountService {
 			//불일치시에 FALSE라는 값이 담긴다.
 			accountCode = "false";
 		}
+		
 		return 	accountmapper.accountDelete(accountCode);
 	}
 }

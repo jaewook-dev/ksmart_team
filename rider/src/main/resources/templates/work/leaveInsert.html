@@ -23,6 +23,14 @@
 							<input id="memberPw" name="memberPw" type="password" class="form-control validate" placeholder="PASSWORD"/>
 						</div>
 						<div>
+							<label class="alert alert-danger col-xl" th:if="${result ne null}" th:text="${result}">
+							</label>
+						</div>
+						<div>
+							<label class="alert alert-danger col-xl" th:if="${alert ne null}" th:text="${alert}">
+							</label>
+						</div>
+						<div>
 							<button type="submit" id="submit" class="btn btn-primary btn-block text-uppercase">
 							퇴근등록
 							</button>

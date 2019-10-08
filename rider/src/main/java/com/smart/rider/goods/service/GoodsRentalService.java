@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.smart.rider.goods.dto.GoodsHapDTO;
 import com.smart.rider.goods.dto.GoodsRentalDTO;
+
 import com.smart.rider.goods.mapper.GoodsRentalMapper;
 
 @Service
@@ -15,6 +16,7 @@ import com.smart.rider.goods.mapper.GoodsRentalMapper;
 public class GoodsRentalService {
 	@Autowired
 	private GoodsRentalMapper goodsRentalMapper;
+
 	
 	//대여상품검색추가
 	public List<GoodsRentalDTO> goodsRentalSearchList(String select ,String searchInput,String beginDate,String endDate){
@@ -37,7 +39,7 @@ public class GoodsRentalService {
 	//대여상품 등록 insert 19-09-25 문영성
 	public int goodsRentalInsert(GoodsRentalDTO goodsRentalDto) {
 		String goodsRentalCode = "GR"+goodsRentalMapper.goodsRentalCodeCount();
-		System.out.println(goodsRentalCode+"<<<<<<<<<<<<<<<<<코드확인");
+		//System.out.println(goodsRentalCode+"<<<<<<<<<<<<<<<<<코드확인");
 		
 		
 		  if(goodsRentalCode.equals("GRnull")) {
@@ -45,8 +47,7 @@ public class GoodsRentalService {
 			  goodsRentalCode = "GR0001"; 
 			 }
 		  	goodsRentalDto.setGoodsRentalCode(goodsRentalCode);
-		 
-		
+		  
 		
 		return goodsRentalMapper.goodsRentalInsert(goodsRentalDto);		
 	}

@@ -63,8 +63,8 @@ public class WorkDTO extends MemberDTO{
 	@Override
 	public String toString() {
 		return "WorkDTO [workCode=" + workCode + ", contractShopCode=" + contractShopCode + ", memberId=" + memberId
-				+ ", workStart=" + workStart + ", workFinish=" + workFinish + ", workRest=" + workRest + ","
-				+ " workDate=" + workDate + "]";
+						+ ", workStart=" + workStart + ", workFinish=" + workFinish + ", workToday=" + workToday + ""
+						+ ", workRest=" + workRest + ", workDate=" + workDate + "]";
 	}
 	
 }

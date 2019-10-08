@@ -52,9 +52,10 @@ public class WorkController {
 		return "redirect:/workSuccess";
 	}
 	@GetMapping("/workAdmin")
-	public String workList(Model model
-			, @RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage) {
-		Map<String, Object> map = workService.workList(currentPage);
+	public String workList(@RequestParam(value="contractShopCode") String contractShopCode
+						  ,@RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage
+						  ,Model model) {
+		Map<String, Object> map = workService.workList(currentPage, contractShopCode);
 		
 		model.addAttribute("workList", map.get("list"));
 		model.addAttribute("currentPage", map.get("currentPage"));
@@ -77,8 +78,31 @@ public class WorkController {
 			return "work/leaveInsert";
 		}
 		System.out.println(result + "<--퇴근 직원아이디확인");
-		
+		//System.out.println(workService.leaveInsert(workdto) + "<-----출근체크 X일때 퇴근등록");
+		int fail = workService.leaveInsert(workdto);
+		if(fail == 0) {
+			model.addAttribute("alert", "출근등록을 하지 않았습니다!");
+			return "work/leaveInsert";
+		}
 		workService.leaveInsert(workdto);
 		return "redirect:/workSuccess";
+	}
+	@PostMapping("/searchWork")
+	public String searchMember(@RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage
+							  ,@RequestParam(value="contractShopCode") String contractShopCode
+							  ,@RequestParam(value="select") String select
+							  ,@RequestParam(value="searchInput") String searchInput
+							  ,@RequestParam(value="beginDate") String beginDate
+							  ,@RequestParam(value="endDate") String endDate
+							  ,Model model) {
+		System.out.println(beginDate + "~" + endDate + "<----날짜검색");
+		model.addAttribute("totalWork", workService.searchTotalWork(select, searchInput, beginDate, endDate));
+		Map<String, Object> map = workService.searchWork(currentPage, contractShopCode, select, searchInput, beginDate, endDate);
+		model.addAttribute("workList", map.get("list"));
+		model.addAttribute("currentPage", map.get("currentPage"));
+		model.addAttribute("lastPage", map.get("lastPage"));
+		model.addAttribute("startPageNum", map.get("startPageNum"));
+		model.addAttribute("lastPageNum", map.get("lastPageNum"));
+		return "work/workAdmin";
 	}
 }

@@ -634,6 +634,9 @@ input[type="checkbox"] {
   height: 24px;
   transition: all 0.1s linear;
 }
+
+
+
 input[type="checkbox"]:checked {
   background: url(../img/check-mark.png) #394e64 center no-repeat;
 }
