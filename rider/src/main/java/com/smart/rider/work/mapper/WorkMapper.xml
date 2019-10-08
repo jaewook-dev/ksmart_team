@@ -84,10 +84,10 @@
 		FROM work
 		<trim prefix="where" prefixOverrides="AND|OR">
 			<if test="contractShopCode neq null and contractShopCode neq ''.toString()">
-				AND w.contract_shop_code = #{contractShopCode}
+				AND contract_shop_code = #{contractShopCode}
 			</if>
 			<if test="memberId neq ''.toString() and memberId neq ''.toString()">
-				AND w.member_id = #{memberId}
+				AND member_id = #{memberId}
 			</if>
 		</trim>
 	</select>
