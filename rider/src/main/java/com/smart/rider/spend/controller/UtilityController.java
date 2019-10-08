@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.smart.rider.main.service.MainService;
-import com.smart.rider.shop.dto.SsrHapDTO;
 import com.smart.rider.spend.dto.JoinUtilityDTO;
 import com.smart.rider.spend.dto.SpendAdminDTO;
 import com.smart.rider.spend.dto.UtilityDTO;
@@ -68,7 +67,6 @@ public class UtilityController {
 		
 		String contractShopCode = selectShopCode;
 		String userLevel = (String)session.getAttribute("SLEVEL");
-		//System.out.println(contractShopCode + " <-- contractShopCode spendUtilityUpdate() UtilityController.java");
 		
 		if(!userLevel.equals("관리자")) {
 			contractShopCode = (String)session.getAttribute("SCODE");
@@ -76,7 +74,6 @@ public class UtilityController {
 			utilityService.utilityUpdate(utilityDTO);
 			return "redirect:/spendUtility";
 		}
-		
 		
 		utilityService.utilityUpdate(utilityDTO);
 		return "redirect:/spendUtility?selectShopCode=" + contractShopCode;

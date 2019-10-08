@@ -35,11 +35,26 @@ public class SalaryController {
 	
 	/**** 190102 재욱, Update : 지출_급여 수정 ****/
 	@PostMapping("/salaryUpdate")
-	public String salaryUpdate(JoinSalaryDTO joinSalaryDTO) {
+	public String salaryUpdate(@RequestParam(value = "selectShopCode", required = false, defaultValue = "SR0000") String selectShopCode
+							  ,JoinSalaryDTO joinSalaryDTO
+							  ,Model model
+							  ,HttpSession session) {
+		
 		//System.out.println(joinSalaryDTO.toString() + " <-- joinSalaryDTO.toString() salaryUpdate SalaryController.java");
+		
+		String contractShopCode = selectShopCode;
+		String userLevel = (String)session.getAttribute("SLEVEL");
+		
+		if(!userLevel.equals("관리자")) {
+			contractShopCode = (String)session.getAttribute("SCODE");
+			
+			salaryService.salaryUpdate(joinSalaryDTO);
+			return "redirect:/spendSalary";
+		}
+		
 		salaryService.salaryUpdate(joinSalaryDTO);
 		
-		return "redirect:/spendSalary";
+		return "redirect:/spendSalary?selectShopCode=" + contractShopCode;
 	}
 	
 	

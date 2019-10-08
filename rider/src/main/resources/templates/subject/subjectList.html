@@ -132,7 +132,8 @@
 										</td>
 										<td class="text-center">
 											<a th:href="@{/subjectDelete(subjectCode=${possible.subjectCode})}"
-											   class="tm-product-delete-link possibleButton"> 
+											   class="tm-product-delete-link possibleButton"
+											   onclick="return deleteSubject();"> 
 											   <i class="far fa-trash-alt tm-product-delete-icon" style="color: white;"></i>
 											</a>
 										</td>
@@ -190,6 +191,10 @@
 
 <th:block layout:fragment="customScript">
 <script type="text/javascript">
+
+	function deleteSubject(){
+		return confirm("정말로 삭제하시겠습니까?");
+	}
 
 	//시작 일자 텍스트상자 클릭시 달력 표기 
 	$('#beginDate').datepicker({

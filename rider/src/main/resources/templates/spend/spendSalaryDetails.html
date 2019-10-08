@@ -28,6 +28,7 @@
 						<form action="/salaryUpdate" method="post" id="salaryUpdateForm">
 						<th:block th:each="details : ${salaryDetails}">
 						<input type="hidden" name="spendSalaryCode" th:value="${details.spendSalaryCode}">
+						<input type="hidden" name="selectShopCode" th:value="${details.contractShopCode}">
 							<h4 class="tm-block-title">등록내역 상세보기</h4>
 							<table class="table">
 								<tr>

@@ -19,6 +19,7 @@ public class UtilityService {
 	@Autowired
 	private UtilityMapper utilityMapper;
 	
+	
 	/*** 190926 재욱, 관리자 권한으로 계약된 매장 내역 ***/
 	public List<SsrHapDTO> utilityShop(){
 		return utilityMapper.utilityShop();
@@ -131,7 +132,7 @@ public class UtilityService {
 
 		utilityDTO.setSpendUtilityCode(spendUtilityCode);
 		utilityDTO.setContractShopCode(contractShopCode);
-		//System.out.println(utilityDTO + " <-- utilityDTO utilityInsert UtilityService.java");
+		//System.out.println(utilityDTO.toString() + " <-- utilityDTO utilityInsert UtilityService.java");
 		return utilityMapper.utilityInsert(utilityDTO);
 	}
 

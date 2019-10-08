@@ -64,8 +64,6 @@
 										name="salaryYear"
 										id="salaryYear"
 										><option value="2019" id="2019">2019</option>
-										 <option value="2018" id="2018">2018</option>
-										 <option value="2017" id="2017">2017</option>
 									</select>
 								</span>
 							</form>
@@ -434,25 +432,6 @@
 			$('#salaryInsertForm').submit();
 		}
 	})
-		
-		
-
-	
-	<!-- 연도 선택 화면전환 -->
-	$('#salaryYear').change(function() {
-		$('#selectYearForm').submit();
-	})
-	
-	<!-- 연도 선택 화면 전환 후 select box 고정 -->
-	var selectedYear = [[${selectedYear}]];
-	
-	if(selectedYear == 2018){
-		$('#2018').attr('selected','selected');
-	} else if(selectedYear == 2017){
-		$('#2017').attr('selected','selected');
-	} else{
-		$('#2019').attr('selected','selected');
-	}
 	
 	<!-- 페이징 -->
 	var scriptCurrentPage = [[${currentPage}]];

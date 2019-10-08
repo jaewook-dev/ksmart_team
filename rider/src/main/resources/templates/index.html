@@ -25,6 +25,28 @@
 						
 					</div>
 					
+					<!-- 순수익 차트 -->
+					<div class="row tm-content-row">
+						<div class="col-12 tm-block-col">
+							<div class="tm-bg-primary-dark tm-block-util">
+									<span style="display: inline-block; float: left"> 
+										<strong class="tm-block-title">보고서 </strong>
+									</span> 
+									<span style="display: inline-block; float: right"> 
+										<select
+											style="width: 100px;" 
+											class="custom-select" 
+											name="netYear"
+											id="netYear"
+											><option value="2019" id="2019">2019</option>
+										</select>
+									</span>
+	
+								<!-- charts.js -->
+								<canvas id="netChart" height="100px;"></canvas>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -34,7 +56,77 @@
 <th:block layout:fragment="customScript">
 
 <script th:inline="javascript">
+
+	var ctx = document.getElementById('netChart').getContext('2d');
+	var netChart = new Chart(ctx, {
+		
+	    // The type of chart we want to create
+	    type: 'bar',
 	
+	    // The data for our dataset
+	    data: {
+	        labels: ['1월', '2월', '3월', '4월', '5월', '6월', '7월','8월','9월','10월','11월','12월'],
+	        datasets: [{
+				label: '순수익',
+				type : 'bar',
+				backgroundColor: 'rgb(255, 204, 102)',
+	            borderColor: 'rgb(255, 204, 102)',
+				data: [
+					-10, -20, -30, 20, 10, 40, 50
+					, 60, 70, 20, 10, 40
+				]
+			}, {
+				label: '지출',
+				type : 'line',
+				fill : false,
+				lineTension : 0,
+				pointRadius : 0,
+				backgroundColor: 'rgb(255, 153, 0)',
+	            borderColor: 'rgb(255, 153, 0)',
+				data: [
+					50, 40, 70, 80, 80, 70, 90
+					, 50, 40, 60, 80, 40, 70
+				]
+			}, {
+				label: '매출',
+				type : 'line',
+				fill : false,
+				lineTension : 0,
+				pointRadius : 0,
+				backgroundColor: 'rgb(255, 204, 0)',
+	            borderColor: 'rgb(255, 204, 0)',
+				data: [
+					70, 50, 60, 40, 50, 40, 20
+					, 30, 40, 50, 70, 50
+				]
+			}]
+	    },
+	
+	    // Configuration options
+	    options: {
+	    	legend: {
+	             labels: {
+	                  fontColor: 'white' // label color
+	                 }
+	              },
+		    scales: {
+		    	// y축
+		        yAxes: [{
+		        	stacked: true,
+		            ticks: {
+		                fontColor:'white' // y축 폰트 color
+		            }
+		     	}],
+		     	// x축
+		     	xAxes: [{
+		     		stacked: true,
+		            ticks: {
+		                fontColor:'white' // x축 폰트 color
+		            }
+		     	}]
+		    }
+	    }
+	});
 </script>
 
 </th:block>
