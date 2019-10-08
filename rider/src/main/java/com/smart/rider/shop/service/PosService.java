@@ -47,7 +47,7 @@ public class PosService {
 		//System.out.println(sid + "로그인된 아이디 확인");
 		//로그인된 아이디로 계약매장코드 가져오기
 		List<SsrHapDTO> ssrList = posMapper.getMemberId(sid);
-		System.out.println(ssrList + "ssrList에 담긴 값 확인");
+		//System.out.println(ssrList + "ssrList에 담긴 값 확인");
 		//값이 없을 경우
 		String contractShopCode  = null;
 		if(ssrList.size() != 0) {
@@ -73,15 +73,15 @@ public class PosService {
 		//입력받은 posCode로 id 가져오기
 		
 		String id = posMapper.getId(posCode);
-		System.out.println(id + "코드 조회시 나오는 ID");
+		//System.out.println(id + "코드 조회시 나오는 ID");
 		//가져온 id로 비밀번호 와 생년월일 가져오기
 		List<MemberDTO> mList = posMapper.getMember(id);
 		String pw = mList.get(0).getMemberPw();
 		//String birth =mList.get(0).getMemberBirth();
-		System.out.println(pw + "id 조회시 나오는 비밀번호");
+		//System.out.println(pw + "id 조회시 나오는 비밀번호");
 		//System.out.println(birth + "id 조회시 나오는 생년월일");
 		String level =(String)session.getAttribute("SLEVEL");
-		System.out.println(level + "관리자 권한 확인");
+		//System.out.println(level + "관리자 권한 확인");
 		//권한이 관리자일 경우 관리자 비밀번호 입력
 		if(level.equals("관리자")) {
 			pw = "pw001";

@@ -45,20 +45,20 @@ public class ContractService {
 		}
 		//로그인 되어있는 아이디값 가져오기
 		contract.setMemberId((String)session.getAttribute("SID"));
-		System.out.println(contract.getMemberId());
+		//System.out.println(contract.getMemberId());
 		//최근단가표 세션으로 가져오기
 		contract.setContractUnitCode((String)session.getAttribute("SCUC"));
-		System.out.println(contract.getContractUnitCode());
+		//System.out.println(contract.getContractUnitCode());
 		//계약코드 생성 후 ContractDTO에 넣기
 		contract.setContractCode(contractCode);
-		System.out.println(contract.getContractCode());
+		//System.out.println(contract.getContractCode());
 		//리턴을 2번 하기 위해  선언
 		int result = 0;
 		result += contractMapper.contractInsert(contract);
 		//contractList에 담겨있는 contractCode 중에  마지막에 등록된 코드 가져오기
 		List<ContractDTO> contractList = contractList();
 		String getContractCode = contractList.get(contractList.size()-1).getContractCode();
-		System.out.println(getContractCode);
+		//System.out.println(getContractCode);
 		
 		//가장 최근에 계약한 코드 가져오기
 		session.setAttribute("SCC",getContractCode);
@@ -79,7 +79,7 @@ public class ContractService {
 		management.setContractManagementState("계약상태");
 		//만든 코드를  ContractManagementCode에다가 set 해주고 get으로 값이 들어가있는지 확인
 		management.setContractManagementCode(managementCode);
-		System.out.println(management.getContractManagementCode());
+		//System.out.println(management.getContractManagementCode());
 		//리턴
 		result += managementService.managementInsert(management, session);
 		
@@ -87,7 +87,13 @@ public class ContractService {
 	}
 	
 	//계약서 목록
-	public List<ContractMemberDTO> agreementList(){
-		return contractMapper.agreementList();
+	public List<ContractMemberDTO> agreementList(HttpSession session){
+		String id = (String)session.getAttribute("SID");
+		String level = (String)session.getAttribute("SLEVEL");
+		//System.out.println(level+"<--로그인 권한 확인");
+		//System.out.println(id+"<--로그인 아이디 확인");
+		
+		
+		return contractMapper.agreementList(id,level);
 	}
 }
