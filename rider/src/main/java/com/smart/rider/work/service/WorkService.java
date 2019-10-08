@@ -71,7 +71,7 @@ public class WorkService{
 		map.put("memberId", memberId);
 		
 		//전체행의 갯수를 가져오는 쿼리
-		double workCount = workMapper.getWorkAllCount(contractShopCode);
+		double workCount = workMapper.getWorkAllCount(contractShopCode, memberId);
 							//올림함수 소수점이있으면 무조건 올림
 		int lastPage = (int)(Math.ceil(workCount/rowPerPage));
 		
