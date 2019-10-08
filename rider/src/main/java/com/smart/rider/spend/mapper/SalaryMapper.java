@@ -11,6 +11,9 @@ import com.smart.rider.spend.dto.JoinSalaryDTO;
 @Mapper
 public interface SalaryMapper {
 	
+	/*** 191002 재욱, Read : 지출_급여 등록 내역 페이징 AllCount ***/
+	public int salaryAllCount(String contractShopCode);
+	
 	/**** 191002 재욱, Update : 지출_급여 수정 ****/
 	public int salaryUpdate(JoinSalaryDTO joinSalaryDTO);
 	

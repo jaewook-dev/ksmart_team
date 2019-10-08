@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.smart.rider.member.dto.MemberDTO;
+import com.smart.rider.shop.dto.SsrHapDTO;
 
 @Mapper
 public interface MemberMapper {
@@ -30,5 +31,7 @@ public interface MemberMapper {
 	//19.10.02 페이지작업위한 작성
 	public int getMemberAllCount();
 	//19.10.04검색 페이지작업
-	public int getSearchAllCount(String select, String searchInput, String beginDate, String endDate);
+	public int getSearchAllCount(String select, String searchInput, String beginDate, String endDate, String shopCode);
+	
+	public List<SsrHapDTO> utilityShop();
 }

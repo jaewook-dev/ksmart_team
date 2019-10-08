@@ -9,7 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.smart.rider.main.service.LoginService;
 import com.smart.rider.member.dto.MemberDTO;
@@ -19,6 +21,15 @@ public class LoginController {
 	
 	@Autowired
 	private LoginService loginService;
+	
+	
+	/**** 191007 재욱, Read 로그인 ajax ****/
+	@RequestMapping("/loginCheck")
+	public @ResponseBody int loginCheck(String memberId, String memberPw) {
+		int result = loginService.loginCount(memberId, memberPw);
+		//System.out.println(result + " <-- result loginCheck() LoginController.java");
+		return result;
+	}
 
 	//로그인 화면 이동
 	@GetMapping("/login")

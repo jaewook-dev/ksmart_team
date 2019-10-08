@@ -36,10 +36,17 @@
 									   type="text" class="form-control validate" style="background-color: #54657D" readonly/>
 							</div>
 							<div class="form-group col-2">
+								<select class="custom-select" name="shopCode">
+									<option value="0">매장</option>
+									<th:block th:each="shop : ${utilityShop}">
+										<option th:text="${shop.shopName}"
+												th:value="${shop.contractShopCode}"
+												id="shopCode"></option>
+									</th:block>
+								</select>
 							</div>
 							<div class="form-group col-3">
 								<select class="custom-select" name="select">
-									<option value="0">Select</option>
 									<option value="member_name">이름</option>
 									<option value="member_level">권한</option>
 								</select>
@@ -90,7 +97,7 @@
 										</a>
 									</td>
 									<td class="text-center">
-										<button type="button" class="tm-product-delete-link" 
+										<button class="tm-product-delete-link" type="button"
 												id="deleteLink" data-toggle="modal" data-target="#deleteModal" th:value="${member.memberId}" style="cursor:pointer">
 											<i class="far fa-trash-alt tm-product-delete-icon"></i>
 										</button>
@@ -102,7 +109,7 @@
 						<!--------------------------------------------- 페이지 버튼 ---------------------------------------------->
 						<div class="text-center">
 						<!-- 맨처음 -->
-						<a class="text-white" th:href="@{/memberList}">[처음]</a>
+						
 						<!-- 이전 -->
 						<a class="text-white" th:if="${currentPage > 1}" 
 						   th:href="@{/memberList(currentPage=${currentPage - 1})}">[이전]</a>
@@ -115,7 +122,7 @@
 						<a class="text-white" th:if="${currentPage < lastPage}" 
 						   th:href="@{/memberList(currentPage=${currentPage + 1})}">[다음]</a>
 						<!-- 맨마지막 -->
-						<a class="text-white" th:href="@{/memberList(currentPage=${lastPage})}">[마지막]</a>
+						
 						</div>
 						
 					</div>
@@ -150,7 +157,7 @@
 <script>
 var memberId ="";
 $(document).ready(function() {     
-    $('#deleteModal').on('show.bs.modal', function(event) {          
+    $('#deleteModal').on('show.bs.modal', function(event) {
     	memberId = $('#deleteLink').val();
     	console.log(memberId+"<---삭제할아이디");
     });
