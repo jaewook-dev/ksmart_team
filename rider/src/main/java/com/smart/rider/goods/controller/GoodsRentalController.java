@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.smart.rider.goods.dto.GoodsDTO;
 import com.smart.rider.goods.dto.GoodsHapDTO;
 import com.smart.rider.goods.dto.GoodsRentalDTO;
 import com.smart.rider.goods.service.GoodsRentalService;
@@ -39,10 +40,10 @@ public class GoodsRentalController {
 		int result = goodsRentalService.goodsRentalDelete(goodsRentalDto.getGoodsRentalCode(),
 														  memberDto.getMemberId(),
 														  memberDto.getMemberPw());
-		System.out.println("############## memberDto goodsRentalDelete GoodsRentalController.java");
-		System.out.println(goodsRentalDto + "<- goodsRentalDto goodsRentalDelete GoodsRentalController.java");
-		System.out.println(memberDto + "<- memberDto goodsRentalDelete GoodsRentalController.java");
-		System.out.println("############## memberDto goodsRentalDelete GoodsRentalController.java");
+		//System.out.println("############## memberDto goodsRentalDelete GoodsRentalController.java");
+		//System.out.println(goodsRentalDto + "<- goodsRentalDto goodsRentalDelete GoodsRentalController.java");
+		//System.out.println(memberDto + "<- memberDto goodsRentalDelete GoodsRentalController.java");
+		//System.out.println("############## memberDto goodsRentalDelete GoodsRentalController.java");
 		if(result == 0) {
 			model.addAttribute("result", "비밀번호를 바르게입력하세요");
 			model.addAttribute("goodsRentalCode",goodsRentalService.getGoodsRentalList(goodsRentalDto.getGoodsRentalCode()));
@@ -81,18 +82,19 @@ public class GoodsRentalController {
 	}
 	//대여상품등록 처리 insert
 	@PostMapping("/goodsRentalInsert")
-	public String goodsRentalInsert(GoodsRentalDTO goodsRentalDto,HttpSession session,Model model) {
+	public String goodsRentalInsert(GoodsRentalDTO goodsRentalDto,GoodsDTO goodsDto,HttpSession session,Model model) {
 		//System.out.println("대여상품 입력확인"+goodsRentalDto);
 		String contractShopCode = (String)session.getAttribute("SCODE");
 		//System.out.println("매장코드 확인"+contractShopCode);
 		goodsRentalDto.setContractShopCode(contractShopCode);
 		goodsRentalService.goodsRentalInsert(goodsRentalDto);
+		//goodsService.goodsUpdate(goodsDto);
 		return "redirect:goodsRentalList";
 	}
 	
 	
 	@GetMapping("/goodsRentalList")	
-	//대여상품 리스트조회
+	//대여상품 리스트조회q
 	public String rentalList(Model model) {
 		List<GoodsHapDTO> rList = goodsRentalService.goodsRentalList();
 		//System.out.println("대여상품리스트 값 넘어오는지확
