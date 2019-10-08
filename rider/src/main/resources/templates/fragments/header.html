@@ -138,7 +138,7 @@
                             </div>
                         </li>
                          <li class="nav-item" th:if="${session.SLEVEL eq '직원'}">
-                            <a class="nav-link" href="/workAdmin" id="navbarDropdown">
+                            <a class="nav-link" th:href="@{/workAdmin(memberId=${session.SID})}" id="navbarDropdown">
                                 <i class="fas fa-calendar-check"></i>
                                 <span>
 									근태관리

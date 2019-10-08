@@ -48,7 +48,7 @@ public class WorkService{
 	}
 	/***********************19.10.01 작성********************************/
 	//페이지 작업
-	public Map<String, Object> workList(int currentPage, String contractShopCode) {
+	public Map<String, Object> workList(int currentPage, String contractShopCode, String memberId) {
 		//페이지 구성 할 행의 갯수
 		final int rowPerPage = 10;
 		//보여줄 첫번째 페이지번호 초기화
@@ -68,6 +68,7 @@ public class WorkService{
 		map.put("startRow", startRow);
 		map.put("rowPerPage", rowPerPage);
 		map.put("contractShopCode", contractShopCode);
+		map.put("memberId", memberId);
 		
 		//전체행의 갯수를 가져오는 쿼리
 		double workCount = workMapper.getWorkAllCount(contractShopCode);

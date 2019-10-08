@@ -53,9 +53,10 @@ public class WorkController {
 	}
 	@GetMapping("/workAdmin")
 	public String workList(@RequestParam(value="contractShopCode") String contractShopCode
+						  ,@RequestParam(value="memberId") String memberId
 						  ,@RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage
 						  ,Model model) {
-		Map<String, Object> map = workService.workList(currentPage, contractShopCode);
+		Map<String, Object> map = workService.workList(currentPage, contractShopCode, memberId);
 		
 		model.addAttribute("workList", map.get("list"));
 		model.addAttribute("currentPage", map.get("currentPage"));
