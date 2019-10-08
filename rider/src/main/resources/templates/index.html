@@ -25,6 +25,7 @@
 						
 					</div>
 					
+					<th:block th:if="${session.SLEVEL eq '점주'}">
 					<!-- 순수익 차트 -->
 					<div class="row tm-content-row">
 						<div class="col-12 tm-block-col">
@@ -43,10 +44,13 @@
 									</span>
 	
 								<!-- charts.js -->
-								<canvas id="netChart" height="100px;"></canvas>
+								
+									<canvas id="netChart" height="100px;"></canvas>
+								
 							</div>
 						</div>
 					</div>
+					</th:block>
 				</div>
 			</div>
 		</div>
