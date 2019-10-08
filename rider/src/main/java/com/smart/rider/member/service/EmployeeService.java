@@ -37,8 +37,8 @@ public class EmployeeService {
 		return employeeMapper.employeeDelete(memberId, memberPw);
 	}
 	//19.09.26작성
-	public List<MemberDTO> searchEmployee(String contractShopCode, String select, String searchInput) {
-		return employeeMapper.searchEmployee(contractShopCode, select, searchInput);
+	public List<MemberDTO> searchEmployee(String contractShopCode, String select, String searchInput, String beginDate, String endDate) {
+		return employeeMapper.searchEmployee(contractShopCode, select, searchInput, beginDate, endDate);
 	}
 	//19.09.27 계약코드 
 	public List<SsrHapDTO> getShopRelationCode(String SID){

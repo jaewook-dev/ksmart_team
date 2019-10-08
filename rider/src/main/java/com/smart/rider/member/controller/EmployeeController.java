@@ -70,8 +70,10 @@ public class EmployeeController {
 	@PostMapping("/searchEmployee")
 	public String searchEmployee(@RequestParam(value="contractShopCode") String contractShopCode,
 								 @RequestParam(value="select") String select,
-								 @RequestParam(value="searchInput") String searchInput, Model model) {
-		List<MemberDTO> searchList = employeeService.searchEmployee(contractShopCode, select, searchInput);
+								 @RequestParam(value="searchInput") String searchInput,
+								 @RequestParam(value="beginDate") String beginDate,
+								 @RequestParam(value="endDate") String endDate, Model model) {
+		List<MemberDTO> searchList = employeeService.searchEmployee(contractShopCode, select, searchInput, beginDate, endDate);
 		model.addAttribute("employeeList", searchList);
 		return "employee/employeeList";
 	}
