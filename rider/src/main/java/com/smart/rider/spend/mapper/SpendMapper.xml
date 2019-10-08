@@ -25,7 +25,8 @@
 		SELECT 
 			COUNT(DISTINCT m.member_id)
 		FROM member m, shop_relation sr
-		WHERE sr.contract_shop_code = #{contractShopCode} AND m.member_birth = #{memberBirth}
+		WHERE sr.contract_shop_code = #{contractShopCode} 
+		AND m.member_id = #{memberId} AND m.member_birth = #{memberBirth}
 		OR m.member_id = 'id001' AND m.member_pw = #{adminPw}
 	</select>
 	

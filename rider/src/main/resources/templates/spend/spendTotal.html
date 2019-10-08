@@ -29,8 +29,8 @@
 							<div class="tm-bg-primary-dark tm-block-select">
 								<form action="/spendManagement" method="get" id="spendManagementForm">
 									<input type="hidden" name="selectShopCode" th:value="${contractShopCode}">
-									<span style="float: left">
-										<strong class="tm-block-title text-center"> 지출 관리 </strong>
+									<span style="float: left" th:each="shop : ${shop}">
+										<strong class="tm-block-title text-center" th:text="${shop.shopName}"></strong>
 									</span> 
 									<span style="float: right"> 
 									<select
@@ -38,9 +38,9 @@
 										class="custom-select"
 										name="spendManagement"
 										id="spendManagement">
-										<option value="spendTotal">통합</option>
-										<option value="spendSalary">급여</option>
-										<option value="spendUtility">공과금/기타</option>
+										<option value="spendTotal" id="spendTotal">통합</option>
+										<option value="spendSalary" id="spendSalary">급여</option>
+										<option value="spendUtility" id="spendUtility">공과금/기타</option>
 									</select>
 									</span>
 								</form>
@@ -97,6 +97,10 @@
 		if(url == '/spendUtility'){
 			$('#spendUtility').attr('selected', 'selected');
 		} else if(url == '/spendSalary'){
+			$('#spendSalary').attr('selected', 'selected');
+		} else if(url == '/spendUtilityList'){
+			$('#spendUtility').attr('selected', 'selected');
+		} else if(url == '/spendSalaryList'){
 			$('#spendSalary').attr('selected', 'selected');
 		} else {
 			$('#spendTotal').attr('selected', 'selected');

@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.smart.rider.main.dto.SearchDTO;
 import com.smart.rider.main.service.MainService;
 import com.smart.rider.member.dto.MemberDTO;
-import com.smart.rider.shop.dto.SsrHapDTO;
 import com.smart.rider.spend.dto.JoinSalaryDTO;
+import com.smart.rider.spend.dto.SpendAdminDTO;
 import com.smart.rider.spend.service.SalaryService;
-import com.smart.rider.spend.service.UtilityService;
+import com.smart.rider.spend.service.SpendService;
 
 @Controller
 public class SalaryController {
@@ -26,11 +26,12 @@ public class SalaryController {
 	@Autowired
 	private SalaryService salaryService;
 	
-	@Autowired
-	private UtilityService utilityService;
 	
 	@Autowired
 	private MainService mainService;
+	
+	@Autowired
+	private SpendService spendService;
 	
 	/**** 190102 재욱, Update : 지출_급여 수정 ****/
 	@PostMapping("/salaryUpdate")
@@ -167,6 +168,9 @@ public class SalaryController {
 		model.addAttribute("lastPage", lastPage);
 		
 		model.addAttribute("contractShopCode", contractShopCode);
+		
+		List<SpendAdminDTO> list = spendService.spendAdminDetails(contractShopCode);
+		model.addAttribute("shop", list);
 		
 		return "spend/spendSalary";
 	}
