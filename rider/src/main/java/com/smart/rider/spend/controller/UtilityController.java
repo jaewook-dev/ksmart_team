@@ -37,10 +37,25 @@ public class UtilityController {
 	
 	/*** 190926 재욱, 지출_공과금 등록내역 삭제 프로세스 ***/ 
 	@GetMapping("/spendUtilityDelete")
-	public String spendUtilityDelete(@RequestParam(value = "spendUtilityCode") String spendUtilityCode) {
+	public String spendUtilityDelete(@RequestParam(value = "selectShopCode", required = false, defaultValue = "SR0000") String selectShopCode
+									,@RequestParam(value = "spendUtilityCode") String spendUtilityCode
+									,Model model
+									,HttpSession session) {
 		//System.out.println(spendUtilityCode + " <-- spendUtilityCode spendUtilityDelete() UtilityController.java");
+		
+		String contractShopCode = selectShopCode;
+		String userLevel = (String)session.getAttribute("SLEVEL");
+		//System.out.println(contractShopCode + " <-- contractShopCode spendUtilityUpdate() UtilityController.java");
+		
+		if(!userLevel.equals("관리자")) {
+			contractShopCode = (String)session.getAttribute("SCODE");
+			
+			utilityService.utilityDelete(spendUtilityCode);
+			return "redirect:/spendUtility";
+		}
+		
 		utilityService.utilityDelete(spendUtilityCode);
-		return "redirect:/spendUtility";
+		return "redirect:/spendUtility?selectShopCode=" + contractShopCode;
 	}
 	
 	

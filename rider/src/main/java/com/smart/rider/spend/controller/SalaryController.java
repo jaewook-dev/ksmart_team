@@ -45,12 +45,23 @@ public class SalaryController {
 	
 	/**** 190930 재욱, Read : 지출_급여 상세보기 ****/
 	@GetMapping("/spendSalaryDetails")
-	public String spendSalaryDetails(@RequestParam(value = "spendSalaryCode") String spendSalaryCode
-									, HttpSession session
-									, Model model) {
+	public String spendSalaryDetails(@RequestParam(value = "selectShopCode", required = false, defaultValue = "SR0000") String selectShopCode
+									,@RequestParam(value = "spendSalaryCode") String spendSalaryCode
+									,HttpSession session
+									,Model model) {
 		//System.out.println(spendSalaryCode + " <-- spendSalaryCode spendSalaryDetails SalaryController.java");
+		//System.out.println(selectShopCode + " <-- selectShopCode spendSalaryDetails() SalaryController.java");
 		
-		String contractShopCode = (String)session.getAttribute("SCODE");
+		String contractShopCode = selectShopCode;
+		String userLevel = (String)session.getAttribute("SLEVEL");
+		
+		if(!userLevel.equals("관리자")) {
+			contractShopCode = (String)session.getAttribute("SCODE");
+			
+			List<JoinSalaryDTO> list = salaryService.spendSalaryDetails(contractShopCode, spendSalaryCode);
+			model.addAttribute("salaryDetails", list);
+			return "spend/spendSalaryDetails";
+		}
 		
 		List<JoinSalaryDTO> list = salaryService.spendSalaryDetails(contractShopCode, spendSalaryCode);
 		model.addAttribute("salaryDetails", list);
