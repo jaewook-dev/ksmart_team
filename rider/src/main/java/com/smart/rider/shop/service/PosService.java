@@ -11,14 +11,12 @@ import com.smart.rider.member.dto.MemberDTO;
 import com.smart.rider.shop.dto.PosDTO;
 import com.smart.rider.shop.dto.SsrHapDTO;
 import com.smart.rider.shop.mapper.PosMapper;
-import com.smart.rider.shop.mapper.ShopMapper;
 
 @Service
 public class PosService {
 
 	@Autowired
 	private PosMapper posMapper;
-
 	
 	//세션 아이디 값을 대입해서 결과값 얻기
 	public List<SsrHapDTO> getMemberId(String memberId) {

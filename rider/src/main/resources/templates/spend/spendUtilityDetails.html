@@ -28,6 +28,7 @@
 							<!-- 등록내역 상세보기 수정 폼-->
 							<form action="/spendUtilityUpdate" method="post" th:each="list : ${detailsList}">
 								<input type="hidden" th:value="${list.spendUtilityCode}" name="spendUtilityCode">
+								<input type="hidden" th:value="${list.contractShopCode}" name="selectShopCode">
 								<div class="tm-bg-primary-dark">
 									<table class="table">
 										<tr>

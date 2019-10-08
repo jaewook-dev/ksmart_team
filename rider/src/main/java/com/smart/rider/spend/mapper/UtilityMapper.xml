@@ -62,6 +62,7 @@
 	<select id="utilityDetails" parameterType="String" resultMap="joinUtilityMap">
 		SELECT 
 			 su.spend_utility_code
+			,su.contract_shop_code
 			,su.subject_code
 			,su.contract_shop_code
 			,su.spend_utility_pay

@@ -29,8 +29,8 @@
 							<div class="tm-bg-primary-dark tm-block-select">
 								<form action="/spendManagement" method="get" id="spendManagementForm">
 									<input type="hidden" name="selectShopCode" th:value="${contractShopCode}">
-									<span style="float: left">
-										<strong class="tm-block-title text-center"> 지출 관리 </strong>
+									<span style="float: left" th:each="shop : ${shop}">
+										<strong class="tm-block-title text-center" th:text="${shop.shopName}"></strong>
 									</span> 
 									<span style="float: right"> 
 									<select
@@ -64,8 +64,6 @@
 										name="salaryYear"
 										id="salaryYear"
 										><option value="2019" id="2019">2019</option>
-										 <option value="2018" id="2018">2018</option>
-										 <option value="2017" id="2017">2017</option>
 									</select>
 								</span>
 							</form>
@@ -102,7 +100,7 @@
 										<td>
 											<a 
 											class="tm-product-delete-link"
-											th:href="@{/spendSalaryDetails(spendSalaryCode=${list.spendSalaryCode})}"
+											th:href="@{/spendSalaryDetails(spendSalaryCode=${list.spendSalaryCode}, selectShopCode=${list.contractShopCode})}"
 											><i class="fas fa-search" style="color: white"></i> 
 											</a>
 										</td>
@@ -323,11 +321,15 @@
 	
 	$(function() {
 		var url = $(location).attr('pathname');
-		console.log(url);
+		//console.log(url);
 		
 		if(url == '/spendUtility'){
 			$('#spendUtility').attr('selected', 'selected');
 		} else if(url == '/spendSalary'){
+			$('#spendSalary').attr('selected', 'selected');
+		} else if(url == '/spendUtilityList'){
+			$('#spendUtility').attr('selected', 'selected');
+		} else if(url == '/spendSalaryList'){
 			$('#spendSalary').attr('selected', 'selected');
 		} else {
 			$('#spendTotal').attr('selected', 'selected');
@@ -430,25 +432,6 @@
 			$('#salaryInsertForm').submit();
 		}
 	})
-		
-		
-
-	
-	<!-- 연도 선택 화면전환 -->
-	$('#salaryYear').change(function() {
-		$('#selectYearForm').submit();
-	})
-	
-	<!-- 연도 선택 화면 전환 후 select box 고정 -->
-	var selectedYear = [[${selectedYear}]];
-	
-	if(selectedYear == 2018){
-		$('#2018').attr('selected','selected');
-	} else if(selectedYear == 2017){
-		$('#2017').attr('selected','selected');
-	} else{
-		$('#2019').attr('selected','selected');
-	}
 	
 	<!-- 페이징 -->
 	var scriptCurrentPage = [[${currentPage}]];

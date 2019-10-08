@@ -1,6 +1,7 @@
 package com.smart.rider.main.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -15,6 +16,7 @@ public class MainService {
 	
 	@Autowired
 	private MainMapper mainMapper;
+		
 	
 	/*** 190926 재욱, 월별 컬럼의 합 ***/
 	public int[] chartValue(Map<String, Object> map){

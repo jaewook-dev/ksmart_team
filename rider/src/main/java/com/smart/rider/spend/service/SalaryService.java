@@ -33,8 +33,11 @@ public class SalaryService {
 		map.put("contractShopCode", contractShopCode);
 		map.put("spendSalaryCode", spendSalaryCode);
 		
+		//System.out.println(map.toString() + " <-- map.toString() spendSalaryDetails() SalaryService.java");
+		
 		List<JoinSalaryDTO> list = salaryMapper.salaryList(map);
 		//System.out.println(list + " <-- list spendSalaryDetails()  SalaryService.java");
+		
 		return list;
 	}
 	
