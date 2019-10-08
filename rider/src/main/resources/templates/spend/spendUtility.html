@@ -31,8 +31,8 @@
 							<div class="tm-bg-primary-dark tm-block-select">
 								<form action="/spendManagement" method="get" id="spendManagementForm">
 									<input type="hidden" name="selectShopCode" th:value="${contractShopCode}">
-									<span style="float: left">
-										<strong class="tm-block-title text-center"> 지출 관리 </strong>
+									<span style="float: left" th:each="shop : ${shop}">
+										<strong class="tm-block-title text-center" th:text="${shop.shopName}"></strong>
 									</span> 
 									<span style="float: right"> 
 									<select
@@ -56,6 +56,7 @@
 					<div class="col-12 tm-block-col">
 						<div class="tm-bg-primary-dark tm-block-util">
 							<form action="/spendUtility" method="get" id="selectYearForm" name="selectYearForm">
+							<input type="hidden" name="selectShopCode" th:value="${contractShopCode}">
 								<span style="display: inline-block; float: left"> 
 									<strong class="tm-block-title">공과금/기타 지출 현황 </strong>
 								</span> 
@@ -66,8 +67,6 @@
 										name="utilityYear"
 										id="utilityYear"
 										><option value="2019" id="2019">2019</option>
-										 <option value="2018" id="2018">2018</option>
-										 <option value="2017" id="2017">2017</option>
 									</select>
 								</span>
 							</form>
@@ -115,13 +114,9 @@
 											<td style="width: 10%">
 												<a
 												class="tm-product-delete-link"
-												href="#deleteModal"
-												data-toggle="modal" 
-												data-target="#deleteModal"
-												>
-												<!-- 
 												th:href="@{/spendUtilityDelete(spendUtilityCode=${list.spendUtilityCode}, selectShopCode=${param?.selectShopCode?.toString()})}"
-												 -->
+												onclick="return deleteUtility();"
+												>
 												<i class="far fa-trash-alt tm-product-delete-icon"
 													style="color: white;"
 												></i> 
@@ -204,6 +199,7 @@
 						<div class="tm-bg-primary-dark tm-block-spend">
 							<h4 class="tm-block-title">지출 등록</h4>
 							<form action="utilityInsert" method="post" id="utilityInsertForm">
+								<input type="hidden" name="selectShopCode" th:value="${contractShopCode}">
 								<div class="form-group">
 									<label>내역</label> 
 									<select
@@ -327,6 +323,11 @@
 
 	<script th:inline="javascript">
 	
+	function deleteUtility(){
+		return confirm("정말로 삭제하시겠습니까?");
+	}
+	
+	
 	$('#spendManagement').change(function() {
 		$('#spendManagementForm').submit()
 	});
@@ -338,6 +339,10 @@
 		if(url == '/spendUtility'){
 			$('#spendUtility').attr('selected', 'selected');
 		} else if(url == '/spendSalary'){
+			$('#spendSalary').attr('selected', 'selected');
+		} else if(url == '/spendUtilityList'){
+			$('#spendUtility').attr('selected', 'selected');
+		} else if(url == '/spendSalaryList'){
 			$('#spendSalary').attr('selected', 'selected');
 		} else {
 			$('#spendTotal').attr('selected', 'selected');
@@ -404,22 +409,6 @@
 		});
 	})
 	
-	<!-- 연도 선택 화면 전환 후 select box 고정 -->
-	var selectedYear = [[${selectedYear}]];
-	
-	if(selectedYear == 2018){
-		$('#2018').attr('selected','selected');
-	} else if(selectedYear == 2017){
-		$('#2017').attr('selected','selected');
-	} else{
-		$('#2019').attr('selected','selected');
-	}
-	
-	<!-- 연도 선택 화면전환 -->
-	$('#utilityYear').change(function() {
-		$('#selectYearForm').submit();
-	})
-	
 	<!-- datepicker -->
 	//시작 일자 텍스트상자 클릭시 달력 표기 
 	$('#beginDate').datepicker({
@@ -443,9 +432,9 @@
     	var utilityPayCheck = $('#spendUtilityPay').val();
     	
     	if($('#spendUtilityPay').val().length == 0){
-    		alert('공백 입력불가');
+    		alert('공백은 입력할 수 없습니다');
     	} else if (isNaN(utilityPayCheck) == true) {
-    		alert('숫자만 입력하세요');
+    		alert('금액은 숫자만 입력하세요');
 		} else {
 			$('#utilityInsertForm').submit();
 		}

@@ -13,9 +13,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.smart.rider.main.service.MainService;
-import com.smart.rider.shop.dto.SsrHapDTO;
 import com.smart.rider.spend.dto.JoinUtilityDTO;
+import com.smart.rider.spend.dto.SpendAdminDTO;
 import com.smart.rider.spend.dto.UtilityDTO;
+import com.smart.rider.spend.service.SpendService;
 import com.smart.rider.spend.service.UtilityService;
 import com.smart.rider.subject.dto.SubjectDTO;
 
@@ -28,23 +29,54 @@ public class UtilityController {
 	@Autowired
 	private MainService mainService;
 	
+	@Autowired
+	private SpendService spendService;
+	
 	
 	
 	/*** 190926 재욱, 지출_공과금 등록내역 삭제 프로세스 ***/ 
 	@GetMapping("/spendUtilityDelete")
-	public String spendUtilityDelete(@RequestParam(value = "spendUtilityCode") String spendUtilityCode) {
+	public String spendUtilityDelete(@RequestParam(value = "selectShopCode", required = false, defaultValue = "SR0000") String selectShopCode
+									,@RequestParam(value = "spendUtilityCode") String spendUtilityCode
+									,Model model
+									,HttpSession session) {
 		//System.out.println(spendUtilityCode + " <-- spendUtilityCode spendUtilityDelete() UtilityController.java");
+		
+		String contractShopCode = selectShopCode;
+		String userLevel = (String)session.getAttribute("SLEVEL");
+		//System.out.println(contractShopCode + " <-- contractShopCode spendUtilityUpdate() UtilityController.java");
+		
+		if(!userLevel.equals("관리자")) {
+			contractShopCode = (String)session.getAttribute("SCODE");
+			
+			utilityService.utilityDelete(spendUtilityCode);
+			return "redirect:/spendUtility";
+		}
+		
 		utilityService.utilityDelete(spendUtilityCode);
-		return "redirect:/spendUtility";
+		return "redirect:/spendUtility?selectShopCode=" + contractShopCode;
 	}
 	
 	
 	/*** 190926 재욱, 지출_공과금 등록내역 수정 프로세스 ***/ 
 	@PostMapping("/spendUtilityUpdate")
-	public String spendUtilityUpdate(UtilityDTO utilityDTO) {
+	public String spendUtilityUpdate(@RequestParam(value = "selectShopCode", required = false, defaultValue = "SR0000") String selectShopCode
+									,UtilityDTO utilityDTO
+									,HttpSession session) {
 		//System.out.println(utilityDTO.toString() + " <-- utilityDTO.toString() spendUtilityUpdate() UtilityController.java");
+		
+		String contractShopCode = selectShopCode;
+		String userLevel = (String)session.getAttribute("SLEVEL");
+		
+		if(!userLevel.equals("관리자")) {
+			contractShopCode = (String)session.getAttribute("SCODE");
+			
+			utilityService.utilityUpdate(utilityDTO);
+			return "redirect:/spendUtility";
+		}
+		
 		utilityService.utilityUpdate(utilityDTO);
-		return "redirect:/spendUtility";
+		return "redirect:/spendUtility?selectShopCode=" + contractShopCode;
 	}
 
 	
@@ -134,6 +166,8 @@ public class UtilityController {
 		
 		model.addAttribute("contractShopCode", contractShopCode);
 		
+		List<SpendAdminDTO> list = spendService.spendAdminDetails(contractShopCode);
+		model.addAttribute("shop", list);
 		
 		return "spend/spendUtility";
 	}
@@ -215,6 +249,9 @@ public class UtilityController {
 
 		model.addAttribute("contractShopCode", contractShopCode);
 		
+		List<SpendAdminDTO> list = spendService.spendAdminDetails(contractShopCode);
+		model.addAttribute("shop", list);
+		
 		return "spend/spendUtility";
 	}
 
@@ -222,27 +259,25 @@ public class UtilityController {
 	/*** 190925 재욱, 지출_공과금 내역 등록 ***/
 	@PostMapping("/utilityInsert")
 	public String utilityInsert(@RequestParam(value = "subjectCode") String subjectCode
-							  , @RequestParam(value = "masterShopCode", required = false, defaultValue = "SR0000") String masterShopCode
+							  , @RequestParam(value = "selectShopCode", required = false, defaultValue = "SR0000") String selectShopCode
 							  , UtilityDTO utilityDTO
 							  , HttpSession session) {
 		
-		String contractShopCode = (String)session.getAttribute("SCODE");
+		String contractShopCode = selectShopCode;
 		String userLevel = (String)session.getAttribute("SLEVEL");
-		//System.out.println(subjectCode + " <-- subjectCode utilityInsert UtilityController.java");
-		//System.out.println(utilityDTO.getSpendUtilityPay() + " <-- getSpendUtilityPay() utilityInsert UtilityController.java");
-		//System.out.println(utilityDTO.getSpendUtilityContents() + " <-- getSpendUtilityContents() utilityInsert UtilityController.java");
+		//System.out.println(contractShopCode + " <-- contractShopCode utilityInsert() UtilityController.java");
 		
-		/*** 190926 재욱, 관리자 권한으로 계약된 매장 내역 ***/
-		if(userLevel.equals("관리자")) {
-			contractShopCode = masterShopCode;
+		if(!userLevel.equals("관리자")) {
+			contractShopCode = (String)session.getAttribute("SCODE");
+			
 			utilityService.utilityInsert(utilityDTO, contractShopCode);
-			return "redirect:/spendUtility?selectShopCode=" + contractShopCode;
+			return "redirect:/spendUtility";
 		}
 		
 		
 		utilityService.utilityInsert(utilityDTO, contractShopCode);
 
-		return "redirect:/spendUtility";
+		return "redirect:/spendUtility?selectShopCode=" + contractShopCode;
 	}
 
 }

@@ -11,15 +11,12 @@ import com.smart.rider.member.dto.MemberDTO;
 import com.smart.rider.shop.dto.PosDTO;
 import com.smart.rider.shop.dto.SsrHapDTO;
 import com.smart.rider.shop.mapper.PosMapper;
-import com.smart.rider.shop.mapper.ShopMapper;
 
 @Service
 public class PosService {
 
 	@Autowired
 	private PosMapper posMapper;
-	@Autowired
-	private ShopMapper shopMapper;
 	
 	//세션 아이디 값을 대입해서 결과값 얻기
 	public List<SsrHapDTO> getMemberId(String memberId) {
@@ -42,15 +39,20 @@ public class PosService {
 	public List<PosDTO> getPosList(HttpSession session){
 		//로그인 된 권한 확인
 		String level = (String)session.getAttribute("SLEVEL");
-		System.out.println(level + "로그인된 아이디의 권한 확인");
+		//System.out.println(level + "로그인된 아이디의 권한 확인");
 		//로그인 된 아이디 확인
 		String sid =(String)session.getAttribute("SID");
-		System.out.println(sid + "로그인된 아이디 확인");
+		//System.out.println(sid + "로그인된 아이디 확인");
 		//로그인된 아이디로 계약매장코드 가져오기
 		List<SsrHapDTO> ssrList = posMapper.getMemberId(sid);
 		System.out.println(ssrList + "ssrList에 담긴 값 확인");
-		String contractShopCode  = ssrList.get(0).getContractShopCode();
-		System.out.println(contractShopCode);
+		//값이 없을 경우
+		String contractShopCode  = null;
+		if(ssrList.size() != 0) {
+		contractShopCode  = ssrList.get(0).getContractShopCode();
+		//System.out.println(contractShopCode);
+		}
+		
 		return posMapper.getPosList(contractShopCode,level);
 	}
 	

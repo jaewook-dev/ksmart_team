@@ -132,15 +132,18 @@ public class SpendController {
 		
 		model.addAttribute("contractShopCode", contractShopCode);
 		
+		List<SpendAdminDTO> list = spendService.spendAdminDetails(contractShopCode);
+		model.addAttribute("shop", list);
+		
 		return "spend/spendTotal";
 	}
 	
 	
 	/**** 191004 재욱, Modal ajax 호출, 관리자 확인 카운트, 2일 때 관리자 비밀번호와 점주 생년월일 일치 ****/
 	@RequestMapping(value = "/adminCheck") // 요청에 반응하는 url
-	public @ResponseBody int adminCheck(String contractShopCode, String memberBirth, String adminPw) {
+	public @ResponseBody int adminCheck(String contractShopCode, String memberBirth, String adminPw, String memberId) {
 		//System.out.println(contractShopCode + memberBirth + adminPw + " <-- check adminCheck() SpendController.java" );
-		int result = spendService.spendAdminCheck(contractShopCode, memberBirth, adminPw); // DB 조회 결과
+		int result = spendService.spendAdminCheck(contractShopCode, memberBirth, memberId,adminPw); // DB 조회 결과
 		//System.out.println(result + " <-- result adminCheck() SpendController.java"); 
 		
 		return result;

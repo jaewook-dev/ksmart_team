@@ -86,27 +86,27 @@ public class ShopController {
 	}
 	
 	//상세보기에서 검색시
-		@PostMapping("/shopSearchList")
-		public String shopSearchList(SearchDTO search, Model model) {
-			System.out.println(search + "<-- 담겨있는값 ");
-			Map<String,Object> map = shopService.shopSearchList(search);
-			// model에 값 넣기
-			@SuppressWarnings("unchecked")
-			List<ShopDTO> shopListYes = (List<ShopDTO>)map.get("shopSearchListYes");
-			@SuppressWarnings("unchecked")
-			List<ShopDTO> shopListNo = (List<ShopDTO>)map.get("shopSearchListNo");
-			System.out.println(shopListYes +"<--삭제가능리스트 확인");
-			System.out.println(shopListNo +"<--삭제불가능리스트 확인");
-			//model에 대입값 넣기
-			model.addAttribute("shopListYes", shopListYes);
-			model.addAttribute("shopListNo", shopListNo);
-			//조회 결과가 없으면 나오는 문장
-			if(shopListYes.size()  == 0  && shopListNo.size() == 0) {
-				model.addAttribute("alert", "검색 결과가 없습니다");
-			}
-				
-			return "shop/shopList";
+	@PostMapping("/shopSearchList")
+	public String shopSearchList(SearchDTO search, Model model) {
+		System.out.println(search + "<-- 담겨있는값 ");
+		Map<String,Object> map = shopService.shopSearchList(search);
+		// model에 값 넣기
+		@SuppressWarnings("unchecked")
+		List<ShopDTO> shopListYes = (List<ShopDTO>)map.get("shopSearchListYes");
+		@SuppressWarnings("unchecked")
+		List<ShopDTO> shopListNo = (List<ShopDTO>)map.get("shopSearchListNo");
+		System.out.println(shopListYes +"<--삭제가능리스트 확인");
+		System.out.println(shopListNo +"<--삭제불가능리스트 확인");
+		//model에 대입값 넣기
+		model.addAttribute("shopListYes", shopListYes);
+		model.addAttribute("shopListNo", shopListNo);
+		//조회 결과가 없으면 나오는 문장
+		if(shopListYes.size()  == 0  && shopListNo.size() == 0) {
+			model.addAttribute("alert", "검색 결과가 없습니다");
 		}
+			
+		return "shop/shopList";
+	}
 	
 	//매장 목록 5개씩 보여주기
 	@GetMapping("/shop")

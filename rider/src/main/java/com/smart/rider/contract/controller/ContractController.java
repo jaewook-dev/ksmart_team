@@ -40,10 +40,12 @@ public class ContractController {
 		model.addAttribute("agreement", contractService.agreementList());
 		List<UnitDTO>  UnitDTO = contractService.unitNew();
 		//최근 계약 단가표 코드 session으로 받아오기
-		String getContractUnitCode = UnitDTO.get(0).getContractUnitCode();
+		String getContractUnitCode = null;
+		if(UnitDTO.size() != 0) {
+		getContractUnitCode = UnitDTO.get(0).getContractUnitCode();
 		System.out.println(getContractUnitCode + "<--최근 단가표 값 받는가 확인");
 		session.setAttribute("SCUC",getContractUnitCode);
-			
+		}
 		return "/contract/agreement";
 	}
 	
@@ -57,8 +59,9 @@ public class ContractController {
 		
 		return "contract/contractList";
 	}
+
 	
-	//계약단가표 생성화면
+	//계약 생성화면
 	@GetMapping("/contractInsert")
 	public String contractInsert(Model model){
 		List<UnitDTO> contractInsert =   contractService.unitNew();
@@ -69,7 +72,7 @@ public class ContractController {
 		return "/contract/contractInsert";
 	}
 	
-	//계약단가표 생성하기
+	//계약 생성하기
 	@PostMapping("/contractInsert")
 	public String contractInsert(ContractDTO contract,HttpSession session,ManagementDTO management) {
 		System.out.println(contract.toString() + "<-- contract.toString");
