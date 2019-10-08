@@ -24,4 +24,8 @@ public interface WorkMapper {
 	public int getWorkAllCount(String contractShopCode);
 	
 	public List<WorkDTO> searchWork(Map<String, Object> map);
+	
+	public int getSearchAllCount(String contractShopCode, String select, String searchInput, String beginDate, String endDate);
+	
+	public List<WorkDTO> searchTotalWork(String select, String searchInput, String beginDate, String endDate);
 }

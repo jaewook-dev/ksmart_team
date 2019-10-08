@@ -51,7 +51,7 @@ public class MemberService {
 		}
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		resultMap.put("list", memberMapper.memberList(map));
-		System.out.println(memberMapper.memberList(map) + "<-----");
+		//System.out.println(memberMapper.memberList(map) + "<-----");
 		resultMap.put("currentPage", currentPage);
 		resultMap.put("lastPage", lastPage);
 		resultMap.put("startPageNum", startPageNum);
@@ -71,7 +71,7 @@ public class MemberService {
 		return memberMapper.memberUpdate(memberdto);
 	}
 	public Map<String, Object> searchMember(int currentPage, String select, String searchInput, String beginDate, String endDate, String shopCode) {
-		System.out.println(beginDate+"<--시작날짜");
+		//System.out.println(beginDate+"<--시작날짜");
 		//페이지 구성 할 행의 갯수
 		final int rowPerPage = 10;
 		//보여줄 첫번째 페이지번호 초기화
@@ -105,7 +105,7 @@ public class MemberService {
 		}
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		resultMap.put("list", memberMapper.searchMember(map));
-		System.out.println(memberMapper.searchMember(map) + "<-----");
+		//System.out.println(memberMapper.searchMember(map) + "<-----");
 		resultMap.put("currentPage", currentPage);
 		resultMap.put("lastPage", lastPage);
 		resultMap.put("startPageNum", startPageNum);

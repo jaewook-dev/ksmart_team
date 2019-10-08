@@ -41,10 +41,11 @@
 			<div class="row tm-content-row">
 				<div class="col tm-block-col">
 					<div class="tm-bg-primary-dark tm-block tm-block-h-auto-copy">
-						<form action="#" class="tm-search-form row" method="post">
+						<form action="/searchWork" class="tm-search-form row" method="post">
+							<input type="hidden" id="contractShopCode" name="contractShopCode" th:value="${session.SCODE}">
 							<div class="form-group col-3">
 								<select class="custom-select" name="searchDate">
-									<option value="subject_date">등록일자</option>
+									<option value="w.work_date">등록일자</option>
 								</select>
 							</div>
 							<div class="form-group col-3">
@@ -63,8 +64,7 @@
 							
 							<div class="form-group col-3">
 								<select class="custom-select" name="select">
-									<option value="0">Select</option>
-									<option value="member_name">이름</option>
+									<option value="m.member_name">이름</option>
 								</select>
 							</div>
 							<div class="form-group col-7">
@@ -82,10 +82,10 @@
 			
 			<div class="row tm-content-row">
 				
-				<!-------------------------------------------- 근태 리스트 ------------------------------------------------------------>
+				<!-------------------------------------------- 근태 리스트 ------------------------------------------------------->
 				<div class="col-8 tm-block-col">
 					<div class="col-lx tm-bg-primary-dark tm-block-sub tm-block-scroll">
-						<table class="table">
+						<table class="table" id="tableWork">
 							<thead>
 								<tr>
 									<th scope="col">이름</th>
@@ -93,7 +93,6 @@
 									<th scope="col">출근시간</th>
 									<th scope="col">퇴근시간</th>
 									<th scope="col">일근무시간</th>
-									<th scope="col">휴무일</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -103,7 +102,6 @@
 									<th th:text="${workList.workStart}"></th>
 									<th th:text="${workList.workFinish}"></th>
 									<th th:text="${workList.workToday}"></th>
-									<th th:text="${workList.workRest}"></th>
 								</tr>
 							</tbody>
 						</table>
@@ -111,7 +109,7 @@
 						<hr>
 						<div class="text-center">
 						<!-- 맨처음 -->
-						<a class="text-white" th:href="@{/workList}">[처음]</a>
+						
 						<!-- 이전 -->
 						<a class="text-white" th:if="${currentPage > 1}" 
 						   th:href="@{/workList(currentPage=${currentPage - 1})}">[이전]</a>
@@ -124,13 +122,13 @@
 						<a class="text-white" th:if="${currentPage < lastPage}" 
 						   th:href="@{/memberList(currentPage=${currentPage + 1})}">[다음]</a>
 						<!-- 맨마지막 -->
-						<a class="text-white" th:href="@{/workList(currentPage=${lastPage})}">[마지막]</a>
+						
 						</div>					
 					</div>
 				</div>
 				<div class="col-4 tm-block-col">
 					<div class="col-lx tm-bg-primary-dark tm-block-sub">
-					
+						
 					</div>
 				</div>
 			</div>

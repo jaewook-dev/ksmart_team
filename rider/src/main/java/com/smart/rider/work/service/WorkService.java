@@ -1,6 +1,7 @@
 package com.smart.rider.work.service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -107,9 +108,13 @@ public class WorkService{
 		map.put("startRow", startRow);
 		map.put("rowPerPage", rowPerPage);
 		map.put("contractShopCode", contractShopCode);
+		map.put("select", select);
+		map.put("searchInput", searchInput);
+		map.put("beginDate", beginDate);
+		map.put("endDate", endDate);
 		
 		//전체행의 갯수를 가져오는 쿼리
-		double workCount = workMapper.getWorkAllCount(contractShopCode);
+		double workCount = workMapper.getSearchAllCount(contractShopCode, select, searchInput, beginDate, endDate);
 							//올림함수 소수점이있으면 무조건 올림
 		int lastPage = (int)(Math.ceil(workCount/rowPerPage));
 		
@@ -117,11 +122,17 @@ public class WorkService{
 			lastPageNum = lastPage;
 		}
 		Map<String, Object> resultMap = new HashMap<String, Object>();
-		resultMap.put("list", workMapper.workList(map));
+		resultMap.put("list", workMapper.searchWork(map));
 		resultMap.put("currentPage", currentPage);
 		resultMap.put("lastPage", lastPage);
 		resultMap.put("startPageNum", startPageNum);
 		resultMap.put("lastPageNum", lastPageNum);
 		return resultMap;
+	}
+	public List<WorkDTO> searchTotalWork(String select, String searchInput, String beginDate, String endDate) {
+		
+		System.out.println(workMapper.searchTotalWork(select, searchInput, beginDate, endDate) + "<---total할것");
+		
+		return workMapper.searchTotalWork(select, searchInput, beginDate, endDate);
 	}
 }

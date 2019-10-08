@@ -87,4 +87,22 @@ public class WorkController {
 		workService.leaveInsert(workdto);
 		return "redirect:/workSuccess";
 	}
+	@PostMapping("/searchWork")
+	public String searchMember(@RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage
+							  ,@RequestParam(value="contractShopCode") String contractShopCode
+							  ,@RequestParam(value="select") String select
+							  ,@RequestParam(value="searchInput") String searchInput
+							  ,@RequestParam(value="beginDate") String beginDate
+							  ,@RequestParam(value="endDate") String endDate
+							  ,Model model) {
+		System.out.println(beginDate + "~" + endDate + "<----날짜검색");
+		model.addAttribute("totalWork", workService.searchTotalWork(select, searchInput, beginDate, endDate));
+		Map<String, Object> map = workService.searchWork(currentPage, contractShopCode, select, searchInput, beginDate, endDate);
+		model.addAttribute("workList", map.get("list"));
+		model.addAttribute("currentPage", map.get("currentPage"));
+		model.addAttribute("lastPage", map.get("lastPage"));
+		model.addAttribute("startPageNum", map.get("startPageNum"));
+		model.addAttribute("lastPageNum", map.get("lastPageNum"));
+		return "work/workAdmin";
+	}
 }

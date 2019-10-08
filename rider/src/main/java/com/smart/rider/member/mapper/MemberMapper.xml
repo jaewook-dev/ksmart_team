@@ -27,7 +27,7 @@
 			,NOW()
 			,NOW())
 	</insert>
-	<select id="memberList" resultType="com.smart.rider.member.dto.MemberDTO">
+	<select id="memberList" parameterType="map" resultType="com.smart.rider.member.dto.MemberDTO">
 		SELECT 
 			 member_id 			AS memberId
 			,member_pw 			AS memberPw
@@ -80,7 +80,7 @@
 		WHERE
 			member_id = #{memberId}
 	</update>
-	<select id="searchMember" resultType="com.smart.rider.member.dto.MemberDTO">
+	<select id="searchMember" parameterType="map" resultType="com.smart.rider.member.dto.MemberDTO">
 		SELECT 
 			 member_id 			AS memberId
 			,member_pw 			AS memberPw

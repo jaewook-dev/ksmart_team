@@ -51,14 +51,14 @@ public class MemberController {
 	@RequestMapping(value = "/memberIdCheck", method = RequestMethod.POST)
 	@ResponseBody
 	public String idCheck(@RequestParam("memberId") String memberId) {
-		System.out.println(memberId + "<--memberId 중복체크");
+		//System.out.println(memberId + "<--memberId 중복체크");
 		int result = memberService.memberIdCheck(memberId);
 		return String.valueOf(result);
 	}
 
 	@GetMapping("/getMemberList")
 	public String getMemberList(@RequestParam(value="memberId") String memberId, Model model) {
-		System.out.println(memberId + "<--상세보기id");
+		//System.out.println(memberId + "<--상세보기id");
 		model.addAttribute("memberList", memberService.getMemberList(memberId));
 
 		return "member/memberUpdate";
@@ -77,15 +77,14 @@ public class MemberController {
 							  ,@RequestParam(value="endDate") String endDate
 							  ,@RequestParam(value="shopCode") String shopCode
 							  ,Model model) {
-		System.out.println(shopCode +"<---검색매장");
+		//System.out.println(shopCode +"<---검색매장");
+		model.addAttribute("utilityShop", memberService.utilityShop());
 		Map<String, Object> map = memberService.searchMember(currentPage, select, searchInput, beginDate, endDate, shopCode);
 		model.addAttribute("memberList", map.get("list"));
 		model.addAttribute("currentPage", map.get("currentPage"));
 		model.addAttribute("lastPage", map.get("lastPage"));
 		model.addAttribute("startPageNum", map.get("startPageNum"));
 		model.addAttribute("lastPageNum", map.get("lastPageNum"));
-		//List<MemberDTO> search = memberService.searchMember(select, searchInput, beginDate, endDate);
-		//model.addAttribute("memberList", search);
 		return "member/memberList";
 	}
 	//19.09.18작성
@@ -98,7 +97,7 @@ public class MemberController {
 	//19.09.20작성
 	@GetMapping("/memberDelete")
 	public String memberDelete(@RequestParam(value="memberId") String memberId, Model model) {
-		System.out.println(memberId + "<--딜리트 아이디");
+		//System.out.println(memberId + "<--딜리트 아이디");
 		model.addAttribute("memberId", memberId);
 		return "/member/memberDelete";
 	}
@@ -115,7 +114,7 @@ public class MemberController {
 	}
 	@GetMapping("/levelDelete")
 	public String levelDelete(@RequestParam(value="memberId") String memberId, Model model) {
-		System.out.println(memberId + "<--바로 삭제할 아이디");
+		//System.out.println(memberId + "<--바로 삭제할 아이디");
 		model.addAttribute("deleteMember", memberService.levelDelete(memberId));
 		return "redirect:/memberList";
 	}

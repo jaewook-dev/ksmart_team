@@ -101,6 +101,7 @@ $('#memberPw2').blur(function(){
 function sendIt() {
 	var getCheck= RegExp(/^[a-zA-Z0-9]{4,12}$/);
 	var getName= RegExp(/^[가-힣]+$/);
+	var getNumber= RegExp(/^[0-9]+/g);
 	var getMail = RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/);
 	//아이디
 	if(!getCheck.test($("#memberId").val())){
@@ -126,6 +127,20 @@ function sendIt() {
 		alert("이름이 올바르지 않습니다.");
 		$("#memberName").val("");
 		$("#memberName").focus();
+		return false;
+	}
+	//생년월일
+	if(!getNumber.test($("#memberPhone").val())) {
+		alert("생년월일은 숫자만 입력해주세요!");
+		$("#memberBirth").val("");
+		$("#memberBirth").focus();
+		return false;
+	}
+	//전화번호
+	if(!getNumber.test($("#memberPhone").val())) {
+		alert("전화번호는 숫자만 입력해주세요!");
+		$("#memberPhone").val("");
+		$("#memberPhone").focus();
 		return false;
 	}
 	//이메일

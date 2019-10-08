@@ -97,7 +97,7 @@
 										</a>
 									</td>
 									<td class="text-center">
-										<button class="tm-product-delete-link" 
+										<button class="tm-product-delete-link" type="button"
 												id="deleteLink" data-toggle="modal" data-target="#deleteModal" th:value="${member.memberId}" style="cursor:pointer">
 											<i class="far fa-trash-alt tm-product-delete-icon"></i>
 										</button>
@@ -109,7 +109,7 @@
 						<!--------------------------------------------- 페이지 버튼 ---------------------------------------------->
 						<div class="text-center">
 						<!-- 맨처음 -->
-						<a class="text-white" th:href="@{/memberList}">[처음]</a>
+						
 						<!-- 이전 -->
 						<a class="text-white" th:if="${currentPage > 1}" 
 						   th:href="@{/memberList(currentPage=${currentPage - 1})}">[이전]</a>
@@ -122,7 +122,7 @@
 						<a class="text-white" th:if="${currentPage < lastPage}" 
 						   th:href="@{/memberList(currentPage=${currentPage + 1})}">[다음]</a>
 						<!-- 맨마지막 -->
-						<a class="text-white" th:href="@{/memberList(currentPage=${lastPage})}">[마지막]</a>
+						
 						</div>
 						
 					</div>
