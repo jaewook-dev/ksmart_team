@@ -9,7 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.smart.rider.contract.dto.AgreementDTO;
 import com.smart.rider.contract.dto.ContractDTO;
 import com.smart.rider.contract.dto.ManagementDTO;
 import com.smart.rider.contract.dto.UnitDTO;
@@ -33,11 +35,13 @@ public class ContractController {
 	}
 	//계약쪽 화면
 	@GetMapping("/agreement")
-	public String agreement(Model model,HttpSession session) {
+	public String agreementList(Model model,HttpSession session) {
 		//입력값 확인
 		//System.out.println("=====test=====");
 		//System.out.println("agreement:"+contractService.agreementList());
 		model.addAttribute("agreement", contractService.agreementList(session));
+		model.addAttribute("SLEVEL", (String)session.getAttribute("SLEVEL"));
+		model.addAttribute("size", contractService.agreementList(session).size());
 		List<UnitDTO>  UnitDTO = contractService.unitNew();
 		//최근 계약 단가표 코드 session으로 받아오기
 		String getContractUnitCode = null;
@@ -46,6 +50,7 @@ public class ContractController {
 		//System.out.println(getContractUnitCode + "<--최근 단가표 값 받는가 확인");
 		session.setAttribute("SCUC",getContractUnitCode);
 		}
+		
 		return "/contract/agreement";
 	}
 	
@@ -56,7 +61,7 @@ public class ContractController {
 		//System.out.println("=====test=====");
 		//System.out.println("contractList:"+contractList);
 		model.addAttribute("contractList", contractList);
-		
+
 		return "contract/contractList";
 	}
 
@@ -81,6 +86,17 @@ public class ContractController {
 		return "redirect:/contractList";
 	}
 	
+	@GetMapping("/agreementList")
+	public String getAgreementList(@RequestParam(value="contractCode")String contractCode,Model model) {
+		//넘어오는코드 값 확인
+		System.out.println("계약코드값 : " + contractCode);
+		//대입결과 확인
+		List<AgreementDTO> getAgreementList = contractService.getAgreementList(contractCode);
+		//System.out.println("getAgreementList 값 : " + getAgreementList);
+		model.addAttribute("getAgreementList", getAgreementList);
+		
+		return "contract/agreementList";
+	}
 
 	
 	

@@ -41,4 +41,36 @@
 			COUNT(*)
 		FROM rental_customer
 	</select>
+	<!-- 코드 자동증가 -->
+	<select id="customerCodeCount" resultType="String">
+		SELECT 
+			MAX(LPAD(RIGHT(rental_customer_code, 4)+1, '4' , '0')) 
+		FROM rental_customer;
+	</select>
+	<insert id="customerInsert" parameterType="com.smart.rider.customer.dto.CustomerDTO">
+		INSERT INTO rental_customer(
+			 rental_customer_code
+			,contract_shop_code
+			,goods_rental_code
+			,rental_customer_name
+			,rental_customer_address
+			,rental_customer_phone
+			,rental_customer_start
+			,rental_customer_finish
+			,rental_customer_overdue
+			,rental_customer_date
+			,rental_customer_return
+		)VALUES (
+			 #{rentalCustomerCode}
+			,#{contractShopCode}
+			,#{goodsRentalCode}
+			,#{rentalCustomerName}
+			,#{rentalCustomerAddress}
+			,#{rentalCustomerPhone}
+			,#{rentalCustomerStart}
+			,#{rentalCustomerFinish}
+			,'무'
+			,NOW()
+			,0)
+	</insert>
 </mapper>

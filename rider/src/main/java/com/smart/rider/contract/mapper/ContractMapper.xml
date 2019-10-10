@@ -68,23 +68,56 @@
 	 	    ,NOW()) 	    
 	</insert>
 	
-	<!-- 계약된 매장 목록 -->
-	<select id="agreementList" parameterType="String" resultType="com.smart.rider.contract.dto.ContractMemberDTO">
+	<!-- 계약 내용 -->
+	<select id="agreementList" parameterType="String" resultType="com.smart.rider.contract.dto.AgreementDTO">
 		SELECT 
-		contract.
-			 member_id AS memberId
-			,contract_start AS contractStart
-			,contract_finish AS contractFinish
-			,contract_valid_date AS contractValidDate
-		,member.
-			 member_id 			AS memberId
-			,member_name		AS memberName
-			,member_phone 		AS memberPhone
-		from contract inner join member
-		on contract.member_id =member.member_id
+			c.member_id AS memberId
+			,c.contract_code AS contractCode
+			,c.contract_start AS contractStart
+			,c.contract_finish AS contractFinish
+			,c.contract_valid_date AS contractValidDate
+			,m.member_id AS memberId
+			,m.member_phone AS memberPhone
+			,m.member_name AS memberName
+			,cm.contract_code AS contractCode
+			,cm.contract_management_amout AS contractManagementAmout
+			,cm.contract_management_unpaid AS contractManagementUnpaid
+			,cm.contract_management_state AS contractManagementState
+			,cm.contract_management_contents AS contractManagementContents
+			from contract c inner join member m INNER JOIN contract_management cm
+			ON c.member_id = m.member_id
+			and c.contract_code = cm.contract_code
 		<if test="memberLevel neq '관리자'.toString()">
-			WHERE contract.member_id = #{memberId}
+		WHERE 
+			c.member_id = #{memberId}
 		</if>
 	</select>
+	
+	<!-- 계약 내용 및 납부 현황 -->
+	<select id="getAgreementList" parameterType="String" resultType="com.smart.rider.contract.dto.AgreementDTO">
+		SELECT 
+			c.member_id AS memberId
+			,c.contract_code AS contractCode
+			,c.contract_start AS contractStart
+			,c.contract_finish AS contractFinish
+			,c.contract_valid_date AS contractValidDate
+			,m.member_id AS memberId
+			,m.member_phone AS memberPhone
+			,m.member_name AS memberName
+			,cm.contract_code AS contractCode
+			,cm.contract_management_amout AS contractManagementAmout
+			,cm.contract_management_unpaid AS contractManagementUnpaid
+			,cm.contract_management_state AS contractManagementState
+			,cm.contract_management_contents AS contractManagementContents
+			from contract c inner join member m INNER JOIN contract_management cm
+			ON c.member_id = m.member_id
+			and c.contract_code = cm.contract_code
+			WHERE c.contract_code = #{agreementCode};
+	</select>
+	
+	
+	
+	
+	
 </mapper>
 

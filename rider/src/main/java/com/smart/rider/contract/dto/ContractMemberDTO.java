@@ -4,6 +4,7 @@ package com.smart.rider.contract.dto;
 //리스트를 조회하기위해 만든 DTO(db랑 관련 없음)
 public class ContractMemberDTO {
 	
+	private String contractCode;
 	private String memberId;
 	private String contractStart;
 	private String contractFinish;
@@ -11,6 +12,12 @@ public class ContractMemberDTO {
 	private String memberName;
 	private String memberPhone;
 	
+	public String getContractCode() {
+		return contractCode;
+	}
+	public void setContractCode(String contractCode) {
+		this.contractCode = contractCode;
+	}
 	public String getMemberId() {
 		return memberId;
 	}
@@ -47,14 +54,18 @@ public class ContractMemberDTO {
 	public void setMemberPhone(String memberPhone) {
 		this.memberPhone = memberPhone;
 	}
-	
 	@Override
 	public String toString() {
-		return "ContractMemberDTO [memberId=" + memberId + ", contractStart=" + contractStart + ", contractFinish="
-				+ contractFinish + ", contractValidDate=" + contractValidDate + ", memberName=" + memberName
-				+ ", memberPhone=" + memberPhone + "]";
+		return "ContractMemberDTO [contractCode=" + contractCode + ", memberId=" + memberId + ", contractStart="
+				+ contractStart + ", contractFinish=" + contractFinish + ", contractValidDate=" + contractValidDate
+				+ ", memberName=" + memberName + ", memberPhone=" + memberPhone + "]";
 	}
 
 	
-	
+
+
+
+
+
+
 }
