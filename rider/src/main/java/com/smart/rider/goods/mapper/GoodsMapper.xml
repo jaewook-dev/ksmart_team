@@ -3,6 +3,22 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.smart.rider.goods.mapper.GoodsMapper">
+
+	<!-- 판매매출등록시 상품 판매유무 상태 변경쿼리  -->
+	<update id="goodsSalesUpdate" parameterType="com.smart.rider.goods.dto.GoodsDTO">
+ 		 		UPDATE goods				
+				SET 
+ 				goods_state = '없음'
+				,goods_rental = '대여불가'		
+ 				,goods_completion_state='판매완료'
+ 				,goods_rental_state = '대여불가'
+				 		
+ 				
+ 		
+ 		WHERE goods_code=#{goodsCode}
+ 		
+	</update>
+
 	<!-- 삭제가능상품 상세보기  -->
 	<select id="yesGoodsList" resultMap="ASid">
 		SELECT	
