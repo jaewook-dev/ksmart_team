@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.smart.rider.contract.dto.AgreementDTO;
 import com.smart.rider.contract.dto.ContractDTO;
 import com.smart.rider.contract.dto.ContractMemberDTO;
 import com.smart.rider.contract.dto.UnitDTO;
@@ -24,6 +25,8 @@ public interface ContractMapper {
 	public int contractInsert(ContractDTO Contract);
 	
 	//계약된 매장 목록
-	public List<ContractMemberDTO> agreementList(String memberId,String memberLevel);
+	public List<AgreementDTO> agreementList(String memberId,String memberLevel);
 	
+	//계약 내용 및 계약금 납부 현황 보기
+	public List<AgreementDTO> getAgreementList(String agreementCode);
 }

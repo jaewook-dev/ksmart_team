@@ -3,6 +3,8 @@ package com.smart.rider.customer.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -56,8 +58,17 @@ public class CustomerController {
 	}
 	//19.10.10 작성 대여상품 리스트가져오기
 	@GetMapping("/rentalGoodsList")
-	public String rentalGoodsList(Model model) {
-		List<GoodsHapDTO> rList = goodsRentalService.goodsRentalList();
+	public String rentalGoodsList(Model model,HttpSession session) {
+		String select = null;
+		String searchInput = "";
+		String beginDate = "";
+		String endDate = "";
+		String SCODE = (String)session.getAttribute("SCODE");
+		String SLEVEL = (String)session.getAttribute("SLEVEL");
+		Map<String, Object> map = goodsRentalService.goodsRentalList(select, searchInput, beginDate, endDate, SCODE, SLEVEL);
+		@SuppressWarnings("unchecked")
+		List<GoodsHapDTO> rList = (List<GoodsHapDTO>)map.get("rList");
+		
 		model.addAttribute("rList", rList);
 		return "customer/rentalGoodsList";
 	}

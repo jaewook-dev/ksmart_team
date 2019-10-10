@@ -58,7 +58,7 @@ public class AccountService {
 		}
 		//AccountDTO 매입거래처 코드 담기
 		account.setAccountCode(accountCode);
-		System.out.println(account.getAccountCode()+"<--값 담겨있는지 확인");
+		//System.out.println(account.getAccountCode()+"<--값 담겨있는지 확인");
 		
 		return accountmapper.accountInsert(account);
 	}
@@ -70,8 +70,8 @@ public class AccountService {
 		//로그인한 계약매장코드 값과 권한 가져오기
 		String sCode = (String)session.getAttribute("SCODE");
 		String sLevel = (String)session.getAttribute("SLEVEL");
-		System.out.println(sCode + "세션 코드 입력값");
-		System.out.println(sLevel + "세션 권한 입력값");
+		//System.out.println(sCode + "세션 코드 입력값");
+		//System.out.println(sLevel + "세션 권한 입력값");
 		//권한 확인
 		if(sLevel.equals("관리자")) {
 			//map 넣을 내용을 String,Object 형식으로 넣어준다.

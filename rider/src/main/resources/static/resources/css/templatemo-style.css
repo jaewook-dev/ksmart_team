@@ -5,6 +5,18 @@ Product Admin CSS Template
 https://templatemo.com/tm-524-product-admin
 
 */
+.modal-dialog.modal-fullsize {
+  width: 100%;
+  height: 100%;
+  margin: 20;
+  padding: 0;
+}
+.modal-content.modal-fullsize {
+  height: 80%;
+  min-height: 80%;
+  border-radius: 20; 
+}
+
 
 html {
   font-size: 16px;
@@ -167,6 +179,15 @@ button:focus {
   min-height: 475px;
   height: 100%;
   max-height: 475px;
+}
+.tm-block-jjw {
+  padding: 40px;
+  -webkit-box-shadow: 1px 1px 5px 0 #455c71;
+  -moz-box-shadow: 1px 1px 5px 0 #455c71;
+  box-shadow: 1px 1px 5px 0 #455c71;
+  min-height: 300px;
+  height: 100%;
+  max-height: 300px;
 }
 .tm-block-spend-shop {
   padding: 40px;

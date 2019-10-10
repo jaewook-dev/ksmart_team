@@ -34,7 +34,7 @@ public class ShopController {
 	public String shopInsert(Model model) {
 		List<ContractDTO> contractList =  contractService.contractList();
 		//필요한 contractList에 담긴 값을 가져오기 위해 model 사용
-		System.out.println("contractList:"+contractList);
+		//System.out.println("contractList:"+contractList);
 		model.addAttribute("contractList", contractList);
 		return  "/shop/shopInsert";
 	}
@@ -42,7 +42,7 @@ public class ShopController {
 	@PostMapping("/shopInsert")
 	public String shopInsert(ShopDTO shop,HttpSession session,ShopRelationDTO relation) {
 		//입력값 확인
-		System.out.println(shop+"<-담겨있는값");
+		//System.out.println(shop+"<-담겨있는값");
 		shopService.shopInsert(shop,session,relation);
 		return "redirect:/shop";
 	}
@@ -50,9 +50,9 @@ public class ShopController {
 	//수정입력 값 받기
 	@GetMapping("/shopUpdate")
 	public String shopUpdate(@RequestParam(value ="shopCode") String shopCode,Model model) {
-		System.out.println(shopCode + "<--넘어오는 코드값 확인");
+		//System.out.println(shopCode + "<--넘어오는 코드값 확인");
 		List<ShopDTO> shopList = shopService.shopUpdate(shopCode);
-		System.out.println(shopList + "<--코드로 조회하는 데이터 확인");
+		//System.out.println(shopList + "<--코드로 조회하는 데이터 확인");
 		//shopList에 담겨있는 값 모델에 담기
 		model.addAttribute("shopList", shopList);
 		return "shop/shopUpdate";
@@ -61,7 +61,7 @@ public class ShopController {
 	//수정
 	@PostMapping("/shopUpdate")
 	public String shopUpdate(ShopDTO shop) {
-		System.out.println(shop + "<--  수정된 값");
+		//System.out.println(shop + "<--  수정된 값");
 		shopService.shopUpdateSet(shop);
 		return "redirect:/shop";
 	}
@@ -77,8 +77,8 @@ public class ShopController {
 		List<ShopDTO> shopListYes = (List<ShopDTO>)map.get("shopListYes");
 		@SuppressWarnings("unchecked")
 		List<ShopDTO> shopListNo = (List<ShopDTO>)map.get("shopListNo");
-		System.out.println(shopListYes);
-		System.out.println(shopListNo);
+		//System.out.println(shopListYes);
+		//System.out.println(shopListNo);
 		//입력값 확인 후 모델값 값을 넣는다.
 		model.addAttribute("shopListYes", shopListYes);
 		model.addAttribute("shopListNo", shopListNo);
@@ -88,15 +88,15 @@ public class ShopController {
 	//상세보기에서 검색시
 	@PostMapping("/shopSearchList")
 	public String shopSearchList(SearchDTO search, Model model) {
-		System.out.println(search + "<-- 담겨있는값 ");
+		//System.out.println(search + "<-- 담겨있는값 ");
 		Map<String,Object> map = shopService.shopSearchList(search);
 		// model에 값 넣기
 		@SuppressWarnings("unchecked")
 		List<ShopDTO> shopListYes = (List<ShopDTO>)map.get("shopSearchListYes");
 		@SuppressWarnings("unchecked")
 		List<ShopDTO> shopListNo = (List<ShopDTO>)map.get("shopSearchListNo");
-		System.out.println(shopListYes +"<--삭제가능리스트 확인");
-		System.out.println(shopListNo +"<--삭제불가능리스트 확인");
+		//System.out.println(shopListYes +"<--삭제가능리스트 확인");
+		//System.out.println(shopListNo +"<--삭제불가능리스트 확인");
 		//model에 대입값 넣기
 		model.addAttribute("shopListYes", shopListYes);
 		model.addAttribute("shopListNo", shopListNo);
@@ -116,13 +116,13 @@ public class ShopController {
 		List<ShopRelationDTO> srList = shopService.relationList();
 		List<PosDTO> pList = posService.getPosList(session);
 		List<ShopDTO> personnelList = shopService.personnelList(session);
-		System.out.println("relationList"+srList );
-		System.out.println("posList" + pList);
-		System.out.println("personnelList" + personnelList);
+		//System.out.println("relationList"+srList );
+		//System.out.println("posList" + pList);
+		//System.out.println("personnelList" + personnelList);
 		//맵으로 서비스부분 받기
 		Map<String, Object> returnMap = shopService.shopList(currentPage);
     	//Map객체주소로 보내는 경우(model.addAttribute("map", returnMap);
-		System.out.println(returnMap + " map 담긴 값 확인 ");
+		//System.out.println(returnMap + " map 담긴 값 확인 ");
 		//returnMap(Map타입 객체)에 담겨있는 값 -> model(Model타입 객체)에 복사 ->  view전달
 		//매장 목록
     	model.addAttribute("shopList", returnMap.get("list"));

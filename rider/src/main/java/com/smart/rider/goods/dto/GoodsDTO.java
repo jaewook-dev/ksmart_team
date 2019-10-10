@@ -7,12 +7,23 @@ public class GoodsDTO {
 	private String contractShopCode;
 	private int goodsPay;
 	private String goodsPosition;
-	private char goodsRental;
+	private String goodsRental;
 	private String goodsState;
-	private char goodsCompletionState;
-	private char goodsRentalState;
+	private String goodsCompletionState;
+	private String goodsRentalState;
 	private String goodsInventoryDate;
 	private String goodsDate;
+	
+	
+	
+	@Override
+	public String toString() {
+		return "GoodsDTO [goodsCode=" + goodsCode + ", goodsDbCode=" + goodsDbCode + ", purchaseCode=" + purchaseCode
+				+ ", contractShopCode=" + contractShopCode + ", goodsPay=" + goodsPay + ", goodsPosition="
+				+ goodsPosition + ", goodsRental=" + goodsRental + ", goodsState=" + goodsState
+				+ ", goodsCompletionState=" + goodsCompletionState + ", goodsRentalState=" + goodsRentalState
+				+ ", goodsInventoryDate=" + goodsInventoryDate + ", goodsDate=" + goodsDate + "]";
+	}
 	public String getGoodsCode() {
 		return goodsCode;
 	}
@@ -49,10 +60,10 @@ public class GoodsDTO {
 	public void setGoodsPosition(String goodsPosition) {
 		this.goodsPosition = goodsPosition;
 	}
-	public char getGoodsRental() {
+	public String getGoodsRental() {
 		return goodsRental;
 	}
-	public void setGoodsRental(char goodsRental) {
+	public void setGoodsRental(String goodsRental) {
 		this.goodsRental = goodsRental;
 	}
 	public String getGoodsState() {
@@ -61,16 +72,16 @@ public class GoodsDTO {
 	public void setGoodsState(String goodsState) {
 		this.goodsState = goodsState;
 	}
-	public char getGoodsCompletionState() {
+	public String getGoodsCompletionState() {
 		return goodsCompletionState;
 	}
-	public void setGoodsCompletionState(char goodsCompletionState) {
+	public void setGoodsCompletionState(String goodsCompletionState) {
 		this.goodsCompletionState = goodsCompletionState;
 	}
-	public char getGoodsRentalState() {
+	public String getGoodsRentalState() {
 		return goodsRentalState;
 	}
-	public void setGoodsRentalState(char goodsRentalState) {
+	public void setGoodsRentalState(String goodsRentalState) {
 		this.goodsRentalState = goodsRentalState;
 	}
 	public String getGoodsInventoryDate() {
@@ -85,15 +96,9 @@ public class GoodsDTO {
 	public void setGoodsDate(String goodsDate) {
 		this.goodsDate = goodsDate;
 	}
-	@Override
-	public String toString() {
-		return "GoodsDTO [goodsCode=" + goodsCode + ", goodsDbCode=" + goodsDbCode + ", purchaseCode=" + purchaseCode
-				+ ", contractShopCode=" + contractShopCode + ", goodsPay=" + goodsPay + ", goodsPosition="
-				+ goodsPosition + ", goodsRental=" + goodsRental + ", goodsState=" + goodsState
-				+ ", goodsCompletionState=" + goodsCompletionState + ", goodsRentalState=" + goodsRentalState
-				+ ", goodsInventoryDate=" + goodsInventoryDate + ", goodsDate=" + goodsDate + "]";
-	}
+	
+
 	
 	
-	
+
 }

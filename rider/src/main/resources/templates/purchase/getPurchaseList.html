@@ -92,7 +92,8 @@
 						<a  th:if="${session.SLEVEL eq '관리자' || session.SLEVEL eq'점주'}" href="#myModal" data-toggle="modal"
 							class="btn btn-primary btn-block text-uppercase mb-3">매입 삭제하기</a>
 						<a  th:href="@{/goodsInsert(purchaseCode=${purchaseCode.purchaseCode})}"
-							class="btn btn-primary btn-block text-uppercase mb-3">판매상품 등록하기</a>	
+							class="btn btn-primary btn-block text-uppercase mb-3">판매상품 등록하기</a>
+						<div style="color: orange;">판매상품등록후 대여상품금액 추정하여 대여등록할수있음</div>	
 						
 					</div>
 				</div>

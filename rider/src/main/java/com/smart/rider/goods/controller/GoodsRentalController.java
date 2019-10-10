@@ -1,6 +1,7 @@
 package com.smart.rider.goods.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -95,8 +96,17 @@ public class GoodsRentalController {
 	
 	@GetMapping("/goodsRentalList")	
 	//대여상품 리스트조회q
-	public String rentalList(Model model) {
-		List<GoodsHapDTO> rList = goodsRentalService.goodsRentalList();
+	public String rentalList(Model model,HttpSession session) {
+		String select = null;
+		String searchInput = "";
+		String beginDate = "";
+		String endDate = "";
+		String SCODE = (String)session.getAttribute("SCODE");
+		String SLEVEL = (String)session.getAttribute("SLEVEL");
+		
+		Map<String,Object> map = goodsRentalService.goodsRentalList(select, searchInput, beginDate, endDate, SCODE, SLEVEL);
+		@SuppressWarnings("unchecked")
+		List<GoodsHapDTO> rList = (List<GoodsHapDTO>)map.get("rList");
 		//System.out.println("대여상품리스트 값 넘어오는지확
 		model.addAttribute("rList", rList);
 		
@@ -108,14 +118,17 @@ public class GoodsRentalController {
 										,@RequestParam(value="searchInput")String searchInput
 										,@RequestParam(value="beginDate")String beginDate
 										,@RequestParam(value="endDate")String endDate
-										,Model model) {
+										,Model model,HttpSession session) {
+		
+		String SCODE = (String)session.getAttribute("SCODE");
+		
 		//System.out.println("대여상품 앞날짜검색"+beginDate);
 		//System.out.println("대여상품 뒤날짜검색"+endDate);
 		//System.out.println("대여상품 카테고리"+select);
 		//System.out.println("대여상품 카테고리명"+searchInput);
-		List<GoodsRentalDTO> search = goodsRentalService.goodsRentalSearchList(select, searchInput, beginDate, endDate);
-		model.addAttribute("rList", search);
-		if(search.size()==0) {
+		List<GoodsRentalDTO> rList = goodsRentalService.goodsRentalSearchList(select, searchInput, beginDate, endDate, SCODE);
+		model.addAttribute("rList", rList);
+		if(rList.size()==0) {
 			model.addAttribute("alert", "검색 결과가 없습니다");
 		}		
 		return "goods/goodsRentalList";

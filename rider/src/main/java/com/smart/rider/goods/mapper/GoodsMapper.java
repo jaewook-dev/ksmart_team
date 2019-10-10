@@ -10,23 +10,24 @@ import com.smart.rider.goods.dto.GoodsHapDTO;
 @Mapper
 public interface GoodsMapper {
 	
-	
+	//대여상품 매출등록시 상품상태변경
+	public int goodsSalesRentalUpdate(GoodsDTO goodsDto);
 	//매출등록시 상품판매상태변경
 	public int goodsSalesUpdate(GoodsDTO goodsDto);
 	//삭제가능상품 상세보기
 	public GoodsHapDTO yesGoodsList(String goodsCode);
 	
 	//삭제불가능상품메서드
-	public List<GoodsHapDTO> goodsNlist(String select ,String searchInput,String beginDate,String endDate);
+	public List<GoodsHapDTO> goodsNlist(String select ,String searchInput,String beginDate,String endDate,String SCODE);
 	
 	//삭제가능상품메서드
-	public List<GoodsHapDTO> goodsYlist(String select ,String searchInput,String beginDate,String endDate);
+	public List<GoodsHapDTO> goodsYlist(String select ,String searchInput,String beginDate,String endDate,String SCODE);
 	
 	//코드자동증가
 	public String goodsCodeCount();
 	
 	//상품검색추가
-	public List<GoodsDTO> goodsSearchList(String select ,String searchInput,String beginDate,String endDate);
+	public List<GoodsDTO> goodsSearchList(String select ,String searchInput,String beginDate,String endDate,String SCODE);
 	//상품삭제
 	public int goodsDelete(String goodsCode,String memberId,String memberPw);
 	
