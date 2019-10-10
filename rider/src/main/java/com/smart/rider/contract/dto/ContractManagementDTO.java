@@ -11,6 +11,9 @@ public class ContractManagementDTO {
 	private String contractManagementState;
 	private String contractManagementContents;
 	private String contractManagementDate;
+	
+	
+	
 	public String getContractManagementCode() {
 		return contractManagementCode;
 	}

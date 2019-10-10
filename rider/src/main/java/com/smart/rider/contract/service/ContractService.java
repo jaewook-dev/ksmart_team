@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.smart.rider.contract.dto.AgreementDTO;
 import com.smart.rider.contract.dto.ContractDTO;
 import com.smart.rider.contract.dto.ContractMemberDTO;
 import com.smart.rider.contract.dto.ManagementDTO;
@@ -87,13 +88,18 @@ public class ContractService {
 	}
 	
 	//계약서 목록
-	public List<ContractMemberDTO> agreementList(HttpSession session){
+	public List<AgreementDTO> agreementList(HttpSession session){
 		String id = (String)session.getAttribute("SID");
 		String level = (String)session.getAttribute("SLEVEL");
 		//System.out.println(level+"<--로그인 권한 확인");
 		//System.out.println(id+"<--로그인 아이디 확인");
 		
-		
 		return contractMapper.agreementList(id,level);
+	}
+	
+	//계약 내용 및 계약금 납부 현황 보기
+	public List<AgreementDTO> getAgreementList(String agreementCode){
+		
+		return contractMapper.getAgreementList(agreementCode);
 	}
 }
