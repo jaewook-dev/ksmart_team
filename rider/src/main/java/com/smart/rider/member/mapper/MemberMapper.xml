@@ -27,7 +27,7 @@
 			,NOW()
 			,NOW())
 	</insert>
-	<select id="memberList" parameterType="map" resultType="com.smart.rider.member.dto.MemberDTO">
+	<select id="memberList" resultType="com.smart.rider.member.dto.MemberDTO">
 		SELECT 
 			 member_id 			AS memberId
 			,member_pw 			AS memberPw
@@ -80,7 +80,7 @@
 		WHERE
 			member_id = #{memberId}
 	</update>
-	<select id="searchMember" parameterType="map" resultType="com.smart.rider.member.dto.MemberDTO">
+	<select id="searchMember" parameterType="java.util.Map" resultType="com.smart.rider.member.dto.MemberDTO">
 		SELECT 
 			 member_id 			AS memberId
 			,member_pw 			AS memberPw
@@ -107,7 +107,7 @@
 			<if test="beginDate neq ''.toString() and endDate eq ''.toString()">
 				AND member_insert_date between #{beginDate} and NOW()
 			</if>
-			<if test="shopCode neq ''.toString() and shopCode neq null">
+			<if test="shopCode neq '0'.toString() and shopCode neq null">
 				AND contract_shop_code = #{shopCode}
 			</if>
 		</trim>
@@ -162,7 +162,7 @@
 			<if test="beginDate neq ''.toString() and endDate eq ''.toString()">
 				AND member_insert_date between #{beginDate} and NOW()
 			</if>
-			<if test="shopCode neq ''.toString() and shopCode neq null">
+			<if test="shopCode neq '0'.toString() and shopCode neq null">
 				AND contract_shop_code = #{shopCode}
 			</if>
 		</trim>

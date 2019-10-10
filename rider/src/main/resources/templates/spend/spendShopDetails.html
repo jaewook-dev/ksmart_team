@@ -151,6 +151,12 @@
 											 name="contractShopCode" 
 											 id="contractShopCode" 
 											 th:value="${list.contractShopCode}">
+										<input
+											type="hidden"
+											name="memberId"
+											id="memberId"
+											th:value="${list.memberId}"
+										>
 										
 										<label>관리자 비밀번호</label>
 										<input 
@@ -203,13 +209,14 @@
             
         	var contractShopCode = $('#contractShopCode').val();
         	var adminPw = $('#adminPw').val();
-        	var memberBirth = $('#memberBirth').val();     	
+        	var memberBirth = $('#memberBirth').val(); 
+        	var memberId = $('#memberId').val();
         	
             // ajax 호출을 위한 정보 기입
             var request = $.ajax({
               url: "/adminCheck", // 호출 url
               method: "POST", // 전송방식
-              data: {contractShopCode, adminPw, memberBirth}, // 파라미터
+              data: {contractShopCode, adminPw, memberBirth, memberId}, // 파라미터
               dataType: "text" // 전송 받을 타입 ex) xml, html, text, json
             });
              

@@ -105,7 +105,7 @@ public class MemberService {
 		}
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		resultMap.put("list", memberMapper.searchMember(map));
-		//System.out.println(memberMapper.searchMember(map) + "<-----");
+		System.out.println(memberMapper.searchMember(map) + "<---검색결과");
 		resultMap.put("currentPage", currentPage);
 		resultMap.put("lastPage", lastPage);
 		resultMap.put("startPageNum", startPageNum);

@@ -25,6 +25,32 @@
 						
 					</div>
 					
+					<th:block th:if="${session.SLEVEL eq '점주'}">
+					<!-- 순수익 차트 -->
+					<div class="row tm-content-row">
+						<div class="col-12 tm-block-col">
+							<div class="tm-bg-primary-dark tm-block-util">
+									<span style="display: inline-block; float: left"> 
+										<strong class="tm-block-title">보고서 </strong>
+									</span> 
+									<span style="display: inline-block; float: right"> 
+										<select
+											style="width: 100px;" 
+											class="custom-select" 
+											name="netYear"
+											id="netYear"
+											><option value="2019" id="2019">2019</option>
+										</select>
+									</span>
+	
+								<!-- charts.js -->
+								
+									<canvas id="netChart" height="100px;"></canvas>
+								
+							</div>
+						</div>
+					</div>
+					</th:block>
 				</div>
 			</div>
 		</div>
@@ -34,7 +60,82 @@
 <th:block layout:fragment="customScript">
 
 <script th:inline="javascript">
-	
+
+	$(function() {
+		var ctx = document.getElementById('netChart').getContext('2d');
+		var netChart = new Chart(ctx, {
+			
+		    // The type of chart we want to create
+		    type: 'bar',
+		
+		    // The data for our dataset
+		    data: {
+		        labels: ['1월', '2월', '3월', '4월', '5월', '6월', '7월','8월','9월','10월','11월','12월'],
+		        datasets: [{
+					label: '순수익',
+					type : 'bar',
+					backgroundColor: 'rgb(255, 204, 102)',
+		            borderColor: 'rgb(255, 204, 102)',
+					data: [
+						 [[${netPay0}]], [[${netPay1}]], [[${netPay2}]], [[${netPay3}]], [[${netPay4}]]
+						,[[${netPay5}]], [[${netPay6}]], [[${netPay7}]], [[${netPay8}]], [[${netPay9}]]
+						,[[${netPay10}]], [[${netPay11}]]
+					]
+				}, {
+					label: '지출',
+					type : 'line',
+					fill : false,
+					lineTension : 0,
+					pointRadius : 0,
+					backgroundColor: 'rgb(255, 153, 0)',
+		            borderColor: 'rgb(255, 153, 0)',
+					data: [
+						 [[${spend0}]], [[${spend1}]], [[${spend2}]], [[${spend3}]], [[${spend4}]]
+						,[[${spend5}]], [[${spend6}]], [[${spend7}]], [[${spend8}]], [[${spend9}]]
+						,[[${spend10}]], [[${spend11}]]
+					]
+				}, {
+					label: '매출',
+					type : 'line',
+					fill : false,
+					lineTension : 0,
+					pointRadius : 0,
+					backgroundColor: 'rgb(255, 204, 0)',
+		            borderColor: 'rgb(255, 204, 0)',
+					data: [
+						 [[${sales0}]], [[${sales1}]], [[${sales2}]], [[${sales3}]], [[${sales4}]]
+						,[[${sales5}]], [[${sales6}]], [[${sales7}]], [[${sales8}]], [[${sales9}]]
+						,[[${sales10}]], [[${sales11}]]
+					]
+				}]
+		    },
+		
+		    // Configuration options
+		    options: {
+		    	legend: {
+		             labels: {
+		                  fontColor: 'white' // label color
+		                 }
+		              },
+			    scales: {
+			    	// y축
+			        yAxes: [{
+			        	stacked: true,
+			            ticks: {
+			                fontColor:'white' // y축 폰트 color
+			            }
+			     	}],
+			     	// x축
+			     	xAxes: [{
+			     		stacked: true,
+			            ticks: {
+			                fontColor:'white' // x축 폰트 color
+			            }
+			     	}]
+			    }
+		    }
+		});
+	})
 </script>
 
 </th:block>

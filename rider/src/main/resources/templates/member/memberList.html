@@ -108,8 +108,6 @@
 						<hr>
 						<!--------------------------------------------- 페이지 버튼 ---------------------------------------------->
 						<div class="text-center">
-						<!-- 맨처음 -->
-						
 						<!-- 이전 -->
 						<a class="text-white" th:if="${currentPage > 1}" 
 						   th:href="@{/memberList(currentPage=${currentPage - 1})}">[이전]</a>
@@ -121,8 +119,6 @@
 						<!-- 다음 -->
 						<a class="text-white" th:if="${currentPage < lastPage}" 
 						   th:href="@{/memberList(currentPage=${currentPage + 1})}">[다음]</a>
-						<!-- 맨마지막 -->
-						
 						</div>
 						
 					</div>

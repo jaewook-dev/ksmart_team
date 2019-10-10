@@ -21,7 +21,7 @@ public interface WorkMapper {
 	
 	public int leaveInsert(WorkDTO workdto);
 	//페이지작업위한 목록 총 카운트
-	public int getWorkAllCount(String contractShopCode);
+	public int getWorkAllCount(String contractShopCode, String memberId);
 	
 	public List<WorkDTO> searchWork(Map<String, Object> map);
 	

@@ -29,8 +29,8 @@
 							<div class="tm-bg-primary-dark tm-block-select">
 								<form action="/spendManagement" method="get" id="spendManagementForm">
 									<input type="hidden" name="selectShopCode" th:value="${contractShopCode}">
-									<span style="float: left">
-										<strong class="tm-block-title text-center"> 지출 관리 </strong>
+									<span style="float: left" th:each="shop : ${shop}">
+										<strong class="tm-block-title text-center" th:text="${shop.shopName}"></strong>
 									</span> 
 									<span style="float: right"> 
 									<select
@@ -38,9 +38,9 @@
 										class="custom-select"
 										name="spendManagement"
 										id="spendManagement">
-										<option value="spendTotal">통합</option>
-										<option value="spendSalary">급여</option>
-										<option value="spendUtility">공과금/기타</option>
+										<option value="spendTotal" id="spendTotal">통합</option>
+										<option value="spendSalary" id="spendSalary">급여</option>
+										<option value="spendUtility" id="spendUtility">공과금/기타</option>
 									</select>
 									</span>
 								</form>
@@ -66,8 +66,6 @@
 										name="totalYear"
 										id="totalYear"
 										><option value="2019" id="2019">2019</option>
-										 <option value="2018" id="2018">2018</option>
-										 <option value="2017" id="2017">2017</option>
 									</select>
 								</span>
 							</form>
@@ -97,6 +95,10 @@
 		if(url == '/spendUtility'){
 			$('#spendUtility').attr('selected', 'selected');
 		} else if(url == '/spendSalary'){
+			$('#spendSalary').attr('selected', 'selected');
+		} else if(url == '/spendUtilityList'){
+			$('#spendUtility').attr('selected', 'selected');
+		} else if(url == '/spendSalaryList'){
 			$('#spendSalary').attr('selected', 'selected');
 		} else {
 			$('#spendTotal').attr('selected', 'selected');
@@ -206,22 +208,6 @@
 		    }
 	    }
 	});
-	
-	<!-- 연도 선택 화면 전환 후 select box 고정 -->
-	var selectedYear = [[${selectedYear}]];
-	
-	if(selectedYear == 2018){
-		$('#2018').attr('selected','selected');
-	} else if(selectedYear == 2017){
-		$('#2017').attr('selected','selected');
-	} else{
-		$('#2019').attr('selected','selected');
-	}
-	
-	<!-- 연도 선택 화면전환 -->
-	$('#totalYear').change(function() {
-		$('#selectYearForm').submit();
-	})
 	
 </script>
 </th:block>
