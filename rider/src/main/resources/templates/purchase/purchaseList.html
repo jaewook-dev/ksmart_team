@@ -95,7 +95,7 @@
 										<th th:text="${y.goodsDbCategory}"></th>																			
 										<th th:text="${y.purchasePay}"></th>
 										<th th:text="${y.purchaseState}"></th>
-										<th th:text="${y.goodsState}"></th>
+										<th th:text="${y.goodsState} ? ${y.goodsState} : 상품등록하지않음 "></th>
 										<th th:text="${y.purchaseDate}"></th>
 										<td>
 										<a
@@ -112,7 +112,7 @@
 										<th th:text="${n.goodsDbCategory}"></th>																			
 										<th th:text="${n.purchasePay}"></th>
 										<th th:text="${n.purchaseState}"></th>
-										<th th:text="${n.goodsState}"></th>
+										<th th:text="${n.goodsState} ? ${n.goodsState} : 상품등록하지않음 "></th>
 										<th th:text="${n.purchaseDate}"></th>
 										<td><a
 											th:href="@{/getPurchaseList(purchaseCode=${n.purchaseCode})}"

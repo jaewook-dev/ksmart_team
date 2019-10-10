@@ -77,12 +77,13 @@ public class GoodsPurchaseController {
 										,@RequestParam(value="searchInput")String searchInput
 										,@RequestParam(value="beginDate")String beginDate
 										,@RequestParam(value="endDate")String endDate
+										,@RequestParam(value="SCODE")String SCODE
 										,Model model) {
 		//List<GoodsPurchaseDTO> search = goodsPurchaseService.purchaseSearchList(select, searchInput, beginDate, endDate);
 		
-		List<GoodsHapDTO> yList = goodsPurchaseService.purchaseYlist(select, searchInput, beginDate, endDate);
+		List<GoodsHapDTO> yList = goodsPurchaseService.purchaseYlist(select, searchInput, beginDate, endDate,SCODE);
 		model.addAttribute("yList",yList);
-		List<GoodsHapDTO> nList = goodsPurchaseService.purchaseNlist(select, searchInput, beginDate, endDate);		
+		List<GoodsHapDTO> nList = goodsPurchaseService.purchaseNlist(select, searchInput, beginDate, endDate,SCODE);		
 		model.addAttribute("nList",nList);
 		//System.out.println(select + " <-- select goodsSearchList GoodsController.java");
 		//System.out.println(searchInput + " <-- searchInput goodsSearchList GoodsController.java");
@@ -108,26 +109,38 @@ public class GoodsPurchaseController {
 	
 	//매입리스트 
 	@GetMapping("/purchaseList")
-	public String purchase(Model model) {
+	public String purchase(Model model,HttpSession session) {
 		String select = null;
 		String searchInput = "";
 		String beginDate = "";
 		String endDate = "";
+		String SCODE = (String)session.getAttribute("SCODE");
+		String SLEVEL = (String)session.getAttribute("SLEVEL");
 		
+		Map<String,Object> map = goodsPurchaseService.purchaseList(select, searchInput, beginDate, endDate, SCODE, SLEVEL);
 		
-		List<GoodsHapDTO> yList = goodsPurchaseService.purchaseYlist(select, searchInput, beginDate, endDate);
-		model.addAttribute("yList",yList);
-		List<GoodsHapDTO> nList = goodsPurchaseService.purchaseNlist(select, searchInput, beginDate, endDate);		
-		model.addAttribute("nList",nList);
+		@SuppressWarnings("unchecked")
+		List<GoodsHapDTO> yList = (List<GoodsHapDTO>)map.get("yList");
+		@SuppressWarnings("unchecked")
+		List<GoodsHapDTO> nList = (List<GoodsHapDTO>)map.get("nList");
 		
-		List<GoodsHapDTO> hList = goodsPurchaseService.purchaseList();
-		//System.out.println(model.addAttribute("hList", hList));
 		
 		/*
-		 * model.addAttribute("yList",yList); model.addAttribute("nList",nList);
+		 * List<GoodsHapDTO> yList = goodsPurchaseService.purchaseYlist(select,
+		 * searchInput, beginDate, endDate); model.addAttribute("yList",yList);
+		 * List<GoodsHapDTO> nList = goodsPurchaseService.purchaseNlist(select,
+		 * searchInput, beginDate, endDate); model.addAttribute("nList",nList);
 		 */
+		 
 		
-		model.addAttribute("hList",hList);
+		//List<GoodsHapDTO> hList = goodsPurchaseService.purchaseList();
+		//System.out.println(model.addAttribute("hList", hList));
+		
+		
+		  model.addAttribute("yList",yList);
+		  model.addAttribute("nList",nList);		 
+		
+		//  model.addAttribute("hList",hList);
 	
 		
 		return "purchase/purchaseList";

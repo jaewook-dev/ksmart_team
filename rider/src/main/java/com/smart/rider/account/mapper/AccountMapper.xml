@@ -32,10 +32,7 @@
 		FROM account ac LEFT JOIN purchase pu
 		ON ac.account_code = pu.account_code
 		WHERE pu.account_code IS null
-		<if test="sCode neq 'A'.toString()">
-        	AND 
-        		ac.contract_shop_code  = #{sCode}
-        </if>
+		
 	</select>
 	
 	<!-- 삭제 불가능  -->

@@ -54,6 +54,10 @@
 			AND
 			p.purchase_date between #{beginDate} and #{endDate}
 		</if> 
+		<if test="SCODE neq 'A'.toString()">
+        	AND 
+        		p.contract_shop_code  = #{SCODE}
+        </if>
 	</select>
 	
 		<!-- 삭제가능한 매입상품리스트  -->
@@ -84,7 +88,10 @@
 			AND
 			p.purchase_date between #{beginDate} and #{endDate}
 		</if> 
-		
+		<if test="SCODE neq 'A'.toString()">
+        	AND 
+        		p.contract_shop_code  = #{SCODE}
+        </if>
 	</select>		
 		
 	<delete id="purchaseDelete" parameterType="String">

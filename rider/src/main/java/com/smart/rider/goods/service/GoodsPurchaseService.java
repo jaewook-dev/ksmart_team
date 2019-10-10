@@ -1,6 +1,8 @@
 package com.smart.rider.goods.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,14 +25,30 @@ public class GoodsPurchaseService {
 		return goodsPurchaseMapper.yesPurchaseList(purchaseCode);
 	}
 	
-	//삭제가능 매입리스트
-	public List<GoodsHapDTO> purchaseYlist(String select ,String searchInput,String beginDate,String endDate) {
-		return goodsPurchaseMapper.purchaseYlist(select, searchInput, beginDate, endDate);
+	//리스트 관리자, 점주 화면나눠주기
+	public Map<String,Object> purchaseList(String select ,String searchInput,String beginDate,String endDate,String SCODE,String SLEVEL){
+		Map<String,Object> map = new HashMap<String, Object>();
+		if(SLEVEL.equals("관리자")) {
+			SCODE="A";
+			map.put("yList", goodsPurchaseMapper.purchaseYlist(select, searchInput, beginDate, endDate, SCODE));
+			map.put("nList", goodsPurchaseMapper.purchaseNlist(select, searchInput, beginDate, endDate, SCODE));
+			return map;
+		}
+		map.put("yList", goodsPurchaseMapper.purchaseYlist(select, searchInput, beginDate, endDate, SCODE));
+		map.put("nList", goodsPurchaseMapper.purchaseNlist(select, searchInput, beginDate, endDate, SCODE));
+		return map;
 	}
-	//삭제가능 매입리스트
-	public List<GoodsHapDTO> purchaseNlist(String select ,String searchInput,String beginDate,String endDate) {
-		return goodsPurchaseMapper.purchaseNlist(select, searchInput, beginDate, endDate);
-	}
+	
+	
+	  //삭제가능 매입리스트 
+		public List<GoodsHapDTO> purchaseYlist(String select ,String searchInput,String beginDate,String endDate,String SCODE) {
+			return  goodsPurchaseMapper.purchaseYlist(select, searchInput, beginDate, endDate,SCODE);
+		}
+	 //삭제 불가능 매입리스트
+		public List<GoodsHapDTO>  purchaseNlist(String select ,String searchInput,String beginDate,String  endDate,String SCODE) {
+			return goodsPurchaseMapper.purchaseNlist(select,  searchInput, beginDate, endDate ,SCODE);
+			}
+	 
 		
 	//매입삭제 메서드
 	public int purchaseDelete(String purchaseCode,String memberId,String memberPw) {
