@@ -10,7 +10,8 @@ import com.smart.rider.goods.dto.GoodsHapDTO;
 @Mapper
 public interface GoodsMapper {
 	
-	
+	//대여상품 매출등록시 상품상태변경
+	public int goodsSalesRentalUpdate(GoodsDTO goodsDto);
 	//매출등록시 상품판매상태변경
 	public int goodsSalesUpdate(GoodsDTO goodsDto);
 	//삭제가능상품 상세보기

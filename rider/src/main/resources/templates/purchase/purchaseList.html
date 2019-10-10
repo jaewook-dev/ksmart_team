@@ -65,7 +65,8 @@
 										<th scope="col">상품명</th>
 										<th scope="col">상품카테고리</th>
 										<th scope="col">매입 가격</th>
-										<th scope="col">매입상품상태</th>
+										<th scope="col">매입시 상품상태</th>
+										<th scope="col">현재 상품상태</th>
 										<th scope="col">매입일자</th>
 										<th scope="col">상세보기</th>
 
@@ -94,6 +95,7 @@
 										<th th:text="${y.goodsDbCategory}"></th>																			
 										<th th:text="${y.purchasePay}"></th>
 										<th th:text="${y.purchaseState}"></th>
+										<th th:text="${y.goodsState}"></th>
 										<th th:text="${y.purchaseDate}"></th>
 										<td>
 										<a
@@ -110,6 +112,7 @@
 										<th th:text="${n.goodsDbCategory}"></th>																			
 										<th th:text="${n.purchasePay}"></th>
 										<th th:text="${n.purchaseState}"></th>
+										<th th:text="${n.goodsState}"></th>
 										<th th:text="${n.purchaseDate}"></th>
 										<td><a
 											th:href="@{/getPurchaseList(purchaseCode=${n.purchaseCode})}"

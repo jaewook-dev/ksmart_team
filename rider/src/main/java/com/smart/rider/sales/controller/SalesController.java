@@ -145,6 +145,18 @@ public class SalesController {
 		return "redirect:salesList";
 		
 	}
+	//대여매출등록처리
+		@PostMapping("/salesRentalInsert")
+		public String salesRentalInsert(SalesDTO salesDto,GoodsDTO goodsDto,HttpSession session) {
+			//System.out.println("매출등록 입력확인"+salesDto);
+			//상품
+			goodsService.goodsSalesRentalUpdate(goodsDto);
+			String contractShopCode = (String)session.getAttribute("SCODE");
+			salesDto.setContractShopCode(contractShopCode);
+			salesService.salesInsert(salesDto);
+			return "redirect:salesList";
+			
+		}
 	//매출리스트 조회요청
 	@GetMapping("/salesList")
 	public String salseList(Model model,@RequestParam(value = "salesYear", required = false, defaultValue = "2019") String salesYear) {

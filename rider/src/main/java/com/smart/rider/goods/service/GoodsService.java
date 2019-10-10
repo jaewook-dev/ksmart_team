@@ -17,6 +17,12 @@ public class GoodsService {
 	@Autowired	
 	private GoodsMapper goodsMapper;
 	
+	
+	//대여매출등록시 판매상품 상태병경
+		public int goodsSalesRentalUpdate(GoodsDTO goodsDto) {
+			return goodsMapper.goodsSalesRentalUpdate(goodsDto);
+		}
+		
 	//매출등록시 판매상품 상태병경
 	public int goodsSalesUpdate(GoodsDTO goodsDto) {
 		return goodsMapper.goodsSalesUpdate(goodsDto);

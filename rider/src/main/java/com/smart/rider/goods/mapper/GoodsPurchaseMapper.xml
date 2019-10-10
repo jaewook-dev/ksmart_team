@@ -206,6 +206,7 @@
     	<result column="goods_database_description"    	property="goodsDbDescription"/>
     	<result column="goods_database_date"    	property="goodsDbDate"/>
     	<result column="account_market"    	property="accountMarket"/>
+    	<result column="goods_state"    	property="goodsState"/>
     	
 	</resultMap>
 </mapper>
