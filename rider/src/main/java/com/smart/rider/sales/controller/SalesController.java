@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.smart.rider.goods.dto.GoodsDTO;
 import com.smart.rider.goods.dto.GoodsHapDTO;
 
 import com.smart.rider.goods.service.GoodsRentalService;
@@ -135,8 +136,9 @@ public class SalesController {
 	}
 	//매출등록처리
 	@PostMapping("/salesInsert")
-	public String salesInsert(SalesDTO salesDto,HttpSession session) {
+	public String salesInsert(SalesDTO salesDto,GoodsDTO goodsDto,HttpSession session) {
 		//System.out.println("매출등록 입력확인"+salesDto);
+		goodsService.goodsSalesUpdate(goodsDto);
 		String contractShopCode = (String)session.getAttribute("SCODE");
 		salesDto.setContractShopCode(contractShopCode);
 		salesService.salesInsert(salesDto);

@@ -7,7 +7,7 @@
 		 <nav class="navbar navbar-expand-xl">
             <div class="container h-100">
                 <a class="navbar-brand" href="/">
-                	<h2 class="tm-site-title mb-0"> 배포 191007</h2>             
+                	<h2 class="tm-site-title mb-0"> 배포 191009</h2>             
                 </a>
 
                 <button class="navbar-toggler ml-auto mr-0" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -138,7 +138,7 @@
                             </div>
                         </li>
                          <li class="nav-item" th:if="${session.SLEVEL eq '직원'}">
-                            <a class="nav-link" href="/workAdmin" id="navbarDropdown">
+                            <a class="nav-link" th:href="@{/workAdmin(memberId=${session.SID})}" id="navbarDropdown">
                                 <i class="fas fa-calendar-check"></i>
                                 <span>
 									근태관리

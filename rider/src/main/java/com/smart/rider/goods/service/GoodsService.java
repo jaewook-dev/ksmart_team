@@ -16,6 +16,12 @@ import com.smart.rider.goods.mapper.GoodsMapper;
 public class GoodsService {
 	@Autowired	
 	private GoodsMapper goodsMapper;
+	
+	//매출등록시 판매상품 상태병경
+	public int goodsSalesUpdate(GoodsDTO goodsDto) {
+		return goodsMapper.goodsSalesUpdate(goodsDto);
+	}
+	
 	//삭제가능상품 리스트상세보기
 	public GoodsHapDTO yesGoodsList(String goodsCode) {
 		return goodsMapper.yesGoodsList(goodsCode);

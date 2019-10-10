@@ -85,10 +85,9 @@
 									</tr>
 									<tr>	
 										<th scope="col">대여상태</th>
-										<th><input type="text" id="goodsRentalState" name="goodsRentalState"
-													 th:value="${goodsCode.goodsRentalState}"></th>
+										<th th:text="${goodsCode.goodsRentalState}"></th>
 									</tr>
-																
+																								
 									<tr>	
 										<th scope="col">판매가격</th>
 										<th th:text="${goodsCode.goodsPay}"></th>

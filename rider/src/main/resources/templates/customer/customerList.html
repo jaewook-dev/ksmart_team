@@ -38,8 +38,25 @@
 								</div>
 							</div>
 							<div class="form-group col-3">
+								<select class="custom-select" name="searchDate">
+									<option value="w.work_date">등록일자</option>
+								</select>
+							</div>
+							<div class="form-group col-3">
+								<input id="beginDate" name="beginDate" 
+									   type="text" class="form-control validate" style="background-color: #54657D" readonly/>
+							</div>
+							<div class="form-group col-1 text-center">
+								<h2 class="tm-site-title mb-0">~</h2>
+							</div>
+							<div class="form-group col-3">
+								<input id="endDate" name="endDate" 
+									   type="text" class="form-control validate" style="background-color: #54657D" readonly/>
+							</div>
+							<div class="form-group col-2">
+							</div>
+							<div class="form-group col-3">
 								<select class="custom-select" name="select">
-									<option value="0">Select</option>
 									<option value="member_name">이름</option>
 								</select>
 							</div>
@@ -94,8 +111,6 @@
 						</table>
 						<hr>
 						<div class="text-center">
-						<!-- 맨처음 -->
-						<a class="text-white" th:href="@{/customerList}">[처음]</a>
 						<!-- 이전 -->
 						<a class="text-white" th:if="${currentPage > 1}" 
 						   th:href="@{/customerList(currentPage=${currentPage - 1})}">[이전]</a>
@@ -107,8 +122,6 @@
 						<!-- 다음 -->
 						<a class="text-white" th:if="${currentPage < lastPage}" 
 						   th:href="@{/customerList(currentPage=${currentPage + 1})}">[다음]</a>
-						<!-- 맨마지막 -->
-						<a class="text-white" th:href="@{/customerList(currentPage=${lastPage})}">[마지막]</a>
 						</div>
 					</div>
 				</div>
@@ -117,5 +130,16 @@
 	</div>
 </th:block>
 <th:block layout:fragment="customScript">
+<script>
+//시작 일자 텍스트상자 클릭시 달력 표기 
+$('#beginDate').datepicker({
+});
+$('#beginDate').datepicker('option','dateFormat','yy-mm-dd'); // 기존 dd/mm/yy에서 yy-mm-dd로 format 변경   
+
+//종료 일자 텍스트상자 클릭시 달력 표기 
+$('#endDate').datepicker({
+});
+$('#endDate').datepicker('option','dateFormat','yy-mm-dd'); // 기존 dd/mm/yy에서 yy-mm-dd로 format 변경 
+</script>
 </th:block>
 </html>

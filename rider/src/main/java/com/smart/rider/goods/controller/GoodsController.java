@@ -23,7 +23,7 @@ public class GoodsController {
 	private GoodsService goodsService;
 
 	@Autowired
-	private GoodsPurchaseService goodsPurchaseService;
+	private GoodsPurchaseService goodsPurchaseService;	
 	
 	//상품검색추가 2019-09-26
 	//삭제가능 불가능 리스트 추가하여 검색 추가 10.04
