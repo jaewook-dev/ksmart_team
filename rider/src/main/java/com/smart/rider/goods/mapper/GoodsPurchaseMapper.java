@@ -24,7 +24,7 @@ public interface GoodsPurchaseMapper {
 	//매입 상세조회
 	public GoodsHapDTO getPurchaseList(String purchaseCode);
 	//매입 검색
-	public List<GoodsPurchaseDTO> purchaseSearchList(String select ,String searchInput,String beginDate,String endDate);
+	public List<GoodsPurchaseDTO> purchaseSearchList(String select ,String searchInput,String beginDate,String SCODE);
 	//매입 삭제
 	public int purchaseDelete(String purchaseCode,String memberId,String memberPw);
 	

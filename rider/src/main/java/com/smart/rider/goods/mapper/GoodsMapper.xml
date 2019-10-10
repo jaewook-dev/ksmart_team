@@ -71,7 +71,12 @@
 			test="beginDate neq ''.toString() and endDate neq ''.toString()">
 			AND
 			g.goods_date between #{beginDate} and #{endDate}
-		</if> 
+		</if>
+	 	<if test="SCODE neq 'A'.toString()">
+        	AND 
+        		g.contract_shop_code  = #{SCODE}
+        </if> 
+		
 		
 	</select>
 	<!-- 삭제가능한 상품쿼리 -->
@@ -102,6 +107,10 @@
 			AND
 			g.goods_date between #{beginDate} and #{endDate}
 		</if> 
+		<if test="SCODE neq 'A'.toString()">
+        	AND 
+        		g.contract_shop_code  = #{SCODE}
+        </if>
 		
 	</select>
 	<!-- 상품검색  -->

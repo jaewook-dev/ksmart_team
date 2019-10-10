@@ -1,7 +1,8 @@
 package com.smart.rider.goods.service;
 
+import java.util.HashMap;
 import java.util.List;
-
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,19 +33,34 @@ public class GoodsService {
 	public GoodsHapDTO yesGoodsList(String goodsCode) {
 		return goodsMapper.yesGoodsList(goodsCode);
 	}
+	
+	//관리자,점주 화면다르게보이기 시작
+	public Map<String,Object> goodsList(String select ,String searchInput,String beginDate,String endDate,String SCODE,String SLEVEL){
+		Map<String,Object> map = new HashMap<String, Object>();
+		if(SLEVEL.equals("관리자")) {
+			SCODE="A";
+			map.put("yList", goodsMapper.goodsYlist(select, searchInput, beginDate, endDate, SCODE));
+			map.put("nList", goodsMapper.goodsNlist(select, searchInput, beginDate, endDate, SCODE));
+			return map;
+		}
+		map.put("yList", goodsMapper.goodsYlist(select, searchInput, beginDate, endDate, SCODE));
+		map.put("nList", goodsMapper.goodsNlist(select, searchInput, beginDate, endDate, SCODE));
+		return map;
+	}
+	
 	//삭제 불 가능상품리스트
-	public List<GoodsHapDTO> goodsNlist(String select ,String searchInput,String beginDate,String endDate){
-		return goodsMapper.goodsNlist(select, searchInput, beginDate, endDate);
+	public List<GoodsHapDTO> goodsNlist(String select ,String searchInput,String beginDate,String endDate,String SCODE){
+		return goodsMapper.goodsNlist(select, searchInput, beginDate, endDate,SCODE);
 		}
 	//삭제가능상품리스트
-	public List<GoodsHapDTO> goodsYlist(String select ,String searchInput,String beginDate,String endDate){
-		return goodsMapper.goodsYlist(select, searchInput, beginDate, endDate);
+	public List<GoodsHapDTO> goodsYlist(String select ,String searchInput,String beginDate,String endDate,String SCODE){
+		return goodsMapper.goodsYlist(select, searchInput, beginDate, endDate,SCODE);
 	}
 	
 	
 	//상품검색추가
-	public List<GoodsDTO> goodsSearchList(String select ,String searchInput,String beginDate,String endDate){
-		List<GoodsDTO> search = goodsMapper.goodsSearchList(select, searchInput, beginDate, endDate);
+	public List<GoodsDTO> goodsSearchList(String select ,String searchInput,String beginDate,String endDate,String SCODE){
+		List<GoodsDTO> search = goodsMapper.goodsSearchList(select, searchInput, beginDate, endDate,SCODE);
 		return search;
 	}
 	//상품삭제

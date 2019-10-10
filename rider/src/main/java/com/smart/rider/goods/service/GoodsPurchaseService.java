@@ -28,6 +28,7 @@ public class GoodsPurchaseService {
 	//리스트 관리자, 점주 화면나눠주기
 	public Map<String,Object> purchaseList(String select ,String searchInput,String beginDate,String endDate,String SCODE,String SLEVEL){
 		Map<String,Object> map = new HashMap<String, Object>();
+		
 		if(SLEVEL.equals("관리자")) {
 			SCODE="A";
 			map.put("yList", goodsPurchaseMapper.purchaseYlist(select, searchInput, beginDate, endDate, SCODE));
@@ -56,8 +57,8 @@ public class GoodsPurchaseService {
 	}
 	
 	//매입 검색 메서드
-	public List<GoodsPurchaseDTO> purchaseSearchList(String select ,String searchInput,String beginDate,String endDate){
-		List<GoodsPurchaseDTO> search = goodsPurchaseMapper.purchaseSearchList(select, searchInput, beginDate, endDate);
+	public List<GoodsPurchaseDTO> purchaseSearchList(String select ,String searchInput,String beginDate,String endDate,String SCODE){
+		List<GoodsPurchaseDTO> search = goodsPurchaseMapper.purchaseSearchList(select, searchInput, beginDate, SCODE);
 		return search;
 	}
 	

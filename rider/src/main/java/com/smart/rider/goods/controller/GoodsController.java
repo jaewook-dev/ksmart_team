@@ -1,6 +1,7 @@
 package com.smart.rider.goods.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -32,17 +33,18 @@ public class GoodsController {
 									,@RequestParam(value="searchInput")String searchInput
 									,@RequestParam(value="beginDate")String beginDate
 									,@RequestParam(value="endDate")String endDate
-									,Model model) {
+									,Model model,HttpSession session) {
+		String SCODE = (String)session.getAttribute("SCODE");
 		//System.out.println(select + " <-- select goodsSearchList GoodsController.java");
 		//System.out.println(searchInput + " <-- searchInput goodsSearchList GoodsController.java");
 		//System.out.println(beginDate + " <-- beginDate goodsSearchList GoodsController.java");
 		//System.out.println(endDate + " <-- endDate goodsSearchList GoodsController.java");
-		List<GoodsDTO> search = goodsService.goodsSearchList(select, searchInput, beginDate, endDate);
+		List<GoodsDTO> search = goodsService.goodsSearchList(select, searchInput, beginDate, endDate,SCODE);
 		model.addAttribute("gList", search);
 		
-		List<GoodsHapDTO> yList = goodsService.goodsYlist(select, searchInput, beginDate, endDate);
+		List<GoodsHapDTO> yList = goodsService.goodsYlist(select, searchInput, beginDate, endDate,SCODE);
 		model.addAttribute("yList", yList);
-		List<GoodsHapDTO> nList = goodsService.goodsNlist(select, searchInput, beginDate, endDate);
+		List<GoodsHapDTO> nList = goodsService.goodsNlist(select, searchInput, beginDate, endDate,SCODE);
 		model.addAttribute("nList", nList);
 				
 		if(yList.size()==0 && nList.size()==0 ) {
@@ -119,22 +121,35 @@ public class GoodsController {
 	//19-09-16 문영성
 	//19-10-04 삭제가능불가능 상품 추가 문영성
 	@GetMapping("/goodsList")
-	public String goodsList(Model model) {
+	public String goodsList(Model model,HttpSession session) {
 
 		String select = null;
 		String searchInput = "";
 		String beginDate = "";
 		String endDate = "";
+		String SCODE = (String)session.getAttribute("SCODE");
+		String SLEVEL = (String)session.getAttribute("SLEVEL");
 		
-		List<GoodsHapDTO> gList = goodsService.goodsList();
+		Map<String,Object> map = goodsService.goodsList(select, searchInput, beginDate, endDate, SCODE, SLEVEL);
 		
-		List<GoodsHapDTO> yList = goodsService.goodsYlist(select, searchInput, beginDate, endDate);
-		model.addAttribute("yList", yList);
-		List<GoodsHapDTO> nList = goodsService.goodsNlist(select, searchInput, beginDate, endDate);
-		model.addAttribute("nList", nList);
+		@SuppressWarnings("unchecked")
+		List<GoodsHapDTO> yList = (List<GoodsHapDTO>)map.get("yList");
+		@SuppressWarnings("unchecked")
+		List<GoodsHapDTO> nList = (List<GoodsHapDTO>)map.get("nList");
+		
+		 model.addAttribute("yList",yList);
+		 model.addAttribute("nList",nList);
+		/*
+		 * List<GoodsHapDTO> gList = goodsService.goodsList();
+		 * 
+		 * List<GoodsHapDTO> yList = goodsService.goodsYlist(select, searchInput,
+		 * beginDate, endDate); model.addAttribute("yList", yList); List<GoodsHapDTO>
+		 * nList = goodsService.goodsNlist(select, searchInput, beginDate, endDate);
+		 * model.addAttribute("nList", nList);
+		 */
 		//System.out.println(gList);
 		//System.out.println(model.addAttribute("gList",gList+"<---------------------GoodsController.java------확인"));
-		model.addAttribute("gList", gList);
+		//model.addAttribute("gList", gList);
 		return "/goods/goodsList";
 	}
 }

@@ -133,6 +133,7 @@
         		p.purchase_date between #{beginDate} and #{endDate}
         </if>
         
+        
 	</select>
 	
 	<!-- 매입 상세보기 -->

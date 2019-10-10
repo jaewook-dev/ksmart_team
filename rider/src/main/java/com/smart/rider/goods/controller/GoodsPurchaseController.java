@@ -76,10 +76,11 @@ public class GoodsPurchaseController {
 	public String purchaseSearchList(@RequestParam(value="select")String select
 										,@RequestParam(value="searchInput")String searchInput
 										,@RequestParam(value="beginDate")String beginDate
-										,@RequestParam(value="endDate")String endDate
-										,@RequestParam(value="SCODE")String SCODE
-										,Model model) {
+										,@RequestParam(value="endDate")String endDate										
+										,Model model,HttpSession session) {
 		//List<GoodsPurchaseDTO> search = goodsPurchaseService.purchaseSearchList(select, searchInput, beginDate, endDate);
+		String SCODE = (String)session.getAttribute("SCODE");
+		
 		
 		List<GoodsHapDTO> yList = goodsPurchaseService.purchaseYlist(select, searchInput, beginDate, endDate,SCODE);
 		model.addAttribute("yList",yList);
