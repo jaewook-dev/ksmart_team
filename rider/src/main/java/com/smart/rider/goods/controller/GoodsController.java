@@ -34,13 +34,14 @@ public class GoodsController {
 									,@RequestParam(value="beginDate")String beginDate
 									,@RequestParam(value="endDate")String endDate
 									,Model model,HttpSession session) {
+		
 		String SCODE = (String)session.getAttribute("SCODE");
 		//System.out.println(select + " <-- select goodsSearchList GoodsController.java");
 		//System.out.println(searchInput + " <-- searchInput goodsSearchList GoodsController.java");
 		//System.out.println(beginDate + " <-- beginDate goodsSearchList GoodsController.java");
 		//System.out.println(endDate + " <-- endDate goodsSearchList GoodsController.java");
-		List<GoodsDTO> search = goodsService.goodsSearchList(select, searchInput, beginDate, endDate,SCODE);
-		model.addAttribute("gList", search);
+		//List<GoodsDTO> search = goodsService.goodsSearchList(select, searchInput, beginDate, endDate,SCODE);
+		//model.addAttribute("gList", search);
 		
 		List<GoodsHapDTO> yList = goodsService.goodsYlist(select, searchInput, beginDate, endDate,SCODE);
 		model.addAttribute("yList", yList);
@@ -130,6 +131,7 @@ public class GoodsController {
 		String SCODE = (String)session.getAttribute("SCODE");
 		String SLEVEL = (String)session.getAttribute("SLEVEL");
 		
+		//상품리스트 관리자와 점주 권한별 나눠주기
 		Map<String,Object> map = goodsService.goodsList(select, searchInput, beginDate, endDate, SCODE, SLEVEL);
 		
 		@SuppressWarnings("unchecked")
