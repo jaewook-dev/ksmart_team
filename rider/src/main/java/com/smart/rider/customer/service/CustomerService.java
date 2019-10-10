@@ -55,4 +55,13 @@ public class CustomerService {
 		resultMap.put("lastPageNum", lastPageNum);
 		return resultMap;
 	}
+	public int customerInsert(CustomerDTO customerdto) {
+		String customerCode = "RC" + customerMapper.customerCodeCount();
+		
+		if(customerCode.equals("RCnull")) {
+			customerCode = "RC0001";
+		}
+		customerdto.setRentalCustomerCode(customerCode);
+		return customerMapper.customerInsert(customerdto);
+	}
 }
