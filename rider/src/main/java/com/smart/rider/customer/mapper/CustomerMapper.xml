@@ -15,6 +15,11 @@
 				,rental_customer_return 	AS rentalCustomerReturn
 		FROM 
 			rental_customer
+		<trim prefix="where" prefixOverrides="AND|OR">
+			<if test="contractShopCode neq null and contractShopCode neq ''.toString()">
+				AND contract_shop_code = #{contractShopCode}
+			</if>
+		</trim>
 		ORDER BY rental_customer_code DESC 
 		LIMIT #{startRow},#{rowPerPage}
 	</select>
@@ -40,6 +45,11 @@
 		SELECT
 			COUNT(*)
 		FROM rental_customer
+		<trim prefix="where" prefixOverrides="AND|OR">
+			<if test="contractShopCode neq null and contractShopCode neq ''.toString()">
+				AND contract_shop_code = #{contractShopCode}
+			</if>
+		</trim>
 	</select>
 	<!-- 코드 자동증가 -->
 	<select id="customerCodeCount" resultType="String">
@@ -73,4 +83,32 @@
 			,NOW()
 			,0)
 	</insert>
+	<update id="customerUpdate" parameterType="com.smart.rider.customer.dto.CustomerDTO">
+		UPDATE rental_customer
+			<trim prefix="SET" suffixOverrides=",">
+				<if test="rentalCustomerName neq null and rentalCustomerName neq ''.toString()">
+					rental_customer_name = #{rentalCustomerName},
+				</if>
+				<if test="rentalCustomerAddress neq null and rentalCustomerAddress neq ''.toString()">
+					rental_customer_address = #{rentalCustomerAddress},
+				</if>
+				<if test="rentalCustomerPhone neq null and rentalCustomerPhone neq ''.toString()">
+					rental_customer_phone = #{rentalCustomerPhone},
+				</if>
+				<if test="rentalCustomerStart neq null and rentalCustomerStart neq ''.toString()">
+					rental_customer_start = #{rentalCustomerStart},
+				</if>
+				<if test="rentalCustomerFinish neq null and rentalCustomerFinish neq ''.toString()">
+					rental_customer_finish = #{rentalCustomerFinish},
+				</if>
+				<if test="rentalCustomerOverdue neq null and rentalCustomerOverdue neq ''.toString()">
+					rental_customer_overdue = #{rentalCustomerOverdue},
+				</if>
+				<if test="rentalCustomerReturn neq null and rentalCustomerReturn neq ''.toString()">
+					rental_customer_return = #{rentalCustomerReturn},
+				</if>
+			</trim>
+		WHERE
+			rental_customer_code = #{rentalCustomerCode} 
+	</update>
 </mapper>

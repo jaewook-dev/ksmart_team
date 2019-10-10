@@ -19,7 +19,7 @@ public class CustomerService {
 		return customerMapper.getCustomerList(rentalCustomerCode);
 	}
 	//19.10.02 페이지 작업
-	public Map<String, Object> customerList(int currentPage) {
+	public Map<String, Object> customerList(int currentPage, String contractShopCode) {
 		//페이지 구성 할 행의 갯수
 		final int rowPerPage = 10;
 		//보여줄 첫번째 페이지번호 초기화
@@ -38,9 +38,10 @@ public class CustomerService {
 		
 		map.put("startRow", startRow);
 		map.put("rowPerPage", rowPerPage);
+		map.put("contractShopCode", contractShopCode);
 		
 		//전체행의 갯수를 가져오는 쿼리
-		double customerCount = customerMapper.getCustomerAllCount();
+		double customerCount = customerMapper.getCustomerAllCount(contractShopCode);
 							//올림함수 소수점이있으면 무조건 올림
 		int lastPage = (int)(Math.ceil(customerCount/rowPerPage));
 		
@@ -55,6 +56,7 @@ public class CustomerService {
 		resultMap.put("lastPageNum", lastPageNum);
 		return resultMap;
 	}
+	//19.10.10
 	public int customerInsert(CustomerDTO customerdto) {
 		String customerCode = "RC" + customerMapper.customerCodeCount();
 		
@@ -63,5 +65,8 @@ public class CustomerService {
 		}
 		customerdto.setRentalCustomerCode(customerCode);
 		return customerMapper.customerInsert(customerdto);
+	}
+	public int customerUpdate(CustomerDTO customerdto) {
+		return customerMapper.customerUpdate(customerdto);
 	}
 }

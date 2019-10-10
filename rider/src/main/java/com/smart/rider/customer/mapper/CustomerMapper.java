@@ -15,9 +15,11 @@ public interface CustomerMapper {
 	
 	public CustomerDTO getCustomerList(String rentalCustomerCode);
 	//19.10.02 페이지작업위한 작성
-	public int getCustomerAllCount();
-	
+	public int getCustomerAllCount(String contractShopCode);
+	//19.10.10
 	public String customerCodeCount();
 	
 	public int customerInsert(CustomerDTO customerdto);
+	
+	public int customerUpdate(CustomerDTO customerdto);
 }

@@ -84,7 +84,7 @@
 									<th scope="col">대여시작일</th>
 									<th scope="col">대여종료일</th>
 									<th scope="col">대여반납일</th>
-									<th scope="col">연체유무</th>
+									<th scope="col" class="text-center">연체유무</th>
 									<th scope="col" class="text-center">상세보기</th>
 									<th scope="col" class="text-center">반납</th>
  								</tr>
@@ -96,7 +96,7 @@
 									<td th:text="${customer.rentalCustomerStart}"></td>
 									<td th:text="${customer.rentalCustomerFinish}"></td>
 									<td th:text="${customer.rentalCustomerReturn}"></td>
-									<td th:text="${customer.rentalCustomerOverdue}"></td>
+									<td class="text-center" th:text="${customer.rentalCustomerOverdue}"></td>
 									<td class="text-center">
 										<a th:href="@{/getCustomerList(rentalCustomerCode=${customer.rentalCustomerCode})}" class="tm-product-delete-link">
 										<i class="far fa-address-card tm-product-delete-icon"></i></a>

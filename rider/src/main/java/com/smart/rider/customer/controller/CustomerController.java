@@ -43,8 +43,9 @@ public class CustomerController {
 	//19.10.02 페이지 작업
 	@GetMapping("/customerList")
 	public String customerList(Model model
+							,@RequestParam(value="contractShopCode", defaultValue="") String contractShopCode
 							 , @RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage) {
-		Map<String, Object> map = customerService.customerList(currentPage);
+		Map<String, Object> map = customerService.customerList(currentPage, contractShopCode);
 		
 		model.addAttribute("customerList", map.get("list"));
 		model.addAttribute("currentPage", map.get("currentPage"));
@@ -64,5 +65,10 @@ public class CustomerController {
 	public String goodsRentalUpdate(@RequestParam(value="goodsRentalCode")String goodsRentalCode,Model model) {
 		model.addAttribute("goodsRentalCode", goodsRentalService.getGoodsRentalList(goodsRentalCode));
 		return "customer/rentalGoodsDetail";
+	}
+	@PostMapping("/customerUpdate")
+	public String customerUpdate(CustomerDTO customerdto) {
+		customerService.customerUpdate(customerdto);
+		return "redirect:/customerList";
 	}
 }
