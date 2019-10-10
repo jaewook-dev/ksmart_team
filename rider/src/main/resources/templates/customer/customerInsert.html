@@ -14,11 +14,12 @@
 					<h2 class="tm-block-title">대여고객 등록</h2>
 					
 					<form action="/customerInsert" class="tm-signup-form row" method="post">
+						<input type="hidden" id="contractShopCode" name="contractShopCode" th:value="${session.SCODE}">
 						<div class="form-group input-group col-lg-12">
-							<input id="rentalGoods" name="rentalGoods" type="text" class="form-control bg-light text-dark" placeholder="대여상품입력" required="required"/>
+							<input id="goodsRentalCode" name="goodsRentalCode" type="text" class="form-control bg-light text-dark" placeholder="대여상품입력" required="required"/>
 							<div class="input-group-append">
 								<button class="btn btn-primary btn-block text-uppercase" type="button" id="rentalButton"
-										onclick="window.open('/goodsRentalList','대여상품','left='+(screen.availWidth-550)/2+',top='+(screen.availHeight-430)/10+',width=440,height=700,location=no,status=no,scrollbars=yes')">
+										onclick="window.open('/rentalGoodsList','대여상품','left='+(screen.availWidth-550)/4+',top='+(screen.availHeight-430)/28+',width=1050,height=770,location=no,status=no,scrollbars=yes')">
 									#검색
 								</button>
 							</div>
