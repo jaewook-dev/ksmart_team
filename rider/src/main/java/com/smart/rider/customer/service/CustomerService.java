@@ -69,4 +69,54 @@ public class CustomerService {
 	public int customerUpdate(CustomerDTO customerdto) {
 		return customerMapper.customerUpdate(customerdto);
 	}
+	public int returnButton(CustomerDTO customerdto) {
+		return customerMapper.returnButton(customerdto);
+	}
+	public Map<String, Object> searchCustomer(int currentPage, String contractShopCode, String returnNo, String overdueYes
+											 ,String select, String searchInput, String selectDate, String beginDate, String endDate) {
+		//페이지 구성 할 행의 갯수
+		final int rowPerPage = 10;
+		//보여줄 첫번째 페이지번호 초기화
+		int startPageNum = 1;
+		//보여줄 페이지번호의 갯수 초기화
+		int lastPageNum = rowPerPage;
+		
+		if(currentPage > (rowPerPage/2)) {
+			startPageNum = currentPage - ((lastPageNum/2)-1);
+			lastPageNum += (startPageNum-1);
+		}
+		// limit 적용될 값 startRow, 상수 ROW_PER_PAGE
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		int startRow = (currentPage-1)*rowPerPage;
+		
+		map.put("startRow", startRow);
+		map.put("rowPerPage", rowPerPage);
+		map.put("contractShopCode", contractShopCode);
+		map.put("returnNo", returnNo);
+		map.put("overdueYes", overdueYes);
+		map.put("select", select);
+		map.put("searchInput", searchInput);
+		map.put("selectDate", selectDate);
+		map.put("beginDate", beginDate);
+		map.put("endDate", endDate);
+		
+		//전체행의 갯수를 가져오는 쿼리
+		double customerCount = customerMapper.getSearchAllCount(contractShopCode, returnNo, overdueYes
+																,select, searchInput, selectDate, beginDate, endDate);
+							//올림함수 소수점이있으면 무조건 올림
+		int lastPage = (int)(Math.ceil(customerCount/rowPerPage));
+		
+		if(currentPage >= (lastPage-4)) {
+			lastPageNum = lastPage;
+		}
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		System.out.println(customerMapper.searchCustomer(map) + "<---검색 후");
+		resultMap.put("list", customerMapper.searchCustomer(map));
+		resultMap.put("currentPage", currentPage);
+		resultMap.put("lastPage", lastPage);
+		resultMap.put("startPageNum", startPageNum);
+		resultMap.put("lastPageNum", lastPageNum);
+		return resultMap;
+	}
 }

@@ -17,7 +17,7 @@
 							<label for="id">아이디</label>
 							<input id="memberId" name="memberId" type="text" class="form-control validate" maxlength="12" placeholder="ID" required="required"/>
 						</div>
-						<label th:if="${result ne null}" th:text="${result}"></label>
+						<label id="idCheckText"></label>
 						<div class="form-group">
 							<label for="password">비밀번호</label>
 							<input id="memberPw" name="memberPw" type="password" class="form-control validate"  maxlength="12" required="required" placeholder="PASSWORD"/>
@@ -60,17 +60,15 @@
 <th:block layout:fragment="customScript">
 
 <script>
-$(function(){
 	$('#memberId').blur(function() {
-		var memberId = $('#memberId').text();
+		var memberId = $('#memberId').val();
 		
 		$.ajax({
 			url : '/memberIdCheck',
-			type : 'POST',
+			type : 'GET',
 			data : memberId,
-			success : function(result) {
-				console.log(result + '<---------')
-				if (result == 1) {
+			success : function(data) {
+				if (data == 1) {
 					// 1 : 아이디가 중복되는 문구
 					$("#idCheckText").text("사용중인 아이디입니다!");
 					$("#memberId").val("");
@@ -81,7 +79,6 @@ $(function(){
 			}
 		});
 	});
-});
 
 $('#memberPw2').blur(function(){
 	if($('#memberPw').val() != $('#memberPw2').val()){

@@ -82,4 +82,30 @@ public class CustomerController {
 		customerService.customerUpdate(customerdto);
 		return "redirect:/customerList";
 	}
+	@GetMapping("/returnButton")
+	public String returnButton(CustomerDTO customerdto) {
+		customerService.returnButton(customerdto);
+		return "redirect:/customerList";
+	}
+	@PostMapping("/searchCustomer")
+	public String searchCustomer(@RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage
+							  	,@RequestParam(value="contractShopCode") String contractShopCode
+							  	,@RequestParam(value="returnNo", defaultValue="") String returnNo
+							  	,@RequestParam(value="overdueYes", defaultValue="") String overdueYes
+							  	,@RequestParam(value="select") String select
+							  	,@RequestParam(value="searchInput") String searchInput
+							  	,@RequestParam(value="selectDate") String selectDate
+							  	,@RequestParam(value="beginDate") String beginDate
+							  	,@RequestParam(value="endDate") String endDate
+							  	,Model model) {
+		System.out.println(returnNo + "<--체크확인");
+		Map<String, Object> map = customerService.searchCustomer(currentPage, contractShopCode, returnNo, overdueYes
+																,select, searchInput, selectDate, beginDate, endDate);
+		model.addAttribute("customerList", map.get("list"));
+		model.addAttribute("currentPage", map.get("currentPage"));
+		model.addAttribute("lastPage", map.get("lastPage"));
+		model.addAttribute("startPageNum", map.get("startPageNum"));
+		model.addAttribute("lastPageNum", map.get("lastPageNum"));
+		return "customer/customerList";
+	}
 }

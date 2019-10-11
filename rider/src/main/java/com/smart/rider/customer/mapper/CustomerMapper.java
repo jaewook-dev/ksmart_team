@@ -22,4 +22,11 @@ public interface CustomerMapper {
 	public int customerInsert(CustomerDTO customerdto);
 	
 	public int customerUpdate(CustomerDTO customerdto);
+	
+	public int returnButton(CustomerDTO customerdto);
+	
+	public int getSearchAllCount(String contractShopCode, String returnNo, String overdueYes, String select
+								,String searchInput, String selectDate, String beginDate, String endDate);
+	
+	public List<CustomerDTO> searchCustomer(Map<String, Object> map);
 }

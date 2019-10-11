@@ -80,7 +80,7 @@
 			,#{rentalCustomerStart}
 			,#{rentalCustomerFinish}
 			,'무'
-			,NOW()
+			,CURDATE()
 			,0)
 	</insert>
 	<update id="customerUpdate" parameterType="com.smart.rider.customer.dto.CustomerDTO">
@@ -111,4 +111,80 @@
 		WHERE
 			rental_customer_code = #{rentalCustomerCode} 
 	</update>
+	<update id="returnButton" parameterType="com.smart.rider.customer.dto.CustomerDTO">
+		UPDATE rental_customer
+		SET
+			rental_customer_return = CURDATE(),
+			rental_customer_overdue = IF(CURDATE()<![CDATA[ <= ]]>rental_customer_finish, '무', '유')
+		WHERE 
+			rental_customer_code = #{rentalCustomerCode}
+	</update>
+	<select id="getSearchAllCount" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM rental_customer
+		<trim prefix="where" prefixOverrides="AND|OR">
+			<if test="returnNo neq null and returnNo neq ''.toString()">
+				AND rental_customer_return = #{returnNo}
+			</if>
+			<if test="overdueYes neq null and overdueYes neq ''.toString()">
+				AND rental_customer_overdue = #{overdueYes}
+			</if>
+			<if test="searchInput neq null and searchInput neq ''.toString()">
+				AND ${select} Like CONCAT('%',#{searchInput},'%')
+			</if>
+			<if test="beginDate neq ''.toString() and endDate neq ''.toString()">
+				AND ${selectDate} between #{beginDate} and #{endDate}
+			</if>
+			<if test="beginDate eq ''.toString() and endDate neq ''.toString()">
+				AND ${selectDate} between '2000-01-01' and #{endDate}
+			</if>
+			<if test="beginDate neq ''.toString() and endDate eq ''.toString()">
+				AND ${selectDate} between #{beginDate} and NOW()
+			</if>
+			<if test="contractShopCode neq null and contractShopCode neq ''.toString()">
+				AND contract_shop_code = #{contractShopCode}
+			</if>
+		</trim>
+	</select>
+	<select id="searchCustomer" parameterType="String" resultType="com.smart.rider.customer.dto.CustomerDTO">
+		SELECT 	 rental_customer_code 		AS rentalCustomerCode
+				,contract_shop_code 		AS contractShopCode
+				,goods_rental_code 			AS goodsRentalCode
+				,rental_customer_name 		AS rentalCustomerName
+				,rental_customer_address 	AS rentalCustomerAddress
+				,rental_customer_phone 		AS rentalCustomerPhone
+				,rental_customer_start 		AS rentalCustomerStart
+				,rental_customer_finish 	AS rentalCustomerFinish
+				,rental_customer_overdue 	AS rentalCustomerOverdue
+				,rental_customer_date 		AS rentalCustomerDate
+				,rental_customer_return 	AS rentalCustomerReturn
+		FROM 
+			rental_customer
+		<trim prefix="where" prefixOverrides="AND|OR">
+			<if test="returnNo neq null and returnNo neq ''.toString()">
+				AND rental_customer_return = #{returnNo}
+			</if>
+			<if test="overdueYes neq null and overdueYes neq ''.toString()">
+				AND rental_customer_overdue = #{overdueYes}
+			</if>
+			<if test="searchInput neq null and searchInput neq ''.toString()">
+				AND ${select} Like CONCAT('%',#{searchInput},'%')
+			</if>
+			<if test="beginDate neq ''.toString() and endDate neq ''.toString()">
+				AND ${selectDate} between #{beginDate} and #{endDate}
+			</if>
+			<if test="beginDate eq ''.toString() and endDate neq ''.toString()">
+				AND ${selectDate} between '2000-01-01' and #{endDate}
+			</if>
+			<if test="beginDate neq ''.toString() and endDate eq ''.toString()">
+				AND ${selectDate} between #{beginDate} and NOW()
+			</if>
+			<if test="contractShopCode neq null and contractShopCode neq ''.toString()">
+				AND contract_shop_code = #{contractShopCode}
+			</if>
+		</trim>
+		ORDER BY rental_customer_code DESC 
+		LIMIT #{startRow},#{rowPerPage}
+	</select>
 </mapper>
