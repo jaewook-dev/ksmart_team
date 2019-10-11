@@ -64,10 +64,11 @@
 		var memberId = $('#memberId').val();
 		
 		$.ajax({
-			url : '/memberIdCheck',
+			url : "/memberIdCheck",
 			type : 'GET',
-			data : memberId,
+			data : {"memberId":$('#memberId').val()},
 			success : function(data) {
+				console.log('1이면 사용중 0이면 사용가능' + data);
 				if (data == 1) {
 					// 1 : 아이디가 중복되는 문구
 					$("#idCheckText").text("사용중인 아이디입니다!");
@@ -76,7 +77,11 @@
 				}else{
 					$("#idCheckText").text("사용가능한 아이디입니다.");
 				}
-			}
+			},
+			 error : function(error) {
+	                
+	                alert("error : " + error);
+			 }	                
 		});
 	});
 

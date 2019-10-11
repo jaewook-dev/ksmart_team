@@ -50,8 +50,8 @@ public class MemberController {
 	@RequestMapping(value = "/memberIdCheck", method = RequestMethod.GET)
 	@ResponseBody
 	public int idCheck(@RequestParam("memberId") String memberId) {
-		System.out.println(memberId + "<--memberId 중복체크");
 		int result = memberService.memberIdCheck(memberId);
+		System.out.println(result + "<--memberId 중복체크");
 		return result;
 	}
 
