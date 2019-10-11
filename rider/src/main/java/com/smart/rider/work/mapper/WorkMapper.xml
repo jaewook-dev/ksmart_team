@@ -43,7 +43,6 @@
 			,w.work_start AS workStart
 			,w.work_finish AS workFinish
 			,w.work_today AS workToday
-			,w.work_rest AS workRest
 			,w.work_date AS workDate
 			,m.member_name AS memberName
 		FROM 
@@ -100,7 +99,6 @@
 			,w.work_start AS workStart
 			,w.work_finish AS workFinish
 			,w.work_today AS workToday
-			,w.work_rest AS workRest
 			,w.work_date AS workDate
 			,m.member_name AS memberName
 		FROM 
@@ -172,7 +170,6 @@
 			,w.work_start AS workStart
 			,w.work_finish AS workFinish
 			,w.work_today AS workToday
-			,w.work_rest AS workRest
 			,w.work_date AS workDate
 			,m.member_name AS memberName
 		FROM 

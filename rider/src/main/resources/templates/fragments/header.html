@@ -36,7 +36,7 @@
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="/salesList">매출</a>
-                                <a class="dropdown-item" href="/inventoryList">!)재고</a>
+                                <!-- <a class="dropdown-item" href="/inventoryList">!)재고</a> -->
                                 <a class="dropdown-item" href="/spendShopList" th:if="${session.SLEVEL eq '관리자'}">지출관리</a>
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
              					   aria-haspopup="true" aria-expanded="false" th:if="${session.SLEVEL eq '점주'}">지출</a>
@@ -76,7 +76,7 @@
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" th:if="${session.SLEVEL ne '직원'}" href="/goodsDbList">상품DB관리</a>
-                                <a class="dropdown-item" href="/purchaseList">매입상풍</a>
+                                <a class="dropdown-item" href="/purchaseList">매입상품 및 재고현황</a>
                                 <a class="dropdown-item" href="/goodsList">판매상품</a>
                                 <a class="dropdown-item" href="/goodsRentalList">대여상품</a>
                                 
@@ -93,7 +93,9 @@
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             	<a class="dropdown-item" href="/shop">매장</a>
-                                <a class="dropdown-item" href="/customerList">!대여고객 관리</a>
+                                <a class="dropdown-item" th:if="${session.SLEVEL eq '관리자'}" href="/customerList">!대여고객 관리</a>
+                                <a class="dropdown-item" th:if="${session.SLEVEL eq '점주' or session.SLEVEL eq '직원'}" 
+                                   th:href="@{/customerList(contractShopCode=${session.SCODE})}">대여고객 관리</a>
                             </div>
                         </li>
                         <li class="nav-item dropdown">

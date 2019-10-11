@@ -24,22 +24,27 @@
 				g.goods_code =  gr.goods_code		
 				and
 				g.goods_database_code = gb.goods_database_code
-			<if test="searchInput != null and searchInput neq ''.toString()">
-			WHERE 
-				${select} Like CONCAT('%',#{searchInput},'%')
-			</if>
-			<if test="beginDate neq ''.toString() and endDate eq ''.toString()">
-	        	AND 
-	        		gr.goods_rental_date between #{beginDate} and NOW()		
-	        </if>
-	        <if test="beginDate eq ''.toString() and endDate neq ''.toString()">
-	        	AND 
-	        		gr.goods_rental_date between '2000-01-01' and #{endDate}
-	        </if>
-	        <if test="beginDate neq ''.toString() and endDate neq ''.toString()">
-	        	AND 
-	        		gr.goods_rental_date between #{beginDate} and #{endDate}
-	        </if>	
+							<where>
+				<if test="searchInput != null and searchInput neq ''.toString()">
+				AND
+					${select} Like CONCAT('%',#{searchInput},'%')
+				</if>
+				<if test="beginDate neq ''.toString() and endDate eq ''.toString()">
+		        	AND 
+		        		gr.goods_rental_date between #{beginDate} and NOW()		
+		        </if>
+		        <if test="beginDate eq ''.toString() and endDate neq ''.toString()">
+		        	AND 
+		        		gr.goods_rental_date between '2000-01-01' and #{endDate}
+		        </if>
+		        <if test="beginDate neq ''.toString() and endDate neq ''.toString()">
+		        	AND 
+		        		gr.goods_rental_date between #{beginDate} and #{endDate}
+		        </if>	
+				<if test="SCODE neq 'A'.toString()">
+        			AND gr.contract_shop_code  = #{SCODE}
+       			</if>
+			</where>
 	</select>
 	
 	
@@ -83,6 +88,7 @@
 			g.goods_database_code = gb.goods_database_code
 			where
 			gr.goods_rental_code = #{goodsRentalCode}
+			
 		
 	
 	</select>
@@ -101,7 +107,27 @@
 				g.goods_code =  gr.goods_code		
 				and
 				g.goods_database_code = gb.goods_database_code
-			
+				<where>
+				<if test="searchInput != null and searchInput neq ''.toString()">
+				AND
+					${select} Like CONCAT('%',#{searchInput},'%')
+				</if>
+				<if test="beginDate neq ''.toString() and endDate eq ''.toString()">
+		        	AND 
+		        		gr.goods_rental_date between #{beginDate} and NOW()		
+		        </if>
+		        <if test="beginDate eq ''.toString() and endDate neq ''.toString()">
+		        	AND 
+		        		gr.goods_rental_date between '2000-01-01' and #{endDate}
+		        </if>
+		        <if test="beginDate neq ''.toString() and endDate neq ''.toString()">
+		        	AND 
+		        		gr.goods_rental_date between #{beginDate} and #{endDate}
+		        </if>	
+				<if test="SCODE neq 'A'.toString()">
+        			AND gr.contract_shop_code  = #{SCODE}
+       			</if>
+			</where>
 	</select>
 	
 	<!-- 대여상품등록 INSERT  -->

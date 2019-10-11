@@ -67,6 +67,7 @@
 										<th scope="col">상품카테고리</th>
 										<th scope="col">대여보증금</th>										
 										<th scope="col">상품위치</th>
+										<th scope="col">상품상태</th>
 										<th scope="col">상품등록일자</th>
 										<th scope="col">상세보기</th>
 
@@ -80,6 +81,7 @@
 										<th th:text="${gr.goodsDbCategory}"></th>
 										<th th:text="${gr.goodsRentalDeposit}"></th>
 										<th th:text="${gr.goodsRentalPosition}"></th>
+											<th th:text="${gr.goodsState}"></th>
 										<th th:text="${gr.goodsRentalDate}"></th>
 										<td><a
 											th:href="@{/getGoodsRentalList(goodsRentalCode=${gr.goodsRentalCode})}"

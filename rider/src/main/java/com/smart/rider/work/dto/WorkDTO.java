@@ -10,7 +10,6 @@ public class WorkDTO extends MemberDTO{
 	private String workStart;
 	private String workFinish;
 	private String workToday;
-	private String workRest;
 	private String workDate;
 	public String getWorkCode() {
 		return workCode;
@@ -48,12 +47,6 @@ public class WorkDTO extends MemberDTO{
 	public void setWorkToday(String workToday) {
 		this.workToday = workToday;
 	}
-	public String getWorkRest() {
-		return workRest;
-	}
-	public void setWorkRest(String workRest) {
-		this.workRest = workRest;
-	}
 	public String getWorkDate() {
 		return workDate;
 	}
@@ -63,8 +56,7 @@ public class WorkDTO extends MemberDTO{
 	@Override
 	public String toString() {
 		return "WorkDTO [workCode=" + workCode + ", contractShopCode=" + contractShopCode + ", memberId=" + memberId
-						+ ", workStart=" + workStart + ", workFinish=" + workFinish + ", workToday=" + workToday + ""
-						+ ", workRest=" + workRest + ", workDate=" + workDate + "]";
+				+ ", workStart=" + workStart + ", workFinish=" + workFinish + ", workToday=" + workToday + ", workDate="
+				+ workDate + "]";
 	}
-	
 }

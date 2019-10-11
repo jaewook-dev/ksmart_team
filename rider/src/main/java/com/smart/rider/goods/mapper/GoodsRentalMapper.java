@@ -10,7 +10,7 @@ import com.smart.rider.goods.dto.GoodsRentalDTO;
 public interface GoodsRentalMapper {
 	
 	//대여상품검색기능추가
-	public List<GoodsRentalDTO> goodsRentalSearchList(String select ,String searchInput,String beginDate,String endDate);
+	public List<GoodsRentalDTO> goodsRentalSearchList(String select ,String searchInput,String beginDate,String endDate,String SCODE);
 	//대여상품삭제
 	public int goodsRentalDelete(String goodsRentalCode,String memberId,String memberPw);
 	//대여상품수정
@@ -22,6 +22,6 @@ public interface GoodsRentalMapper {
 	//대여상품등록 insert
 	public int goodsRentalInsert(GoodsRentalDTO goodsRentalDto);
 	//대여상품 리스트
-	public List<GoodsHapDTO> goodsRentalList();
+	public List<GoodsHapDTO> goodsRentalList(String select ,String searchInput,String beginDate,String endDate,String SCODE);
 	
 }

@@ -46,7 +46,7 @@ public class WorkController {
 			System.out.println(result + "<--실패");
 			return "work/goInsert";
 		}
-		System.out.println(result + "<--직원아이디확인");
+		//System.out.println(result + "<--직원아이디확인");
 		
 		workService.goInsert(workdto);
 		return "redirect:/workSuccess";
@@ -78,7 +78,7 @@ public class WorkController {
 			System.out.println(result + "<--퇴근실패");
 			return "work/leaveInsert";
 		}
-		System.out.println(result + "<--퇴근 직원아이디확인");
+		//System.out.println(result + "<--퇴근 직원아이디확인");
 		//System.out.println(workService.leaveInsert(workdto) + "<-----출근체크 X일때 퇴근등록");
 		int fail = workService.leaveInsert(workdto);
 		if(fail == 0) {
@@ -96,7 +96,7 @@ public class WorkController {
 							  ,@RequestParam(value="beginDate") String beginDate
 							  ,@RequestParam(value="endDate") String endDate
 							  ,Model model) {
-		System.out.println(beginDate + "~" + endDate + "<----날짜검색");
+		//System.out.println(beginDate + "~" + endDate + "<----날짜검색");
 		model.addAttribute("totalWork", workService.searchTotalWork(select, searchInput, beginDate, endDate));
 		Map<String, Object> map = workService.searchWork(currentPage, contractShopCode, select, searchInput, beginDate, endDate);
 		model.addAttribute("workList", map.get("list"));

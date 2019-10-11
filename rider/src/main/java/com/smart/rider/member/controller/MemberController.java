@@ -47,12 +47,12 @@ public class MemberController {
 		return "member/memberList";
 	}
 	//19.09.16작성
-	@RequestMapping(value = "/memberIdCheck", method = RequestMethod.POST)
+	@RequestMapping(value = "/memberIdCheck", method = RequestMethod.GET)
 	@ResponseBody
-	public String idCheck(@RequestParam("memberId") String memberId) {
-		//System.out.println(memberId + "<--memberId 중복체크");
+	public int idCheck(@RequestParam("memberId") String memberId) {
+		System.out.println(memberId + "<--memberId 중복체크");
 		int result = memberService.memberIdCheck(memberId);
-		return String.valueOf(result);
+		return result;
 	}
 
 	@GetMapping("/getMemberList")

@@ -41,7 +41,7 @@ public class SalesService {
 	//매출등록
 	public int salesInsert(SalesDTO salesDto) {
 		String salesCode = "SI"+salesMapper.salesCodeCount();
-		System.out.println(salesCode+"<<<<<<<<<<<<<<<<<코드확인");
+		//System.out.println(salesCode+"<<<<<<<<<<<<<<<<<코드확인");
 		
 		
 		  if(salesCode.equals("SInull")) {

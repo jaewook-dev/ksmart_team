@@ -132,7 +132,7 @@ public class WorkService{
 	}
 	public List<WorkDTO> searchTotalWork(String select, String searchInput, String beginDate, String endDate) {
 		
-		System.out.println(workMapper.searchTotalWork(select, searchInput, beginDate, endDate) + "<---total할것");
+		//System.out.println(workMapper.searchTotalWork(select, searchInput, beginDate, endDate) + "<---total할것");
 		
 		return workMapper.searchTotalWork(select, searchInput, beginDate, endDate);
 	}
