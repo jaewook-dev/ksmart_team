@@ -14,7 +14,8 @@ import com.smart.rider.contract.service.UnitService;
 @Controller
 public class UnitController {
 
-	@Autowired UnitService unitService;
+	@Autowired 
+	private UnitService unitService;
 	
 	//계약단가표 생성화면
 	@GetMapping("/unitInsert.html")
@@ -34,7 +35,7 @@ public class UnitController {
 	//계약단가표 생성하기
 	@PostMapping("/unitInsert")
 	public String unitInsert(UnitDTO unit, HttpSession session) {
-		System.out.println(unit.toString() + "<-- unit.toString");
+		//System.out.println(unit.toString() + "<-- unit.toString");
 		unitService.unitInsert(unit,session);
 
 		return "redirect:/unitList.html";

@@ -10,11 +10,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.smart.rider.contract.dto.AgreementDTO;
 import com.smart.rider.contract.dto.ContractDTO;
-import com.smart.rider.contract.dto.ContractMemberDTO;
 import com.smart.rider.contract.dto.ManagementDTO;
 import com.smart.rider.contract.dto.UnitDTO;
 import com.smart.rider.contract.mapper.ContractMapper;
 import com.smart.rider.contract.mapper.ManagementMapper;
+import com.smart.rider.main.dto.SearchDTO;
 
 @Service
 @Transactional
@@ -32,12 +32,17 @@ public class ContractService {
 		return contractMapper.unitNew();
 	}
 	
-	//단가표 목록
+	//계약 목록
 	public List<ContractDTO> contractList(){
 		return contractMapper.contractList();
 	}
 	
-	//단가표 생성하기
+	//계약금 검색
+	public List<ContractDTO> contractSearchList(SearchDTO search){
+		return contractMapper.contractSearchList(search);
+	}
+	
+	//계약  생성하기
 	public int contractInsert(ContractDTO contract,HttpSession session,ManagementDTO management) {
 		//계약코드 생성
 		String contractCode = "C"+ contractMapper.contractCodeMax();
@@ -99,7 +104,13 @@ public class ContractService {
 	
 	//계약 내용 및 계약금 납부 현황 보기
 	public List<AgreementDTO> getAgreementList(String agreementCode){
-		
 		return contractMapper.getAgreementList(agreementCode);
 	}
+	
+	//특정 계약코드로 데이터조회
+	public List<ContractDTO> getContractList(String contractCode){
+		return contractMapper.getContractList(contractCode);
+	}
+	
+
 }

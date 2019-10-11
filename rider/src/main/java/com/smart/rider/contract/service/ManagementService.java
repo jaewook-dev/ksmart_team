@@ -22,7 +22,6 @@ public class ManagementService {
 	
 	//계약단가표 생성
 	public int managementInsert(ManagementDTO management,HttpSession session) {
-	
 		return managementMapper.managementInsert(management);
 	}
 	
@@ -69,19 +68,16 @@ public class ManagementService {
 	
 	//계약금 상세조회 
 	public List<ManagementDTO> getManagementList(String managementCode){
-		
 		return managementMapper.getManagementList(managementCode);
 	}
 	
 	//계약금 수정하기
 	public int managementUpdate(ManagementDTO management) {
-		
 		return managementMapper.managementUpdate(management);
 	}
 	
 	//계약금 검색
 	public List<ContractManagementDTO> managementSearchList(SearchDTO search){
-		
 		return managementMapper.managementSearchList(search);
 	}
 }
