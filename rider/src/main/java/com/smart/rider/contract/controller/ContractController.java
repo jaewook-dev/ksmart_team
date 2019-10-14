@@ -121,28 +121,27 @@ public class ContractController {
 	
 	//관리자 ,특정 계약코드 조회
 	@GetMapping("/getContractList")
-	public String getContractList(@RequestParam(value="contractCode")String contractCode,Model model){
+	public String getContractList(@RequestParam(value="contractCode")String contractCode
+								,@RequestParam(value="contractUnitCode")String contractUnitCode
+								,Model model){
 		//System.out.println(contractCode + "<--계약코드 값");
+		//System.out.println(contractUnitCode + "입력받은 계약단가표 값");
 		List<ContractDTO> contractList = contractService.getContractList(contractCode);
 		//System.out.println(contractList + "계약코드 값으로 데이터 조회 결과 확인");
 		model.addAttribute("contractList", contractList);
 		if(contractList != null) {
 		model.addAttribute("contractMethod", contractList.get(0).getContractMethod());
 		//System.out.println("납부방식에 담겨 있는값 :" +contractList.get(0).getContractMethod());
-		String contractUnitCode = contractList.get(0).getContractUnitCode();
+		String unitCode = contractList.get(0).getContractUnitCode();
 		model.addAttribute("contractUnitCode", contractUnitCode);
-		//System.out.println(contractUnitCode + " <-- 담겨있는 코드값");
-		}
-		//수정시 자동으로
+		//System.out.println(unitCode + " <-- 담겨있는 코드값");
+			 		}
+		//수정시 계약 단가표를 수정 할 수 있게
 		List<UnitDTO> uList =  unitService.unitList();
 		model.addAttribute("uList", uList);
+		List<UnitDTO> unitList = contractService.getUnitList(contractUnitCode);
+		model.addAttribute("unitList", unitList);
 		return "contract/contractUpdate";
 	}
-	@GetMapping("/unitCode")
-	public String unitCode(@RequestParam(value="contractUnitCode")String contractUnitCode) {
-		//System.out.println(contractUnitCode + "담긴값");
-		
-		
-		return "contract/contractUpdate";
-	}
+
 }

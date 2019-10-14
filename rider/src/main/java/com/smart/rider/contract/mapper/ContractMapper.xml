@@ -10,10 +10,10 @@
 	<select id="unitNew" resultType="com.smart.rider.contract.dto.UnitDTO">
 		SELECT 
 			contract_unit_code 		AS contractUnitCode
-			,member_id 			AS memberId
+			,member_id 				AS memberId
 			,contract_unit_month 	AS contractUnitMonth
-			,contract_unit_oneyear AS contractUnitOneyear
-			,contract_unit_twoyear AS contractUnitTwoyear
+			,contract_unit_oneyear 	AS contractUnitOneyear
+			,contract_unit_twoyear 	AS contractUnitTwoyear
 			,contract_unit_date 	AS contractUnitDate
  		FROM contract_unit ORDER by contract_unit_date DESC LIMIT 1 
 	</select>
@@ -167,6 +167,19 @@
 			,contract_date 			AS contractDate
  		FROM contract
  		Where contract_code = #{contratCode};
+	</select>
+	
+	<!--특정 계약코드로 조회 -->
+	<select id="getUnitList" parameterType="String" resultType="com.smart.rider.contract.dto.UnitDTO">
+		SELECT 
+			contract_unit_code 		AS contractUnitCode
+			,member_id 				AS memberId
+			,contract_unit_month 	AS contractUnitMonth
+			,contract_unit_oneyear 	AS contractUnitOneyear
+			,contract_unit_twoyear	AS contractUnitTwoyear
+			,contract_unit_date 	AS contractUnitDate
+ 		FROM contract_unit
+ 		Where contract_unit_code = #{contractUnitCode};
 	</select>
 	
 

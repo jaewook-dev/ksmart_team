@@ -112,5 +112,9 @@ public class ContractService {
 		return contractMapper.getContractList(contractCode);
 	}
 	
+	//특정 단가표코드로 데이터 조회
+	public List<UnitDTO> getUnitList(String contractUnitCode){
+		return contractMapper.getUnitList(contractUnitCode);
+	}
 
 }

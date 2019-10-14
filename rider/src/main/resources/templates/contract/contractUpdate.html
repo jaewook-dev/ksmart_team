@@ -15,6 +15,9 @@
 					</div>
 					<div class="row tm-edit-product-row" >
 						<div class="col-xl-6 col-lg-6 col-md-12" >
+						
+						<input type="hidden" name="contractCode" id="contractCode" th:value="${clist.contractCode}">
+						
 						<!-- 계약금 납입방식 -->
 								<div class="form-group mb-3">
 									<label>계약금 납입방식</label> <select id = "contractMethod"
@@ -65,7 +68,7 @@
 						<div class="col-xl-6 col-lg-6 col-md-12 mx-auto mb-4 form-group mb-3" >	
 						<label>계약금 코드 선택</label>
 						<select id="contractUnitCode" name= "contractUnitCode" class="custom-select tm-select-accounts" >
-							<option th:each="uList : ${uList}" th:text="${uList.contractUnitCode}" th:value="${uList.contractUnitCode}"> </option>
+							<option th:each="uList : ${uList}" th:text="${uList.contractUnitCode}"> </option>
 						</select>
 						<br/><br/><br/>
 						<table class="table">
@@ -77,10 +80,10 @@
                                 </tr>
                             </thead>
                             <tbody>
-                             	<tr th:each="uList : ${uList}">
-									<th id="unitMonth" th:text="${uList.contractUnitMonth}"></th>
-									<th id="unitOneYear" th:text="${uList.contractUnitOneyear}"></th>
-									<th id="unitTweYear" th:text="${uList.contractUnitTwoyear}"></th>
+                             	<tr th:each="unitList : ${unitList}">
+									<th id="unitMonth" th:text="${unitList.contractUnitMonth}"></th>
+									<th id="unitOneYear" th:text="${unitList.contractUnitOneyear}"></th>
+									<th id="unitTweYear" th:text="${unitList.contractUnitTwoyear}"></th>
                                 </tr>
                             </tbody>
 						</table>
@@ -101,12 +104,6 @@
 	
 
 	
-	<script src="js/jquery-3.3.1.min.js"></script>
-	<!-- https://jquery.com/download/ -->
-	<script src="jquery-ui-datepicker/jquery-ui.min.js"></script>
-	<!-- https://jqueryui.com/download/ -->
-	<script src="js/bootstrap.min.js"></script>
-	<!-- https://getbootstrap.com/ -->
 
 	</form>
 </th:block>
@@ -121,20 +118,27 @@
 <script>
 var unitCode = '[[${contractUnitCode}]]';
 var cuCode = $('#contractUnitCode').val()
-console.log(unitCode);
+var contractCode= $('#contractCode').val()
+//console.log(contractCode);
+//console.log(unitCode);
+//console.log($('#contractUnitCode').val());
 
 $('#contractUnitCode').val(unitCode);
 
 $('#contractUnitCode').change(function(){
-	location.href='/unitCode?contractUnitCode='+cuCode;
-});
+	location.href='/getContractList?contractUnitCode='+$('#contractUnitCode').val()+'&contractCode='+contractCode;
+}); 
 
-
+/* 모델에 담겨 있는 납부 방식을 가져와서 납부 방식이 값이 같을 경우에 넣는다. */
 var test = '[[${contractMethod}]]';
+//console.log(test);
 
 if(test == '1년 일시불' || test == '2년 일시불' || test == '월 납부'){
 	$('#contractMethod').val(test);
-}
+} 
+
+
+
 
 //textarea 담기는 내용
 $('#textareaId').val('1.상태변경은 오프라인 문의 \n\n 2.서비스종료일자 + D10, 유효기간시 까지 서비스 제공, 유효기간 지날시 계약종료 \n\n 3.30일 연체시 이용 중지  \n\n 4.중도 해지시 남은 기간에 따른 금액의 60% 환불')

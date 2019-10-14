@@ -81,7 +81,7 @@
 								<th th:text="${cList.contractMethod}"></th>
 								<th th:text="${cList.contractDate}"></th>
 								<td class="text-center"><a
-											th:href="@{getContractList(contractCode=${cList.contractCode})}"
+											th:href="@{getContractList(contractCode=${cList.contractCode},contractUnitCode=${cList.contractUnitCode})}"
 											class="tm-product-delete-link"> <i
 												class="fas fa-check tm-product-check-icon"
 												style="color: white"></i>

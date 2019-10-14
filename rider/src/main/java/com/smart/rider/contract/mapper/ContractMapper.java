@@ -36,4 +36,6 @@ public interface ContractMapper {
 	//특정 계약코드로 데이터 조회
 	public List<ContractDTO> getContractList(String contractCode);
 
+	//특정 단가표코드로 데이터 조회
+	public List<UnitDTO> getUnitList(String contractUnitCode);
 }
