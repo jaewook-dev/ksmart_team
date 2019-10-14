@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.smart.rider.member.mapper.EmployeeMapper">
+	
+	<!-- 직원 등록처리 -->
 	<insert id="employeeInsert" parameterType="com.smart.rider.member.dto.MemberDTO">
 		INSERT INTO member(
 			 member_id
@@ -24,9 +26,11 @@
 			,#{memberEmail}
 			,#{memberPhone}
 			,#{contractShopCode}
-			,NOW()
-			,NOW())
+			,CURDATE()
+			,CURDATE())
 	</insert>
+	
+	<!-- 직원 목록 -->
 	<select id="employeeList" parameterType="String" resultType="com.smart.rider.member.dto.MemberDTO">
 		SELECT 
 			 member_id 			AS memberId
@@ -44,7 +48,8 @@
 		WHERE
 			contract_shop_code = #{contractShopCode}
 	</select>
-	<!-- 19.09.20작성 -->
+	
+	<!-- 19.09.20작성 직원 상세보기 -->
 	<select id="getEmployeeList" parameterType="String" resultType="com.smart.rider.member.dto.MemberDTO">
 		SELECT 
 			 member_id 			AS memberId
@@ -60,7 +65,8 @@
 		WHERE
 			member_id 			= #{memberId}
 	</select>
-	<!-- 19.09.25작성 -->
+	
+	<!-- 19.09.25작성 직원 수정처리 -->
 	<update id="employeeUpdate" parameterType="com.smart.rider.member.dto.MemberDTO">
 		UPDATE member
 		SET
@@ -69,11 +75,13 @@
 			,member_address		= #{memberAddress}
 			,member_email		= #{memberEmail}
 			,member_phone		= #{memberPhone}
-			,member_update_date	= NOW()
+			,member_update_date	= CURDATE()
 			,contract_shop_code	= #{contractShopCode}
 		WHERE
 			member_id = #{memberId}
 	</update>
+	
+	<!-- 직원 탈퇴처리 -->
 	<delete id="employeeDelete" parameterType="String">
 		DELETE 
 		FROM member
@@ -81,7 +89,8 @@
 			member_id = #{memberId}
 		AND member_pw = #{memberPw}
 	</delete>
-	<!-- 19.09.26작성 -->
+	
+	<!-- 19.09.26작성 직원 검색 -->
 	<select id="searchEmployee" parameterType="String" resultType="com.smart.rider.member.dto.MemberDTO">
 		SELECT 
 			 member_id 			AS memberId

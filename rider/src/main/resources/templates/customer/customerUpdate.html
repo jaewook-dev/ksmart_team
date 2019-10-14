@@ -16,12 +16,13 @@
 						<div class="form-group col-lg-6">
 							<label for="name">이름</label>
 							<input id="rentalCustomerName" name="rentalCustomerName" type="text" 
-								   th:value="${customerList.rentalCustomerName}" class="form-control validate" />
+								   th:value="${customerList.rentalCustomerName}" class="form-control validate" required="required"/>
 						</div>
+						<!-- 대여한 상품 상세보기 -->
 						<div class="form-group col-lg-6">
 							<label for="rentalGoods">대여상품</label>
 							<button class="btn btn-outline-info form-control validate" id="rentalGoods" type="button"
-									th:text="${customerList.goodsRentalCode}" onclick="goodsDetail()">
+									th:text="${customerList.goodsRentalCode}" onclick="goodsDetail()" >
 							</button>
 						</div>
 						<div class="form-group col-lg-6">
@@ -37,12 +38,12 @@
 						<div class="form-group col-lg-6">
 							<label for="start">대여시작일</label>
 							<input id="rentalCustomerStart" name="rentalCustomerStart" type="date" 
-								   th:value="${customerList.rentalCustomerStart}" class="form-control validate" />
+								   th:value="${customerList.rentalCustomerStart}" class="form-control validate" required="required"/>
 						</div>
 						<div class="form-group col-lg-6">
 							<label for="finish">대여종료일</label>
 							<input id="rentalCustomerFinish" name="rentalCustomerFinish" type="date" 
-								   th:value="${customerList.rentalCustomerFinish}" class="form-control validate" />
+								   th:value="${customerList.rentalCustomerFinish}" class="form-control validate" required="required"/>
 						</div>
 						<div class="form-group col-lg-6">
 							<label for="date">대여고객등록일자</label>
@@ -52,7 +53,7 @@
 						<div class="form-group col-lg-6">
 							<label for="return">대여반납일자</label>
 							<input id="rentalCustomerReturn" name="rentalCustomerReturn" type="date" 
-								   th:value="${customerList.rentalCustomerReturn}" class="form-control validate" />
+								   th:value="${customerList.rentalCustomerReturn}" class="form-control validate"/>
 						</div>
 						<div class="form-group col-lg-6">
 							<label for="overdue">연체유무</label>

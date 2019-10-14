@@ -21,11 +21,14 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 	
+	//회원 등록화면
 	@GetMapping("/memberInsert")
 	public String memberInsert() {
+		
 		return "member/memberInsert";
 	}
 	
+	//회원 등록처리
 	@PostMapping("/memberInsert")
 	public String memberInsert(MemberDTO memberdto) {
 		memberService.memberInsert(memberdto);
@@ -33,28 +36,34 @@ public class MemberController {
 		return "redirect:/login";
 	}
 	
+	//회원 목록가져오기
 	@GetMapping("/memberList")
-	public String memberList(Model model
-						    ,@RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage) {
+	public String memberList(@RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage
+						    ,Model model) {
+		//계약된 매장들가져오기
 		model.addAttribute("utilityShop", memberService.utilityShop());
 		Map<String, Object> map = memberService.memberList(currentPage);
 		
-		model.addAttribute("memberList", map.get("list"));
-		model.addAttribute("currentPage", map.get("currentPage"));
-		model.addAttribute("lastPage", map.get("lastPage"));
-		model.addAttribute("startPageNum", map.get("startPageNum"));
-		model.addAttribute("lastPageNum", map.get("lastPageNum"));
+		model.addAttribute("memberList"	 ,map.get("list"));
+		model.addAttribute("currentPage" ,map.get("currentPage"));
+		model.addAttribute("lastPage"	 ,map.get("lastPage"));
+		model.addAttribute("startPageNum",map.get("startPageNum"));
+		model.addAttribute("lastPageNum" ,map.get("lastPageNum"));
+		
 		return "member/memberList";
 	}
-	//19.09.16작성
+	
+	//19.09.16작성 아이디 중복체크
 	@RequestMapping(value = "/memberIdCheck", method = RequestMethod.GET)
 	@ResponseBody
 	public int idCheck(@RequestParam("memberId") String memberId) {
 		int result = memberService.memberIdCheck(memberId);
-		System.out.println(result + "<--memberId 중복체크");
+		//System.out.println(result + "<--memberId 중복체크");
+		
 		return result;
 	}
 
+	//회원 상세보기
 	@GetMapping("/getMemberList")
 	public String getMemberList(@RequestParam(value="memberId") String memberId, Model model) {
 		//System.out.println(memberId + "<--상세보기id");
@@ -62,12 +71,16 @@ public class MemberController {
 
 		return "member/memberUpdate";
 	}
-	//19.09.17작성
+	
+	//19.09.17작성 회원수정
 	@PostMapping("/memberUpdate")
 	public String memberUpdate(MemberDTO memberdto) {
 		memberService.memberUpdate(memberdto);
+		
 		return "redirect:/memberList";
 	}
+	
+	//회원 검색하기
 	@PostMapping("/searchMember")
 	public String searchMember(@RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage
 							  ,@RequestParam(value="select") String select
@@ -77,30 +90,38 @@ public class MemberController {
 							  ,@RequestParam(value="shopCode") String shopCode
 							  ,Model model) {
 		//System.out.println(shopCode +"<---검색매장");
+		//계약된 매장가져오기
 		model.addAttribute("utilityShop", memberService.utilityShop());
+		
 		Map<String, Object> map = memberService.searchMember(currentPage, select, searchInput, beginDate, endDate, shopCode);
-		model.addAttribute("memberList", map.get("list"));
-		model.addAttribute("currentPage", map.get("currentPage"));
-		model.addAttribute("lastPage", map.get("lastPage"));
-		model.addAttribute("startPageNum", map.get("startPageNum"));
-		model.addAttribute("lastPageNum", map.get("lastPageNum"));
+		model.addAttribute("memberList"	 ,map.get("list"));
+		model.addAttribute("currentPage" ,map.get("currentPage"));
+		model.addAttribute("lastPage"	 ,map.get("lastPage"));
+		model.addAttribute("startPageNum",map.get("startPageNum"));
+		model.addAttribute("lastPageNum" ,map.get("lastPageNum"));
+		
 		return "member/memberList";
 	}
+	
 	//19.09.18작성
 	//비밀번호 수정화면 팝업으로 띄우기
 	@GetMapping("/changePassword")
 	public String memberPassword(@RequestParam(value="memberId") String memberId, Model model) {
 		model.addAttribute("memberId", memberId);
+		
 		return "member/memberPassword";
 	}
-	//19.09.20작성
+	
+	//19.09.20작성 회원 탈퇴 화면
 	@GetMapping("/memberDelete")
 	public String memberDelete(@RequestParam(value="memberId") String memberId, Model model) {
 		//System.out.println(memberId + "<--딜리트 아이디");
 		model.addAttribute("memberId", memberId);
+		
 		return "/member/memberDelete";
 	}
-	//19.09.23 작성
+	
+	//19.09.23 작성 회원 탈퇴처리
 	@PostMapping("/memberDelete")
 	public String memberDelete(MemberDTO memberdto, Model model) {
 		int result = memberService.memberDelete(memberdto.getMemberId(), memberdto.getMemberPw());
@@ -109,20 +130,28 @@ public class MemberController {
 			model.addAttribute("memberId", memberdto.getMemberId());
 			return "member/memberDelete";
 		}
+		
 		return "redirect:/memberList";
 	}
+	
+	//관리자일때 목록에서 삭제
 	@GetMapping("/levelDelete")
 	public String levelDelete(@RequestParam(value="memberId") String memberId, Model model) {
 		//System.out.println(memberId + "<--바로 삭제할 아이디");
 		model.addAttribute("deleteMember", memberService.levelDelete(memberId));
+		
 		return "redirect:/memberList";
 	}
+	
 	//19.09.25작성
 	//팝업창 완료 메시지
 	@GetMapping("/memberSuccess")
 	public String memberSuccess() {
+		
 		return "member/memberSuccess";
 	}
+	
+	//상세보기에서 비밀번호 수정처리
 	@PostMapping("/updatePassword")
 	public String changePassword(@RequestParam(value="memberPw2") String memberPw2, MemberDTO memberdto, Model model) {
 		int result = memberService.changePassword(memberdto.getMemberId(), memberdto.getMemberPw(), memberPw2);
@@ -131,6 +160,7 @@ public class MemberController {
 			model.addAttribute("memberId", memberdto.getMemberId());
 			return "member/memberPassword";
 		}
+		
 		return "redirect:/memberSuccess";
 	}
 }
