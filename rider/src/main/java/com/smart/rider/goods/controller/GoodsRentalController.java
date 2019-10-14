@@ -95,7 +95,7 @@ public class GoodsRentalController {
 	
 	
 	@GetMapping("/goodsRentalList")	
-	//대여상품 리스트조회q
+	//대여상품 리스트조회
 	public String rentalList(Model model,HttpSession session) {
 		String select = null;
 		String searchInput = "";

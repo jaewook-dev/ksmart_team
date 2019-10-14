@@ -60,7 +60,7 @@ public class GoodsRentalService {
 		Map<String,Object> map = new HashMap<String, Object>();
 		
 		if(SLEVEL.equals("관리자")) {
-			SCODE="A";
+			SCODE="A";	
 			map.put("rList", goodsRentalMapper.goodsRentalList(SCODE, searchInput, select, beginDate, endDate));
 			return map;
 		}

@@ -66,10 +66,12 @@
 				 p.*
 				 ,g.*
 				 ,gb.*
+				 ,s.shop_name
 				FROM purchase p LEFT JOIN goods g 
 				ON p.purchase_code = g.purchase_code
 				LEFT JOIN goods_database gb
 				ON p.goods_database_code = gb.goods_database_code
+				INNER  JOIN shop s
 				WHERE g.purchase_code IS NULL 
 		<if test="searchInput neq null and searchInput neq ''.toString()">
 			AND
@@ -215,6 +217,7 @@
     	<result column="goods_database_date"    	property="goodsDbDate"/>
     	<result column="account_market"    	property="accountMarket"/>
     	<result column="goods_state"    	property="goodsState"/>
+    	<result column="shop_name"    	property="shopName"/>
     	
 	</resultMap>
 </mapper>

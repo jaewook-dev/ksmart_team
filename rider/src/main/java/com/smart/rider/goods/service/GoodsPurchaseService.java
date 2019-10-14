@@ -77,7 +77,7 @@ public class GoodsPurchaseService {
 	public int purchaseInsert(GoodsPurchaseDTO goodsPurchaseDto) {
 		//코드자동증가 
 		String purchaseCode = "P" + goodsPurchaseMapper.purchaseCodeCount();
-		System.out.println(purchaseCode+"lllllllllllllllllllllllllll");
+		//System.out.println(purchaseCode+"lllllllllllllllllllllllllll");
 		
 		
 		if(purchaseCode.equals("Pnull")) {

@@ -11,7 +11,7 @@ import com.smart.rider.sales.dto.SalesDTO;
 public interface SalesMapper {
 	
 	//매출검색
-	public List<SalesDTO> salesSearchList(String select ,String searchInput,String beginDate,String endDate);
+	public List<SalesDTO> salesSearchList(String select ,String searchInput,String beginDate,String endDate,String SCODE);
 	//매출삭제
 	public int salesDelete(String salesCode,String memberId,String memberPw);
 	//매출수정
@@ -21,7 +21,7 @@ public interface SalesMapper {
 	//매출등록
 	public int salesInsert(SalesDTO salesDto);
 	//매출리스트
-	public List<GoodsHapDTO> salesList();
+	public List<GoodsHapDTO> salesList(String select ,String searchInput,String beginDate,String endDate,String SCODE);
 	//insert 시 코드자동증가
 	public String salesCodeCount();
 	
