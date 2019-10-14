@@ -1,6 +1,8 @@
 package com.smart.rider.goods.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,8 +21,8 @@ public class GoodsRentalService {
 
 	
 	//대여상품검색추가
-	public List<GoodsRentalDTO> goodsRentalSearchList(String select ,String searchInput,String beginDate,String endDate){
-		List<GoodsRentalDTO> search = goodsRentalMapper.goodsRentalSearchList(select, searchInput, beginDate, endDate);
+	public List<GoodsRentalDTO> goodsRentalSearchList(String select ,String searchInput,String beginDate,String endDate,String SCODE){
+		List<GoodsRentalDTO> search = goodsRentalMapper.goodsRentalSearchList(select, searchInput, beginDate, endDate, SCODE);
 		return search;
 	}
 	//대여상품 삭제하기
@@ -53,8 +55,17 @@ public class GoodsRentalService {
 	}
 	
 	//대여상품 리스트조회
-	public List<GoodsHapDTO> goodsRentalList(){
-		return goodsRentalMapper.goodsRentalList();
+	public Map<String,Object> goodsRentalList(String select ,String searchInput,String beginDate,String endDate,String SCODE,String SLEVEL){
+		
+		Map<String,Object> map = new HashMap<String, Object>();
+		
+		if(SLEVEL.equals("관리자")) {
+			SCODE="A";	
+			map.put("rList", goodsRentalMapper.goodsRentalList(SCODE, searchInput, select, beginDate, endDate));
+			return map;
+		}
+			map.put("rList", goodsRentalMapper.goodsRentalList(select, searchInput, beginDate, endDate, SCODE));
+		return map;
 	}
 
 	

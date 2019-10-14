@@ -24,10 +24,10 @@ public class GoodsHapDTO {
 	private String contractShopCode;
 	private int goodsPay;
 	private String goodsPosition;
-	private char goodsRental;
+	private String goodsRental;
 	private String goodsState;
-	private char goodsCompletionState;
-	private char goodsRentalState;
+	private String goodsCompletionState;
+	private String goodsRentalState;
 	private String goodsInventoryDate;
 	private String goodsDate;	
 	private String accountCode;	
@@ -57,13 +57,6 @@ public class GoodsHapDTO {
 	private String salesType;
 	private String salesAmount;	
 	private String salesDate;
-	
-	
-	
-	
-	
-
-	
 	@Override
 	public String toString() {
 		return "GoodsHapDTO [goodsDbCode=" + goodsDbCode + ", memberId=" + memberId + ", goodsDbName=" + goodsDbName
@@ -88,105 +81,6 @@ public class GoodsHapDTO {
 				+ ", salesGroupCode=" + salesGroupCode + ", salesPayType=" + salesPayType + ", salesType=" + salesType
 				+ ", salesAmount=" + salesAmount + ", salesDate=" + salesDate + "]";
 	}
-	public String getGoodsDbDate() {
-		return goodsDbDate;
-	}
-	public void setGoodsDbDate(String goodsDbDate) {
-		this.goodsDbDate = goodsDbDate;
-	}
-	public String getSalesCode() {
-		return salesCode;
-	}
-	public void setSalesCode(String salesCode) {
-		this.salesCode = salesCode;
-	}
-	public String getSalesGroupCode() {
-		return salesGroupCode;
-	}
-	public void setSalesGroupCode(String salesGroupCode) {
-		this.salesGroupCode = salesGroupCode;
-	}
-	public String getSalesPayType() {
-		return salesPayType;
-	}
-	public void setSalesPayType(String salesPayType) {
-		this.salesPayType = salesPayType;
-	}
-	public String getSalesType() {
-		return salesType;
-	}
-	public void setSalesType(String salesType) {
-		this.salesType = salesType;
-	}
-	public String getSalesAmount() {
-		return salesAmount;
-	}
-	public void setSalesAmount(String salesAmount) {
-		this.salesAmount = salesAmount;
-	}
-	public String getSalesDate() {
-		return salesDate;
-	}
-	public void setSalesDate(String salesDate) {
-		this.salesDate = salesDate;	
-	}
-	
-	public String getGoodsRentalCode() {
-		return goodsRentalCode;
-	}
-	public void setGoodsRentalCode(String goodsRentalCode) {
-		this.goodsRentalCode = goodsRentalCode;
-	}
-	public String getGoodsRentalPeriodPay() {
-		return goodsRentalPeriodPay;
-	}
-	public void setGoodsRentalPeriodPay(String goodsRentalPeriodPay) {
-		this.goodsRentalPeriodPay = goodsRentalPeriodPay;
-	}
-	public String getGoodsRentalDeposit() {
-		return goodsRentalDeposit;
-	}
-	public void setGoodsRentalDeposit(String goodsRentalDeposit) {
-		this.goodsRentalDeposit = goodsRentalDeposit;
-	}
-	public String getGoodsRentalPosition() {
-		return goodsRentalPosition;
-	}
-	public void setGoodsRentalPosition(String goodsRentalPosition) {
-		this.goodsRentalPosition = goodsRentalPosition;
-	}
-	public String getGoodsRentalDate() {
-		return goodsRentalDate;
-	}
-	public void setGoodsRentalDate(String goodsRentalDate) {
-		this.goodsRentalDate = goodsRentalDate;
-	}
-	public String getShopCode() {
-		return shopCode;
-	}
-	public void setShopCode(String shopCode) {
-		this.shopCode = shopCode;
-	}
-	public String getShopName() {
-		return shopName;
-	}
-	public void setShopName(String shopName) {
-		this.shopName = shopName;
-	}
-	public String getShopAddress() {
-		return shopAddress;
-	}
-	public void setShopAddress(String shopAddress) {
-		this.shopAddress = shopAddress;
-	}
-	public String getShopPhone() {
-		return shopPhone;
-	}
-	public void setShopPhone(String shopPhone) {
-		this.shopPhone = shopPhone;
-	}
-	
-	
 	public String getGoodsDbCode() {
 		return goodsDbCode;
 	}
@@ -283,6 +177,12 @@ public class GoodsHapDTO {
 	public void setGoodsDbDescription(String goodsDbDescription) {
 		this.goodsDbDescription = goodsDbDescription;
 	}
+	public String getGoodsDbDate() {
+		return goodsDbDate;
+	}
+	public void setGoodsDbDate(String goodsDbDate) {
+		this.goodsDbDate = goodsDbDate;
+	}
 	public String getGoodsCode() {
 		return goodsCode;
 	}
@@ -313,10 +213,10 @@ public class GoodsHapDTO {
 	public void setGoodsPosition(String goodsPosition) {
 		this.goodsPosition = goodsPosition;
 	}
-	public char getGoodsRental() {
+	public String getGoodsRental() {
 		return goodsRental;
 	}
-	public void setGoodsRental(char goodsRental) {
+	public void setGoodsRental(String goodsRental) {
 		this.goodsRental = goodsRental;
 	}
 	public String getGoodsState() {
@@ -325,16 +225,16 @@ public class GoodsHapDTO {
 	public void setGoodsState(String goodsState) {
 		this.goodsState = goodsState;
 	}
-	public char getGoodsCompletionState() {
+	public String getGoodsCompletionState() {
 		return goodsCompletionState;
 	}
-	public void setGoodsCompletionState(char goodsCompletionState) {
+	public void setGoodsCompletionState(String goodsCompletionState) {
 		this.goodsCompletionState = goodsCompletionState;
 	}
-	public char getGoodsRentalState() {
+	public String getGoodsRentalState() {
 		return goodsRentalState;
 	}
-	public void setGoodsRentalState(char goodsRentalState) {
+	public void setGoodsRentalState(String goodsRentalState) {
 		this.goodsRentalState = goodsRentalState;
 	}
 	public String getGoodsInventoryDate() {
@@ -421,6 +321,102 @@ public class GoodsHapDTO {
 	public void setAccountDate(String accountDate) {
 		this.accountDate = accountDate;
 	}
+	public String getShopCode() {
+		return shopCode;
+	}
+	public void setShopCode(String shopCode) {
+		this.shopCode = shopCode;
+	}
+	public String getShopName() {
+		return shopName;
+	}
+	public void setShopName(String shopName) {
+		this.shopName = shopName;
+	}
+	public String getShopAddress() {
+		return shopAddress;
+	}
+	public void setShopAddress(String shopAddress) {
+		this.shopAddress = shopAddress;
+	}
+	public String getShopPhone() {
+		return shopPhone;
+	}
+	public void setShopPhone(String shopPhone) {
+		this.shopPhone = shopPhone;
+	}
+	public String getGoodsRentalCode() {
+		return goodsRentalCode;
+	}
+	public void setGoodsRentalCode(String goodsRentalCode) {
+		this.goodsRentalCode = goodsRentalCode;
+	}
+	public String getGoodsRentalPeriodPay() {
+		return goodsRentalPeriodPay;
+	}
+	public void setGoodsRentalPeriodPay(String goodsRentalPeriodPay) {
+		this.goodsRentalPeriodPay = goodsRentalPeriodPay;
+	}
+	public String getGoodsRentalDeposit() {
+		return goodsRentalDeposit;
+	}
+	public void setGoodsRentalDeposit(String goodsRentalDeposit) {
+		this.goodsRentalDeposit = goodsRentalDeposit;
+	}
+	public String getGoodsRentalPosition() {
+		return goodsRentalPosition;
+	}
+	public void setGoodsRentalPosition(String goodsRentalPosition) {
+		this.goodsRentalPosition = goodsRentalPosition;
+	}
+	public String getGoodsRentalDate() {
+		return goodsRentalDate;
+	}
+	public void setGoodsRentalDate(String goodsRentalDate) {
+		this.goodsRentalDate = goodsRentalDate;
+	}
+	public String getSalesCode() {
+		return salesCode;
+	}
+	public void setSalesCode(String salesCode) {
+		this.salesCode = salesCode;
+	}
+	public String getSalesGroupCode() {
+		return salesGroupCode;
+	}
+	public void setSalesGroupCode(String salesGroupCode) {
+		this.salesGroupCode = salesGroupCode;
+	}
+	public String getSalesPayType() {
+		return salesPayType;
+	}
+	public void setSalesPayType(String salesPayType) {
+		this.salesPayType = salesPayType;
+	}
+	public String getSalesType() {
+		return salesType;
+	}
+	public void setSalesType(String salesType) {
+		this.salesType = salesType;
+	}
+	public String getSalesAmount() {
+		return salesAmount;
+	}
+	public void setSalesAmount(String salesAmount) {
+		this.salesAmount = salesAmount;
+	}
+	public String getSalesDate() {
+		return salesDate;
+	}
+	public void setSalesDate(String salesDate) {
+		this.salesDate = salesDate;
+	}
+	
+	
+	
+	
+	
+
 	
 	
 }

@@ -1,7 +1,6 @@
 package com.smart.rider.work.service;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +16,7 @@ public class WorkService{
 	@Autowired
 	private WorkMapper workMapper;
 	
+	//직원 아이디,비밀번호 확인
 	public Map<String, Object> employeeCheck(MemberDTO memberdto) {
 		
 		String result = "";
@@ -26,7 +26,7 @@ public class WorkService{
 		MemberDTO employeeCheck = workMapper.employeeCheck(memberdto);
 		
 		if(employeeCheck == null) {
-			System.out.println(employeeCheck +"<--입력값");
+			//System.out.println(employeeCheck +"<--입력값");
 			result = "아이디와 비밀번호를 확인해주세요!";
 		}else {
 			result = "확인";
@@ -37,6 +37,8 @@ public class WorkService{
 		
 		return map;
 	}
+	
+	//출근등록처리
 	public int goInsert(WorkDTO workdto) {
 		String workCode = "W" + workMapper.workCodeCount();
 		
@@ -44,10 +46,12 @@ public class WorkService{
 			workCode = "W0001";
 		}
 		workdto.setWorkCode(workCode);
+		
 		return workMapper.goInsert(workdto);
 	}
+	
 	/***********************19.10.01 작성********************************/
-	//페이지 작업
+	//직원 근태목록 페이지 작업
 	public Map<String, Object> workList(int currentPage, String contractShopCode, String memberId) {
 		//페이지 구성 할 행의 갯수
 		final int rowPerPage = 10;
@@ -60,15 +64,15 @@ public class WorkService{
 			startPageNum = currentPage - ((lastPageNum/2)-1);
 			lastPageNum += (startPageNum-1);
 		}
-		// limit 적용될 값 startRow, 상수 ROW_PER_PAGE
+		// limit 적용될 값 startRow, 상수 rowPerPage
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		int startRow = (currentPage-1)*rowPerPage;
 		
-		map.put("startRow", startRow);
-		map.put("rowPerPage", rowPerPage);
-		map.put("contractShopCode", contractShopCode);
-		map.put("memberId", memberId);
+		map.put("startRow"		  ,startRow);
+		map.put("rowPerPage"	  ,rowPerPage);
+		map.put("contractShopCode",contractShopCode);
+		map.put("memberId"		  ,memberId);
 		
 		//전체행의 갯수를 가져오는 쿼리
 		double workCount = workMapper.getWorkAllCount(contractShopCode, memberId);
@@ -79,17 +83,24 @@ public class WorkService{
 			lastPageNum = lastPage;
 		}
 		Map<String, Object> resultMap = new HashMap<String, Object>();
-		resultMap.put("list", workMapper.workList(map));
-		resultMap.put("currentPage", currentPage);
-		resultMap.put("lastPage", lastPage);
-		resultMap.put("startPageNum", startPageNum);
-		resultMap.put("lastPageNum", lastPageNum);
+		resultMap.put("list"		,workMapper.workList(map));
+		resultMap.put("currentPage" ,currentPage);
+		resultMap.put("lastPage"	,lastPage);
+		resultMap.put("startPageNum",startPageNum);
+		resultMap.put("lastPageNum" ,lastPageNum);
+		
 		return resultMap;
 	}
+	
+	//직원 퇴근등록
 	public int leaveInsert(WorkDTO workdto) {
+		
 		return workMapper.leaveInsert(workdto);
 	}
-	public Map<String, Object> searchWork(int currentPage, String contractShopCode, String select, String searchInput, String beginDate, String endDate) {
+	
+	//근태 검색처리
+	public Map<String, Object> searchWork(int currentPage, String contractShopCode, String select
+										 ,String searchInput, String beginDate, String endDate) {
 		//페이지 구성 할 행의 갯수
 		final int rowPerPage = 10;
 		//보여줄 첫번째 페이지번호 초기화
@@ -101,20 +112,20 @@ public class WorkService{
 			startPageNum = currentPage - ((lastPageNum/2)-1);
 			lastPageNum += (startPageNum-1);
 		}
-		// limit 적용될 값 startRow, 상수 ROW_PER_PAGE
+		// limit 적용될 값 startRow, 상수 rowPerPage
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		int startRow = (currentPage-1)*rowPerPage;
 		
-		map.put("startRow", startRow);
-		map.put("rowPerPage", rowPerPage);
-		map.put("contractShopCode", contractShopCode);
-		map.put("select", select);
-		map.put("searchInput", searchInput);
-		map.put("beginDate", beginDate);
-		map.put("endDate", endDate);
+		map.put("startRow"		  ,startRow);
+		map.put("rowPerPage"	  ,rowPerPage);
+		map.put("contractShopCode",contractShopCode);
+		map.put("select"		  ,select);
+		map.put("searchInput"	  ,searchInput);
+		map.put("beginDate"		  ,beginDate);
+		map.put("endDate"		  ,endDate);
 		
-		//전체행의 갯수를 가져오는 쿼리
+		//검색한 전체행의 갯수를 가져오는 쿼리
 		double workCount = workMapper.getSearchAllCount(contractShopCode, select, searchInput, beginDate, endDate);
 							//올림함수 소수점이있으면 무조건 올림
 		int lastPage = (int)(Math.ceil(workCount/rowPerPage));
@@ -123,17 +134,12 @@ public class WorkService{
 			lastPageNum = lastPage;
 		}
 		Map<String, Object> resultMap = new HashMap<String, Object>();
-		resultMap.put("list", workMapper.searchWork(map));
-		resultMap.put("currentPage", currentPage);
-		resultMap.put("lastPage", lastPage);
-		resultMap.put("startPageNum", startPageNum);
-		resultMap.put("lastPageNum", lastPageNum);
+		resultMap.put("list"		,workMapper.searchWork(map));
+		resultMap.put("currentPage" ,currentPage);
+		resultMap.put("lastPage"	,lastPage);
+		resultMap.put("startPageNum",startPageNum);
+		resultMap.put("lastPageNum" ,lastPageNum);
+		
 		return resultMap;
-	}
-	public List<WorkDTO> searchTotalWork(String select, String searchInput, String beginDate, String endDate) {
-		
-		System.out.println(workMapper.searchTotalWork(select, searchInput, beginDate, endDate) + "<---total할것");
-		
-		return workMapper.searchTotalWork(select, searchInput, beginDate, endDate);
 	}
 }

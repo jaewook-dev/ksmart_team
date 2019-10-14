@@ -5,7 +5,7 @@
 <th:block layout:fragment="customTitle">
 </th:block>
 <th:block layout:fragment="customContents">
-<form action="/salesInsert" method="post" class="tm-edit-product-form">
+<form action="/salesRentalInsert" method="post" class="tm-edit-product-form">
 	<!-- MAIN -->
 	<div class="main">
 		<div class="container mt-6">
@@ -19,7 +19,7 @@
 									<tr>
 										<th></th>
 										<th>
-											<input type="hidden" id="goodsCode" name="goodsCode" >
+											<input type="hidden" id="goodsCode" name="goodsCode" th:value="${goodsRentalCode.goodsCode}">
 											<input type="hidden" id="goodsRentalCode" name="goodsRentalCode" th:value="${goodsRentalCode.goodsRentalCode}">
 											<input type="hidden" id="salesType" name="salesType" value="대여" >
 										</th>

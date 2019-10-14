@@ -58,14 +58,15 @@
 				<div class="col-sm-12 col-md-12  tm-block-col">
 					<div class="tm-bg-primary-dark tm-block tm-block-products">
 						<div class="tm-bg-primary-dark tm-block-scroll tm-block-sc">
-							<h2 class="tm-block-title">매입상품/// 상세보기하여 매입삭제와 판매상품등록할수있음</h2>
+							<h2 class="tm-block-title">매입상품/// 상세보기하여 매입삭제와 판매상품등록할수있고 현상품상태확인으로 재고파악가능</h2>
 							<table class="table">
 								<thead>
 									<tr>
 										<th scope="col">상품명</th>
 										<th scope="col">상품카테고리</th>
 										<th scope="col">매입 가격</th>
-										<th scope="col">매입상품상태</th>
+										<th scope="col">매입시 상품상태</th>
+										<th scope="col">현재 상품상태</th>
 										<th scope="col">매입일자</th>
 										<th scope="col">상세보기</th>
 
@@ -94,6 +95,7 @@
 										<th th:text="${y.goodsDbCategory}"></th>																			
 										<th th:text="${y.purchasePay}"></th>
 										<th th:text="${y.purchaseState}"></th>
+										<th th:text="${y.goodsState} ? ${y.goodsState} : 상품등록하지않음 "></th>
 										<th th:text="${y.purchaseDate}"></th>
 										<td>
 										<a
@@ -110,6 +112,7 @@
 										<th th:text="${n.goodsDbCategory}"></th>																			
 										<th th:text="${n.purchasePay}"></th>
 										<th th:text="${n.purchaseState}"></th>
+										<th th:text="${n.goodsState} ? ${n.goodsState} : 상품등록하지않음 "></th>
 										<th th:text="${n.purchaseDate}"></th>
 										<td><a
 											th:href="@{/getPurchaseList(purchaseCode=${n.purchaseCode})}"

@@ -54,6 +54,10 @@
 			AND
 			p.purchase_date between #{beginDate} and #{endDate}
 		</if> 
+		<if test="SCODE neq 'A'.toString()">
+        	AND 
+        		p.contract_shop_code  = #{SCODE}
+        </if>
 	</select>
 	
 		<!-- 삭제가능한 매입상품리스트  -->
@@ -62,10 +66,12 @@
 				 p.*
 				 ,g.*
 				 ,gb.*
+				 ,s.shop_name
 				FROM purchase p LEFT JOIN goods g 
 				ON p.purchase_code = g.purchase_code
 				LEFT JOIN goods_database gb
 				ON p.goods_database_code = gb.goods_database_code
+				INNER  JOIN shop s
 				WHERE g.purchase_code IS NULL 
 		<if test="searchInput neq null and searchInput neq ''.toString()">
 			AND
@@ -84,7 +90,10 @@
 			AND
 			p.purchase_date between #{beginDate} and #{endDate}
 		</if> 
-		
+		<if test="SCODE neq 'A'.toString()">
+        	AND 
+        		p.contract_shop_code  = #{SCODE}
+        </if>
 	</select>		
 		
 	<delete id="purchaseDelete" parameterType="String">
@@ -125,6 +134,7 @@
         	AND 
         		p.purchase_date between #{beginDate} and #{endDate}
         </if>
+        
         
 	</select>
 	
@@ -206,6 +216,8 @@
     	<result column="goods_database_description"    	property="goodsDbDescription"/>
     	<result column="goods_database_date"    	property="goodsDbDate"/>
     	<result column="account_market"    	property="accountMarket"/>
+    	<result column="goods_state"    	property="goodsState"/>
+    	<result column="shop_name"    	property="shopName"/>
     	
 	</resultMap>
 </mapper>
