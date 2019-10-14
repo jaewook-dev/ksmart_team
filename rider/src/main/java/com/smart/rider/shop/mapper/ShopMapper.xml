@@ -216,6 +216,20 @@
 		LIMIT #{currentPage}, #{rowPerPage}	
 	</select>
 	
+	<!-- 계약코드 수정시 필요한 쿼리문-->
+	<select id="shopUseList" resultMap="shopMap">
+		SELECT 
+			shop_code 
+			,contract_code 
+			,member_id 
+			,shop_name
+			,shop_address
+			,shop_phone
+			,shop_date
+		FROM shop 
+	</select>
+	
+	
 	<!-- 페이징 처리를 위한 전체행의 갯수 -->
 	<select id="selectShopCount" resultType="int">
 		SELECT 
@@ -250,6 +264,21 @@
 		WHERE shop_code=#{shop_code}
 	</select>
 	
+	<!--계약매장코드로 데이터 조회-->
+	<select id="shopData" parameterType="String" resultMap="shopMap">
+		SELECT 
+			shop_code 
+			,contract_code 
+			,member_id 
+			,shop_name
+			,shop_address
+			,shop_phone
+			,shop_date
+		FROM shop 
+		WHERE contract_code=#{contractCode}
+	</select>
+	
+	
 	<!--매장정보 수정  -->
 	<update id="shopUpdateSet" parameterType="com.smart.rider.shop.dto.ShopDTO">
 		UPDATE shop
@@ -259,7 +288,14 @@
 			,shop_phone=#{shopPhone}
 			,shop_date=NOW()
 		WHERE shop_code=#{shopCode}
+	</update>
 	
+	<!--계약코드 수정하기  -->
+	<update id="shopUpdateCode" parameterType="String">
+		UPDATE shop
+		SET
+			contract_code=#{contractCode}
+		WHERE shop_code=#{shopCode}
 	</update>
 	
 

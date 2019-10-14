@@ -43,4 +43,7 @@ public interface ManagementMapper {
 	
 	//계약금 검색
 	public List<ContractManagementDTO> managementSearchList(SearchDTO search);
+	
+	//계약금 목록(계약 수정시 사용)
+	public List<ManagementDTO> managementUseList();
 }

@@ -73,5 +73,14 @@ public interface ShopMapper {
 	//수정하기
 	public int shopUpdateSet(ShopDTO shop);
 	
+	
+	//계약코드로 수정하기
+	public int shopUpdateCode(String shopCode,String contractCode);
+	
+	//계약코드로 데이터 조회하기
+	public List<ShopDTO> shopData(String contractCode);
+	
+	//계약코드 수정 시 필요
+	public List<ShopDTO> shopUseList();
 }
 

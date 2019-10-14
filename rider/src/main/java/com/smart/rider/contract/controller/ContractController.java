@@ -136,12 +136,23 @@ public class ContractController {
 		model.addAttribute("contractUnitCode", contractUnitCode);
 		//System.out.println(unitCode + " <-- 담겨있는 코드값");
 			 		}
-		//수정시 계약 단가표를 수정 할 수 있게
+		//계약 단가표 리스트를 보여주면서 고를 수 잇도록 설계
 		List<UnitDTO> uList =  unitService.unitList();
 		model.addAttribute("uList", uList);
+		//수정시 계약 단가표 수정 할 수 잇도록 모델에  넣는다.
 		List<UnitDTO> unitList = contractService.getUnitList(contractUnitCode);
 		model.addAttribute("unitList", unitList);
+		
 		return "contract/contractUpdate";
+	}
+	
+	//계약 수정(생성 및 재계약)
+	@PostMapping("/contractUpdate")
+	public String contractUpdate(ContractDTO contract,HttpSession session,ManagementDTO management) {
+		//System.out.println(contract + "수정하는 값 받는 지 확인");
+		contractService.contractUpdate(contract, session, management);
+		
+		return "redirect:/contractList";
 	}
 
 }
