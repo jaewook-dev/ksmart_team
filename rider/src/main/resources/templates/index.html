@@ -89,81 +89,86 @@
 
 <script th:inline="javascript">
 	
-	$(function() {
-		var ctx = document.getElementById('netChart').getContext('2d');
-		var netChart = new Chart(ctx, {
+	var level = [[${session.SLEVEL}]]
+	
+	if(level == '점주'){
+		$(function() {
+			var ctx = document.getElementById('netChart').getContext('2d');
+			var netChart = new Chart(ctx, {
+				
+			    // The type of chart we want to create
+			    type: 'bar',
 			
-		    // The type of chart we want to create
-		    type: 'bar',
-		
-		    // The data for our dataset
-		    data: {
-		        labels: ['1월', '2월', '3월', '4월', '5월', '6월', '7월','8월','9월','10월','11월','12월'],
-		        datasets: [{
-					label: '순수익',
-					type : 'bar',
-					backgroundColor: 'rgb(255, 204, 102)',
-		            borderColor: 'rgb(255, 204, 102)',
-					data: [
-						 [[${netPay0}]], [[${netPay1}]], [[${netPay2}]], [[${netPay3}]], [[${netPay4}]]
-						,[[${netPay5}]], [[${netPay6}]], [[${netPay7}]], [[${netPay8}]], [[${netPay9}]]
-						,[[${netPay10}]], [[${netPay11}]]
-					]
-				}, {
-					label: '지출',
-					type : 'line',
-					fill : false,
-					lineTension : 0.2,
-					pointRadius : 0,
-					backgroundColor: 'rgb(255, 153, 0)',
-		            borderColor: 'rgb(255, 153, 0)',
-					data: [
-						 [[${spend0}]], [[${spend1}]], [[${spend2}]], [[${spend3}]], [[${spend4}]]
-						,[[${spend5}]], [[${spend6}]], [[${spend7}]], [[${spend8}]], [[${spend9}]]
-						,[[${spend10}]], [[${spend11}]]
-					]
-				}, {
-					label: '매출',
-					type : 'line',
-					fill : false,
-					lineTension : 0.2,
-					pointRadius : 0,
-					backgroundColor: 'rgb(255, 204, 0)',
-		            borderColor: 'rgb(255, 204, 0)',
-					data: [
-						 [[${sales0}]], [[${sales1}]], [[${sales2}]], [[${sales3}]], [[${sales4}]]
-						,[[${sales5}]], [[${sales6}]], [[${sales7}]], [[${sales8}]], [[${sales9}]]
-						,[[${sales10}]], [[${sales11}]]
-					]
-				}]
-		    },
-		
-		    // Configuration options
-		    options: {
-		    	legend: {
-		             labels: {
-		                  fontColor: 'white' // label color
-		                 }
-		              },
-			    scales: {
-			    	// y축
-			        yAxes: [{
-			        	stacked: true,
-			            ticks: {
-			                fontColor:'white' // y축 폰트 color
-			            }
-			     	}],
-			     	// x축
-			     	xAxes: [{
-			     		stacked: true,
-			            ticks: {
-			                fontColor:'white' // x축 폰트 color
-			            }
-			     	}]
+			    // The data for our dataset
+			    data: {
+			        labels: ['1월', '2월', '3월', '4월', '5월', '6월', '7월','8월','9월','10월','11월','12월'],
+			        datasets: [{
+						label: '순수익',
+						type : 'bar',
+						backgroundColor: 'rgb(255, 204, 102)',
+			            borderColor: 'rgb(255, 204, 102)',
+						data: [
+							 [[${netPay0}]], [[${netPay1}]], [[${netPay2}]], [[${netPay3}]], [[${netPay4}]]
+							,[[${netPay5}]], [[${netPay6}]], [[${netPay7}]], [[${netPay8}]], [[${netPay9}]]
+							,[[${netPay10}]], [[${netPay11}]]
+						]
+					}, {
+						label: '지출',
+						type : 'line',
+						fill : false,
+						lineTension : 0.2,
+						pointRadius : 0,
+						backgroundColor: 'rgb(255, 153, 0)',
+			            borderColor: 'rgb(255, 153, 0)',
+						data: [
+							 [[${spend0}]], [[${spend1}]], [[${spend2}]], [[${spend3}]], [[${spend4}]]
+							,[[${spend5}]], [[${spend6}]], [[${spend7}]], [[${spend8}]], [[${spend9}]]
+							,[[${spend10}]], [[${spend11}]]
+						]
+					}, {
+						label: '매출',
+						type : 'line',
+						fill : false,
+						lineTension : 0.2,
+						pointRadius : 0,
+						backgroundColor: 'rgb(255, 204, 0)',
+			            borderColor: 'rgb(255, 204, 0)',
+						data: [
+							 [[${sales0}]], [[${sales1}]], [[${sales2}]], [[${sales3}]], [[${sales4}]]
+							,[[${sales5}]], [[${sales6}]], [[${sales7}]], [[${sales8}]], [[${sales9}]]
+							,[[${sales10}]], [[${sales11}]]
+						]
+					}]
+			    },
+			
+			    // Configuration options
+			    options: {
+			    	legend: {
+			             labels: {
+			                  fontColor: 'white' // label color
+			                 }
+			              },
+				    scales: {
+				    	// y축
+				        yAxes: [{
+				        	stacked: true,
+				            ticks: {
+				                fontColor:'white' // y축 폰트 color
+				            }
+				     	}],
+				     	// x축
+				     	xAxes: [{
+				     		stacked: true,
+				            ticks: {
+				                fontColor:'white' // x축 폰트 color
+				            }
+				     	}]
+				    }
 			    }
-		    }
-		});
-	})
+			});
+		})
+	}
+	
 </script>
 
 </th:block>
