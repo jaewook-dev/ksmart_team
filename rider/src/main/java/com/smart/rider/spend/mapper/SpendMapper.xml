@@ -85,6 +85,8 @@
 		AND c.member_id = m.member_id
 		AND sr.shop_code = s.shop_code
 		AND sr.contract_shop_code = #{contractShopCode}
+		ORDER BY c.contract_date DESC 
+		LIMIT 1;
 	</select>
 	
 	<!-- 191007 재욱, 페이징 처리를 위한 매장 리스트 AllCount -->
