@@ -4,7 +4,6 @@
 <head th:replace="fragments/head :: headFrament"></head>
 <th:block layout:fragment="customContents">
 	<div class="container mt-5">
-		<!-- row -->
 		<div class="row tm-content-row">
 			<div class="col-xl-6 mx-auto tm-block-col tm-col-account-settings">
 				<div class="tm-bg-primary-dark tm-block tm-block-settings">
@@ -20,7 +19,7 @@
 						<div class="form-group">
 							<label for="password">비밀번호</label>
 							<input id="memberPw" name="memberPw" type="password" class="form-control validate"
-								   placeholder="PASSWORD" />
+								   placeholder="PASSWORD" required="required"/>
 						</div>
 						<div>
 							<label class="alert alert-danger col-xl" th:if="${result ne null}" th:text="${result}">
@@ -37,11 +36,7 @@
 			</div>
 		</div>
 	</div>
-
 </th:block>
 <th:block layout:fragment="customScript">
-<script>
-	
-</script>
 </th:block>
 </html>
