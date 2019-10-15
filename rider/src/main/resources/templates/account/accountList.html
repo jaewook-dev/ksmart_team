@@ -18,23 +18,20 @@
 						</div>
 					</div>
 					<div class="tm-bg-primary-dark tm-block tm-block-h-auto-copy">
-						<form action="accountSearchList" class="tm-search-form row"
-							method="post">
+						<form action="accountSearchList" class="tm-search-form row" method="post">
 							<div class="form-group col-3">
 								<select class="custom-select" name="accountDate">
 									<option selected="selected">거래처등록일자</option>
 								</select>
 							</div>
 							<div class="form-group col-3">
-								<input id="beginDate" name="beginDate" type="text"
-									class="form-control validate" />
+								<input id="beginDate" name="beginDate" type="text" class="form-control validate" />
 							</div>
 							<div class="form-group col-1 text-center">
 								<h2 class="tm-site-title mb-0">~</h2>
 							</div>
 							<div class="form-group col-3">
-								<input id="endDate" name="endDate" type="text"
-									class="form-control validate" />
+								<input id="endDate" name="endDate" type="text" class="form-control validate" />
 							</div>
 							<div class="form-group col-2"></div>
 							<div class="form-group col-3">
@@ -48,20 +45,20 @@
 							</div>
 							<div class="form-group col-7">
 								<input id="searchInput" name="searchName" type="text"
-									placeholder="검색 할 거래처명을 입력해주세요" class="form-control validate" />
+									   placeholder="검색 할 거래처명을 입력해주세요" class="form-control validate" />
 							</div>
 							<div class="form-group col-2">
 								<button type="submit" class="btn btn-primary btn-block">
-									검색</button>
+									검색
+								</button>
 							</div>
 						</form>
 					</div>
-					<br/><br/><br/>
+					<br /><br /><br />
 					<!-- row -->
 					<div class="row tm-content-row ">
 						<div class="col-12 tm-block-col">
-							<div
-								class="tm-bg-primary-dark tm-block-big tm-block-scroll table-responsive">
+							<div class="tm-bg-primary-dark tm-block-big tm-block-scroll table-responsive">
 								<table class="table">
 									<thead>
 										<tr>
@@ -82,19 +79,21 @@
 											<td th:text="${yeslist.accountPhone}"></td>
 											<td th:text="${yeslist.accountAddress}"></td>
 											<td th:text="${yeslist.accountCategory}"></td>
-											<td class="text-center"><a
-												th:if="${session.SLEVEL eq '관리자'  or session.SLEVEL eq '점주'   }"
-												th:href="@{/accountUpdate(accountCode=${yeslist.accountCode})}"
-												class="tm-product-delete-link"> <i
-													class="fas fa-check tm-product-check-icon"
-													style="color: white"></i>
-											</a></td>
-											<td class="text-center"><a
-												th:if="${session.SLEVEL eq '관리자'  or session.SLEVEL eq '점주'   }"
-												th:href="@{/accountDelete(accountCode=${yeslist.accountCode})}"
-												class="tm-product-delete-link"> <i
-													class="far fa-trash-alt tm-product-delete-icon"></i>
-											</a></td>
+											<td class="text-center">
+												<a th:if="${session.SLEVEL eq '관리자'  or session.SLEVEL eq '점주'   }"
+												   th:href="@{/accountUpdate(accountCode=${yeslist.accountCode})}"
+												   class="tm-product-delete-link"> 
+												   <i class="fas fa-check tm-product-check-icon"
+												   	  style="color: white"></i>
+												</a>
+											</td>
+											<td class="text-center">
+												<a th:if="${session.SLEVEL eq '관리자'  or session.SLEVEL eq '점주'   }"
+												   th:href="@{/accountDelete(accountCode=${yeslist.accountCode})}"
+												   class="tm-product-delete-link">
+												   <i class="far fa-trash-alt tm-product-delete-icon"></i>
+												</a>
+											</td>
 										</tr>
 										<!-- 삭제 불가능  -->
 										<tr th:each="nolist : ${accountListNo}">
@@ -103,21 +102,23 @@
 											<td th:text="${nolist.accountPhone}"></td>
 											<td th:text="${nolist.accountAddress}"></td>
 											<td th:text="${nolist.accountCategory}"></td>
-											<td class="text-center"><a
-												th:if="${session.SLEVEL eq '관리자'  or session.SLEVEL eq '점주'   }"
-												th:href="@{/accountUpdate(accountCode=${nolist.accountCode})}"
-												class="tm-product-delete-link"> <i
-													class="fas fa-check tm-product-check-icon"
-													style="color: white"></i>
-											</a></td>
+											<td class="text-center">
+												<a	th:if="${session.SLEVEL eq '관리자'  or session.SLEVEL eq '점주'   }"
+													th:href="@{/accountUpdate(accountCode=${nolist.accountCode})}"
+													class="tm-product-delete-link"> 
+													<i	class="fas fa-check tm-product-check-icon"
+														style="color: white"></i>
+												</a>
+											</td>
 											<!--삭제 할 수 없는 데이터 클릭시 모달  -->
-											<td class="text-center"><a
-												th:if="${session.SLEVEL eq '관리자'  or session.SLEVEL eq '점주'   }"
-												href="#myModal" class="tm-product-delete-link"
-												data-toggle="modal"> <i
-													class="far fa-trash-alt tm-product-delete-icon"
-													style="color: black"></i>
-											</a></td>
+											<td class="text-center">
+												<a	th:if="${session.SLEVEL eq '관리자'  or session.SLEVEL eq '점주'   }"
+													href="#myModal" class="tm-product-delete-link"
+													data-toggle="modal">
+													<i	class="far fa-trash-alt tm-product-delete-icon"
+														style="color: black"></i>
+												</a>
+											</td>
 										</tr>
 									</tbody>
 									<th:block th:if="${alert} neq null">
@@ -130,11 +131,13 @@
 						</div>
 					</div>
 					<button type="button" id="insertBtn"
-						th:if="${session.SLEVEL eq '관리자'  or session.SLEVEL eq '점주'   }"
-						onclick="location.href='accountInsert'" style="float: right"
-						class="btn btn-primary text-uppercase">거래처등록</button>
+							th:if="${session.SLEVEL eq '관리자'  or session.SLEVEL eq '점주'   }"
+							onclick="location.href='accountInsert'" style="float: right"
+							class="btn btn-primary text-uppercase">
+								거래처등록
+					</button>
 				</div>
-				<br/><br/><br/>
+				<br /><br /><br />
 				<!-- 모달 -->
 				<div class="modal fade" id="myModal">
 					<div class="modal-dialog">
