@@ -1,5 +1,6 @@
 package com.smart.rider.shop.dto;
 
+//매장관리에 필요한 DTO
 public class ShopDTO {
 
 	private String shopCode;

@@ -40,6 +40,11 @@ public class ContractService {
 	public List<ContractDTO> contractList(){
 		return contractMapper.contractList();
 	}
+	//년도별 조회
+	public int contractYear(String year) {
+		return contractMapper.contractYear(year);
+	}
+	
 	
 	//계약금 검색
 	public List<ContractDTO> contractSearchList(SearchDTO search){
@@ -92,7 +97,6 @@ public class ContractService {
 		//System.out.println(management.getContractManagementCode());
 		//리턴
 		result += managementService.managementInsert(management, session);
-		
 		return result;
 	}
 	
@@ -102,7 +106,6 @@ public class ContractService {
 		String level = (String)session.getAttribute("SLEVEL");
 		//System.out.println(level+"<--로그인 권한 확인");
 		//System.out.println(id+"<--로그인 아이디 확인");
-		
 		return contractMapper.agreementList(id,level);
 	}
 	
@@ -119,6 +122,11 @@ public class ContractService {
 	//특정 단가표코드로 데이터 조회
 	public List<UnitDTO> getUnitList(String contractUnitCode){
 		return contractMapper.getUnitList(contractUnitCode);
+	}
+	
+	//계약관리 쪽 계약매장
+	public List<AgreementDTO> getAllList(){
+		return contractMapper.getAllList();
 	}
 
 	//계약 수정(생성)

@@ -77,25 +77,25 @@
 	<!-- 계약릴레이션  생성 쿼리  -->
 	<insert id="relationInsert" parameterType="com.smart.rider.shop.dto.ShopRelationDTO">
 		INSERT INTO shop_relation(
-		 contract_shop_code
-		,member_id
-		,shop_code
-		,contract_shop_date
+			 contract_shop_code
+			,member_id
+			,shop_code
+			,contract_shop_date
 		)
 		VALUES (
-		 #{contractShopCode}
-		,#{memberId}
-		,#{shopCode}
-		, NOW()
+			 #{contractShopCode}
+			,#{memberId}
+			,#{shopCode}
+			, NOW()
 		)
 	</insert>
 
 	<!-- 기본 값으로 설정되어 있는 계약매장코드 값을 수정한다.(계약매장코드 생성시) -->
 	<update id="memberUpdate" parameterType="String"> 
-	UPDATE member
-	SET
-		contract_shop_code=#{getrelationCode}
-	WHERE member_id=#{getrelationId}
+		UPDATE member
+		SET
+			contract_shop_code=#{getrelationCode}
+		WHERE member_id=#{getrelationId}
 	</update>
 	
 	<!--매장 삭제 가능 -->
@@ -170,7 +170,7 @@
 			,s.shop_date
 		FROM shop s, shop_relation sr
 		WHERE s.shop_code = sr.shop_code
-			<if test="searchValue neq null and searchValue neq ''.toString()">
+		<if test="searchValue neq null and searchValue neq ''.toString()">
             AND
                 s.shop_name LIKE CONCAT('%',#{searchValue},'%')
         </if>
@@ -245,7 +245,7 @@
 			,member_birth AS memberBirth
 			,member_address AS memberAddress
 			,member_phone AS memberPhone
-			FROM member
+		FROM member
 		WHERE contract_shop_code = #{code}
 	
 	</select>

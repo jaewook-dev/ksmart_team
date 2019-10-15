@@ -11,8 +11,6 @@ import com.smart.rider.shop.dto.ShopRelationDTO;
 @Mapper
 public interface ShopMapper {
 
-
-	
 	//shop코드 생성 및 데이터생성
 	public int shopInsert(ShopDTO shop);
 	
@@ -37,7 +35,6 @@ public interface ShopMapper {
 	//member에 계약매장코드 수정하기
 	public int memberUpdate(String getrelationCode,String getrelationId);
 	
-	
 	//리스트 조회 시
 	public List<ShopDTO> shopListYes();
 	public List<ShopDTO> shopListNo();
@@ -46,8 +43,8 @@ public interface ShopMapper {
 	public List<ShopDTO> shopSearchListYes(SearchDTO serach);
 	public List<ShopDTO> shopSearchListNo(SearchDTO serach);
 	
+	//매장리스트 전체조회(매장, 계약코드 수정시 필요)
 	public List<ShopDTO> shopListAll();
-	
 	
 	//명단조회
 	public List<ShopDTO> shopList(Map<String, Integer> map);
@@ -56,8 +53,8 @@ public interface ShopMapper {
 	 * @return int
 	 */
 
+	//매장데이터 갯수 조회
 	int selectShopCount();
-	
 	/* -insert처리-
 	 * @param ShopDTO shop
 	 * @brief ShopMapper.xml(id)를 인터페이스 ShopMapper.java(메서드명)와 맵핑
@@ -72,7 +69,6 @@ public interface ShopMapper {
 	
 	//수정하기
 	public int shopUpdateSet(ShopDTO shop);
-	
 	
 	//계약코드로 수정하기
 	public int shopUpdateCode(String shopCode,String contractCode);

@@ -1,5 +1,6 @@
 package com.smart.rider.contract.dto;
 
+//계약관리DTO + 회원관리DTO + 계약금관리DTO 필요한 데이터들 
 public class AgreementDTO {
 
 	private String contractCode;
@@ -18,6 +19,7 @@ public class AgreementDTO {
 	private int contractManagementUnpaid;
 	private String contractManagementState;
 	private String contractManagementContents;
+	
 	
 	public String getContractCode() {
 		return contractCode;

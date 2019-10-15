@@ -1,7 +1,7 @@
 package com.smart.rider.contract.controller;
 
 import java.util.List;
-import java.util.Map;
+
 
 import javax.servlet.http.HttpSession;
 
@@ -33,12 +33,25 @@ public class ContractController {
 	//계약관리 화면
 	@GetMapping("/contract")
 	public String contract(Model model,HttpSession session) {
+		//최신 단가표
 		List<UnitDTO>  UnitDTO = contractService.unitNew();
+		//계약목록
+		List<AgreementDTO> contractList =  contractService.getAllList();
+		for(int i= 2015; i<2030; i++) {
+			String year = String.valueOf(i);
+			//System.out.println(year + "결과 값 String으로 전환");
+			int result = contractService.contractYear(year);
+			//System.out.println(result + "<--year을 대입 했을 때 나오는 결과");
+			String contractChart = "contract"+year;
+			model.addAttribute(contractChart, result);
+		}
+		model.addAttribute("contractList", contractList);
 		model.addAttribute("unitNew", contractService.unitNew());
-		//System.out.println(UnitDTO.toString());
-		
+		//System.out.println(UnitDTO+"<-- 최신 단가표 조회");
+		//System.out.println(contractList + "<-- 계약목록 확인");
 		return "/contract/contract";
 	}
+	
 	//계약쪽 화면
 	@GetMapping("/agreement")
 	public String agreementList(Model model,HttpSession session) {
@@ -56,7 +69,6 @@ public class ContractController {
 		//System.out.println(getContractUnitCode + "<--최근 단가표 값 받는가 확인");
 		session.setAttribute("SCUC",getContractUnitCode);
 		}
-		
 		return "/contract/agreement";
 	}
 	
@@ -67,7 +79,6 @@ public class ContractController {
 		//System.out.println("=====test=====");
 		//System.out.println("contractList:"+contractList);
 		model.addAttribute("contractList", contractList);
-		
 		return "contract/contractList";
 	}
 
@@ -82,7 +93,6 @@ public class ContractController {
 		if(contractList.size()  == 0) {
 			model.addAttribute("alert", "검색 결과가 없습니다");
 		}
-		
 		return "/contract/contractList";
 	}
 
@@ -93,7 +103,6 @@ public class ContractController {
 		//System.out.println("=====test=====");
 		//System.out.println("contractList:"+contractInsert);
 		model.addAttribute("contractInsert", contractInsert);
-		
 		return "/contract/contractInsert";
 	}
 	

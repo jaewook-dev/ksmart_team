@@ -14,7 +14,7 @@
 					</p>
 				</div>
 			</div>
-			<div class="row tm-content-row">
+			<div class="row tm-content-row main-height">
 				<div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
 					<div class="tm-bg-primary-dark tm-block-con">
 						<h2 class="tm-block-title">계약단가표 -최신-</h2>
@@ -48,15 +48,16 @@
 				</div>
 				<div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
 					<div class="tm-bg-primary-dark tm-block-con">
-						<h2 class="tm-block-title">년 계약조회</h2>
-						<canvas id="myChart" style="max-width: 500px;"></canvas>
+						<h2 class="tm-block-title">년 계약건 수</h2>
+						<canvas id="contractChart" style="max-width: 500px;"></canvas>
 					</div>
 				</div>
 				<div class="col-12 tm-block-col">
 					<h2 class="tm-block-title">계약된 매장</h2>
-					<div
-						class="tm-bg-primary-dark tm-block-middle tm-block-taller tm-block-scroll">
-
+					<div class="tm-bg-primary-dark tm-block-middle tm-block-taller tm-block-scroll">
+						<button class="btn btn-primary" type="button" style="float: right;"
+							onclick="location.href='contractList' ">상세보기</button>
+						<br/><br/><br/>
 						<table class="table">
 							<thead>
 								<tr>
@@ -68,115 +69,12 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<th scope="row"><b>아이디(FK)</b></th>
-									<td><b>2018.03.15</b></td>
-									<td><b>2019.03.15</b></td>
-									<td>
-										<div class="tm-status-circle moving"></div>
-										<b>정상</b>
-									</td>
-									<td><b>330000</b></td>
-
-								</tr>
-								<tr>
-									<th scope="row"><b>#122348</b></th>
-									<td>
-										<div class="tm-status-circle pending"></div>Pending
-									</td>
-									<td><b>Jacob Miller</b></td>
-									<td><b>London, UK</b></td>
-									<td><b>360 km</b></td>
-
-								</tr>
-								<tr>
-									<th scope="row"><b>#122347</b></th>
-									<td>
-										<div class="tm-status-circle cancelled"></div>Cancelled
-									</td>
-									<td><b>George Wilson</b></td>
-									<td><b>London, UK</b></td>
-									<td><b>340 km</b></td>
-
-								</tr>
-								<tr>
-									<th scope="row"><b>#122346</b></th>
-									<td>
-										<div class="tm-status-circle moving"></div>Moving
-									</td>
-									<td><b>William Aung</b></td>
-									<td><b>London, UK</b></td>
-									<td><b>218 km</b></td>
-
-								</tr>
-								<tr>
-									<th scope="row"><b>#122345</b></th>
-									<td>
-										<div class="tm-status-circle pending"></div>Pending
-									</td>
-									<td><b>Harry Ryan</b></td>
-									<td><b>London, UK</b></td>
-									<td><b>280 km</b></td>
-
-								</tr>
-								<tr>
-									<th scope="row"><b>#122344</b></th>
-									<td>
-										<div class="tm-status-circle pending"></div>Pending
-									</td>
-									<td><b>Michael Jones</b></td>
-									<td><b>London, UK</b></td>
-									<td><b>218 km</b></td>
-
-								</tr>
-								<tr>
-									<th scope="row"><b>#122343</b></th>
-									<td>
-										<div class="tm-status-circle moving"></div>Moving
-									</td>
-									<td><b>Timmy Davis</b></td>
-									<td><b>London, UK</b></td>
-									<td><b>218 km</b></td>
-
-								</tr>
-								<tr>
-									<th scope="row"><b>#122342</b></th>
-									<td>
-										<div class="tm-status-circle moving"></div>Moving
-									</td>
-									<td><b>Oscar Phyo</b></td>
-									<td><b>London, UK</b></td>
-									<td><b>420 km</b></td>
-
-								</tr>
-								<tr>
-									<th scope="row"><b>#122341</b></th>
-									<td>
-										<div class="tm-status-circle moving"></div>Moving
-									</td>
-									<td><b>Charlie Brown</b></td>
-									<td><b>London, UK</b></td>
-									<td><b>300 km</b></td>
-
-								</tr>
-								<tr>
-									<th scope="row"><b>#122340</b></th>
-									<td>
-										<div class="tm-status-circle cancelled"></div>Cancelled
-									</td>
-									<td><b>Wilson Cookies</b></td>
-									<td><b>London, UK</b></td>
-									<td><b>218 km</b></td>
-
-								</tr>
-								<tr>
-									<th scope="row"><b>#122339</b></th>
-									<td>
-										<div class="tm-status-circle moving"></div>Moving
-									</td>
-									<td><b>Richard Clamon</b></td>
-									<td><b>London, UK</b></td>
-									<td><b>150 km</b></td>
+								<tr th:each="clist : ${contractList}">
+									<td th:text="${clist.memberId}"></td>
+									<td th:text="${clist.contractStart}"></td>
+									<td th:text="${clist.contractFinish}"></td>
+									<td th:text="${clist.contractManagementState}"><div class="tm-status-circle moving"></div></td>
+									<td th:text="${clist.contractPay}"></td>
 								</tr>
 							</tbody>
 						</table>
@@ -188,42 +86,51 @@
 </th:block>
 <th:block layout:fragment="customScript">
 	<script>
-	var ctx = document.getElementById("myChart").getContext('2d');
-	var myChart = new Chart(ctx, {
+	/* 차트에 필요한 값 설정 */
+	//2030년 까지는 값을 받으면 정상적으로 처리된다.
+	var a 		= [[${contract2016}]]
+	var b 		= [[${contract2017}]]
+	var c 		= [[${contract2018}]]
+	var d 		= [[${contract2019}]]
+	var e 		= [[${contract2020}]]
+	//console.log(2016);
+
+	
+	var ctx = document.getElementById("contractChart").getContext('2d');
+	var contractChart = new Chart(ctx, {
 	  type: 'bar',
 	  data: {
-	    labels: ["2013", "2014", "2015", "2016", "2017",],
+	    labels: [2016, 2017, 2018, 2019, 2020],
 	    datasets: [{
 	      label: '계약건수',
-	      data: [12, 19, 3, 5, 2, 3],
-	      backgroundColor: [
-	        'rgba(255, 99, 132, 0.2)',
-	        'rgba(54, 162, 235, 0.2)',
-	        'rgba(255, 206, 86, 0.2)',
-	        'rgba(75, 192, 192, 0.2)',
-	        'rgba(153, 102, 255, 0.2)',
-	        'rgba(255, 159, 64, 0.2)'
-	      ],
-	      borderColor: [
-	        'rgba(255,99,132,1)',
-	        'rgba(54, 162, 235, 1)',
-	        'rgba(255, 206, 86, 1)',
-	        'rgba(75, 192, 192, 1)',
-	        'rgba(153, 102, 255, 1)',
-	        'rgba(255, 159, 64, 1)'
-	      ],
+	      data: [a, b, c, d, e],
+          backgroundColor: 'rgb(245, 166, 35)',
+          borderColor: 'rgb(245, 166, 35)',
 	      borderWidth: 1
 	    }]
 	  },
-	  options: {
+      options: {
+    	legend: {
+             labels: {
+                  fontColor: 'white' // label color
+                 }
+              },
 	    scales: {
-	      yAxes: [{
-	        ticks: {
-	          beginAtZero: true
-	        }
-	      }]
+	    	// y축
+	        yAxes: [{
+	            ticks: {
+	                fontColor:'white' // y축 폰트 color
+	            }
+	     	}],
+	     	// x축
+	     	xAxes: [{
+	            ticks: {
+	            	
+	                fontColor:'white' // x축 폰트 color
+	            }
+	     	}]
 	    }
-	  }
+      }
 	});
 	
 	</script>

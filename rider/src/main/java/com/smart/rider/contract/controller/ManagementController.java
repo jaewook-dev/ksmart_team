@@ -25,7 +25,6 @@ public class ManagementController {
 	@GetMapping("/managementList")
 	public String managementList(@RequestParam(value="currentPage",required=false, defaultValue="1") int currentPage
 								,Model model) {
-
 			//맵으로 서비스부분 받기
 			Map<String, Object> returnMap = managementService.managementList(currentPage);
 	    	//Map객체주소로 보내는 경우(model.addAttribute("map", returnMap);
@@ -38,15 +37,8 @@ public class ManagementController {
 	    	model.addAttribute("currentPage",returnMap.get("currentPage"));
 	    	//마지막페이지
 	    	model.addAttribute("lastPage",returnMap.get("lastPage"));	
-
-		return "management/managementList";
+	    	return "management/managementList";
 	}
-	@GetMapping("getManagementList")
-	public String getManagementList() {
-		
-		return "management/getManagementList";
-	}
-	
 	
 	//계약금 수정화면
 	@GetMapping("/managementUpdate")
@@ -57,7 +49,6 @@ public class ManagementController {
 		List<ManagementDTO> List = managementService.getManagementList(managementCode);
 		//System.out.println("ManagementList"+List);
 		model.addAttribute("managementList", List);
-		
 		return "management/managementUpdate";
 	}
 	
@@ -67,7 +58,6 @@ public class ManagementController {
 		managementService.managementUpdate(management);
 		//들어오는  값 확인 
 		//System.out.println(management.toString() + "<-- management.toString");
-		
 		return "redirect:/managementList";
 	}
 	
@@ -83,7 +73,6 @@ public class ManagementController {
 		if(cmList.size()  == 0) {
 			model.addAttribute("alert", "검색 결과가 없습니다");
 		}
-		
 		return "management/managementList";
 	}
 }

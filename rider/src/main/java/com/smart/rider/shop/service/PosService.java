@@ -52,7 +52,6 @@ public class PosService {
 		contractShopCode  = ssrList.get(0).getContractShopCode();
 		//System.out.println(contractShopCode);
 		}
-		
 		return posMapper.getPosList(contractShopCode,level);
 	}
 	
@@ -69,7 +68,6 @@ public class PosService {
 	//POS 삭제
 	public int posDeleteSet(String memberPw,String posCode,HttpSession session) {
 		//입력받은 posCode로 id 가져오기
-		
 		String id = posMapper.getId(posCode);
 		//System.out.println(id + "코드 조회시 나오는 ID");
 		//가져온 id로 비밀번호 와 생년월일 가져오기
@@ -93,7 +91,6 @@ public class PosService {
 			//불일치시에 FALSE라는 값이 담긴다.
 			posCode = "false";
 		}
-		
 		return posMapper.posDeleteSet(posCode);
 	}
 }

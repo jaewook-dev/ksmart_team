@@ -52,19 +52,14 @@
                                 <tr>
                                     <th scope="col">매장코드</th>
                                     <th scope="col">매장점주 아이디코드</th>
-  
-
                                 </tr>
                             </thead>
-                            <tbody>
-                            	
-                             	<tr th:each="srList : ${relationList}">
-									<th th:text="${srList.shopCode}"></th>
-									<th th:text="${srList.memberId}"></th>
-
+                            <tbody  th:each="srList : ${relationList}">         	
+                             	<tr>
+									<td th:text="${srList.shopCode}"></td>
+									<td th:text="${srList.memberId}"></td>
                                 </tr>
                             </tbody>
-                            
 						</table>
 						<div>
 								<br/><br/>
@@ -136,7 +131,7 @@
 										<h2 class="tm-block-title" style="float: left;">매장 인원</h2>
 									<button type="button" 
 										onclick="location.href='employeeInsert'" style="float: right"
-										class="btn btn-primary text-uppercase">매장직원등록</button>
+										class="btn btn-primary text-uppercase" th:if="${session.SLEVEL eq '관리자 '|| session.SLEVEL eq '점주 '}">매장직원등록</button>
 									<span style="float: left; margin-left: 400px; color:white; font-size: 20px">자세한 내용은 직원관리를 이용해주세요</span>
 										<Br/>
 								</div>

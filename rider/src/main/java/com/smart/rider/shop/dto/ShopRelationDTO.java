@@ -1,7 +1,7 @@
 package com.smart.rider.shop.dto;
 
+//계약매장코드(릴레이션)에 필요한 DTO
 public class ShopRelationDTO {
-
 	
 	private String contractShopCode;
 	private String memberId;

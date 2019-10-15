@@ -82,18 +82,13 @@
         		cm.contract_management_date between #{beginDate} and #{endDate}
         </if>	
 	</select>
-	
-	
-	
-	
+
 	<!-- 페이징 처리를 위한 전체행의 갯수 -->
 	<select id="selectManagementCount" resultType="int">
 		SELECT 
 			COUNT(*) 
 		FROM contract_management
 	</select>
-	
-	 
 	
 	<!--계약금 코드 자동증가 -->
 	<select id="managementCodeMax" resultType="String">
@@ -104,7 +99,6 @@
 	
 	<!--계약금  생성 -->
 	<insert id="managementInsert" parameterType="com.smart.rider.contract.dto.ManagementDTO">
-		
 		INSERT INTO contract_management
 			( contract_management_code
 			 ,contract_code
