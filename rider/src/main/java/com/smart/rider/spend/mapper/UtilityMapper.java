@@ -5,16 +5,12 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.smart.rider.shop.dto.SsrHapDTO;
 import com.smart.rider.spend.dto.JoinUtilityDTO;
 import com.smart.rider.spend.dto.UtilityDTO;
 import com.smart.rider.subject.dto.SubjectDTO;
 
 @Mapper
 public interface UtilityMapper {
-	
-	/*** 190926 재욱, 관리자 권한으로 계약된 매장 내역 ***/
-	public List<SsrHapDTO> utilityShop();
 	
 	/*** 190926 재욱, 지출_공과금 등록 내역 수정 ***/
 	public int utilityUpdate(UtilityDTO utilityDTO);
