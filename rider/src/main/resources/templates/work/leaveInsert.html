@@ -6,14 +6,17 @@
 
 <div class="main-height">
 <div class="container">
-	<!-- row -->
+	<!------- 퇴근등록 화면 팝업창으로 ------->
 	<div class="row tm-content-row">
 		<div class="col-xl-6 mx-auto tm-block-col tm-col-account-settings">
 			<div class="tm-bg-primary-dark tm-block tm-block-settings">
 				<h2 class="tm-block-title">퇴근 등록</h2>
+				<!------- 디지털 시계 ------->
 				<h1 id="digital" class="tm-block-title"></h1>
+				<!------- 아날로그 시계화면 ------->
 				<canvas id="canvas" width="350" height="350" style="background-color:fffff"></canvas>
 					<form action="/leaveInsert" class="tm-signup-form" method="post">
+						<!------- 아이디와 비밀번호 체크 후 등록 ------->
 						<div class="form-group">
 							<label for="id">아이디</label>
 							<input id="memberId" name="memberId" type="text" class="form-control validate" placeholder="ID"/>

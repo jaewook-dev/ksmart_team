@@ -23,7 +23,7 @@ import com.smart.rider.main.service.MainService;
 import com.smart.rider.member.dto.MemberDTO;
 import com.smart.rider.sales.dto.SalesDTO;
 import com.smart.rider.sales.service.SalesService;
-import com.smart.rider.spend.mapper.SpendMapper;
+
 
 @Controller
 public class SalesController {
@@ -43,7 +43,9 @@ public class SalesController {
 									,@RequestParam(value="beginDate")String beginDate
 									,@RequestParam(value="endDate")String endDate
 									,@RequestParam(value = "salesYear", required = false, defaultValue = "2019") String salesYear
-									,Model model) {
+									,Model model,HttpSession session) {
+		
+		String SCODE = (String)session.getAttribute("SCODE");
 		/*
 		 * System.out.println("매출 앞날짜검색----"+beginDate);
 		 * System.out.println("매출 뒤날짜검색-*---"+endDate);
@@ -67,7 +69,7 @@ public class SalesController {
 				//System.out.println("차트값확인~~~~~~~~~~~~~~~~~~~~~~~~~~"+salesChart.toString());
 			}
 		
-		  List<SalesDTO> search = salesService.salesSearchList(select, searchInput,  beginDate, endDate);
+		  List<SalesDTO> search = salesService.salesSearchList(select, searchInput, beginDate, endDate, SCODE);
 		  
 		  model.addAttribute("sList", search);
 		  
@@ -160,16 +162,27 @@ public class SalesController {
 		}
 	//매출리스트 조회요청
 	@GetMapping("/salesList")
-	public String salseList(Model model,@RequestParam(value = "salesYear", required = false, defaultValue = "2019") String salesYear) {
-		List<GoodsHapDTO> sList = salesService.salesList();
+	public String salseList(Model model,@RequestParam(value = "salesYear", required = false, defaultValue = "2019") String salesYear 
+							,HttpSession session) {
+		String select = null;
+		String searchInput = "";
+		String beginDate = "";
+		String endDate = "";
+		String SCODE = (String)session.getAttribute("SCODE");
+		String SLEVEL = (String)session.getAttribute("SLEVEL");
+		
+		Map<String,Object> map = salesService.salesList(select, searchInput, beginDate, endDate, SCODE, SLEVEL);
+		@SuppressWarnings("unchecked")	
+		List<GoodsHapDTO> sList = (List<GoodsHapDTO>)map.get("sList");
+		
 		//매출합 차트에 보여주기,,main참조
-		Map<String,Object> map = new HashMap<String, Object>();
-		map.put("columnDate", "sales_date");	// 조회할 날짜 db 컬럼
-		map.put("columnInt", "sales_amount"); 		// 합산할 db 컬럼 
-		map.put("chartTable", "sales");			// 조회할 db 테이블명
+		Map<String,Object> map1 = new HashMap<String, Object>();
+		map1.put("columnDate", "sales_date");	// 조회할 날짜 db 컬럼
+		map1.put("columnInt", "sales_amount"); 		// 합산할 db 컬럼 
+		map1.put("chartTable", "sales");			// 조회할 db 테이블명
 		//map.put("contractShopCode", contractShopCode);	// 검색 조건, contractShopCode
-		map.put("chartYear", salesYear);				// 검색할 연도	
-		int[] chartValueArrays = mainService.chartValue(map);
+		map1.put("chartYear", salesYear);				// 검색할 연도	
+		int[] chartValueArrays = mainService.chartValue(map1);
 		//System.out.println(Arrays.toString(chartValueArrays) + " <-- salesController.java");
 		
 		//반복문을 통해 배열에 값 입력

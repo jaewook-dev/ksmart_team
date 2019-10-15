@@ -27,6 +27,9 @@
 				AND
 				SA.sales_date between #{beginDate} and #{endDate}
 			</if> 
+			<if test="SCODE neq 'A'.toString()">
+        			AND SA.contract_shop_code  = #{SCODE}
+       		</if>
 		</where>
 		
 		
@@ -122,6 +125,27 @@
 			goods_rental AS GR		
 			ON
 			SA.goods_rental_code = GR.goods_rental_code
+			<where>
+				<if test="searchInput != null and searchInput neq ''.toString()">
+				AND
+					${select} Like CONCAT('%',#{searchInput},'%')
+				</if>
+				<if test="beginDate neq ''.toString() and endDate eq ''.toString()">
+		        	AND 
+		        		SA.sales_date between #{beginDate} and NOW()		
+		        </if>
+		        <if test="beginDate eq ''.toString() and endDate neq ''.toString()">
+		        	AND 
+		        		SA.sales_date between '2000-01-01' and #{endDate}
+		        </if>
+		        <if test="beginDate neq ''.toString() and endDate neq ''.toString()">
+		        	AND 
+		        		SA.sales_date between #{beginDate} and #{endDate}
+		        </if>	
+				<if test="SCODE neq 'A'.toString()">
+        			AND SA.contract_shop_code  = #{SCODE}
+       			</if>
+       		</where>
 	</select>
 	<!-- 코드자동증가  -->
 	<select id="salesCodeCount" resultType="String">

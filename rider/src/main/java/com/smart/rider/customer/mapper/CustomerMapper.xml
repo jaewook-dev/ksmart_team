@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.smart.rider.customer.mapper.CustomerMapper">
+
+	<!-- 대여고객리스트  -->
 	<select id="customerList" resultType="com.smart.rider.customer.dto.CustomerDTO">
 		SELECT 	 rental_customer_code 		AS rentalCustomerCode
 				,contract_shop_code 		AS contractShopCode
@@ -23,6 +25,8 @@
 		ORDER BY rental_customer_code DESC 
 		LIMIT #{startRow},#{rowPerPage}
 	</select>
+	
+	<!-- 대여고객 상세보기  -->
 	<select id="getCustomerList" parameterType="String" resultType="com.smart.rider.customer.dto.CustomerDTO">
 		SELECT 	 rental_customer_code 		AS rentalCustomerCode
 				,contract_shop_code 		AS contractShopCode
@@ -40,6 +44,7 @@
 		WHERE
 			rental_customer_code = #{rentalCustomerCode}
 	</select>
+	
 	<!-- 19.10.02페이지작업위한작성  -->
 	<select id="getCustomerAllCount" resultType="int">
 		SELECT
@@ -51,12 +56,15 @@
 			</if>
 		</trim>
 	</select>
+	
 	<!-- 코드 자동증가 -->
 	<select id="customerCodeCount" resultType="String">
 		SELECT 
 			MAX(LPAD(RIGHT(rental_customer_code, 4)+1, '4' , '0')) 
 		FROM rental_customer;
 	</select>
+	
+	<!-- 대여고객 등록  -->
 	<insert id="customerInsert" parameterType="com.smart.rider.customer.dto.CustomerDTO">
 		INSERT INTO rental_customer(
 			 rental_customer_code
@@ -83,6 +91,8 @@
 			,CURDATE()
 			,0)
 	</insert>
+	
+	<!-- 대여고객수정  -->
 	<update id="customerUpdate" parameterType="com.smart.rider.customer.dto.CustomerDTO">
 		UPDATE rental_customer
 			<trim prefix="SET" suffixOverrides=",">
@@ -111,14 +121,18 @@
 		WHERE
 			rental_customer_code = #{rentalCustomerCode} 
 	</update>
+	
+	<!-- 대여고객리스트에서 반납버튼클릭 반납처리  -->
 	<update id="returnButton" parameterType="com.smart.rider.customer.dto.CustomerDTO">
 		UPDATE rental_customer
 		SET
-			rental_customer_return = CURDATE(),
+			rental_customer_return  = CURDATE(),
 			rental_customer_overdue = IF(CURDATE()<![CDATA[ <= ]]>rental_customer_finish, '무', '유')
 		WHERE 
 			rental_customer_code = #{rentalCustomerCode}
 	</update>
+	
+	<!-- 대여고객검색결과 카운팅 -->
 	<select id="getSearchAllCount" resultType="int">
 		SELECT
 			COUNT(*)
@@ -147,6 +161,8 @@
 			</if>
 		</trim>
 	</select>
+	
+	<!-- 대여고객검색  -->
 	<select id="searchCustomer" parameterType="String" resultType="com.smart.rider.customer.dto.CustomerDTO">
 		SELECT 	 rental_customer_code 		AS rentalCustomerCode
 				,contract_shop_code 		AS contractShopCode

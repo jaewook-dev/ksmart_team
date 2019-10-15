@@ -1,7 +1,9 @@
 package com.smart.rider.sales.service;
 
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,8 +23,8 @@ public class SalesService {
 	
 	
 	//매출검색
-	public List<SalesDTO> salesSearchList(String select ,String searchInput,String beginDate,String endDate){
-		List<SalesDTO> search = salesMapper.salesSearchList(select, searchInput, beginDate, endDate);
+	public List<SalesDTO> salesSearchList(String select ,String searchInput,String beginDate,String endDate,String SCODE){
+		List<SalesDTO> search = salesMapper.salesSearchList(select, searchInput, beginDate, endDate,SCODE);
 		//System.out.println("매출서비스확인@@@@@@@@@@@@@@@@@@@@@"+search);
 		return search;
 	}
@@ -55,7 +57,16 @@ public class SalesService {
 	}
 	
 	//매출리스트
-	public List<GoodsHapDTO> salesList(){
-		return salesMapper.salesList();
+	public Map<String,Object> salesList(String select ,String searchInput,String beginDate,String endDate,String SCODE,String SLEVEL){
+		Map<String,Object> map = new HashMap<String, Object>();
+		
+		if(SLEVEL.equals("관리자")) {
+			SCODE="A";
+			map.put("sList", salesMapper.salesList(select, searchInput, beginDate, endDate, SCODE));
+			return map;
+		}
+			map.put("sList", salesMapper.salesList(select, searchInput, beginDate, endDate, SCODE));
+		return map;
 	}
+	
 }

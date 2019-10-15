@@ -7,7 +7,7 @@
 		 <nav class="navbar navbar-expand-xl">
             <div class="container h-100">
                 <a class="navbar-brand" href="/">
-                	<h2 class="tm-site-title mb-0"> 배포 191009</h2>             
+                	<h2 class="tm-site-title mb-0"> 배포 191010</h2>             
                 </a>
 
                 <button class="navbar-toggler ml-auto mr-0" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -93,7 +93,7 @@
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             	<a class="dropdown-item" href="/shop">매장</a>
-                                <a class="dropdown-item" th:if="${session.SLEVEL eq '관리자'}" href="/customerList">!대여고객 관리</a>
+                                <a class="dropdown-item" th:if="${session.SLEVEL eq '관리자'}" href="/customerList">대여고객 관리</a>
                                 <a class="dropdown-item" th:if="${session.SLEVEL eq '점주' or session.SLEVEL eq '직원'}" 
                                    th:href="@{/customerList(contractShopCode=${session.SCODE})}">대여고객 관리</a>
                             </div>
@@ -136,7 +136,7 @@
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             	<a class="dropdown-item" href="/employeeInsert">직원등록</a>
                             	<a class="dropdown-item" th:href="@{/employeeList(contractShopCode=${session.SCODE})}">직원목록</a>
-                            	<a class="dropdown-item" th:href="@{/workAdmin(contractShopCode=${session.SCODE})}">!근태관리</a>
+                            	<a class="dropdown-item" th:href="@{/workAdmin(contractShopCode=${session.SCODE})}">근태관리</a>
                             </div>
                         </li>
                          <li class="nav-item" th:if="${session.SLEVEL eq '직원'}">
