@@ -7,10 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.smart.rider.member.dto.MemberDTO;
 import com.smart.rider.member.service.MemberService;
@@ -53,16 +50,6 @@ public class MemberController {
 		return "member/memberList";
 	}
 	
-	//19.09.16작성 아이디 중복체크
-	@RequestMapping(value = "/memberIdCheck", method = RequestMethod.GET)
-	@ResponseBody
-	public int idCheck(@RequestParam("memberId") String memberId) {
-		int result = memberService.memberIdCheck(memberId);
-		//System.out.println(result + "<--memberId 중복체크");
-		
-		return result;
-	}
-
 	//회원 상세보기
 	@GetMapping("/getMemberList")
 	public String getMemberList(@RequestParam(value="memberId") String memberId, Model model) {
@@ -162,5 +149,12 @@ public class MemberController {
 		}
 		
 		return "redirect:/memberSuccess";
+	}
+	
+	//아이디 중복체크
+	@GetMapping("/idCheck")
+	public String idCheck() {
+		
+		return "member/memberIdCheck";
 	}
 }

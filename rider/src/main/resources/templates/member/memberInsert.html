@@ -15,9 +15,12 @@
 					<form action="/memberInsert" class="tm-signup-form" method="post" onsubmit="return sendIt();">
 						<div class="form-group">
 							<label for="id">아이디</label>
-							<input id="memberId" name="memberId" type="text" class="form-control validate" maxlength="12" placeholder="ID" required="required"/>
+							<input id="memberId" name="memberId" type="text" class="form-control validate" maxlength="12" placeholder="ID" required="required" style="background-color: #54657D" readonly="readonly"/>
+							
 						</div>
-						<label id="idCheckText"></label>
+						<button type="button" id="idCheck" class="btn btn-primary btn-block text-uppercase" onclick="idCheck()">
+							중복체크
+						</button>
 						<div class="form-group">
 							<label for="password">비밀번호</label>
 							<input id="memberPw" name="memberPw" type="password" class="form-control validate"  maxlength="12" required="required" placeholder="PASSWORD"/>
@@ -47,7 +50,7 @@
 							<input id="memberEmail" name="memberEmail" type="text" class="form-control validate" required="required" placeholder="abc@abc.abc"/>
 						</div>
 						<div>
-							<input type="submit" id="submit" onclick="sendIt()" class="btn btn-primary btn-block text-uppercase" value="회원가입">
+							<button type="submit" onclick="sendIt()" class="btn btn-primary btn-block text-uppercase">회원가입</button>
 						</div>
 					</form>
 					
@@ -60,30 +63,10 @@
 <th:block layout:fragment="customScript">
 
 <script>
-	$('#memberId').blur(function() {
-		var memberId = $('#memberId').val();
-		
-		$.ajax({
-			url : "/memberIdCheck",
-			type : 'GET',
-			data : {"memberId":$('#memberId').val()},
-			success : function(data) {
-				console.log('1이면 사용중 0이면 사용가능' + data);
-				if (data == 1) {
-					// 1 : 아이디가 중복되는 문구
-					$("#idCheckText").text("사용중인 아이디입니다!");
-					$("#memberId").val("");
-					$("#memberId").focus();
-				}else{
-					$("#idCheckText").text("사용가능한 아이디입니다.");
-				}
-			},
-			 error : function(error) {
-	                
-	                alert("error : " + error);
-			 }	                
-		});
-	});
+
+function idCheck(){
+	window.open('/idCheck','아이디중복체크','left='+(screen.availWidth-550)/2+',top='+(screen.availHeight-430)/3+',width=430,height=550,location=no,status=no,scrollbars=yes')
+};
 
 $('#memberPw2').blur(function(){
 	if($('#memberPw').val() != $('#memberPw2').val()){
