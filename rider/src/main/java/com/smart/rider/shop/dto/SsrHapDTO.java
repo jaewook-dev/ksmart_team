@@ -1,6 +1,6 @@
 package com.smart.rider.shop.dto;
 
-//shop+shoprelation 필요한 값만 
+//shop+shoprelation 조회 할 값만 골라서 만든 DTO
 public class SsrHapDTO {
 
 	private String shopCode;

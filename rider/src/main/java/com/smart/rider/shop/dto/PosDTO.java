@@ -1,5 +1,6 @@
 package com.smart.rider.shop.dto;
 
+//POS관리 DTO
 public class PosDTO {
 
 	private String posCode;

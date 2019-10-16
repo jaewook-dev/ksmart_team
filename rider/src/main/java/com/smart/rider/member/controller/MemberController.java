@@ -32,7 +32,7 @@ public class MemberController {
 	@PostMapping("/memberInsert")
 	public String memberInsert(MemberDTO memberdto) {
 		memberService.memberInsert(memberdto);
-		
+		//System.out.println("회원등록컨트롤러");
 		return "redirect:/login";
 	}
 	
@@ -53,16 +53,6 @@ public class MemberController {
 		return "member/memberList";
 	}
 	
-	//19.09.16작성 아이디 중복체크
-	@RequestMapping(value = "/memberIdCheck", method = RequestMethod.GET)
-	@ResponseBody
-	public int idCheck(@RequestParam("memberId") String memberId) {
-		int result = memberService.memberIdCheck(memberId);
-		//System.out.println(result + "<--memberId 중복체크");
-		
-		return result;
-	}
-
 	//회원 상세보기
 	@GetMapping("/getMemberList")
 	public String getMemberList(@RequestParam(value="memberId") String memberId, Model model) {
@@ -162,5 +152,14 @@ public class MemberController {
 		}
 		
 		return "redirect:/memberSuccess";
+	}
+	
+	//아이디중복확인
+	@GetMapping("/memberIdCheck")
+	public @ResponseBody int memberIdCheck(String memberId) {
+		System.out.println(memberId + "<--중복확인 아이디");
+		int result = memberService.memberIdCheck(memberId);
+		
+		return result;
 	}
 }

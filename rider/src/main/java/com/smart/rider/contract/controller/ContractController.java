@@ -1,7 +1,7 @@
 package com.smart.rider.contract.controller;
 
 import java.util.List;
-import java.util.Map;
+
 
 import javax.servlet.http.HttpSession;
 
@@ -33,12 +33,25 @@ public class ContractController {
 	//계약관리 화면
 	@GetMapping("/contract")
 	public String contract(Model model,HttpSession session) {
+		//최신 단가표
 		List<UnitDTO>  UnitDTO = contractService.unitNew();
+		//계약목록
+		List<AgreementDTO> contractList =  contractService.getAllList();
+		for(int i= 2015; i<2030; i++) {
+			String year = String.valueOf(i);
+			//System.out.println(year + "결과 값 String으로 전환");
+			int result = contractService.contractYear(year);
+			//System.out.println(result + "<--year을 대입 했을 때 나오는 결과");
+			String contractChart = "contract"+year;
+			model.addAttribute(contractChart, result);
+		}
+		model.addAttribute("contractList", contractList);
 		model.addAttribute("unitNew", contractService.unitNew());
-		//System.out.println(UnitDTO.toString());
-		
+		//System.out.println(UnitDTO+"<-- 최신 단가표 조회");
+		//System.out.println(contractList + "<-- 계약목록 확인");
 		return "/contract/contract";
 	}
+	
 	//계약쪽 화면
 	@GetMapping("/agreement")
 	public String agreementList(Model model,HttpSession session) {
@@ -56,7 +69,6 @@ public class ContractController {
 		//System.out.println(getContractUnitCode + "<--최근 단가표 값 받는가 확인");
 		session.setAttribute("SCUC",getContractUnitCode);
 		}
-		
 		return "/contract/agreement";
 	}
 	
@@ -67,7 +79,6 @@ public class ContractController {
 		//System.out.println("=====test=====");
 		//System.out.println("contractList:"+contractList);
 		model.addAttribute("contractList", contractList);
-		
 		return "contract/contractList";
 	}
 
@@ -82,7 +93,6 @@ public class ContractController {
 		if(contractList.size()  == 0) {
 			model.addAttribute("alert", "검색 결과가 없습니다");
 		}
-		
 		return "/contract/contractList";
 	}
 
@@ -93,7 +103,6 @@ public class ContractController {
 		//System.out.println("=====test=====");
 		//System.out.println("contractList:"+contractInsert);
 		model.addAttribute("contractInsert", contractInsert);
-		
 		return "/contract/contractInsert";
 	}
 	
@@ -121,28 +130,38 @@ public class ContractController {
 	
 	//관리자 ,특정 계약코드 조회
 	@GetMapping("/getContractList")
-	public String getContractList(@RequestParam(value="contractCode")String contractCode,Model model){
+	public String getContractList(@RequestParam(value="contractCode")String contractCode
+								,@RequestParam(value="contractUnitCode")String contractUnitCode
+								,Model model){
 		//System.out.println(contractCode + "<--계약코드 값");
+		//System.out.println(contractUnitCode + "입력받은 계약단가표 값");
 		List<ContractDTO> contractList = contractService.getContractList(contractCode);
 		//System.out.println(contractList + "계약코드 값으로 데이터 조회 결과 확인");
 		model.addAttribute("contractList", contractList);
 		if(contractList != null) {
 		model.addAttribute("contractMethod", contractList.get(0).getContractMethod());
 		//System.out.println("납부방식에 담겨 있는값 :" +contractList.get(0).getContractMethod());
-		String contractUnitCode = contractList.get(0).getContractUnitCode();
+		String unitCode = contractList.get(0).getContractUnitCode();
 		model.addAttribute("contractUnitCode", contractUnitCode);
-		//System.out.println(contractUnitCode + " <-- 담겨있는 코드값");
-		}
-		//수정시 자동으로
+		//System.out.println(unitCode + " <-- 담겨있는 코드값");
+			 		}
+		//계약 단가표 리스트를 보여주면서 고를 수 잇도록 설계
 		List<UnitDTO> uList =  unitService.unitList();
 		model.addAttribute("uList", uList);
-		return "contract/contractUpdate";
-	}
-	@GetMapping("/unitCode")
-	public String unitCode(@RequestParam(value="contractUnitCode")String contractUnitCode) {
-		//System.out.println(contractUnitCode + "담긴값");
-		
+		//수정시 계약 단가표 수정 할 수 잇도록 모델에  넣는다.
+		List<UnitDTO> unitList = contractService.getUnitList(contractUnitCode);
+		model.addAttribute("unitList", unitList);
 		
 		return "contract/contractUpdate";
 	}
+	
+	//계약 수정(생성 및 재계약)
+	@PostMapping("/contractUpdate")
+	public String contractUpdate(ContractDTO contract,HttpSession session,ManagementDTO management) {
+		//System.out.println(contract + "수정하는 값 받는 지 확인");
+		contractService.contractUpdate(contract, session, management);
+		
+		return "redirect:/contractList";
+	}
+
 }

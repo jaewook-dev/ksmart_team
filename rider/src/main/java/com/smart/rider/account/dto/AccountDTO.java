@@ -1,5 +1,6 @@
 package com.smart.rider.account.dto;
 
+//거래처관리에 필요한 DTO
 public class AccountDTO {
 
 	private String accountCode;

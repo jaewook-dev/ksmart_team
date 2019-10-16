@@ -61,8 +61,7 @@ public class ManagementService {
 		returnMap.put("currentPage", currentPage);
 		returnMap.put("lastPage", lastPage);
 		returnMap.put("startPageNum", startPageNum);
-		returnMap.put("lastPageNum", lastPageNum);
-		
+		returnMap.put("lastPageNum", lastPageNum);	
 		return returnMap;
 	}
 	

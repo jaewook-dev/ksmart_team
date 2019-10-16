@@ -27,6 +27,9 @@ public interface ContractMapper {
 	//계약된 매장 목록
 	public List<AgreementDTO> agreementList(String memberId,String memberLevel);
 	
+	//계약내용 목록보기
+	public List<AgreementDTO> getAllList();
+	
 	//계약 내용 및 계약금 납부 현황 보기
 	public List<AgreementDTO> getAgreementList(String agreementCode);
 	
@@ -36,4 +39,9 @@ public interface ContractMapper {
 	//특정 계약코드로 데이터 조회
 	public List<ContractDTO> getContractList(String contractCode);
 
+	//특정 단가표코드로 데이터 조회
+	public List<UnitDTO> getUnitList(String contractUnitCode);
+	
+	//년도로 조회시에 나오는 숫자
+	public int contractYear(String year);
 }

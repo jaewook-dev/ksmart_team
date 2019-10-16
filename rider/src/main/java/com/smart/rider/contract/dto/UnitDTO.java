@@ -1,5 +1,6 @@
 package com.smart.rider.contract.dto;
 
+//계약단가표DTO 
 public class UnitDTO {
 	
 	private String contractUnitCode;
@@ -8,6 +9,7 @@ public class UnitDTO {
 	private int contractUnitOneyear;
 	private int contractUnitTwoyear;
 	private String contractUnitDate;
+	
 	
 	public String getContractUnitCode() {
 		return contractUnitCode;

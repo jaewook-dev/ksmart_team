@@ -39,12 +39,11 @@ public class AccountController {
 		List<AccountDTO> accountListYes = (List<AccountDTO>)map.get("accountListYes");
 		@SuppressWarnings("unchecked")
 		List<AccountDTO> accountListNo = (List<AccountDTO>)map.get("accountListNo");
-		//System.out.println(accountListYes);
-		//System.out.println(accountListNo);
+		//System.out.println(accountListYes + "삭제할 수 있는 값 확인");
+		//System.out.println(accountListNo + "삭제할 수 없는 값 확인");
 		//입력값 확인 후 모델값 값을 넣는다.
 		model.addAttribute("accountListYes", accountListYes);
-		model.addAttribute("accountListNo", accountListNo);
-		
+		model.addAttribute("accountListNo", accountListNo);	
 		return "/account/accountList";
 	}
 	
@@ -60,7 +59,6 @@ public class AccountController {
 		//model에 담기
 		model.addAttribute("ssrList", ssrList);
 		//System.out.println( ssrList + "<--제대로 담겨 있는지 확인");
-		
 		return "/account/accountInsert";
 	}
 	
@@ -69,7 +67,6 @@ public class AccountController {
 	public String accountInsert(AccountDTO account) {
 		//System.out.println(account +"<--accountInsert에서 넘어온  값");
 		accountService.accountInsert(account);
-		
 		return "redirect:/accountList";
 	}
 	
@@ -90,8 +87,8 @@ public class AccountController {
 		@SuppressWarnings("unchecked")
 		List<AccountDTO> accountListNo = (List<AccountDTO>)map.get("accountSearchListNo");
 		//값확인
-		System.out.println(accountListYes +"<--삭제가능리스트 확인");
-		System.out.println(accountListNo +"<--삭제불가능리스트 확인");
+		//System.out.println(accountListYes +"<--삭제가능리스트 확인");
+		//System.out.println(accountListNo +"<--삭제불가능리스트 확인");
 		//model에 대입값 넣기
 		model.addAttribute("accountListYes", accountListYes);
 		model.addAttribute("accountListNo", accountListNo);
@@ -99,7 +96,6 @@ public class AccountController {
 		if(accountListYes.size()  == 0  && accountListNo.size() == 0) {
 			model.addAttribute("alert", "검색 결과가 없습니다");
 		}
-		
 		return "/account/accountList";
 	}
 	
@@ -122,7 +118,6 @@ public class AccountController {
 		//System.out.println(account+"넘어오는값확인");
 		//넘어온 값 설정하기
 		accountService.accountUpdateSet(account);
-		
 		return "redirect:/accountList";
 	
 	}
@@ -143,7 +138,6 @@ public class AccountController {
 		//System.out.println(updateList+"<--대입 결과 확인");
 		//결과값 model에 담기
 		model.addAttribute("updateList", updateList);
-		
 		return "account/accountDelete";
 	}
 	
@@ -166,7 +160,6 @@ public class AccountController {
 			model.addAttribute("updateList", accountService.accountUpdate(accountCode));	
 			return "account/accountDelete";
 		}
-		
 		return "redirect:/accountList";
 	}
 }

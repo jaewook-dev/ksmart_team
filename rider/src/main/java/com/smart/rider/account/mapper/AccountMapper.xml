@@ -31,10 +31,8 @@
 			,ac.account_date
 		FROM account ac LEFT JOIN purchase pu
 		ON ac.account_code = pu.account_code
-		WHERE pu.account_code IS null
-		
-	</select>
-	
+		WHERE pu.account_code IS null	
+	</select>	
 	<!-- 삭제 불가능  -->
 	<select id="accountListNo" parameterType="String" resultMap="accountMap">
 		SELECT DISTINCT 
@@ -64,28 +62,28 @@
 	<!--매입거래처 생성  -->
 	<insert id="accountInsert" parameterType="com.smart.rider.account.dto.AccountDTO">
 		INSERT INTO account(
-		  account_code
-		 ,contract_shop_code
-		 ,account_market, account_name
-		 ,account_phone, account_address
-		 ,account_category
-		 ,account_date)
+			 account_code
+			,contract_shop_code
+			,account_market, account_name
+			,account_phone, account_address
+			,account_category
+			,account_date)
 	VALUES (
-		  #{accountCode}
-		 ,#{contractShopCode}
-		 ,#{accountMarket}
-		 ,#{accountName}
-		 ,#{accountPhone}
-		 ,#{accountAddress}
-		 ,#{accountCategory}
-		 , NOW())
+			 #{accountCode}
+			,#{contractShopCode}
+			,#{accountMarket}
+			,#{accountName}
+			,#{accountPhone}
+			,#{accountAddress}
+			,#{accountCategory}
+			, NOW())
 	</insert>
 	
 	<!--세션 아이디를 이용해서 계약매장코드 가져오기  -->
 	<select id="getShopRelationCode" parameterType="String" resultType="com.smart.rider.shop.dto.SsrHapDTO">
 		SELECT DISTINCT
-			sr.contract_shop_code AS contractShopCode 
-			,s.shop_name AS shopName
+			 sr.contract_shop_code 	AS contractShopCode 
+			,s.shop_name 			AS shopName
 		FROM shop_relation sr, shop s
 		WHERE sr.shop_code =s.shop_code AND sr.member_id =#{SID}
 	</select>
@@ -188,12 +186,12 @@
 	<update id="accountUpdateSet" parameterType="com.smart.rider.account.dto.AccountDTO" >
 		UPDATE account
 		SET
-			contract_shop_code=#{contractShopCode}
-			,account_market=#{accountMarket}
-			,account_name=#{accountName}
-			,account_phone=#{accountPhone}
-			,account_address=#{accountAddress}
-			,account_category=#{accountCategory}
+			 contract_shop_code		=	#{contractShopCode}
+			,account_market			=	#{accountMarket}
+			,account_name			=	#{accountName}
+			,account_phone			=	#{accountPhone}
+			,account_address		=	#{accountAddress}
+			,account_category		=	#{accountCategory}
 			,account_date= NOW()
 		WHERE account_code=#{accountCode}
 	</update>
@@ -203,13 +201,13 @@
 		SELECT
 			member_pw AS memberPw
 		FROM member
-		WHERE member_id = #{SID};
+		WHERE member_id	= #{SID};
 	</select>
 	
 	<!-- 삭제 퀄리문 -->
 	<delete id="accountDelete" parameterType="String">
 		DELETE 
 		FROM account 
-		WHERE account_code=#{accountCode}
+		WHERE account_code	=	#{accountCode}
 	</delete>
 </mapper>

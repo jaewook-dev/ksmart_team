@@ -15,9 +15,9 @@
 					<form action="/memberInsert" class="tm-signup-form" method="post" onsubmit="return sendIt();">
 						<div class="form-group">
 							<label for="id">아이디</label>
-							<input id="memberId" name="memberId" type="text" class="form-control validate" maxlength="12" placeholder="ID" required="required"/>
+							<input id="memberId" name="memberId" type="text" class="form-control validate"  maxlength="12" required="required" placeholder="ID"/>
 						</div>
-						<label id="idCheckText"></label>
+						<div id="idAlert"></div>
 						<div class="form-group">
 							<label for="password">비밀번호</label>
 							<input id="memberPw" name="memberPw" type="password" class="form-control validate"  maxlength="12" required="required" placeholder="PASSWORD"/>
@@ -47,10 +47,9 @@
 							<input id="memberEmail" name="memberEmail" type="text" class="form-control validate" required="required" placeholder="abc@abc.abc"/>
 						</div>
 						<div>
-							<input type="submit" id="submit" onclick="sendIt()" class="btn btn-primary btn-block text-uppercase" value="회원가입">
+							<input type="submit" onclick="sendIt()" class="btn btn-primary btn-block text-uppercase" value="회원가입"></input>
 						</div>
 					</form>
-					
 				</div>
 			</div>
 		</div>
@@ -59,31 +58,40 @@
 
 <th:block layout:fragment="customScript">
 
-<script>
-	$('#memberId').blur(function() {
-		var memberId = $('#memberId').val();
-		
-		$.ajax({
-			url : "/memberIdCheck",
-			type : 'GET',
-			data : {"memberId":$('#memberId').val()},
-			success : function(data) {
-				console.log('1이면 사용중 0이면 사용가능' + data);
-				if (data == 1) {
-					// 1 : 아이디가 중복되는 문구
-					$("#idCheckText").text("사용중인 아이디입니다!");
-					$("#memberId").val("");
-					$("#memberId").focus();
-				}else{
-					$("#idCheckText").text("사용가능한 아이디입니다.");
-				}
-			},
-			 error : function(error) {
-	                
-	                alert("error : " + error);
-			 }	                
-		});
-	});
+<script type="text/javascript">
+$(function() {
+    $('#memberId').blur(function() {
+        
+    	var memberId = $('#memberId').val();
+        // ajax 호출을 위한 정보 기입
+        var request = $.ajax({
+          url: "/memberIdCheck", // 호출 url
+          method: "GET", // 전송방식
+          data: {'memberId':$('#memberId').val()}, // 파라미터
+          dataType: "text" // 전송 받을 타입 ex) xml, html, text, json
+        });
+        
+        // 호출 정상일 시 실행되는 메서드
+        request.done(function(result) {
+        	console.log(result);
+        	if(result == 1){
+        		$('#idAlert').text("사용중인 아이디입니다.");
+        	} else {
+        		$('#idAlert').text("사용가능한 아이디입니다.");
+        	}
+        });
+        
+        // 호출 에러일 시 실행되는 메서드
+        request.fail(function( jqXHR, textStatus ) {
+          alert( "Request failed: " + textStatus );
+        });
+
+        // 호출 정상 또는 에러 상관없이 실행
+        request.always(function() {
+            //console.log('완료');
+        });
+    });
+});
 
 $('#memberPw2').blur(function(){
 	if($('#memberPw').val() != $('#memberPw2').val()){

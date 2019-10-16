@@ -1,7 +1,7 @@
 package com.smart.rider.contract.dto;
 
 
-//리스트를 조회하기위해 만든 DTO(db랑 관련 없음)
+//회원관리DTO 와 계약관리DTO 에서 필요한 데이터 조회시 사용 
 public class ContractMemberDTO {
 	
 	private String contractCode;

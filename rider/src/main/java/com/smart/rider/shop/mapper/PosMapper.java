@@ -34,7 +34,6 @@ public interface PosMapper {
 	//POS코드로 ID값 가져오기
 	public String getId(String posCode);
 	
-	
 	//삭제하기
 	public int posDeleteSet(String posCode);
 }

@@ -22,7 +22,6 @@ public class ShopService {
 	@Autowired
 	private ShopMapper shopMapper;
 
-
 	//매장생성시 매장계약코드 자동 생성,매장계약코드 생성시에 아이디에 있는 매장계약코드가 입력된다(수정).
 	public int shopInsert(ShopDTO shop,HttpSession session,ShopRelationDTO relation) {
 		// 담겨있는 contractCode로 contractDTO조회
@@ -73,6 +72,7 @@ public class ShopService {
 		result += shopMapper.memberUpdate(getrelationCode,getrelationId);
 		return result;
 	}
+	
 	//계약매장목록
 	public List<ShopRelationDTO> relationList(){
 		return shopMapper.relationList();

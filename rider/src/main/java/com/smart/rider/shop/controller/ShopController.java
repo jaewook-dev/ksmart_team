@@ -38,6 +38,7 @@ public class ShopController {
 		model.addAttribute("contractList", contractList);
 		return  "/shop/shopInsert";
 	}
+	
 	//매장 생성
 	@PostMapping("/shopInsert")
 	public String shopInsert(ShopDTO shop,HttpSession session,ShopRelationDTO relation) {
@@ -71,7 +72,6 @@ public class ShopController {
 	public String getShopList(Model model,HttpSession session) {
 		//맵으로 받기
 		Map<String, Object> map =  shopService.getShopList();
-
 		//SuppressWarnings("unchecked") 메소드상태가 경고 일 때 나오지 않게 해주기
 		@SuppressWarnings("unchecked")
 		List<ShopDTO> shopListYes = (List<ShopDTO>)map.get("shopListYes");
@@ -104,7 +104,6 @@ public class ShopController {
 		if(shopListYes.size()  == 0  && shopListNo.size() == 0) {
 			model.addAttribute("alert", "검색 결과가 없습니다");
 		}
-			
 		return "shop/shopList";
 	}
 	

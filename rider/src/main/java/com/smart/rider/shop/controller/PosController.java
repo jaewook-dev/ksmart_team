@@ -24,10 +24,10 @@ public class PosController {
 	public String posInsert(HttpSession session,Model model) {
 		//현재 로그인 된 아이디 값 받기
 		String memberId = (String)session.getAttribute("SID");
-		System.out.println(memberId+"<--담겨있는 세션값 확인");
+		//System.out.println(memberId+"<--담겨있는 세션값 확인");
 		//현재 로그인 된 아이디 대입 결과 확인
 		List<SsrHapDTO> ssrList = posService.getMemberId(memberId);
-		System.out.println(ssrList+"<--memberId 대입 결과");
+		//System.out.println(ssrList+"<--memberId 대입 결과");
 		//세션에 담기
 		model.addAttribute("ssrHapList", ssrList);
 		return "pos/posInsert";
@@ -37,7 +37,7 @@ public class PosController {
 	@PostMapping("/posInsert")
 	public String posInsert(PosDTO pos) {
 		//입력값 확인
-		System.out.println(pos+"<--받아온 pos 값");
+		//System.out.println(pos+"<--받아온 pos 값");
 		posService.posInsert(pos);
 		return "redirect:/shop";
 	}
@@ -47,7 +47,7 @@ public class PosController {
 	public String getPosList(Model model,HttpSession session) {
 		//PosDTO에 결과 담기
 		List<PosDTO> posList = posService.getPosList(session); 
-		System.out.println(posList + "posList 입력값 확인");
+		//System.out.println(posList + "posList 입력값 확인");
 		//PosDTO값을 model에 담아 넘기기
 		model.addAttribute("posList", posList);
 		return "pos/posList";
@@ -57,35 +57,37 @@ public class PosController {
 	@GetMapping("/posUpdate")
 	public String posUpdate(@RequestParam(value="posCode")String posCode,Model model,HttpSession session) {
 		//코드 값 확인
-		System.out.println(posCode+"pos코드값 확인");
+		//System.out.println(posCode+"pos코드값 확인");
 		//코드 대입한 결과값 확인
 		String memberId = (String)session.getAttribute("SID");
 		List<SsrHapDTO> ssrList = posService.getMemberId(memberId);
 		List<PosDTO> posUpdate = posService.posUpdate(posCode);
-		System.out.println(ssrList + "ssrList 값 확인");
-		System.out.println(posUpdate + "PosDTO 값 확인");
+		//System.out.println(ssrList + "ssrList 값 확인");
+		//System.out.println(posUpdate + "PosDTO 값 확인");
 		model.addAttribute("ssrList", ssrList);
 		model.addAttribute("posUpdate", posUpdate);
 		return "pos/posUpdate";
 	}
+	
 	//수정하기
 	@PostMapping("/posUpdate")
 	public String posUpdateSet(PosDTO pos) {
-		System.out.println(pos + "수정값 확인");
+		//System.out.println(pos + "수정값 확인");
 		posService.posUpdateSet(pos);
 		return "redirect:/shop";
 	}
+	
 	//수정하기 위해 코드값으로 데이터 조회
 	@GetMapping("/posDelete")
 	public String posDelete(@RequestParam(value="posCode")String posCode,Model model,HttpSession session) {
 		//코드 값 확인
-		System.out.println(posCode+"<-- pos코드값 확인");
+		//System.out.println(posCode+"<-- pos코드값 확인");
 		//코드 대입한 결과값 확인
 		String memberId = (String)session.getAttribute("SID");
 		List<SsrHapDTO> ssrList = posService.getMemberId(memberId);
 		List<PosDTO> posDelete = posService.posUpdate(posCode);
-		System.out.println(ssrList + "<-- ssrList 값 확인");
-		System.out.println(posDelete + "<-- PosDTO 값 확인");
+		//System.out.println(ssrList + "<-- ssrList 값 확인");
+		//System.out.println(posDelete + "<-- PosDTO 값 확인");
 		model.addAttribute("ssrList", ssrList);
 		model.addAttribute("posDelete", posDelete);
 		return "pos/posDelete";
@@ -98,20 +100,17 @@ public class PosController {
 								HttpSession session,
 								Model model){
 		//삭제할 Code값 과 입력된 PW값 확인
-		System.out.println(memberPw +"<--memberPw에 입력된 값");
-		System.out.println(posCode +"<--posCode에 입력된 값");
+		//System.out.println(memberPw +"<--memberPw에 입력된 값");
+		//System.out.println(posCode +"<--posCode에 입력된 값");
 		//삭제 확인을 위해서 변수를 선언한다.
 		int deleteCk = posService.posDeleteSet(memberPw,posCode,session);
-		System.out.println(deleteCk +"<--값 확인");
+		//System.out.println(deleteCk +"<--값 확인");
 		//deleteCk가 0이면  삭제가 안되므로 다시 값을 가지고 삭제화면으로 리턴 시킨다.
 		if(deleteCk == 0 ) {
 			model.addAttribute("result", "비밀번호가 일치하지 않습니다.");
 			model.addAttribute("posDelete", posService.posUpdate(posCode));
 			return "pos/posDelete";
 		}
-		
-		
 		return "redirect:/shop";
-		
 	}
 }

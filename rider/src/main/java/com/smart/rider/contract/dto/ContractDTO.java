@@ -1,7 +1,8 @@
 package com.smart.rider.contract.dto;
 
+//계약 관리 DTO
 public class ContractDTO {
-
+	
 	private String contractCode;
 	private String contractUnitCode;
 	private String memberId;
@@ -12,11 +13,6 @@ public class ContractDTO {
 	private int contractPay;
 	private String contractInformation;
 	private String contractDate;
-	
-	
-	
-	
-	
 	
 	
 	public String getContractCode() {
