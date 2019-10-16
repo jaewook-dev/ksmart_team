@@ -35,11 +35,11 @@ public interface ShopMapper {
 	//member에 계약매장코드 수정하기
 	public int memberUpdate(String getrelationCode,String getrelationId);
 	
-	//리스트 조회 시
+	//매장 조회 시
 	public List<ShopDTO> shopListYes();
 	public List<ShopDTO> shopListNo();
 	
-	//리스트 검색시
+	//매장 검색시
 	public List<ShopDTO> shopSearchListYes(SearchDTO serach);
 	public List<ShopDTO> shopSearchListNo(SearchDTO serach);
 	
@@ -78,5 +78,13 @@ public interface ShopMapper {
 	
 	//계약코드 수정 시 필요
 	public List<ShopDTO> shopUseList();
+	
+	//매장계약코드 조회 시
+	public List<ShopDTO> relationYes();
+	public List<ShopDTO> relationNo();
+		
+	//매장계약코드 검색시
+	public List<ShopDTO> relationSearchYes(SearchDTO search);
+	public List<ShopDTO> relationSearchNo(SearchDTO search);
 }
 

@@ -13,13 +13,22 @@
 		<result column="shop_date" 			property="shopDate"/>
 	</resultMap>
 	
+	<!-- 계약매장코드 resultMap -->
+	<resultMap type="com.smart.rider.shop.dto.ShopRelationDTO" id="shopRelationMap">
+		<result column="contract_shop_code" 			property="contractShopCode"/>
+		<result column="member_id" 						property="memberId"/>
+		<result column="shop_code" 						property="shopCode"/>
+		<result column="contract_shop_date" 			property="contractShopDate"/>
+
+	</resultMap>
+	
 	<!-- 매장계약관리 전체조회 쿼리 -->
-	<select id="relationList" resultType="com.smart.rider.shop.dto.ShopRelationDTO">
+	<select id="relationList" resultMap="shopRelationMap">
 		select
-			 contract_shop_code AS contractShopCode
-			,member_id  AS memberId
-			,shop_code AS shopCode
-			,contract_shop_date AS contractShopDate
+			 contract_shop_code 
+			,member_id  
+			,shop_code 
+			,contract_shop_date
 		FROM shop_relation
 	</select>
 	
@@ -297,6 +306,84 @@
 			contract_code=#{contractCode}
 		WHERE shop_code=#{shopCode}
 	</update>
+	
+	<!--매장계약코드 삭제 가능 -->
+	<select id="relationYes" resultMap="shopRelationMap">
+		select
+			 sr.contract_shop_code 
+			,sr.member_id  
+			,sr.shop_code 
+			,sr.contract_shop_date
+		FROM shop_relation sr LEFT JOIN account a
+		ON sr.contract_shop_code = a.contract_shop_code
+		WHERE a.contract_shop_code IS null
+	</select>
+	
+	<!--매장계약코드 삭제 불가능  -->
+	<select id="relationNo" resultMap="shopRelationMap">
+		SELECT DISTINCT 
+			 sr.contract_shop_code 
+			,sr.member_id  
+			,sr.shop_code 
+			,sr.contract_shop_date
+		FROM shop_relation sr, account a
+		WHERE sr.contract_shop_code = a.contract_shop_code
+	</select>
+	
+	<!--매장계약코드 삭제 가능 검색 -->
+	<select id="relationSearchYes" parameterType="com.smart.rider.main.dto.SearchDTO" resultMap="shopRelationMap">
+		select
+			 sr.contract_shop_code 
+			,sr.member_id  
+			,sr.shop_code 
+			,sr.contract_shop_date
+		FROM shop_relation sr LEFT JOIN account a
+		ON sr.contract_shop_code = a.contract_shop_code
+		WHERE a.contract_shop_code IS null
+		<if test="searchValue neq null and searchValue neq ''.toString()">
+            AND
+                 sr.member_id LIKE CONCAT('%',#{searchValue},'%')
+        </if>
+        <if test="beginDate neq ''.toString() and endDate eq ''.toString()">
+        	AND 
+        		sr.contract_shop_date between #{beginDate} and NOW()		
+        </if>
+        <if test="beginDate eq ''.toString() and endDate neq ''.toString()">
+        	AND 
+        		sr.contract_shop_date between '1990-01-01' and #{endDate}
+        </if>
+        <if test="beginDate neq ''.toString() and endDate neq ''.toString()">
+        	AND 
+        		sr.contract_shop_date between #{beginDate} and #{endDate}
+        </if>
+	</select>
+	
+	<!--매장계약코드 삭제 불가능  -->
+	<select id="relationSearchNo" parameterType="com.smart.rider.main.dto.SearchDTO" resultMap="shopRelationMap">
+		SELECT DISTINCT 
+			 sr.contract_shop_code 
+			,sr.member_id  
+			,sr.shop_code 
+			,sr.contract_shop_date
+		FROM shop_relation sr, account a
+		WHERE sr.contract_shop_code = a.contract_shop_code
+		<if test="searchValue neq null and searchValue neq ''.toString()">
+            AND
+                sr.member_id LIKE CONCAT('%',#{searchValue},'%')
+        </if>
+        <if test="beginDate neq ''.toString() and endDate eq ''.toString()">
+        	AND 
+        		sr.contract_shop_date between #{beginDate} and NOW()		
+        </if>
+        <if test="beginDate eq ''.toString() and endDate neq ''.toString()">
+        	AND 
+        		sr.contract_shop_date between '1990-01-01' and #{endDate}
+        </if>
+        <if test="beginDate neq ''.toString() and endDate neq ''.toString()">
+        	AND 
+        		sr.contract_shop_date between #{beginDate} and #{endDate}
+        </if>
+	</select>
 	
 
 </mapper>

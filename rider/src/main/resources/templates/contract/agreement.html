@@ -41,8 +41,8 @@
 										<th scope="col">더보기</th>
 									</tr>
 								</thead>
-								<tbody th:each="agreement : ${agreement}">
-									<tr>
+								<tbody>
+									<tr th:each="agreement : ${agreement}">
 										<th th:text="${agreement.memberId}"></th>
 										<th th:text="${agreement.memberName}"></th>
 										<th th:text="${agreement.memberPhone}"></th>

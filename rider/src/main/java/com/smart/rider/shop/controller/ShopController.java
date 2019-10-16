@@ -137,4 +137,46 @@ public class ShopController {
 		model.addAttribute("personnelList", personnelList);
 		return "/shop/shop";
 	}
+	
+	//상세보기
+	@GetMapping("/relationList")
+	public String getRelationList(Model model) {
+		//맵으로 받기
+		Map<String, Object> map =  shopService.getRelationList();
+		//SuppressWarnings("unchecked") 메소드상태가 경고 일 때 나오지 않게 해주기
+		@SuppressWarnings("unchecked")
+		List<ShopRelationDTO> relationYes = (List<ShopRelationDTO>)map.get("relationYes");
+		@SuppressWarnings("unchecked")
+		List<ShopRelationDTO> relationNo = (List<ShopRelationDTO>)map.get("relationNo");
+		//System.out.println(relationYes + "<-- 삭제 할 수 있는 값");
+		//System.out.println(relationNo + "<-- 삭제 할 수 없는 값");
+		//입력값 확인 후 모델값 값을 넣는다.
+		model.addAttribute("relationYes", relationYes);
+		model.addAttribute("relationNo", relationNo);
+		return "relation/relationList";
+	}
+	
+	//상세보기에서 검색시
+	@PostMapping("/getRelationSearch")
+	public String getRelationSearch(SearchDTO search, Model model) {
+		System.out.println(search + "<-- 담겨있는값 ");
+		Map<String,Object> map = shopService.getRelationSearch(search);
+		// model에 값 넣기
+		@SuppressWarnings("unchecked")
+		List<ShopRelationDTO> relationSearchYes = (List<ShopRelationDTO>)map.get("relationSearchYes");
+		@SuppressWarnings("unchecked")
+		List<ShopRelationDTO> relationSearchNo = (List<ShopRelationDTO>)map.get("relationSearchNo");
+		//System.out.println(relationSearchYes +"<--삭제가능리스트 확인");
+		//System.out.println(relationSearchNo +"<--삭제불가능리스트 확인");
+		//model에 대입값 넣기
+		model.addAttribute("relationYes", relationSearchYes);
+		model.addAttribute("relationNo", relationSearchNo);
+		//조회 결과가 없으면 나오는 문장
+		if(relationSearchYes.size()  == 0  && relationSearchNo.size() == 0) {
+			model.addAttribute("alert", "검색 결과가 없습니다");
+		}
+		return "relation/relationList";
+	}
+	
+
 }
