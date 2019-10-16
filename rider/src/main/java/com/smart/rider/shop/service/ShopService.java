@@ -159,7 +159,7 @@ public class ShopService {
 	}
 	
 	//수정하기
-	public int shopUpdateSet(ShopDTO shop) {
+	public int shopUpdate(ShopDTO shop) {
 		return shopMapper.shopUpdateSet(shop);
 	}
 		

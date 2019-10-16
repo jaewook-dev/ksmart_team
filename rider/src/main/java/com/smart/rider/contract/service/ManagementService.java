@@ -20,7 +20,7 @@ public class ManagementService {
 	@Autowired
 	private ManagementMapper managementMapper;
 	
-	//계약단가표 생성
+	//계약금 생성
 	public int managementInsert(ManagementDTO management,HttpSession session) {
 		return managementMapper.managementInsert(management);
 	}

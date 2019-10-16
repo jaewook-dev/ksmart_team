@@ -63,7 +63,7 @@ public class ShopController {
 	@PostMapping("/shopUpdate")
 	public String shopUpdate(ShopDTO shop) {
 		//System.out.println(shop + "<--  수정된 값");
-		shopService.shopUpdateSet(shop);
+		shopService.shopUpdate(shop);
 		return "redirect:/shop";
 	}
 	

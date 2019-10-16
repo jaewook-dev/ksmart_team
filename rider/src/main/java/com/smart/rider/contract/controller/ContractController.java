@@ -35,7 +35,7 @@ public class ContractController {
 	public String contract(Model model,HttpSession session) {
 		//최신 단가표
 		List<UnitDTO>  UnitDTO = contractService.unitNew();
-		//계약목록
+		//계약 목록
 		List<AgreementDTO> contractList =  contractService.getAllList();
 		for(int i= 2015; i<2030; i++) {
 			String year = String.valueOf(i);
@@ -72,7 +72,7 @@ public class ContractController {
 		return "/contract/agreement";
 	}
 	
-	//계약된 매장 목록
+	//계약 목록
 	@GetMapping("/contractList")
 	public String contractList(Model model) {
 		List<ContractDTO> contractList =  contractService.contractList();
