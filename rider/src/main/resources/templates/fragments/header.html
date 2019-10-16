@@ -37,6 +37,7 @@
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="/salesList">매출</a>
                                 <!-- <a class="dropdown-item" href="/inventoryList">!)재고</a> -->
+                                <a class="dropdown-item" href="/spendTotal" th:if="${session.SLEVEL eq null}">지출</a>
                                 <a class="dropdown-item" href="/spendShopList" th:if="${session.SLEVEL eq '관리자'}">지출관리</a>
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
              					   aria-haspopup="true" aria-expanded="false" th:if="${session.SLEVEL eq '점주'}">지출</a>
