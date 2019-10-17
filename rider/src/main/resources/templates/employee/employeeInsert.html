@@ -18,6 +18,7 @@
 							<label for="id">아이디</label>
 							<input id="memberId" name="memberId" type="text" class="form-control validate" placeholder="ID" maxlength="12" required="required"/>
 						</div>
+						<div class="check_font" id="idAlert"></div>
 						<div class="form-group">
 							<label for="password">비밀번호</label>
 							<input id="memberPw" name="memberPw" type="password" class="form-control validate" maxlength="12" placeholder="PASSWORD" />
@@ -58,6 +59,43 @@
 
 <th:block layout:fragment="customScript">
 <script>
+$(function() {
+    $('#memberId').blur(function() {
+        
+    	var checkId = $('#memberId').val();
+        // ajax 호출을 위한 정보 기입
+        var request = $.ajax({
+          url: "/memberIdCheck", // 호출 url
+          method: "get", // 전송방식
+          data: {memberId : checkId}, // 파라미터
+          dataType : 'text'
+        });
+        
+        // 호출 정상일 시 실행되는 메서드
+        request.done(function(data) {
+        	
+        	if(data == "no"){
+        		$('#idAlert').text("사용중인 아이디입니다. 다른 아이디를 입력해주세요.");
+        		$('#idAlert').css("color","#FF6347");
+        		$('#memberId').focus();
+        	} else {
+        		$('#idAlert').text("사용가능한 아이디입니다.");
+        		$('#idAlert').css("color","#00FFFF");
+        	}
+        });
+        
+        // 호출 에러일 시 실행되는 메서드
+        request.fail(function( jqXHR, textStatus ) {
+          alert( "Request failed: " + textStatus );
+        });
+
+        // 호출 정상 또는 에러 상관없이 실행
+        request.always(function() {
+            //console.log('완료');
+        });
+    });
+});
+
 $('#EmployeePw2').blur(function(){
 	if($('#memberPw').val() != $('#EmployeePw2').val()){
 		if($('#EmployeePw2').val()!=''){
