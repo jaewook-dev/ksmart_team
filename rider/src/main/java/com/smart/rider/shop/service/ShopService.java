@@ -78,7 +78,7 @@ public class ShopService {
 		return shopMapper.relationList();
 	};
 	
-	//거래처 조회
+	//매장 조회
 	//맵으로 리턴 시키기 위해서 맵으로 선언해준다.
 	public Map<String, Object> getShopList(){
 		//맵으로 선언
@@ -89,7 +89,7 @@ public class ShopService {
 		return map;
 	}
 	
-	//특정 값으로 목록 조회
+	//특정 값으로 매장검색
 	public Map<String,Object> shopSearchList(SearchDTO search){
 		//맵으로 선언
 		Map<String,Object> map = new HashMap<String,Object>();
@@ -159,9 +159,33 @@ public class ShopService {
 	}
 	
 	//수정하기
-	public int shopUpdateSet(ShopDTO shop) {
+	public int shopUpdate(ShopDTO shop) {
 		return shopMapper.shopUpdateSet(shop);
 	}
 		
+	//계약매장코드 조회
+	public Map<String, Object> getRelationList(){
+		//맵으로 선언
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("relationYes", shopMapper.relationYes());
+		map.put("relationNo", shopMapper.relationNo());
+		//System.out.println(shopMapper.relationYes() + "yes서비스에서 담긴값 확인");
+		//System.out.println(shopMapper.relationNo() + " no서비스에서 담긴값 확인");
+		//맵으로 리턴 시킨다.
+		return map;
+	}
+	
+	//특정 값으로 매장검색
+	public Map<String,Object> getRelationSearch(SearchDTO search){
+		//맵으로 선언
+		Map<String,Object> map = new HashMap<String,Object>();
+		//map 넣을 내용을 String,Object 형식으로 넣어준다.
+		map.put("relationSearchYes", shopMapper.relationSearchYes(search));
+		map.put("relationSearchNo", shopMapper.relationSearchNo(search));
+		//System.out.println(shopMapper.relationSearchYes(serach) + "yes서비스에서 담긴값 확인");
+		//System.out.println(shopMapper.relationSearchNo(serach) + " no서비스에서 담긴값 확인");
+		return map;
+	}
+	
 		
 }

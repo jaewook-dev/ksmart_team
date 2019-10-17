@@ -26,7 +26,7 @@ public class AccountController {
 	
 	//거래처목록
 	@GetMapping("/accountList")
-	public String account(Model model,HttpSession session) {
+	public String accountList(Model model,HttpSession session) {
 		//세션값 받아오지
 		String sCode = (String)session.getAttribute("SCODE");
 		String sLevel = (String)session.getAttribute("SLEVEL");
@@ -143,7 +143,7 @@ public class AccountController {
 	
 	//삭제처리
 	@PostMapping("/accountDelete")
-	public String accountDelete(@RequestParam(value="memberPw")String memberPw,
+	public String accountDeleteSet(@RequestParam(value="memberPw")String memberPw,
 								@RequestParam(value="accountCode")String accountCode,
 								HttpSession session,
 								Model model){
