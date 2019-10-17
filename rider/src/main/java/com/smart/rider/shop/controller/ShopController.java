@@ -72,7 +72,7 @@ public class ShopController {
 	@GetMapping("/shopList")
 	public String getShopList(Model model,HttpSession session) {
 		//맵으로 받기
-		Map<String, Object> map =  shopService.getShopList();
+		Map<String, Object> map =  shopService.getShopList(session);
 		//SuppressWarnings("unchecked") 메소드상태가 경고 일 때 나오지 않게 해주기
 		@SuppressWarnings("unchecked")
 		List<ShopDTO> shopListYes = (List<ShopDTO>)map.get("shopListYes");
@@ -88,9 +88,9 @@ public class ShopController {
 	
 	//상세보기에서 검색시
 	@PostMapping("/shopSearchList")
-	public String shopSearchList(SearchDTO search, Model model) {
+	public String shopSearchList(SearchDTO search, Model model,HttpSession session) {
 		//System.out.println(search + "<-- 담겨있는값 ");
-		Map<String,Object> map = shopService.shopSearchList(search);
+		Map<String,Object> map = shopService.shopSearchList(search,session);
 		// model에 값 넣기
 		@SuppressWarnings("unchecked")
 		List<ShopDTO> shopListYes = (List<ShopDTO>)map.get("shopSearchListYes");
@@ -120,7 +120,7 @@ public class ShopController {
 		//System.out.println("posList" + pList);
 		//System.out.println("personnelList" + personnelList);
 		//맵으로 서비스부분 받기
-		Map<String, Object> returnMap = shopService.shopList(currentPage);
+		Map<String, Object> returnMap = shopService.shopList(currentPage,session);
     	//Map객체주소로 보내는 경우(model.addAttribute("map", returnMap);
 		//System.out.println(returnMap + " map 담긴 값 확인 ");
 		//returnMap(Map타입 객체)에 담겨있는 값 -> model(Model타입 객체)에 복사 ->  view전달

@@ -52,7 +52,7 @@ public class PosController {
 	public String getPosList(Model model,HttpSession session) {
 		//PosDTO에 결과 담기
 		List<PosDTO> posList = posService.getPosList(session); 
-		//System.out.println(posList + "posList 입력값 확인");
+		System.out.println(posList + "posList 입력값 확인");
 		//PosDTO값을 model에 담아 넘기기
 		model.addAttribute("posList", posList);
 		return "pos/posList";
@@ -124,11 +124,12 @@ public class PosController {
 		int deleteCk = posService.posDeleteSet(memberPw,posCode,session);
 		System.out.println(deleteCk +"<--값 확인");
 		//deleteCk가 0이면  삭제가 안되므로 다시 값을 가지고 삭제화면으로 리턴 시킨다.
-		if(deleteCk == 0 ) {
+		if(deleteCk == 0 ) { 
 			model.addAttribute("result", "비밀번호가 일치하지 않습니다.");
-			model.addAttribute("posDelete", posService.posUpdate(posCode));
-			return "pos/posDelete";
+			model.addAttribute("posDelete", posService.posUpdate(posCode)); 
+			return "pos/posDelete"; 
 		}
+		 
 		return "redirect:/shop";
 	}
 }

@@ -21,8 +21,8 @@
 				<div class="col-sm-12 col-md-12 col-lg-5 col-xl-5 tm-block-col">
 					<div class="tm-bg-primary-dark tm-block-con tm-block-scroll">
 						<div>
-							<button class="btn btn-secondary btn-sm" style="float: right;"type="button" 
-							 		onclick="location.href='posInsert'">
+							<button th:if="${session.SLEVEL ne '직원'}"  class="btn btn-secondary btn-sm" style="float: right;"type="button" 
+							 		onclick="location.href='posInsert'" >
 							 		POS등록
 					 		</button>
 							<button class="btn btn-secondary btn-sm" style="float: right; margin-right: 20px;"
@@ -74,12 +74,12 @@
 					</div>
 				</div>
 				<div class="col-sm-12  tm-block-col"
-					th:if="${session.SLEVEL eq '관리자'}">
+					th:if="${session.SLEVEL eq '관리자' || session.SLEVEL eq '점주'}">
 					<div class="tm-bg-primary-dark tm-block-big">
 						<div>
 							<button type="button" id="insertBtn"
 								onclick="location.href='shopInsert'" style="float: right"
-								class="btn btn-primary text-uppercase">매장등록</button>
+								class="btn btn-primary text-uppercase" th:if="${session.SLEVEL eq '관리자'}">매장등록</button>
 
 							<button type="button" id="shopListSerachBtn"
 								onclick="location.href='shopList'"
@@ -109,7 +109,7 @@
 							</tbody>
 						</table>
 						<br />
-						<ul class="pagination justify-content-center mt-3 mr-3">
+						<ul class="pagination justify-content-center mt-3 mr-3" th:if="${session.SLEVEL eq '관리자'}">
 							<li class="page-item">
 								<a class="page-link btn-primary"style="color: white;" th:href="@{/shop}">맨처음</a>
 							</li>
@@ -132,7 +132,7 @@
 							<h2 class="tm-block-title" style="float: left;">매장 인원</h2>
 							<button type="button" onclick="location.href='employeeInsert'"
 									style="float: right" class="btn btn-primary text-uppercase"
-									th:if="${session.SLEVEL eq '관리자 '|| session.SLEVEL eq '점주 '}">매장직원등록</button>
+									th:if="${session.SLEVEL eq '관리자' || session.SLEVEL eq '점주'}" >매장직원등록</button>
 							<span style="float: left; margin-left: 400px; color: white; font-size: 20px">
 									자세한 내용은 직원관리를 이용해주세요</span> 
 							<Br/>

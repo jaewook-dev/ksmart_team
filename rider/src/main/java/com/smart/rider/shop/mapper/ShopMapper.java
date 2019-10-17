@@ -37,8 +37,8 @@ public interface ShopMapper {
 	public int memberUpdate(String getrelationCode,String getrelationId);
 	
 	//매장 조회 시
-	public List<ShopDTO> shopListYes();
-	public List<ShopDTO> shopListNo();
+	public List<ShopDTO> shopListYes(String id);
+	public List<ShopDTO> shopListNo(String id);
 	
 	//매장 검색시
 	public List<ShopDTO> shopSearchListYes(SearchDTO serach);
@@ -48,7 +48,7 @@ public interface ShopMapper {
 	public List<ShopDTO> shopListAll();
 	
 	//명단조회
-	public List<ShopDTO> shopList(Map<String, Integer> map);
+	public List<ShopDTO> shopList(Map<String, Object> map);
 	/* - shop table의 전체 행의 갯수 -
 	 * @brief ShopMapper.xml(id)를 인터페이스 ShopMapper.java(메서드명)와 맵핑
 	 * @return int
