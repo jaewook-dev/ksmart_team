@@ -9,9 +9,10 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.smart.rider.account.mapper.AccountMapper;
 import com.smart.rider.contract.dto.ContractDTO;
 import com.smart.rider.main.dto.SearchDTO;
-
+import com.smart.rider.member.dto.MemberDTO;
 import com.smart.rider.shop.dto.ShopDTO;
 import com.smart.rider.shop.dto.ShopRelationDTO;
 
@@ -21,6 +22,8 @@ import com.smart.rider.shop.mapper.ShopMapper;
 public class ShopService {
 	@Autowired
 	private ShopMapper shopMapper;
+	@Autowired
+	private AccountMapper accountMapper;
 
 	//매장생성시 매장계약코드 자동 생성,매장계약코드 생성시에 아이디에 있는 매장계약코드가 입력된다(수정).
 	public int shopInsert(ShopDTO shop,HttpSession session,ShopRelationDTO relation) {
@@ -187,5 +190,19 @@ public class ShopService {
 		return map;
 	}
 	
-		
+	//코드 값 확인 후 데이터 조회
+	public List<ShopRelationDTO> relationUpdate(String contractShopCode){
+		return shopMapper.relationUpdate(contractShopCode); 
+	}
+	
+	//수정하기
+	public int relationUpdate(ShopRelationDTO relation) {
+		return shopMapper.relationUpdateSet(relation);
+	}
+	
+	//점주아이디 목록 가져오기
+	public List<MemberDTO> getMemberId(){
+		return shopMapper.getMemberId();
+	}
+	
 }

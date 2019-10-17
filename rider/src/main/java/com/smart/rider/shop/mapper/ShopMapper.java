@@ -5,6 +5,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 import com.smart.rider.contract.dto.ContractDTO;
 import com.smart.rider.main.dto.SearchDTO;
+import com.smart.rider.member.dto.MemberDTO;
 import com.smart.rider.shop.dto.ShopDTO;
 import com.smart.rider.shop.dto.ShopRelationDTO;
 
@@ -64,10 +65,10 @@ public interface ShopMapper {
 	//매장 인원
 	public List<ShopDTO> personnelList(String code);
 	
-	//코드 값으로 조회(수정)
+	//매장코드 값으로 조회(수정화면)
 	public List<ShopDTO> shopUpdate(String shopCode);
 	
-	//수정하기
+	//매장 수정하기
 	public int shopUpdateSet(ShopDTO shop);
 	
 	//계약코드로 수정하기
@@ -86,5 +87,16 @@ public interface ShopMapper {
 	//매장계약코드 검색시
 	public List<ShopDTO> relationSearchYes(SearchDTO search);
 	public List<ShopDTO> relationSearchNo(SearchDTO search);
+	
+	//매장계약코드 값으로 조회(수정화면)
+	public List<ShopRelationDTO> relationUpdate(String contractShopCode);
+	
+	//매장계약코드 수정하기
+	public int relationUpdateSet(ShopRelationDTO relation);
+	
+	//점주아이디 목록 가져오기
+	public List<MemberDTO> getMemberId();
+	
+
 }
 

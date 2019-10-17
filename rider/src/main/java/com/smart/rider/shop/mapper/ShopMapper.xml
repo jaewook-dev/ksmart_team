@@ -270,7 +270,7 @@
 			,shop_phone
 			,shop_date
 		FROM shop 
-		WHERE shop_code=#{shop_code}
+		WHERE shop_code=#{shopCode}
 	</select>
 	
 	<!--계약매장코드로 데이터 조회-->
@@ -286,6 +286,8 @@
 		FROM shop 
 		WHERE contract_code=#{contractCode}
 	</select>
+	
+	
 	
 	
 	<!--매장정보 수정  -->
@@ -385,6 +387,33 @@
         </if>
 	</select>
 	
+	
+	<!--코드로 데이터 조회-->
+	<select id="relationUpdate" parameterType="String" resultMap="shopRelationMap">
+		SELECT 
+			 contract_shop_code
+			,member_id
+			,shop_code
+			,contract_shop_date
+		FROM shop_relation
+		WHERE contract_shop_code=#{contractShopCode}
+	</select>
+	
+	<!--매장정보 수정  -->
+	<update id="relationUpdateSet" parameterType="com.smart.rider.shop.dto.ShopRelationDTO">
+		UPDATE shop_relation
+		SET
+			 member_id=#{memberId}
+			,shop_code=#{shopCode}
+		WHERE contract_shop_code=#{contractShopCode}
+	</update>
+	
+	<!--점주아이디 목록가져오기-->
+	<select id="getMemberId" resultType="com.smart.rider.member.dto.MemberDTO">
+		SELECT 
+			 member_id AS memberId
+		FROM member WHERE member_level='점주'
+	</select>
 
 </mapper>
 

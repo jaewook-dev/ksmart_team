@@ -186,8 +186,7 @@
 	<update id="accountUpdateSet" parameterType="com.smart.rider.account.dto.AccountDTO" >
 		UPDATE account
 		SET
-			 contract_shop_code		=	#{contractShopCode}
-			,account_market			=	#{accountMarket}
+			account_market			=	#{accountMarket}
 			,account_name			=	#{accountName}
 			,account_phone			=	#{accountPhone}
 			,account_address		=	#{accountAddress}

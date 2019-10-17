@@ -105,7 +105,7 @@ public class AccountController {
 		//System.out.println(accountCode+"<--넘어오는 코드값 확인");
 		//대입값 넣어서 나온 결과 updateList에 담기
 		List<AccountDTO> updateList = accountService.accountUpdate(accountCode);
-		//System.out.println(updateList+"<--대입 결과 확인");
+		System.out.println(updateList+"<--대입 결과 확인");
 		//결과값 model에 담기
 		model.addAttribute("updateList", updateList);
 		
@@ -115,7 +115,7 @@ public class AccountController {
 	//수정처리
 	@PostMapping("/accountUpdate")
 	public String accountUpdateSet(AccountDTO account) {
-		//System.out.println(account+"넘어오는값확인");
+		System.out.println(account+"넘어오는값확인");
 		//넘어온 값 설정하기
 		accountService.accountUpdateSet(account);
 		return "redirect:/accountList";
