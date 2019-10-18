@@ -10,7 +10,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.smart.rider.shop.dto.PosDTO;
+import com.smart.rider.shop.dto.ShopDTO;
+import com.smart.rider.shop.dto.ShopRelationDTO;
 import com.smart.rider.shop.dto.SsrHapDTO;
+import com.smart.rider.shop.mapper.ShopMapper;
 import com.smart.rider.shop.service.PosService;
 
 @Controller
@@ -18,6 +21,8 @@ public class PosController {
 
 	@Autowired
 	private PosService posService;
+	@Autowired
+	private ShopMapper shopMapper;
 	
 	//생성 폼가기
 	@GetMapping("/posInsert")
@@ -47,7 +52,7 @@ public class PosController {
 	public String getPosList(Model model,HttpSession session) {
 		//PosDTO에 결과 담기
 		List<PosDTO> posList = posService.getPosList(session); 
-		//System.out.println(posList + "posList 입력값 확인");
+		System.out.println(posList + "posList 입력값 확인");
 		//PosDTO값을 model에 담아 넘기기
 		model.addAttribute("posList", posList);
 		return "pos/posList";
@@ -55,17 +60,30 @@ public class PosController {
 	
 	//수정하기 위해 코드값으로 데이터 조회
 	@GetMapping("/posUpdate")
-	public String posUpdate(@RequestParam(value="posCode")String posCode,Model model,HttpSession session) {
-		//코드 값 확인
-		//System.out.println(posCode+"pos코드값 확인");
-		//코드 대입한 결과값 확인
-		String memberId = (String)session.getAttribute("SID");
-		List<SsrHapDTO> ssrList = posService.getMemberId(memberId);
-		List<PosDTO> posUpdate = posService.posUpdate(posCode);
-		//System.out.println(ssrList + "ssrList 값 확인");
-		//System.out.println(posUpdate + "PosDTO 값 확인");
-		model.addAttribute("ssrList", ssrList);
-		model.addAttribute("posUpdate", posUpdate);
+	public String posUpdate(@RequestParam(value="posCode")String posCode,Model model) {
+		//System.out.println(posCode + "코드 확인");
+		List<PosDTO> posList = posService.posUpdate(posCode);
+		model.addAttribute("posList", posList);
+		//System.out.println(posList + "결과값 확인");
+		if(posList !=null) {
+			String csCode= posList.get(0).getContractShopCode();
+			//System.out.println(csCode + "담겨있는 계약매장코드값 확인");
+			model.addAttribute("shopName", "해당되는 매장 이름이 없습니다.");
+			if(csCode != null) {
+				List<ShopRelationDTO> relation = shopMapper.relationUpdate(csCode);
+				//System.out.println(relation + "계약매장코드 값 확인");
+				String shopCode = relation.get(0).getShopCode();
+				List<ShopDTO> shopList = shopMapper.getScode(shopCode);
+				//System.out.println(shopList + "매장목록 값 확인");
+				String memberId = shopList.get(0).getMemberId();
+				List<SsrHapDTO> ssrList = posService.getMemberId(memberId);
+				model.addAttribute("shopName", ssrList.get(0).getShopName());
+			}	
+		}
+		
+		//List<SsrHapDTO> ssrList = posService.getMemberId();
+		
+		
 		return "pos/posUpdate";
 	}
 	
@@ -104,13 +122,14 @@ public class PosController {
 		//System.out.println(posCode +"<--posCode에 입력된 값");
 		//삭제 확인을 위해서 변수를 선언한다.
 		int deleteCk = posService.posDeleteSet(memberPw,posCode,session);
-		//System.out.println(deleteCk +"<--값 확인");
+		System.out.println(deleteCk +"<--값 확인");
 		//deleteCk가 0이면  삭제가 안되므로 다시 값을 가지고 삭제화면으로 리턴 시킨다.
-		if(deleteCk == 0 ) {
+		if(deleteCk == 0 ) { 
 			model.addAttribute("result", "비밀번호가 일치하지 않습니다.");
-			model.addAttribute("posDelete", posService.posUpdate(posCode));
-			return "pos/posDelete";
+			model.addAttribute("posDelete", posService.posUpdate(posCode)); 
+			return "pos/posDelete"; 
 		}
+		 
 		return "redirect:/shop";
 	}
 }

@@ -6,7 +6,6 @@ public class ShopRelationDTO {
 	private String contractShopCode;
 	private String memberId;
 	private String shopCode;
-	private String contractShopUse;
 	private String contractShopDate;
 	
 	public String getContractShopCode() {
@@ -27,12 +26,6 @@ public class ShopRelationDTO {
 	public void setShopCode(String shopCode) {
 		this.shopCode = shopCode;
 	}
-	public String getContractShopUse() {
-		return contractShopUse;
-	}
-	public void setContractShopUse(String contractShopUse) {
-		this.contractShopUse = contractShopUse;
-	}
 	public String getContractShopDate() {
 		return contractShopDate;
 	}
@@ -42,7 +35,7 @@ public class ShopRelationDTO {
 	@Override
 	public String toString() {
 		return "ShopRelationDTO [contractShopCode=" + contractShopCode + ", memberId=" + memberId + ", shopCode="
-				+ shopCode + ", contractShopUse=" + contractShopUse + ", contractShopDate=" + contractShopDate + "]";
+				+ shopCode + ", contractShopDate=" + contractShopDate + "]";
 	}
 	
 	

@@ -7,7 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.smart.rider.member.dto.MemberDTO;
 import com.smart.rider.member.service.MemberService;
@@ -29,7 +31,7 @@ public class MemberController {
 	@PostMapping("/memberInsert")
 	public String memberInsert(MemberDTO memberdto) {
 		memberService.memberInsert(memberdto);
-		
+		//System.out.println("회원등록컨트롤러");
 		return "redirect:/login";
 	}
 	
@@ -151,10 +153,15 @@ public class MemberController {
 		return "redirect:/memberSuccess";
 	}
 	
-	//아이디 중복체크
-	@GetMapping("/idCheck")
-	public String idCheck() {
+	//아이디중복확인
+	@RequestMapping(value = "/memberIdCheck", produces = "text/plain")
+	public @ResponseBody String memberIdCheck(@RequestParam(value="memberId") String memberId) {
+		//System.out.println(memberId + "<--중복확인 아이디");
+		int result = memberService.memberIdCheck(memberId);
+		if(result == 1) {
+			return "no";
+		}
 		
-		return "member/memberIdCheck";
+		return "yes";
 	}
 }

@@ -7,7 +7,7 @@
 		 <nav class="navbar navbar-expand-xl">
             <div class="container h-100">
                 <a class="navbar-brand" href="/">
-                	<h2 class="tm-site-title mb-0"> 배포 191010</h2>             
+                	<h2 class="tm-site-title mb-0"> SMART RIDER </h2>             
                 </a>
 
                 <button class="navbar-toggler ml-auto mr-0" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -37,10 +37,11 @@
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="/salesList">매출</a>
                                 <!-- <a class="dropdown-item" href="/inventoryList">!)재고</a> -->
+                                <a class="dropdown-item" href="/spendTotal" th:if="${session.SLEVEL eq null}">지출</a>
                                 <a class="dropdown-item" href="/spendShopList" th:if="${session.SLEVEL eq '관리자'}">지출관리</a>
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
              					   aria-haspopup="true" aria-expanded="false" th:if="${session.SLEVEL eq '점주'}">지출</a>
-                                <div class="dropdown dropright" style="position: absolute; left: 90px; top:103px;">
+                                <div class="dropdown dropright" style="position: absolute; left: 85px; top:53px;">
 									<div class="dropdown-menu">
 								    	<a class="dropdown-item" href="/spendTotal">통합</a>
 								    	<a class="dropdown-item" href="/spendSalary">급여</a>
@@ -139,13 +140,19 @@
                             	<a class="dropdown-item" th:href="@{/workAdmin(contractShopCode=${session.SCODE})}">근태관리</a>
                             </div>
                         </li>
-                         <li class="nav-item" th:if="${session.SLEVEL eq '직원'}">
-                            <a class="nav-link" th:href="@{/workAdmin(memberId=${session.SID})}" id="navbarDropdown">
-                                <i class="fas fa-calendar-check"></i>
+                         <li class="nav-item dropdown" th:if="${session.SLEVEL eq '직원'}">
+                         	<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-address-book"></i>
                                 <span>
-									근태관리
+                                	내정보관리
+                                     <i class="fas fa-angle-down"></i>
                                 </span>
                             </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            	<a class="dropdown-item" th:href="@{/getEmployeeList(memberId=${session.SID})}" id="navbarDropdown">내정보</a>
+                            	<a class="dropdown-item" th:href="@{/workAdmin(memberId=${session.SID})}" id="navbarDropdown">근태관리</a>
+                            </div>
                         </li>
                     </ul>
                     <ul class="navbar-nav">

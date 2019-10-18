@@ -56,10 +56,10 @@ public class EmployeeController {
 	//직원 수정하기
 	@PostMapping("/employeeUpdate")
 	public String employeeUpdate(MemberDTO memberdto) {
-		String contractShopCode = memberdto.getContractShopCode();
+		String memberId = memberdto.getMemberId();
 		employeeService.employeeUpdate(memberdto);
 		
-		return "redirect:/employeeList?contractShopCode="+contractShopCode+"";
+		return "redirect:/getEmployeeList?memberId="+memberId+"";
 	}
 	
 	//19.09.25작성 직원 탈퇴

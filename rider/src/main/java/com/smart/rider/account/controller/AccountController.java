@@ -26,7 +26,7 @@ public class AccountController {
 	
 	//거래처목록
 	@GetMapping("/accountList")
-	public String account(Model model,HttpSession session) {
+	public String accountList(Model model,HttpSession session) {
 		//세션값 받아오지
 		String sCode = (String)session.getAttribute("SCODE");
 		String sLevel = (String)session.getAttribute("SLEVEL");
@@ -105,7 +105,7 @@ public class AccountController {
 		//System.out.println(accountCode+"<--넘어오는 코드값 확인");
 		//대입값 넣어서 나온 결과 updateList에 담기
 		List<AccountDTO> updateList = accountService.accountUpdate(accountCode);
-		//System.out.println(updateList+"<--대입 결과 확인");
+		System.out.println(updateList+"<--대입 결과 확인");
 		//결과값 model에 담기
 		model.addAttribute("updateList", updateList);
 		
@@ -115,7 +115,7 @@ public class AccountController {
 	//수정처리
 	@PostMapping("/accountUpdate")
 	public String accountUpdateSet(AccountDTO account) {
-		//System.out.println(account+"넘어오는값확인");
+		System.out.println(account+"넘어오는값확인");
 		//넘어온 값 설정하기
 		accountService.accountUpdateSet(account);
 		return "redirect:/accountList";
@@ -143,7 +143,7 @@ public class AccountController {
 	
 	//삭제처리
 	@PostMapping("/accountDelete")
-	public String accountDelete(@RequestParam(value="memberPw")String memberPw,
+	public String accountDeleteSet(@RequestParam(value="memberPw")String memberPw,
 								@RequestParam(value="accountCode")String accountCode,
 								HttpSession session,
 								Model model){

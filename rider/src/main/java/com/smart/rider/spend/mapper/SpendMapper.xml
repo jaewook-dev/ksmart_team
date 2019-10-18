@@ -27,32 +27,6 @@
 		FROM spend_total;
 	</select>
 	
-	<!-- 191008 재욱, Insert : 지출통합 등록 -->
-	<insert id="spendTotal" parameterType="com.smart.rider.spend.dto.SpendTotalDTO">
-		INSERT INTO spend_total(
-			  spend_total_code
-			, contract_shop_code
-			, purchase_code
-			, spend_salary_code
-			, spend_utility_code
-			, spend_group_code
-			, spend_total_type
-			, spend_total_way
-			, spend_total_pay
-			, spend_total_date)
-		VALUES (
-			 #{spendTotalCode}
-			,#{contractShopCode}
-			,#{purchaseCode}
-			,#{spendSalaryCode}
-			,#{spendUtilityCode}
-			,#{spendGroupCode}
-			,#{spendTotalType}
-			,#{spendTotalWay}
-			,#{spendTotalPay}
-			,NOW())
-	</insert>
-	
 	<!-- 191004 재욱, Read : 관리자 확인 카운트, 2일 때 관리자 비밀번호와 점주 생년월일 일치 -->
 	<select id="spendAdminCheck" resultType="int" parameterType="String">
 		SELECT 
