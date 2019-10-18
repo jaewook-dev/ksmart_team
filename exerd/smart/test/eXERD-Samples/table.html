@@ -1,0 +1,1702 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>리포트</title>
+    <style type="text/css">
+        .entity{
+            border: solid 1px #7E2828;
+            margin-bottom: 20px;
+        }
+        .header{
+            background-color: #7E2828;
+            color: white;
+        }
+        .column-header{
+            background-color: #E8E8E8;
+        }
+        td{
+            padding-left: 5px;
+            padding-right: 5px;
+        }
+    </style>
+</head>
+<body>
+<h2>내 스키마의 템플릿</h2>
+<table class="entity" cellpadding="0" cellspacing="0">
+    <tr>
+        <td colspan="6" class="header">회원관리 (member)</td>
+    </tr>
+    <tr class="column-header">
+        <td>논리명</td>
+        <td>물리명</td>
+        
+        <td>데이터 타입</td>
+        <td>Not Null</td>
+        <td>설명</td>
+    </tr>
+    <tr>
+        <td>아이디(PK)</td>
+        <td>member_id</td>
+        
+        <td>VARCHAR(20)</td>
+        <td>Y</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>비밀번호</td>
+        <td>member_pw</td>
+        
+        <td>VARCHAR(20)</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>이름</td>
+        <td>member_name</td>
+        
+        <td>VARCHAR(20)</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>접근권한</td>
+        <td>member_level</td>
+        
+        <td>VARCHAR(20)</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>생년월일</td>
+        <td>member_birth</td>
+        
+        <td>INT</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>주소</td>
+        <td>member_address</td>
+        
+        <td>VARCHAR(200)</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>이메일</td>
+        <td>member_email</td>
+        
+        <td>VARCHAR(50)</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>전화번호</td>
+        <td>member_phone</td>
+        
+        <td>INT</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>회원가입일자</td>
+        <td>member_insert_date</td>
+        
+        <td>DATE</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>회원수정일자</td>
+        <td>member_update_date</td>
+        
+        <td>DATE</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+</table>
+<table class="entity" cellpadding="0" cellspacing="0">
+    <tr>
+        <td colspan="6" class="header">계약단가표 (contract_unit)</td>
+    </tr>
+    <tr class="column-header">
+        <td>논리명</td>
+        <td>물리명</td>
+        
+        <td>데이터 타입</td>
+        <td>Not Null</td>
+        <td>설명</td>
+    </tr>
+    <tr>
+        <td>계약단가코드(PK)</td>
+        <td>contract_unit_code</td>
+        
+        <td>VARCHAR(20)</td>
+        <td>Y</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>아이디(FK)</td>
+        <td>member_id</td>
+        
+        <td>VARCHAR(20)</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>월계약금액</td>
+        <td>contract_unit_month</td>
+        
+        <td>INT</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>1년일시불계약금액</td>
+        <td>contract_unit_oneyear</td>
+        
+        <td>INT</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>2년일시불계약금액</td>
+        <td>contract_unit_twoyear</td>
+        
+        <td>INT</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>계약단가표등록일자</td>
+        <td>contract_unit_date</td>
+        
+        <td>DATE</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+</table>
+<table class="entity" cellpadding="0" cellspacing="0">
+    <tr>
+        <td colspan="6" class="header">계약관리 (TABLE3)</td>
+    </tr>
+    <tr class="column-header">
+        <td>논리명</td>
+        <td>물리명</td>
+        
+        <td>데이터 타입</td>
+        <td>Not Null</td>
+        <td>설명</td>
+    </tr>
+    <tr>
+        <td>새 컬럼</td>
+        <td>COL</td>
+        
+        
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+</table>
+<table class="entity" cellpadding="0" cellspacing="0">
+    <tr>
+        <td colspan="6" class="header">계약단가표2 (TABLE4)</td>
+    </tr>
+    <tr class="column-header">
+        <td>논리명</td>
+        <td>물리명</td>
+        
+        <td>데이터 타입</td>
+        <td>Not Null</td>
+        <td>설명</td>
+    </tr>
+</table>
+<table class="entity" cellpadding="0" cellspacing="0">
+    <tr>
+        <td colspan="6" class="header">계약관리 (contract)</td>
+    </tr>
+    <tr class="column-header">
+        <td>논리명</td>
+        <td>물리명</td>
+        
+        <td>데이터 타입</td>
+        <td>Not Null</td>
+        <td>설명</td>
+    </tr>
+    <tr>
+        <td>계약코드(PK)</td>
+        <td>contract_code</td>
+        
+        <td>VARCHAR(20)</td>
+        <td>Y</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>계약단가코드(FK)</td>
+        <td>contract_unit_code</td>
+        
+        <td>VARCHAR(20)</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>아이디(FK)</td>
+        <td>member_id</td>
+        
+        <td>VARCHAR(20)</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>계약일</td>
+        <td>contract_date</td>
+        
+        <td>DATE</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>서비스시작일자</td>
+        <td>contract_start</td>
+        
+        <td>DATE</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>서비스종료일자</td>
+        <td>contract_finish</td>
+        
+        <td>DATE</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>계약유효기간</td>
+        <td>contract_valid_date</td>
+        
+        <td>DATE</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>계약상태</td>
+        <td>contract_state</td>
+        
+        <td>VARCHAR(20)</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>계약금액</td>
+        <td>contract_pay</td>
+        
+        <td>VARCHAR(20)</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>계약금납입방식(월/일시불)</td>
+        <td>contract_method</td>
+        
+        <td>VARCHAR(20)</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>납임금액</td>
+        <td>contract_amout</td>
+        
+        <td>INT</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>미납금액</td>
+        <td>contract_unpaid</td>
+        
+        <td>INT</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>계약내용</td>
+        <td>contract_contents</td>
+        
+        <td>MEDIUMTEXT</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>계약자사업자등록정보</td>
+        <td>contract_information</td>
+        
+        <td>VARCHAR(200)</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+</table>
+<table class="entity" cellpadding="0" cellspacing="0">
+    <tr>
+        <td colspan="6" class="header">매장관리 (shop)</td>
+    </tr>
+    <tr class="column-header">
+        <td>논리명</td>
+        <td>물리명</td>
+        
+        <td>데이터 타입</td>
+        <td>Not Null</td>
+        <td>설명</td>
+    </tr>
+    <tr>
+        <td>매장코드(PK)</td>
+        <td>shop_code</td>
+        
+        <td>VARCHAR(20)</td>
+        <td>Y</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>계약코드(FK)</td>
+        <td>contract_code</td>
+        
+        <td>VARCHAR(20)</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>아이디(FK)</td>
+        <td>member_id</td>
+        
+        <td>VARCHAR(20)</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>매장명</td>
+        <td>shop_name</td>
+        
+        <td>VARCHAR(20)</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>매장주소</td>
+        <td>shop_address</td>
+        
+        <td>VARCHAR(200)</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>매장전화번호</td>
+        <td>shop_phone</td>
+        
+        <td>INT</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>매장등록일자</td>
+        <td>shop_date</td>
+        
+        <td>DATE</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+</table>
+<table class="entity" cellpadding="0" cellspacing="0">
+    <tr>
+        <td colspan="6" class="header">상품DB관리 (goods_database)</td>
+    </tr>
+    <tr class="column-header">
+        <td>논리명</td>
+        <td>물리명</td>
+        
+        <td>데이터 타입</td>
+        <td>Not Null</td>
+        <td>설명</td>
+    </tr>
+    <tr>
+        <td>상품DB코드(PK)</td>
+        <td>goods_database_code</td>
+        
+        <td>VARCHAR(20)</td>
+        <td>Y</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>아이디(FK)</td>
+        <td>member_id</td>
+        
+        <td>VARCHAR(20)</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>상품명</td>
+        <td>goods_database_name</td>
+        
+        <td>VARCHAR(20)</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>상품카테고리</td>
+        <td>goods_database_category</td>
+        
+        <td>VARCHAR(20)</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>상품번호</td>
+        <td>goods_database_number</td>
+        
+        <td>VARCHAR(50)</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>색상</td>
+        <td>goods_database_color</td>
+        
+        <td>VARCHAR(20)</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>중량</td>
+        <td>goods_database_weight</td>
+        
+        <td>INT</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>최대속도</td>
+        <td>goods_database_speed</td>
+        
+        <td>INT</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>바퀴사이즈</td>
+        <td>goods_database_size</td>
+        
+        <td>VARCHAR(20)</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>제조국가</td>
+        <td>goods_database_nation</td>
+        
+        <td>VARCHAR(20)</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>최대하중</td>
+        <td>goods_database_load</td>
+        
+        <td>INT</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>주행가능거리</td>
+        <td>goods_database_distance</td>
+        
+        <td>INT</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>배터리용량</td>
+        <td>goods_database_battery</td>
+        
+        <td>INT</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>완충시간</td>
+        <td>goods_database_time</td>
+        
+        <td>TIME</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>제조일자</td>
+        <td>goods_database_made</td>
+        
+        <td>DATE</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>상세설명</td>
+        <td>goods_database_description</td>
+        
+        <td>MEDIUMTEXT</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>상품이미지</td>
+        <td>goods_database_image</td>
+        
+        <td>VARCHAR(50)</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>상품DB등록일자</td>
+        <td>goods_database_date</td>
+        
+        <td>DATE</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+</table>
+<table class="entity" cellpadding="0" cellspacing="0">
+    <tr>
+        <td colspan="6" class="header">매장거래처관리  (account)</td>
+    </tr>
+    <tr class="column-header">
+        <td>논리명</td>
+        <td>물리명</td>
+        
+        <td>데이터 타입</td>
+        <td>Not Null</td>
+        <td>설명</td>
+    </tr>
+    <tr>
+        <td>거래처코드(PK)</td>
+        <td>account_code</td>
+        
+        <td>VARCHAR(20)</td>
+        <td>Y</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>계약매장코드(FK)</td>
+        <td>contract_shop_code</td>
+        
+        <td>VARCHAR(20)</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>거래처명</td>
+        <td>account_market</td>
+        
+        <td>VARCHAR(20)</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>담당자명</td>
+        <td>account_name</td>
+        
+        <td>VARCHAR(20)</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>전화번호</td>
+        <td>account_phone</td>
+        
+        <td>INT</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>주소</td>
+        <td>account_address</td>
+        
+        <td>VARCHAR(200)</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>취급품목</td>
+        <td>account_category</td>
+        
+        <td>VARCHAR(50)</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>거래시작일자</td>
+        <td>account_date</td>
+        
+        <td>DATE</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+</table>
+<table class="entity" cellpadding="0" cellspacing="0">
+    <tr>
+        <td colspan="6" class="header">매입상품관리 (purchase)</td>
+    </tr>
+    <tr class="column-header">
+        <td>논리명</td>
+        <td>물리명</td>
+        
+        <td>데이터 타입</td>
+        <td>Not Null</td>
+        <td>설명</td>
+    </tr>
+    <tr>
+        <td>매입상품코드(PK)</td>
+        <td>purchase_code</td>
+        
+        <td>VARCHAR(20)</td>
+        <td>Y</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>거래처코드(FK)</td>
+        <td>account_code</td>
+        
+        <td>VARCHAR(20)</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>계약매장코드(FK)</td>
+        <td>contract_shop_code</td>
+        
+        <td>VARCHAR(20)</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>상품DB코드(FK)</td>
+        <td>goods_database_code</td>
+        
+        <td>VARCHAR(20)</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>매입단가</td>
+        <td>purchase_pay</td>
+        
+        <td>INT</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>매입상품상태</td>
+        <td>purchase_state</td>
+        
+        <td>VARCHAR(20)</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>매입일자</td>
+        <td>purchase_date</td>
+        
+        <td>DATE</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+</table>
+<table class="entity" cellpadding="0" cellspacing="0">
+    <tr>
+        <td colspan="6" class="header">매입반품관리 (return)</td>
+    </tr>
+    <tr class="column-header">
+        <td>논리명</td>
+        <td>물리명</td>
+        
+        <td>데이터 타입</td>
+        <td>Not Null</td>
+        <td>설명</td>
+    </tr>
+    <tr>
+        <td>매입반품코드(PK)</td>
+        <td>return_code</td>
+        
+        <td>VARCHAR(20)</td>
+        <td>Y</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>계약매장코드(FK)</td>
+        <td>contract_shop_code</td>
+        
+        <td>VARCHAR(20)</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>거래처코드(FK)</td>
+        <td>account_code</td>
+        
+        <td>VARCHAR(20)</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>매입상품코드(FK)</td>
+        <td>purchase_code</td>
+        
+        <td>VARCHAR(20)</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>반품사유</td>
+        <td>return_reason</td>
+        
+        <td>VARCHAR(200)</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>반품일자</td>
+        <td>return_date</td>
+        
+        <td>DATE</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+</table>
+<table class="entity" cellpadding="0" cellspacing="0">
+    <tr>
+        <td colspan="6" class="header">상품관리 (goods)</td>
+    </tr>
+    <tr class="column-header">
+        <td>논리명</td>
+        <td>물리명</td>
+        
+        <td>데이터 타입</td>
+        <td>Not Null</td>
+        <td>설명</td>
+    </tr>
+    <tr>
+        <td>상품코드(PK)</td>
+        <td>goods_code</td>
+        
+        <td>VARCHAR(20)</td>
+        <td>Y</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>상품DB코드(FK)</td>
+        <td>goods_database_code</td>
+        
+        <td>VARCHAR(20)</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>매입상품코드(FK)</td>
+        <td>purchase_code</td>
+        
+        <td>VARCHAR(20)</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>계약매장코드(FK)</td>
+        <td>contract_shop_code</td>
+        
+        <td>VARCHAR(20)</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>판매가격</td>
+        <td>goods_pay</td>
+        
+        <td>INT</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>판매상품위치</td>
+        <td>goods_position</td>
+        
+        <td>VARCHAR(50)</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>대여가능여부</td>
+        <td>goods_rental</td>
+        
+        <td>CHAR</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>상품상태</td>
+        <td>goods_state</td>
+        
+        <td>VARCHAR(20)</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>판매완료유무</td>
+        <td>goods_completion_state</td>
+        
+        <td>CHAR</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>대여상태</td>
+        <td>goods_rental_state</td>
+        
+        <td>CHAR</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>최종재고확인일자</td>
+        <td>goods_inventory_date</td>
+        
+        <td>DATETIME</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>상품등록일자</td>
+        <td>goods_date</td>
+        
+        <td>DATE</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+</table>
+<table class="entity" cellpadding="0" cellspacing="0">
+    <tr>
+        <td colspan="6" class="header">대여상품관리  (goods_rental)</td>
+    </tr>
+    <tr class="column-header">
+        <td>논리명</td>
+        <td>물리명</td>
+        
+        <td>데이터 타입</td>
+        <td>Not Null</td>
+        <td>설명</td>
+    </tr>
+    <tr>
+        <td>대여상품코드(PK)</td>
+        <td>goods_rental_code</td>
+        
+        <td>VARCHAR(20)</td>
+        <td>Y</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>계약매장코드(FK)</td>
+        <td>contract_shop_code</td>
+        
+        <td>VARCHAR(20)</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>상품코드(FK)</td>
+        <td>goods_code</td>
+        
+        <td>VARCHAR(20)</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>기간별 대여가격</td>
+        <td>goods_rental_period_pay</td>
+        
+        <td>VARCHAR(50)</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>대여보증금</td>
+        <td>goods_rental_deposit</td>
+        
+        <td>INT</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>대여상품위치</td>
+        <td>goods_rental_position</td>
+        
+        <td>VARCHAR(50)</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>대여상품등록일자</td>
+        <td>goods_rental_date</td>
+        
+        <td>DATE</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+</table>
+<table class="entity" cellpadding="0" cellspacing="0">
+    <tr>
+        <td colspan="6" class="header">대여고객관리 (rental_customer)</td>
+    </tr>
+    <tr class="column-header">
+        <td>논리명</td>
+        <td>물리명</td>
+        
+        <td>데이터 타입</td>
+        <td>Not Null</td>
+        <td>설명</td>
+    </tr>
+    <tr>
+        <td>대여고객코드(PK)</td>
+        <td>rental_customer_code</td>
+        
+        <td>VARCHAR(20)</td>
+        <td>Y</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>계약매장코드(FK)</td>
+        <td>contract_shop_code</td>
+        
+        <td>VARCHAR(20)</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>대여상품코드(FK)</td>
+        <td>goods_rental_code</td>
+        
+        <td>VARCHAR(20)</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>대여고객이름</td>
+        <td>rental_customer_name</td>
+        
+        <td>VARCHAR(50)</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>대여고객주소</td>
+        <td>rental_customer_address</td>
+        
+        <td>VARCHAR(50)</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>대여고객전화번호</td>
+        <td>rental_customer_phone</td>
+        
+        <td>INT</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>대여시작일</td>
+        <td>rental_customer_start</td>
+        
+        <td>DATE</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>대여종료일</td>
+        <td>rental_customer_finish</td>
+        
+        <td>DATE</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>대여일연체유무</td>
+        <td>rental_customer_overdue</td>
+        
+        <td>CHAR</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>대여등록일자</td>
+        <td>rental_customer_date</td>
+        
+        <td>DATE</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>대여반납일자</td>
+        <td>rental_customer_return</td>
+        
+        <td>DATE</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+</table>
+<table class="entity" cellpadding="0" cellspacing="0">
+    <tr>
+        <td colspan="6" class="header">대여 및 판매 매출통합 (sales)</td>
+    </tr>
+    <tr class="column-header">
+        <td>논리명</td>
+        <td>물리명</td>
+        
+        <td>데이터 타입</td>
+        <td>Not Null</td>
+        <td>설명</td>
+    </tr>
+    <tr>
+        <td>매출통합코드(PK)</td>
+        <td>sales_code</td>
+        
+        <td>VARCHAR(20)</td>
+        <td>Y</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>상품코드(FK)</td>
+        <td>goods_code</td>
+        
+        <td>VARCHAR(20)</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>계약매장코드(FK)</td>
+        <td>contract_shop_code</td>
+        
+        <td>VARCHAR(20)</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>매출통합그룹코드</td>
+        <td>sales_group_code</td>
+        
+        <td>VARCHAR(50)</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>결제수단(현금/카드)</td>
+        <td>sales_pay_type</td>
+        
+        <td>CHAR</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>구분(판매/대여)</td>
+        <td>sales_type</td>
+        
+        <td>CHAR</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>금액</td>
+        <td>sales_amount</td>
+        
+        <td>INT</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>매출등록일자</td>
+        <td>sales_date</td>
+        
+        <td>DATE</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+</table>
+<table class="entity" cellpadding="0" cellspacing="0">
+    <tr>
+        <td colspan="6" class="header">재고관리 (inventory)</td>
+    </tr>
+    <tr class="column-header">
+        <td>논리명</td>
+        <td>물리명</td>
+        
+        <td>데이터 타입</td>
+        <td>Not Null</td>
+        <td>설명</td>
+    </tr>
+    <tr>
+        <td>재고코드(PK)</td>
+        <td>inventory_code</td>
+        
+        <td>VARCHAR(20)</td>
+        <td>Y</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>상품코드(FK)</td>
+        <td>goods_code</td>
+        
+        <td>VARCHAR(20)</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>매입상품코드(FK)</td>
+        <td>purchase_code</td>
+        
+        <td>VARCHAR(20)</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>계약매장코드(FK)</td>
+        <td>contract_shop_code</td>
+        
+        <td>VARCHAR(20)</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>재고상태</td>
+        <td>inventory_state</td>
+        
+        <td>VARCHAR(20)</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>재고일자</td>
+        <td>inventory_date</td>
+        
+        <td>DATE</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+</table>
+<table class="entity" cellpadding="0" cellspacing="0">
+    <tr>
+        <td colspan="6" class="header">직원근태관리 (work)</td>
+    </tr>
+    <tr class="column-header">
+        <td>논리명</td>
+        <td>물리명</td>
+        
+        <td>데이터 타입</td>
+        <td>Not Null</td>
+        <td>설명</td>
+    </tr>
+    <tr>
+        <td>직원근태코드(PK)</td>
+        <td>work_code</td>
+        
+        <td>VARCHAR(20)</td>
+        <td>Y</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>계약매장코드(FK)</td>
+        <td>contract_shop_code</td>
+        
+        <td>VARCHAR(20)</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>출근시간</td>
+        <td>work_start</td>
+        
+        <td>TIME</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>퇴근시간</td>
+        <td>work_finish</td>
+        
+        <td>TIME</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>초과근무시간</td>
+        <td>work_over</td>
+        
+        <td>TIME</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>월근로시간</td>
+        <td>work_total</td>
+        
+        <td>INT</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>휴무일</td>
+        <td>work_rest</td>
+        
+        <td>DATE</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>근태등록일자</td>
+        <td>work_date</td>
+        
+        <td>DATE</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+</table>
+<table class="entity" cellpadding="0" cellspacing="0">
+    <tr>
+        <td colspan="6" class="header">지출관리_급여 (spend_salary)</td>
+    </tr>
+    <tr class="column-header">
+        <td>논리명</td>
+        <td>물리명</td>
+        
+        <td>데이터 타입</td>
+        <td>Not Null</td>
+        <td>설명</td>
+    </tr>
+    <tr>
+        <td>급여코드(PK)</td>
+        <td>spend_salary_code</td>
+        
+        <td>VARCHAR(20)</td>
+        <td>Y</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>계약매장코드(FK)</td>
+        <td>contract_shop_code</td>
+        
+        <td>VARCHAR(20)</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>직원아이디(FK)</td>
+        <td>member_id</td>
+        
+        <td>VARCHAR(20)</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>기본급여</td>
+        <td>spend_salary_pay</td>
+        
+        <td>INT</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>시간외수당</td>
+        <td>spend_salary_overpay</td>
+        
+        <td>INT</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>상여금</td>
+        <td>spend_salary_bouns</td>
+        
+        <td>INT</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>비과세</td>
+        <td>spend_salary_free</td>
+        
+        <td>INT</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>총액</td>
+        <td>spend_salary_total</td>
+        
+        <td>INT</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>급여등록일자</td>
+        <td>spend_salary_date</td>
+        
+        <td>DATE</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+</table>
+<table class="entity" cellpadding="0" cellspacing="0">
+    <tr>
+        <td colspan="6" class="header">계정과목 관리코드  (subject)</td>
+    </tr>
+    <tr class="column-header">
+        <td>논리명</td>
+        <td>물리명</td>
+        
+        <td>데이터 타입</td>
+        <td>Not Null</td>
+        <td>설명</td>
+    </tr>
+    <tr>
+        <td>계정과목관리코드(PK)</td>
+        <td>subject_code</td>
+        
+        <td>VARCHAR(20)</td>
+        <td>Y</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>아이디(FK)</td>
+        <td>member_id</td>
+        
+        <td>VARCHAR(20)</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>계정과목코드</td>
+        <td>subject_number</td>
+        
+        <td>INT</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>계정과목명</td>
+        <td>subject_name</td>
+        
+        <td>VARCHAR(20)</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>카테고리등록ㅇ리자</td>
+        <td>subject_date</td>
+        
+        <td>DATE</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+</table>
+<table class="entity" cellpadding="0" cellspacing="0">
+    <tr>
+        <td colspan="6" class="header">지출관리_공과금 (spend_utility)</td>
+    </tr>
+    <tr class="column-header">
+        <td>논리명</td>
+        <td>물리명</td>
+        
+        <td>데이터 타입</td>
+        <td>Not Null</td>
+        <td>설명</td>
+    </tr>
+    <tr>
+        <td>공과금지출코드(PK)</td>
+        <td>spend_utility_code</td>
+        
+        <td>VARCHAR(20)</td>
+        <td>Y</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>계정과목관리코드(FK)</td>
+        <td>subject_code</td>
+        
+        <td>VARCHAR(20)</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>계약매장코드(FK)</td>
+        <td>contract_shop_code</td>
+        
+        <td>VARCHAR(20)</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>납부금액</td>
+        <td>spend_utility_pay</td>
+        
+        <td>INT</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>납부내용</td>
+        <td>spend_utility_contents</td>
+        
+        <td>VARCHAR(200)</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>납부일자</td>
+        <td>spend_utility_date</td>
+        
+        <td>DATE</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+</table>
+<table class="entity" cellpadding="0" cellspacing="0">
+    <tr>
+        <td colspan="6" class="header">지출통합관리 (spend_total)</td>
+    </tr>
+    <tr class="column-header">
+        <td>논리명</td>
+        <td>물리명</td>
+        
+        <td>데이터 타입</td>
+        <td>Not Null</td>
+        <td>설명</td>
+    </tr>
+    <tr>
+        <td>지출통합코드(PK)</td>
+        <td>spend_total_code</td>
+        
+        <td>VARCHAR(20)</td>
+        <td>Y</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>계약매장코드(FK)</td>
+        <td>contract_shop_code</td>
+        
+        <td>VARCHAR(20)</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>매입상품코드(FK)</td>
+        <td>purchase_code</td>
+        
+        <td>VARCHAR(20)</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>공과금지출코드(FK)</td>
+        <td>spend_utility_code</td>
+        
+        <td>VARCHAR(20)</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>급여코드(FK)</td>
+        <td>spend_salary_code</td>
+        
+        <td>VARCHAR(20)</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>지출통합그룹코드</td>
+        <td>spend_group_code</td>
+        
+        <td>VARCHAR(50)</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>구분(매입/급여/공금)</td>
+        <td>spend_total_type</td>
+        
+        <td>VARCHAR(20)</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>결제수단(카드/현금)</td>
+        <td>spend_total_way</td>
+        
+        <td>CHAR</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>결제금액</td>
+        <td>spend_total_pay</td>
+        
+        <td>INT</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>지출등록일자</td>
+        <td>spend_total_date</td>
+        
+        <td>DATE</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+</table>
+<table class="entity" cellpadding="0" cellspacing="0">
+    <tr>
+        <td colspan="6" class="header">순이익관리 (profit)</td>
+    </tr>
+    <tr class="column-header">
+        <td>논리명</td>
+        <td>물리명</td>
+        
+        <td>데이터 타입</td>
+        <td>Not Null</td>
+        <td>설명</td>
+    </tr>
+    <tr>
+        <td>순이익관리코드(PK)</td>
+        <td>profit_code</td>
+        
+        <td>VARCHAR(20)</td>
+        <td>Y</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>계약매장코드(FK)</td>
+        <td>contract_shop_code</td>
+        
+        <td>VARCHAR(20)</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>매출통합그룹코드(월별)</td>
+        <td>sales_group_code</td>
+        
+        <td>VARCHAR(50)</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>지출통합그룹코드(월별)</td>
+        <td>spend_group_code</td>
+        
+        <td>INT</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>순이익(월별)</td>
+        <td>profit_month</td>
+        
+        <td>INT</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>일자</td>
+        <td>profit_date</td>
+        
+        <td>DATE</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+</table>
+<table class="entity" cellpadding="0" cellspacing="0">
+    <tr>
+        <td colspan="6" class="header">POS관리 (pos)</td>
+    </tr>
+    <tr class="column-header">
+        <td>논리명</td>
+        <td>물리명</td>
+        
+        <td>데이터 타입</td>
+        <td>Not Null</td>
+        <td>설명</td>
+    </tr>
+    <tr>
+        <td>POS코드(PK)</td>
+        <td>pos_code</td>
+        
+        <td>VARCHAR(20)</td>
+        <td>Y</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>계약매장코드(FK)</td>
+        <td>contract_shop_code</td>
+        
+        <td>VARCHAR(20)</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>POS이름</td>
+        <td>pos_name</td>
+        
+        <td>VARCHAR(20)</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>POS번호</td>
+        <td>pos_number</td>
+        
+        <td>INT</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+</table>
+<table class="entity" cellpadding="0" cellspacing="0">
+    <tr>
+        <td colspan="6" class="header">계약매장릴레이션 (shop_relation)</td>
+    </tr>
+    <tr class="column-header">
+        <td>논리명</td>
+        <td>물리명</td>
+        
+        <td>데이터 타입</td>
+        <td>Not Null</td>
+        <td>설명</td>
+    </tr>
+    <tr>
+        <td>계약매장코드(PK)</td>
+        <td>contract_shop_code</td>
+        
+        <td>VARCHAR(20)</td>
+        <td>Y</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>아이디(FK)</td>
+        <td>member_id</td>
+        
+        <td>VARCHAR(20)</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>매장코드(FK)</td>
+        <td>shop_code</td>
+        
+        <td>VARCHAR(20)</td>
+        <td>N</td>
+        <td>&nbsp;</td>
+    </tr>
+</table>
+</body>
+</html>
