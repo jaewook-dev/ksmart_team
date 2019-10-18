@@ -8,7 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -155,11 +154,14 @@ public class MemberController {
 	}
 	
 	//아이디중복확인
-	@GetMapping("/memberIdCheck")
-	public @ResponseBody int memberIdCheck(String memberId) {
-		System.out.println(memberId + "<--중복확인 아이디");
+	@RequestMapping(value = "/memberIdCheck", produces = "text/plain")
+	public @ResponseBody String memberIdCheck(@RequestParam(value="memberId") String memberId) {
+		//System.out.println(memberId + "<--중복확인 아이디");
 		int result = memberService.memberIdCheck(memberId);
+		if(result == 1) {
+			return "no";
+		}
 		
-		return result;
+		return "yes";
 	}
 }

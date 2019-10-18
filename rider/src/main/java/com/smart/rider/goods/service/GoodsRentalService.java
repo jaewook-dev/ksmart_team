@@ -61,10 +61,10 @@ public class GoodsRentalService {
 		
 		if(SLEVEL.equals("관리자")) {
 			SCODE="A";	
-			map.put("rList", goodsRentalMapper.goodsRentalList(SCODE, searchInput, select, beginDate, endDate));
+			map.put("rList", goodsRentalMapper.goodsRentalList(select, searchInput, beginDate, endDate, SCODE, SLEVEL));
 			return map;
 		}
-			map.put("rList", goodsRentalMapper.goodsRentalList(select, searchInput, beginDate, endDate, SCODE));
+			map.put("rList", goodsRentalMapper.goodsRentalList(select, searchInput, beginDate, endDate, SCODE, SLEVEL));
 		return map;
 	}
 

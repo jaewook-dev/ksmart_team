@@ -22,6 +22,6 @@ public interface GoodsRentalMapper {
 	//대여상품등록 insert
 	public int goodsRentalInsert(GoodsRentalDTO goodsRentalDto);
 	//대여상품 리스트
-	public List<GoodsHapDTO> goodsRentalList(String select ,String searchInput,String beginDate,String endDate,String SCODE);
+	public List<GoodsHapDTO> goodsRentalList(String select ,String searchInput,String beginDate,String endDate,String SCODE,String SLEVEL);
 	
 }

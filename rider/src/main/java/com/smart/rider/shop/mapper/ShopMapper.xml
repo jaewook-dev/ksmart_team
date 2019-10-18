@@ -102,13 +102,16 @@
 	<!-- 기본 값으로 설정되어 있는 계약매장코드 값을 수정한다.(계약매장코드 생성시) -->
 	<update id="memberUpdate" parameterType="String"> 
 		UPDATE member
+		
+		
+		
 		SET
 			contract_shop_code=#{getrelationCode}
 		WHERE member_id=#{getrelationId}
 	</update>
 	
 	<!--매장 삭제 가능 -->
-	<select id="shopListYes" resultMap="shopMap">
+	<select id="shopListYes" parameterType="String" resultMap="shopMap">
 		SELECT 
 			 s.shop_code
 			,s.contract_code
@@ -120,10 +123,14 @@
 		FROM shop s LEFT JOIN shop_relation sr
 		ON s.shop_code = sr.shop_code
 		WHERE sr.shop_code IS null
+		<if test="id neq null and id neq ''.toString()">
+			AND 
+				s.member_id=#{id}
+		</if>
 	</select>
 	
 	<!--매장 삭제 불가능  -->
-	<select id="shopListNo" resultMap="shopMap">
+	<select id="shopListNo" parameterType="String" resultMap="shopMap">
 		SELECT DISTINCT 
 			 s.shop_code
 			,s.contract_code
@@ -134,10 +141,14 @@
 			,s.shop_date
 		FROM shop s, shop_relation sr
 		WHERE s.shop_code = sr.shop_code
+		<if test="level neq null and id neq ''.toString()">
+			AND 
+				s.member_id=#{id}
+		</if>
 	</select>
 	
 	<!--매장 삭제 가능 검색 -->
-	<select id="shopSearchListYes" parameterType="com.smart.rider.main.dto.SearchDTO" resultMap="shopMap">
+	<select id="shopSearchListYes" parameterType="java.util.Map" resultMap="shopMap">
 		SELECT 
 			 s.shop_code
 			,s.contract_code
@@ -149,6 +160,10 @@
 		FROM shop s LEFT JOIN shop_relation sr
 		ON s.shop_code = sr.shop_code
 		WHERE sr.shop_code IS null
+		<if test="searchKey neq null and searchKey neq ''.toString()">
+			AND 
+				s.member_id=#{searchKey}
+		</if>
 		<if test="searchValue neq null and searchValue neq ''.toString()">
             AND
                 s.shop_name LIKE CONCAT('%',#{searchValue},'%')
@@ -168,7 +183,7 @@
 	</select>
 	
 	<!--매장 삭제 불가능  검색  -->
-	<select id="shopSearchListNo" parameterType="com.smart.rider.main.dto.SearchDTO" resultMap="shopMap">
+	<select id="shopSearchListNo" parameterType="java.util.Map" resultMap="shopMap">
 		SELECT DISTINCT 
 			 s.shop_code
 			,s.contract_code
@@ -179,6 +194,10 @@
 			,s.shop_date
 		FROM shop s, shop_relation sr
 		WHERE s.shop_code = sr.shop_code
+		<if test="searchKey neq null and searchKey neq ''.toString()">
+			AND 
+				s.member_id=#{searchKey}
+		</if>
 		<if test="searchValue neq null and searchValue neq ''.toString()">
             AND
                 s.shop_name LIKE CONCAT('%',#{searchValue},'%')
@@ -220,7 +239,10 @@
 			,shop_address
 			,shop_phone
 			,shop_date
-		FROM shop 
+		FROM shop
+		<if test="level neq '관리자'.toString()">
+		WHERE member_id=#{id}
+		</if> 
 		ORDER BY shop_code DESC 
 		LIMIT #{currentPage}, #{rowPerPage}	
 	</select>
@@ -270,7 +292,7 @@
 			,shop_phone
 			,shop_date
 		FROM shop 
-		WHERE shop_code=#{shop_code}
+		WHERE shop_code=#{shopCode}
 	</select>
 	
 	<!--계약매장코드로 데이터 조회-->
@@ -286,6 +308,8 @@
 		FROM shop 
 		WHERE contract_code=#{contractCode}
 	</select>
+	
+	
 	
 	
 	<!--매장정보 수정  -->
@@ -385,6 +409,33 @@
         </if>
 	</select>
 	
+	
+	<!--코드로 데이터 조회-->
+	<select id="relationUpdate" parameterType="String" resultMap="shopRelationMap">
+		SELECT 
+			 contract_shop_code
+			,member_id
+			,shop_code
+			,contract_shop_date
+		FROM shop_relation
+		WHERE contract_shop_code=#{contractShopCode}
+	</select>
+	
+	<!--매장정보 수정  -->
+	<update id="relationUpdateSet" parameterType="com.smart.rider.shop.dto.ShopRelationDTO">
+		UPDATE shop_relation
+		SET
+			 member_id=#{memberId}
+			,shop_code=#{shopCode}
+		WHERE contract_shop_code=#{contractShopCode}
+	</update>
+	
+	<!--점주아이디 목록가져오기-->
+	<select id="getMemberId" resultType="com.smart.rider.member.dto.MemberDTO">
+		SELECT 
+			 member_id AS memberId
+		FROM member WHERE member_level='점주'
+	</select>
 
 </mapper>
 

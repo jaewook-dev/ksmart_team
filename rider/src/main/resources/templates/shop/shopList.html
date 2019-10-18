@@ -72,7 +72,7 @@
 										<th scope="col">매장 주소</th>
 										<th scope="col">매장 등록일자</th>
 										<th scope="col" style="width: 8%" class="text-center" >수정</th>
-										<th scope="col" style="width: 8%" class="text-center" >삭제</th>
+										<th scope="col" style="width: 8%" class="text-center" th:if="${session.SLEVEL eq '관리자'}">삭제</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -84,7 +84,6 @@
 										<td th:text="${syeslist.shopAddress}"></td>
 										<td th:text="${syeslist.shopDate}"></td>
 										<td class="text-center"><a
-											th:if="${session.SLEVEL eq '관리자'}"
 											th:href="@{/shopUpdate(shopCode=${syeslist.shopCode})}"
 											class="tm-product-delete-link"> <i
 												class="fas fa-check tm-product-check-icon"
@@ -105,7 +104,6 @@
 										<td th:text="${snolist.shopAddress}"></td>
 										<td th:text="${snolist.shopDate}"></td>
 										<td class="text-center"><a
-											th:if="${session.SLEVEL eq '관리자'}"
 											th:href="@{/shopUpdate(shopCode=${snolist.shopCode})}"
 											class="tm-product-delete-link"> <i
 												class="fas fa-check tm-product-check-icon"

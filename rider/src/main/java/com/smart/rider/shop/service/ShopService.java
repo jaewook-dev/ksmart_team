@@ -9,9 +9,10 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 import com.smart.rider.contract.dto.ContractDTO;
 import com.smart.rider.main.dto.SearchDTO;
-
+import com.smart.rider.member.dto.MemberDTO;
 import com.smart.rider.shop.dto.ShopDTO;
 import com.smart.rider.shop.dto.ShopRelationDTO;
 
@@ -21,6 +22,7 @@ import com.smart.rider.shop.mapper.ShopMapper;
 public class ShopService {
 	@Autowired
 	private ShopMapper shopMapper;
+
 
 	//매장생성시 매장계약코드 자동 생성,매장계약코드 생성시에 아이디에 있는 매장계약코드가 입력된다(수정).
 	public int shopInsert(ShopDTO shop,HttpSession session,ShopRelationDTO relation) {
@@ -80,20 +82,36 @@ public class ShopService {
 	
 	//매장 조회
 	//맵으로 리턴 시키기 위해서 맵으로 선언해준다.
-	public Map<String, Object> getShopList(){
+	public Map<String, Object> getShopList(HttpSession session){
+		//로그인된 아이디의 권한이 점주면 id에 해당되는 데이터만불러오기
+		String id = null;
+		String level = (String)session.getAttribute("SLEVEL");
+		//System.out.println(level + "<-- 로그인한 아이디의 권한");
+		if(level.equals("점주")) {
+			id =(String) session.getAttribute("SID");
+			//System.out.println(id + "<-- 로그인한 아이디");	
+		}
 		//맵으로 선언
 		Map<String,Object> map = new HashMap<String,Object>();
-		map.put("shopListYes", shopMapper.shopListYes());
-		map.put("shopListNo", shopMapper.shopListNo());
+		map.put("shopListYes", shopMapper.shopListYes(id));
+		map.put("shopListNo", shopMapper.shopListNo(id));
 		//맵으로 리턴 시킨다.
 		return map;
 	}
 	
 	//특정 값으로 매장검색
-	public Map<String,Object> shopSearchList(SearchDTO search){
+	public Map<String,Object> shopSearchList(SearchDTO search,HttpSession session){
 		//맵으로 선언
 		Map<String,Object> map = new HashMap<String,Object>();
 		//map 넣을 내용을 String,Object 형식으로 넣어준다.
+		//로그인된 아이디의 권한이 점주면 id에 해당되는 데이터만불러오기
+				String level = (String)session.getAttribute("SLEVEL");
+				//System.out.println(level + "<-- 로그인한 아이디의 권한");
+				if(level.equals("점주")) {
+					String id =(String) session.getAttribute("SID");
+					//System.out.println(id + "<-- 로그인한 아이디");	
+					search.setSearchKey(id);;
+				}
 		map.put("shopSearchListYes", shopMapper.shopSearchListYes(search));
 		map.put("shopSearchListNo", shopMapper.shopSearchListNo(search));
 		//System.out.println(shopMapper.shopSearchListYes(search) + "yes서비스에서 담긴값 확인");
@@ -107,7 +125,7 @@ public class ShopService {
 	}
 	
 	//리스트에서 목록처럼 보여주기
-	public Map<String, Object> shopList(int currentPage) {
+	public Map<String, Object> shopList(int currentPage,HttpSession session) {
 		// view(list)에서 보여줄 행의 갯수
 		final int ROW_PER_PAGE = 5;
 		// view(list)에서 보여줄 첫번째 페이지번호 초기화 (view쪽의 반복문의 시작값)
@@ -122,7 +140,7 @@ public class ShopService {
 			lastPageNum += (startPageNum-1);
 		}
 		// Map(키, 값) 생성 -> DB에 접근하여 리스트로 보여줄 시작점과 행의 갯수 
-		Map<String, Integer> map = new HashMap<String, Integer>();
+		Map<String, Object> map = new HashMap<String, Object>();
 		// Table(board)에 담겨진 행의 시작점은 0이므로 현재페이지가 첫번째일 경우 0으로 시작하는 알고리즘
 		int startRow = (currentPage-1)*ROW_PER_PAGE;
 		// map에 보여줄 행의 시작점과 보여줄 행의 갯수를 키와 함께 담는다.
@@ -136,6 +154,16 @@ public class ShopService {
 		if(currentPage >= (lastPage-2)) {
 			lastPageNum = lastPage;
 		}
+		//로그인된 아이디의 권한이 점주면 id에 해당되는 데이터만불러오기
+		String level = (String)session.getAttribute("SLEVEL");
+		//System.out.println(level + "<-- 로그인한 아이디의 권한");
+		map.put("level",level);
+		if(level.equals("점주")) {
+			String id =(String) session.getAttribute("SID");
+			//System.out.println(id + "<-- 로그인한 아이디");	
+			map.put("id", id);
+		}
+		
 		// view에 보여질 페이징 처리를 위해 값을 Map에 담아 리턴
 		Map<String, Object> returnMap = new HashMap<String, Object>();
 		returnMap.put("list", shopMapper.shopList(map));
@@ -143,6 +171,9 @@ public class ShopService {
 		returnMap.put("lastPage", lastPage);
 		returnMap.put("startPageNum", startPageNum);
 		returnMap.put("lastPageNum", lastPageNum);
+				
+	
+		
 		return returnMap;
 	}
 	
@@ -187,5 +218,19 @@ public class ShopService {
 		return map;
 	}
 	
-		
+	//코드 값 확인 후 데이터 조회
+	public List<ShopRelationDTO> relationUpdate(String contractShopCode){
+		return shopMapper.relationUpdate(contractShopCode); 
+	}
+	
+	//수정하기
+	public int relationUpdate(ShopRelationDTO relation) {
+		return shopMapper.relationUpdateSet(relation);
+	}
+	
+	//점주아이디 목록 가져오기
+	public List<MemberDTO> getMemberId(){
+		return shopMapper.getMemberId();
+	}
+	
 }

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.smart.rider.contract.dto.ContractDTO;
 import com.smart.rider.contract.service.ContractService;
 import com.smart.rider.main.dto.SearchDTO;
+import com.smart.rider.member.dto.MemberDTO;
 import com.smart.rider.shop.dto.PosDTO;
 import com.smart.rider.shop.dto.ShopDTO;
 import com.smart.rider.shop.dto.ShopRelationDTO;
@@ -71,7 +72,7 @@ public class ShopController {
 	@GetMapping("/shopList")
 	public String getShopList(Model model,HttpSession session) {
 		//맵으로 받기
-		Map<String, Object> map =  shopService.getShopList();
+		Map<String, Object> map =  shopService.getShopList(session);
 		//SuppressWarnings("unchecked") 메소드상태가 경고 일 때 나오지 않게 해주기
 		@SuppressWarnings("unchecked")
 		List<ShopDTO> shopListYes = (List<ShopDTO>)map.get("shopListYes");
@@ -87,9 +88,9 @@ public class ShopController {
 	
 	//상세보기에서 검색시
 	@PostMapping("/shopSearchList")
-	public String shopSearchList(SearchDTO search, Model model) {
+	public String shopSearchList(SearchDTO search, Model model,HttpSession session) {
 		//System.out.println(search + "<-- 담겨있는값 ");
-		Map<String,Object> map = shopService.shopSearchList(search);
+		Map<String,Object> map = shopService.shopSearchList(search,session);
 		// model에 값 넣기
 		@SuppressWarnings("unchecked")
 		List<ShopDTO> shopListYes = (List<ShopDTO>)map.get("shopSearchListYes");
@@ -119,7 +120,7 @@ public class ShopController {
 		//System.out.println("posList" + pList);
 		//System.out.println("personnelList" + personnelList);
 		//맵으로 서비스부분 받기
-		Map<String, Object> returnMap = shopService.shopList(currentPage);
+		Map<String, Object> returnMap = shopService.shopList(currentPage,session);
     	//Map객체주소로 보내는 경우(model.addAttribute("map", returnMap);
 		//System.out.println(returnMap + " map 담긴 값 확인 ");
 		//returnMap(Map타입 객체)에 담겨있는 값 -> model(Model타입 객체)에 복사 ->  view전달
@@ -138,7 +139,7 @@ public class ShopController {
 		return "/shop/shop";
 	}
 	
-	//상세보기
+	//매장계약코드 상세보기
 	@GetMapping("/relationList")
 	public String getRelationList(Model model) {
 		//맵으로 받기
@@ -156,7 +157,7 @@ public class ShopController {
 		return "relation/relationList";
 	}
 	
-	//상세보기에서 검색시
+	//매장계약코드 상세보기에서 검색시
 	@PostMapping("/getRelationSearch")
 	public String getRelationSearch(SearchDTO search, Model model) {
 		System.out.println(search + "<-- 담겨있는값 ");
@@ -176,6 +177,39 @@ public class ShopController {
 			model.addAttribute("alert", "검색 결과가 없습니다");
 		}
 		return "relation/relationList";
+	}
+	
+	//매장계약코드 수정화면
+	@GetMapping("/relationUpdate")
+	public String relationUpdate(@RequestParam(value ="contractShopCode") String contractShopCode,Model model) {
+		//System.out.println(contractShopCode + "<--넘어오는 계약매장코드값 확인");
+		List<ShopRelationDTO> relationList = shopService.relationUpdate(contractShopCode);
+		//System.out.println(contractShopCode + "<--계약매장코드로 조회하는 데이터 확인");
+		//relationList에 담겨있는 값 모델에 담기
+		
+		List<MemberDTO> memberList = shopService.getMemberId();
+		List<ShopDTO> shopList = shopService.shopListAll();
+		//System.out.println(memberList + "<-- 점주 아이디 목록");
+		//System.out.println(shopList + "<-- 계약코드목록");
+		model.addAttribute("relationList", relationList);
+		if(relationList != null) {
+			model.addAttribute("relationId", relationList.get(0).getMemberId());
+			model.addAttribute("relationShop", relationList.get(0).getShopCode());
+			//System.out.println(relationList.get(0).getMemberId() + " <-- 아이디값");
+			//System.out.println(relationList.get(0).getShopCode() + "<-- 매장코드값");
+		}
+		
+		model.addAttribute("memberList", memberList);
+		model.addAttribute("shopList", shopList);
+		return "relation/relationUpdate";
+	}
+	
+	//계약코드 수정
+	@PostMapping("/relationUpdate")
+	public String relationUpdate(ShopRelationDTO relation) {
+		//System.out.println(relation + "<-- 계약코드 데이터 수정된 값");
+		shopService.relationUpdate(relation);
+		return "redirect:/relationList";
 	}
 	
 

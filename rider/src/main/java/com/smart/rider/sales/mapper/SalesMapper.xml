@@ -89,8 +89,7 @@
 			(sales_code
 			, goods_code
 			, contract_shop_code
-			, goods_rental_code
-			, sales_group_code
+			, goods_rental_code			
 			, sales_pay_type
 			, sales_type
 			, sales_amount
@@ -99,8 +98,7 @@
 			 (#{salesCode}
 			 , #{goodsCode}
 			 , #{contractShopCode}
-			 , #{goodsRentalCode}
-			 , #{salesGroupCode}
+			 , #{goodsRentalCode}			
 			 , #{salesPayType}
 			 , #{salesType}
 			 , #{salesAmount}
